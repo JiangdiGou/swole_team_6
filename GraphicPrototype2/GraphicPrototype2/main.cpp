@@ -4,9 +4,6 @@
 //7-11-15
 
 #define _CRT_SECURE_NO_WARNINGS
-
-#include "Graphics.h"
-#include "Shader.h"
 #include "Sprite.h"
 #include <Windows.h>
 
@@ -73,9 +70,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        smiley.Draw();
-        excited.Draw();
-        calm.Draw();
+        drawSprites();
 
         testScaling(smiley);
         testRotation(excited);

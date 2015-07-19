@@ -3,6 +3,7 @@
 
 #include "Graphics.h"
 #include "Shader.h"
+#include <vector>
 
 class Sprite
 {
@@ -33,5 +34,8 @@ private:
 	Shader shader;
 
 };
+
+extern std::vector<Sprite*> sprites;
+void drawSprites(void);
 
 #endif 

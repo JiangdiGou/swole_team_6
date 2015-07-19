@@ -1,5 +1,6 @@
 #include "Sprite.h"
 
+std::vector<Sprite*> sprites = {};
 
 Sprite::Sprite()
 {
@@ -63,6 +64,7 @@ Sprite::Sprite(Shader intendedShader)
 	rotation = 0;
 	color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
+  sprites.push_back(this);
 }
 
 Sprite::~Sprite()
@@ -104,4 +106,8 @@ void Sprite::Draw(void)
 	glBindVertexArray(0);
 }
 
-
+void drawSprites(void)
+{
+  for (std::vector<Sprite*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
+    (*it)->Draw();
+}
