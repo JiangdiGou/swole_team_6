@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-std::vector<Sprite*> sprites = {};
+std::vector<Sprite*> Sprite::sprites = {};
 
 Sprite::Sprite()
 {
@@ -86,7 +86,7 @@ glm::mat4 Sprite::calculateTransorm(void)
 	return transform;
 }
 
-void Sprite::Draw(void)
+void Sprite::draw(void)
 {
 	GLint transformLocation, colorLocation;
 
@@ -106,8 +106,8 @@ void Sprite::Draw(void)
 	glBindVertexArray(0);
 }
 
-void drawSprites(void)
+void Sprite::drawSprites(void)
 {
   for (std::vector<Sprite*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
-    (*it)->Draw();
+    (*it)->draw();
 }

@@ -1,12 +1,12 @@
-﻿Build started 7/19/2015 3:13:58 PM.
+﻿Build started 7/22/2015 3:07:56 PM.
      1>Project "C:\Users\Qbz\swole_team_6\GraphicPrototype2\GraphicPrototype2\GraphicPrototype2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         E:\Programs\VStudio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
-     1>c:\users\qbz\swole_team_6\graphicprototype2\graphicprototype2\main.cpp(165): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
-     1>c:\users\qbz\swole_team_6\graphicprototype2\graphicprototype2\main.cpp(145): warning C4715: 'WinProc' : not all control paths return a value
+         E:\Programs\VStudio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Graphics.cpp
+         Graphics.cpp
+     1>c:\users\qbz\swole_team_6\graphicprototype2\graphicprototype2\graphics.cpp(48): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
        Link:
-         E:\Programs\VStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Qbz\swole_team_6\GraphicPrototype2\Debug\GraphicPrototype2.exe" /INCREMENTAL /NOLOGO opengl32.lib glew32s.lib SOIL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Qbz\swole_team_6\GraphicPrototype2\Debug\GraphicPrototype2.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Qbz\swole_team_6\GraphicPrototype2\Debug\GraphicPrototype2.lib" /MACHINE:X86 Debug\Graphics.obj
+         E:\Programs\VStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Qbz\swole_team_6\GraphicPrototype2\Debug\GraphicPrototype2.exe" /INCREMENTAL /NOLOGO opengl32.lib glew32s.lib SOIL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Qbz\swole_team_6\GraphicPrototype2\Debug\GraphicPrototype2.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Qbz\swole_team_6\GraphicPrototype2\Debug\GraphicPrototype2.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\Graphics.obj
          Debug\main.obj
          Debug\Shader.obj
          Debug\Sprite.obj
@@ -15,4 +15,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.97
+Time Elapsed 00:00:01.24

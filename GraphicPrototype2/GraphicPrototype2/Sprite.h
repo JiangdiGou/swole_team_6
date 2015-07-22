@@ -1,41 +1,45 @@
 #ifndef  SPRITE_H
 #define SPRITE_H
 
-#include "Graphics.h"
 #include "Shader.h"
 #include <vector>
 
 class Sprite
 {
 public:
-	//Default constructor does nothing
+  //Default constructor, does nothing
 	Sprite();
-	//Constructor makes a square
-	Sprite(Shader intendedShader);
+  //
+  Sprite(Shader intendedShader);
 	//Deconstructor 
 	~Sprite();
-
-	//Core Drawing
-	void Draw(void);
-	GLuint vertexArray;
 
 	//Transformations
 	glm::vec3 translation;
 	GLfloat rotation;
 	glm::vec3 scale;
-	glm::mat4 calculateTransorm(void);
+
 
 	//Color and Texture
 	glm::vec4 color;
 	GLuint texture;
 
+  void static drawSprites(void);
+  static std::vector<Sprite*> sprites;
+
 private:
+  //Vertex information 
 	GLuint vertexBuffer;
-	Shader shader;
+  GLuint vertexArray;
+
+  Shader shader;
+
+  //A sprite's personal draw function, called by drawsprites 
+  void draw(void);
+
+  //Calculates a sprite's transformation matrix using the 
+  glm::mat4 calculateTransorm(void);
 
 };
-
-extern std::vector<Sprite*> sprites;
-void drawSprites(void);
 
 #endif 

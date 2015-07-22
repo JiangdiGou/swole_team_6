@@ -5,6 +5,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include "Sprite.h"
+#include "Camera.h"
 #include <Windows.h>
 
 //Vars for transformation/color tests
@@ -39,6 +40,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
     ShowWindow(window, show);
 
     Shader basicShader = Shader("VertexShader.txt", "FragmentShader.txt");
+    Camera basicCamera = Camera(basicShader);
 
     //Creates Three Sprites
     Sprite smiley = Sprite(basicShader);
@@ -56,9 +58,10 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
     calm.texture = textureCalm;
 
     //Sets inital values of sprites for their respective tests
-    smiley.translation = glm::vec3(-0.75f, 0.5f, 0.0f);
-    excited.translation = glm::vec3(0.6f, -0.4f, 0.0f);
+    smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
+    excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
     calm.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    smiley.scale = glm::vec3(0.15f, 0.15f, 0.15f);
 
     basicShader.Use();
 
@@ -70,9 +73,13 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        drawSprites();
+        //basicCamera.move(glm::vec3(0.01f, 0.0f, 0.0f));
+        //basicCamera.zoom -= .005;
 
-        testScaling(smiley);
+        basicCamera.update();
+        Sprite::drawSprites();
+
+        //testScaling(smiley);
         testRotation(excited);
         testTranslate(calm);
         testColor(calm);
@@ -137,7 +144,6 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 
     case WM_DESTROY:
       shouldQuit = true;
-      
 
     default:    
         return DefWindowProc(hWnd, msg, wp, lp);
@@ -149,13 +155,13 @@ void testScaling(Sprite &sprite)
     if (testScalingGrowing)
     {
         sprite.scale += glm::vec3(0.01f, 0.01f, 0.01f);
-        if (sprite.scale.x > 1.0f)
+        if (sprite.scale.x > 0.75f)
             testScalingGrowing = false;
     }
     else
     {
         sprite.scale -= glm::vec3(0.01f, 0.01f, 0.01f);
-        if (sprite.scale.x < 0.05f)
+        if (sprite.scale.x < 0.025f)
             testScalingGrowing = true;
     }
 }
