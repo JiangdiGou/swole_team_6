@@ -1,11 +1,22 @@
 #include "Shader.h"
 
-//Default constructor for shader. Doesn't do anything. 
+//**********************
+//Function    : Shader
+//Input       : none
+//Output      : Shader - The Constructed Shader
+//Description : Default Constructor for shader, does nothing
+//**********************
 Shader::Shader()
 {
 }
 
-//Constructor for the Shader Class 
+//**********************
+//Function    : Shader
+//Input       : vertexPath   - the filename of the vertex shader 
+//              fragmentPath - the filename of the fragment shader
+//Output      : Shader - The Constructed Shader
+//Description : Default Constructor for camera, does nothing
+//**********************
 Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 {
 	//Loads shader code from file and stores as strings
@@ -25,7 +36,12 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 	this->Program = compileShaderProgram(vertexShader, fragmentShader);	
 }
 
-//Loads shader code from a text file into a std string
+//**********************
+//Function    : shader.loadShaderCodeFromFile
+//Input       : filePath - the filename/path of the file
+//Output      : string - the string that stores the shader code
+//Description : takes shader code from a file and stores it in a string
+//**********************
 std::string Shader::loadShaderCodeFromFile(const GLchar* filePath)
 {
 	std::string shaderCode;
@@ -61,7 +77,13 @@ std::string Shader::loadShaderCodeFromFile(const GLchar* filePath)
 	return shaderCode;
 }
 
-
+//**********************
+//Function    : shader.compileShader
+//Input       : shaderCode - a const GLchar* storing the shader code
+//              shaderType - an enum, indicated the type of shader 
+//Output      : GLuint - the openGL id of the compiled shader
+//Description : Takes shader code from a const GLchar* and compiles it
+//**********************
 GLuint Shader::compileShader(const GLchar* shaderCode, SHADERTYPE shaderType)
 {
 	GLuint shader;
@@ -105,6 +127,13 @@ GLuint Shader::compileShader(const GLchar* shaderCode, SHADERTYPE shaderType)
 	return shader;
 }
 
+//**********************
+//Function    : shader.compileShaderProgram
+//Input       : vertexShader - the openGL ID of the vertex Shader
+//              fragmentShader - the openGL ID of the fragment Shader
+//Output      : GLuint - the openGL ID of the shader program
+//Description : compiles a shader program from a vertex and fragment shader
+//**********************
 GLuint Shader::compileShaderProgram(GLuint vertexShader, GLuint fragmentShader)
 {
 	GLuint shaderProgram;
@@ -129,7 +158,12 @@ GLuint Shader::compileShaderProgram(GLuint vertexShader, GLuint fragmentShader)
 	return shaderProgram;
 }
 
-
+//**********************
+//Function    : shader.Use
+//Input       : none
+//Output      : none
+//Description : tells openGL to use this shader program 
+//**********************
 void Shader::Use()
 {
 	glUseProgram(this->Program);

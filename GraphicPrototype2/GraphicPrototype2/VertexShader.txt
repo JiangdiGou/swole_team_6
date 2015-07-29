@@ -11,5 +11,5 @@ uniform mat4 uniformProjection;
 void main()
 {
     gl_Position = uniformProjection * uniformView * uniformTransform * vec4(position, 1.0f);
-    TexCoords = vec2(texCoords.x, 1.0f - texCoords.y);
+    TexCoords = vec2(texCoords.x, texCoords.y);
 }

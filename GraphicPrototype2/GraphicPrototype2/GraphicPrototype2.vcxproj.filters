@@ -30,6 +30,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Testing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="FragmentShader.txt">
@@ -49,6 +55,12 @@
     <Image Include="Smiley3.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ExampleSpriteSheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="braidSpriteSheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -61,6 +73,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Testing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

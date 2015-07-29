@@ -6,17 +6,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Sprite.h"
 #include "Camera.h"
-#include <Windows.h>
+#include "Testing.h"
 
-//Vars for transformation/color tests
-bool testScalingGrowing = true;
-bool testTranslateUp = true;
-bool testColorBlue = true;
-//Transofmration/color tests
-void testScaling(Sprite &sprite);
-void testRotation(Sprite &sprite);
-void testTranslate(Sprite &sprite);
-void testColor(Sprite &sprite);
+#include <Windows.h>
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -46,11 +38,16 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
     Sprite smiley = Sprite(basicShader);
     Sprite excited = Sprite(basicShader);
     Sprite calm = Sprite(basicShader);
+  
+    Sprite animated = Sprite(basicShader);
 
-    //Loads three textures 
-    GLuint textureSmiley = loadTexture("Smiley1.png");
-    GLuint textureExcited = loadTexture("Smiley2.png");
-    GLuint textureCalm = loadTexture("Smiley3.png");
+    Texture textureSmiley = Texture("Smiley1.png");
+    Texture textureExcited = Texture("Smiley2.png");
+    Texture textureCalm = Texture("Smiley3.png");
+
+    Texture textureAnimated = Texture("ExampleSpriteSheet.png", 3, 64, 64, 1000.0f);
+    animated.texture = textureAnimated;
+    animated.translation = glm::vec3(-1.5f, 1.0f, 0.0f);
 
     //Saves the textures into the sprites 
     smiley.texture = textureSmiley;
@@ -79,7 +76,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
         basicCamera.update();
         Sprite::drawSprites();
 
-        //testScaling(smiley);
+        testScaling(smiley);
         testRotation(excited);
         testTranslate(calm);
         testColor(calm);
@@ -98,6 +95,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
     return 0;
 }
 
+//Callback function 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 {
   switch (msg)
@@ -148,60 +146,4 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     default:    
         return DefWindowProc(hWnd, msg, wp, lp);
   }
-}
-
-void testScaling(Sprite &sprite)
-{
-    if (testScalingGrowing)
-    {
-        sprite.scale += glm::vec3(0.01f, 0.01f, 0.01f);
-        if (sprite.scale.x > 0.75f)
-            testScalingGrowing = false;
-    }
-    else
-    {
-        sprite.scale -= glm::vec3(0.01f, 0.01f, 0.01f);
-        if (sprite.scale.x < 0.025f)
-            testScalingGrowing = true;
-    }
-}
-
-void testRotation(Sprite &sprite)
-{
-    sprite.rotation += .05;
-}
-
-void testTranslate(Sprite &sprite)
-{
-    if (testTranslateUp)
-    {
-        sprite.translation += glm::vec3(0.0f, 0.005f, 0.0f);
-        if (sprite.translation.y > 0.75)
-            testTranslateUp = false;
-    }
-    else
-    {
-        sprite.translation -= glm::vec3(0.0f, 0.005f, 0.0f);
-        if (sprite.translation.y < -0.75)
-            testTranslateUp = true;
-    }
-
-}
-
-void testColor(Sprite &sprite)
-{
-    if (testColorBlue)
-    {
-        //Color is weird. It's not RGBA like you would expect. I'll look into it more later. 
-        //Looks like its G, B, A, R. No freakin idea why. 
-        sprite.color -= glm::vec4(0.00f, 0.00f, 0.00f, 0.01f);
-        if (sprite.color.w <= 0)
-            testColorBlue = false;
-    }
-    else
-    {
-        sprite.color += glm::vec4(0.0f, 0.00f, 0.0f, 0.01f);
-        if (sprite.color.w >= 1.25)
-            testColorBlue = true;
-    }
 }

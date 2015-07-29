@@ -20,15 +20,15 @@
 //Printing out stuff
 #include<iostream>
 
+#include <vector>
+
 #define WINDOWWIDTH 960
 #define WINDOWHEIGHT 540
 
-GLuint  loadTexture(const char* filePath);
 void setupPixelFormatDescriptor(HDC handleDeviceContext);
 HWND createWindow(HINSTANCE instance);
 
 //This function prototype is in here so createwindow can see it 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
-
 
 #endif

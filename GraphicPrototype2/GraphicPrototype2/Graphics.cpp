@@ -1,38 +1,12 @@
 #include "Graphics.h"
 
-GLuint loadTexture(const char* filePath)
-{
-	int textureWidth, textureHeight;
-	GLuint texture;
-
-	//Generates the Texture ID and stores in var 
-	glGenTextures(1, &texture);
-
-	//Binds the texture so future fx calls will affect this texture
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	//Loads the image using soil 
-	unsigned char* image = SOIL_load_image(filePath, &textureWidth,
-		                                    &textureHeight, 0, SOIL_LOAD_RGBA);
-
-	//Generates Texture info 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0,
-		           GL_RGBA, GL_UNSIGNED_BYTE, image);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-
-  //Sets the Blending mode 
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	//de allocates resources and unbinds texture 
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	return texture;
-}
-
-
+//**********************
+//Function    : setupPixelFormatDescriptor
+//Input       : deviceContext - the device context of the window. 
+//Output      : none
+//Description : PFD is used to tell windows how pixels draw on the screen.
+//              this sets one up. 
+//**********************
 void setupPixelFormatDescriptor(HDC deviceContext)
 {
   PIXELFORMATDESCRIPTOR pfd;
@@ -53,6 +27,12 @@ void setupPixelFormatDescriptor(HDC deviceContext)
     std::cout << "Pixel Format Descriptor Creation Successful." << std::endl;
 }
 
+//**********************
+//Function    : createWindow
+//Input       : instance - paramter from winMain 
+//Output      : HWND - handle to the window that is created 
+//Description : Creates a window and returns a handle to it. 
+//**********************
 HWND createWindow(HINSTANCE instance)
 {
   WNDCLASS windowClass;

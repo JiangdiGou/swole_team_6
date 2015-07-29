@@ -3,13 +3,16 @@
 
 #include "Shader.h"
 #include <vector>
+#include "Texture.h"
 
 class Sprite
 {
+  //This may or may not be necessary, not sure yet 
+
 public:
   //Default constructor, does nothing
 	Sprite();
-  //
+  //Constructor from shader 
   Sprite(Shader intendedShader);
 	//Deconstructor 
 	~Sprite();
@@ -22,7 +25,7 @@ public:
 
 	//Color and Texture
 	glm::vec4 color;
-	GLuint texture;
+	Texture texture;
 
   void static drawSprites(void);
   static std::vector<Sprite*> sprites;
@@ -30,6 +33,7 @@ public:
 private:
   //Vertex information 
 	GLuint vertexBuffer;
+  GLuint textureBuffer;
   GLuint vertexArray;
 
   Shader shader;

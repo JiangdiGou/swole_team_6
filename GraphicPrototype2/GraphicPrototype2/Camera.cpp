@@ -1,14 +1,32 @@
 #include "Camera.h"
 
+//**********************
+//Function    : Camera
+//Input       : none
+//Output      : Camera - the constructed Camera
+//Description : Default Constructor for camera, does nothing
+//**********************
 Camera::Camera()
 {
   std::cout << "Camera::This default constructor does nothing." << std::endl;
 } 
 
+//**********************
+//Function    : ~Camera
+//Input       : none
+//Output      : none
+//Description : Destructor for camera, does nothing 
+//**********************
 Camera::~Camera()
 {
 }
 
+//**********************
+//Function    : Camera
+//Input       : intendedShader - the shader you intend to use with this camera
+//Output      : Camera - the constructed Camera
+//Description : The constructor you should use to make a camera. 
+//**********************
 Camera::Camera(Shader intendedShader)
 {
   zoom = 1.0f;
@@ -19,6 +37,12 @@ Camera::Camera(Shader intendedShader)
   shader = intendedShader;
 }
 
+//**********************
+//Function    : Camera.update
+//Input       : none
+//Output      : none
+//Description : Sends the camera information to te shader. 
+//**********************
 void Camera::update()
 {
   //Gets the Aspect Ratio of the Window to set up the camera's coordinates 
@@ -43,6 +67,13 @@ void Camera::update()
   glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
 }
 
+//**********************
+//Function    : Camera.move
+//Input       : none
+//Output      : none
+//Description : moves the camera and its target so its still looking at the 
+//              2d plane
+//**********************
 void Camera::move(glm::vec3 translation)
 {
   cameraPosition += translation;
