@@ -35,7 +35,7 @@ void levelGenerator::writeLevelSize()
   string dataHeader = "[ArraySpecs]\n";
   editingLevelFile << dataHeader;
   editingLevelFile << desiredWidth << '\n';
-  editingLevelFile << desiredLength << '\n';
+  editingLevelFile << desiredHeight << '\n';
 }
 
 void levelGenerator::writeTileMap()
@@ -43,7 +43,7 @@ void levelGenerator::writeTileMap()
   string dataHeader = "[TileMap]\n";
 
   editingLevelFile << dataHeader;
-  for (int i = 0; i < desiredLength; i++)
+  for (int i = 0; i < desiredHeight; i++)
   {
     for (int j = 0; j < desiredWidth; j++)
     {
@@ -58,7 +58,7 @@ void levelGenerator::writeEntityMap()
   string dataHeader = "[EntityMap]\n";
 
   editingLevelFile << dataHeader;
-  for (int i = 0; i < desiredLength; i++)
+  for (int i = 0; i < desiredHeight; i++)
   {
     for (int j = 0; j < desiredWidth; j++)
     {
@@ -108,7 +108,7 @@ void levelGenerator::promptWriteLevelSize()
   std::cout << "Width of level in tiles: ";
   std::cin >> desiredWidth;
   std::cout << "Height of level in tiles: ";
-  std::cin >> desiredLength;
+  std::cin >> desiredHeight;
   prepareLevelArray();
   writeLevelSize();
   writeTileMap();
@@ -127,13 +127,13 @@ bool levelGenerator::openFileEmpty()
 
 void levelGenerator::prepareLevelArray()
 {
-  holdingArray = new char*[desiredWidth];
-  for (int i = 0; i < desiredWidth; i++)
+  holdingArray = new char*[desiredHeight];
+  for (int i = 0; i < desiredHeight; i++)
   {
-    holdingArray[i] = new char[desiredLength];
+    holdingArray[i] = new char[desiredWidth];
   }
 
-  for (int i = 0; i < desiredLength; i++)
+  for (int i = 0; i < desiredHeight; i++)
   {
     for (int j = 0; j < desiredWidth; j++)
     {
@@ -150,7 +150,7 @@ void levelGenerator::closeFstream()
   }
 }
 
-std::string levelGenerator::getFileName()
+string levelGenerator::getFileName()
 {
   return lastFileName;//no reason for this to have changed during editing
 }

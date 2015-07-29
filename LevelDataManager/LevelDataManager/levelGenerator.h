@@ -16,7 +16,7 @@ private:
   string lastFileName;//DO NOT MAKE A SETTER
   fstream editingLevelFile;
   int desiredWidth;
-  int desiredLength;
+  int desiredHeight;
   char**  holdingArray;
 
 public:
