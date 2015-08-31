@@ -1,4 +1,5 @@
 #include "levelGenerator.h"
+#include "levelEditor.h"
 #include "Utilities.h"
 
 #include <stdio.h>  /* defines FILENAME_MAX */
@@ -48,11 +49,13 @@ int main(void)
     test.promptWriteLevelSize();
 
     test.closeFstream();
-    /*TEST CODE WORKED*/
+    /*TEST CODE WORKED
     getSpecLineTest = getLineFromFile(4, fileName);
-    std::cout << "Line test result: " << getSpecLineTest << std::endl;
-
+    std::cout << "Line test result: " << getSpecLineTest << std::endl;*/
   }
+
+  levelEditor test2;
+  test2.loadLevelFrom(fileName);
 
   //Wait for Keyboard press
   waitForKB();
