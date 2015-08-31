@@ -30,7 +30,7 @@ void levelEditor::loadLevelFrom(std::string fileName)
   arrayX = std::stoi(garbage);
 
   //height of tileMap
-  garbage = getLineFromFile(4, fileName);
+  garbage = getLineFromFile(5, fileName);
   arrayY = std::stoi(garbage);
 
   //load arrays
@@ -38,26 +38,24 @@ void levelEditor::loadLevelFrom(std::string fileName)
   for (int i = 0; i < arrayY; i++)
   {
     tileMap[i] = new char[arrayX];
+    garbage = getLineFromFile(5 + i + 2, fileName);
+    strcpy(tileMap[i], garbage.c_str());
   }
-  for (int i = 0; i < arrayY; i++)
-  {
-    for (int j = 0; j < arrayX; j++)
-    {
-      tileMap[i][j] = '0';
-    }
-  }
+
   entityMap = new char*[arrayY];
   for (int i = 0; i < arrayY; i++)
   {
     entityMap[i] = new char[arrayX];
+    garbage = getLineFromFile(5 + i + 1 + 2 + arrayY, fileName);
+    strcpy(entityMap[i], garbage.c_str());
   }
-  for (int i = 0; i < arrayY; i++)
-  {
-    for (int j = 0; j < arrayX; j++)
-    {
-      entityMap[i][j] = '0';
-    }
-  }
+
+  this->gameLevel.levelName = levelName;
+  this->gameLevel.levelWidth = arrayX;
+  this->gameLevel.levelHeight = arrayY;
+  this->gameLevel.tileMap = tileMap;
+  this->gameLevel.entityMap = entityMap;
+  this->gameLevel.printLevel();
 }
 
 void levelEditor::saveLevelTo(std::string fileName)

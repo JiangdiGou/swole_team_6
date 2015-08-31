@@ -4,13 +4,16 @@
 class gameLevel
 {
 private:
+  std::fstream data;
+
+public:
   std::string levelName;
   int levelWidth;
   int levelHeight;
   char ** tileMap;
   char ** entityMap;
-  std::fstream data;
 
 public:
-  void loadLevelFromFile(std::string fileName);
+  void printLevel();
+  void loadLevelFrom(std::string fileName);
 };

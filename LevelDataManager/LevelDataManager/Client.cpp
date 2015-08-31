@@ -54,6 +54,8 @@ int main(void)
     std::cout << "Line test result: " << getSpecLineTest << std::endl;*/
   }
 
+  waitForKB();
+
   levelEditor test2;
   test2.loadLevelFrom(fileName);
 
