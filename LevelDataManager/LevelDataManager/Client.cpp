@@ -58,6 +58,7 @@ int main(void)
 
   levelEditor test2;
   test2.loadLevelFrom(fileName);
+  test2.editingRoutine();
 
   //Wait for Keyboard press
   waitForKB();

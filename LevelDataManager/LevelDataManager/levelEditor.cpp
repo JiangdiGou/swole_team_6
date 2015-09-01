@@ -1,8 +1,24 @@
 #include "levelEditor.h"
 #include "Utilities.h"
+
+#include <vector>
 #include <fstream>
+#include <sstream>
+#include <iterator>
 
 using std::string;
+using std::vector;
+
+levelEditor::levelEditor()
+{
+  levelEditor::validCommands.push_back("help");//prints available commands or help on specific command*/
+  levelEditor::validCommands.push_back("print");//prints level
+  levelEditor::validCommands.push_back("ent");//changes entity
+  levelEditor::validCommands.push_back("tile");//changes tile
+
+  levelEditor::validCommands.push_back("save");//saves file
+  levelEditor::validCommands.push_back("quit");//quits loop
+}
 
 void levelEditor::loadLevelFrom(std::string fileName)
 {
@@ -55,7 +71,53 @@ void levelEditor::loadLevelFrom(std::string fileName)
   this->gameLevel.levelHeight = arrayY;
   this->gameLevel.tileMap = tileMap;
   this->gameLevel.entityMap = entityMap;
-  this->gameLevel.printLevel();
+  //this->gameLevel.printLevel();
+}
+
+void levelEditor::editingRoutine()
+{
+  while(true)
+  {
+    string input;
+    vector<string> uiCmds;
+
+    std::cout<<"Type a command. (Use \"help\" to see list of valid commands.)"<<std::endl;
+    std::getline(std::cin, input);
+    input.append(" ");
+
+    //getting commands
+    std::stringstream toSplit(input);
+    std::string cmd;
+    int cmdCount = 0;
+    while (std::getline(toSplit, cmd, ' '))
+    {
+      uiCmds.push_back(cmd);
+      cmdCount++;
+    }
+    /*command test*/
+    /*for (std::vector<string>::const_iterator i = uiCmds.begin(); i != uiCmds.end(); ++i)
+    {
+      std::cout << *i << ' ';
+    }*/
+
+    string mainCmd = uiCmds[0];
+
+    //mainCmd pathing
+    if (mainCmd.compare("help") == 0)
+    {
+      if(cmdCount != 2 || !vectorHas(validCommands, uiCmds[1]))
+      {
+        std::cout<<"Invalid command to get help with."<<std::endl;
+        continue;
+      }
+      cmdHelp(uiCmds[1]);
+    }
+  }
+}
+
+void levelEditor::cmdHelp(std::string command)
+{
+
 }
 
 void levelEditor::saveLevelTo(std::string fileName)

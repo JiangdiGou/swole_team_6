@@ -4,12 +4,21 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <iterator>
+#include <vector>
 
 //meh, hopefully the client remembered to use the "setter" for closing the fstream
 //(as long as the levelGenerator instance still exists, we cannot guarantee that its
 //member fstream has been deconstructed. period.)
 std::string getLineFromFile(int lineNumber, std::string fileName);
 bool fileExists(const char *fileName);
+
+template<typename T>
+bool vectorHas(std::vector<T> vector, T value)
+{
+  return std::find(std::begin(vector), std::end(vector), value) != std::end(vector);
+}
+
 void waitForKB();
 
 #endif

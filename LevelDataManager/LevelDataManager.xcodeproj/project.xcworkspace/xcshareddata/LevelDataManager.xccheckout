@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>3F6CDB25-F13B-43D4-802E-E2D518696C64</string>
 	<key>IDESourceControlProjectName</key>
-	<string>LevelDataManager</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>8ECC598C8A6FEED1B91A04D4C8D7ABB296C81145</key>
 		<string>https://git.digipen.edu/projects/swole_team_6</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>LevelDataManager/LevelDataManager.xcodeproj</string>
+	<string>LevelDataManager/LevelDataManager.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8ECC598C8A6FEED1B91A04D4C8D7ABB296C81145</key>
