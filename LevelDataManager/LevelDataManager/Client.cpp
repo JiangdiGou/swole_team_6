@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   Client.cpp
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is a client for the LevelDataManager, which is a big mess.
+ */
+/******************************************************************************/
+
 #include "levelGenerator.h"
 #include "levelEditor.h"
 #include "Utilities.h"

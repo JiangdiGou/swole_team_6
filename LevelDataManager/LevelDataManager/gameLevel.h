@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   gameLevel.h
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is the interface for the gameLevel class.
+ */
+/******************************************************************************/
+
 #include <string>
 #include <fstream>
 

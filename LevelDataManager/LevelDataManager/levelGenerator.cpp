@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   levelGenerator.cpp
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is the implementation of the levelGenerator class, which can generate an empty Level in a file.
+ */
+/******************************************************************************/
+
 #include "levelGenerator.h"
 #include "Utilities.h"
 

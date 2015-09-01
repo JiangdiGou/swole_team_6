@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   Utilities.cpp
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is the implementation for Utilities, which does some random crap.
+ */
+/******************************************************************************/
+
 #include "Utilities.h"
 
 std::string getLineFromFile(int lineNumber, std::string fileName)
@@ -20,6 +31,11 @@ bool fileExists(const char* fileName)
 {
   std::ifstream infile(fileName);
   return infile.good();
+}
+
+void visLine()
+{
+  std::cout<<"=========="<<std::endl;
 }
 
 void waitForKB()

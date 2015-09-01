@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   gameLevel.cpp
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is the implementation of the gameLevel class. (Quick printing, tileMap, etc).
+ */
+/******************************************************************************/
+
 #include "gameLevel.h"
 #include "Utilities.h"
 

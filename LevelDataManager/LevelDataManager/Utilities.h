@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   Utilities.cpp
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is the interface (and some implementations) for Utilities.
+ */
+/******************************************************************************/
+
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
@@ -19,6 +30,7 @@ bool vectorHas(std::vector<T> vector, T value)
   return std::find(std::begin(vector), std::end(vector), value) != std::end(vector);
 }
 
+void visLine();
 void waitForKB();
 
 #endif

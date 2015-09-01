@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   levelGenerator.h
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is the interface for the levelGenerator class.
+ */
+/******************************************************************************/
+
 #ifndef LEVELGENERATOR_H
 #define LEVELGENERATOR_H
 

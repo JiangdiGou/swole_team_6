@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+ \file   levelEditor.cpp
+ \author Nolan Yoo
+ \par    email: n.yoo\@digipen.edu
+ \par    Component: LevelDataManager
+ \brief
+ This is the implementation of the LevelEditor, which is a big mess.
+ */
+/******************************************************************************/
+
 #include "levelEditor.h"
 #include "Utilities.h"
 
@@ -18,6 +29,8 @@ levelEditor::levelEditor()
 
   levelEditor::validCommands.push_back("save");//saves file
   levelEditor::validCommands.push_back("quit");//quits loop
+
+  levelEditor::numCommands = levelEditor::validCommands.size();
 }
 
 void levelEditor::loadLevelFrom(std::string fileName)
@@ -78,6 +91,7 @@ void levelEditor::editingRoutine()
 {
   while(true)
   {
+    visLine();
     string input;
     vector<string> uiCmds;
 
@@ -99,25 +113,55 @@ void levelEditor::editingRoutine()
     {
       std::cout << *i << ' ';
     }*/
-
+    visLine();
     string mainCmd = uiCmds[0];
 
     //mainCmd pathing
     if (mainCmd.compare("help") == 0)
     {
-      if(cmdCount != 2 || !vectorHas(validCommands, uiCmds[1]))
+      if(cmdCount == 1)
+      {
+        cmdHelp();
+        continue;
+      }
+      else if(cmdCount != 2 || !vectorHas(validCommands, uiCmds[1]))
       {
         std::cout<<"Invalid command to get help with."<<std::endl;
         continue;
       }
       cmdHelp(uiCmds[1]);
     }
+    else if(mainCmd.compare("print") == 0)
+    {
+      this->gameLevel.printLevel();
+      continue;
+    }
+  }
+}
+
+void levelEditor::cmdHelp()
+{
+  std::cout<<"Valid commands:"<<std::endl;
+  for(int i = 0; i < numCommands; i++)
+  {
+    std::cout<<validCommands[i]<<std::endl;
   }
 }
 
 void levelEditor::cmdHelp(std::string command)
 {
-
+  if (command.compare("help") == 0)
+  {
+    std::cout<<"Shows list of commands or gets help with a specific command."<<std::endl;
+  }
+  else if (command.compare("print") == 0)
+  {
+    std::cout<<"Prints out the level."<<std::endl;
+  }
+  else
+  {
+    std::cout<<"COMMAND IS NOT DOCUMENTED."<<std::endl;
+  }
 }
 
 void levelEditor::saveLevelTo(std::string fileName)
