@@ -38,6 +38,11 @@ void visLine()
   std::cout<<"=========="<<std::endl;
 }
 
+void printstr(std::string toPrint)
+{
+  std::cout<< toPrint <<std::endl;
+}
+
 void waitForKB()
 {
   std::cout << "Press Enter or Return to continue..." << std::endl;

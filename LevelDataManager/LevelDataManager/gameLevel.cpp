@@ -14,6 +14,16 @@
 
 using std::string;
 
+bool gameLevel::validPoint(int x, int y)
+{
+  if(x > (this->levelWidth - 1) || y > (this->levelHeight - 1) || x < 0 || y < 0)
+  {
+    std::cout<<"Invalid tile selection."<<std::endl;
+    return false;
+  }
+  return true;
+}
+
 void gameLevel::printLevel()
 {
   std::cout << "Level Name: " << this->levelName << std::endl;
@@ -86,4 +96,29 @@ void gameLevel::loadLevelFrom(std::string fileName)
   this->tileMap = tileMap;
   this->entityMap = entityMap;
   this->printLevel();
+}
+
+//return false if tile couldn't be changed, true + change tile otherwise
+bool gameLevel::changeTile(char tile, int x, int y)
+{
+  y = this->levelHeight - y - 1;
+  if(!this->validPoint(x, y))
+  {
+    return false;
+  }
+  this->tileMap[y][x] = tile;
+  return true;
+}
+
+//return false if tile couldn't be changed, true + change tile otherwise
+bool gameLevel::changeEntity(char entity, int x, int y)
+{
+  //invalid check + reversal
+  y = this->levelHeight - y - 1;
+  if(!this->validPoint(x, y))
+  {
+    return false;
+  }
+  this->entityMap[y][x] = entity;
+  return true;
 }

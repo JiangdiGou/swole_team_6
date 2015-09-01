@@ -28,6 +28,7 @@ public:
   void editingRoutine();
   void cmdHelp();
   void cmdHelp(std::string command);
+  bool cmdSingle(char tile, int x, int y, bool mode);
   void saveLevelTo(std::string fileName);
 };
 #endif

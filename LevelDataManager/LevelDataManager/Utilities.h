@@ -31,6 +31,7 @@ bool vectorHas(std::vector<T> vector, T value)
 }
 
 void visLine();
+void printstr(std::string toPrint);
 void waitForKB();
 
 #endif

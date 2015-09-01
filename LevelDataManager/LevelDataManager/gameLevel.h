@@ -24,7 +24,11 @@ public:
   char ** tileMap;
   char ** entityMap;
 
+  bool validPoint(int x, int y);
+
 public:
   void printLevel();
   void loadLevelFrom(std::string fileName);
+  bool changeTile(char tile, int x, int y);
+  bool changeEntity(char entity, int x, int y);
 };

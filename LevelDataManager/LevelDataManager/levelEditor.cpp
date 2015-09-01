@@ -24,8 +24,8 @@ levelEditor::levelEditor()
 {
   levelEditor::validCommands.push_back("help");//prints available commands or help on specific command*/
   levelEditor::validCommands.push_back("print");//prints level
-  levelEditor::validCommands.push_back("ent");//changes entity
-  levelEditor::validCommands.push_back("tile");//changes tile
+  levelEditor::validCommands.push_back("tile");//changes entity
+  levelEditor::validCommands.push_back("ent");//changes tile
 
   levelEditor::validCommands.push_back("save");//saves file
   levelEditor::validCommands.push_back("quit");//quits loop
@@ -35,56 +35,7 @@ levelEditor::levelEditor()
 
 void levelEditor::loadLevelFrom(std::string fileName)
 {
-  string garbage;
-  string levelName;//at line 2
-  int arrayX;      //        4
-  int arrayY;      //        5
-  char**  tileMap;
-  char**  entityMap;
-
-  //get line count
-  int lineCount;
-  std::ifstream tempfile(fileName);
-  std::string line;
-  for (lineCount = 0; std::getline(tempfile, line); ++lineCount)
-    ;//empty for, use for counting only
-  tempfile.close();
-
-  //get level name property
-  levelName = getLineFromFile(2, fileName);
-  //std::cout << levelName;
-
-  //width of tileMap
-  garbage = getLineFromFile(4, fileName);
-  arrayX = std::stoi(garbage);
-
-  //height of tileMap
-  garbage = getLineFromFile(5, fileName);
-  arrayY = std::stoi(garbage);
-
-  //load arrays
-  tileMap = new char*[arrayY];
-  for (int i = 0; i < arrayY; i++)
-  {
-    tileMap[i] = new char[arrayX];
-    garbage = getLineFromFile(5 + i + 2, fileName);
-    strcpy(tileMap[i], garbage.c_str());
-  }
-
-  entityMap = new char*[arrayY];
-  for (int i = 0; i < arrayY; i++)
-  {
-    entityMap[i] = new char[arrayX];
-    garbage = getLineFromFile(5 + i + 1 + 2 + arrayY, fileName);
-    strcpy(entityMap[i], garbage.c_str());
-  }
-
-  this->gameLevel.levelName = levelName;
-  this->gameLevel.levelWidth = arrayX;
-  this->gameLevel.levelHeight = arrayY;
-  this->gameLevel.tileMap = tileMap;
-  this->gameLevel.entityMap = entityMap;
-  //this->gameLevel.printLevel();
+  this->gameLevel.loadLevelFrom(fileName);
 }
 
 void levelEditor::editingRoutine()
@@ -121,7 +72,7 @@ void levelEditor::editingRoutine()
     {
       if(cmdCount == 1)
       {
-        cmdHelp();
+        this->cmdHelp();
         continue;
       }
       else if(cmdCount != 2 || !vectorHas(validCommands, uiCmds[1]))
@@ -129,11 +80,67 @@ void levelEditor::editingRoutine()
         std::cout<<"Invalid command to get help with."<<std::endl;
         continue;
       }
-      cmdHelp(uiCmds[1]);
+      this->cmdHelp(uiCmds[1]);
     }
     else if(mainCmd.compare("print") == 0)
     {
       this->gameLevel.printLevel();
+      continue;
+    }
+    else if(mainCmd.compare("tile") == 0)
+    {
+      //"ent" char int int
+      if(cmdCount != 4)
+      {
+        printstr("\"tile\" command requires 4 arguments.");
+        continue;
+      }
+
+      char newTile;
+      int x;
+      int y;
+
+      try
+      {
+        newTile = uiCmds[1].c_str()[0];
+        x = std::stoi(uiCmds[2]) - 1;
+        y = std::stoi(uiCmds[3]) - 1;
+      }
+      catch (const std::invalid_argument)
+      {
+        std::cout<<uiCmds[2]<<" or "<<uiCmds[3]<<" wasn't a valid x/y value."<<std::endl;
+        continue;
+      }
+
+      this->cmdSingle(newTile, x, y, true);
+      continue;
+    }
+    else if(mainCmd.compare("ent") == 0)
+    {
+      //"ent" char int int
+      if(cmdCount != 4)
+      {
+        printstr("\"ent\" command requires 4 arguments.");
+        continue;
+      }
+
+      char newTile;
+      int x;
+      int y;
+
+      try
+      {
+        newTile = uiCmds[1].c_str()[0];
+        x = std::stoi(uiCmds[2]) - 1;
+        y = std::stoi(uiCmds[3]) - 1;
+      }
+      catch (const std::invalid_argument)
+      {
+        std::cout<<uiCmds[2]<<" or "<<uiCmds[3]<<" wasn't a valid x/y value."<<std::endl;
+        continue;
+      }
+
+      this->cmdSingle(newTile, x, y, false);
       continue;
     }
   }
@@ -144,7 +151,7 @@ void levelEditor::cmdHelp()
   std::cout<<"Valid commands:"<<std::endl;
   for(int i = 0; i < numCommands; i++)
   {
-    std::cout<<validCommands[i]<<std::endl;
+    std::cout<<this->validCommands[i]<<std::endl;
   }
 }
 
@@ -162,6 +169,31 @@ void levelEditor::cmdHelp(std::string command)
   {
     std::cout<<"COMMAND IS NOT DOCUMENTED."<<std::endl;
   }
+}
+
+//mode is true for a tile, false for an entity!
+bool levelEditor::cmdSingle(char tile, int x, int y, bool mode)
+{
+  bool success;
+  if(mode)
+  {
+    success = this->gameLevel.changeTile(tile, x, y);
+  }
+  else
+  {
+    success = this->gameLevel.changeEntity(tile, x, y);
+  }
+
+  if(success)
+  {
+    this->gameLevel.printLevel();
+  }
+  else
+  {
+    printstr("Change to level could not be made.");
+  }
+
+  return success;
 }
 
 void levelEditor::saveLevelTo(std::string fileName)
