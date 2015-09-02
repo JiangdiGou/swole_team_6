@@ -12,6 +12,7 @@
 #include "levelGenerator.h"
 #include "levelEditor.h"
 #include "Utilities.h"
+#include "luaRunner.h"
 
 #include <stdio.h>  /* defines FILENAME_MAX */
 #ifdef _WIN32
@@ -40,7 +41,9 @@ int main(void)
   /* RUNNING LUA ROUTINE*/
   if(luaTest())
   {
-    printstr("Lua test run.");
+    luaRunner testLua;
+    testLua.runFile("Scripts/hello.lua");
+    printstr("Lua test run successfully.");
   }
   else
   {
