@@ -20,6 +20,8 @@ class levelEditor
 private:
   std::vector<std::string> validCommands;
   int numCommands;
+
+  std::string fileName;
   gameLevel gameLevel;
 
 public:
@@ -29,6 +31,6 @@ public:
   void cmdHelp();
   void cmdHelp(std::string command);
   bool cmdSingle(char tile, int x, int y, bool mode);
-  void saveLevelTo(std::string fileName);
+  void saveLevel();
 };
 #endif

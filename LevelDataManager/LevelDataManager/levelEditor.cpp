@@ -16,6 +16,7 @@
 #include <fstream>
 #include <sstream>
 #include <iterator>
+#include <stdio.h>
 
 using std::string;
 using std::vector;
@@ -35,6 +36,7 @@ levelEditor::levelEditor()
 
 void levelEditor::loadLevelFrom(std::string fileName)
 {
+  this->fileName = fileName;
   this->gameLevel.loadLevelFrom(fileName);
 }
 
@@ -143,6 +145,11 @@ void levelEditor::editingRoutine()
       this->cmdSingle(newTile, x, y, false);
       continue;
     }
+
+    else if(mainCmd.compare("save") == 0)
+    {
+      this->saveLevel();
+    }
   }
 }
 
@@ -196,6 +203,40 @@ bool levelEditor::cmdSingle(char tile, int x, int y, bool mode)
   return success;
 }
 
-void levelEditor::saveLevelTo(std::string fileName)
+void levelEditor::saveLevel()
 {
+  remove(fileName.c_str());
+  std::fstream levelFile;
+  levelFile.open(fileName.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
+
+  string dataHeader = "[LevelName]\n";
+  levelFile << dataHeader;
+  levelFile << this->gameLevel.levelName << '\n';
+
+  dataHeader = "[ArraySpecs]\n";
+  levelFile << dataHeader;
+  levelFile << this->gameLevel.levelWidth << '\n';
+  levelFile << this->gameLevel.levelHeight << '\n';
+
+  dataHeader = "[TileMap]\n";
+  levelFile << dataHeader;
+  for (int i = 0; i < this->gameLevel.levelHeight; i++)
+  {
+    for (int j = 0; j < this->gameLevel.levelWidth; j++)
+    {
+      levelFile << this->gameLevel.tileMap[i][j];
+    }
+    levelFile << '\n';
+  }
+
+  dataHeader = "[EntityMap]\n";
+  levelFile << dataHeader;
+  for (int i = 0; i < this->gameLevel.levelHeight; i++)
+  {
+    for (int j = 0; j < this->gameLevel.levelWidth; j++)
+    {
+      levelFile << this->gameLevel.entityMap[i][j];
+    }
+    levelFile << '\n';
+  }
 }

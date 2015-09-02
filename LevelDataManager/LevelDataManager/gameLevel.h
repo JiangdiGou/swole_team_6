@@ -18,6 +18,7 @@ private:
   std::fstream data;
 
 public:
+  std::string fileName;
   std::string levelName;
   int levelWidth;
   int levelHeight;
