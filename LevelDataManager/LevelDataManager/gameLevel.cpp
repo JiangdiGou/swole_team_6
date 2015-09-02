@@ -226,3 +226,9 @@ void gameLevel::insertCol(int x, int count)
     }
   }
 }
+
+void gameLevel::insertRow(int y, int count)
+{
+  
+}
+

@@ -34,4 +34,5 @@ public:
   bool changeTile(char tile, int x, int y);
   bool changeEntity(char entity, int x, int y);
   void insertCol(int x, int count);
+  void insertRow(int y, int count);
 };

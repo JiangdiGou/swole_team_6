@@ -34,7 +34,20 @@ int main(void)
   }
   cCurrentPath[sizeof(cCurrentPath) - 1] = '\0'; /* for safety */
   std::cout<<"The current working directory is: "<<cCurrentPath<<'\n';
+  visLine();
   /* END RUNNING DIRECTORY ROUTINE */
+
+  /* RUNNING LUA ROUTINE*/
+  if(luaTest())
+  {
+    printstr("Lua test run.");
+  }
+  else
+  {
+    printstr("Lua test broke.");
+  }
+  visLine();
+  /* END RUNNING LUA ROUTINE*/
 
   levelGenerator test;
   string fileName;

@@ -18,6 +18,13 @@
 #include <iterator>
 #include <vector>
 
+extern "C"
+{
+  #include "luaLib/lua.h"
+  #include "luaLib/lualib.h"
+  #include "luaLib/lauxlib.h"
+}
+
 //meh, hopefully the client remembered to use the "setter" for closing the fstream
 //(as long as the levelGenerator instance still exists, we cannot guarantee that its
 //member fstream has been deconstructed. period.)
@@ -33,5 +40,7 @@ bool vectorHas(std::vector<T> vector, T value)
 void visLine();
 void printstr(std::string toPrint);
 void waitForKB();
+
+bool luaTest();
 
 #endif

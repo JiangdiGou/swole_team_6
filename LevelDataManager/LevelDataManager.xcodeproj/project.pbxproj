@@ -10,6 +10,8 @@
 		F6152F481B4CA87F00B5961F /* gameLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6152F441B4CA87F00B5961F /* gameLevel.cpp */; };
 		F6152F491B4CA87F00B5961F /* levelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6152F461B4CA87F00B5961F /* levelGenerator.cpp */; };
 		F652888E1B4D745200C75C21 /* levelEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F652888C1B4D745200C75C21 /* levelEditor.cpp */; };
+		F6814C2B1B97874F00C20985 /* liblua53.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6814C2A1B97874F00C20985 /* liblua53.dylib */; };
+		F6814C2C1B97875500C20985 /* liblua53.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F6814C2A1B97874F00C20985 /* liblua53.dylib */; };
 		F69622701B4C376E00333195 /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F696226B1B4C376E00333195 /* Client.cpp */; };
 		F69622721B4C376E00333195 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F696226E1B4C376E00333195 /* Utilities.cpp */; };
 /* End PBXBuildFile section */
@@ -17,12 +19,13 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		F696225F1B4C370C00333195 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				F6814C2C1B97875500C20985 /* liblua53.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -33,6 +36,8 @@
 		F6152F471B4CA87F00B5961F /* levelGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = levelGenerator.h; sourceTree = "<group>"; };
 		F652888C1B4D745200C75C21 /* levelEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = levelEditor.cpp; sourceTree = "<group>"; };
 		F652888D1B4D745200C75C21 /* levelEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = levelEditor.h; sourceTree = "<group>"; };
+		F6814C2A1B97874F00C20985 /* liblua53.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua53.dylib; path = LevelDataManager/luaMac/liblua53.dylib; sourceTree = "<group>"; };
+		F6814C2D1B97877200C20985 /* luaLib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = luaLib; path = LevelDataManager/luaLib; sourceTree = "<group>"; };
 		F69622611B4C370C00333195 /* LevelDataManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LevelDataManager; sourceTree = BUILT_PRODUCTS_DIR; };
 		F696226B1B4C376E00333195 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
 		F696226E1B4C376E00333195 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
@@ -44,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6814C2B1B97874F00C20985 /* liblua53.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +59,8 @@
 		F69622581B4C370C00333195 = {
 			isa = PBXGroup;
 			children = (
+				F6814C2D1B97877200C20985 /* luaLib */,
+				F6814C2A1B97874F00C20985 /* liblua53.dylib */,
 				F69622631B4C370C00333195 /* LevelDataManager */,
 				F69622621B4C370C00333195 /* Products */,
 			);
@@ -229,6 +237,11 @@
 		F69622691B4C370C00333195 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LevelDataManager/macLua",
+					"$(PROJECT_DIR)/LevelDataManager/luaMac",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -237,6 +250,11 @@
 		F696226A1B4C370C00333195 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LevelDataManager/macLua",
+					"$(PROJECT_DIR)/LevelDataManager/luaMac",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

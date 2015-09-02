@@ -49,3 +49,18 @@ void waitForKB()
   fseek(stdin, 0, SEEK_END);
   while (getchar() != '\n');
 }
+
+bool luaTest()
+{
+  try
+  {
+    lua_State *L = luaL_newstate();
+    lua_close(L);
+  }
+  catch(...)
+  {
+    //SOMETHING was caught.
+    return false;
+  }
+  return true;
+}
