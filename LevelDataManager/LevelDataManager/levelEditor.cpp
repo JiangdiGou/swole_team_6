@@ -165,7 +165,7 @@ void levelEditor::editingRoutine()
 
       try
       {
-        x = std::stoi(uiCmds[1]);
+        x = std::stoi(uiCmds[1]) - 1;
         count = std::stoi(uiCmds[2]);
       }
       catch (const std::invalid_argument)
@@ -173,14 +173,26 @@ void levelEditor::editingRoutine()
         std::cout<<uiCmds[1]<<" or "<<uiCmds[2]<<" wasn't a valid number."<<std::endl;
         continue;
       }
+      if(x >= this->gameLevel.levelWidth)
+      {
+        printstr("Cannot insert columns into empty space.");
+        continue;
+      }
 
+      std::cout<<"Inserting "<<count<<" columns at row "<<(x + 1)<<std::endl;
       this->gameLevel.insertCol(x, count);
+      this->gameLevel.printLevel();
       continue;
     }
 
     else if(mainCmd.compare("save") == 0)
     {
       this->saveLevel();
+    }
+    else
+    {
+      printstr("Invalid command");
+      continue;
     }
   }
 }
@@ -240,6 +252,16 @@ bool levelEditor::cmdSingle(char tile, int x, int y, bool mode)
 
   if(success)
   {
+    std::string type;
+    if(mode)
+    {
+      type = "tile";
+    }
+    else
+    {
+      type = "entity";
+    }
+    std::cout<<"Changing "<<type<<" at ("<<x<<','<<y<<") to '"<<tile<<'\''<<std::endl;
     this->gameLevel.printLevel();
   }
   else

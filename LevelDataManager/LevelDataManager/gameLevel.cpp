@@ -134,10 +134,13 @@ void gameLevel::insertCol(int x, int count)
 
   //save the old data
   oldTileMap = new char*[oldHeight];
-  oldEntityMap = new char*[oldHeight];
   for (int i = 0; i < oldHeight; i++)
   {
     oldTileMap[i] = new char[oldWidth];
+  }
+  oldEntityMap = new char*[oldHeight];
+  for (int i = 0; i < oldHeight; i++)
+  {
     oldEntityMap[i] = new char[oldWidth];
   }
   for (int i = 0; i < oldHeight; i++)
@@ -154,11 +157,13 @@ void gameLevel::insertCol(int x, int count)
   int newWidth = this->levelWidth;
 
   newTileMap = new char*[oldHeight];
-  newEntityMap = new char*[oldHeight];
-
   for (int i = 0; i < oldHeight; i++)
   {
     newTileMap[i] = new char[newWidth];
+  }
+  newEntityMap = new char*[oldHeight];
+  for (int i = 0; i < oldHeight; i++)
+  {
     newEntityMap[i] = new char[newWidth];
   }
 
@@ -184,7 +189,7 @@ void gameLevel::insertCol(int x, int count)
   //set memory part 2 (after new columns)
   for (int i = 0; i < oldHeight; i++)
   {
-    for (int j = x; j < newWidth; j++)
+    for (int j = x; j < oldWidth; j++)
     {
       newTileMap[i][j + count] = oldTileMap[i][j];
       newEntityMap[i][j + count] = oldEntityMap[i][j];
@@ -202,11 +207,14 @@ void gameLevel::insertCol(int x, int count)
 
   //copy + realloc memory
   this->tileMap = new char*[oldHeight];
-  this->entityMap = new char*[oldHeight];
 
   for (int i = 0; i < oldHeight; i++)
   {
     this->tileMap[i] = new char[newWidth];
+  }
+  this->entityMap = new char*[oldHeight];
+  for (int i = 0; i < oldHeight; i++)
+  {
     this->entityMap[i] = new char[newWidth];
   }
   for (int i = 0; i < oldHeight; i++)
