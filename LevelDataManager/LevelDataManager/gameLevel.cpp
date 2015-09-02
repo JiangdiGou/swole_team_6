@@ -122,3 +122,99 @@ bool gameLevel::changeEntity(char entity, int x, int y)
   this->entityMap[y][x] = entity;
   return true;
 }
+
+void gameLevel::insertCol(int x, int count)
+{
+  char ** oldTileMap;
+  char ** oldEntityMap;
+  char ** newTileMap;
+  char ** newEntityMap;
+  int oldHeight = this->levelHeight;
+  int oldWidth = this->levelWidth;
+
+  //save the old data
+  oldTileMap = new char*[oldHeight];
+  oldEntityMap = new char*[oldHeight];
+  for (int i = 0; i < oldHeight; i++)
+  {
+    oldTileMap[i] = new char[oldWidth];
+    oldEntityMap[i] = new char[oldWidth];
+  }
+  for (int i = 0; i < oldHeight; i++)
+  {
+    for (int j = 0; j < oldWidth; j++)
+    {
+      oldTileMap[i][j] = this->tileMap[i][j];
+      oldEntityMap[i][j] = this->entityMap[i][j];
+    }
+  }
+
+  //re-alloc memory
+  this->levelWidth = this->levelWidth + count;
+  int newWidth = this->levelWidth;
+
+  newTileMap = new char*[oldHeight];
+  newEntityMap = new char*[oldHeight];
+
+  for (int i = 0; i < oldHeight; i++)
+  {
+    newTileMap[i] = new char[newWidth];
+    newEntityMap[i] = new char[newWidth];
+  }
+
+  //set memory part 0 (give everything a 0)
+  for (int i = 0; i < oldHeight; i++)
+  {
+    for (int j = 0; j < newWidth; j++)
+    {
+      newTileMap[i][j] = '0';
+      newEntityMap[i][j] = '0';
+    }
+  }
+
+  //set memory part 1 (before new columns)
+  for (int i = 0; i < oldHeight; i++)
+  {
+    for (int j = 0; j < x; j++)
+    {
+      newTileMap[i][j] = oldTileMap[i][j];
+      newEntityMap[i][j] = oldEntityMap[i][j];
+    }
+  }
+  //set memory part 2 (after new columns)
+  for (int i = 0; i < oldHeight; i++)
+  {
+    for (int j = x; j < newWidth; j++)
+    {
+      newTileMap[i][j + count] = oldTileMap[i][j];
+      newEntityMap[i][j + count] = oldEntityMap[i][j];
+    }
+  }
+
+  //clear memory
+  for (int i = 0; i < oldHeight; i++)
+  {
+    delete [] this->tileMap[i];
+    delete [] this->entityMap[i];
+  }
+  delete [] this->tileMap;
+  delete [] this->entityMap;
+
+  //copy + realloc memory
+  this->tileMap = new char*[oldHeight];
+  this->entityMap = new char*[oldHeight];
+
+  for (int i = 0; i < oldHeight; i++)
+  {
+    this->tileMap[i] = new char[newWidth];
+    this->entityMap[i] = new char[newWidth];
+  }
+  for (int i = 0; i < oldHeight; i++)
+  {
+    for (int j = 0; j < newWidth; j++)
+    {
+      this->tileMap[i][j] = newTileMap[i][j];
+      this->entityMap[i][j] = newEntityMap[i][j];
+    }
+  }
+}

@@ -28,10 +28,15 @@ levelEditor::levelEditor()
   levelEditor::validCommands.push_back("tile");//changes entity
   levelEditor::validCommands.push_back("ent");//changes tile
 
+  levelEditor::validCommands.push_back("inscol");//insert column
+  // insrow (where) (how many)
+  // rect
+  // undo
+
   levelEditor::validCommands.push_back("save");//saves file
   levelEditor::validCommands.push_back("quit");//quits loop
 
-  levelEditor::numCommands = levelEditor::validCommands.size();
+  levelEditor::numCommands = (int)levelEditor::validCommands.size();
 }
 
 void levelEditor::loadLevelFrom(std::string fileName)
@@ -146,6 +151,33 @@ void levelEditor::editingRoutine()
       continue;
     }
 
+    else if(mainCmd.compare("inscol") == 0)
+    {
+      //"inscol" int int
+      if(cmdCount != 3)
+      {
+        printstr("\"inscol\" command requires 3 arguments.");
+        continue;
+      }
+
+      int x;
+      int count;
+
+      try
+      {
+        x = std::stoi(uiCmds[1]);
+        count = std::stoi(uiCmds[2]);
+      }
+      catch (const std::invalid_argument)
+      {
+        std::cout<<uiCmds[1]<<" or "<<uiCmds[2]<<" wasn't a valid number."<<std::endl;
+        continue;
+      }
+
+      this->gameLevel.insertCol(x, count);
+      continue;
+    }
+
     else if(mainCmd.compare("save") == 0)
     {
       this->saveLevel();
@@ -171,6 +203,21 @@ void levelEditor::cmdHelp(std::string command)
   else if (command.compare("print") == 0)
   {
     std::cout<<"Prints out the level."<<std::endl;
+  }
+  else if (command.compare("tile") == 0)
+  {
+    std::cout<<"Change a tile, using a character, an x value, and a y value."<<std::endl;
+    printstr("Example: \"tile x 1 1\"");
+  }
+  else if (command.compare("ent") == 0)
+  {
+    std::cout<<"Change an entity, using a character, an x value, and a y value."<<std::endl;
+    printstr("Example: \"ent x 1 1\"");
+  }
+
+  else if (command.compare("save") == 0)
+  {
+    std::cout<<"Saves the level to the file."<<std::endl;
   }
   else
   {
