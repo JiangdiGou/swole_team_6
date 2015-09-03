@@ -25,6 +25,27 @@
 
 using std::string;
 
+void luaRoutine()
+{
+  luaRunner testLua;
+
+  printstr("(Lua Test 1)");
+  testLua.runFile("Scripts/hello.lua");
+  std::cout<<'\n';
+
+  printstr("(Lua Test 2)");
+  testLua.loadFile("Scripts/hello.lua");
+  std::string message1 = testLua.get<std::string>("test.candy");
+  int message2 = testLua.get<int>("exam");
+  printstr(message1);
+  std::cout<<message2<<std::endl;
+  std::cout<<'\n';
+
+  printstr("(Lua Test 3)");
+  testLua.runFile<std::string>("Scripts/paramTest.lua", "Lua argument test");
+  //std::cout<<'\n';
+}
+
 int main(void)
 {
   /* RUNNING RUNNING DIRECTORY ROUTINE */
@@ -41,9 +62,7 @@ int main(void)
   /* RUNNING LUA ROUTINE*/
   if(luaTest())
   {
-    luaRunner testLua;
-    testLua.runFile("Scripts/hello.lua");
-    printstr("Lua test run successfully.");
+    luaRoutine();
   }
   else
   {

@@ -18,7 +18,7 @@
 #include <iterator>
 #include <vector>
 
-extern "C"
+extern "C"//import as c libraries specifically
 {
   #include "luaLib/lua.h"
   #include "luaLib/lualib.h"

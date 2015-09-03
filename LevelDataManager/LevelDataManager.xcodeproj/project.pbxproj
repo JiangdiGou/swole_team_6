@@ -44,6 +44,7 @@
 		F6814C2E1B97A97500C20985 /* luaRunner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = luaRunner.cpp; sourceTree = "<group>"; };
 		F6814C2F1B97A97500C20985 /* luaRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luaRunner.h; sourceTree = "<group>"; };
 		F6814C311B97AC1000C20985 /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Scripts; path = LevelDataManager/Scripts; sourceTree = "<group>"; };
+		F6814C331B97DBFE00C20985 /* luaRunnerInline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = luaRunnerInline.h; sourceTree = "<group>"; };
 		F69622611B4C370C00333195 /* LevelDataManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LevelDataManager; sourceTree = BUILT_PRODUCTS_DIR; };
 		F696226B1B4C376E00333195 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
 		F696226E1B4C376E00333195 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 				F696226F1B4C376E00333195 /* Utilities.h */,
 				F6814C2E1B97A97500C20985 /* luaRunner.cpp */,
 				F6814C2F1B97A97500C20985 /* luaRunner.h */,
+				F6814C331B97DBFE00C20985 /* luaRunnerInline.h */,
 			);
 			path = LevelDataManager;
 			sourceTree = "<group>";
