@@ -6,12 +6,11 @@
 #include <string>
 #include <iostream>
 
-extern "C"//import as c libraries specifically
-{
-  #include "luaLib/lua.h"
-  #include "luaLib/lualib.h"
-  #include "luaLib/lauxlib.h"
-}
+#ifdef _WIN32
+  #pragma comment(lib, "luaWin/lua53.lib")
+#endif
+
+#include "luaLib/lua.hpp"
 
 class luaRunner
 {

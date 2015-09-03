@@ -57,6 +57,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,12 +85,16 @@
     <ClCompile Include="levelEditor.cpp" />
     <ClCompile Include="levelGenerator.cpp" />
     <ClCompile Include="gameLevel.cpp" />
+    <ClCompile Include="luaRunner.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="levelEditor.h" />
     <ClInclude Include="levelGenerator.h" />
     <ClInclude Include="gameLevel.h" />
+    <ClInclude Include="luaRunner.h" />
+    <ClInclude Include="luaRunnerInline.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
