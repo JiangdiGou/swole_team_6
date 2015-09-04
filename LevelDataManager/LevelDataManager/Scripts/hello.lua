@@ -1,4 +1,6 @@
-io.write("Hello World, from ",_VERSION,"!\n")
+message = "Hello World, from " .. _VERSION .. "!"
+
+print(message)
 
 test = 
 {

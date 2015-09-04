@@ -1,8 +1,3 @@
-/* loosely based on:
- https://github.com/EliasD/unnamed_lua_binder/
- http://lua-users.org/wiki/CppLuaDataPassing
- */
-
 #include <string>
 #include <iostream>
 

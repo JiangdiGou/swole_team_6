@@ -1,8 +1,3 @@
-/* loosely based on:
- https://github.com/EliasD/unnamed_lua_binder/
- http://lua-users.org/wiki/CppLuaDataPassing
- */
-
 //a single string argument
 template<>
 inline void luaRunner::runFile<std::string>(const std::string& fileName, std::string value, int args)
