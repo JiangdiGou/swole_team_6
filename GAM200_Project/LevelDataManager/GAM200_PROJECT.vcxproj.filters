@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="runLua">
+      <UniqueIdentifier>{a97aa9fe-a0d4-45d5-a7d0-ec77f177acbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lvlTools">
+      <UniqueIdentifier>{0400fde7-7b9b-4c5d-a1d5-15c72df535b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Universal">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="gameLevel.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="runLua\luaRunner.cpp">
+      <Filter>runLua</Filter>
+    </ClCompile>
+    <ClCompile Include="lvlTools\levelEditor.cpp">
+      <Filter>lvlTools</Filter>
+    </ClCompile>
+    <ClCompile Include="lvlTools\levelGenerator.cpp">
+      <Filter>lvlTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="runLua\luaRunner.h">
+      <Filter>runLua</Filter>
+    </ClInclude>
+    <ClInclude Include="runLua\luaRunnerInline.h">
+      <Filter>runLua</Filter>
+    </ClInclude>
+    <ClInclude Include="lvlTools\levelEditor.h">
+      <Filter>lvlTools</Filter>
+    </ClInclude>
+    <ClInclude Include="lvlTools\levelGenerator.h">
+      <Filter>lvlTools</Filter>
+    </ClInclude>
+    <ClInclude Include="gameLevel.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

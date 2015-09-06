@@ -1,4 +1,6 @@
-LevelDataManager/Build/*
-LevelDataManager/LevelDataManager/Debug/*
-LevelDataManager/LevelDataManager/Release/*
-LevelDataManager/LevelDataManager.xcodeproj/xcuserdata/*
+GAM200_Project/Build/*
+GAM200_Project/LevelDataManager/Debug/*
+GAM200_Project/LevelDataManager/Release/*
+GAM200_Project/LevelDataManager.xcodeproj/xcuserdata/*
+GAM200_Project/GraphicPrototype2/Debug/*
+GAM200_Project/GraphicPrototype2/Release/*
