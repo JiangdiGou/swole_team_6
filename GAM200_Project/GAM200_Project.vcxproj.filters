@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="graphicsLib">
+      <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{7a0231aa-4081-4242-90e5-850edb2cfcbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="luaRunner">
+      <UniqueIdentifier>{97d76878-a596-438c-8320-c594e23ab41f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lvlTools">
+      <UniqueIdentifier>{69aee93f-ae98-41f8-a545-01a9c17427cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Universal">
+      <UniqueIdentifier>{8622ca41-f451-432b-99f7-32cb65db372d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Shader.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\ShaderManager.h">
+      <Filter>graphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\runLua\luaRunner.h">
+      <Filter>luaRunner</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h">
+      <Filter>luaRunner</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\levelGenerator.h">
+      <Filter>lvlTools</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h">
+      <Filter>lvlTools</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Utilities.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\gameLevel.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\collision_detection_utility.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\math_utility.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\movement_collision_detection.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\range.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\shapes.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\vector2d.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\boolean.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\collision_detection.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp">
+      <Filter>graphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp">
+      <Filter>luaRunner</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp">
+      <Filter>lvlTools</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp">
+      <Filter>lvlTools</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Utilities.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Client.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\gameLevel.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="GAM200_Project\resources\Smiley1.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="GAM200_Project\resources\Smiley2.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="GAM200_Project\resources\Smiley3.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="GAM200_Project\resources\ExampleSpriteSheet.png">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GAM200_Project\resources\VertexShader.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="GAM200_Project\resources\VertexShaderDebug.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="GAM200_Project\resources\FragmentShader.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="GAM200_Project\resources\FragmentShaderDebug.txt">
+      <Filter>resources</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

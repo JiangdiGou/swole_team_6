@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GAM200_Project\engineGraphics\Camera.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\Shader.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\ShaderManager.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
+    <ClInclude Include="GAM200_Project\gameLevel.h" />
+    <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h" />
+    <ClInclude Include="GAM200_Project\lvlTools\levelGenerator.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\boolean.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\collision_detection.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\collision_detection_utility.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\math_utility.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\movement_collision_detection.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\range.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\shapes.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\vector2d.h" />
+    <ClInclude Include="GAM200_Project\runLua\luaRunner.h" />
+    <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h" />
+    <ClInclude Include="GAM200_Project\Utilities.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GAM200_Project\Client.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
+    <ClCompile Include="GAM200_Project\gameLevel.cpp" />
+    <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp" />
+    <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp" />
+    <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp" />
+    <ClCompile Include="GAM200_Project\Utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="GAM200_Project\resources\ExampleSpriteSheet.png" />
+    <Image Include="GAM200_Project\resources\Smiley1.png" />
+    <Image Include="GAM200_Project\resources\Smiley2.png" />
+    <Image Include="GAM200_Project\resources\Smiley3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GAM200_Project\resources\FragmentShader.txt" />
+    <Text Include="GAM200_Project\resources\FragmentShaderDebug.txt" />
+    <Text Include="GAM200_Project\resources\VertexShader.txt" />
+    <Text Include="GAM200_Project\resources\VertexShaderDebug.txt" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{73E2DFFE-92FF-4977-B8FE-68E8ED2EA2F6}</ProjectGuid>
+    <RootNamespace>GraphicPrototype2</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\Qbz\Documents\Visual Studio 2013\Projects\GraphicPrototype2\GraphicPrototype2\Inlcudes;Inlcudes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Qbz\Documents\Visual Studio 2013\Projects\GraphicPrototype2\GraphicPrototype2\Libararies;Libararies;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\Qbz\Documents\Visual Studio 2013\Projects\GraphicPrototype2\GraphicPrototype2\Inlcudes;Inlcudes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Qbz\Documents\Visual Studio 2013\Projects\GraphicPrototype2\GraphicPrototype2\Libararies;Libararies;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
