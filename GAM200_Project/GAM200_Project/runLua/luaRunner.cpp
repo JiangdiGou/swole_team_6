@@ -1,4 +1,10 @@
 #include "luaRunner.h"
+#include "../Utilities.h"
+
+void luaRunner::sendStr(std::string arg)
+{
+  macAppend = arg;
+}
 
 void luaRunner::printError(lua_State *L, int status)
 {
@@ -18,8 +24,13 @@ void luaRunner::printError(const std::string& source, const std::string& reason)
 void luaRunner::runFile(const std::string& fileName)
 {
   lua_State *local = luaL_newstate();
+  std::string trueName = "";
 
-  int fileCall = luaL_loadfile(local, fileName.c_str());
+#ifndef _WIN32
+  trueName += macAppend;
+#endif
+  trueName += fileName;
+  int fileCall = luaL_loadfile(local, trueName.c_str());
 
   if(fileCall == 0)//file can actually be ran
   {
@@ -34,8 +45,13 @@ void luaRunner::runFile(const std::string& fileName)
 void luaRunner::loadFile(const std::string& fileName)
 {
   running = luaL_newstate();
+  std::string trueName = "";
 
-  int fileCall = luaL_loadfile(running, fileName.c_str());
+#ifndef _WIN32
+  trueName += macAppend;
+#endif
+  trueName += fileName;
+  int fileCall = luaL_loadfile(running, trueName.c_str());
 
   if (fileCall == 0)//file can actually be loaded
   {
@@ -45,7 +61,7 @@ void luaRunner::loadFile(const std::string& fileName)
   }
   else
   {
-    std::cout<<"LUA INIT ERROR:\nfailed to load \""<<fileName<<'\"'<<std::endl;
+    std::cout<<"LUA INIT ERROR:\nfailed to load \""<<trueName<<'\"'<<std::endl;
     running = nullptr;
   }
 

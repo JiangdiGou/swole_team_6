@@ -7,39 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F680F39C1BA0D64A006998AD /* liblua53.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F680F3971BA0D3C3006998AD /* liblua53.dylib */; };
+		F680F3A01BA0D9F7006998AD /* liblua53.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F680F3971BA0D3C3006998AD /* liblua53.dylib */; };
+		F680F3A31BA0DDAA006998AD /* dyld_set.sh in CopyFiles */ = {isa = PBXBuildFile; fileRef = F680F39F1BA0D9EA006998AD /* dyld_set.sh */; };
 		F6FDB9EE1B9D0E94007EF209 /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDB9E61B9D0E94007EF209 /* Client.cpp */; };
 		F6FDB9EF1B9D0E94007EF209 /* gameLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDB9E71B9D0E94007EF209 /* gameLevel.cpp */; };
 		F6FDB9F01B9D0E94007EF209 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDB9EC1B9D0E94007EF209 /* Utilities.cpp */; };
-		F6FDB9F21B9D0F05007EF209 /* liblua53.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6FDB9F11B9D0F05007EF209 /* liblua53.dylib */; };
 		F6FDBA031B9D0FE3007EF209 /* levelEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDB9FF1B9D0FE3007EF209 /* levelEditor.cpp */; };
 		F6FDBA041B9D0FE3007EF209 /* levelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDBA011B9D0FE3007EF209 /* levelGenerator.cpp */; };
 		F6FDBA091B9D0FFB007EF209 /* luaRunner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDBA061B9D0FFB007EF209 /* luaRunner.cpp */; };
-		F6FDBA0A1B9D1028007EF209 /* liblua53.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F6FDB9F11B9D0F05007EF209 /* liblua53.dylib */; };
 		F6FDBA0C1B9D105C007EF209 /* Scripts in CopyFiles */ = {isa = PBXBuildFile; fileRef = F6FDBA0B1B9D1058007EF209 /* Scripts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F680F39D1BA0D6A2006998AD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F6D1F0AB1B9D0D5C0096D517 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F680F3A31BA0DDAA006998AD /* dyld_set.sh in CopyFiles */,
+				F680F3A01BA0D9F7006998AD /* liblua53.dylib in CopyFiles */,
 				F6FDBA0C1B9D105C007EF209 /* Scripts in CopyFiles */,
-				F6FDBA0A1B9D1028007EF209 /* liblua53.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F680F3951BA0D2D6006998AD /* liblua53.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua53.a; path = luaMac/liblua53.a; sourceTree = "<group>"; };
+		F680F3971BA0D3C3006998AD /* liblua53.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua53.dylib; path = luaMac/liblua53.dylib; sourceTree = "<group>"; };
+		F680F39F1BA0D9EA006998AD /* dyld_set.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = dyld_set.sh; path = macTools/dyld_set.sh; sourceTree = "<group>"; };
 		F6D1F0AD1B9D0D5C0096D517 /* GAM200_Project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GAM200_Project; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FDB9E61B9D0E94007EF209 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
 		F6FDB9E71B9D0E94007EF209 /* gameLevel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameLevel.cpp; sourceTree = "<group>"; };
 		F6FDB9E81B9D0E94007EF209 /* gameLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gameLevel.h; sourceTree = "<group>"; };
 		F6FDB9EC1B9D0E94007EF209 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
 		F6FDB9ED1B9D0E94007EF209 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
-		F6FDB9F11B9D0F05007EF209 /* liblua53.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua53.dylib; path = luaMac/liblua53.dylib; sourceTree = "<group>"; };
 		F6FDB9F91B9D0FC6007EF209 /* lauxlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lauxlib.h; path = GAM200_Project/luaLib/lauxlib.h; sourceTree = "<group>"; };
 		F6FDB9FA1B9D0FC6007EF209 /* lua.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lua.h; path = GAM200_Project/luaLib/lua.h; sourceTree = "<group>"; };
 		F6FDB9FB1B9D0FC6007EF209 /* lua.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = lua.hpp; path = GAM200_Project/luaLib/lua.hpp; sourceTree = "<group>"; };
@@ -60,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6FDB9F21B9D0F05007EF209 /* liblua53.dylib in Frameworks */,
+				F680F39C1BA0D64A006998AD /* liblua53.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,8 +83,10 @@
 		F6D1F0A41B9D0D5C0096D517 = {
 			isa = PBXGroup;
 			children = (
+				F680F39F1BA0D9EA006998AD /* dyld_set.sh */,
+				F680F3951BA0D2D6006998AD /* liblua53.a */,
+				F680F3971BA0D3C3006998AD /* liblua53.dylib */,
 				F6FDBA0B1B9D1058007EF209 /* Scripts */,
-				F6FDB9F11B9D0F05007EF209 /* liblua53.dylib */,
 				F6D1F0AF1B9D0D5C0096D517 /* GAM200_Project */,
 				F6D1F0AE1B9D0D5C0096D517 /* Products */,
 			);
@@ -146,6 +161,7 @@
 				F6D1F0A91B9D0D5C0096D517 /* Sources */,
 				F6D1F0AA1B9D0D5C0096D517 /* Frameworks */,
 				F6D1F0AB1B9D0D5C0096D517 /* CopyFiles */,
+				F680F39D1BA0D6A2006998AD /* CopyFiles */,
 			);
 			buildRules = (
 			);

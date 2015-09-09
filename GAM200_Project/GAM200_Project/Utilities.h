@@ -18,12 +18,22 @@
 #include <iterator>
 #include <vector>
 
+#ifdef _WIN32
+  #include <direct.h>
+  #define GetCurrentDir _getcwd
+#else
+  #include <unistd.h>
+  #define GetCurrentDir getcwd
+#endif
+
 extern "C"//import as c libraries specifically
 {
   #include "luaLib/lua.h"
   #include "luaLib/lualib.h"
   #include "luaLib/lauxlib.h"
 }
+
+std::string whereExec();
 
 //meh, hopefully the client remembered to use the "setter" for closing the fstream
 //(as long as the levelGenerator instance still exists, we cannot guarantee that its

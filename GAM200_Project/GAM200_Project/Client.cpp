@@ -9,28 +9,26 @@
  */
 /******************************************************************************/
 
+#define NO_SDK 1
+
 #include "lvlTools/levelGenerator.h"
 #include "lvlTools/levelEditor.h"
 #include "Utilities.h"
 #include "runLua/luaRunner.h"
 
+#include <string>
 #include <stdio.h>  /* defines FILENAME_MAX */
-#ifdef _WIN32
-  #include <direct.h>
-  #define GetCurrentDir _getcwd
-#else
-  #include <unistd.h>
-  #define GetCurrentDir getcwd
-#endif
 
 using std::string;
 
-void luaRoutine()
+void luaRoutine(std::string arg)
 {
   luaRunner testLua;
 
   printstr("(Lua Test 1)");
   testLua.runFile("Scripts/hello.lua");
+  arg.erase(arg.begin() + arg.find_last_of("/"), arg.end());
+  testLua.sendStr(arg + "/");
   std::cout<<'\n';
 
   printstr("(Lua Test 2)");
@@ -49,7 +47,7 @@ void luaRoutine()
 #ifdef _WIN32
 int potato(void)
 #else
-int main(void)
+int main(int arc, char **argv)
 #endif
 {
   /* RUNNING RUNNING DIRECTORY ROUTINE */
@@ -66,7 +64,7 @@ int main(void)
   /* RUNNING LUA ROUTINE*/
   if(luaTest())
   {
-    luaRoutine();
+    luaRoutine(argv[0]);
   }
   else
   {

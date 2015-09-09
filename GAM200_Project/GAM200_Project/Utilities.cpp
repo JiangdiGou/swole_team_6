@@ -11,6 +11,17 @@
 
 #include "Utilities.h"
 
+std::string whereExec()
+{
+  char cCurrentPath[FILENAME_MAX];
+  if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
+  {
+    throw std::runtime_error("cannot locate myself");
+  }
+  cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+  return std::string(cCurrentPath);
+}
+
 std::string getLineFromFile(int lineNumber, std::string fileName)
 {
   std::string garbage;

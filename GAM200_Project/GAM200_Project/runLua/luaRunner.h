@@ -10,6 +10,7 @@
 class luaRunner
 {
 public:
+  void sendStr(std::string arg);
   void printError(lua_State *L, int status);
   void printError(const std::string& source, const std::string& reason);
 
@@ -65,6 +66,7 @@ private:
   lua_State* running;
   std::string fileName;
   int depth;
+  std::string macAppend;
 };
 
 #include "luaRunnerInline.h"

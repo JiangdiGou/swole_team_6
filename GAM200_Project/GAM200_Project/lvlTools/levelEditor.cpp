@@ -29,7 +29,7 @@ levelEditor::levelEditor()
   levelEditor::validCommands.push_back("ent");//changes tile
 
   levelEditor::validCommands.push_back("inscol");//insert column
-  // insrow (where) (how many)
+  levelEditor::validCommands.push_back("insrow");//insert column
   // rect
   // undo
 
@@ -179,8 +179,42 @@ void levelEditor::editingRoutine()
         continue;
       }
 
-      std::cout<<"Inserting "<<count<<" columns at row "<<(x + 1)<<std::endl;
+      std::cout<<"Inserting "<<count<<" columns at column "<<(x + 1)<<std::endl;
       this->gameLevel.insertCol(x, count);
+      this->gameLevel.printLevel();
+      continue;
+    }
+
+    else if(mainCmd.compare("insrow") == 0)
+    {
+      //"inscol" int int
+      if(cmdCount != 3)
+      {
+        printstr("\"insrow\" command requires 3 arguments.");
+        continue;
+      }
+
+      int y;
+      int count;
+
+      try
+      {
+        y = std::stoi(uiCmds[1]) - 1;
+        count = std::stoi(uiCmds[2]);
+      }
+      catch (const std::invalid_argument)
+      {
+        std::cout<<uiCmds[1]<<" or "<<uiCmds[2]<<" wasn't a valid number."<<std::endl;
+        continue;
+      }
+      if(y >= this->gameLevel.levelHeight)
+      {
+        printstr("Cannot insert rows into empty space.");
+        continue;
+      }
+
+      std::cout<<"Inserting "<<count<<" rows at row "<<(y + 1)<<std::endl;
+      this->gameLevel.insertRow(y, count);
       this->gameLevel.printLevel();
       continue;
     }

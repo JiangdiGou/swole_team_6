@@ -231,6 +231,105 @@ void gameLevel::insertCol(int x, int count)
 
 void gameLevel::insertRow(int y, int count)
 {
-  
+  char ** oldTileMap;
+  char ** oldEntityMap;
+  char ** newTileMap;
+  char ** newEntityMap;
+  int oldHeight = this->levelHeight;
+  int oldWidth = this->levelWidth;
+
+  //save the old data
+  oldTileMap = new char*[oldHeight];
+  for (int i = 0; i < oldHeight; i++)
+  {
+    oldTileMap[i] = new char[oldWidth];
+  }
+  oldEntityMap = new char*[oldHeight];
+  for (int i = 0; i < oldHeight; i++)
+  {
+    oldEntityMap[i] = new char[oldWidth];
+  }
+  for (int i = 0; i < oldHeight; i++)
+  {
+    for (int j = 0; j < oldWidth; j++)
+    {
+      oldTileMap[i][j] = this->tileMap[i][j];
+      oldEntityMap[i][j] = this->entityMap[i][j];
+    }
+  }
+
+  //re-alloc memory
+  this->levelHeight = this->levelHeight + count;
+  int newHeight = this->levelHeight;
+
+  newTileMap = new char*[newHeight];
+  for (int i = 0; i < newHeight; i++)
+  {
+    newTileMap[i] = new char[oldWidth];
+  }
+  newEntityMap = new char*[newHeight];
+  for (int i = 0; i < newHeight; i++)
+  {
+    newEntityMap[i] = new char[oldWidth];
+  }
+
+  //set memory part 0 (give everything a 0)
+  for (int i = 0; i < newHeight; i++)
+  {
+    for (int j = 0; j < oldWidth; j++)
+    {
+      newTileMap[i][j] = '0';
+      newEntityMap[i][j] = '0';
+    }
+  }
+
+  //set memory part 1 (before new rows)
+  for (int i = 0; i < y; i++)
+  {
+    for (int j = 0; j < oldWidth; j++)
+    {
+      newTileMap[i][j] = oldTileMap[i][j];
+      newEntityMap[i][j] = oldEntityMap[i][j];
+    }
+  }
+  //set memory part 2 (after new rows)
+  for (int i = y; i < oldHeight; i++)
+  {
+    for (int j = 0; j < oldWidth; j++)
+    {
+      newTileMap[i + count][j] = oldTileMap[i][j];
+      newEntityMap[i + count][j] = oldEntityMap[i][j];
+    }
+  }
+
+  //clear memory
+  for (int i = 0; i < oldHeight; i++)
+  {
+    delete [] this->tileMap[i];
+    delete [] this->entityMap[i];
+  }
+  delete [] this->tileMap;
+  delete [] this->entityMap;
+
+  //copy + realloc memory
+  this->tileMap = new char*[newHeight];
+
+  for (int i = 0; i < newHeight; i++)
+  {
+    this->tileMap[i] = new char[oldWidth];
+  }
+  this->entityMap = new char*[newHeight];
+  for (int i = 0; i < newHeight; i++)
+  {
+    this->entityMap[i] = new char[oldWidth];
+  }
+  for (int i = 0; i < newHeight; i++)
+  {
+    for (int j = 0; j < oldWidth; j++)
+    {
+      this->tileMap[i][j] = newTileMap[i][j];
+      this->entityMap[i][j] = newEntityMap[i][j];
+    }
+  }
 }
 
