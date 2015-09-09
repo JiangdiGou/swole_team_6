@@ -223,6 +223,10 @@ void levelEditor::editingRoutine()
     {
       this->saveLevel();
     }
+    else if(mainCmd.compare("quit") == 0)
+    {
+      return;
+    }
     else
     {
       printstr("Invalid command");

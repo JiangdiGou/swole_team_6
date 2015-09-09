@@ -24,11 +24,11 @@ using std::string;
 void luaRoutine(std::string arg)
 {
   luaRunner testLua;
-
-  printstr("(Lua Test 1)");
-  testLua.runFile("Scripts/hello.lua");
   arg.erase(arg.begin() + arg.find_last_of("/"), arg.end());
   testLua.sendStr(arg + "/");
+  
+  printstr("(Lua Test 1)");
+  testLua.runFile("Scripts/hello.lua");
   std::cout<<'\n';
 
   printstr("(Lua Test 2)");

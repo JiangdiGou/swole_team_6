@@ -3,8 +3,13 @@ template<>
 inline void luaRunner::runFile<std::string>(const std::string& fileName, std::string value, int args)
 {
   lua_State *local = luaL_newstate();
+  std::string trueName = "";
 
-  int fileCall = luaL_loadfile(local, fileName.c_str());
+#ifndef _WIN32
+  trueName += macAppend;
+#endif
+  trueName += fileName;
+  int fileCall = luaL_loadfile(local, trueName.c_str());
 
   if(fileCall == 0)//file can actually be ran
   {
