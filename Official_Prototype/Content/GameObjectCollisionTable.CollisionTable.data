@@ -1,0 +1,63 @@
+CollisionTable = 
+{
+	Array RegisteredGroups = 
+	[
+		"4e740859314e5515:DefaultGroup",
+		"55344c1d69797cae:CollisionGroup_Enemy",
+		"55344c3e53a95305:CollisionGroup_Player",
+	],
+	Array CollisionFilters = 
+	[
+		{
+			string TypeA = "55344c3e53a95305:CollisionGroup_Player",
+			string TypeB = "55344c3e53a95305:CollisionGroup_Player",
+			bool SkipResolution = false,
+			bool SkipDetectingCollision = true,
+			bool StartEvent = false,
+			bool EndEvent = false,
+			bool PersistedEvent = false,
+			bool PreSolveEvent = false,
+		},
+		{
+			string TypeA = "55344c3e53a95305:CollisionGroup_Player",
+			string TypeB = "4e740859314e5515:DefaultGroup",
+			bool SkipResolution = false,
+			bool SkipDetectingCollision = true,
+			bool StartEvent = false,
+			bool EndEvent = false,
+			bool PersistedEvent = false,
+			bool PreSolveEvent = false,
+		},
+		{
+			string TypeA = "55344c1d69797cae:CollisionGroup_Enemy",
+			string TypeB = "55344c3e53a95305:CollisionGroup_Player",
+			bool SkipResolution = true,
+			bool SkipDetectingCollision = false,
+			bool StartEvent = false,
+			bool EndEvent = false,
+			bool PersistedEvent = false,
+			bool PreSolveEvent = false,
+		},
+		{
+			string TypeA = "55344c1d69797cae:CollisionGroup_Enemy",
+			string TypeB = "55344c1d69797cae:CollisionGroup_Enemy",
+			bool SkipResolution = false,
+			bool SkipDetectingCollision = true,
+			bool StartEvent = false,
+			bool EndEvent = false,
+			bool PersistedEvent = false,
+			bool PreSolveEvent = false,
+		},
+		{
+			string TypeA = "55344c1d69797cae:CollisionGroup_Enemy",
+			string TypeB = "4e740859314e5515:DefaultGroup",
+			bool SkipResolution = true,
+			bool SkipDetectingCollision = false,
+			bool StartEvent = false,
+			bool EndEvent = false,
+			bool PersistedEvent = false,
+			bool PreSolveEvent = false,
+		},
+	],
+	bool AutoRegister = true,
+},

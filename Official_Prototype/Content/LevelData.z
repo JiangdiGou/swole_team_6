@@ -1,0 +1,58 @@
+class LevelData : ZilchComponent
+{
+    var RPlayerHealth:Real;
+    var RPlayerEnergy:Real;
+    var IEnergyCountDown:Integer;
+    var IBestCombo:Integer;
+    [Property]
+    var ILevelTimer:Integer = 100;
+    var ITimeCountDown:Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.RPlayerHealth = 100;
+        this.RPlayerEnergy = 0;
+        this.IEnergyCountDown = 0;
+        this.IBestCombo = 0;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        ++this.ITimeCountDown;
+        
+        if(this.ITimeCountDown % 60 == 0)
+        {
+            --this.ILevelTimer;
+        }
+        
+        if(this.RPlayerEnergy % 20 != 0)
+        {
+            ++this.IEnergyCountDown;
+            
+            if(this.IEnergyCountDown % 40 == 0)
+            {
+                this.RPlayerEnergy -= 1;
+            }
+        }
+    }
+    
+    function CheckBestCombo(iNewCombo_:Integer)
+    {
+        if(iNewCombo_ > this.IBestCombo)
+        {
+            this.IBestCombo = iNewCombo_;
+        }
+    }
+    
+    function AddEnergy(iEnergyValue_:Integer)
+    {
+        this.RPlayerEnergy += 1 + (iEnergyValue_ / 4);
+        
+        if(this.RPlayerEnergy > 100)
+        {
+            this.RPlayerHealth = 100;
+        }
+        this.IEnergyCountDown = 0;
+    }
+}

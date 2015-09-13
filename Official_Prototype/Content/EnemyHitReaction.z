@@ -1,0 +1,86 @@
+class EnemyHitReaction : ZilchComponent
+{
+    //Enemy's Health (Damage they can take until they die)
+    [Property]
+    var IHealth:Integer = 100;
+    
+    //Enemy's Overkill Health (Damage they can take until they can no longer be hit)
+    [Property]
+    var IOverkillHealth:Integer = 150;
+    
+    [Property]
+    var IDespawnTime: Integer = 200;
+    
+    //The number of frames that this enemy is stunned
+    [Property]
+    var IStunCD:Integer = 60;
+    
+    //The counter to see how long the enemy has until they're not stunned
+    var IStunCounter:Integer = 0;
+    
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollision);
+    }
+    
+    
+    function OnLogicUpdate(event: UpdateEvent)
+    {
+        this.Owner.SpriteText.Text = "`this.IHealth`";
+        
+        if(this.IOverkillHealth <= 0)
+        {
+            this.Owner.Destroy();
+        }
+        
+        if(this.IHealth <= 0)
+        {
+            this.IDespawnTime -= 1;
+        }
+        
+        if(this.IDespawnTime <= 0)
+        {
+            this.Owner.Destroy();
+        }
+    }
+    
+    
+    function OnCollision(event:CollisionEvent)
+    {
+        var sOtherObject = event.OtherObject;
+        
+        if(sOtherObject.Name == "AttackBox")
+        {
+            this.OnHit(sOtherObject.DamageProperties.IDamageDealt, sOtherObject.DamageProperties.BCanStun, sOtherObject.DamageProperties.BKnockUp);
+            /*var iPlaceholder:Integer = sOtherObject.DamageProperties.IDamageDealt;
+            var bPlaceholder:Boolean = sOtherObject.DamageProperties.BKnockUp;
+            
+            this.IHealth -= iPlaceholder;
+            this.IOverkillHealth -= iPlaceholder;
+            
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
+            
+            if(bPlaceholder)
+            {
+                this.Owner.RigidBody.Velocity += Real3(0, 10, 0);
+            }*/
+        }
+    }
+    
+    
+    function OnHit(iDamageTaken_:Integer, bIsStunned_:Boolean, bKnockedUp_:Boolean)
+    {
+        this.IHealth -= iDamageTaken_;
+        this.IOverkillHealth -= iDamageTaken_;
+        
+        if(bKnockedUp_)
+        {
+            this.Owner.RigidBody.Velocity += Real3(0.0, 10.0, 0.0);
+        }
+        
+        this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
+    }
+}

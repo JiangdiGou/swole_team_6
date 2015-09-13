@@ -1,0 +1,83 @@
+class ScrollSelect : ZilchComponent
+{
+    [Property]
+    var IScrollNumber:Integer = 0;
+    var IScrollSelected:Integer = 0;
+    var IScrollCooldown:Integer = 0;
+    var BCanUse:Boolean = true;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space, Events.MouseScroll, this.ChangeScroll);
+        Zero.Connect(this.Space, Events.RightMouseDown, this.UseScroll);
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.IScrollCooldown > 0)
+        {
+            --this.IScrollCooldown;
+            
+            if(this.IScrollCooldown == 0)
+            {
+                this.BCanUse = true;
+                this.Owner.Sprite.Color += Real4(0,0,0,0.5);
+            }
+        }
+    }
+    
+    function ChangeScroll(event : MouseEvent)
+    {
+        if(event.Scroll.Y == 1)
+        {
+            ++this.IScrollSelected;
+            
+            if(this.IScrollSelected > 2)
+            {
+                this.IScrollSelected = 0;
+            }
+        }
+        else if(event.Scroll.Y == -1)
+        {
+            --this.IScrollSelected;
+            
+            if(this.IScrollSelected < 0)
+            {
+                this.IScrollSelected = 2;
+            }
+        }
+        
+        this.UpdatePosition();
+    }
+    
+    function UseScroll(event : MouseEvent)
+    {
+        if(this.BCanUse && this.IScrollNumber == this.IScrollSelected)
+        {
+            Console.WriteLine("ScrollSelect.UseScroll Success!");
+            this.IScrollCooldown = 1000;
+            this.BCanUse = false;
+            this.Owner.Sprite.Color -= Real4(0,0,0,0.5);
+        }
+    }
+    
+    function UpdatePosition()
+    {
+        if(this.IScrollNumber == this.IScrollSelected)
+        {
+            this.Owner.Transform.Translation = Real3(16.5, 8.5, 0.1);
+            this.Owner.Transform.Scale = Real3(6, 1.5, 0);
+        }
+        else if(this.IScrollNumber == 1 && this.IScrollSelected == 0 || this.IScrollNumber == 2 && this.IScrollSelected == 1 || this.IScrollNumber == 0 && this.IScrollSelected == 2)
+        {
+            this.Owner.Transform.Translation = Real3(16.5, 7.5, 0);
+            this.Owner.Transform.Scale = Real3(4, 1, 0);
+        }
+        else if(this.IScrollNumber == 0 && this.IScrollSelected == 1 || this.IScrollNumber == 1 && this.IScrollSelected == 2 || this.IScrollNumber == 2 && this.IScrollSelected == 0)
+        {
+            this.Owner.Transform.Translation = Real3(16.5, 9.5, 0);
+            this.Owner.Transform.Scale = Real3(4, 1, 0);
+        }
+    }
+}

@@ -1,0 +1,120 @@
+class PlayerMovement : ZilchComponent
+{
+    //How fast the player can move
+    [Property]
+    var RSpeed:Real = 0.3;
+    
+    //How high the player can jump
+    [Property]
+    var RJumpHeight:Real = 10.0;
+    
+    //X velocity of the player during a dash
+    [Property]
+    var RDashSpeedX:Real = 60.0;
+    
+    //Frame counter where the dash isn't available (after use)
+    var IDashCD:Integer = 0;
+    //Stops player's X velocity when it hits 0 or they keep sliding after a dash
+    var IDashStop:Integer = 0;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.DecreaseCounters();
+        
+        //Dash left when Q is pressed
+        if(Zero.Keyboard.KeyIsPressed(Keys.Q) && this.IDashCD == 0)
+        {
+            this.Dash(1);
+        }
+        //Dash right when E is pressed
+        if(Zero.Keyboard.KeyIsPressed(Keys.E) && this.IDashCD == 0)
+        {
+            this.Dash(2);
+        }
+        
+        //Move left when A or Left Arrow are pressed
+        if(Zero.Keyboard.KeyIsDown(Keys.A) || Zero.Keyboard.KeyIsDown(Keys.Left))
+        {
+            this.Owner.Transform.Translation -= Real3(this.RSpeed, 0.0, 0.0);
+        }
+        //Move right when D or Right Arrow are pressed
+        else if(Zero.Keyboard.KeyIsDown(Keys.D) || Zero.Keyboard.KeyIsDown(Keys.Right))
+        {
+            this.Owner.Transform.Translation += Real3(this.RSpeed, 0.0, 0.0);
+        }
+        
+        //Lets the player fall faster while S or Down Arrow are pressed
+        if(Zero.Keyboard.KeyIsDown(Keys.S) || Zero.Keyboard.KeyIsDown(Keys.Down) && this.Owner.RigidBody.Velocity.Y < 0)
+        {
+            this.Owner.Transform.Translation -= Real3(0.0, this.RSpeed, 0.0);
+        }
+        
+        //Jump when Space is pressed
+        if(Zero.Keyboard.KeyIsPressed(Keys.Space))
+        {
+            //Will only jump if the player's Y velocity is low enough. Prevents infinite air jumping
+            if(this.Owner.RigidBody.Velocity.Y <= 1.0 && this.Owner.RigidBody.Velocity.Y >= 0.0)
+            {
+                this.Owner.RigidBody.Velocity += Real3(0.0, this.RJumpHeight, 0.0);
+                this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,1);//Jump ID = 1
+            }
+        }
+    }
+    
+    
+    function Dash(iDirection_:Integer)
+    {
+        //For iDirection, 1 is dash left, 2 is dash right
+        if(iDirection_ == 1)
+        {
+            this.Owner.RigidBody.Velocity -= Real3(this.RDashSpeedX, 0, 0);
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,4);//Dash Left ID = 4
+        }
+        else if(iDirection_ == 2)
+        {
+            this.Owner.RigidBody.Velocity += Real3(this.RDashSpeedX, 0, 0);
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,3);//Dash Right ID = 3
+        }
+        this.Owner.BoxCollider.Ghost = true;
+        //Players have to wait 30 frames until they can dash again
+        this.IDashCD = 30;
+        //The number of frames that the player will have the dash velocity applied to them
+        this.IDashStop = 6;
+    }
+    
+    
+    function DecreaseCounters()
+    {
+        //Decrements the cooldown until the player can dash again
+        if(this.IDashCD > 0)
+        {
+            --this.IDashCD;
+        }
+        
+        //Decrements the amount of time the player is moving from a dash
+        if(this.IDashStop > 0)
+        {
+            --this.IDashStop;
+            
+            this.Owner.BoxCollider.Ghost = true;
+            this.Owner.RigidBody.Velocity = Real3(this.Owner.RigidBody.Velocity.X, 0, 0);
+            
+            if(this.IDashStop == 0)
+            {
+                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.BoxCollider.Ghost = false;
+            }
+        }
+    }
+}
+
+
+
+

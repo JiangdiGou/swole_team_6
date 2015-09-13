@@ -1,0 +1,54 @@
+class ObjectManager : ZilchComponent
+{
+    var OM_STATICOBJECT:Integer = 1;
+    var OM_DYNAMICOBJECT:Integer = 2;
+    
+    var AStaticObjects: Array[Cog];
+    var ADynamicObjects: Array[Cog];
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.AStaticObjects = new Array[Cog]();
+        this.ADynamicObjects = new Array[Cog]();
+    }
+
+    function AddObject(cog_:Cog, iOMType_:Integer):Void
+    {
+        if(iOMType_ == this.OM_STATICOBJECT)
+        {
+            this.AStaticObjects.Push(cog_);
+        }
+        else if(iOMType_ == this.OM_DYNAMICOBJECT)
+        {
+            this.ADynamicObjects.Push(cog_);
+        }
+    }
+    
+    function DestroyVector(iOMType_:Integer):Void
+    {
+        if(iOMType_ == 1)//static
+        {
+            var iStatic:Integer = this.AStaticObjects.LastIndex;
+            for(var s:Integer = 0; s < iStatic; ++s)
+            {
+                this.AStaticObjects.Get(s).Destroy();
+                
+            }
+        }
+        else if(iOMType_ == 2)//dynamic
+        {
+            
+        }
+    }
+    
+    function DestroyAllData():Void
+    {
+        
+    }
+    
+    function Destroy():Void
+    {
+        
+    }
+}

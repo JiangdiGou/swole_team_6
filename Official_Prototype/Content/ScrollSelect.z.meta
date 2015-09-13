@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScrollSelect",
+		uint64 ResourceId = 55359856f8fbe5e5,
+	},
+},

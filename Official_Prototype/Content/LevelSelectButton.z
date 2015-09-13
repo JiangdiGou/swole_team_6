@@ -1,0 +1,23 @@
+class LevelSelectButton : ZilchComponent
+{
+    [Property]
+    var ISelected:Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.MouseDown, this.MouseDown);
+    }
+    
+    function MouseDown(event : ViewportMouseEvent)
+    {
+        if(this.ISelected > 0)
+        {
+            this.LevelSettings.LevelSelect.ISelected = this.ISelected;
+            this.LevelSettings.LevelSelect.UpdateSelector();
+        }
+        else
+        {
+            Console.WriteLine("Go to main Menu");
+        }
+    }
+}

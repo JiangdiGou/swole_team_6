@@ -1,0 +1,29 @@
+class PowerTest : ZilchComponent
+{
+    [Property]
+    var BDoubleJump:Boolean = false;
+    [Property]
+    var BFlashFire:Boolean = false;
+    [Property]
+    var BSacrificeHP:Boolean = false;
+    var BIsOn:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.MouseUp, this.OnMouseUp);
+    }
+    
+    function OnMouseUp(event : MouseEvent)
+    {
+        this.BIsOn = !this.BIsOn;
+        
+        if(this.BIsOn)
+        {
+            this.Owner.Sprite.Color = Real4(0,1,0,1.0);
+        }
+        else
+        {
+            this.Owner.Sprite.Color = Real4(1,0,0,1.0);
+        }
+    }
+}

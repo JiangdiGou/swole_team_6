@@ -1,0 +1,352 @@
+class PlayerAttack : ZilchComponent
+{
+    //Determines if the left mouse is currently held down
+    var BLClickDown:Boolean = false;
+    //Duration that the left mouse is held down
+    var ILClickDuration:Integer = 0;
+    
+    //Internal cooldown to prevent the player from attacking too fast
+    var IAttackCD:Integer = 0;
+    
+    //Screen position of the mouse when the left mouse is clicked down
+    var RMouseClickPos:Real2 = Real2(0,0);
+    //Screen position of the mouse when the left mouse is released
+    var RMouseReleasePos:Real2 = Real2(0,0);
+    
+    //Stops player's velocity when it hits 0 or they keep sliding after a slash
+    var ISlashStop:Integer = 0;
+    
+    
+    //*******************************************************************************************************************************************
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space, Events.LeftMouseDown, this.LeftMouseDown);
+        Zero.Connect(this.Space, Events.LeftMouseUp, this.LeftMouseUp);
+    }
+    
+    //*******************************************************************************************************************************************
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.DecreaseCounters();
+        
+        //Increases the duration of how long the left mouse has been down
+        if(this.BLClickDown)
+        {
+            this.ILClickDuration += 1;
+        }
+    }
+    
+    //*******************************************************************************************************************************************
+    function LeftMouseDown(event : ViewportMouseEvent)
+    {
+        //Resets the duration timer for left click to 0 frames
+        this.ILClickDuration = 0;
+        //Captures the screen position of the mouse when left click is clicked down
+        this.RMouseClickPos = Real2(event.ToWorldZPlane(0).X, event.ToWorldZPlane(0).Y);
+        this.BLClickDown = true;
+    }
+    
+    //*******************************************************************************************************************************************
+    function LeftMouseUp(event : ViewportMouseEvent)
+    {
+        if(this.IAttackCD == 0)
+        {
+            //Captures the screen position of the mouse when left click is released
+            this.RMouseReleasePos = Real2(event.ToWorldZPlane(0).X, event.ToWorldZPlane(0).Y);
+            var rXDifference:Real = this.RMouseReleasePos.X - this.RMouseClickPos.X;
+            var rYDifference:Real = this.RMouseReleasePos.Y - this.RMouseClickPos.Y;
+            
+            //If the drag of the mouse isn't long enough, it won't register as a slash, just a standard attack
+            if(rXDifference <= 1 && rXDifference >= -1 && rYDifference <= 1 && rYDifference >= -1)
+            {
+                this.StandardAttack(this.RMouseReleasePos.X, this.RMouseReleasePos.Y);
+            }
+            //If the drag of the mouse is long enough and the mouse wasn't held down too long, it registers as a slash
+            else if(this.ILClickDuration <= 50)
+            {
+                this.Slash(rXDifference, rYDifference);
+            }
+        }
+        this.BLClickDown = false;
+    }
+    
+    
+    //*******************************************************************************************************************************************
+    function StandardAttack(rXPos_:Real, rYPos_:Real)
+    {
+        //Finding the section of the screen that the player is attacking in (Cardinals and diagonals from the player)
+        /*var rXDiff:Real = rXPos_ - this.LevelSettings.CameraViewport.ResolutionOrAspect.X / 2;
+        var rYDiff:Real = rYPos_ - this.LevelSettings.CameraViewport.ResolutionOrAspect.Y / 2;*/
+        var rXDiff:Real = rXPos_ - this.Owner.Transform.Translation.X;
+        var rYDiff:Real = rYPos_ - this.Owner.Transform.Translation.Y;
+        var rAngle:Real = Math.ATan2(rYDiff, rXDiff) * (180/Math.Pi);
+        var rAtkPos:Real3 = Real3(0.0, 0.0, 0.0);
+        var iAttackID:Integer = 10;
+        
+        var a3HitComboRight:Array[Integer] = new Array[Integer](2,12);
+        var a3HitComboLeft:Array[Integer] = new Array[Integer](2,16);
+        
+        
+        
+        //Up attack
+        if(rAngle >= 67.5 && rAngle <= 112.5)
+        {
+            //iAttackID += 0;
+        }
+        //Up-Right attack
+        else if(rAngle > 22.5 && rAngle < 67.5)
+        {
+            iAttackID = 11;
+        }
+        //Right attack
+        else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
+        {
+            iAttackID = 12;
+        }
+        //Down-Right attack
+        else if(rAngle < -22.5 && rAngle > -67.5)
+        {
+            iAttackID = 13;
+        }
+        //Down attack
+        else if(rAngle >= -112.5 && rAngle <= -67.5)
+        {
+            iAttackID = 14;
+        }
+        //Down-Left attack
+        else if(rAngle < -112.5 && rAngle > -157.5)
+        {
+            iAttackID = 15;
+        }
+        //Left attack
+        else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
+        {
+            iAttackID = 16;
+        }
+        //Down-Left attack
+        else if(rAngle > 112.5 && rAngle < 157.5)
+        {
+            iAttackID = 17;
+        }
+        
+        var segAttackStart:Real3 = this.Owner.Transform.Translation;
+        var segAttackEnd:Real3 = Real3(Math.Cos(rAngle * (Math.Pi/180)) * 4 + this.Owner.Transform.Translation.X, Math.Sin(rAngle * (Math.Pi/180)) * 4 + this.Owner.Transform.Translation.Y, 0);
+        var segAttackSegment = this.Space.PhysicsSpace.CastSegmentResults(segAttackStart, segAttackEnd, 10);
+        
+        var iDamage:Integer = 10;
+        var bStun:Boolean = false;
+        
+        var lineDraw = DebugLine();
+        lineDraw.Start(segAttackStart);
+        lineDraw.End(segAttackEnd);
+        lineDraw.Width(10);
+        lineDraw.Float4Color(Real4(1,0,0,1));
+        
+        //If the player did 3 regular attacks in the same direction fast enough, it combos to a strong 3rd hit
+        //Heavy Right Attack
+        if(this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.CheckForComboAttack(a3HitComboRight))
+        {
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(0,18);
+            this.IAttackCD = 30;
+            iDamage = 20;
+            bStun = true;
+        }
+        //Heavy Left attack
+        else if(this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.CheckForComboAttack(a3HitComboLeft))
+        {
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(0,19);
+            this.IAttackCD = 30;
+            iDamage = 20;
+            bStun = true;
+        }
+        //Standard Attack
+        else
+        {
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,iAttackID);
+            this.IAttackCD = 10;
+            lineDraw.Float4Color(Real4(0,0,1,1));
+        }
+        
+        Console.WriteLine("PlayerAttack.StandardAttack: `segAttackSegment.Size()`");
+        
+        for(var s:Integer = 0; s < segAttackSegment.Size(); ++s)
+        {
+            if(segAttackSegment.Front().ObjectHit.Name == "Enemy")
+            {
+                segAttackSegment.Front().ObjectHit.EnemyHitReaction.OnHit(iDamage,false, bStun);
+            }
+            segAttackSegment.PopFront();
+            --s;
+        }
+        
+        lineDraw.Draw();
+    }
+    
+    //*******************************************************************************************************************************************
+    function Slash(rXDifference_:Real, rYDifference_:Real)
+    {
+        //Overall distance between the mouse down and mouse up positions
+        var rDistance:Real = Math.Sqrt((rXDifference_ * rXDifference_) + (rYDifference_ * rYDifference_));
+        //The angle that the mouse moved while down, indicating the angle of attack
+        var rAngle:Real = Math.ATan2(rYDifference_, rXDifference_) * (180/Math.Pi);
+        //The ID number to send to the Combo Manager to check against
+        var iSlashID:Integer = 0;
+        //Speed that the player moves based on the length of the slash############ Possibly not needed with Ray
+        var rSpeed:Real = 0;
+        
+        //Distance for the ray to use
+        var rRayDistance:Real = 0;
+        
+        
+        //Short slash
+        if(rDistance <= 5)
+        {
+            //A short slash's ID will be between 10-19
+            iSlashID += 20;
+            rSpeed = 60;
+            rRayDistance = 5.0;
+        }
+        //Medium slash
+        else if(rDistance <= 8)
+        {
+            //A medium slash's ID will be between 20-29
+            iSlashID += 30;
+            rSpeed = 90;
+            rRayDistance = 10.0;
+        }
+        //Long slash
+        else
+        {
+            //A long slash's ID will be between 30-39
+            iSlashID += 40;
+            rSpeed = 120;
+            rRayDistance = 15.0;
+        }
+        
+        //Note for this IF check: zilch doesn't do angles from 0-360. Instead it does 0 to 180 and 0 to -180
+        //Up slash
+        if(rAngle >= 67.5 && rAngle <= 112.5)
+        {
+            //iSlashID += 0;
+        }
+        //Up-Right slash
+        else if(rAngle > 22.5 && rAngle < 67.5)
+        {
+            iSlashID += 1;
+        }
+        //Right slash
+        else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
+        {
+            iSlashID += 2;
+        }
+        //Down-Right slash
+        else if(rAngle < -22.5 && rAngle > -67.5)
+        {
+            iSlashID += 3;
+        }
+        //Down slash
+        else if(rAngle >= -112.5 && rAngle <= -67.5)
+        {
+            iSlashID += 4;
+        }
+        //Down-Left slash
+        else if(rAngle < -112.5 && rAngle > -157.5)
+        {
+            iSlashID += 5;
+        }
+        //Left slash
+        else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
+        {
+            iSlashID += 6;
+        }
+        //Up-Left slash
+        else if(rAngle > 112.5 && rAngle < 157.5)
+        {
+            iSlashID += 7;
+        }
+        
+        this.Owner.RigidBody.Velocity += Real3(Math.Cos(rAngle * (Math.Pi/180)) * rSpeed,Math.Sin(rAngle * (Math.Pi/180)) * rSpeed,0);
+        
+        this.ISlashStop = 6;
+        this.IAttackCD = 10;
+        
+        
+        var segSlashStart:Real3 = this.Owner.Transform.Translation;
+        var segSlashEnd:Real3 = Real3(Math.Cos(rAngle * (Math.Pi/180)) * rRayDistance + this.Owner.Transform.Translation.X, Math.Sin(rAngle * (Math.Pi/180)) * rRayDistance + this.Owner.Transform.Translation.Y, 0);
+        var segSlashSegment = this.Space.PhysicsSpace.CastSegmentResults(segSlashStart, segSlashEnd, 10);
+        
+        var lineDraw = DebugLine();
+        lineDraw.Start(segSlashStart);
+        lineDraw.End(segSlashEnd);
+        lineDraw.Width(10);
+        lineDraw.Float4Color(Real4(0,1,0,1));
+        
+        for(var s:Integer = 0; s < segSlashSegment.Size(); ++s)
+        {
+            if(segSlashSegment.Front().ObjectHit.Name == "Enemy")
+            {
+                segSlashSegment.Front().ObjectHit.EnemyHitReaction.OnHit(15,false, true);
+            }
+            else if(segSlashSegment.Front().ObjectHit.Name == "DefaultTile")
+            {
+                //this.Owner.RigidBody.Velocity = Real3(0,0,0);
+                var newX:Real = segSlashSegment.Current.WorldPosition.X + 0.05 - Math.Cos(rAngle * Math.Pi/180);
+                var newY:Real = segSlashSegment.Current.WorldPosition.Y + 0.05 - Math.Sin(rAngle * Math.Pi/180);
+                
+                //this.Owner.Transform.Translation = Real3(newX, newY, 0);
+                this.Owner.Transform.Translation = Real3(segSlashSegment.Current.WorldPosition.X, segSlashSegment.Current.WorldPosition.Y,0);
+                this.Owner.RigidBody.Velocity = Real3(0,0,0);
+                lineDraw.End(Real3(newX,newY,0));
+                break;//stops the slash as soon as it hits a wall so it doesn't pass though
+            }
+            
+            segSlashSegment.PopFront();
+            --s;
+        }
+        
+        lineDraw.Draw();
+        //cast ray here instead of creating slash archetype to deal damage?
+        this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,iSlashID);
+    }
+    
+    //*******************************************************************************************************************************************
+    function DecreaseCounters()
+    {
+        //Decrements the light attack cooldown
+        if(this.IAttackCD > 0)
+        {
+            this.IAttackCD -= 1;
+        }
+        
+        //Decrements the amount of time the player is moving from a slash
+        if(this.ISlashStop > 0)
+        {
+            --this.ISlashStop;
+            
+            this.Owner.Transform.Translation += Real3(0,0,2);
+            
+            if(this.ISlashStop == 0)
+            {
+                this.Owner.RigidBody.Velocity = Real3(0, 0, 0);
+            }
+        }
+        else
+        {
+            this.Owner.Transform.Translation = Real3(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y, 0);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

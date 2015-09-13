@@ -1,0 +1,23 @@
+class ComboCounter : ZilchComponent
+{
+    //Determines if this counter displays the current combo or the highest combo
+    [Property]
+    var BIsCurrent:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.BIsCurrent)
+        {
+            this.Owner.SpriteText.Text = "`this.LevelSettings.ComboManager.IPlayerCombo`";
+        }
+        else
+        {
+            this.Owner.SpriteText.Text = "Best: `this.LevelSettings.LevelData.IBestCombo`";
+        }
+    }
+}

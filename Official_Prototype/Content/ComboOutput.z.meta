@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ComboOutput",
+		uint64 ResourceId = 550c60be119fe22c,
+	},
+},

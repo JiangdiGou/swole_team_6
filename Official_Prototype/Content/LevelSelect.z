@@ -1,0 +1,89 @@
+class LevelSelect : ZilchComponent
+{
+    var ALevelNames:Array[String];
+    
+    [Property]
+    var SLevel0Name:String = "Level 0";
+    [Property]
+    var SLevel1Name:String = "Level 1";
+    [Property]
+    var SLevel2Name:String = "Level 2";
+    [Property]
+    var SLevel3Name:String = "Level 3";
+    
+    var ISelected:Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.ALevelNames = new Array[String](4);
+        
+        this.ALevelNames.Set(0, this.SLevel0Name);
+        this.ALevelNames.Set(1, this.SLevel1Name);
+        this.ALevelNames.Set(2, this.SLevel2Name);
+        this.ALevelNames.Set(3, this.SLevel3Name);
+        
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(Zero.Keyboard.KeyIsPressed(Keys.D) || Zero.Keyboard.KeyIsPressed(Keys.Right))
+        {
+            ++this.ISelected;
+            
+            if(this.ISelected > 3)
+            {
+                this.ISelected = 0;
+            }
+            
+            this.UpdateSelector();
+        }
+        else if(Zero.Keyboard.KeyIsPressed(Keys.A) || Zero.Keyboard.KeyIsPressed(Keys.Left))
+        {
+            --this.ISelected;
+            
+            if(this.ISelected < 0)
+            {
+                this.ISelected = 3;
+            }
+            
+            this.UpdateSelector();
+        }
+        
+        if(Zero.Keyboard.KeyIsPressed(Keys.Space) || Zero.Keyboard.KeyIsPressed(Keys.Enter))
+        {
+            Console.WriteLine("Goto level `this.ISelected`");
+        }
+    }
+    
+    function UpdateSelector()
+    {
+        var iButtonX:Real = 0;
+        var iButtonY:Real = 0;
+        
+        if(this.ISelected == 0)
+        {
+            iButtonX = this.Space.FindObjectByName("LevelButton0").Transform.Translation.X;
+            iButtonY = this.Space.FindObjectByName("LevelButton0").Transform.Translation.Y;
+            this.Space.FindObjectByName("LevelHilight").Transform.Translation = Real3(iButtonX, iButtonY, -0.1);
+        }
+        else if(this.ISelected == 1)
+        {
+            iButtonX = this.Space.FindObjectByName("LevelButton1").Transform.Translation.X;
+            iButtonY = this.Space.FindObjectByName("LevelButton1").Transform.Translation.Y;
+            this.Space.FindObjectByName("LevelHilight").Transform.Translation = Real3(iButtonX, iButtonY, -0.1);
+        }
+        else if(this.ISelected == 2)
+        {
+            iButtonX = this.Space.FindObjectByName("LevelButton2").Transform.Translation.X;
+            iButtonY = this.Space.FindObjectByName("LevelButton2").Transform.Translation.Y;
+            this.Space.FindObjectByName("LevelHilight").Transform.Translation = Real3(iButtonX, iButtonY, -0.1);
+        }
+        else if(this.ISelected == 3)
+        {
+            iButtonX = this.Space.FindObjectByName("LevelButton3").Transform.Translation.X;
+            iButtonY = this.Space.FindObjectByName("LevelButton3").Transform.Translation.Y;
+            this.Space.FindObjectByName("LevelHilight").Transform.Translation = Real3(iButtonX, iButtonY, -0.1);
+        }
+    }
+}

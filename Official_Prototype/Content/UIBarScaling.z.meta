@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "UIBarScaling",
+		uint64 ResourceId = 55354b9cd4786f72,
+	},
+},

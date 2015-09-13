@@ -1,0 +1,39 @@
+class GameData : ZilchComponent
+{
+    //Default Player Values DON'T MESS WITH THEM
+    var CONST_IBaseHPMax:Integer = 100;
+    var CONST_IBaseEnergyMax:Integer = 100;
+    var CONST_IBaseDamage:Integer = 10;
+    var CONST_RCritChance:Real = 0.1;//10% crit chance
+    var CONST_REnergyBoost:Real = 0.2;//Current combo * this = bonus energy/hit
+    
+    //Progression Powers active
+    var BPCrane:Boolean = false;//Silver Crane
+    var BPBoar:Boolean = false;//Ruby Boar
+    var BPSerpent:Boolean = false;//Sapphire Serpent
+    var BPTiger:Boolean = false;//Topaz Tiger
+    var BPDragon:Boolean = false;//Jade Dragon
+    
+    var BPDoubleJump:Boolean = false;
+    var BPHealthBoost:Boolean = false;
+    var BPDamageBoost:Boolean = false;
+    
+    //Villager Powers active
+    var BVSaviorsGrace:Boolean = false;//More HP drops
+    var BVDefendersAdvantage:Boolean = false;//Grant energy
+    var BVDivineFavor:Boolean = false;//Rez chance
+    var BVSturdy:Boolean = false;//No stun or knock
+    var BVAuraShield:Boolean = false;//Prevent damage
+    var BVHardyFighter:Boolean = false;//More HP
+    var BVWindSlash:Boolean = false;//Ranged
+    
+    //Dark Powers active
+    var BDSacrificeHealth:Boolean = false;
+    var BDFlashfire:Boolean = false;
+    var BDMadDash:Boolean = false;
+    var BDNotToday:Boolean = false;
+    var BDDarkBeam:Boolean = false;
+    var BDMadSlasher:Boolean = false;
+    var BDGravityWell:Boolean = false;
+    var BDDarkOrb:Boolean = false;
+}

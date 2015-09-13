@@ -1,0 +1,97 @@
+//Put this on each gameplay level
+class ComboManager : ZilchComponent
+{
+    var IPlayerCombo:Integer;//Player's current combo
+    var IComboResetTime:Integer;//Time before the current combo ends
+    var IComboChainTime:Integer;//Time that the next attack is able to chain off of the previous
+    var APrevActionIDs: Array[Integer];//Holds the previous 10 action ID numbers that the player made
+    /*Action ID Code References
+    0-9     :General Actions        10-19   :Standard Attacks           20-29   :Short Slash            30-39   :Medium Slash           40-49   :Long Slash 
+            0 - Nothing                     10 - Up                             20 - Up                         30 - Up                         40 - Up 
+            1 - Jump                        11 - Up Right                       21 - Up Right                   31 - Up Right                   41 - Up Right 
+            2 - Double Jump                 12 - Right                          22 - Right                      32 - Right                      42 - Right 
+            3 - Dash Right                  13 - Down Right                     23 - Down Right                 33 - Down Right                 43 - Down Right 
+            4 - Dash Left                   14 - Down                           24 - Down                       34 - Down                       44 - Down 
+                                            15 - Down Left                      25 - Down Left                  35 - Down Left                  45 - Down Left 
+                                            16 - Left                           26 - Left                       36 - Left                       46 - Left 
+                                            17 - Up Left                        27 - Up Left                    37 - Up Left                    47 - Up Left 
+                                            18 - 3 Hit Combo Right 
+                                            19 - 3 Hit Combo Left 
+    */
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.IPlayerCombo = 0;
+        this.APrevActionIDs = new Array[Integer](10,0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.IComboResetTime > 0)
+        {
+            --this.IComboResetTime;
+        }
+        else
+        {
+            //Send IPlayerCombo to the current level's LevelData to check if it's a new high score
+            this.LevelSettings.LevelData.CheckBestCombo(this.IPlayerCombo);
+            this.IPlayerCombo = 0;
+        }
+        
+        if(this.IComboChainTime > 0)
+        {
+            --this.IComboChainTime;
+        }
+    }
+    
+    //This function is called everytime the player attacks. It sets the new attack's
+    //iChainTime is the amount of time that a new action can chain off of this one
+    //iActionID is the ID number of the action to be added to the array for checking
+    function NewAttack(iChainTime_:Integer, iActionID_:Integer)
+    {
+        this.IComboChainTime = iChainTime_;
+        this.APrevActionIDs.Push(iActionID_);
+        
+        if(this.APrevActionIDs.LastIndex > 9)
+        {
+            for(var i:Integer = 9; i < this.APrevActionIDs.LastIndex; ++i)
+            {
+                this.APrevActionIDs.RemoveAt(0);
+            }
+        }
+    }
+    
+    //This is called whenever a player's attack hits a target
+    //Increases the player combo and resets the combo reset time to its max
+    function AttackHit()
+    {
+        this.IPlayerCombo += 1;
+        this.IComboResetTime = 80;
+        this.LevelSettings.LevelData.AddEnergy(this.IPlayerCombo);
+    }
+    
+    //Checks through the most recent player actions to see if the most current action
+    //triggers a special combo attack.
+    //Returns false if the combo chain time is over or if all of the ID checks don't match up
+    function CheckForComboAttack(aIDCheck_:Array[Integer]):Boolean
+    {
+        if(this.IComboChainTime > 0)
+        {
+            for(var c:Integer = 0; c < aIDCheck_.LastIndex; ++c)
+            {
+                if(aIDCheck_.Get(c) != this.APrevActionIDs.Get(this.APrevActionIDs.LastIndex - (c+1)))
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            return false;
+        }
+        
+        return true;
+    }
+}

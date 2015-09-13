@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "SlashGamePrototype",
+	uint64 LibraryId = 551f871f885a33c7,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},

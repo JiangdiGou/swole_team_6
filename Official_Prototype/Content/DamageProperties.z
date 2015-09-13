@@ -1,0 +1,47 @@
+class DamageProperties : ZilchComponent
+{
+    //How much damage this attack deals
+    [Property]
+    var IDamageDealt:Integer = 10;
+    
+    //If this attack stuns enemies
+    [Property]
+    var BCanStun:Boolean = false;
+    
+    //If this attack knocks enemies into the air
+    [Property]
+    var BKnockUp:Boolean = false;
+    
+    //If this attack gains power based on combo multiplier
+    [Property]
+    var BMultiplyDamage:Boolean = false;
+    
+    //How much extra damage is dealt per multiplier
+    [Property]
+    var IDamageMultiplier:Integer = 5;
+    
+    //What is the maximum amount of damage this attack can deal with the multiplier
+    [Property]
+    var IMaxComboDamage:Integer = 15;
+    
+    function DealDamage():Integer
+    {
+        if(this.BMultiplyDamage)
+        {
+            var iPlaceholder:Integer = this.IDamageDealt / this.IDamageMultiplier + this.IDamageDealt;
+            
+            if(iPlaceholder > this.IMaxComboDamage)
+            {
+                iPlaceholder = this.IMaxComboDamage;
+            }
+            
+            Console.Write("Multiplier damage dealt: ");
+            Console.WriteLine(iPlaceholder);
+            return iPlaceholder;
+        }
+        
+        Console.Write("Base damage dealt: ");
+        Console.WriteLine(this.IDamageDealt);
+        return this.IDamageDealt;
+    }
+}

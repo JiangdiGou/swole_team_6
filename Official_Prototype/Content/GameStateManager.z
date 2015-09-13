@@ -1,0 +1,50 @@
+class GameStateManager : ZilchComponent
+{
+    var IGSMStep:Integer;
+        //0 = create level
+        //1 = initialize level
+        //2 = update level
+        //3 = uninitialize level
+        //4 = Destroy level
+    var IChangeStateRequest:Integer;
+        //0 = New Level
+        //1 = Restart Level
+        //2 = quit game
+    var LevelPrevious:Level;
+    var LevelCurrent:Level;
+    var LevelNext:Level;
+    
+    function Initialize(levelStarting_:Level)
+    {
+        this.LevelCurrent = levelStarting_;
+        this.LevelPrevious = null;
+        
+        this.IGSMStep = 0;//create level
+        this.IChangeStateRequest = 0;//new level
+    }
+
+    function Update()
+    {
+        if(this.IGSMStep == 0)//Create level
+        {
+            
+            this.IGSMStep = 1;
+        }
+        else if(this.IGSMStep == 1)//Initialize level
+        {
+            
+        }
+        else if(this.IGSMStep == 2)//Update level
+        {
+            
+        }
+        else if(this.IGSMStep == 3)//Uninitialize level
+        {
+            
+        }
+        else if(this.IGSMStep == 4)//Destroy level
+        {
+            
+        }
+    }
+}
