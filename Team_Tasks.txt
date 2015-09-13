@@ -1,0 +1,20 @@
+Task Manager:
+Connor:
+Debug draw (polish)
+
+Jiangdi:
+Transform component
+
+Gabe:
+Game loop skeleton
+
+Mitch:
+2 proof of concepts
+
+Nolan:
+I. components
+II. ObiID
+III. game level object
+
+Josh:
+Draft a GUI concept 
