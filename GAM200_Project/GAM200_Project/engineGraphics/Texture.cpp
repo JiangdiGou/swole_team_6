@@ -75,6 +75,9 @@ Texture::Texture(const char* filePath)
   textureCoordinates[9] = 0.0f;
   textureCoordinates[10] = 1.0f;
   textureCoordinates[11] = 0.0f;
+
+  offsetXBytes = 0;
+  offsetYBytes = 0;
 }
 
 //**********************
@@ -138,6 +141,84 @@ Texture::Texture(const char* filePath, int numberOfFrames, int frameWidth, int f
   textureCoordinates[9] = 1.0f;
   textureCoordinates[10] = 0.0f;
   textureCoordinates[11] = 1.0f;
+
+  offsetXBytes = 0;
+  offsetYBytes = 0;
+
+  width = textureWidth;
+  height = textureHeight;
+}
+
+//**********************
+//Function    : Texture
+//Input       : filePath       - the filename/path to the image file 
+//              numberOfFrames - the amount of frames in an animation
+//              frameWidth     - the width of a frame in pixels
+//              frameHeight    - the height of a frame in pixels
+//              frameTime      - the duration of a frame in milliseconds 
+//				startOffsetX   - the offset in the atlas where this starts
+//				startOffsetY   - the offset in the atlas where this starts
+//Output      : Texture - the constructed Texture
+//Description : Constructs an animated texture from a sprite sheet in an atlas 
+//**********************
+Texture::Texture(const char* filePath, int numberOfFrames, int frameWidth, int frameHeight, 
+				float frameTime, int startOffsetX, int startOffsetY)
+{
+	int textureWidth, textureHeight;
+	GLuint texture;
+
+	//Generates the Texture ID and stores in var 
+	glGenTextures(1, &texture);
+
+	//Binds the texture so future fx calls will affect this texture
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	//Loads the image using soil 
+	unsigned char* image = SOIL_load_image(filePath, &textureWidth,
+		&textureHeight, 0, SOIL_LOAD_RGBA);
+
+	//Generates Texture info 
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0,
+		GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	//Sets the Blending mode 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	//de allocates resources and unbinds texture 
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	//Calculates number of rows and columns
+	numRows = (textureHeight + startOffsetY) / frameHeight;
+	numColumns = (textureWidth + startOffsetX) / frameWidth;
+
+	ID = texture;
+	numFrames = numberOfFrames;
+	currentFrame = 0;
+	frameDuration = frameTime;
+	frameStartTime = GetTickCount();
+
+	//Sets the initial texture Coordinates 
+	textureCoordinates[0] = 1.0f;
+	textureCoordinates[1] = 0.0f;
+	textureCoordinates[2] = 0.0f;
+	textureCoordinates[3] = 1.0f;
+	textureCoordinates[4] = 0.0f;
+	textureCoordinates[5] = 0.0f;
+	textureCoordinates[6] = 1.0f;
+	textureCoordinates[7] = 0.0f;
+	textureCoordinates[8] = 1.0f;
+	textureCoordinates[9] = 1.0f;
+	textureCoordinates[10] = 0.0f;
+	textureCoordinates[11] = 1.0f;
+
+	offsetXBytes = startOffsetX;
+	offsetYBytes = startOffsetY;
+
+	width = textureWidth;
+	height = textureHeight;
 }
 
 //**********************
@@ -187,7 +268,7 @@ void Texture::updateAnimation()
 //**********************
 GLfloat Texture::getBottomY()
 {
-  return ((currentFrame / numColumns) + 1) * (1.0 / (float)numRows);
+	return (((currentFrame / numColumns) + 1) * (1.0 / (float)numRows)) + ((float)offsetYBytes/height);
 }
 
 //**********************
@@ -198,7 +279,7 @@ GLfloat Texture::getBottomY()
 //**********************
 GLfloat Texture::getTopY()
 {
-  return (currentFrame / numColumns) * (1.0 / (float)numRows);
+	return ((currentFrame / numColumns) * (1.0 / (float)numRows)) + ((float)offsetYBytes / height);
 }
 
 //**********************
@@ -209,7 +290,7 @@ GLfloat Texture::getTopY()
 //**********************
 GLfloat Texture::getLeftX()
 {
-  return (currentFrame % numColumns) * (1.0 / (float)numColumns);
+	return ((currentFrame % numColumns) * (1.0 / (float)numColumns)) + ((float)offsetXBytes / width);
 }
 
 //**********************
@@ -220,5 +301,5 @@ GLfloat Texture::getLeftX()
 //**********************
 GLfloat Texture::getRightX()
 {
-  return ((currentFrame % numColumns) + 1) * (1.0 / (float)numColumns);
+	return (((currentFrame % numColumns) + 1) * (1.0 / (float)numColumns)) + ((float)offsetXBytes / width);
 }

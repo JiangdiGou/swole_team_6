@@ -13,6 +13,8 @@ public:
   Texture(const char* fileName);
   //Constructor for animated textures 
   Texture(const char* fileName, int numberOfFrames, int frameWidth, int frameHeight, float frameDuration);
+  //Constructor for animated textures in a larger atlas
+  Texture(const char* fileName, int numberOfFrames, int frameWidth, int frameHeight, float frameDuration, int startOffsetX, int startOffsetY);
   //Destructor
   ~Texture();
 
@@ -29,8 +31,12 @@ public:
   GLfloat textureCoordinates[12];
 
 private:
+  int offsetXBytes;
+  int offsetYBytes;
   int numRows;
   int numColumns;
+  float width;
+  float height;
   float frameStartTime;
   GLfloat getLeftX();
   GLfloat getRightX();
