@@ -67,6 +67,9 @@ int notMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line,
     smiley.scale = glm::vec3(0.15f, 0.15f, 0.15f);
 
     basicShader.Use();
+	//I know three parts to drawing isnt ideal but this will eventually be in a larger
+	//init graphics function or something. 
+	initDebugDraw(basicShader); 
 
     //This should probably eventually use a game state manager like cs230
     //But this is fine for now 
@@ -77,11 +80,23 @@ int notMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line,
         glClear(GL_COLOR_BUFFER_BIT);
 
         //basicCamera.move(glm::vec3(0.01f, 0.0f, 0.0f));
-        basicCamera.zoom -= .005;
+        //basicCamera.zoom -= .005;
 
         Sprite::drawSprites();
+		//Again, not ideal, but there will eventually be a draw all function or something
+		debugDrawFrame();
         basicCamera.update();
-        //debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f), debugShader);
+
+        debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
+		debugDrawLine(excited.translation, calm.translation, glm::vec3());
+		debugDrawLine(animated.translation, calm.translation, glm::vec3());
+
+		debugDrawSquare(calm.translation, calm.scale.x, calm.scale.y, glm::vec3());
+		debugDrawSquare(smiley.translation, smiley.scale.x, smiley.scale.y, glm::vec3());
+		debugDrawSquare(excited.translation, excited.scale.x, excited.scale.y, glm::vec3());
+
+		debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
+		debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
 
         testScaling(smiley);
         testRotation(excited);
