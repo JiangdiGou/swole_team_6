@@ -1,6 +1,5 @@
-GAM200_Project/Build/*
-GAM200_Project/LevelDataManager/Debug/*
-GAM200_Project/LevelDataManager/Release/*
-GAM200_Project/LevelDataManager.xcodeproj/xcuserdata/*
-GAM200_Project/GraphicPrototype2/Debug/*
-GAM200_Project/GraphicPrototype2/Release/*
+GAM200_Project/DerivedData/*
+GAM200_Project/GAM200_Project/build/Debug/*
+GAM200_Project/GAM200_Project/build/Release/*
+GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*
+GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*/*/*/*
