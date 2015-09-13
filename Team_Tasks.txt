@@ -1,6 +1,6 @@
 Task Manager:
 Connor:
-Debug draw (polish)
+
 
 Jiangdi:
 Transform component
