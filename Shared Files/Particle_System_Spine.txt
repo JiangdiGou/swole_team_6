@@ -1,0 +1,72 @@
+********************
+Particle Components:
+********************
+Transform 
+
+Sprite Particle System
+- Visible
+- Geometry Mode
+- Billboarded
+- Face velocity
+- Beam
+
+Render Mode
+- Bledded
+- Additive
+
+Particle Animation
+- Single 
+- Looping
+
+Tint
+- RGB customization
+	- Alpha
+Texture
+
+Max Particle Size
+Velocity
+Length Scale
+Emit Count
+Emit Rate
+Emit Variance
+Size
+Size Variance
+Lifetime
+Lifetime Variance
+Spin
+Spin Variance
+- input
+
+Random Spin
+- boolean
+
+Start Velocity
+- x
+- y
+- z
+
+Random Velocity
+- x
+- y
+- z
+
+Emitter Size (?)
+
+Growth
+Dampening
+Torque
+- input
+
+Force
+- x
+- y
+- z
+
+Twist (?)
+- x
+- y
+- z
+
+Particle Animator
+- color 0 - 4
+	- RGB valyes for colors
