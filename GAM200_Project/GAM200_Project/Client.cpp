@@ -45,7 +45,7 @@ void luaRoutine(std::string arg)
 }
 
 #ifdef _WIN32
-int potato(void)
+int potato(int arc, char **argv)
 #else
 int main(int arc, char **argv)
 #endif

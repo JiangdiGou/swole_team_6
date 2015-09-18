@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="graphicsLib">
-      <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="resources">
       <UniqueIdentifier>{7a0231aa-4081-4242-90e5-850edb2cfcbd}</UniqueIdentifier>
     </Filter>
@@ -19,31 +16,37 @@
     <Filter Include="physics">
       <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engineGraphics">
+      <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameState">
+      <UniqueIdentifier>{9aa4dd65-ce20-40f7-b620-b5ab537df0cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\ShaderManager.h">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h">
       <Filter>luaRunner</Filter>
@@ -90,31 +93,43 @@
     <ClInclude Include="GAM200_Project\physicsLib\collision_detection.h">
       <Filter>physics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameState\GameState_Default.h">
+      <Filter>GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\GameState\GameStateList.h">
+      <Filter>GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\GameState\GameStateManager.h">
+      <Filter>GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Engine.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\main.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp">
-      <Filter>graphicsLib</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp">
-      <Filter>graphicsLib</Filter>
+      <Filter>engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp">
       <Filter>luaRunner</Filter>
@@ -132,6 +147,18 @@
       <Filter>Universal</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\gameLevel.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp">
+      <Filter>GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp">
+      <Filter>GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp">
+      <Filter>engineGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\main.cpp">
       <Filter>Universal</Filter>
     </ClCompile>
   </ItemGroup>

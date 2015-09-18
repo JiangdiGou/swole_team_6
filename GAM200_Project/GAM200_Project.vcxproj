@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GAM200_Project\Engine.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h" />
@@ -20,8 +21,12 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
     <ClInclude Include="GAM200_Project\gameLevel.h" />
+    <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
+    <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
+    <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
     <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h" />
     <ClInclude Include="GAM200_Project\lvlTools\levelGenerator.h" />
+    <ClInclude Include="GAM200_Project\main.h" />
     <ClInclude Include="GAM200_Project\physicsLib\boolean.h" />
     <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h" />
     <ClInclude Include="GAM200_Project\physicsLib\collision_detection.h" />
@@ -40,14 +45,19 @@
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp" />
-    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
     <ClCompile Include="GAM200_Project\gameLevel.cpp" />
+    <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
+    <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp" />
+    <ClCompile Include="GAM200_Project\main.cpp" />
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp" />
     <ClCompile Include="GAM200_Project\Utilities.cpp" />
   </ItemGroup>
