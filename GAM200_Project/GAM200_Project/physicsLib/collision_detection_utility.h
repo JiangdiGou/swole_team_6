@@ -5,7 +5,7 @@
 #include "vector2d.h"
 #include "range.h"
 
-Bool overlapping(float minA, float maxA, float minB, float maxB)
+bool overlapping(float minA, float maxA, float minB, float maxB)
 {
     return minB <= maxA && minA <= maxB;
 }
@@ -21,7 +21,7 @@ Range project_segment(const Segment* s, const Vector2D* onto, Bool ontoIsUnit)
     return r;
 }
 
-Bool on_one_side(const Line* axis, const Segment* s)
+bool on_one_side(const Line* axis, const Segment* s)
 {
 	const Vector2D d1 = subtract_vector(&axis->base, &s->point1);
 	const Vector2D d2 = subtract_vector(&axis->base, &s->point2);
@@ -42,13 +42,13 @@ Vector2D clamp_on_rectangle(const Vector2D* p, const Rectangle* r)
 	return clamp;
 }
 
-Bool parallel_vectors(const Vector2D* a, const Vector2D* b)
+bool parallel_vectors(const Vector2D* a, const Vector2D* b)
 {
 	const Vector2D na = rotate_vector_90(a);
 	return !(0 == a->x && 0 == a->y) && !(0 == b->x && 0 == b->y) && equal_floats(0, dot_product(&na, b));
 }
 
-Bool equal_vectors(const Vector2D* a, const Vector2D* b)
+bool equal_vectors(const Vector2D* a, const Vector2D* b)
 {
 	return equal_floats(a->x, b->x) && equal_floats(a->y, b->y);
 }
@@ -130,7 +130,7 @@ Segment oriented_rectangle_edge(const OrientedRectangle* r, int nr)
 	return edge;
 }
 
-Bool separating_axis_for_oriented_rectangle(const Segment* axis, const OrientedRectangle* r)
+bool separating_axis_for_oriented_rectangle(const Segment* axis, const OrientedRectangle* r)
 {
 	Range axisRange, r0Range, r2Range, rProjection;
 	Segment rEdge0 = oriented_rectangle_edge(r, 0);
@@ -146,7 +146,7 @@ Bool separating_axis_for_oriented_rectangle(const Segment* axis, const OrientedR
     return !overlapping_ranges(&axisRange, &rProjection);
 }
 
-Bool separating_axis_for_rectangle(const Segment* axis, const Rectangle* r)
+bool separating_axis_for_rectangle(const Segment* axis, const Rectangle* r)
 {
 	Segment rEdgeA, rEdgeB;
 	Range axisRange, rEdgeARange, rEdgeBRange, rProjection;

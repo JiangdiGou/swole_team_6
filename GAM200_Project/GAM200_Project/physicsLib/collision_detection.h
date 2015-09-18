@@ -6,20 +6,20 @@
 #include "collision_detection_utility.h"
 #include "bounding_shapes.h"
 
-Bool circles_collide(const Circle* a, const Circle* b)
+bool circles_collide(const Circle* a, const Circle* b)
 {
     const float radiusSum = a->radius + b->radius;
 	const Vector2D distance = subtract_vector(&(a->center), &(b->center));
     return dot_product(&distance, &distance) <= radiusSum * radiusSum;
 }
 
-Bool circle_point_collide(const Circle* c, const Vector2D* p)
+bool circle_point_collide(const Circle* c, const Vector2D* p)
 {
 	const Vector2D distance = subtract_vector(&(c->center), p);
 	return dot_product(&distance, &distance) <= c->radius * c->radius;
 }
 
-Bool circle_line_collide(const Circle* c, const Line* l)
+bool circle_line_collide(const Circle* c, const Line* l)
 {
     const Vector2D lc = subtract_vector(&c->center, &l->base);
 	Vector2D p = project_vector(&lc, &l->direction);
@@ -27,13 +27,13 @@ Bool circle_line_collide(const Circle* c, const Line* l)
     return circle_point_collide(c, &p);
 }
 
-Bool circle_rectangle_collide(const Circle* c, const Rectangle* r)
+bool circle_rectangle_collide(const Circle* c, const Rectangle* r)
 {
     const Vector2D clamped = clamp_on_rectangle(&c->center, r);
     return circle_point_collide(c, &clamped);
 }
 
-Bool circle_segment_collide(const Circle* c, const Segment* s)
+bool circle_segment_collide(const Circle* c, const Segment* s)
 {
 	if(circle_point_collide(c, &s->point1) || circle_point_collide(c, &s->point2))
 		return yes;
@@ -47,7 +47,7 @@ Bool circle_segment_collide(const Circle* c, const Segment* s)
 	}
 }
 
-Bool circle_oriented_rectangle_collide(const Circle* c, const OrientedRectangle* r)
+bool circle_oriented_rectangle_collide(const Circle* c, const OrientedRectangle* r)
 {
 	const Rectangle lr = {{0, 0}, {r->halfExtend.x * 2, r->halfExtend.y * 2}};
 
@@ -59,35 +59,35 @@ Bool circle_oriented_rectangle_collide(const Circle* c, const OrientedRectangle*
 	return circle_rectangle_collide(&lc, &lr);
 }
 
-Bool rectangles_collide(const Rectangle* a, const Rectangle* b)
+bool rectangles_collide(const Rectangle* a, const Rectangle* b)
 {
     return
 		overlapping(a->origin.x, a->origin.x + a->size.x, b->origin.x, b->origin.x + b->size.x) &&
 		overlapping(a->origin.y, a->origin.y + a->size.y, b->origin.y, b->origin.y + b->size.y);
 }
 
-Bool points_collide(const Vector2D* a, const Vector2D* b)
+bool points_collide(const Vector2D* a, const Vector2D* b)
 {
 	return equal_floats(a->x, b->x) && equal_floats(a->y, b->y);
 }
 
-Bool line_point_collide(const Line* l, const Vector2D* p)
+bool line_point_collide(const Line* l, const Vector2D* p)
 {
     const Vector2D lp = subtract_vector(p, &l->base);
 	return (lp.x == 0 && lp.y == 0) || parallel_vectors(&lp, &l->direction);
 }
 
-Bool lines_collide(const Line* a, const Line* b)
+bool lines_collide(const Line* a, const Line* b)
 {
 	return !parallel_vectors(&a->direction, &b->direction) || line_point_collide(a, &b->base);
 }
 
-Bool line_segment_collide(const Line* l, const Segment* s)
+bool line_segment_collide(const Line* l, const Segment* s)
 {
 	return !on_one_side(l, s);
 }
 
-Bool point_segment_collide(const Vector2D* p, const Segment* s)
+bool point_segment_collide(const Vector2D* p, const Segment* s)
 {
     const Vector2D d = subtract_vector(&s->point2, &s->point1);
     const Vector2D lp = subtract_vector(p, &s->point1);
@@ -95,7 +95,7 @@ Bool point_segment_collide(const Vector2D* p, const Segment* s)
     return points_collide(&lp, &pr) && dot_product(&pr, &pr) <= dot_product(&d, &d) && 0 <= dot_product(&pr, &d);
 }
 
-Bool segments_collide(const Segment* a, const Segment* b)
+bool segments_collide(const Segment* a, const Segment* b)
 {
 	Line axisA, axisB;
 	axisA.base = a->point1;
@@ -123,7 +123,7 @@ Bool segments_collide(const Segment* a, const Segment* b)
 		return yes;
 }
 
-Bool line_rectangle_collide(const Line* l, const Rectangle* r)
+bool line_rectangle_collide(const Line* l, const Rectangle* r)
 {
 	const Vector2D n = rotate_vector_90(&l->direction);
 
@@ -147,7 +147,7 @@ Bool line_rectangle_collide(const Line* l, const Rectangle* r)
 	return (dp1 * dp2 <= 0) || (dp2 * dp3 <= 0) || (dp3 * dp4 <= 0);
 }
 
-Bool line_oriented_rectangle_collide(const Line* l, const OrientedRectangle* r)
+bool line_oriented_rectangle_collide(const Line* l, const OrientedRectangle* r)
 {
 	const Rectangle lr = {{0, 0}, {r->halfExtend.x * 2, r->halfExtend.y * 2}};
 
@@ -160,7 +160,7 @@ Bool line_oriented_rectangle_collide(const Line* l, const OrientedRectangle* r)
     return line_rectangle_collide(&ll, &lr);
 }
 
-Bool oriented_rectangles_collide(const OrientedRectangle* a, const OrientedRectangle* b)
+bool oriented_rectangles_collide(const OrientedRectangle* a, const OrientedRectangle* b)
 {
 	Segment edge = oriented_rectangle_edge(a, 0);
 	if(separating_axis_for_oriented_rectangle(&edge, b))
@@ -178,7 +178,7 @@ Bool oriented_rectangles_collide(const OrientedRectangle* a, const OrientedRecta
 	return !separating_axis_for_oriented_rectangle(&edge, a);
 }
 
-Bool point_rectangle_collide(const Vector2D* p, const Rectangle* r)
+bool point_rectangle_collide(const Vector2D* p, const Rectangle* r)
 {
     const float left = r->origin.x;
     const float right = left + r->size.x;
@@ -187,7 +187,7 @@ Bool point_rectangle_collide(const Vector2D* p, const Rectangle* r)
     return left <= p->x && bottom <= p->y && p->x <= right && p->y <= top;
 }
 
-Bool oriented_rectangle_point_collide(const OrientedRectangle* r, const Vector2D* p)
+bool oriented_rectangle_point_collide(const OrientedRectangle* r, const Vector2D* p)
 {
 	const Rectangle lr = {{0, 0}, {r->halfExtend.x * 2, r->halfExtend.y * 2}};
     Vector2D lp = subtract_vector(p, &r->center);
@@ -197,7 +197,7 @@ Bool oriented_rectangle_point_collide(const OrientedRectangle* r, const Vector2D
     return point_rectangle_collide(&lp, &lr);
 }
 
-Bool oriented_rectangle_rectangle_collide(const OrientedRectangle* or, const Rectangle* aar)
+bool oriented_rectangle_rectangle_collide(const OrientedRectangle* or, const Rectangle* aar)
 {
 	Segment edge;
 	const Rectangle orHull = oriented_rectangle_rectangle_hull(or);
@@ -212,7 +212,7 @@ Bool oriented_rectangle_rectangle_collide(const OrientedRectangle* or, const Rec
 	return !separating_axis_for_rectangle(&edge, aar);
 }
 
-Bool rectangle_segment_collide(const Rectangle* r, const Segment* s)
+bool rectangle_segment_collide(const Rectangle* r, const Segment* s)
 {
 	Line sLine;
 	Range rRange = {r->origin.x, r->origin.x + r->size.x};
@@ -234,7 +234,7 @@ Bool rectangle_segment_collide(const Rectangle* r, const Segment* s)
     return line_rectangle_collide(&sLine, r);
 }
 
-Bool oriented_rectangle_segment_collide(const OrientedRectangle* r, const Segment* s)
+bool oriented_rectangle_segment_collide(const OrientedRectangle* r, const Segment* s)
 {
 	const Rectangle lr = {{0, 0}, {r->halfExtend.x * 2, r->halfExtend.y * 2}};
 

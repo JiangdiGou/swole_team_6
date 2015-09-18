@@ -2,7 +2,7 @@
 
 #include "vector2d.h"
 #include "shapes.h"
-#include "math_utility.h"
+//#include "math_utility.h"
 
 Rectangle enlarge_rectangle_point(const Rectangle* r, const Vector2D* p)
 {

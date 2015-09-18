@@ -80,6 +80,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F60FA4621BAC8622009D2717 /* gameComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = gameComponents;
+			sourceTree = "<group>";
+		};
 		F6D1F0A41B9D0D5C0096D517 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				F6FDB9E61B9D0E94007EF209 /* Client.cpp */,
+				F60FA4621BAC8622009D2717 /* gameComponents */,
 				F6FDB9E71B9D0E94007EF209 /* gameLevel.cpp */,
 				F6FDB9E81B9D0E94007EF209 /* gameLevel.h */,
 				F6FDB9F81B9D0FB8007EF209 /* luaLib */,

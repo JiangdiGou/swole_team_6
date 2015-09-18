@@ -8,7 +8,7 @@ typedef struct
 	float maximum;
 } Range;
 
-Bool overlapping_ranges(const Range* a, const Range* b)
+bool overlapping_ranges(const Range* a, const Range* b)
 {
     return b->minimum <= a->maximum && a->minimum <= b->maximum;
 }

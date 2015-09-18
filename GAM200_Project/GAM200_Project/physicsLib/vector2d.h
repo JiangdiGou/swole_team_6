@@ -2,6 +2,7 @@
 
 #include "math_utility.h"
 #include "boolean.h"
+#include <math.h>
 
 typedef struct
 {
