@@ -15,6 +15,7 @@
 #include "lvlTools/levelEditor.h"
 #include "Utilities.h"
 #include "runLua/luaRunner.h"
+#include "logger/logger.h"
 
 #include <string>
 #include <stdio.h>  /* defines FILENAME_MAX */
@@ -44,6 +45,14 @@ void luaRoutine(std::string arg)
   //std::cout<<'\n';
 }
 
+void logRoutine()
+{
+  printstr("(Log Test 1)");
+  log *thisLog = new log("log.txt");
+  thisLog->write("log test");
+  thisLog->write("ERROR");
+}
+
 #ifdef _WIN32
 int potato(int arc, char **argv)
 #else
@@ -70,6 +79,8 @@ int main(int arc, char **argv)
   {
     printstr("Lua test broke.");
   }
+  visLine();
+  logRoutine();
   visLine();
   /* END RUNNING LUA ROUTINE*/
 
