@@ -1,12 +1,18 @@
 class LevelData : ZilchComponent
 {
+    //Player HP 0-100 but will change the max in GameData
     var RPlayerHealth:Real;
+    //Player energy 0-100
     var RPlayerEnergy:Real;
+    //Number of frames until energy is decreased by 1
     var IEnergyCountDown:Integer;
+    //Number of frames until the level timer is decreased by 1
+    var ITimeCountDown:Integer = 0;
+    //Highest attack combo for this level
     var IBestCombo:Integer;
+    //Amount of time for the player to complete this level
     [Property]
     var ILevelTimer:Integer = 100;
-    var ITimeCountDown:Integer = 0;
     
     function Initialize(init : CogInitializer)
     {
@@ -19,24 +25,54 @@ class LevelData : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        ++this.ITimeCountDown;
-        
-        if(this.ITimeCountDown % 60 == 0)
+        //Makes the level timer count down until it hits 0. goes down by 1 every 60 frames
+        if(this.ILevelTimer > 0)
         {
-            --this.ILevelTimer;
+            ++this.ITimeCountDown;
+            
+            if(this.ITimeCountDown % 60 == 0)
+            {
+                --this.ILevelTimer;
+            }
         }
+        //When the timer hits 0, end the level
+        /*else
+        {
+            //end level stuff
+        }*/
         
-        if(this.RPlayerEnergy % 20 != 0)
+        //Decreases the player's energy by 1 every 40 frames
+        if(this.RPlayerEnergy > 0)
         {
             ++this.IEnergyCountDown;
             
             if(this.IEnergyCountDown % 40 == 0)
             {
                 this.RPlayerEnergy -= 1;
+                this.IEnergyCountDown = 0;
             }
+        }
+        
+        //DEVELOPER TOOLS TO TEST HEALTH AND ENERGY MECHANICSVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        if(Zero.Keyboard.KeyIsPressed(Keys.Minus))
+        {
+            this.RPlayerHealth -= 10;
+        }
+        else if(Zero.Keyboard.KeyIsPressed(Keys.Equal))
+        {
+            this.RPlayerHealth = 100;
+        }
+        else if(Zero.Keyboard.KeyIsPressed(Keys.LeftBracket))
+        {
+            this.RPlayerEnergy += 20;
+        }
+        else if(Zero.Keyboard.KeyIsPressed(Keys.RightBracket))
+        {
+            this.RPlayerEnergy = 100;
         }
     }
     
+    //Called when a combo ends. Checks the new combo streak against the best and finds the highest
     function CheckBestCombo(iNewCombo_:Integer)
     {
         if(iNewCombo_ > this.IBestCombo)
@@ -45,6 +81,7 @@ class LevelData : ZilchComponent
         }
     }
     
+    //Called whenever the player attacks or takes damage. Increases energy up to a max of 100
     function AddEnergy(iEnergyValue_:Integer)
     {
         this.RPlayerEnergy += 1 + (iEnergyValue_ / 4);

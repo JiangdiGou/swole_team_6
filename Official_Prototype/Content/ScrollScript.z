@@ -1,0 +1,49 @@
+class ScrollScript : ZilchComponent
+{
+    //Determines which scroll this is
+    //1 = Silver Crane
+    //2 = Ruby Boar
+    //3 = Sapphire Serpent
+    //4 = Topaz Tiger
+    //5 = Jade Dragon
+    [Property]
+    var ScrollNum:Integer = 1;
+    [Property]
+    var IFrameLimit:Integer = 0;
+    [Property]
+    var IGoldTime:Integer = 0;
+    var IPlayerTime:Integer;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.IPlayerTime = 0;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        ++this.IPlayerTime;
+        
+        if(this.IPlayerTime > this.IFrameLimit)
+        {
+            this.ScrollFailed();
+        }
+    }
+    
+    function ScrollComplete()
+    {
+        if(this.IPlayerTime <= this.IGoldTime)
+        {
+            Console.WriteLine("ScrollScript.ScrollComplete GOLD TIME COMPLETE");
+        }
+        else
+        {
+            Console.WriteLine("ScrollScript.ScrollComplete COMPLETE");
+        }
+    }
+    
+    function ScrollFailed()
+    {
+        Console.WriteLine("ScrollScript.ScrollFailed SCROLL FAILED");
+    }
+}

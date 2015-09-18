@@ -1,0 +1,37 @@
+class ScrollPoint : ZilchComponent
+{
+    [Property]
+    var BIsActive:Boolean = false;
+    [Property]
+    var BIsLastPoint:Boolean = false;
+    
+    [Property]
+    var NextPoint:CogPath;
+    [Property]
+    var PathSprite:CogPath;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+    }
+
+    function OnMouseEnter(event : MouseEvent)
+    {
+        if(this.BIsActive)
+        {
+            this.Owner.Transform.Scale = Real3(1, 1, 1);
+            this.Owner.Sprite.Color = Real4(0,0,0,1);
+            
+            
+            if(this.BIsLastPoint)
+            {
+                Console.WriteLine("ScrollPoint.OnMouseEnter all done");
+            }
+            else
+            {
+                this.NextPoint.Cog.ScrollPoint.BIsActive = true;
+                this.PathSprite.Cog.Sprite.Color = Real4(0,0,0,1);
+            }
+        }
+    }
+}

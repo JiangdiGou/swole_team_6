@@ -90,6 +90,9 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
+		PowerActivator = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -103,7 +106,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.0852653, 1.95838, 49.9495],
+			Vec3 Translation = [0.136526, -0.589654, 49.9495],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278e-008, 0, 1],
 		},
@@ -115,7 +118,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 12.1306,
+			float Size = 22.1034,
 		},
 		EditorCameraController = 
 		{
@@ -123,7 +126,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0.0852653, 1.95838, -0.0505],
+			Vec3 LookTarget = [0.136526, -0.589654, -0.0505001],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -174,12 +177,144 @@ Level =
 		},
 		Named = 
 		{
+			string Name = "JadeDragon",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [5, -2.23701, -0.116571],
+			Vec3 Scale = [5.5, 1.5, 1.5],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.269342, 0.69, 0.21735, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollSelectButtons = 
+		{
+			int ScrollNum = 5,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = true,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 5,
+		},
+		Named = 
+		{
+			string Name = "RubyBoar",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [5, 4.12724, 0.0248567],
+			Vec3 Scale = [5.5, 1.5, 1.5],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 0.12, 0.12, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollSelectButtons = 
+		{
+			int ScrollNum = 2,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = true,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 6,
+		},
+		Named = 
+		{
+			string Name = "SapphireSerpent",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [5, 2.00583, -0.116571],
+			Vec3 Scale = [5.5, 1.5, 1.5],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0.2907, 0.855, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollSelectButtons = 
+		{
+			int ScrollNum = 3,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = true,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 7,
+		},
+		Named = 
+		{
 			string Name = "Level1",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 3.55983, 0],
-			Vec3 Scale = [1, 1, 1],
+			Vec3 Translation = [-5, 7.71608, 0],
+			Vec3 Scale = [0.627188, 0.627188, 0.627188],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		SpriteText = 
@@ -205,7 +340,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 5,
+					uint Id = 8,
 				},
 				Named = 
 				{
@@ -247,26 +382,13 @@ Level =
 						bool UpdatePathOnCogChange = true,
 						bool UpdateCogOnInitialize = true,
 						bool ResolvedNullErrorOccurred = false,
-						uint ResolvedCog = 6,
+						uint ResolvedCog = 9,
 						CogPathPreference PathPreference0 = CogRelative,
 						CogPathPreference PathPreference1 = SpaceRelative,
 						CogPathPreference PathPreference2 = Absolute,
 					},
-					bool Villager_SaviorsGrace = false,
-					bool Villager_DefendersAdvantage = false,
-					bool Villager_DivineFavor = false,
-					bool Villager_Sturdy = false,
-					bool Villager_AuraShield = false,
-					bool Villager_HardyFighter = false,
-					bool Villager_WindSlash = false,
-					bool Dark_SacrificeHealth = false,
-					bool Dark_FlashFire = false,
-					bool Dark_MadDash = false,
-					bool Dark_NotToday = false,
-					bool Dark_DarkBeam = false,
-					bool Dark_MadSLasher = false,
-					bool Dark_GravityWell = false,
-					bool Dark_DarkOrb = false,
+					int LevelNumber = 1,
+					int Value = 1,
 				},
 				Reactive = 
 				{
@@ -278,7 +400,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 7,
+					uint Id = 10,
 				},
 				Named = 
 				{
@@ -320,26 +442,13 @@ Level =
 						bool UpdatePathOnCogChange = true,
 						bool UpdateCogOnInitialize = true,
 						bool ResolvedNullErrorOccurred = false,
-						uint ResolvedCog = 6,
+						uint ResolvedCog = 9,
 						CogPathPreference PathPreference0 = CogRelative,
 						CogPathPreference PathPreference1 = SpaceRelative,
 						CogPathPreference PathPreference2 = Absolute,
 					},
-					bool Villager_SaviorsGrace = false,
-					bool Villager_DefendersAdvantage = false,
-					bool Villager_DivineFavor = false,
-					bool Villager_Sturdy = false,
-					bool Villager_AuraShield = false,
-					bool Villager_HardyFighter = false,
-					bool Villager_WindSlash = false,
-					bool Dark_SacrificeHealth = false,
-					bool Dark_FlashFire = false,
-					bool Dark_MadDash = false,
-					bool Dark_NotToday = false,
-					bool Dark_DarkBeam = false,
-					bool Dark_MadSLasher = false,
-					bool Dark_GravityWell = false,
-					bool Dark_DarkOrb = false,
+					int LevelNumber = 1,
+					int Value = -1,
 				},
 				Reactive = 
 				{
@@ -351,7 +460,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 8,
+					uint Id = 11,
 				},
 				Named = 
 				{
@@ -393,26 +502,13 @@ Level =
 						bool UpdatePathOnCogChange = true,
 						bool UpdateCogOnInitialize = true,
 						bool ResolvedNullErrorOccurred = false,
-						uint ResolvedCog = 6,
+						uint ResolvedCog = 9,
 						CogPathPreference PathPreference0 = CogRelative,
 						CogPathPreference PathPreference1 = SpaceRelative,
 						CogPathPreference PathPreference2 = Absolute,
 					},
-					bool Villager_SaviorsGrace = false,
-					bool Villager_DefendersAdvantage = false,
-					bool Villager_DivineFavor = false,
-					bool Villager_Sturdy = false,
-					bool Villager_AuraShield = false,
-					bool Villager_HardyFighter = false,
-					bool Villager_WindSlash = false,
-					bool Dark_SacrificeHealth = false,
-					bool Dark_FlashFire = false,
-					bool Dark_MadDash = false,
-					bool Dark_NotToday = false,
-					bool Dark_DarkBeam = false,
-					bool Dark_MadSLasher = false,
-					bool Dark_GravityWell = false,
-					bool Dark_DarkOrb = false,
+					int LevelNumber = 1,
+					int Value = 0,
 				},
 				Reactive = 
 				{
@@ -424,7 +520,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 6,
+					uint Id = 9,
 				},
 				Named = 
 				{
@@ -459,7 +555,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 9,
+					uint Id = 12,
 				},
 				Named = 
 				{
@@ -496,94 +592,1738 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 10,
+			uint Id = 13,
 		},
 		Named = 
 		{
-			string Name = "Scroll2",
+			string Name = "Level2",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [16.5, 7.5, 1.25257e-007],
-			Vec3 Scale = [4, 1, 1],
+			Vec3 Translation = [-5, 5.52092, 0],
+			Vec3 Scale = [0.627188, 0.627188, 0.627188],
 			Quat Rotation = [0, 0, 0, 1],
 		},
-		Sprite = 
+		SpriteText = 
 		{
 			bool Visible = true,
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [0.269342, 0.69, 0.21735, 1],
+			Vec4 Color = [1, 1, 1, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 50,
+			string Text = "Level 2",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
 		},
-		ScrollSelect = 
+		Hierarchy = 
 		{
-			int IScrollNumber = 1,
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 14,
+				},
+				Named = 
+				{
+					string Name = "Good",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0.9107, 0.53, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 15,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 2,
+					int Value = 1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 16,
+				},
+				Named = 
+				{
+					string Name = "Evil",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.371, 0, 0.7, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 15,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 2,
+					int Value = -1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 17,
+				},
+				Named = 
+				{
+					string Name = "Empty",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.51, 0.51, 0.51, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 15,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 2,
+					int Value = 0,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 15,
+				},
+				Named = 
+				{
+					string Name = "Hilight2",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [2, 2, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0, 0.000599861, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 18,
+				},
+				Named = 
+				{
+					string Name = "Bar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [7.96159, 0.351759, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0, 0, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 11,
+			uint Id = 19,
 		},
 		Named = 
 		{
-			string Name = "Scroll3",
+			string Name = "Level3",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [16.5, 8.5, 1.25257e-007],
-			Vec3 Scale = [6.01262, 1.50316, 1.50316],
+			Vec3 Translation = [-5, 3.32577, 0],
+			Vec3 Scale = [0.627188, 0.627188, 0.627188],
 			Quat Rotation = [0, 0, 0, 1],
 		},
-		Sprite = 
+		SpriteText = 
 		{
 			bool Visible = true,
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [1, 0.12, 0.12, 1],
+			Vec4 Color = [1, 1, 1, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 50,
+			string Text = "Level 3",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
 		},
-		ScrollSelect = 
+		Hierarchy = 
 		{
-			int IScrollNumber = 0,
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 20,
+				},
+				Named = 
+				{
+					string Name = "Good",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0.9107, 0.53, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 21,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 3,
+					int Value = 1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 22,
+				},
+				Named = 
+				{
+					string Name = "Evil",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.371, 0, 0.7, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 21,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 3,
+					int Value = -1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 23,
+				},
+				Named = 
+				{
+					string Name = "Empty",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.51, 0.51, 0.51, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 21,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 3,
+					int Value = 0,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 21,
+				},
+				Named = 
+				{
+					string Name = "Hilight3",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [2, 2, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0, 0.000599861, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 24,
+				},
+				Named = 
+				{
+					string Name = "Bar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [7.96159, 0.351759, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0, 0, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 12,
+			uint Id = 25,
 		},
 		Named = 
 		{
-			string Name = "Scroll1",
+			string Name = "Level4",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [16.5, 9.5, 1.25257e-007],
-			Vec3 Scale = [4, 1, 1],
+			Vec3 Translation = [-5, 1.13061, 0],
+			Vec3 Scale = [0.627188, 0.627188, 0.627188],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 50,
+			string Text = "Level 4",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 26,
+				},
+				Named = 
+				{
+					string Name = "Good",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0.9107, 0.53, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 27,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 4,
+					int Value = 1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 28,
+				},
+				Named = 
+				{
+					string Name = "Evil",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.371, 0, 0.7, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 27,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 4,
+					int Value = -1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 29,
+				},
+				Named = 
+				{
+					string Name = "Empty",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.51, 0.51, 0.51, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 27,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 4,
+					int Value = 0,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 27,
+				},
+				Named = 
+				{
+					string Name = "Hilight4",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [2, 2, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0, 0.000599861, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 30,
+				},
+				Named = 
+				{
+					string Name = "Bar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [7.96159, 0.351759, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0, 0, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 31,
+		},
+		Named = 
+		{
+			string Name = "Level5",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-5, -1.06455, 0],
+			Vec3 Scale = [0.627188, 0.627188, 0.627188],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 50,
+			string Text = "Level 5",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 32,
+				},
+				Named = 
+				{
+					string Name = "Good",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0.9107, 0.53, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 33,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 5,
+					int Value = 1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 34,
+				},
+				Named = 
+				{
+					string Name = "Evil",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.371, 0, 0.7, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 33,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 5,
+					int Value = -1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 35,
+				},
+				Named = 
+				{
+					string Name = "Empty",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.51, 0.51, 0.51, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 33,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 5,
+					int Value = 0,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 33,
+				},
+				Named = 
+				{
+					string Name = "Hilight5",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [2, 2, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0, 0.000599861, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 36,
+				},
+				Named = 
+				{
+					string Name = "Bar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [7.96159, 0.351759, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0, 0, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 37,
+		},
+		Named = 
+		{
+			string Name = "Level6",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-5, -3.2597, 0],
+			Vec3 Scale = [0.627188, 0.627188, 0.627188],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 50,
+			string Text = "Level 6",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 38,
+				},
+				Named = 
+				{
+					string Name = "Good",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0.9107, 0.53, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 39,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 6,
+					int Value = 1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 40,
+				},
+				Named = 
+				{
+					string Name = "Evil",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.371, 0, 0.7, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 39,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 6,
+					int Value = -1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 41,
+				},
+				Named = 
+				{
+					string Name = "Empty",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.51, 0.51, 0.51, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 39,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 6,
+					int Value = 0,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 39,
+				},
+				Named = 
+				{
+					string Name = "Hilight6",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [2, 2, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0, 0.000599861, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 42,
+				},
+				Named = 
+				{
+					string Name = "Bar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [7.96159, 0.351759, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0, 0, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 43,
+		},
+		Named = 
+		{
+			string Name = "Level7",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-5, -5.45486, 0],
+			Vec3 Scale = [0.627188, 0.627188, 0.627188],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 50,
+			string Text = "Level 7",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 44,
+				},
+				Named = 
+				{
+					string Name = "Good",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0.9107, 0.53, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 45,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 7,
+					int Value = 1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 46,
+				},
+				Named = 
+				{
+					string Name = "Evil",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-4, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.371, 0, 0.7, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 45,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 7,
+					int Value = -1,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 47,
+				},
+				Named = 
+				{
+					string Name = "Empty",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, 0],
+					Vec3 Scale = [1.5, 1.5, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.51, 0.51, 0.51, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				PowerSelectButtons = 
+				{
+					CogPath CogHighlighter = 
+					{
+						string Path = "../Hilight1",
+						bool ErrorOnResolveToNull = false,
+						bool ErrorOnPathCantCompute = false,
+						bool ErrorOnDirectLinkFail = false,
+						bool UpdateCogOnPathChange = true,
+						bool UpdatePathOnCogChange = true,
+						bool UpdateCogOnInitialize = true,
+						bool ResolvedNullErrorOccurred = false,
+						uint ResolvedCog = 45,
+						CogPathPreference PathPreference0 = CogRelative,
+						CogPathPreference PathPreference1 = SpaceRelative,
+						CogPathPreference PathPreference2 = Absolute,
+					},
+					int LevelNumber = 7,
+					int Value = 0,
+				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 45,
+				},
+				Named = 
+				{
+					string Name = "Hilight7",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [2, 2, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 0, 0.000599861, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5274db4c2e7c11f9:Circle",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 48,
+				},
+				Named = 
+				{
+					string Name = "Bar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, -1.79498, -0.1],
+					Vec3 Scale = [7.96159, 0.351759, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0, 0, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 49,
+		},
+		Named = 
+		{
+			string Name = "TopazTiger",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [5, -0.115592, -0.116571],
+			Vec3 Scale = [5.5, 1.5, 1.5],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -592,7 +2332,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [0, 0.2907, 0.855, 1],
+			Vec4 Color = [1, 0.87, 0, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -604,9 +2344,58 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		ScrollSelect = 
+		ScrollSelectButtons = 
 		{
-			int IScrollNumber = 2,
+			int ScrollNum = 4,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = true,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 50,
+		},
+		Named = 
+		{
+			string Name = "SilverCrane",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [5, 6.24866, 0.0248567],
+			Vec3 Scale = [5.5, 1.5, 1.5],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.78, 0.78, 0.78, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollSelectButtons = 
+		{
+			int ScrollNum = 1,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = true,
 		},
 	},
 },

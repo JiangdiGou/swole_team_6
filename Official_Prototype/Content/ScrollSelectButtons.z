@@ -1,0 +1,62 @@
+class ScrollSelectButtons : ZilchComponent
+{
+    //Determines which scroll this is
+    //1 = Silver Crane
+    //2 = Ruby Boar
+    //3 = Sapphire Serpent
+    //4 = Topaz Tiger
+    //5 = Jade Dragon
+    [Property]
+    var ScrollNum:Integer = 1;
+    var BIsSelected:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.MouseDown, this.OnMouseDown);
+    }
+
+    function OnMouseDown(event : MouseEvent)
+    {
+        if(this.BIsSelected == false)
+        {
+            if(this.LevelSettings.PowerActivator.INumScrolls < 3)
+            {
+                this.LevelSettings.PowerActivator.INumScrolls += 1;
+                this.BIsSelected = true;
+                this.ChangeBools();
+                this.Owner.Transform.Scale = Real3(7.2, 2, 2);
+            }
+        }
+        else
+        {
+            this.LevelSettings.PowerActivator.INumScrolls -= 1;
+            this.BIsSelected = false;
+            this.ChangeBools();
+            this.Owner.Transform.Scale = Real3(5.5, 1.5, 1.5);
+        }
+    }
+    
+    function ChangeBools()
+    {
+        if(this.ScrollNum == 1)
+        {
+            this.GameSession.GameData.BPCrane = this.BIsSelected;
+        }
+        else if(this.ScrollNum == 2)
+        {
+            this.GameSession.GameData.BPBoar = this.BIsSelected;
+        }
+        else if(this.ScrollNum == 3)
+        {
+            this.GameSession.GameData.BPSerpent = this.BIsSelected;
+        }
+        else if(this.ScrollNum == 4)
+        {
+            this.GameSession.GameData.BPTiger = this.BIsSelected;
+        }
+        else if(this.ScrollNum == 5)
+        {
+            this.GameSession.GameData.BPDragon = this.BIsSelected;
+        }
+    }
+}

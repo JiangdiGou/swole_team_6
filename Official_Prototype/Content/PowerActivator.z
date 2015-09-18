@@ -1,0 +1,170 @@
+class PowerActivator : ZilchComponent
+{
+    var ILvl1:Integer = 0;
+    var ILvl2:Integer = 0;
+    var ILvl3:Integer = 0;
+    var ILvl4:Integer = 0;
+    var ILvl5:Integer = 0;
+    var ILvl6:Integer = 0;
+    var ILvl7:Integer = 0;
+    
+    var INumScrolls:Integer = 0;
+    
+    //Function called by PowerSelectButtons when clicked to change what each lvl's power is selected
+    function ChangeValue(iLvl_:Integer, iVal_:Integer)
+    {
+        if(iLvl_ == 1)
+        {
+            this.ILvl1 = iVal_;
+        }
+        else if(iLvl_ == 2)
+        {
+            this.ILvl2 = iVal_;
+        }
+        else if(iLvl_ == 3)
+        {
+            this.ILvl3 = iVal_;
+        }
+        else if(iLvl_ == 4)
+        {
+            this.ILvl4 = iVal_;
+        }
+        else if(iLvl_ == 5)
+        {
+            this.ILvl5 = iVal_;
+        }
+        else if(iLvl_ == 6)
+        {
+            this.ILvl6 = iVal_;
+        }
+        else if(iLvl_ == 7)
+        {
+            this.ILvl7 = iVal_;
+        }
+        
+        this.UpdateBooleans();
+    }
+    
+    //Changes the boolean values in GameData script that designates which powers are active
+    function UpdateBooleans()
+    {
+        //Level 1 Abilities: Temporary immunity to stuns/knockback vs Convert HP to Energy
+        if(this.ILvl1 == 1)
+        {
+            this.GameSession.GameData.BVSturdy = true;
+            this.GameSession.GameData.BDSacrificeHealth = false;
+        }
+        else if(this.ILvl1 == -1)
+        {
+            this.GameSession.GameData.BVSturdy = false;
+            this.GameSession.GameData.BDSacrificeHealth = true;
+        }
+        else
+        {
+            this.GameSession.GameData.BVSturdy = false;
+            this.GameSession.GameData.BDSacrificeHealth = false;
+        }
+        
+        //Level 2 Abilities: Wind slash ranged attack vs Dark Orb ranged attack
+        if(this.ILvl2 == 1)
+        {
+            this.GameSession.GameData.BVWindSlash = true;
+            this.GameSession.GameData.BDDarkOrb = false;
+        }
+        else if(this.ILvl2 == -1)
+        {
+            this.GameSession.GameData.BVWindSlash = false;
+            this.GameSession.GameData.BDDarkOrb = true;
+        }
+        else
+        {
+            this.GameSession.GameData.BVWindSlash = false;
+            this.GameSession.GameData.BDDarkOrb = false;
+        }
+        
+        //Level 3 Abilities: Circular knockback/stun vs Circular draw-in/stun
+        if(this.ILvl3 == 1)
+        {
+            this.GameSession.GameData.BVKeepTheDistance = true;
+            this.GameSession.GameData.BDGravityWell = false;
+        }
+        else if(this.ILvl3 == -1)
+        {
+            this.GameSession.GameData.BVKeepTheDistance = false;
+            this.GameSession.GameData.BDGravityWell = true;
+        }
+        else
+        {
+            this.GameSession.GameData.BVKeepTheDistance = false;
+            this.GameSession.GameData.BDGravityWell = false;
+        }
+        
+        //Level 4 Abilities: Bonus HP vs Speed/jump boost while having HP drained
+        if(this.ILvl4 == 1)
+        {
+            this.GameSession.GameData.BVHardyFighter = true;
+            this.GameSession.GameData.BDFlashfire = false;
+        }
+        else if(this.ILvl4 == -1)
+        {
+            this.GameSession.GameData.BVHardyFighter = false;
+            this.GameSession.GameData.BDFlashfire = true;
+        }
+        else
+        {
+            this.GameSession.GameData.BVHardyFighter = false;
+            this.GameSession.GameData.BDFlashfire = false;
+        }
+        
+        //Level 5 Abilities: Damage shield vs Damage boost w/combo
+        if(this.ILvl5 == 1)
+        {
+            this.GameSession.GameData.BVAuraShield = true;
+            this.GameSession.GameData.BDMadSlasher = false;
+        }
+        else if(this.ILvl5 == -1)
+        {
+            this.GameSession.GameData.BVAuraShield = false;
+            this.GameSession.GameData.BDMadSlasher = true;
+        }
+        else
+        {
+            this.GameSession.GameData.BVAuraShield = false;
+            this.GameSession.GameData.BDMadSlasher = false;
+        }
+        
+        //Level 6 Abilities: Grant energy on random enemy death vs Energy beam cost HP
+        if(this.ILvl6 == 1)
+        {
+            this.GameSession.GameData.BVDefendersAdvantage = true;
+            this.GameSession.GameData.BDDarkBeam = false;
+        }
+        else if(this.ILvl6 == -1)
+        {
+            this.GameSession.GameData.BVDefendersAdvantage = false;
+            this.GameSession.GameData.BDDarkBeam = true;
+        }
+        else
+        {
+            this.GameSession.GameData.BVDefendersAdvantage = false;
+            this.GameSession.GameData.BDDarkBeam = false;
+        }
+        
+        //Level 7 Abilities: Random rez on player death vs temporary invincibility
+        if(this.ILvl7 == 1)
+        {
+            this.GameSession.GameData.BVDivineFavor = true;
+            this.GameSession.GameData.BDNotToday = false;
+        }
+        else if(this.ILvl7 == -1)
+        {
+            this.GameSession.GameData.BVDivineFavor = false;
+            this.GameSession.GameData.BDNotToday = true;
+        }
+        else
+        {
+            this.GameSession.GameData.BVDivineFavor = false;
+            this.GameSession.GameData.BDNotToday = false;
+        }
+    }
+}

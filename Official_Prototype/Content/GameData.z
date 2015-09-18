@@ -19,21 +19,20 @@ class GameData : ZilchComponent
     var BPDamageBoost:Boolean = false;
     
     //Villager Powers active
-    var BVSaviorsGrace:Boolean = false;//More HP drops
-    var BVDefendersAdvantage:Boolean = false;//Grant energy
-    var BVDivineFavor:Boolean = false;//Rez chance
-    var BVSturdy:Boolean = false;//No stun or knock
-    var BVAuraShield:Boolean = false;//Prevent damage
-    var BVHardyFighter:Boolean = false;//More HP
-    var BVWindSlash:Boolean = false;//Ranged
+    var BVSturdy:Boolean = false;//Temp no stun or knock <lvl1>
+    var BVWindSlash:Boolean = false;//Ranged damage based on combo <lvl2>
+    var BVKeepTheDistance:Boolean = false;//Repel/stun enemies in circle <lvl3>
+    var BVHardyFighter:Boolean = false;//More HP <lvl4>
+    var BVAuraShield:Boolean = false;//Prevent damage <lvl5>
+    var BVDefendersAdvantage:Boolean = false;//Grant energy on random enemy death <lvl6>
+    var BVDivineFavor:Boolean = false;//Rez chance <lvl7>
     
     //Dark Powers active
-    var BDSacrificeHealth:Boolean = false;
-    var BDFlashfire:Boolean = false;
-    var BDMadDash:Boolean = false;
-    var BDNotToday:Boolean = false;
-    var BDDarkBeam:Boolean = false;
-    var BDMadSlasher:Boolean = false;
-    var BDGravityWell:Boolean = false;
-    var BDDarkOrb:Boolean = false;
+    var BDSacrificeHealth:Boolean = false;//Converts hp to energy <lvl1>
+    var BDDarkOrb:Boolean = false;//Ranged damage based on energy <lvl2>
+    var BDGravityWell:Boolean = false;//Draw in/stun enemies in circle <lvl3>
+    var BDFlashfire:Boolean = false;//speed/jump boost, hp drain <lvl4>
+    var BDMadSlasher:Boolean = false;//less damage, increases w/combo <lvl5>
+    var BDDarkBeam:Boolean = false;//energy blast cost hp <lvl6>
+    var BDNotToday:Boolean = false;//invulnerable <lvl7>
 }

@@ -43,7 +43,8 @@ class PlayerAttack : ZilchComponent
         //Resets the duration timer for left click to 0 frames
         this.ILClickDuration = 0;
         //Captures the screen position of the mouse when left click is clicked down
-        this.RMouseClickPos = Real2(event.ToWorldZPlane(0).X, event.ToWorldZPlane(0).Y);
+        this.RMouseClickPos = Real2(event.ToWorldZPlane(0).X - this.Owner.Transform.Translation.X, event.ToWorldZPlane(0).Y - this.Owner.Transform.Translation.Y);
+        
         this.BLClickDown = true;
     }
     
@@ -53,7 +54,8 @@ class PlayerAttack : ZilchComponent
         if(this.IAttackCD == 0)
         {
             //Captures the screen position of the mouse when left click is released
-            this.RMouseReleasePos = Real2(event.ToWorldZPlane(0).X, event.ToWorldZPlane(0).Y);
+            this.RMouseReleasePos = Real2(event.ToWorldZPlane(0).X - this.Owner.Transform.Translation.X, event.ToWorldZPlane(0).Y - this.Owner.Transform.Translation.Y);
+            
             var rXDifference:Real = this.RMouseReleasePos.X - this.RMouseClickPos.X;
             var rYDifference:Real = this.RMouseReleasePos.Y - this.RMouseClickPos.Y;
             
@@ -76,10 +78,9 @@ class PlayerAttack : ZilchComponent
     function StandardAttack(rXPos_:Real, rYPos_:Real)
     {
         //Finding the section of the screen that the player is attacking in (Cardinals and diagonals from the player)
-        /*var rXDiff:Real = rXPos_ - this.LevelSettings.CameraViewport.ResolutionOrAspect.X / 2;
-        var rYDiff:Real = rYPos_ - this.LevelSettings.CameraViewport.ResolutionOrAspect.Y / 2;*/
-        var rXDiff:Real = rXPos_ - this.Owner.Transform.Translation.X;
-        var rYDiff:Real = rYPos_ - this.Owner.Transform.Translation.Y;
+        var rXDiff:Real = rXPos_;//
+        var rYDiff:Real = rYPos_;//
+        
         var rAngle:Real = Math.ATan2(rYDiff, rXDiff) * (180/Math.Pi);
         var rAtkPos:Real3 = Real3(0.0, 0.0, 0.0);
         var iAttackID:Integer = 10;
@@ -131,7 +132,7 @@ class PlayerAttack : ZilchComponent
         }
         
         var segAttackStart:Real3 = this.Owner.Transform.Translation;
-        var segAttackEnd:Real3 = Real3(Math.Cos(rAngle * (Math.Pi/180)) * 4 + this.Owner.Transform.Translation.X, Math.Sin(rAngle * (Math.Pi/180)) * 4 + this.Owner.Transform.Translation.Y, 0);
+        var segAttackEnd:Real3 = Real3(Math.Cos(rAngle * (Math.Pi/180)) * 10 + this.Owner.Transform.Translation.X, Math.Sin(rAngle * (Math.Pi/180)) * 10 + this.Owner.Transform.Translation.Y, 0);
         var segAttackSegment = this.Space.PhysicsSpace.CastSegmentResults(segAttackStart, segAttackEnd, 10);
         
         var iDamage:Integer = 10;
@@ -168,13 +169,18 @@ class PlayerAttack : ZilchComponent
             lineDraw.Float4Color(Real4(0,0,1,1));
         }
         
-        Console.WriteLine("PlayerAttack.StandardAttack: `segAttackSegment.Size()`");
         
         for(var s:Integer = 0; s < segAttackSegment.Size(); ++s)
         {
             if(segAttackSegment.Front().ObjectHit.Name == "Enemy")
             {
-                segAttackSegment.Front().ObjectHit.EnemyHitReaction.OnHit(iDamage,false, bStun);
+                //var rXDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.X - this.Owner.Transform.Translation.X;
+                //var rYDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.Y - this.Owner.Transform.Translation.Y;
+                var rHypot:Real = Math.DistanceSq(this.Owner.Transform.Translation, segAttackSegment.Front().ObjectHit.Transform.Translation);
+                if(rHypot <= 20)
+                {
+                    segAttackSegment.Front().ObjectHit.EnemyHitReaction.OnHit(iDamage,false, bStun);
+                }
             }
             segAttackSegment.PopFront();
             --s;

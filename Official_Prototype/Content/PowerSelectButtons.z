@@ -1,53 +1,27 @@
 class PowerSelectButtons : ZilchComponent
 {
+    //The object that hilights this button
     [Property]
     var CogHighlighter:CogPath;
+    //Designates what level this button is for
+    [Property]
+    var LevelNumber:Integer;
+    //What value to give to the power activator in LevelSettings
+    //-1 is for Dark
+    //0 is for both off
+    //1 is for Villager
+    [Property]
+    var Value:Integer;
     
-    [Property]
-    var Villager_SaviorsGrace:Boolean = false;
-    [Property]
-    var Villager_DefendersAdvantage:Boolean = false;
-    [Property]
-    var Villager_DivineFavor:Boolean = false;
-    [Property]
-    var Villager_Sturdy:Boolean = false;
-    [Property]
-    var Villager_AuraShield:Boolean = false;
-    [Property]
-    var Villager_HardyFighter:Boolean = false;
-    [Property]
-    var Villager_WindSlash:Boolean = false;
-    
-    [Property]
-    var Dark_SacrificeHealth:Boolean = false;
-    [Property]
-    var Dark_FlashFire:Boolean = false;
-    [Property]
-    var Dark_MadDash:Boolean = false;
-    [Property]
-    var Dark_NotToday:Boolean = false;
-    [Property]
-    var Dark_DarkBeam:Boolean = false;
-    [Property]
-    var Dark_MadSLasher:Boolean = false;
-    [Property]
-    var Dark_GravityWell:Boolean = false;
-    [Property]
-    var Dark_DarkOrb:Boolean = false;
     
     function Initialize(init : CogInitializer)
     {
-        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
         Zero.Connect(this.Owner, Events.MouseDown, this.OnMouseDown);
-    }
-
-    function OnLogicUpdate(event : UpdateEvent)
-    {
     }
     
     function OnMouseDown(event : MouseEvent)
     {
         this.CogHighlighter.Cog.Transform.Translation = Real3(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y, -0.1);
-        
+        this.LevelSettings.PowerActivator.ChangeValue(this.LevelNumber, this.Value);
     }
 }

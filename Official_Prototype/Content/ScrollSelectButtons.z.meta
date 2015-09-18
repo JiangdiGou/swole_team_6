@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScrollSelectButtons",
+		uint64 ResourceId = 552048f5a94db316,
+	},
+},

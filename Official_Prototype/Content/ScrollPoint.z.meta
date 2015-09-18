@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScrollPoint",
+		uint64 ResourceId = 552046c8893de2a3,
+	},
+},
