@@ -24,6 +24,7 @@
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
+    <ClInclude Include="GAM200_Project\logger\logger.h" />
     <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h" />
     <ClInclude Include="GAM200_Project\lvlTools\levelGenerator.h" />
     <ClInclude Include="GAM200_Project\main.h" />
@@ -39,15 +40,14 @@
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h" />
     <ClInclude Include="GAM200_Project\Utilities.h" />
+    <ClInclude Include="GAM200_Project\_EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\Client.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp" />
-    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
@@ -55,6 +55,7 @@
     <ClCompile Include="GAM200_Project\gameLevel.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />
+    <ClCompile Include="GAM200_Project\logger\logger.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp" />
     <ClCompile Include="GAM200_Project\main.cpp" />

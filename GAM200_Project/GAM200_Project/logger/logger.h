@@ -9,10 +9,10 @@
 #include <fstream>
 #include <string>
 
-class log
+class txtlog
 {
 public:
-  log(std::string fileName);
+  txtlog(std::string fileName);
   void write(std::string message);
 private:
   std::fstream logStream;

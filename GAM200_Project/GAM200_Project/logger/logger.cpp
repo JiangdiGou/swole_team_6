@@ -8,13 +8,13 @@
 
 #include "logger.h"
 
-log::log(std::string fileName)
+txtlog::txtlog(std::string fileName)
 {
   logStream.open(fileName.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
   this->fileName = fileName;
 }
 
-void log::write(std::string message)
+void txtlog::write(std::string message)
 {
   logStream << message.c_str() << '\n';
   logStream.close();

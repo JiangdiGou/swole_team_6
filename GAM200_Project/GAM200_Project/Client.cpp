@@ -16,6 +16,7 @@
 #include "Utilities.h"
 #include "runLua/luaRunner.h"
 #include "logger/logger.h"
+#include "_EntryPoint.h"
 
 #include <string>
 #include <stdio.h>  /* defines FILENAME_MAX */
@@ -25,8 +26,10 @@ using std::string;
 void luaRoutine(std::string arg)
 {
   luaRunner testLua;
+  #ifndef _WIN32
   arg.erase(arg.begin() + arg.find_last_of("/"), arg.end());
   testLua.sendStr(arg + "/");
+  #endif
   
   printstr("(Lua Test 1)");
   testLua.runFile("Scripts/hello.lua");
@@ -48,15 +51,15 @@ void luaRoutine(std::string arg)
 void logRoutine()
 {
   printstr("(Log Test 1)");
-  log *thisLog = new log("log.txt");
+  txtlog *thisLog = new txtlog("log.txt");
   thisLog->write("log test");
   thisLog->write("ERROR");
 }
 
-#ifdef _WIN32
-int potato(int arc, char **argv)
+#ifdef LDM_RUN
+int main(int argc, char **argv)
 #else
-int main(int arc, char **argv)
+int falseMain3(int argc, char **argv)
 #endif
 {
   /* RUNNING RUNNING DIRECTORY ROUTINE */

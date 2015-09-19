@@ -9,9 +9,13 @@
 /******************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
+#include "_EntryPoint.h"
 
-
+#ifdef GAMELOOP_RUN
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
+#else
+void falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
+#endif
 {
   //Openas a console for debugging and testing 
   AllocConsole();

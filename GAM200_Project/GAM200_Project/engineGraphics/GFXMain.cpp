@@ -8,7 +8,7 @@
 #include "Camera.h"
 #include "Testing.h"
 #include "debugDraw.h"
-
+#include "../_EntryPoint.h"
 #include <Windows.h>
 
 HDC deviceContext;
@@ -21,10 +21,10 @@ Texture* pTexturePlayerIdle;
 bool shouldQuit = false;
 
 //Entry point of the application
-#ifdef _WIN32
+#ifdef GFX_RUN
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #else
-int notMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
+int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
 {
     //Openas a console for debugging and testing 

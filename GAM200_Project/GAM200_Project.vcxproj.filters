@@ -22,6 +22,9 @@
     <Filter Include="GameState">
       <UniqueIdentifier>{9aa4dd65-ce20-40f7-b620-b5ab537df0cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{a8a71b5b-a5ad-4cbf-b972-1e7d6d64e39a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -108,6 +111,12 @@
     <ClInclude Include="GAM200_Project\main.h">
       <Filter>Universal</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\logger\logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\_EntryPoint.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -155,11 +164,14 @@
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp">
       <Filter>GameState</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\engineGraphics\main.cpp">
-      <Filter>engineGraphics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\main.cpp">
       <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\logger\logger.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp">
+      <Filter>engineGraphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
