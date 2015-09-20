@@ -10,6 +10,7 @@
 #include "debugDraw.h"
 #include "../_EntryPoint.h"
 #include <Windows.h>
+#include "instancedSprite.h"
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -31,6 +32,8 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     AllocConsole();
     freopen("CONOUT$", "w", stdout);
 
+
+
     //Stores the window being created
     HWND window; 
     //Stores windows messages 
@@ -41,16 +44,19 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     ShowWindow(window, show);
 
     Shader basicShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
+    Shader basicShader2 = Shader("resources/VertexShader2.txt", "resources/FragmentShader2.txt");
     Shader debugShader = Shader("resources/VertexShaderDebug.txt", "resources/FragmentShaderDebug.txt");
     Camera basicCamera = Camera(basicShader);
 
+    ISprite::Load(basicShader2);
+
     //Creates Three Sprites
     Sprite smiley = Sprite(basicShader);
-    Sprite excited = Sprite(basicShader);
+    ISprite excited = ISprite();
     Sprite calm = Sprite(basicShader);
     Sprite animated = Sprite(basicShader);
-	Sprite player = Sprite(basicShader);
-	pPlayer = &player;
+	  Sprite player = Sprite(basicShader);
+	  pPlayer = &player;
 
     Texture textureSmiley = Texture("resources/Smiley1.png");
     Texture textureExcited = Texture("resources/Smiley2.png");
@@ -88,29 +94,23 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        //basicCamera.move(glm::vec3(0.01f, 0.0f, 0.0f));
-        //basicCamera.zoom -= .005;
-
-        Sprite::drawSprites();
-		//Again, not ideal, but there will eventually be a draw all function or something
-		debugDrawFrame();
         basicCamera.update();
+        ISprite::drawSprites(textureExcited);
+        Sprite::drawSprites();
+
+		    //Again, not ideal, but there will eventually be a draw all function or something
+		    debugDrawFrame();
 
         debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
-		debugDrawLine(excited.translation, calm.translation, glm::vec3());
-		debugDrawLine(animated.translation, calm.translation, glm::vec3());
+		    debugDrawLine(excited.translation, calm.translation, glm::vec3());
+		    debugDrawLine(animated.translation, calm.translation, glm::vec3());
 
-		debugDrawSquare(calm.translation, calm.scale.x, calm.scale.y, glm::vec3());
-		debugDrawSquare(smiley.translation, smiley.scale.x, smiley.scale.y, glm::vec3());
-		debugDrawSquare(excited.translation, excited.scale.x, excited.scale.y, glm::vec3());
+		    debugDrawSquare(calm.translation, calm.scale.x, calm.scale.y, glm::vec3());
+		    debugDrawSquare(smiley.translation, smiley.scale.x, smiley.scale.y, glm::vec3());
+		    debugDrawSquare(excited.translation, excited.scale.x, excited.scale.y, glm::vec3());
 
-		debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
-		debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
-
-        testScaling(smiley);
-        testRotation(excited);
-        testTranslate(calm);
-        testColor(calm);
+		    debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
+	    	debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
 
         SwapBuffers(deviceContext);
 

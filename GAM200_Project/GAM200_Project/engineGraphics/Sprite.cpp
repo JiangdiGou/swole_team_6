@@ -53,7 +53,7 @@ Sprite::Sprite(Shader intendedShader)
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 
 	//Copies the Vertex data into the buffer
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
 	//Tells openGL how to interpret this array of random numbers
 	//glVertexAttribPointer
@@ -65,18 +65,16 @@ Sprite::Sprite(Shader intendedShader)
 	//Param 6: Offset. After how many bytes the info begins (cast as glvoid*)
 
 	//Sets up Vertex position information
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
-		(GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 	//Activates Vertex Position Information
 	glEnableVertexAttribArray(0);
 
   //Binds the texture buffer and sends it data 
   glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(texCoords), texCoords, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(texCoords), texCoords, GL_STREAM_DRAW);
 
 	//Sets up Texture coordinate information 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
-		(GLvoid*)0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 	//Activates texture coordinate information 
 	glEnableVertexAttribArray(1);
 
@@ -137,6 +135,7 @@ void Sprite::draw(void)
 
 	glBindVertexArray(vertexArray);
 	glBindTexture(GL_TEXTURE_2D, texture.ID);
+
   shader.Use();
 
   //If the Sprite's texture should animate 
