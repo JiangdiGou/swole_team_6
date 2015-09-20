@@ -1,3 +1,14 @@
+//Implimented by Josh Painter
+class ScrollSelectEvent : Event
+{
+    // Remember that member variable names MUST be capitalized in Zilch
+    var NumberToSend : Integer = 0;
+    //constructor() : base()
+    //{
+    //}
+}
+
+
 class ScrollSelect : ZilchComponent
 {
     [Property]
@@ -59,6 +70,11 @@ class ScrollSelect : ZilchComponent
             this.IScrollCooldown = 1000;
             this.BCanUse = false;
             this.Owner.Sprite.Color -= Real4(0,0,0,0.5);
+            
+            //send the event that a scroll was used
+            var scrollSelectEvent = new ScrollSelectEvent();
+            scrollSelectEvent.NumberToSend = this.IScrollSelected;
+            this.GameSession.DispatchEvent("ScrollSelectEvent", scrollSelectEvent);
         }
     }
     

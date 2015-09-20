@@ -22,7 +22,7 @@ Level =
 		{
 			bool Active = true,
 			bool WakeUpOnChange = false,
-			float Drag = 0.7,
+			float Drag = 0.699999988,
 		},
 		CameraViewport = 
 		{
@@ -68,7 +68,7 @@ Level =
 		},
 		ForwardRenderer = 
 		{
-			Vec4 ClearColor = [0.155, 0.155, 0.155, 1],
+			Vec4 ClearColor = [0.155000001, 0.155000001, 0.155000001, 1],
 			bool DrawNonVisible = false,
 			bool DrawDebugObjects = true,
 			bool DrawEditorIcons = true,
@@ -85,14 +85,20 @@ Level =
 			bool DrawAxisOrigins = true,
 			bool AlwaysDrawInEditor = true,
 			bool DrawInGame = true,
-			Vec4 GridColor = [0.5, 0.5, 0.5, 0.4],
-			Vec4 GridHiLight = [0, 0, 0, 0.4],
+			Vec4 GridColor = [0.5, 0.5, 0.5, 0.400000006],
+			Vec4 GridHiLight = [0, 0, 0, 0.400000006],
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
 		HUDCreator = 
 		{
 			string HUDLevel = "55303348fcd9d288:HUDLevel.Level",
+		},
+		ScrollLoader = 
+		{
+			string TigerScroll = "55c16e8a571aa798:TigerScroll",
+			string DragonScroll = "",
+			string CraneScroll = "",
 		},
 	},
 	Cog = 
@@ -107,9 +113,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.633554, 38.8831, 50],
+			Vec3 Translation = [0.633553982, 38.8830986, 50],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0, -1.09278e-008, 0, 1],
+			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
 		Camera = 
 		{
@@ -119,7 +125,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 14.9569,
+			float Size = 20.1896992,
 		},
 		EditorCameraController = 
 		{
@@ -127,12 +133,12 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0.633554, 38.8831, -2.71022e-007],
+			Vec3 LookTarget = [0.633553982, 38.8830986, -2.71022003e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
 		{
-			Vec4 ClearColor = [0.155, 0.155, 0.155, 1],
+			Vec4 ClearColor = [0.155000001, 0.155000001, 0.155000001, 1],
 			bool DrawNonVisible = true,
 			bool DrawDebugObjects = true,
 			bool DrawEditorIcons = true,
@@ -151,8 +157,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 40.1599, 0],
-			Vec3 Scale = [0.434233, 1.17156, 0.434233],
+			Vec3 Translation = [0, 40.1599007, 0],
+			Vec3 Scale = [0.43423301, 1.17156005, 0.43423301],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -197,7 +203,7 @@ Level =
 		},
 		PlayerMovement = 
 		{
-			float RSpeed = 0.3,
+			float RSpeed = 0.300000012,
 			float RJumpHeight = 10,
 			float RDashSpeedX = 100,
 		},
@@ -222,7 +228,7 @@ Level =
 				Transform = 
 				{
 					Vec3 Translation = [0, 0, 40],
-					Vec3 Scale = [1, 0.370644, 1],
+					Vec3 Scale = [1, 0.370644003, 1],
 					Quat Rotation = [0, 0, 0, 1],
 				},
 				Camera = 
@@ -233,9 +239,9 @@ Level =
 					float FieldOfView = 45,
 					float NearPlane = 0.5,
 					float FarPlane = 200,
-					float Size = 14.5184,
+					float Size = 14.5184002,
 				},
-				Microphone = 
+				SoundListener = 
 				{
 					bool Active = true,
 				},
@@ -274,7 +280,7 @@ Level =
 			string SourceName = "553ad09014469252:Level_TileMap00",
 			string PaletteName = "553ad1ecdc92c95f:CollisionTiles",
 			float UnitsPerTile = 1,
-			float MeshThickness = 1.2,
+			float MeshThickness = 1.20000005,
 		},
 	},
 	ArchetypeInstance = 
@@ -286,8 +292,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-1.39799, 11.5107, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [-1.39798999, 11.5107002, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Named = 
@@ -304,8 +310,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-5.7694, 40.6072, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [-5.76940012, 40.6072006, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Named = 
@@ -329,8 +335,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-8.53463, 40.6072, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [-8.53462982, 40.6072006, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -339,7 +345,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = false,
 			bool CastShadows = false,
-			Vec4 Color = [0.11, 1, 0, 1],
+			Vec4 Color = [0.109999999, 1, 0, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -407,8 +413,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [8.89597, 40.6072, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [8.89597034, 40.6072006, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Named = 
@@ -425,8 +431,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.971455, 0.716568, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [0.971454978, 0.716567993, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Named = 
@@ -443,8 +449,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-15.2197, 5.45545, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [-15.2196999, 5.45545006, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Named = 
@@ -461,8 +467,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [9.39619, 2.77886, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [9.39618969, 2.77886009, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Named = 
@@ -479,8 +485,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [16.1974, 4.66564, 0],
-			Vec3 Scale = [2.4006, 2.4006, 2.4006],
+			Vec3 Translation = [16.1973991, 4.66563988, 0],
+			Vec3 Scale = [2.40059996, 2.40059996, 2.40059996],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Named = 
@@ -520,7 +526,7 @@ Level =
 			string SourceName = "55344727145c69cf:Level_TileMap01",
 			string PaletteName = "553ad1ecdc92c95f:CollisionTiles",
 			float UnitsPerTile = 1,
-			float MeshThickness = 1.2,
+			float MeshThickness = 1.20000005,
 		},
 	},
 },
