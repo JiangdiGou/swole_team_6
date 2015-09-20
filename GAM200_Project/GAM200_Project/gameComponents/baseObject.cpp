@@ -8,7 +8,17 @@
 
 #include "baseObject.h"
 
+gameObject::gameObject(std::string name)
+{
+  this->name = name;
+}
+
 int gameObject::getObjID()
 {
   return this->objID;
+}
+
+void gameObject::setObjID(int newID)
+{
+  this->objID = newID;
 }

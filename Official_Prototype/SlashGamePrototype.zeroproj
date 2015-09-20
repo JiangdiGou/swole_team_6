@@ -6,7 +6,8 @@ Cog =
 		string ProjectOwner = "",
 		string DefaultLevel = "Level",
 		string ProjectSpace = "Space",
-		uint ProjectEngineRevision = 12046,
+		string ProjectFolder = "C:\Users\joshx_000\Desktop\SWOLE Team 6\Official_Prototype",
+		uint ProjectEngineRevision = 12259,
 		bool AutoTakeProjectScreenshot = true,
 	},
 	EditorSettings = 
@@ -16,5 +17,6 @@ Cog =
 		float ViewCubeViewportSize = 150,
 		ScriptReloadMethod ScriptReloadEditor = ReInitializeObjects,
 		ScriptReloadMethod ScriptReloadGame = PatchObjects,
+		bool AutoUpdateContentChanges = true,
 	},
 },

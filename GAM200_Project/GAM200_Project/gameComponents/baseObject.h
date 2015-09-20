@@ -25,6 +25,8 @@ private:
   std::string name;
   Transform transform;
 public:
+  gameObject(std::string name);
   int getObjID();
+  void setObjID(int newID);
 };
 
