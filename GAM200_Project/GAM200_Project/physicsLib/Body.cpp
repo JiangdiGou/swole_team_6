@@ -1,5 +1,6 @@
 #include "our header files"
 #include "Body.h"
+#include "Transform.h"
 
 float Random(float low, float high)
 {
@@ -29,7 +30,7 @@ RigidBody::RigidBody(IEntity* Owner, Primitive *shape) :
   invInertia = 1.0f/inertia;
   isStatic = false;
   angularVelocity = 0.0f;
-  orientation = Random(-PI,PI);
+  orientation = Random(-FLOAT_PI,FLOAT_PI);
   /*stFric = 0.5f;
   dynFric = 0.3f;
   friction = 0.2f;*/
@@ -49,7 +50,7 @@ RigidBody::RigidBody(IEntity* Owner, Primitive *shape) :
 RigidBody::~RigidBody()
 {
   // delete the body list
-  //physics->bodies.clear();
+  physics->bodies.clear();
     
 	//Let's say if we have physics manager
     for (auto iter = physics->bodies.begin(); iter != physics->bodies.end(); ++iter)
@@ -199,10 +200,10 @@ void RigidBody::AddForce(const Vector2 &force)
 //  
 //}
 
-void RigidBody::ApplyImpulse(const Vector2& impulse, const Vector2D& contactVec)
+void RigidBody::ApplyImpulse(const Vector2& impulse, const Vec2D& contactVec)
 {
   velocity += invMass * impulse;
-  angularVelocity += invInertia * Vector2D::CrossProduct(contactVec, impulse);
+  angularVelocity += invInertia * Vec2D::CrossProduct(contactVec, impulse);
 }
 
 void RigidBody::SetOrientation(float radians)

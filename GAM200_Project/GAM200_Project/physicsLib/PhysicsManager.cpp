@@ -1,9 +1,14 @@
 #include "other stuff"
 #include "PhysicsManager.h"
 #include "game setting file?"
+#include "Resolution.h"
+#include "math_utility.h"
 
 PhysicsManager *physics = nullptr;
 
+
+
+//MOVEMENT COLLISION FORCESS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //PhysicsManager::PhysicsManager() : ISystem("Physics", SystemType::ST_Physics)
 //{
@@ -31,6 +36,7 @@ void PhysicsManager::Shutdown()
 	colliders.clear();
 	bodies.clear();
 }
+
 
 
 void PhysicsManager::RigidBodyCheck()
@@ -138,7 +144,7 @@ void PhysicsManager::IntegrateForces(RigidBody *body, float dt)
 	if (body->useGravity)
 	{
 		// Symplectic Euler w/ gravity
-		body->velocity += ((body->forceAccum * body->invMass + Vector2D(0, *physics->GRAVITY)) * (dt / 2.0f));
+		body->velocity += ((body->forceAccum * body->invMass + Vec2D(0, *physics->GRAVITY)) * (dt / 2.0f));
 	}
 	else
 	{

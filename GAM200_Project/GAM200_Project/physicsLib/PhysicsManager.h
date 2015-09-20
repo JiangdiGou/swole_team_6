@@ -1,7 +1,6 @@
-#include "Precompiled\Precompiled.h"
 #include "collision_narrow.h"
-#include "rigidbody.h"
-#include "manifold.h"
+#include "Body.h"
+#include "Resolution.h"
 
 // Physics system
 class PhysicsManager : public ISystem
@@ -25,8 +24,7 @@ public:
 	void ColliderCheck();
 	void RigidBodyCheck();
 
-	//I changed this from a Vector2D so I could load it from Settings
-	//in the new, non-breaking-between-levels persistent version.
+	//I changed this from a Vector2D so I could load it from Setting
 	float *GRAVITY;
 };
 

@@ -37,3 +37,4 @@ float MoveTowards(float current, float target, float maxDelta)
 		current = target;
 	return current;
 }
+
