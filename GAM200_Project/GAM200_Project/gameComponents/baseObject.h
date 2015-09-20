@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Nolan Yoo. All rights reserved.
 //
 
+#ifndef BASEOBJECT_H
+#define BASEOBJECT_H
+
 #include <stdio.h>
 #include <string>
 #include "../engineGraphics/glm/vec3.hpp"
@@ -26,7 +29,9 @@ private:
   Transform transform;
 public:
   gameObject(std::string name);
+  ~gameObject();
   int getObjID();
   void setObjID(int newID);
 };
 
+#endif

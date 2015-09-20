@@ -6,9 +6,9 @@
 struct Contact
 {
 	Contact() : Pn(0.0f), Pt(0.0f), Pnb(0.0f), massNormal(0.0f), massTangent(0.0f), bias(0.0f) {}
-	Vector2D position;
-	Vector2D normal;
-	Vector2D r1, r2;
+	Vector2 position;
+	Vector2 normal;
+	Vector2 r1, r2;
 	float seperation;
 	float Pn; // accumulated normal impulse
 	float Pt; // accumulated tangent impulse
@@ -46,9 +46,9 @@ struct Manifold
 	// Combined frictions
 	float friction;
 
-	Vector2D normal;
+	Vector2 normal;
 
-	Vector2D contact[2];
+	Vector2 contact[2];
 
 	float staticFriction;
 

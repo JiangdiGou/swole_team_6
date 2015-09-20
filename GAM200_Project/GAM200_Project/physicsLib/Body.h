@@ -3,7 +3,7 @@
 #include "our entity header file"
 #include <vector> //for the vector of trigger callbacks
 #include <utility> //pair
-#include "vector2d.h"
+//#include "vector2d.h"
 #include "PhysicsManager.h"
 class RigidBody : public IComponent
 {
@@ -14,12 +14,12 @@ public:
   friend class Circle;
   friend class AABB;
   //WE NEED A TRANSFORM COMPONET
-  //Transform *pTrans;
+  Transform *pTrans;
   Primitive *bodyShape;
-  Vector2D position;       // Holds the position of the rigid body
-  Vector2D acceleration;
-  Vector2D velocity;       // Holds the linear velocity of the rigid body
-  Vector2D forceAccum;     // Accumlated force
+  Vector2 position;       // Holds the position of the rigid body
+  Vector2 acceleration;
+  Vector2 velocity;       // Holds the linear velocity of the rigid body
+  Vector2 forceAccum;     // Accumlated force
   float mass;             // Holds the mass of the rigid body
   float invMass;          // Holds the inverted mass
   float rotation;         // Holds the rotation
@@ -40,7 +40,7 @@ public:
 
 
   // WE NEED ENTITY FILE AND PRIMITIVE
-  //RigidBody(IEntity* Owner, Primitive *shape);
+  RigidBody(IEntity* Owner, Primitive *shape);
   ~RigidBody();
 
   bool Initialize() override;
@@ -49,18 +49,18 @@ public:
 
   void set(float mass);
     // Sets the position
-  void setPosition(const Vector2D &position);
+  void setPosition(const Vector2 &position);
   void setPosition(const float x, const float y);
-  Vector2D getPosition() const;
+  Vector2 getPosition() const;
 
    // Set the acceleration
-  void setAcceleration(const Vector2D &acc);
+  void setAcceleration(const Vector2 &acc);
   void setAcceleration(const float x, const float y);
-  Vector2D getAcceleration() const;
+  Vector2 getAcceleration() const;
 
-  void setVelocity(const Vector2D &velocity);
+  void setVelocity(const Vector2 &velocity);
   void setVelocity(const float x, const float y);
-  Vector2D getVelocity() const;
+  Vector2 getVelocity() const;
   
   void setMass(const float mass); 
   float getMass() const;
@@ -69,14 +69,14 @@ public:
   void setRotation(const float rotation);
   float getRotation() const;
 
-  void AddForce(const Vector2D &force);
+  void AddForce(const Vector2 &force);
   void SetStatic(void);
-  void ApplyImpulse(const Vector2D & impulse, const Vector2D & contactVec);
+  void ApplyImpulse(const Vector2 & impulse, const Vector2 & contactVec);
   void SetOrientation(float radians);
 
   bool IsStatic();
   bool CheckDetectsCollision();
-  void MovePosition(Vector2D &pos); // Moves the rigidbody to position.
+  void MovePosition(Vector2 &pos); // Moves the rigidbody to position.
   void SetDensity(float density);  //Sets the mass based on the attached colliders assuming a constant density.
 
 

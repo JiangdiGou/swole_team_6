@@ -1,6 +1,6 @@
 #include "Resolution.h"
 #include <algorithm>
-#include "vector2d.h"
+//#include "math_utility.h"
 
 PhysicsMaterial::PhysicsMaterial()
 {
@@ -15,7 +15,8 @@ PhysicsMaterial::PhysicsMaterial()
 void Manifold::Solve(void)
 {
 	// Give the current data
-	CollisionRegistry[A->bodyShape->GetID()][B->bodyShape->GetID()](A, B, this);
+	
+	[A->bodyShape->GetID()][B->bodyShape->GetID()](A, B, this);
 }
 
 void Manifold::PreStep(float dt)
@@ -42,7 +43,7 @@ void Manifold::PreStep(float dt)
 		Vector2 radii_A = contact[i] - A->position;
 		Vector2 radii_B = contact[i] - B->position;
 
-		Vector2 relativeVel = B->velocity + Vector2::CrossProduct(B->angularVelocity, radii_B) -
+		Vector2 relativeVel = B->velocity + Vec2D::CrossProduct(B->angularVelocity, radii_B) -
 			A->velocity - Vector2::CrossProduct(A->angularVelocity, radii_A);
 
 		if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vector2D(0, *physics->GRAVITY))).Magnitude() + EPSILON)
@@ -74,11 +75,11 @@ void Manifold::AppyImpulse(void)
 		Vector2 radii_b = contact[i] - B->position;
 
 		// Relative velocity at contact
-		Vector2 relativeVel = B->velocity + Vector2D::CrossProduct(B->angularVelocity, radii_b) -
-			A->velocity - Vector2D::CrossProduct(A->angularVelocity, radii_a);
+		Vector2 relativeVel = B->velocity + Vec2D::CrossProduct(B->angularVelocity, radii_b) -
+			A->velocity - Vec2D::CrossProduct(A->angularVelocity, radii_a);
 
 		// Relative velocity along normal
-		float contactVel = Vector2D::DotProduct(relativeVel, normal);
+		float contactVel = Vec2D::DotProduct(relativeVel, normal);
 
 		// If velocities are separating do not resolve
 		if (contactVel > 0)
@@ -86,8 +87,8 @@ void Manifold::AppyImpulse(void)
 			return;
 		}
 
-		float crossA = Vector2D::CrossProduct(radii_a, normal);
-		float crossB = Vector2D::CrossProduct(radii_b, normal);
+		float crossA = Vec2D::CrossProduct(radii_a, normal);
+		float crossB = Vec2D::CrossProduct(radii_b, normal);
 		float invMassSum = A->invMass + B->invMass + (crossA * crossA) * A->invInertia + (crossB * crossB) * B->invInertia;
 		e = 0.2003f; //epsilon value
 		// Calculate the impulse scalar
@@ -101,10 +102,10 @@ void Manifold::AppyImpulse(void)
 		B->ApplyImpulse(impulse, radii_b);
 
 		// Friction impulse
-		relativeVel = B->velocity + Vector2D::CrossProduct(B->angularVelocity, radii_b) -
-			A->velocity - Vector2D::CrossProduct(A->angularVelocity, radii_a);
+		relativeVel = B->velocity + Vec2D::CrossProduct(B->angularVelocity, radii_b) -
+			A->velocity - Vec2D::CrossProduct(A->angularVelocity, radii_a);
 
-		Vector2 tangentVec = relativeVel - (normal * Vector2D::DotProduct(relativeVel, normal));
+		Vector2 tangentVec = relativeVel - (normal * Vec2D::DotProduct(relativeVel, normal));
 		tangentVec.Normalize();
 
 		// Solve magnitude to apply along friction vector
