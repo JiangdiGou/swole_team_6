@@ -10,6 +10,7 @@ typedef struct
     float y;
 } Vector2D;
 
+
 Vector2D add_vector(const Vector2D* a, const Vector2D* b)
 {
 	const Vector2D r = {a->x + b->x, a->y + b->y};

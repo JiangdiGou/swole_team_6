@@ -1,9 +1,14 @@
 #include "other stuff"
 #include "PhysicsManager.h"
 #include "game setting file?"
+#include "Resolution.h"
+#include "math_utility.h"
 
 PhysicsManager *physics = nullptr;
 
+
+
+//MOVEMENT COLLISION FORCESS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //PhysicsManager::PhysicsManager() : ISystem("Physics", SystemType::ST_Physics)
 //{
@@ -31,6 +36,7 @@ void PhysicsManager::Shutdown()
 	colliders.clear();
 	bodies.clear();
 }
+
 
 
 void PhysicsManager::RigidBodyCheck()
