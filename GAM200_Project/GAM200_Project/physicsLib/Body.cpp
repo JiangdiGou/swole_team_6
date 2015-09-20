@@ -238,7 +238,7 @@ bool RigidBody::CheckDetectsCollision()
   return isGhost;
 }
 
-void RigidBody::MovePosition &pos)
+void RigidBody::MovePosition (Vector2 &pos)
 {
   position = pos;
 }
@@ -252,7 +252,7 @@ void RigidBody::SetDensity(float density)
   if (bodyShape->GetID() == Primitive::pCircle)
   {
     // Circle pi*r^2
-    mass = PI * (bodyShape->radius * bodyShape->radius);
+    mass = FLOAT_PI * (bodyShape->radius * bodyShape->radius);
     invMass = 1.0f / mass;
 
   }
