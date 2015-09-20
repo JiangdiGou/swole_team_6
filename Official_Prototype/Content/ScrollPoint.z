@@ -10,6 +10,9 @@ class ScrollPoint : ZilchComponent
     [Property]
     var PathSprite:CogPath;
     
+    [Property]
+    var Circle : SpriteSource;
+    
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
@@ -20,7 +23,8 @@ class ScrollPoint : ZilchComponent
         if(this.BIsActive)
         {
             this.Owner.Transform.Scale = Real3(1, 1, 1);
-            this.Owner.Sprite.Color = Real4(0,0,0,1);
+            this.Owner.Sprite.Color = this.Owner.Sprite.Color - Real4(0,0,0,0.5);
+            this.Owner.Sprite.SpriteSource = this.Circle;
             
             
             if(this.BIsLastPoint)
@@ -30,7 +34,7 @@ class ScrollPoint : ZilchComponent
             else
             {
                 this.NextPoint.Cog.ScrollPoint.BIsActive = true;
-                this.PathSprite.Cog.Sprite.Color = Real4(0,0,0,1);
+                this.PathSprite.Cog.Sprite.Color = Real4(1,1,1,0.7);
             }
         }
     }
