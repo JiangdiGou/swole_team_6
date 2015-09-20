@@ -1,6 +1,13 @@
 #include "objFactory.h"
 #include <random>
 
+#include "../AssertionError/AssertionError.h"
+
+objFactory::objFactory()
+{
+  
+}
+
 gameObject* objFactory::makeObject(std::string Name)
 {
   gameObject *toReturn = new gameObject(Name);
@@ -18,5 +25,25 @@ gameObject* objFactory::makeObject(std::string Name)
   }
 
   toReturn->setObjID(gen);
+  objIDs.push_back(gen);
+  gameObjs.push_back(toReturn);
   return toReturn;
+}
+
+void objFactory::destroyObject(int killID)
+{
+  if (std::find(objIDs.begin(), objIDs.end(), killID) == objIDs.end())
+  {
+    //already using gen
+    throw AssertionError(std::string("Object ID " + std::to_string(killID)
+                                     +" is not destroyable."
+                                     ));
+  }
+  else
+  {
+    std::vector<int>::iterator pos = std::find(objIDs.begin(), objIDs.end(), killID);
+    int whereAt = pos - objIDs.begin();
+    objIDs.erase(pos);
+    gameObjs.at(whereAt)->~gameObject();
+  }
 }

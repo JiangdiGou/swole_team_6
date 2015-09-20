@@ -13,9 +13,14 @@
 
 #include "lvlTools/levelGenerator.h"
 #include "lvlTools/levelEditor.h"
-#include "Utilities.h"
+
 #include "runLua/luaRunner.h"
 #include "logger/logger.h"
+
+#include "gameComponents/baseObject.h"
+#include "gameComponents/objFactory.h"
+
+#include "Utilities.h"
 #include "_EntryPoint.h"
 
 #include <string>
@@ -56,6 +61,16 @@ void logRoutine()
   thisLog->write("ERROR");
 }
 
+void factoryRoutine()
+{
+  printstr("(Factory Test 1)");
+  objFactory *makeThings = new objFactory();
+  gameObject unicorn = *makeThings->makeObject("SampleThing");
+  std::cout<<"Unicorn's ID: "<<unicorn.getObjID()<<std::endl;
+  makeThings->destroyObject(unicorn.getObjID());
+  //makeThings->destroyObject(23);
+}
+
 #ifdef LDM_RUN
 int main(int argc, char **argv)
 #else
@@ -84,6 +99,8 @@ int falseMain3(int argc, char **argv)
   }
   visLine();
   logRoutine();
+  visLine();
+  factoryRoutine();
   visLine();
   /* END RUNNING LUA ROUTINE*/
 

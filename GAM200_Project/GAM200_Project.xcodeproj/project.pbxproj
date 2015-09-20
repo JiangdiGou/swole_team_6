@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F61B22071BAF452700EE43BF /* baseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F61B22031BAF452700EE43BF /* baseObject.cpp */; };
+		F61B22081BAF452700EE43BF /* objFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F61B22051BAF452700EE43BF /* objFactory.cpp */; };
+		F61B23821BAF519F00EE43BF /* AssertionError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F61B23801BAF519F00EE43BF /* AssertionError.cpp */; };
 		F680F39C1BA0D64A006998AD /* liblua53.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F680F3971BA0D3C3006998AD /* liblua53.dylib */; };
 		F680F3A01BA0D9F7006998AD /* liblua53.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F680F3971BA0D3C3006998AD /* liblua53.dylib */; };
 		F680F3A31BA0DDAA006998AD /* dyld_set.sh in CopyFiles */ = {isa = PBXBuildFile; fileRef = F680F39F1BA0D9EA006998AD /* dyld_set.sh */; };
+		F696454B1BAF40CC00EA3FA9 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F69645491BAF40CC00EA3FA9 /* logger.cpp */; };
 		F6FDB9EE1B9D0E94007EF209 /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDB9E61B9D0E94007EF209 /* Client.cpp */; };
 		F6FDB9EF1B9D0E94007EF209 /* gameLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDB9E71B9D0E94007EF209 /* gameLevel.cpp */; };
 		F6FDB9F01B9D0E94007EF209 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FDB9EC1B9D0E94007EF209 /* Utilities.cpp */; };
@@ -44,9 +48,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F61B22031BAF452700EE43BF /* baseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = baseObject.cpp; sourceTree = "<group>"; };
+		F61B22041BAF452700EE43BF /* baseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseObject.h; sourceTree = "<group>"; };
+		F61B22051BAF452700EE43BF /* objFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = objFactory.cpp; sourceTree = "<group>"; };
+		F61B22061BAF452700EE43BF /* objFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objFactory.h; sourceTree = "<group>"; };
+		F61B23801BAF519F00EE43BF /* AssertionError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssertionError.cpp; sourceTree = "<group>"; };
+		F61B23811BAF519F00EE43BF /* AssertionError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssertionError.h; sourceTree = "<group>"; };
 		F680F3951BA0D2D6006998AD /* liblua53.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua53.a; path = luaMac/liblua53.a; sourceTree = "<group>"; };
 		F680F3971BA0D3C3006998AD /* liblua53.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua53.dylib; path = luaMac/liblua53.dylib; sourceTree = "<group>"; };
 		F680F39F1BA0D9EA006998AD /* dyld_set.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = dyld_set.sh; path = macTools/dyld_set.sh; sourceTree = "<group>"; };
+		F69645471BAF40C500EA3FA9 /* _EntryPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EntryPoint.h; sourceTree = "<group>"; };
+		F69645491BAF40CC00EA3FA9 /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = "<group>"; };
+		F696454A1BAF40CC00EA3FA9 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		F6D1F0AD1B9D0D5C0096D517 /* GAM200_Project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GAM200_Project; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FDB9E61B9D0E94007EF209 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
 		F6FDB9E71B9D0E94007EF209 /* gameLevel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameLevel.cpp; sourceTree = "<group>"; };
@@ -80,11 +93,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F60FA4621BAC8622009D2717 /* gameComponents */ = {
+		F61B22021BAF452700EE43BF /* gameComponents */ = {
 			isa = PBXGroup;
 			children = (
+				F61B22031BAF452700EE43BF /* baseObject.cpp */,
+				F61B22041BAF452700EE43BF /* baseObject.h */,
+				F61B22051BAF452700EE43BF /* objFactory.cpp */,
+				F61B22061BAF452700EE43BF /* objFactory.h */,
 			);
 			path = gameComponents;
+			sourceTree = "<group>";
+		};
+		F61B237F1BAF519F00EE43BF /* AssertionError */ = {
+			isa = PBXGroup;
+			children = (
+				F61B23801BAF519F00EE43BF /* AssertionError.cpp */,
+				F61B23811BAF519F00EE43BF /* AssertionError.h */,
+			);
+			path = AssertionError;
+			sourceTree = "<group>";
+		};
+		F69645481BAF40CC00EA3FA9 /* logger */ = {
+			isa = PBXGroup;
+			children = (
+				F69645491BAF40CC00EA3FA9 /* logger.cpp */,
+				F696454A1BAF40CC00EA3FA9 /* logger.h */,
+			);
+			path = logger;
 			sourceTree = "<group>";
 		};
 		F6D1F0A41B9D0D5C0096D517 = {
@@ -110,10 +145,13 @@
 		F6D1F0AF1B9D0D5C0096D517 /* GAM200_Project */ = {
 			isa = PBXGroup;
 			children = (
+				F69645471BAF40C500EA3FA9 /* _EntryPoint.h */,
 				F6FDB9E61B9D0E94007EF209 /* Client.cpp */,
-				F60FA4621BAC8622009D2717 /* gameComponents */,
+				F61B237F1BAF519F00EE43BF /* AssertionError */,
+				F61B22021BAF452700EE43BF /* gameComponents */,
 				F6FDB9E71B9D0E94007EF209 /* gameLevel.cpp */,
 				F6FDB9E81B9D0E94007EF209 /* gameLevel.h */,
+				F69645481BAF40CC00EA3FA9 /* logger */,
 				F6FDB9F81B9D0FB8007EF209 /* luaLib */,
 				F6FDB9FE1B9D0FD1007EF209 /* lvlTools */,
 				F6FDBA051B9D0FF0007EF209 /* runLua */,
@@ -217,9 +255,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6FDBA091B9D0FFB007EF209 /* luaRunner.cpp in Sources */,
+				F61B22071BAF452700EE43BF /* baseObject.cpp in Sources */,
+				F61B22081BAF452700EE43BF /* objFactory.cpp in Sources */,
 				F6FDBA041B9D0FE3007EF209 /* levelGenerator.cpp in Sources */,
 				F6FDB9EF1B9D0E94007EF209 /* gameLevel.cpp in Sources */,
 				F6FDB9EE1B9D0E94007EF209 /* Client.cpp in Sources */,
+				F696454B1BAF40CC00EA3FA9 /* logger.cpp in Sources */,
+				F61B23821BAF519F00EE43BF /* AssertionError.cpp in Sources */,
 				F6FDB9F01B9D0E94007EF209 /* Utilities.cpp in Sources */,
 				F6FDBA031B9D0FE3007EF209 /* levelEditor.cpp in Sources */,
 			);

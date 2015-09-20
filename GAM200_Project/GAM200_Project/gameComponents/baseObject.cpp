@@ -13,6 +13,11 @@ gameObject::gameObject(std::string name)
   this->name = name;
 }
 
+gameObject::~gameObject()
+{
+  
+}
+
 int gameObject::getObjID()
 {
   return this->objID;
