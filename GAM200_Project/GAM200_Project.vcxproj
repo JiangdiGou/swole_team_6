@@ -20,6 +20,8 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
+    <ClInclude Include="GAM200_Project\gameComponents\baseObject.h" />
+    <ClInclude Include="GAM200_Project\gameComponents\objFactory.h" />
     <ClInclude Include="GAM200_Project\gameLevel.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
@@ -52,6 +54,8 @@
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
+    <ClCompile Include="GAM200_Project\gameComponents\baseObject.cpp" />
+    <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp" />
     <ClCompile Include="GAM200_Project\gameLevel.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />

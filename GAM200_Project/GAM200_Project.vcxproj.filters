@@ -16,14 +16,17 @@
     <Filter Include="physics">
       <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engineGraphics">
-      <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
+    <Filter Include="logger">
+      <UniqueIdentifier>{a8a71b5b-a5ad-4cbf-b972-1e7d6d64e39a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameComponents">
+      <UniqueIdentifier>{76ae88c4-daec-4b1d-a43a-6122a9ff8abf}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameState">
       <UniqueIdentifier>{9aa4dd65-ce20-40f7-b620-b5ab537df0cf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="logger">
-      <UniqueIdentifier>{a8a71b5b-a5ad-4cbf-b972-1e7d6d64e39a}</UniqueIdentifier>
+    <Filter Include="engineGraphics">
+      <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +120,12 @@
     <ClInclude Include="GAM200_Project\_EntryPoint.h">
       <Filter>Universal</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\gameComponents\baseObject.h">
+      <Filter>gameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\gameComponents\objFactory.h">
+      <Filter>gameComponents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -172,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp">
       <Filter>engineGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\gameComponents\baseObject.cpp">
+      <Filter>gameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp">
+      <Filter>gameComponents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
