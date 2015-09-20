@@ -1,6 +1,6 @@
 #include "collision_narrow.h"
 #include "Body.h"
-#include "manifold.h"
+#include "Resolution.h"
 
 // Physics system
 class PhysicsManager : public ISystem
@@ -10,7 +10,7 @@ public:
 	~PhysicsManager();
 
 	std::vector<RigidBody *>bodies; // Holds the bodies
-	//std::vector<Manifold> contacts; // Holds the contacts
+	std::vector<Manifold> contacts; // Holds the contacts
 	std::vector<Primitive *>colliders; // Holds the colliders
 
 	// Overloaded methods
@@ -24,9 +24,8 @@ public:
 	void ColliderCheck();
 	void RigidBodyCheck();
 
-	//I changed this from a Vector2D so I could load it from Settings
-	//in the new, non-breaking-between-levels persistent version.
-	Vector2D *GRAVITY;
+	//I changed this from a Vector2D so I could load it from Setting
+	float *GRAVITY;
 };
 
 extern PhysicsManager *physics;
