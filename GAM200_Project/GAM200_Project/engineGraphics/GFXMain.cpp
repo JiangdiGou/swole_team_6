@@ -51,9 +51,9 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     ISprite::Load(basicShader2);
 
     //Creates Three Sprites
-    Sprite smiley = Sprite(basicShader);
+    ISprite smiley = ISprite();
     ISprite excited = ISprite();
-    Sprite calm = Sprite(basicShader);
+    //Sprite calm = Sprite(basicShader);
     Sprite animated = Sprite(basicShader);
 	  Sprite player = Sprite(basicShader);
 	  pPlayer = &player;
@@ -70,14 +70,14 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     //Saves the textures into the sprites 
     smiley.texture = textureSmiley;
     excited.texture = textureExcited;
-    calm.texture = textureCalm;
+    //calm.texture = textureCalm;
 	animated.texture = textureAnimated;
 	player.texture = texturePlayerIdle;
 
     //Sets inital values of sprites for their respective tests
     smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
     excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
-    calm.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    //calm.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     smiley.scale = glm::vec3(0.15f, 0.15f, 0.15f);
 	animated.translation = glm::vec3(-1.5f, 1.0f, 0.0f);
 
@@ -90,26 +90,31 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     //But this is fine for now 
     while (!shouldQuit)
     {
+
         wglMakeCurrent(deviceContext, renderingContext);
+
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         basicCamera.update();
-        ISprite::drawSprites(textureExcited);
-        Sprite::drawSprites();
+
+
+        ISprite::drawSprites(textureAnimated);
+
+        //Sprite::drawSprites();
 
 		    //Again, not ideal, but there will eventually be a draw all function or something
-		    debugDrawFrame();
+		    //debugDrawFrame();
 
-        debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
-		    debugDrawLine(excited.translation, calm.translation, glm::vec3());
-		    debugDrawLine(animated.translation, calm.translation, glm::vec3());
+	        //debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
+		    //debugDrawLine(excited.translation, calm.translation, glm::vec3());
+		    //debugDrawLine(animated.translation, calm.translation, glm::vec3());
 
-		    debugDrawSquare(calm.translation, calm.scale.x, calm.scale.y, glm::vec3());
+		    //debugDrawSquare(calm.translation, calm.scale.x, calm.scale.y, glm::vec3());
 		    debugDrawSquare(smiley.translation, smiley.scale.x, smiley.scale.y, glm::vec3());
 		    debugDrawSquare(excited.translation, excited.scale.x, excited.scale.y, glm::vec3());
 
-		    debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
+		    //debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
 	    	debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
 
         SwapBuffers(deviceContext);

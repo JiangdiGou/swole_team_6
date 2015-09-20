@@ -39,7 +39,7 @@ private:
   static GLuint colorBuffer; 
   static GLuint matrixBuffer;
 
-  static std::vector<glm::mat4> transformMatrices;
+  static std::vector<GLfloat> transformMatrices;
   static std::vector<GLfloat> textureCoordinatesAll;
   static std::vector<GLfloat> colorValues;
 

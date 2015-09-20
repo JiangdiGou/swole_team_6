@@ -9,7 +9,7 @@ GLuint ISprite::texCoordsBuffer = 0;
 GLuint ISprite::colorBuffer = 0;
 GLuint ISprite::matrixBuffer = 0;
 
-std::vector<glm::mat4> ISprite::transformMatrices = {};
+std::vector<GLfloat> ISprite::transformMatrices = {};
 std::vector<GLfloat> ISprite::textureCoordinatesAll = {};
 std::vector<GLfloat> ISprite::colorValues = {};
 
@@ -17,6 +17,8 @@ Shader* ISprite::shader = NULL;
 
 void ISprite::Load(Shader spriteShader)
 {
+	spriteShader.Use();
+
   GLfloat vertices[] = {
     //X    Y     Z     
     0.5f, -0.5f, 0.0f,
@@ -33,47 +35,53 @@ void ISprite::Load(Shader spriteShader)
   glGenBuffers(1, &colorBuffer);
   glGenBuffers(1, &matrixBuffer);
 
-  glBindVertexArray(vertexArray);
+  //The vertex data will never change, so send that data now. 
+  glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
   //For vertex Position
   glEnableVertexAttribArray(0);
-  glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
-
-  //The vertex data will never change, so send that data now. 
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), (GLvoid*)0);
 
   //For texture coordinates
-  glEnableVertexAttribArray(1);
   glBindBuffer(GL_ARRAY_BUFFER, texCoordsBuffer);
-  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+  glEnableVertexAttribArray(1);
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2*sizeof(GLfloat), (GLvoid*)0);
 
   //For Color
-  glEnableVertexAttribArray(2);
   glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+  glEnableVertexAttribArray(2);
+  glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 
   //For Transformation Matrix
-  glEnableVertexAttribArray(3);
   glBindBuffer(GL_ARRAY_BUFFER, matrixBuffer);
-  glVertexAttribPointer(3, 1, GL_MATRIX4_ARB, GL_FALSE, 0, (GLvoid*)0);
+  for (int i = 0; i < 4; ++i)
+  {
+	  glEnableVertexAttribArray(3 + i);
+	  glVertexAttribPointer(3 + i, 4, GL_FLOAT, GL_FALSE, 
+		  4 * 4 * sizeof(GLfloat), (GLvoid*)(4 * i * sizeof(GLfloat)));
+  }
 
-  //Unbind
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(vertexArray);
+  glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, texCoordsBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, matrixBuffer);
   glBindVertexArray(0);
 
-  //Sets up support for instancing
-  glVertexAttribDivisor(0, 0); 
-  glVertexAttribDivisor(1, 1); 
-  glVertexAttribDivisor(2, 1);
-  glVertexAttribDivisor(3, 1);
+  glVertexAttribDivisor(positionBuffer, 0);
+  glVertexAttribDivisor(texCoordsBuffer, 1);
+  glVertexAttribDivisor(colorBuffer, 1);
+  glVertexAttribDivisor(matrixBuffer, 1);
+  glVertexAttribDivisor(matrixBuffer + 1, 1);
+  glVertexAttribDivisor(matrixBuffer + 2, 1);
+  glVertexAttribDivisor(matrixBuffer + 3, 1);
 
   ISprite::shader = &spriteShader;
 }
 
 
 void ISprite::Unload()
-
 {
   glDeleteBuffers(1, &positionBuffer);
   glDeleteBuffers(1, &texCoordsBuffer);
@@ -135,18 +143,22 @@ glm::mat4 ISprite::calculateTransorm(void)
 void ISprite::prepareDraw(void)
 {
   //Adds their personal data to vectors shared by class 
-  transformMatrices.push_back(calculateTransorm());
+  glm::mat4 transform = calculateTransorm();
 
-  for (int i = 0; i < 6; i += 2)
+  for (int i = 0; i < 4; ++i)
   {
-    texture.updateAnimation();
-    ISprite::textureCoordinatesAll.push_back(texture.textureCoordinates[i]);
-    ISprite::textureCoordinatesAll.push_back(texture.textureCoordinates[i + i]);
+	  for (int j = 0; j < 4; ++j)
+	    ISprite::transformMatrices.push_back(transform[i][j]);
   }
 
+  texture.updateAnimation();
+  for (int i = 0; i < 12; ++i)
+    ISprite::textureCoordinatesAll.push_back(texture.textureCoordinates[i]);
+ 
   ISprite::colorValues.push_back(color.x);
   ISprite::colorValues.push_back(color.y);
   ISprite::colorValues.push_back(color.z);
+  ISprite::colorValues.push_back(color.w);
 }
 
 //**********************
@@ -158,32 +170,27 @@ void ISprite::prepareDraw(void)
 void ISprite::drawSprites(Texture testTexture)
 {
   shader->Use();
-  glBindTexture(GL_TEXTURE_2D, testTexture.ID);
 
   for (std::vector<ISprite*>::iterator it = Isprites.begin(); it != Isprites.end(); ++it)
     (*it)->prepareDraw();
 
   glBindVertexArray(vertexArray);
+  glBindTexture(GL_TEXTURE_2D, testTexture.ID);
+
   //Bind texture here if you want textures to work. if not, a single texture atlas will be bound
   glBindBuffer(GL_ARRAY_BUFFER, texCoordsBuffer);
   glBufferData(GL_ARRAY_BUFFER, textureCoordinatesAll.size() * sizeof(GLfloat),
-                NULL, GL_STREAM_DRAW);  
-  glBufferSubData(GL_ARRAY_BUFFER, 0, textureCoordinatesAll.size() * sizeof(GLfloat), 
-                textureCoordinatesAll.data());
+	  textureCoordinatesAll.data(), GL_STREAM_DRAW);
 
   glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
   glBufferData(GL_ARRAY_BUFFER, colorValues.size() * sizeof(GLfloat),
-              NULL, GL_STREAM_DRAW);
-  glBufferSubData(GL_ARRAY_BUFFER, 0, colorValues.size() * sizeof(GLfloat),
-               colorValues.data());
+	  colorValues.data(), GL_STREAM_DRAW);
 
   glBindBuffer(GL_ARRAY_BUFFER, matrixBuffer);
-  glBufferData(GL_ARRAY_BUFFER, transformMatrices.size() * sizeof(glm::mat4),
-              NULL, GL_STREAM_DRAW);
-  glBufferSubData(GL_ARRAY_BUFFER, 0, transformMatrices.size() * sizeof(glm::mat4),
-              transformMatrices.data());
+  glBufferData(GL_ARRAY_BUFFER, transformMatrices.size() * sizeof(GLfloat),
+	  transformMatrices.data(), GL_STREAM_DRAW);
 
-  glDrawArraysInstanced(GL_TRIANGLES, 0, 6, Isprites.size());
+  glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 6, Isprites.size());
 
   textureCoordinatesAll.clear();
   colorValues.clear();
