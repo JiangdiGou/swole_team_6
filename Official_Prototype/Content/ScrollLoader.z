@@ -1,0 +1,53 @@
+//Implimented by Josh Painter
+class ScrollLoader : ZilchComponent
+{
+    [Property]
+    var TigerScroll: Level = null;
+    [Property]
+    var DragonScroll: Level = null;
+    [Property]
+    var CraneScroll: Level = null;
+    
+    var ScrollToLoad : Level = null;
+    
+    var ScrollSpace: Space = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.ScrollSpace = this.GameSession.CreateNamedSpace("Scrollpace", Archetype.Find("Space"));
+        Zero.Connect(this.GameSession, "ScrollSelectEvent", this.OnScrollSelectEvent);
+    }
+
+    function OnScrollSelectEvent(scrollSelectEvent : ScrollSelectEvent)
+    {
+        Console.WriteLine("Hello");
+        //Use as much or as little information passed by the event
+        var scrollNum = scrollSelectEvent.NumberToSend;
+        
+        
+        /*  0 = Tiger,
+            1 = Crane,
+            2 = Dragon 
+        */
+        if(scrollNum == 0)
+        {
+            this.ScrollToLoad = this.TigerScroll;
+        }
+        else if(scrollNum == 1)
+        {
+            this.ScrollToLoad = this.CraneScroll;
+        }
+        else if(scrollNum == 2)
+        {
+            this.ScrollToLoad = this.DragonScroll;
+        }
+        
+        //load the appropriate scroll
+        this.ScrollSpace.LoadLevel(this.ScrollToLoad);
+    }
+    
+    function Destroyed()
+    {
+        this.ScrollSpace.Destroy();
+    }
+}
