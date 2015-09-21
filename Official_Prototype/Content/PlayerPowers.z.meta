@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PlayerPowers",
+		uint64 ResourceId = 55c047a5d5b8283e,
+	},
+},

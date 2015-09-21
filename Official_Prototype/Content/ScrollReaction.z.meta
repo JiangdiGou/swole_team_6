@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScrollReaction",
+		uint64 ResourceId = 55c053681d71d8f8,
+	},
+},

@@ -1,15 +1,19 @@
 class ScrollPoint : ZilchComponent
 {
+    //Boolean that determines if this point is active. True if this is the first point
     [Property]
     var BIsActive:Boolean = false;
+    //Boolean that determins if this is the final point in the scroll
     [Property]
     var BIsLastPoint:Boolean = false;
     
+    //Determines which point is the next in the sequence. Leave blank if this is the last point
     [Property]
     var NextPoint:CogPath;
+    //Points to the next path sprite leading to the point. Leave blank if this is the last point
     [Property]
     var PathSprite:CogPath;
-    
+    //Sprite that this point turns into when hit
     [Property]
     var Circle : SpriteSource;
     
@@ -20,17 +24,22 @@ class ScrollPoint : ZilchComponent
 
     function OnMouseEnter(event : MouseEvent)
     {
-        if(this.BIsActive)
+        //Checks if this point is active when moused over
+        if(this.BIsActive)// && event.Mouse.IsButtonDown(MouseButtons.Right))
         {
+            //Increases the scale, sets the color to black, and becomes a transparent circle
             this.Owner.Transform.Scale = Real3(1, 1, 1);
-            this.Owner.Sprite.Color = this.Owner.Sprite.Color - Real4(0,0,0,0.5);
+            this.Owner.Sprite.Color = Real4(this.Owner.Sprite.Color.W/255,this.Owner.Sprite.Color.X/255,this.Owner.Sprite.Color.Y/255,0.5);
             this.Owner.Sprite.SpriteSource = this.Circle;
             
-            
+            //If this is the last point in the sequence
             if(this.BIsLastPoint)
             {
+                //Calls the ScrollActivate function for this scroll in LevelSettings.ScrollReaction
                 Console.WriteLine("ScrollPoint.OnMouseEnter all done");
+                this.LevelSettings.ScrollReaction.ScrollActivate();
             }
+            //If not, tells the next scroll point to become active
             else
             {
                 this.NextPoint.Cog.ScrollPoint.BIsActive = true;

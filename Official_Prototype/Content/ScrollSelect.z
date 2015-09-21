@@ -11,10 +11,16 @@ class ScrollSelectEvent : Event
 
 class ScrollSelect : ZilchComponent
 {
+    //Integer that determines what this scroll's ID number is (0,1,2)
     [Property]
     var IScrollNumber:Integer = 0;
+    [Property]
+    var ICooldownTime:Integer = 100;
+    //Integer that says what scroll is currently selected (0,1,2)
     var IScrollSelected:Integer = 0;
+    //Number of frames until the scroll is usable again
     var IScrollCooldown:Integer = 0;
+    //Boolean that says if this scroll is currently usable
     var BCanUse:Boolean = true;
     
     function Initialize(init : CogInitializer)
@@ -26,33 +32,44 @@ class ScrollSelect : ZilchComponent
     
     function OnLogicUpdate(event : UpdateEvent)
     {
+        //If the scroll is on cooldown, it can't be used
         if(this.IScrollCooldown > 0)
         {
+            //the remaining cooldown timer is decreased
             --this.IScrollCooldown;
             
+            //If the cooldown timer reaches zero, it can be used again
             if(this.IScrollCooldown == 0)
             {
                 this.BCanUse = true;
+                //Updates the sprite to be more visible
                 this.Owner.Sprite.Color += Real4(0,0,0,0.5);
             }
         }
     }
     
+    //Called when the player uses the mouse wheel
     function ChangeScroll(event : MouseEvent)
     {
+        //If the player scrolls up
         if(event.Scroll.Y == 1)
         {
+            //increases the selected scroll
             ++this.IScrollSelected;
             
+            //Circles back around
             if(this.IScrollSelected > 2)
             {
                 this.IScrollSelected = 0;
             }
         }
+        //If the player scrolls down
         else if(event.Scroll.Y == -1)
         {
+            //decreases the selected scroll
             --this.IScrollSelected;
             
+            //Circles back around
             if(this.IScrollSelected < 0)
             {
                 this.IScrollSelected = 2;
@@ -62,13 +79,17 @@ class ScrollSelect : ZilchComponent
         this.UpdatePosition();
     }
     
+    //Called when the player right clicks and activates the selected scroll
     function UseScroll(event : MouseEvent)
     {
+        //Checks if the scroll is used, and if this particular scroll is selected
         if(this.BCanUse && this.IScrollNumber == this.IScrollSelected)
         {
-            Console.WriteLine("ScrollSelect.UseScroll Success!");
-            this.IScrollCooldown = 1000;
+            //Sets the number of frames to be on cooldown
+            this.IScrollCooldown = this.ICooldownTime;
+            //makes this scroll unusable
             this.BCanUse = false;
+            //makes the scroll transparent
             this.Owner.Sprite.Color -= Real4(0,0,0,0.5);
             
             //send the event that a scroll was used
@@ -78,6 +99,7 @@ class ScrollSelect : ZilchComponent
         }
     }
     
+    //Called by ChangeScroll to update the position and size of the scrolls
     function UpdatePosition()
     {
         if(this.IScrollNumber == this.IScrollSelected)

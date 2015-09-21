@@ -14,13 +14,14 @@ class ScrollLoader : ZilchComponent
     
     function Initialize(init : CogInitializer)
     {
-        this.ScrollSpace = this.GameSession.CreateNamedSpace("Scrollpace", Archetype.Find("Space"));
         Zero.Connect(this.GameSession, "ScrollSelectEvent", this.OnScrollSelectEvent);
     }
 
     function OnScrollSelectEvent(scrollSelectEvent : ScrollSelectEvent)
     {
-        Console.WriteLine("Hello");
+        //When this is activated, it creates a new space
+        this.ScrollSpace = this.GameSession.CreateNamedSpace("Scrollpace", Archetype.Find("Space"));
+        
         //Use as much or as little information passed by the event
         var scrollNum = scrollSelectEvent.NumberToSend;
         
@@ -44,10 +45,5 @@ class ScrollLoader : ZilchComponent
         
         //load the appropriate scroll
         this.ScrollSpace.LoadLevel(this.ScrollToLoad);
-    }
-    
-    function Destroyed()
-    {
-        this.ScrollSpace.Destroy();
     }
 }

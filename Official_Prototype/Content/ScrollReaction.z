@@ -1,0 +1,79 @@
+class ScrollReaction : ZilchComponent
+{
+    var IPlayerTime:Integer = 0;
+    //The number of frames until the scroll fails
+    [Property]
+    var ITimeLimit:Integer = 0;
+    //The number of frames that the player should beat for GOLD Time
+    [Property]
+    var IGoldTime:Integer = 0;
+    //The amount of energy that this scroll requires to use sucessfully
+    [Property]
+    var IEnergyCost:Real = 0;
+    //The amount of energy that is expended when failing
+    [Property]
+    var IFailCost:Real = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //First checks if the player has enough energy to cast the scroll. If not, it fails
+        if(this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.LevelData.RPlayerEnergy < this.IEnergyCost)
+        {
+            Console.WriteLine("ScrollReaction.ScrollFail NOT ENOUGH ENERGY");
+            this.ScrollFail();
+        }
+        
+        //Sets the initial player time at 0
+        this.IPlayerTime = 0;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //Increases the player time each frame
+        ++this.IPlayerTime;
+        Console.WriteLine("ScrollReaction.Update: player time `this.IPlayerTime`");
+        //If the player time is beyond the time limit, the scroll fails (took too long)
+        if(this.IPlayerTime > this.ITimeLimit)
+        {
+            this.ScrollFail();
+        }
+    }
+    
+    //Function called by the ScrollPoint script when the last point is hit
+    function ScrollActivate()
+    {
+        //Takes away from the player's energy to cast this ability
+        this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.LevelData.RPlayerEnergy -= this.IEnergyCost;
+        
+        //If the player didn't beat the gold time, scroll activates as normal
+        if(this.IPlayerTime > this.IGoldTime)
+        {
+            Console.WriteLine("ScrollReaction.ScrollActivate SCROLL ACTIVE");
+        }
+        //If the player's time is better than the gold time, the scroll is more powerful
+        else
+        {
+            Console.WriteLine("ScrollReaction.ScrollActivate GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLD!!!!!");
+        }
+        //Destroys this space
+        this.Space.Destroy();
+    }
+    
+    //Function called when the player doesnt have enough energy to cast, or runs out of time
+    function ScrollFail()
+    {
+        //if the player doesnt have enough energy, sets it to 0
+        if(this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.LevelData.RPlayerEnergy < this.IFailCost)
+        {
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.LevelData.RPlayerEnergy = 0;
+        }
+        //Otherwise subtracts from the total.
+        else
+        {
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.LevelData.RPlayerEnergy -= this.IFailCost;
+        }
+        //Destroys this space
+        this.Space.Destroy();
+    }
+}

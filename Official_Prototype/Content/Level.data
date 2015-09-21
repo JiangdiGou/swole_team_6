@@ -213,6 +213,9 @@ Level =
 		PlayerCollision = 
 		{
 		},
+		PlayerPowers = 
+		{
+		},
 		Hierarchy = 
 		{
 			Cog = 
