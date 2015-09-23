@@ -13,46 +13,67 @@
     <Filter Include="Universal">
       <UniqueIdentifier>{8622ca41-f451-432b-99f7-32cb65db372d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="physics">
-      <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="logger">
       <UniqueIdentifier>{a8a71b5b-a5ad-4cbf-b972-1e7d6d64e39a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gameComponents">
-      <UniqueIdentifier>{76ae88c4-daec-4b1d-a43a-6122a9ff8abf}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameState">
       <UniqueIdentifier>{9aa4dd65-ce20-40f7-b620-b5ab537df0cf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engineGraphics">
+    <Filter Include="BaseEngine">
+      <UniqueIdentifier>{df063242-ee77-4e77-bcbc-a9f623eccd65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseEngine\Composition">
+      <UniqueIdentifier>{76c594ee-2e31-4fb8-9c2f-59f032bbfbfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{a8038c2e-3d64-4804-81ec-2e3747b7ca4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\engineGraphics">
       <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\physics">
+      <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameObject">
+      <UniqueIdentifier>{76ae88c4-daec-4b1d-a43a-6122a9ff8abf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseEngine\Factory">
+      <UniqueIdentifier>{016ba0f4-3cd4-49a8-a16f-9c78a0467dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\physics\Transform">
+      <UniqueIdentifier>{77886485-cf60-4d82-a089-7dc137198584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseEngine\Engine">
+      <UniqueIdentifier>{bb06bff4-0edb-47bd-85e2-22c99cb7441b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{32d850cf-c236-4a14-9f1d-a31702ba05d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\ShaderManager.h">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h">
       <Filter>luaRunner</Filter>
@@ -73,31 +94,31 @@
       <Filter>Universal</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\collision_detection_utility.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\math_utility.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\movement_collision_detection.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\range.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\shapes.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\vector2d.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\boolean.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\collision_detection.h">
-      <Filter>physics</Filter>
+      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h">
       <Filter>GameState</Filter>
@@ -107,9 +128,6 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h">
       <Filter>GameState</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\Engine.h">
-      <Filter>Universal</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\main.h">
       <Filter>Universal</Filter>
@@ -121,33 +139,51 @@
       <Filter>Universal</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\gameComponents\baseObject.h">
-      <Filter>gameComponents</Filter>
+      <Filter>gameObject</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h">
-      <Filter>gameComponents</Filter>
+      <Filter>BaseEngine\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Component.h">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ComponentCreator.h">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Composition.h">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Transform.h">
+      <Filter>Systems\physics\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Engine.h">
+      <Filter>BaseEngine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ComponentTypeIds.h">
+      <Filter>BaseEngine\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp">
       <Filter>luaRunner</Filter>
@@ -173,20 +209,26 @@
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp">
       <Filter>GameState</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\main.cpp">
-      <Filter>Universal</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\logger\logger.cpp">
       <Filter>logger</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp">
-      <Filter>engineGraphics</Filter>
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\gameComponents\baseObject.cpp">
-      <Filter>gameComponents</Filter>
+      <Filter>gameObject</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp">
-      <Filter>gameComponents</Filter>
+      <Filter>BaseEngine\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Composition.cpp">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Transform.cpp">
+      <Filter>Systems\physics\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\main.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

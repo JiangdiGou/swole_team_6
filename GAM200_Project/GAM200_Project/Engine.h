@@ -21,5 +21,8 @@ Header for libraries and engine includes
 //Engine Includes
 
 #include "engineGraphics\Graphics.h"
+#include "Composition.h"
+#include "Transform.h"
+#include "./gameComponents/objFactory.h"
 
 #endif

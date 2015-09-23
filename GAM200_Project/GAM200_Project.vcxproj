@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GAM200_Project\Component.h" />
+    <ClInclude Include="GAM200_Project\ComponentCreator.h" />
+    <ClInclude Include="GAM200_Project\ComponentTypeIds.h" />
+    <ClInclude Include="GAM200_Project\Composition.h" />
     <ClInclude Include="GAM200_Project\Engine.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h" />
@@ -41,11 +45,13 @@
     <ClInclude Include="GAM200_Project\physicsLib\vector2d.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h" />
+    <ClInclude Include="GAM200_Project\Transform.h" />
     <ClInclude Include="GAM200_Project\Utilities.h" />
     <ClInclude Include="GAM200_Project\_EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\Client.cpp" />
+    <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp" />
@@ -62,8 +68,11 @@
     <ClCompile Include="GAM200_Project\logger\logger.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp" />
-    <ClCompile Include="GAM200_Project\main.cpp" />
+    <ClCompile Include="GAM200_Project\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp" />
+    <ClCompile Include="GAM200_Project\Transform.cpp" />
     <ClCompile Include="GAM200_Project\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>

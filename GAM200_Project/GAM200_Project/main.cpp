@@ -17,7 +17,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
 void falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
 {
-  //Openas a console for debugging and testing 
+  //Opens a console for debugging and testing 
   AllocConsole();
   freopen("CONOUT$", "w", stdout);
 

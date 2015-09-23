@@ -11,4 +11,6 @@ public:
   objFactory();
   gameObject* makeObject(std::string Name);
   void destroyObject(int killID);
+
 };
+extern objFactory * FACTORY;
