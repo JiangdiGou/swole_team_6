@@ -1,4 +1,4 @@
-#include "Precompiled.h"
+//#include "our precompile header.h"
 #include "primitive.h"
 
 ////// PRIMITIVE //////
