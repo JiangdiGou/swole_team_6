@@ -1,8 +1,8 @@
-#include "other stuff"
+//#include "other stuff"
 #include "PhysicsManager.h"
-#include "game setting file?"
+//#include "game setting file?"
 #include "Resolution.h"
-#include "math_utility.h"
+//#include "math_utility.h"
 
 PhysicsManager *physics = nullptr;
 

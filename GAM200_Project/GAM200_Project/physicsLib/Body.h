@@ -1,11 +1,12 @@
 #pragma once
 #include "math_utility.h"
-#include "our entity header file"
+//#include "our entity header file"
 #include <vector> //for the vector of trigger callbacks
 #include <utility> //pair
+#include "BaseEngine/Composition/Component.h"
 //#include "vector2d.h"
 #include "PhysicsManager.h"
-class RigidBody : public IComponent
+class RigidBody : public GameComponent
 {
 public:
   
