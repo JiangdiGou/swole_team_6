@@ -1,17 +1,17 @@
 #pragma once
-#include "all the header" //Math/Vec3.h
-
-class Transform : public IComponent
+//#include "all the header" //Math/Vec3.h
+#include "../Composition.h"
+class Transform : public GameComponent
 {
 public:
 	friend class RigidBody;
-	Transform(IEntity* Owner = NULL, Vector3 pos = Vector3(), Vector3 rot = Vector3(),
+	Transform(GameObjectComposition* Owner = NULL, Vector3 pos = Vector3(), Vector3 rot = Vector3(),
 		Vector3 scal = Vector3());
 	~Transform() override;
 
 	//Inherited Methods
-	bool Initialize() override;
-	void Update(float dt) override;
+	void Initialize() override;
+	void Update() override;
 	void Release() override;
 
 	//Getters

@@ -1,7 +1,7 @@
-#include "our header files"
+//#include "our header files"
 #include "Body.h"
 #include "Transform.h"
-
+#include "../Composition.h"
 float Random(float low, float high)
 {
   float a = (float)rand();
@@ -10,8 +10,8 @@ float Random(float low, float high)
   return a;
 }
 
-RigidBody::RigidBody(IEntity* Owner, Primitive *shape) : 
-  IComponent(Component_Type::CT_Body, Owner), bodyShape(shape->Clone())
+RigidBody::RigidBody(GameObjectComposition* Owner) : 
+  IComponent(Component_Type::CT_Body, Owner),)
 {
   bodyShape->body = this;
   bodyShape->radius = shape->radius;

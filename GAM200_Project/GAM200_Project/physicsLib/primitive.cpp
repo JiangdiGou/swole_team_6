@@ -1,9 +1,10 @@
 //#include "our precompile header.h"
 #include "primitive.h"
+//#include "../Component.h"
 
 ////// PRIMITIVE //////
-Primitive::Primitive(GameObject parent, ShapeID pID, Component_Type type)
-	:IComponent(type, parent), Id(pID)
+Primitive::Primitive(GameObjectComposition parent, ShapeID pID,ComponentTypeId type)
+	:GameComponent(type, parent), Id(pID)
 {
 	radius = 0.0f;
 	active = true; //false;
@@ -33,7 +34,7 @@ void Primitive::Release(){}
 
 ////// CIRCLE //////
 Circle::Circle()
-	: Primitive(nullptr, pCircle, Component_Type::CT_CircleCollider)
+	: Primitive(nullptr, pCircle, ComponentTypeId::CT_CircleCollider)
 {
 
 }
@@ -58,7 +59,7 @@ void Circle::Release(){}
 
 ////// AABB //////
 AABB::AABB()
-	:Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
+	:Primitive(Owner, pAABB, ComponentTypeId::CT_BoxCollider)
 {
 }
 

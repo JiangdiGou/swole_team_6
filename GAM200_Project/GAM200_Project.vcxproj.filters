@@ -162,6 +162,18 @@
     <ClInclude Include="GAM200_Project\ComponentTypeIds.h">
       <Filter>BaseEngine\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\PhysicsManager.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Body.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Resolution.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\primitive.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -229,6 +241,18 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\main.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\PhysicsManager.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Body.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp">
+      <Filter>Systems\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

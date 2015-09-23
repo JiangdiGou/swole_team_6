@@ -4,64 +4,61 @@
 #include "ComponentTypeIds.h"
 #include <vector>//TO BE MOVED - container header
 
-namespace Framework
+//Game object ID type
+typedef unsigned int GOCId;
+
+//Vector of components, used for storage of components
+typedef std::vector<GameComponent*> ComponentArray;
+
+class GameObjectComposition
 {
-  //Game object ID type
-  typedef unsigned int GOCId;
+public:
+friend class objFactory;
 
-  //Vector of components, used for storage of components
-  typedef std::vector<GameComponent*> ComponentArray;
+GameComponent* GetComponent(ComponentTypeId typeId);
 
-  class GameObjectComposition
-  {
-  public:
-    friend class objFactory;
+///Type safe way of accessing components.
+template<typename type>
+type* GetComponetType(ComponentTypeId typeId);
 
-    GameComponent* GetComponent(ComponentTypeId typeId);
+void Initialize();
 
-    ///Type safe way of accessing components.
-    template<typename type>
-    type* GetComponetType(ComponentTypeId typeId);
+void Update();
 
-    void Initialize();
+void Destroy();
 
-    void Update();
+void AddComponent(ComponentTypeId typeId, GameComponent* component);
 
-    void Destroy();
+//Game Obj's Id
+GOCId GetId() { return ObjectId; }
+private:
 
-    void AddComponent(ComponentTypeId typeId, GameComponent* component);
+//Sorted array of components.
+ComponentArray Components;
+typedef ComponentArray::iterator ComponentIt;
 
-    //Game Obj's Id
-    GOCId GetId() { return ObjectId; }
-  private:
+//A unique id for each object used to safely reference 
+//GOCs.
+GOCId ObjectId;
 
-    //Sorted array of components.
-    ComponentArray Components;
-    typedef ComponentArray::iterator ComponentIt;
+//The constructor and destructor are private to prevent a user
+//from creating or deleting an object directly they must use the Destroy function
 
-    //A unique id for each object used to safely reference 
-    //GOCs.
-    GOCId ObjectId;
+//FACTORY ONLY: Use CreateEmptyComposition on factory instead
+GameObjectComposition();
+//FACTORY ONLY: Use Destroy instead, factory will call the destructor correctly
+~GameObjectComposition();
 
-    //The constructor and destructor are private to prevent a user
-    //from creating or deleting an object directly they must use the Destroy function
+};
 
-    //FACTORY ONLY: Use CreateEmptyComposition on factory instead
-    GameObjectComposition();
-    //FACTORY ONLY: Use Destroy instead, factory will call the destructor correctly
-    ~GameObjectComposition();
+typedef GameObjectComposition GOC;
 
-  };
-
-  typedef GameObjectComposition GOC;
-
-  //type safe way of accessing components
-  //Transform* transform = object->has(Transform);
-  template<typename type>
-  type * GameObjectComposition::GetComponetType(ComponentTypeId typeId)
-  {
-    return static_cast<type*>(GetComponent(typeId));
-  }
+//type safe way of accessing components
+//Transform* transform = object->has(Transform);
+template<typename type>
+type * GameObjectComposition::GetComponetType(ComponentTypeId typeId)
+{
+return static_cast<type*>(GetComponent(typeId));
 }
 
 #endif

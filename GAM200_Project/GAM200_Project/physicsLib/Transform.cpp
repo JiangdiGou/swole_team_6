@@ -3,7 +3,8 @@
 #include"our entity header"
 #include "math_utility.h"
 
-Transform::Transform(IEntity* Owner, Vector3 pos, Vector3 rot, Vector3 scal) :
+
+Transform::Transform(GameObjectComposition* Owner, Vector3 pos, Vector3 rot, Vector3 scal) :
 IComponent(Component_Type::CT_TransformComponent, Owner), position(pos),
 rotation(rot), scale(scal)
 {
@@ -13,12 +14,11 @@ Transform::~Transform()
 {
 }
 
-bool Transform::Initialize()
+void Transform::Initialize()
 {
-	return true;
 }
 
-void Transform::Update(float dt)
+void Transform::Update()
 {
 }
 

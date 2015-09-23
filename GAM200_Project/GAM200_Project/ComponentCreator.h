@@ -1,8 +1,6 @@
 #ifndef COMPONENTCREATOR_H
 #define COMPONENTCREATOR_H
 #include "ComponentTypeIds.h"
-namespace Framework
-{
   class GameComponent;
 
   //Game Component Creator Interface.
@@ -35,8 +33,6 @@ namespace Framework
       return new type();
     }8
   };
-
-};
 
 //Register component macro
 #define RegisterComponent(type) FACTORY->AddComponentCreator( #type, new ComponentCreatorType<type>( CT_##type ) );

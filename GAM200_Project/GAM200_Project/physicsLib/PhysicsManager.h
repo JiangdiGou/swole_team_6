@@ -14,7 +14,7 @@ public:
 	std::vector<Primitive *>colliders; // Holds the colliders
 
 	// Overloaded methods
-	bool Initialize() override;
+	void Initialize() override;
 	void Update(float dt) override;
 	void Shutdown() override;
 

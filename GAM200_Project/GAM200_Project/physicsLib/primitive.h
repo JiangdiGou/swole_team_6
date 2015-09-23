@@ -3,9 +3,9 @@
 #include "Body.h"
 #include "Resolution.h"
 #include "Transform.h"
+#include "../Composition.h"
 
-
-class Primitive : public IComponent
+class Primitive
 {
 public:
 	enum ShapeID
@@ -24,13 +24,13 @@ public:
 	bool active;      // True for search
 
 
-	bool Initialize() override;
-	void Update(float dt) override;
-	void Release() override;
+	void Initialize();
+	void Update(float dt);
+	void Release();
 
 	//Primitive();
 	//Primitive(IEntity* Owner);
-	Primitive(GameObject parent, ShapeID pID, Component_Type type);
+	Primitive(GameObjectComposition parent, ShapeID pID, ComponentTypeId type);
 
 	virtual ~Primitive() = 0;
 	virtual Primitive *Clone(void) const = 0;
@@ -43,12 +43,12 @@ class Circle : public Primitive
 public:
 
 	Circle();
-	Circle(GameObject Owner);
+	Circle(GameObjectComposition Owner);
 	~Circle();
 
-	bool Initialize() override;
-	void Update(float dt) override;
-	void Release() override;
+	void Initialize() ;
+	void Update(float dt);
+	void Release();
 
 	Primitive *Clone(void) const
 	{
@@ -68,12 +68,12 @@ class AABB : public Primitive
 {
 public:
 	AABB();
-	AABB(GameObject Owner);
+	AABB(GameObjectComposition Owner);
 	~AABB();
 
-	bool Initialize() override;
-	void Update(float dt) override;
-	void Release() override;
+	void Initialize() ;
+	void Update(float dt) ;
+	void Release() ;
 
 	Primitive *Clone(void) const
 	{
