@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include "Body.h"
-#include "manifold.h"
+#include "Resolution.h"
 #include "Transform.h"
 
 
