@@ -15,6 +15,6 @@ enum ComponentTypeId
 	//Max
 	CT_MaxComponents,
 	CT_CircleCollider,
-	CT_BoxCollider
+	CT_BoxCollider,
 };
 #endif

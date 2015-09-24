@@ -1,7 +1,7 @@
 //#include "our header files"
 #include "Body.h"
 #include "Transform.h"
-#include "../Composition.h"
+//#include "../Composition.h"
 float Random(float low, float high)
 {
   float a = (float)rand();
@@ -10,8 +10,8 @@ float Random(float low, float high)
   return a;
 }
 
-RigidBody::RigidBody(GameObjectComposition* Owner) : 
-  IComponent(Component_Type::CT_Body, Owner),)
+RigidBody::RigidBody(GameObjectComposition* Owner, Primitive *shape) :
+GameComponent(ComponentTypeId::CT_Body, Owner), bodyShape(shape->Clone())
 {
   bodyShape->body = this;
   bodyShape->radius = shape->radius;
@@ -188,17 +188,17 @@ void RigidBody::AddForce(const Vector2 &force)
   forceAccum += force;
 }
 
-//void RigidBody::SetStatic(void)
-//{
-//  // Sets the object to static
-//  isStatic = true;
-//
-//  mass = 0.0f;
-//  invMass = 0.0f;
-//  inertia = 0.0f;
-//  invInertia = 0.0f;
-//  
-//}
+void RigidBody::SetStatic(void)
+{
+  // Sets the object to static
+  isStatic = true;
+
+  mass = 0.0f;
+  invMass = 0.0f;
+  inertia = 0.0f;
+  invInertia = 0.0f;
+  
+}
 
 void RigidBody::ApplyImpulse(const Vector2& impulse, const Vec2D& contactVec)
 {

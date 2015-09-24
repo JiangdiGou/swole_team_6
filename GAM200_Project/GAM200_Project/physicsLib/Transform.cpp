@@ -1,12 +1,10 @@
-#include "our precompiled header"
+//#include "our precompiled header"
 #include"Transform.h"
-#include"our entity header"
-#include "math_utility.h"
+#include"../Composition.h"
 
 
 Transform::Transform(GameObjectComposition* Owner, Vector3 pos, Vector3 rot, Vector3 scal) :
-IComponent(Component_Type::CT_TransformComponent, Owner), position(pos),
-rotation(rot), scale(scal)
+GameComponent(ComponentTypeId::CT_Transform, Owner), position(pos),rotation(rot), scale(scal)
 {
 }
 

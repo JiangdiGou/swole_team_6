@@ -3,7 +3,7 @@
 //#include "our entity header file"
 #include <vector> //for the vector of trigger callbacks
 #include <utility> //pair
-#include "../Component.h"
+#include "../Composition.h"
 //#include "vector2d.h"
 #include "PhysicsManager.h"
 class RigidBody : public GameComponent

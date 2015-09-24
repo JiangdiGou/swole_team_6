@@ -1,6 +1,7 @@
 #pragma once
 //#include "all the header" //Math/Vec3.h
 #include "../Composition.h"
+#include "math_utility.h"
 class Transform : public GameComponent
 {
 public:
