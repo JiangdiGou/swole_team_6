@@ -7,7 +7,10 @@ class GameData : ZilchComponent
     var CONST_RCritChance:Real = 0.1;//10% crit chance
     var CONST_REnergyBoost:Real = 0.2;//Current combo * this = bonus energy/hit
     
-    //Progression Powers active
+    //The next level to load once the current level is done.
+    var NextLevel:Level = null;
+    
+    //Progression Powers unlocked
     var BPCrane:Boolean = false;//Silver Crane
     var BPBoar:Boolean = false;//Ruby Boar
     var BPSerpent:Boolean = false;//Sapphire Serpent
@@ -17,6 +20,11 @@ class GameData : ZilchComponent
     var BPDoubleJump:Boolean = false;
     var BPHealthBoost:Boolean = false;
     var BPDamageBoost:Boolean = false;
+    
+    //Scrolls active in each level (used by ScrollSelectButtons and ScrollSelect)
+    var IScroll0:Integer = 0;
+    var IScroll1:Integer = 0;
+    var IScroll2:Integer = 0;
     
     //Villager Powers active
     var BVSturdy:Boolean = false;//Temp no stun or knock <lvl1>

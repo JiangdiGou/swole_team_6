@@ -97,7 +97,7 @@ Level =
 		ScrollLoader = 
 		{
 			string TigerScroll = "55c16e8a571aa798:TigerScroll",
-			string DragonScroll = "",
+			string DragonScroll = "55c00e1150af24f1:DragonScroll",
 			string CraneScroll = "",
 		},
 	},

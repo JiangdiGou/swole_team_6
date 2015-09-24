@@ -1,0 +1,61 @@
+class GoToLevel : ZilchComponent
+{
+    //Boolean to see if this script is called externally. If True, it doesn't use mouse events
+    [Property]
+    var IsExternal:Boolean = false;
+    //If this button should go to the level stored in GameData. Otherwise it goes to Level_Name
+    [Property]
+    var GoToGameDataLevel:Boolean = false;
+    //the level that is sent to be stored in GameData. Only used if we need to go to an in-between level like PowerSelect
+    [Property]
+    var GameData_Level:Level = null;
+    //the level that this button goes to
+    [Property]
+    var Level_Name:Level = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        if(this.IsExternal == false)
+        {
+            Zero.Connect(this.Owner, Events.MouseDown, this.MouseDown);
+        }
+    }
+    
+    function MouseDown(event : ViewportMouseEvent)
+    {
+        if(this.GoToGameDataLevel)
+        {
+            this.Space.LoadLevel(this.GameSession.GameData.NextLevel);
+        }
+        else
+        {
+            //If the in-between level isn't null, send it to GameData
+            if(this.GameData_Level != null)
+            {
+                this.GameSession.GameData.NextLevel = this.GameData_Level;
+            }
+            
+            //Loads the designated level
+            this.Space.LoadLevel(this.Level_Name);
+        }
+    }
+    
+    function ExternalGoTo()
+    {
+        if(this.GoToGameDataLevel)
+        {
+            this.Space.LoadLevel(this.GameSession.GameData.NextLevel);
+        }
+        else
+        {
+            //If the in-between level isn't null, send it to GameData
+            if(this.GameData_Level != null)
+            {
+                this.GameSession.GameData.NextLevel = this.GameData_Level;
+            }
+            
+            //Loads the designated level
+            this.Space.LoadLevel(this.Level_Name);
+        }
+    }
+}

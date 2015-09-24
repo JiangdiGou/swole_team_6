@@ -17,46 +17,78 @@ class ScrollSelectButtons : ZilchComponent
 
     function OnMouseDown(event : MouseEvent)
     {
+        //If this scroll isn't already selected by the player
         if(this.BIsSelected == false)
         {
+            //Checks if there are already 3 scrolls selected
             if(this.LevelSettings.PowerActivator.INumScrolls < 3)
             {
+                //Tells the PowerActivator that another scroll is active
                 this.LevelSettings.PowerActivator.INumScrolls += 1;
+                //Sets this scroll to selected
                 this.BIsSelected = true;
-                this.ChangeBools();
+                //Calls the ChangeData function to save info in GameData
+                this.ChangeData(true);
+                //Increases this scroll's size to be very visibly selected
                 this.Owner.Transform.Scale = Real3(7.2, 2, 2);
+                
+            Console.WriteLine("ScrollSelect.SetColor Crane color: `this.Owner.Sprite.Color`");
             }
         }
+        //If this scroll is already selected, clicking again deselects it
         else
         {
+            //Tells the PowerActivator that the player can select another scroll
             this.LevelSettings.PowerActivator.INumScrolls -= 1;
+            //Sets this scroll to not be selected
             this.BIsSelected = false;
-            this.ChangeBools();
+            //Updates the data in GameData
+            this.ChangeData(false);
+            //Decreases this scroll's size to go back to normal
             this.Owner.Transform.Scale = Real3(5.5, 1.5, 1.5);
         }
     }
     
-    function ChangeBools()
+    //Sets the ID number of what each active scroll is in each level
+    function ChangeData(bIncreasing_:Boolean)
     {
-        if(this.ScrollNum == 1)
+        //If this scroll is being selected
+        if(bIncreasing_)
         {
-            this.GameSession.GameData.BPCrane = this.BIsSelected;
+            //If this is the first scroll activated
+            if(this.LevelSettings.PowerActivator.INumScrolls == 1)
+            {
+                this.GameSession.GameData.IScroll0 = this.ScrollNum;
+            }
+            //If this is the second scroll activated
+            else if(this.LevelSettings.PowerActivator.INumScrolls == 2)
+            {
+                this.GameSession.GameData.IScroll1 = this.ScrollNum;
+            }
+            //If this is the third (last) scroll activated
+            else if(this.LevelSettings.PowerActivator.INumScrolls == 3)
+            {
+                this.GameSession.GameData.IScroll2 = this.ScrollNum;
+            }
         }
-        else if(this.ScrollNum == 2)
+        //If this scroll is being deselected
+        else
         {
-            this.GameSession.GameData.BPBoar = this.BIsSelected;
-        }
-        else if(this.ScrollNum == 3)
-        {
-            this.GameSession.GameData.BPSerpent = this.BIsSelected;
-        }
-        else if(this.ScrollNum == 4)
-        {
-            this.GameSession.GameData.BPTiger = this.BIsSelected;
-        }
-        else if(this.ScrollNum == 5)
-        {
-            this.GameSession.GameData.BPDragon = this.BIsSelected;
+            //If the first scroll is deactivated
+            if(this.LevelSettings.PowerActivator.INumScrolls == 0)
+            {
+                this.GameSession.GameData.IScroll0 = this.ScrollNum;
+            }
+            //If the second scroll is deactivated
+            else if(this.LevelSettings.PowerActivator.INumScrolls == 1)
+            {
+                this.GameSession.GameData.IScroll1 = this.ScrollNum;
+            }
+            //If the third (last) scroll is deactivated
+            else if(this.LevelSettings.PowerActivator.INumScrolls == 2)
+            {
+                this.GameSession.GameData.IScroll2 = this.ScrollNum;
+            }
         }
     }
 }

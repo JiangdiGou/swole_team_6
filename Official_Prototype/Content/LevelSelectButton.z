@@ -1,23 +1,50 @@
 class LevelSelectButton : ZilchComponent
 {
+    //boolean that determines if this is the first level active
+    [Property]
+    var BIsFirst:Boolean = false;
     [Property]
     var ISelected:Integer = 0;
     
     function Initialize(init : CogInitializer)
     {
+        //If this is the first level, moves hilight to it
+        if(this.BIsFirst)
+        {
+            this.MoveHilight();
+        }
+        
         Zero.Connect(this.Owner, Events.MouseDown, this.MouseDown);
     }
     
     function MouseDown(event : ViewportMouseEvent)
     {
-        if(this.ISelected > 0)
+        var iHilightX:Real = this.Space.FindObjectByName("LevelHilight").Transform.Translation.X;
+        var iHilightY:Real = this.Space.FindObjectByName("LevelHilight").Transform.Translation.Y;
+        var iOwnerX:Real = this.Owner.Transform.Translation.X;
+        var iOwnerY:Real = this.Owner.Transform.Translation.Y;
+        
+        Console.WriteLine("Owner X: `iOwnerX`, Hilight X: `iHilightX`");
+        Console.WriteLine("Owner Y: `iOwnerY`, Hilight Y: `iHilightY`");
+        
+        //Checks if this button has the hilighter behind it, indicating that it's selected
+        if(iOwnerX == iHilightX && iOwnerY == iHilightY)
         {
-            this.LevelSettings.LevelSelect.ISelected = this.ISelected;
-            this.LevelSettings.LevelSelect.UpdateSelector();
+            this.Owner.GoToLevel.ExternalGoTo();
         }
+        //If it isn't selected, moves the hilighter to it
         else
         {
-            Console.WriteLine("Go to main Menu");
+            this.MoveHilight();
         }
+    }
+    
+    //Moves the level hilighter to this button
+    function MoveHilight()
+    {
+        var iButtonX:Real = this.Owner.Transform.Translation.X;
+        var iButtonY:Real = this.Owner.Transform.Translation.Y;
+        
+        this.Space.FindObjectByName("LevelHilight").Transform.Translation = Real3(iButtonX, iButtonY, -0.1);
     }
 }

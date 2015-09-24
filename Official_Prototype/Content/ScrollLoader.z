@@ -1,46 +1,94 @@
 //Implimented by Josh Painter
 class ScrollLoader : ZilchComponent
 {
+    //Levels to load based on the active scroll in ScrollSelect
+    [Property]
+    var CraneScroll: Level = null;
+    [Property]
+    var BoarScroll: Level = null;
+    [Property]
+    var SerpentScroll: Level = null;
     [Property]
     var TigerScroll: Level = null;
     [Property]
     var DragonScroll: Level = null;
-    [Property]
-    var CraneScroll: Level = null;
     
     var ScrollToLoad : Level = null;
-    
     var ScrollSpace: Space = null;
     
-    function Initialize(init : CogInitializer)
-    {
-        Zero.Connect(this.GameSession, "ScrollSelectEvent", this.OnScrollSelectEvent);
-    }
-
-    function OnScrollSelectEvent(scrollSelectEvent : ScrollSelectEvent)
+    //Function Called by ScrollSelect
+    function ScrollActivate(iScrollNum_:Integer)
     {
         //When this is activated, it creates a new space
-        this.ScrollSpace = this.GameSession.CreateNamedSpace("Scrollpace", Archetype.Find("Space"));
-        
-        //Use as much or as little information passed by the event
-        var scrollNum = scrollSelectEvent.NumberToSend;
+        this.ScrollSpace = this.GameSession.CreateNamedSpace("ScrollSpace", Archetype.Find("Space"));
         
         
-        /*  0 = Tiger,
+        /*  0 = Nothing
             1 = Crane,
-            2 = Dragon 
+            2 = Boar,
+            3 = Serpent,
+            4 = Tiger,
+            5 = Dragon 
         */
-        if(scrollNum == 0)
+        if(iScrollNum_ == 1)
         {
-            this.ScrollToLoad = this.TigerScroll;
+            //Makes sure the crane scroll level is loaded
+            if(this.CraneScroll != null)
+            {
+                this.ScrollToLoad = this.CraneScroll;
+            }
+            else
+            {
+                Console.WriteLine("ScrollLoader.ScrollActivate Crane Scroll = Null");
+            }
         }
-        else if(scrollNum == 1)
+        else if(iScrollNum_ == 2)
         {
-            this.ScrollToLoad = this.CraneScroll;
+            //Makes sure the boar scroll level is loaded
+            if(this.BoarScroll != null)
+            {
+                this.ScrollToLoad = this.BoarScroll;
+            }
+            else
+            {
+                Console.WriteLine("ScrollLoader.ScrollActivate Boar Scroll = Null");
+            }
         }
-        else if(scrollNum == 2)
+        else if(iScrollNum_ == 3)
         {
-            this.ScrollToLoad = this.DragonScroll;
+            //Makes sure the serpent scroll level is loaded
+            if(this.SerpentScroll != null)
+            {
+                this.ScrollToLoad = this.SerpentScroll;
+            }
+            else
+            {
+                Console.WriteLine("ScrollLoader.ScrollActivate Serpent Scroll = Null");
+            }
+        }
+        else if(iScrollNum_ == 4)
+        {
+            //Makes sure the tiger scroll level is loaded
+            if(this.TigerScroll != null)
+            {
+                this.ScrollToLoad = this.TigerScroll;
+            }
+            else
+            {
+                Console.WriteLine("ScrollLoader.ScrollActivate Tiger Scroll = Null");
+            }
+        }
+        else if(iScrollNum_ == 5)
+        {
+            //Makes sure the dragon scroll level is loaded
+            if(this.DragonScroll != null)
+            {
+                this.ScrollToLoad = this.DragonScroll;
+            }
+            else
+            {
+                Console.WriteLine("ScrollLoader.ScrollActivate Dragon Scroll = Null");
+            }
         }
         
         //load the appropriate scroll

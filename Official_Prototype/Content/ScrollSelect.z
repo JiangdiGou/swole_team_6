@@ -1,14 +1,3 @@
-//Implimented by Josh Painter
-class ScrollSelectEvent : Event
-{
-    // Remember that member variable names MUST be capitalized in Zilch
-    var NumberToSend : Integer = 0;
-    //constructor() : base()
-    //{
-    //}
-}
-
-
 class ScrollSelect : ZilchComponent
 {
     //Integer that determines what this scroll's ID number is (0,1,2)
@@ -16,8 +5,17 @@ class ScrollSelect : ZilchComponent
     var IScrollNumber:Integer = 0;
     [Property]
     var ICooldownTime:Integer = 100;
-    //Integer that says what scroll is currently selected (0,1,2)
+    
+    //Integer that says what scroll is currently selected on the HUD (0,1,2)
     var IScrollSelected:Integer = 0;
+    //Integer that determines which animal scroll will be used
+    //0 - nothing
+    //1 - Crane
+    //2 - Boar
+    //3 - Serpent
+    //4 - Tiger
+    //5 - Dragon
+    var IGameDataScroll:Integer = 0;
     //Number of frames until the scroll is usable again
     var IScrollCooldown:Integer = 0;
     //Boolean that says if this scroll is currently usable
@@ -25,6 +23,20 @@ class ScrollSelect : ZilchComponent
     
     function Initialize(init : CogInitializer)
     {
+        //Determines which scroll power to call when this is used
+        this.SetScroll();
+        this.SetColor();
+        
+        //Makes it so that if this scroll is nothing, it can't accidentally be used
+        if(this.IGameDataScroll == 0)
+        {
+            this.BCanUse = false;
+        }
+        else
+        {
+            this.BCanUse = true;
+        }
+        
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
         Zero.Connect(this.Space, Events.MouseScroll, this.ChangeScroll);
         Zero.Connect(this.Space, Events.RightMouseDown, this.UseScroll);
@@ -45,6 +57,58 @@ class ScrollSelect : ZilchComponent
                 //Updates the sprite to be more visible
                 this.Owner.Sprite.Color += Real4(0,0,0,0.5);
             }
+        }
+    }
+    
+    //Sets which scroll ability is used when activated
+    function SetScroll()
+    {
+        if(this.IScrollNumber == 0)
+        {
+            this.IGameDataScroll = this.GameSession.GameData.IScroll0;
+        }
+        else if(this.IScrollNumber == 1)
+        {
+            this.IGameDataScroll = this.GameSession.GameData.IScroll1;
+        }
+        else
+        {
+            this.IGameDataScroll = this.GameSession.GameData.IScroll2;
+        }
+    }
+    
+    //Sets the color of this scroll
+    function SetColor()
+    {
+        //No scroll, invisible
+        if(this.IGameDataScroll == 0)
+        {
+            this.Owner.Sprite.Color = Real4(0, 0, 0, 0);
+        }
+        //Crane scroll, silver
+        else if(this.IGameDataScroll == 1)
+        {
+            this.Owner.Sprite.Color = Real4(0.78, 0.78, 0.78, 1);
+        }
+        //Boar scroll, red
+        else if(this.IGameDataScroll == 2)
+        {
+            this.Owner.Sprite.Color = Real4(1, 0.12, 0.12, 1);
+        }
+        //Serpent scroll, blue
+        else if(this.IGameDataScroll == 3)
+        {
+            this.Owner.Sprite.Color = Real4(0, 0.2907, 0.855, 1);
+        }
+        //Tiger scroll, yellow
+        else if(this.IGameDataScroll == 4)
+        {
+            this.Owner.Sprite.Color = Real4(0.980392, 0.498039, 0, 1);
+        }
+        //Dragon scroll, green
+        else if(this.IGameDataScroll == 5)
+        {
+            this.Owner.Sprite.Color = Real4(0.269342, 0.69, 0.21735, 1);
         }
     }
     
@@ -79,26 +143,6 @@ class ScrollSelect : ZilchComponent
         this.UpdatePosition();
     }
     
-    //Called when the player right clicks and activates the selected scroll
-    function UseScroll(event : MouseEvent)
-    {
-        //Checks if the scroll is used, and if this particular scroll is selected
-        if(this.BCanUse && this.IScrollNumber == this.IScrollSelected)
-        {
-            //Sets the number of frames to be on cooldown
-            this.IScrollCooldown = this.ICooldownTime;
-            //makes this scroll unusable
-            this.BCanUse = false;
-            //makes the scroll transparent
-            this.Owner.Sprite.Color -= Real4(0,0,0,0.5);
-            
-            //send the event that a scroll was used
-            var scrollSelectEvent = new ScrollSelectEvent();
-            scrollSelectEvent.NumberToSend = this.IScrollSelected;
-            this.GameSession.DispatchEvent("ScrollSelectEvent", scrollSelectEvent);
-        }
-    }
-    
     //Called by ChangeScroll to update the position and size of the scrolls
     function UpdatePosition()
     {
@@ -116,6 +160,23 @@ class ScrollSelect : ZilchComponent
         {
             this.Owner.Transform.Translation = Real3(16.5, 9.5, 0);
             this.Owner.Transform.Scale = Real3(4, 1, 0);
+        }
+    }
+    
+    //Called when the player right clicks and activates the selected scroll
+    function UseScroll(event : MouseEvent)
+    {
+        //Checks if the scroll is used, and if this particular scroll is selected
+        if(this.BCanUse && this.IScrollNumber == this.IScrollSelected)
+        {
+            //Sets the number of frames to be on cooldown
+            this.IScrollCooldown = this.ICooldownTime;
+            //makes this scroll unusable
+            this.BCanUse = false;
+            //makes the scroll transparent
+            this.Owner.Sprite.Color -= Real4(0,0,0,0.5);
+            
+            this.Owner.ScrollLoader.ScrollActivate(this.IGameDataScroll);
         }
     }
 }

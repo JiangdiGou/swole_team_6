@@ -3,16 +3,16 @@ class ScrollReaction : ZilchComponent
     var IPlayerTime:Integer = 0;
     //The number of frames until the scroll fails
     [Property]
-    var ITimeLimit:Integer = 0;
+    var ITimeLimit:Integer = 200;
     //The number of frames that the player should beat for GOLD Time
     [Property]
-    var IGoldTime:Integer = 0;
+    var IGoldTime:Integer = 190;
     //The amount of energy that this scroll requires to use sucessfully
     [Property]
-    var IEnergyCost:Real = 0;
+    var IEnergyCost:Real = 20;
     //The amount of energy that is expended when failing
     [Property]
-    var IFailCost:Real = 0;
+    var IFailCost:Real = 10;
     
     function Initialize(init : CogInitializer)
     {

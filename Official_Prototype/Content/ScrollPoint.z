@@ -19,16 +19,27 @@ class ScrollPoint : ZilchComponent
     
     function Initialize(init : CogInitializer)
     {
+        //Calls the ActivatePoint function if this is the first point so it's more visible
+        if(this.BIsActive)
+        {
+            this.ActivatePoint();
+        }
         Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
     }
-
+    
+    function ActivatePoint()
+    {
+        this.BIsActive = true;
+        this.Owner.Transform.Scale = Real3(1,1,1);
+    }
+    
     function OnMouseEnter(event : MouseEvent)
     {
         //Checks if this point is active when moused over
-        if(this.BIsActive)// && event.Mouse.IsButtonDown(MouseButtons.Right))
+        if(this.BIsActive)
         {
             //Increases the scale, sets the color to black, and becomes a transparent circle
-            this.Owner.Transform.Scale = Real3(1, 1, 1);
+            //this.Owner.Transform.Scale = Real3(1, 1, 1);
             this.Owner.Sprite.Color = Real4(this.Owner.Sprite.Color.W/255,this.Owner.Sprite.Color.X/255,this.Owner.Sprite.Color.Y/255,0.5);
             this.Owner.Sprite.SpriteSource = this.Circle;
             
@@ -42,7 +53,7 @@ class ScrollPoint : ZilchComponent
             //If not, tells the next scroll point to become active
             else
             {
-                this.NextPoint.Cog.ScrollPoint.BIsActive = true;
+                this.NextPoint.Cog.ScrollPoint.ActivatePoint();
                 this.PathSprite.Cog.Sprite.Color = Real4(1,1,1,0.7);
             }
         }

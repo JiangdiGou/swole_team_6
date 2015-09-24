@@ -10,9 +10,4 @@ class HUDCreator : ZilchComponent
         this.HUDSpace = this.GameSession.CreateNamedSpace("HUDSpace", Archetype.Find("Space"));
         this.HUDSpace.LoadLevel(this.HUDLevel);
     }
-
-    function Destroyed()
-    {
-        //this.HUDSpace.Destroy();
-    }
 }
