@@ -1,8 +1,9 @@
 
 #include "Resolution.h"
-#include <algorithm>
-#include <math.h>
+//#include <algorithm>
+//#include <math.h>
 //#include "math_utility.h"
+#include "Precompiled.h"
 
 PhysicsMaterial::PhysicsMaterial()
 {
@@ -30,14 +31,14 @@ void Manifold::PreStep(float dt)
 	e = std::min(A->restitution, B->restitution);
 
 	// Calculate the static and dynamic friction
-	//staticFriction = std::sqrt( A->stFric * B->stFric );
-	//dynamicFriction = std::sqrt( A->dynFric * B->dynFric );
+	staticFriction = std::sqrt( A->stFric * B->stFric );
+	dynamicFriction = std::sqrt( A->dynFric * B->dynFric );
 
-	//staticFriction = std::sqrt(A->bodyshape->material.staticFriction *
-	//	B->bodyShape->material.staticFriction);
+	staticFriction = std::sqrt(A->bodyshape->material.staticFriction *
+		B->bodyShape->material.staticFriction);
 
-	//dynamicFriction = std::sqrt(A->bodyShape->material.dynamicFriction *
-	//	B->bodyShape->material.dynamicFriction);
+	dynamicFriction = std::sqrt(A->bodyShape->material.dynamicFriction *
+		B->bodyShape->material.dynamicFriction);
 
 	for (unsigned int i = 0; i < contactCount; ++i)
 	{
@@ -45,7 +46,7 @@ void Manifold::PreStep(float dt)
 		Vector2 radii_A = contact[i] - A->position;
 		Vector2 radii_B = contact[i] - B->position;
 
-		Vector2 relativeVel = B->velocity + Vec2D::CrossProduct(B->angularVelocity, radii_B) -
+		Vector2 relativeVel = B->velocity + Vector2::CrossProduct(B->angularVelocity, radii_B) -
 			A->velocity - Vector2::CrossProduct(A->angularVelocity, radii_A);
 
 		if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vec2D(0, *physics->GRAVITY))).Magnitude() + EPSILON)

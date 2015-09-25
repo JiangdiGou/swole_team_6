@@ -1,8 +1,9 @@
 #ifndef RESOLUTION_H
 #define RESOLUTION_H
 #include "Body.h"
-//#include "collision_narrow.h"
+#include "Collision.h"
 #include "primitive.h"
+
 
 struct Contact
 {
@@ -68,4 +69,4 @@ struct Manifold
 
 };
 
-#endif RESOLUTION_H
+#endif 

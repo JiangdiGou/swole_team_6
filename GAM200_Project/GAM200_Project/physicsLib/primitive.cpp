@@ -1,4 +1,5 @@
 //#include "our precompile header.h"
+#include "Precompiled.h"
 #include "primitive.h"
 //#include "../Component.h"
 
@@ -33,53 +34,53 @@ void Primitive::Release(){}
 
 
 ////// CIRCLE //////
-//Circle::Circle()
-//	: Primitive(nullptr, pCircle,
-//CT_CircleCollider)
-//{
-//
-//}
-//
-//Circle::Circle()
-//	//: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
-//{
-//}
-//
-//Circle::~Circle(){}
-//
-//void Circle::Initialize()
-//{
-//	pTrans = GetOwner()->has(Transform);
-//	physics->colliders.push_back(this);
-//	//return true;
-//}
-//
-//void Circle::Update(float dt){}
-//
-//void Circle::Release(){}
-//
-//////// AABB //////
-//AABB::AABB()
-//{
-//	GetOwner()->has(BoxCollider);
-//}
-//
-//AABB::AABB(GameObject Owner)
-//	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
-//{
-//
-//}
-//AABB::~AABB()
-//{
-//}
-//
-//void AABB::Initialize()
-//{
-//	pTrans = GetOwner()->has(Transform);
-//	physics->colliders.push_back(this);
-//	//return true;
-//}
-//void AABB::Update(float dt){}
-//
-//void AABB::Release(){}
+Circle::Circle()
+	: Primitive(nullptr, pCircle,
+ComponentTypeID_CT_CircleCollider)
+{
+
+}
+
+Circle::Circle()
+	//: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
+{
+}
+
+Circle::~Circle(){}
+
+void Circle::Initialize()
+{
+	pTrans = GetOwner()->has(Transform);
+	physics->colliders.push_back(this);
+	//return true;
+}
+
+void Circle::Update(float dt){}
+
+void Circle::Release(){}
+
+////// AABB //////
+AABB::AABB()
+{
+	GetOwner()->has(BoxCollider);
+}
+
+AABB::AABB(GameObject Owner)
+	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
+{
+
+}
+AABB::~AABB()
+{
+}
+
+void AABB::Initialize()
+{
+	pTrans = GetOwner()->has(Transform);
+	physics->colliders.push_back(this);
+	//return true;
+}
+void AABB::Update(float dt){}
+
+void AABB::Release(){}
 

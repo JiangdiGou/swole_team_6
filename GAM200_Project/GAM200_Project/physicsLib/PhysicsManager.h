@@ -3,6 +3,8 @@
 #define PHYSICSMANAGER_H
 #include "Body.h"
 #include "Resolution.h"
+#include "Collision.h"
+#include "Precompiled.h"
 // Physics system
 class PhysicsManager //: public ISystem
 {

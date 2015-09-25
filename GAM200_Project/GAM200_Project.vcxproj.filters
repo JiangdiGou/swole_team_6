@@ -171,6 +171,18 @@
     <ClInclude Include="GAM200_Project\physicsLib\Transform.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Collision.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\CollisionCheck.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Trigger.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Precompiled.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -249,6 +261,21 @@
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Collision.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\math_utility.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
   </ItemGroup>

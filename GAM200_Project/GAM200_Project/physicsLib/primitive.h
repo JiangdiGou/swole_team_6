@@ -2,8 +2,8 @@
 #define PRIMITIVE_H
 #include <cstdlib>
 #include "Body.h"
-#include "Resolution.h"
 #include "Transform.h"
+#include "Precompiled.h"
 #include "../Composition.h"
 
 class Primitive : GameComponent

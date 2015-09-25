@@ -8,17 +8,18 @@
 #include "../Composition.h"
 //#include "vector2d.h"
 //#include "PhysicsManager.h"
+#include "Trigger.h"
 class RigidBody : public GameComponent
 	{
 	public:
 
 		// Will make these variables private later
-		//friend class Primitive;
-		//friend class Circle;
-		//friend class AABB;
+		friend class Primitive;
+		friend class Circle;
+		friend class AABB;
 		//WE NEED A TRANSFORM COMPONET
 		Transform *pTrans;
-		//Primitive *bodyShape;
+		Primitive *bodyShape;
 		Vector2 position;       // Holds the position of the rigid body
 		Vector2 acceleration;
 		Vector2 velocity;       // Holds the linear velocity of the rigid body
@@ -31,9 +32,7 @@ class RigidBody : public GameComponent
 		float orientation;
 		float inertia;
 		float invInertia;
-		/* float friction;
-		float stFric;
-		float dynFric;*/
+
 
 		bool isStatic;          // True if object is static
 		// Set where rigidbody doesn't have a resolution
@@ -43,8 +42,8 @@ class RigidBody : public GameComponent
 
 
 		// WE NEED ENTITY FILE AND PRIMITIVE
-		//RigidBody(Primitive *shape);
-		RigidBody();
+		RigidBody(Primitive *shape);
+		//RigidBody();
 		~RigidBody();
 
 		void Initialize() override;
@@ -85,11 +84,11 @@ class RigidBody : public GameComponent
 
 
 		//Called in PhysicsManager when two objects collide
-		//void Trigger(IEntity *collObj);
-		//void AddTriggerCallback(CollisionDelegate *del);
+		void Trigger(GameObjectComposition *collObj);
+		void AddTriggerCallback(CollisionDelegate *del);
 		//Vector of pairs of collision delegate methods and the objects they're in.
 		//(Is all of this necessary? Could you just have one function since it's all the same name?)
-		//std::vector <CollisionDelegate *> triggerCallbacks;
+		std::vector <CollisionDelegate *> triggerCallbacks;
 	//private:
 		//PhysicsManager *physics;
 	};

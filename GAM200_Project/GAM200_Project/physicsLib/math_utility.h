@@ -1,6 +1,7 @@
 #ifndef MATH_UTILITY_H
 #define MATH_UTILITY_H
 #include <math.h>
+#include <algorithm>
 
 #define FLOAT_PI 3.14159265358979323846f
 
@@ -35,20 +36,7 @@ float radian_to_degrees(float radian)
 
 
 //MathFunctions
-//class MathF
-//{
-//public:
-//
-//	static float Lerp(float from, float to, float time);
-//	static float InverseLerp(float from, float to, float current);
-//	static float MoveTowards(float current, float target, float maxDelta);
-//	static bool FloatsAreEqual(float a, float b);
-//	static float maximum(float a, float b);
-//	static float minimum(float a, float b);
-//	static const float eps;
-//
-//
-//};
+
 class Vec2D
 {
 public:

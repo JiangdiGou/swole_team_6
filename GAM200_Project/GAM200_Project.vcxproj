@@ -37,16 +37,20 @@
     <ClInclude Include="GAM200_Project\physicsLib\Body.h" />
     <ClInclude Include="GAM200_Project\physicsLib\boolean.h" />
     <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\Collision.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\CollisionCheck.h" />
     <ClInclude Include="GAM200_Project\physicsLib\collision_detection.h" />
     <ClInclude Include="GAM200_Project\physicsLib\collision_detection_utility.h" />
     <ClInclude Include="GAM200_Project\physicsLib\math_utility.h" />
     <ClInclude Include="GAM200_Project\physicsLib\movement_collision_detection.h" />
     <ClInclude Include="GAM200_Project\physicsLib\PhysicsManager.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\Precompiled.h" />
     <ClInclude Include="GAM200_Project\physicsLib\primitive.h" />
     <ClInclude Include="GAM200_Project\physicsLib\range.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Resolution.h" />
     <ClInclude Include="GAM200_Project\physicsLib\shapes.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Transform.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\Trigger.h" />
     <ClInclude Include="GAM200_Project\physicsLib\vector2d.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h" />
@@ -76,10 +80,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Body.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\Collision.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\math_utility.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\PhysicsManager.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp" />
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp" />
     <ClCompile Include="GAM200_Project\Utilities.cpp" />
   </ItemGroup>
