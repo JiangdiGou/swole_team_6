@@ -13,6 +13,9 @@
 #include "instancedSprite.h"
 #include "FramerateController.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 HDC deviceContext;
 HGLRC renderingContext;
 
@@ -32,6 +35,15 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   //Openas a console for debugging and testing 
   AllocConsole();
   freopen("CONOUT$", "w", stdout);
+  
+  FT_Library ft;
+  if (FT_Init_FreeType(&ft))
+    std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+  
+  FT_Face face;
+  if (FT_New_Face(ft, "resources/fonts/OpenSans-Regular.ttf", 0, &face))
+    std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+
 
   //Stores the window being created
   HWND window; 
