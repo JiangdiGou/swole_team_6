@@ -1,11 +1,14 @@
-#pragma once
+#ifndef BODY_H
+#define BODY_H
+
 #include "math_utility.h"
 //#include "our entity header file"
 #include <vector> //for the vector of trigger callbacks
 #include <utility> //pair
 #include "../Composition.h"
 //#include "vector2d.h"
-#include "PhysicsManager.h"
+//#include "PhysicsManager.h"
+#include "Trigger.h"
 class RigidBody : public GameComponent
 	{
 	public:
@@ -29,9 +32,7 @@ class RigidBody : public GameComponent
 		float orientation;
 		float inertia;
 		float invInertia;
-		/* float friction;
-		float stFric;
-		float dynFric;*/
+
 
 		bool isStatic;          // True if object is static
 		// Set where rigidbody doesn't have a resolution
@@ -41,7 +42,8 @@ class RigidBody : public GameComponent
 
 
 		// WE NEED ENTITY FILE AND PRIMITIVE
-		RigidBody(GameObjectComposition* Owner, Primitive *shape);
+		RigidBody(Primitive *shape);
+		//RigidBody();
 		~RigidBody();
 
 		void Initialize() override;
@@ -82,11 +84,14 @@ class RigidBody : public GameComponent
 
 
 		//Called in PhysicsManager when two objects collide
-		//void Trigger(IEntity *collObj);
-		//void AddTriggerCallback(CollisionDelegate *del);
+		void Trigger(GameObjectComposition *collObj);
+		void AddTriggerCallback(CollisionDelegate *del);
 		//Vector of pairs of collision delegate methods and the objects they're in.
 		//(Is all of this necessary? Could you just have one function since it's all the same name?)
-		//std::vector <CollisionDelegate *> triggerCallbacks;
-
+		std::vector <CollisionDelegate *> triggerCallbacks;
+	//private:
+		//PhysicsManager *physics;
 	};
 //}
+
+#endif 

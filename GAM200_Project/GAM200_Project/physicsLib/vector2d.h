@@ -101,3 +101,4 @@ Vector2D project_vector(const Vector2D* project, const Vector2D* onto)
         return multiply_vector(onto, dot_product(project, onto) / d);
     return *onto;
 }
+

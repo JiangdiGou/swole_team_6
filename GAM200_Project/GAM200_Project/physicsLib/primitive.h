@@ -1,11 +1,12 @@
-#pragma once
+#ifndef PRIMITIVE_H
+#define PRIMITIVE_H
 #include <cstdlib>
 #include "Body.h"
-#include "Resolution.h"
 #include "Transform.h"
+#include "Precompiled.h"
 #include "../Composition.h"
 
-class Primitive
+class Primitive : GameComponent
 {
 public:
 	enum ShapeID
@@ -14,7 +15,7 @@ public:
 		pAABB,
 		pCount
 	};
-
+	
 	Transform *pTrans;// position
 	float radius;     // For circle
 	Vector2 halfSize; // halfsize
@@ -30,7 +31,7 @@ public:
 
 	//Primitive();
 	//Primitive(IEntity* Owner);
-	Primitive(GameObjectComposition parent, ShapeID pID, ComponentTypeId type);
+	Primitive( ShapeID pID, ComponentTypeId type);
 
 	virtual ~Primitive() = 0;
 	virtual Primitive *Clone(void) const = 0;
@@ -71,6 +72,7 @@ public:
 	AABB(GameObjectComposition Owner);
 	~AABB();
 
+	
 	void Initialize() ;
 	void Update(float dt) ;
 	void Release() ;
@@ -102,3 +104,5 @@ public:
 	int vertexCount;
 	Vector2 AABB_vertices[4];
 };
+
+#endif

@@ -1,7 +1,8 @@
 //#include "other stuff"
 #include "PhysicsManager.h"
+#include "Precompiled.h"
 //#include "game setting file?"
-#include "Resolution.h"
+//#include "Resolution.h"
 //#include "math_utility.h"
 
 PhysicsManager *physics = nullptr;
@@ -10,12 +11,12 @@ PhysicsManager *physics = nullptr;
 
 //MOVEMENT COLLISION FORCESS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-//PhysicsManager::PhysicsManager() : ISystem("Physics", SystemType::ST_Physics)
-//{
+PhysicsManager::PhysicsManager()// : ISystem("Physics", SystemType::ST_Physics)
+{
 //	float *temp = NULL;
 //	GlobalSettings->GetFloatValue("___ PHYSICS SETTINGS ___", temp, false);
 //	GlobalSettings->GetFloatValue("Gravity", GRAVITY, true);
-//}
+}
 
 PhysicsManager::~PhysicsManager()
 {
@@ -37,7 +38,104 @@ void PhysicsManager::Shutdown()
 	bodies.clear();
 }
 
+void PhysicsManager::ColliderCheck()
+{
+	//  COLLIDER LIST
+	for (unsigned int i = 0; i < colliders.size(); ++i)
+	{
+		if (colliders[i] == NULL)
+		{
+			continue;
+		}
 
+		Primitive *a = colliders[i];
+
+		for (unsigned int j = i + 1; j < colliders.size(); ++j)
+		{
+			Primitive *b = colliders[j];
+
+			if (a->active == false && b->active == false)
+			{
+				continue;
+			}
+
+			Vector3 posA = a->GetOwner()->has(Transform)->GetPosition();
+			Vector3 posB = b->GetOwner()->has(Transform)->GetPosition();
+
+			if (a->Id == Primitive::pCircle && b->Id == Primitive::pCircle)
+			{
+				if (CollisionChecker::CircleAndCircle(reinterpret_cast<Circle *>(a), posA, reinterpret_cast<Circle *>(b), posB))
+				{
+					printf("Circle");
+				}
+			}
+			else if (a->Id == Primitive::pAABB && b->Id == Primitive::pAABB)
+			{
+				if (CollisionChecker::AABBAndAABB(reinterpret_cast<AABB *>(a), posA, reinterpret_cast<AABB *>(b), posB))
+				{
+					printf("AABB");
+					//We get to this point twice for one collision, right? If so, only need this one call.
+					reinterpret_cast<RigidBody*>((a->GetOwner())->GetComponent(CT_Body))->Trigger(b->GetOwner());
+					reinterpret_cast<RigidBody*>((b->GetOwner())->GetComponent(CT_Body))->Trigger(a->GetOwner());
+
+				}
+			}
+			else if (a->Id == Primitive::pAABB && b->Id == Primitive::pCircle)
+			{
+				if (CollisionChecker::AABBAndCircle(reinterpret_cast<AABB *>(a), posA, reinterpret_cast<Circle *>(b), posB))
+				{
+					printf("AABB to Circle");
+				}
+			}
+			else if (a->Id == Primitive::pCircle && b->Id == Primitive::pAABB)
+			{
+				if (CollisionChecker::CircleAndAABB(reinterpret_cast<Circle *>(a), posA, reinterpret_cast<AABB *>(b), posB))
+				{
+					printf("Circle to AABB");
+				}
+			}
+		}
+	}
+}
+
+void PhysicsManager::RigidBodyCheck()
+{
+	// Go through the bodies
+	for (unsigned int i = 0; i < bodies.size(); ++i)
+	{
+		if (bodies[i] == NULL)
+		{
+			continue;
+		}
+
+		RigidBody *a = bodies[i];
+
+		// Loop through the next body
+		for (unsigned int j = i + 1; j < bodies.size(); ++j)
+		{
+			RigidBody *b = bodies[j];
+
+			// Check if these object are static
+			if (a->isStatic == true && b->isStatic == true)
+			{
+				continue;
+			}
+
+			// Set manifold data
+			Manifold m(a, b);
+
+			// Solve
+			m.Solve();
+
+			//Check if there's any contact count
+			if (m.contactCount)
+			{
+				// Append new element to the end
+				contacts.emplace_back(m);
+			}
+		}
+	}
+}
 
 void PhysicsManager::RigidBodyCheck()
 {
@@ -129,7 +227,7 @@ void PhysicsManager::Step(float dt)
 
 	for (unsigned int i = 0; i < bodies.size(); ++i)
 	{
-		bodies[i]->Update(dt);
+		bodies[i]->Update();
 	}
 }
 

@@ -1,9 +1,13 @@
 //#include "collision_narrow.h"
+//#ifndef PHYSICSMANAGER_H
+//#define PHYSICSMANAGER_H
+#pragma once
 #include "Body.h"
 #include "Resolution.h"
-
+#include "Collision.h"
+#include "Precompiled.h"
 // Physics system
-class PhysicsManager : public ISystem
+class PhysicsManager //: public ISystem
 {
 public:
 	PhysicsManager();
@@ -14,9 +18,9 @@ public:
 	std::vector<Primitive *>colliders; // Holds the colliders
 
 	// Overloaded methods
-    bool Initialize() override;
-	void Update(float dt) override;
-	void Shutdown() override;
+	bool Initialize();// override;
+		void Update(float dt);//override;
+		void Shutdown();// override;
 
 	void IntegrateForces(RigidBody *body, float dt);
 	void IntegrateVelocity(RigidBody *body, float dt);
@@ -29,3 +33,5 @@ public:
 };
 
 extern PhysicsManager *physics;
+
+//#endif

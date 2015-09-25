@@ -19,7 +19,7 @@ GameComponent* GetComponent(ComponentTypeId typeId);
 
 ///Type safe way of accessing components.
 template<typename type>
-type* GetComponetType(ComponentTypeId typeId);
+type* GetComponentType(ComponentTypeId typeId);
 
 void Initialize();
 
@@ -56,9 +56,11 @@ typedef GameObjectComposition GOC;
 //type safe way of accessing components
 //Transform* transform = object->has(Transform);
 template<typename type>
-type * GameObjectComposition::GetComponetType(ComponentTypeId typeId)
+type * GameObjectComposition::GetComponentType(ComponentTypeId typeId)
 {
 return static_cast<type*>(GetComponent(typeId));
 }
+
+#define has(type) GetComponentType<type>(CT_##type);
 
 #endif

@@ -1,7 +1,10 @@
+//#ifndef RESOLUTION_H
+//#define RESOLUTION_H
 #pragma once
 #include "Body.h"
-//#include "collision_narrow.h"
+#include "Collision.h"
 #include "primitive.h"
+
 
 struct Contact
 {
@@ -66,3 +69,5 @@ struct Manifold
 	void CorrectPosition(void);
 
 };
+
+//#endif 

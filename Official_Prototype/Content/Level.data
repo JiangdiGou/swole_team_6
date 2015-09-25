@@ -15,7 +15,7 @@ Level =
 			bool Active = true,
 			bool WakeUpOnChange = false,
 			bool LocalSpaceDirection = true,
-			float Strength = 10,
+			float Strength = 25,
 			Vec3 Direction = [0, -1, 0],
 		},
 		DragEffect = 
@@ -96,9 +96,11 @@ Level =
 		},
 		ScrollLoader = 
 		{
+			string CraneScroll = "",
+			string BoarScroll = "",
+			string SerpentScroll = "",
 			string TigerScroll = "55c16e8a571aa798:TigerScroll",
 			string DragonScroll = "55c00e1150af24f1:DragonScroll",
-			string CraneScroll = "",
 		},
 	},
 	Cog = 
@@ -204,7 +206,7 @@ Level =
 		PlayerMovement = 
 		{
 			float RSpeed = 0.300000012,
-			float RJumpHeight = 10,
+			float RJumpHeight = 14,
 			float RDashSpeedX = 100,
 		},
 		PlayerAttack = 

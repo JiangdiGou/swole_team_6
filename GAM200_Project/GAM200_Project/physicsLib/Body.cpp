@@ -1,5 +1,5 @@
 //#include "our header files"
-#include "Body.h"
+#include "Precompiled.h"
 #include "Transform.h"
 //#include "../Composition.h"
 float Random(float low, float high)
@@ -10,8 +10,7 @@ float Random(float low, float high)
   return a;
 }
 
-RigidBody::RigidBody(GameObjectComposition* Owner, Primitive *shape) :
-GameComponent(ComponentTypeId::CT_Body, Owner), bodyShape(shape->Clone())
+RigidBody::RigidBody(Primitive * shape) : bodyShape(shape->Clone())
 {
   bodyShape->body = this;
   bodyShape->radius = shape->radius;
@@ -31,9 +30,6 @@ GameComponent(ComponentTypeId::CT_Body, Owner), bodyShape(shape->Clone())
   isStatic = false;
   angularVelocity = 0.0f;
   orientation = Random(-FLOAT_PI,FLOAT_PI);
-  /*stFric = 0.5f;
-  dynFric = 0.3f;
-  friction = 0.2f;*/
   isGhost = false;
   useGravity = true; // By default set gravity to on
   isKinematic = false;
@@ -49,18 +45,7 @@ GameComponent(ComponentTypeId::CT_Body, Owner), bodyShape(shape->Clone())
 
 RigidBody::~RigidBody()
 {
-  // delete the body list
-  physics->bodies.clear();
-    
-	//Let's say if we have physics manager
-    for (auto iter = physics->bodies.begin(); iter != physics->bodies.end(); ++iter)
-    {
-        if (*iter == this)
-        {
-            physics->bodies.erase(iter);
-            return;
-        }
-    }
+  
 }
 
 void RigidBody::set(float mass_num)
@@ -75,7 +60,7 @@ void RigidBody::set(float mass_num)
     mass = mass_num;
     invMass = 1.0f/mass;
 
-    // Calculate inertia
+    //// Calculate inertia
     if (bodyShape->Id == Primitive::pAABB)
     {
       inertia = mass * (bodyShape->halfSize.x * bodyShape->halfSize.x +
@@ -92,20 +77,18 @@ void RigidBody::set(float mass_num)
 
 }
 
-bool RigidBody::Initialize()
+void RigidBody::Initialize()
 {
-  pTrans = Owner->GetTransform();
+  pTrans = GetOwner()->has(Transform);
 
-  position.x = pTrans->position.x;
-  position.y = pTrans->position.y;
 
   physics->bodies.push_back(this);
-  return true;
+  //return true;
 }
 
-void RigidBody::Update(float dt)
+void RigidBody::Update()
 {
-  pTrans->SetPosition(position);
+  /*pTrans->SetPosition(position);*/
 }
 
 void RigidBody::Release(){}
@@ -115,12 +98,11 @@ void RigidBody::setPosition(const Vector2 &position)
   this->position = position;
 }
 
-void RigidBody::setPosition(const float x, const float y)
-{
-  position.x = x;
-  position.y = y;
-
-}
+//void RigidBody::setPosition(const float x, const float y)
+//{
+//  //positi
+//
+//}
 
 Vector2 RigidBody::getPosition() const
 {
@@ -209,24 +191,24 @@ void RigidBody::ApplyImpulse(const Vector2& impulse, const Vec2D& contactVec)
 void RigidBody::SetOrientation(float radians)
 {
   orientation = radians;
-  bodyShape->SetOrientation(radians);
+  //bodyShape->SetOrientation(radians);
 }
 
-//void RigidBody::Trigger(IEntity *collObj)
-//{
-//  if (triggerCallbacks.size() > 0)
-//    triggerCallbacks[0]->OnCollision(collObj);
-//  //I forget what I did here, but it looks like only the first callback to be registered is used
-//  /*for (auto it : triggerCallbacks)
-//  {
-//    it->OnCollision(collObj);
-//  }*/
-//}
+void RigidBody::Trigger(GameObjectComposition *collObj)
+{
+  if (triggerCallbacks.size() > 0)
+    triggerCallbacks[0]->OnCollision(collObj);
+  //I forget what I did here, but it looks like only the first callback to be registered is used
+  /*for (auto it : triggerCallbacks)
+  {
+    it->OnCollision(collObj);
+  }*/
+}
 
-//void RigidBody::AddTriggerCallback(CollisionDelegate *obj)
-//{
-//  triggerCallbacks.push_back(obj);
-//}
+void RigidBody::AddTriggerCallback(CollisionDelegate *obj)
+{
+  triggerCallbacks.push_back(obj);
+}
 
 bool RigidBody::IsStatic()
 {

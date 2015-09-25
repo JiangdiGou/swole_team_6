@@ -40,9 +40,6 @@
     <Filter Include="BaseEngine\Factory">
       <UniqueIdentifier>{016ba0f4-3cd4-49a8-a16f-9c78a0467dfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\physics\Transform">
-      <UniqueIdentifier>{77886485-cf60-4d82-a089-7dc137198584}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BaseEngine\Engine">
       <UniqueIdentifier>{bb06bff4-0edb-47bd-85e2-22c99cb7441b}</UniqueIdentifier>
     </Filter>
@@ -153,9 +150,6 @@
     <ClInclude Include="GAM200_Project\Composition.h">
       <Filter>BaseEngine\Composition</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\Transform.h">
-      <Filter>Systems\physics\Transform</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\Engine.h">
       <Filter>BaseEngine\Engine</Filter>
     </ClInclude>
@@ -172,6 +166,21 @@
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\primitive.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Transform.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Collision.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\CollisionCheck.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Trigger.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\Precompiled.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
   </ItemGroup>
@@ -236,9 +245,6 @@
     <ClCompile Include="GAM200_Project\Composition.cpp">
       <Filter>BaseEngine\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\Transform.cpp">
-      <Filter>Systems\physics\Transform</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
@@ -252,6 +258,24 @@
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Collision.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\math_utility.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
   </ItemGroup>

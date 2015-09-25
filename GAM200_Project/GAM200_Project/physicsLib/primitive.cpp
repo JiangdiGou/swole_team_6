@@ -1,10 +1,11 @@
 //#include "our precompile header.h"
+#include "Precompiled.h"
 #include "primitive.h"
 //#include "../Component.h"
 
 ////// PRIMITIVE //////
-Primitive::Primitive(GameObjectComposition parent, ShapeID pID,ComponentTypeId type)
-	:GameComponent(type, parent), Id(pID)
+Primitive::Primitive( ShapeID pID,ComponentTypeId type)
+	: Id(pID)
 {
 	radius = 0.0f;
 	active = true; //false;
@@ -22,10 +23,10 @@ Primitive::~Primitive()
 	}
 }
 
-bool Primitive::Initialize()
+void Primitive::Initialize()
 {
 	physics->colliders.push_back(this);
-	return true;
+	//return true;
 }
 
 void Primitive::Update(float dt) {}
@@ -34,23 +35,24 @@ void Primitive::Release(){}
 
 ////// CIRCLE //////
 Circle::Circle()
-	: Primitive(nullptr, pCircle, ComponentTypeId::CT_CircleCollider)
+	: Primitive(nullptr, pCircle,
+ComponentTypeID_CT_CircleCollider)
 {
 
 }
 
-Circle::Circle(GameObject Owner)
-	: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
+Circle::Circle()
+	//: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
 {
 }
 
 Circle::~Circle(){}
 
-bool Circle::Initialize()
+void Circle::Initialize()
 {
-	pTrans = Owner->GetTransform();
+	pTrans = GetOwner()->has(Transform);
 	physics->colliders.push_back(this);
-	return true;
+	//return true;
 }
 
 void Circle::Update(float dt){}
@@ -59,8 +61,8 @@ void Circle::Release(){}
 
 ////// AABB //////
 AABB::AABB()
-	:Primitive(Owner, pAABB, ComponentTypeId::CT_BoxCollider)
 {
+	GetOwner()->has(BoxCollider);
 }
 
 AABB::AABB(GameObject Owner)
@@ -72,11 +74,11 @@ AABB::~AABB()
 {
 }
 
-bool AABB::Initialize()
+void AABB::Initialize()
 {
-	pTrans = Owner->GetTransform();
+	pTrans = GetOwner()->has(Transform);
 	physics->colliders.push_back(this);
-	return true;
+	//return true;
 }
 void AABB::Update(float dt){}
 
