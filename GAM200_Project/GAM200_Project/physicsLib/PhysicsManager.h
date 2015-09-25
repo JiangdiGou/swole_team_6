@@ -1,6 +1,7 @@
 //#include "collision_narrow.h"
-#ifndef PHYSICSMANAGER_H
-#define PHYSICSMANAGER_H
+//#ifndef PHYSICSMANAGER_H
+//#define PHYSICSMANAGER_H
+#pragma once
 #include "Body.h"
 #include "Resolution.h"
 #include "Collision.h"
@@ -33,4 +34,4 @@ public:
 
 extern PhysicsManager *physics;
 
-#endif
+//#endif

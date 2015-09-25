@@ -1,3 +1,5 @@
+//#ifndef COLLISIONCHECK_H
+//#define COLLISIONCHECK_H
 #pragma once
 #include "primitive.h"
 
@@ -14,3 +16,5 @@ public:
 private:
 
 };
+
+//#endif

@@ -1,5 +1,6 @@
-#ifndef RESOLUTION_H
-#define RESOLUTION_H
+//#ifndef RESOLUTION_H
+//#define RESOLUTION_H
+#pragma once
 #include "Body.h"
 #include "Collision.h"
 #include "primitive.h"
@@ -69,4 +70,4 @@ struct Manifold
 
 };
 
-#endif 
+//#endif 
