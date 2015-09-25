@@ -1,0 +1,36 @@
+class PlayerNotification : ZilchComponent
+{
+    //Timer to keep track of the number of frames for the notification to be on screen
+    var Timer:Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Timer > 0)
+        {
+            --this.Timer;
+            
+            if(this.Timer == 0)
+            {
+                this.RemoveNotification();
+            }
+        }
+    }
+    
+    //Function to set what the sprite text says and how long to be on screen
+    function SetNotification(iTime_:Integer, sText_:String)
+    {
+        this.Owner.SpriteText.Text = sText_;
+        this.Timer = iTime_;
+    }
+    
+    //Function to remove the notification from the screen
+    function RemoveNotification()
+    {
+        this.Owner.SpriteText.Text = "";
+    }
+}

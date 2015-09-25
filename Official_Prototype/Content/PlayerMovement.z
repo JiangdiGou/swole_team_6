@@ -49,12 +49,21 @@ class PlayerMovement : ZilchComponent
             //Move left when A or Left Arrow are pressed
             if(Zero.Keyboard.KeyIsDown(Keys.A) || Zero.Keyboard.KeyIsDown(Keys.Left))
             {
-                this.Owner.Transform.Translation -= Real3(this.RSpeed, 0.0, 0.0);
+                this.Owner.RigidBody.Velocity = Real3(-this.RSpeed * 80, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.Sprite.FlipX = true;
             }
             //Move right when D or Right Arrow are pressed
             else if(Zero.Keyboard.KeyIsDown(Keys.D) || Zero.Keyboard.KeyIsDown(Keys.Right))
             {
-                this.Owner.Transform.Translation += Real3(this.RSpeed, 0.0, 0.0);
+                this.Owner.RigidBody.Velocity = Real3(this.RSpeed * 80, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.Sprite.FlipX = false;
+            }
+            else
+            {
+                if(this.Owner.PlayerAttack.ISlashStop == 0 && this.IDashStop == 0)
+                {
+                    this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                }
             }
             
             //Jump when Space is pressed
@@ -85,6 +94,7 @@ class PlayerMovement : ZilchComponent
             this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,4);//Dash Left ID = 4
             //Sets the end location of the dash for the segment cast
             rXDistance = this.Owner.Transform.Translation.X - 10.5;
+            this.Owner.Sprite.FlipX = true;
         }
         else if(iDirection_ == 2)//Dash right
         {
@@ -94,6 +104,7 @@ class PlayerMovement : ZilchComponent
             this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,3);//Dash Right ID = 3
             //Sets the end location of the dash for the segment cast
             rXDistance = this.Owner.Transform.Translation.X + 10.5;
+            this.Owner.Sprite.FlipX = false;
         }
         
         //Sets the starting location of the segment cast at the player's location
@@ -123,6 +134,7 @@ class PlayerMovement : ZilchComponent
             --s;
         }
         
+        this.Owner.BoxCollider.Ghost = true;
         //Players have to wait 30 frames until they can dash again
         this.IDashCD = 30;
         //The number of frames that the player will have the dash velocity applied to them
@@ -154,24 +166,6 @@ class PlayerMovement : ZilchComponent
                 this.Owner.BoxCollider.Ghost = false;
                 this.BCanMove = true;
             }
-        }
-    }
-    
-    //*******************************************************************************************************************************************
-    function CheckCollisions()
-    {
-        //Filter so that the collider only recognizes static bodies
-        var collisionFilter = CastFilter();
-        collisionFilter.IgnoreDynamic = true;
-        collisionFilter.IgnoreKinematic = true;
-        
-        //casts a continuous collider to check the area around the player
-        var continuousColliderResults = this.Space.PhysicsSpace.ContinuousCollider(this.Collider, this.Owner.RigidBody.Velocity, 0, collisionFilter);
-        
-        //for loop that loops through the results of the continuous collider
-        foreach(var result in continuousColliderResults)
-        {
-            
         }
     }
 }

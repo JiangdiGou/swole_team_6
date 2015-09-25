@@ -14,8 +14,8 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-6.2886, 40.6072, 0],
-		Vec3 Scale = [2.4006, 2.4006, 2.4006],
+		Vec3 Translation = [-5.76940012, 40.6072006, 0],
+		Vec3 Scale = [2, 2, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
@@ -24,11 +24,11 @@ Cog =
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = false,
 		bool CastShadows = false,
-		Vec4 Color = [0.11, 1, 0, 1],
+		Vec4 Color = [1, 1, 1, 1],
 		BlendMode BlendMode = Alpha,
 		SpriteGeometryMode GeometryMode = ZPlane,
 		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-		string SpriteSource = "5275aa4d802dd6dc:Square",
+		string SpriteSource = "563ae58cfa3668d6:BladeRunner",
 		bool RenderMask = false,
 		bool FlipX = false,
 		bool FlipY = false,
@@ -72,8 +72,8 @@ Cog =
 		bool Seamless = true,
 		string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 		string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
-		Vec3 Offset = [0, 0, 0],
-		Vec3 Size = [0.5, 0.5, 0.5],
+		Vec3 Offset = [0, -0.109999999, 0],
+		Vec3 Size = [0.5, 0.600000024, 0.5],
 	},
 	EnemyHitReaction = 
 	{

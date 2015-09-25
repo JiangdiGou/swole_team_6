@@ -1,0 +1,117 @@
+class ScrollCompleteActions : ZilchComponent
+{
+    var MainSpace:Space;
+    var PlayerCog:Cog;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.MainSpace = this.GameSession.FindSpaceByName("Main");
+        this.PlayerCog = this.MainSpace.FindObjectByName("Player");
+    }
+    
+    //Function called by ScrollReaction, sending the completed scroll's ID number and if it was finished in gold time
+    function ScrollID(id_:Integer, gold_:Boolean)
+    {
+        if(id_ == 1)
+        {
+            this.Crane(gold_);
+        }
+        else if(id_ == 2)
+        {
+            this.Boar(gold_);
+        }
+        else if(id_ == 3)
+        {
+            this.Serpent(gold_);
+        }
+        else if(id_ == 4)
+        {
+            this.Tiger(gold_);
+        }
+        else if(id_ == 5)
+        {
+            this.Dragon(gold_);
+        }
+    }
+    
+    //If the Crane scroll was completed
+    function Crane(bGold_:Boolean)
+    {
+        var bMoveLeft:Boolean = this.PlayerCog.Sprite.FlipX;
+        var fireball = this.MainSpace.CreateAtPosition(Archetype.Find("FireBall"), this.PlayerCog.Transform.Translation);
+        
+        var seq1 = Action.Sequence(fireball.Actions);
+        
+        fireball.Sprite.FlipX = bMoveLeft;
+        
+        if(bMoveLeft)
+        {
+            Action.Property(seq1, @fireball.Transform.Translation, fireball.Transform.Translation - Real3(15, 0, 0), 0.5, Ease.Linear);
+        }
+        else
+        {
+            Action.Property(seq1, @fireball.Transform.Translation, fireball.Transform.Translation + Real3(15, 0, 0), 0.5, Ease.Linear);
+        }
+        
+        if(bGold_)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+    
+    //If the Boar scroll was completed
+    function Boar(bGold_:Boolean)
+    {
+        if(bGold_)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+    
+    //If the Serpent scroll was completed
+    function Serpent(bGold_:Boolean)
+    {
+        if(bGold_)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+    
+    //If the Tiger scroll was completed
+    function Tiger(bGold_:Boolean)
+    {
+        if(bGold_)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+    
+    //If the Dragon scroll was completed
+    function Dragon(bGold_:Boolean)
+    {
+        if(bGold_)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+}
