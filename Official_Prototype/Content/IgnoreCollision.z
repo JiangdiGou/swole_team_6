@@ -1,0 +1,19 @@
+class IgnoreCollision : ZilchComponent
+{
+    //Name of objects that this object shouldn't collide with
+    [Property]
+    var DontCollideWith:String = "";
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.CheckCollision);
+    }
+
+    function CheckCollision(event : CollisionEvent)
+    {
+        if(event.OtherObject.Name == this.DontCollideWith)
+        {
+            
+        }
+    }
+}

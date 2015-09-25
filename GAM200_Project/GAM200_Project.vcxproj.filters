@@ -54,9 +54,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
@@ -183,6 +180,18 @@
     <ClInclude Include="GAM200_Project\physicsLib\Precompiled.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\FramerateController.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\text.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\ft2build.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -278,6 +287,12 @@
     <ClCompile Include="GAM200_Project\physicsLib\math_utility.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\FramerateController.cpp">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\text.cpp">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GAM200_Project\resources\Smiley1.png">
@@ -294,16 +309,27 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="GAM200_Project\resources\VertexShader.txt">
+    <Font Include="resources\Fonts\OpenSans-Regular.ttf">
+      <Filter>resources</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\FragmentShader.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="GAM200_Project\resources\VertexShaderDebug.txt">
+    <Text Include="resources\fragmentShader2.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="GAM200_Project\resources\FragmentShader.txt">
+    <Text Include="resources\FragmentShaderDebug.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="GAM200_Project\resources\FragmentShaderDebug.txt">
+    <Text Include="resources\VertexShader.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\vertexShader2.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\VertexShaderDebug.txt">
       <Filter>resources</Filter>
     </Text>
   </ItemGroup>

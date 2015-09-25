@@ -4,12 +4,16 @@
 //Function    : Camera
 //Input       : none
 //Output      : Camera - the constructed Camera
-//Description : Default Constructor for camera, does nothing
+//Description : The constructor you should use to make a camera. 
 //**********************
 Camera::Camera()
 {
-  std::cout << "Camera::This default constructor does nothing." << std::endl;
-} 
+  zoom = 1.0f;
+
+  cameraPosition = glm::vec3(0.0f, 0.0f, 2.0);
+  cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+  worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+}
 
 //**********************
 //Function    : ~Camera
@@ -21,21 +25,6 @@ Camera::~Camera()
 {
 }
 
-//**********************
-//Function    : Camera
-//Input       : intendedShader - the shader you intend to use with this camera
-//Output      : Camera - the constructed Camera
-//Description : The constructor you should use to make a camera. 
-//**********************
-Camera::Camera(Shader intendedShader)
-{
-  zoom = 1.0f;
-
-  cameraPosition = glm::vec3(0.0f, 0.0f, 2.0);
-  cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-  worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-  shader = intendedShader;
-}
 
 //**********************
 //Function    : Camera.update
@@ -43,7 +32,7 @@ Camera::Camera(Shader intendedShader)
 //Output      : none
 //Description : Sends the camera information to te shader. 
 //**********************
-void Camera::update()
+void Camera::Update()
 {
   //Gets the Aspect Ratio of the Window to set up the camera's coordinates 
   float ratio = (float)WINDOWWIDTH / (float)WINDOWHEIGHT;

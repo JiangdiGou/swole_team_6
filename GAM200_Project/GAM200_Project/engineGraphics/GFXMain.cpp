@@ -11,6 +11,10 @@
 #include "../_EntryPoint.h"
 #include <Windows.h>
 #include "instancedSprite.h"
+#include "FramerateController.h"
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -31,6 +35,15 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   //Openas a console for debugging and testing 
   AllocConsole();
   freopen("CONOUT$", "w", stdout);
+  
+  FT_Library ft;
+  if (FT_Init_FreeType(&ft))
+    std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+  
+  FT_Face face;
+  if (FT_New_Face(ft, "resources/fonts/OpenSans-Regular.ttf", 0, &face))
+    std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+
 
   //Stores the window being created
   HWND window; 
@@ -43,7 +56,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   //Creates the core shader and camera 
   Shader basicShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
-  Camera basicCamera = Camera(basicShader);
+  Camera basicCamera = Camera();
 
   //Instancing Testing 
   //Shader basicShader2 = Shader("resources/VertexShader2.txt", "resources/FragmentShader2.txt");
@@ -56,6 +69,11 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   Sprite calm = Sprite(basicShader);
   Sprite animated = Sprite(basicShader);
   Sprite player = Sprite(basicShader);
+  /*
+  Sprite player2 = Sprite(basicShader);
+  Sprite player3 = Sprite(basicShader);
+  Sprite player4 = Sprite(basicShader);
+  */
   pPlayer = &player;
 
 	//Sets up textures 
@@ -73,8 +91,13 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   excited.texture = textureExcited;
   calm.texture = textureCalm;
 	animated.texture = textureAnimated;
-	player.texture = texturePlayerIdle;
 
+	player.texture = texturePlayerIdle;
+  /*
+  player2.texture = texturePlayerRun;
+  player3.texture = texturePlayerRun;
+  player4.texture = texturePlayerRun;
+  */
   //Sets inital values of sprites for their respective tests
   smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
   excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
@@ -102,7 +125,8 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     testRotation(excited);
     testScaling(smiley);
 
-    basicCamera.update();
+    basicCamera.Update();
+
     Sprite::drawSprites();
 
 	  //Again, not ideal, but there will eventually be a draw all function or something
@@ -119,6 +143,8 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 	  debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
 	  debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
 
+    
+    FramerateController::frameEnd();
     SwapBuffers(deviceContext);
 
     if (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
@@ -128,6 +154,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     }
 
     wglMakeCurrent(NULL, NULL);
+
   }
   return 0;
 }

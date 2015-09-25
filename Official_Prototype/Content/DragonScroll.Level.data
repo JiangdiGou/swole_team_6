@@ -92,10 +92,14 @@ Level =
 		},
 		ScrollReaction = 
 		{
+			int IDNumber = 5,
 			int ITimeLimit = 220,
 			int IGoldTime = 205,
 			float IEnergyCost = 60,
 			float IFailCost = 20,
+		},
+		ScrollCompleteActions = 
+		{
 		},
 	},
 	Cog = 

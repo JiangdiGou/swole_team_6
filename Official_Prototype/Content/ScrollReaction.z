@@ -1,6 +1,9 @@
 class ScrollReaction : ZilchComponent
 {
     var IPlayerTime:Integer = 0;
+    //The ID that ScrollCompleteActions will take
+    [Property]
+    var IDNumber:Integer = 0;
     //The number of frames until the scroll fails
     [Property]
     var ITimeLimit:Integer = 200;
@@ -19,7 +22,8 @@ class ScrollReaction : ZilchComponent
         //First checks if the player has enough energy to cast the scroll. If not, it fails
         if(this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.LevelData.RPlayerEnergy < this.IEnergyCost)
         {
-            Console.WriteLine("ScrollReaction.ScrollFail NOT ENOUGH ENERGY");
+            //Console.WriteLine("ScrollReaction.ScrollFail NOT ENOUGH ENERGY");
+            this.GameSession.FindSpaceByName("HUDSpace").FindObjectByName("NotificationText").PlayerNotification.SetNotification(100, "Not Enough Energy");
             this.ScrollFail();
         }
         
@@ -50,11 +54,13 @@ class ScrollReaction : ZilchComponent
         if(this.IPlayerTime > this.IGoldTime)
         {
             Console.WriteLine("ScrollReaction.ScrollActivate SCROLL ACTIVE");
+            this.Owner.ScrollCompleteActions.ScrollID(this.IDNumber, false);
         }
         //If the player's time is better than the gold time, the scroll is more powerful
         else
         {
             Console.WriteLine("ScrollReaction.ScrollActivate GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLD!!!!!");
+            this.Owner.ScrollCompleteActions.ScrollID(this.IDNumber, true);
         }
         //Destroys this space
         this.Space.Destroy();

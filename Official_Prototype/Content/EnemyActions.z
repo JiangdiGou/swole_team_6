@@ -1,0 +1,23 @@
+class EnemyActions : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        //ACTIONS N STUFF
+        var seq1 = Action.Sequence(this.Owner.Actions);
+        
+        //Delays run time before/after other actions in sequence
+        //(action sequence, #sec)
+        Action.Delay(seq1, 5);
+        
+        //(action sequence, @property to change, what to change the property to, #sec, how to handle interpolation)
+        Action.Property(seq1, @this.Owner.Sprite.Color, Real4(1,0,0,0.5), 1.0, Ease.SinIn);
+        
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        
+    }
+}

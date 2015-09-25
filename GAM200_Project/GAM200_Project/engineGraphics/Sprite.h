@@ -4,8 +4,9 @@
 #include "Shader.h"
 #include <vector>
 #include "Texture.h"
+#include "../Composition.h"
 
-class Sprite
+class Sprite : public GameComponent
 {
   //This may or may not be necessary, not sure yet 
 
@@ -27,7 +28,9 @@ public:
 	glm::vec4 color;
 	Texture texture;
 
-  void static drawSprites(void);
+  void Update() override;
+
+  void static drawSprites(void);  
   static std::vector<Sprite*> sprites;
 
 private:

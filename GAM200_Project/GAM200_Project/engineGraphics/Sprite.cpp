@@ -174,3 +174,8 @@ void Sprite::drawSprites(void)
   for (std::vector<Sprite*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
     (*it)->draw();
 }
+
+void Sprite::Update()
+{
+  draw();
+}
