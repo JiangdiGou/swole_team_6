@@ -114,6 +114,7 @@
     <ClCompile Include="GAM200_Project\gameLevel.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />
+    <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp" />
     <ClCompile Include="GAM200_Project\logger\logger.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp" />

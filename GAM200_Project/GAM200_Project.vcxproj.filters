@@ -293,6 +293,9 @@
     <ClCompile Include="GAM200_Project\engineGraphics\text.cpp">
       <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GAM200_Project\resources\Smiley1.png">
