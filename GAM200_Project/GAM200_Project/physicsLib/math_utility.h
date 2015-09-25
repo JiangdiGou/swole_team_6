@@ -7,33 +7,21 @@
 
 //const float MathF::eps = 100 * FLT_EPSILON;
 
-float minimum(float a, float b)
-{
-	return a < b ? a : b;
-}
 
-float maximum(float a, float b)
-{
-	return a > b ? a : b;
-}
-
-bool equal_floats(float a, float b)
-{
-	const float epsilon = 1.0f / 8192.0f;/* should be small enough for 1.0f == pixel width */
-	return fabsf(a - b) < epsilon;
-}
+float minimum(float a, float b);
 
 
-float degrees_to_radian(float degrees)
-{
-	return degrees * FLOAT_PI / 180.0f;
-}
+float maximum(float a, float b);
 
-float radian_to_degrees(float radian)
-{
-	return radian * 180.0f / FLOAT_PI;
-}
 
+bool equal_floats(float a, float b);
+
+
+
+float degrees_to_radian(float degrees);
+
+
+float radian_to_degrees(float radian);
 
 //MathFunctions
 
@@ -49,144 +37,50 @@ public:
 
 	Vec2D(const float x, const float y) : x(x), y(y) {}
 
-	void Set(float newX, float newY)
-	{
-		x = newX;
-		y = newY;
-	}
+	void Set(float newX, float newY);
 
-	void Clear()
-	{
-		x = 0.0f;
-		y = 0.0f;
-	}
+	void Clear();
 
-	float Magnitude()
-	{
-		return sqrtf(x*x + y*y);
-	}
+	float Magnitude();
 
-	Vec2D Normalize()
-	{
-		Vec2D result;
+	Vec2D Normalize();
 
-		// Find the magnitude
-		float mag = this->Magnitude();
+	void Invert();
 
-		result.x = x / mag;
-		result.y = y / mag;
-
-		return result;
-	}
-
-	void Invert()
-	{
-		x = -x;
-		y = -y;
-	}
-
-	float SqrMagnitude()
-	{
-		return(x*x + y*y);
-	}
-
+	float SqrMagnitude();
 	// Add
-	void operator+=(const Vec2D &vec)
-	{
-		x += vec.x;
-		y += vec.y;
-	}
+	void operator+=(const Vec2D &vec);
 
-	Vec2D operator+(const Vec2D& vec) const
-	{
-		return Vec2D(x + vec.x, y + vec.y);
-	}
+	Vec2D operator+(const Vec2D& vec) const;
 
 
 	// Subtract
-	void operator-=(const Vec2D &vec)
-	{
-		x -= vec.x;
-		y -= vec.y;
-	}
+	void operator-=(const Vec2D &vec);
 
-	Vec2D operator-(const Vec2D& vec) const
-	{
-		return Vec2D(x - vec.x, y - vec.y);
-	}
+	Vec2D operator-(const Vec2D& vec) const;
 
-	Vec2D operator-(void)
-	{
-		return (Vec2D(-1 * x, -1 * y));
-	}
+	Vec2D operator-(void);
 
-	friend Vec2D operator*(const Vec2D& vec, const float scale)
-	{
-		return Vec2D(vec.x*scale, vec.y*scale);
-	}
+	friend Vec2D operator*(const Vec2D& vec, const float scale);
 
-	friend Vec2D operator*(const float scale, const Vec2D& vec)
-	{
-		return Vec2D(vec.x*scale, vec.y*scale);
-	}
+	friend Vec2D operator*(const float scale, const Vec2D& vec);
+	void operator*=(const float scale);
 
-	void operator*=(const float scale)
-	{
-		x *= scale;
-		y *= scale;
-	}
+	void operator/=(const float scale);
 
-	void operator/=(const float scale)
-	{
-		if (scale == 0.0f)
-		{
-			throw "Division by zero";
-		}
-
-		x /= scale;
-		y /= scale;
-	}
-
-	friend Vec2D operator/(const Vec2D& vec, const float scale)
-	{
-		if (scale == 0.0f)
-		{
-			throw "Division by zero";
-		}
-		return Vec2D(vec.x / scale, vec.y / scale);
-	}
-	friend Vec2D operator/(const float scale, const Vec2D& vec)
-	{
-		if (scale == 0.0f)
-			return Vec2D(0.0f, 0.0f);
-		else
-			return Vec2D(vec.x / scale, vec.y / scale);
-	}
+	friend Vec2D operator/(const Vec2D& vec, const float scale);
+	friend Vec2D operator/(const float scale, const Vec2D& vec);
 
 	// Returns true if the vectors are equal.
-	bool operator==(const Vec2D& rhs)
-	{
-		return (x == rhs.x && y == rhs.y);
-	}
+	bool operator==(const Vec2D& rhs);
 
 	// Returns true if vectors are not equal
-	bool operator!=(const Vec2D& rhs)
-	{
-		return !(*this == rhs);
-	}
+	bool operator!=(const Vec2D& rhs);
 
 	// Adds the vector to this, scaled by the given amount
-	void AddScale(const Vec2D& vec, float scale)
-	{
-		x += vec.x * scale;
-		y += vec.y * scale;
-	}
+	void AddScale(const Vec2D& vec, float scale);
 
-	void SubScale(const Vec2D& vec, float scale)
-	{
-		x -= vec.x * scale;
-		y -= vec.y * scale;
-	}
+	void SubScale(const Vec2D& vec, float scale);
 
 
 	/* STATIC FUNCTIONS */
@@ -289,154 +183,52 @@ public:
 	Vector3D(const float x, const float y, const float z)
 		: x(x), y(y), z(z) {}
 
-	void Set(float newX, float newY, float newZ)
-	{
-		x = newX;
-		y = newY;
-		z = newZ;
-	}
+	void Set(float newX, float newY, float newZ);
 
 	// Zero all the components of the vector
-	void Clear()
-	{
-		x = 0.0f;
-		y = 0.0f;
-		z = 0.0f;
-	}
+	void Clear();
 
-	float Magnitude()
-	{
-		return sqrtf(x*x + y*y + z*z);
-	}
+	float Magnitude();
 
-	Vector3D Normalize()
-	{
-		Vector3D result;
+	Vector3D Normalize();
 
-		// Find the magnitude
-		float mag = this->Magnitude();
+	void Invert();
 
-		result.x = x / mag;
-		result.y = y / mag;
-		result.z = z / mag;
-
-		return result;
-	}
-
-	void Invert()
-	{
-		x = -x;
-		y = -y;
-		z = -z;
-	}
-
-	float SqrMagnitude()
-	{
-		return(x*x + y*y + z*z);
-	}
+	float SqrMagnitude();
 
 	// Add
-	void operator+=(const Vector3D &vec)
-	{
-		x += vec.x;
-		y += vec.y;
-		z += vec.z;
-	}
+	void operator+=(const Vector3D &vec);
 
-	Vector3D operator+(const Vector3D& vec) const
-	{
-		return Vector3D(x + vec.x, y + vec.y, z + vec.z);
-	}
+	Vector3D operator+(const Vector3D& vec) const;
 
 	// Subtract
-	void operator-=(const Vector3D &vec)
-	{
-		x -= vec.x;
-		y -= vec.y;
-		z -= vec.z;
-	}
+	void operator-=(const Vector3D &vec);
 
-	Vector3D operator-(const Vector3D& vec) const
-	{
-		return Vector3D(x - vec.x, y - vec.y, z - vec.z);
-	}
+	Vector3D operator-(const Vector3D& vec) const;
 
-	Vector3D operator-(void)
-	{
-		return (Vector3D(-1 * x, -1 * y, -1 * z));
-	}
+	Vector3D operator-(void);
 
-	void operator*=(const float scale)
-	{
-		x *= scale;
-		y *= scale;
-		z *= scale;
-	}
+	void operator*=(const float scale);
 
-	friend Vector3D operator*(const Vector3D& vec, const float scale)
-	{
-		return Vector3D(vec.x*scale, vec.y*scale, vec.z*scale);
-	}
+	friend Vector3D operator*(const Vector3D& vec, const float scale);
 
-	friend Vector3D operator*(const float scale, const Vector3D& vec)
-	{
-		return Vector3D(vec.x*scale, vec.y*scale, vec.z*scale);
-	}
+	friend Vector3D operator*(const float scale, const Vector3D& vec);
 
-	void operator/=(const float scale)
-	{
-		if (scale == 0.0f)
-		{
-			throw "Division by zero";
-		}
-		x /= scale;
-		y /= scale;
-		z /= scale;
-	}
+	void operator/=(const float scale);
 
-	friend Vector3D operator/(const Vector3D& vec, const float scale)
-	{
-		if (scale == 0.0f)
-		{
-			throw "Division by zero";
-		}
-		return Vector3D(vec.x / scale, vec.y / scale, vec.z / scale);
-	}
+	friend Vector3D operator/(const Vector3D& vec, const float scale);
 
-	friend Vector3D operator/(const float scale, const Vector3D& vec)
-	{
-		if (scale == 0.0f)
-			return Vector3D(0.0f, 0.0f, 0.0f);
-		else
-			return Vector3D(vec.x / scale, vec.y / scale, vec.z / scale);
-	}
+	friend Vector3D operator/(const float scale, const Vector3D& vec);
 
 	// Returns true if the vectors are equal.
-	bool operator==(const Vector3D& rhs)
-	{
-		return (x == rhs.x && y == rhs.y && z == rhs.z);
-	}
-
+	bool operator==(const Vector3D& rhs);
 	// Returns true if vectors are not equal
-	bool operator!=(const Vector3D& rhs)
-	{
-		return !(*this == rhs);
-	}
+	bool operator!=(const Vector3D& rhs);
 
 	// Adds the vector to this, scaled by the given amount
-	void addScale(const Vector3D& vec, float scale)
-	{
-		x += vec.x * scale;
-		y += vec.y * scale;
-		z += vec.z * scale;
-	}
+	void addScale(const Vector3D& vec, float scale);
 
-	void subScale(const Vector3D& vec, float scale)
-	{
-		x -= vec.x * scale;
-		y -= vec.y * scale;
-		z -= vec.z * scale;
-	}
+	void subScale(const Vector3D& vec, float scale);
 
 
 	/* STATIC FUNCTIONS */

@@ -114,4 +114,6 @@ bool CollisionChecker::CircleAndAABB(Circle *a, Vector3 aPos, AABB *b, Vector3 b
 	{
 		return true;
 	}
+
+
 }

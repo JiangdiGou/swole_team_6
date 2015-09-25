@@ -1,4 +1,4 @@
-#include "Collision.h"
+//#include "Collision.h"
 #include "Precompiled.h"
 
 CollisionTest CollisionRegistry[Primitive::pCount][Primitive::pCount] =
@@ -12,19 +12,28 @@ CollisionTest CollisionRegistry[Primitive::pCount][Primitive::pCount] =
 	},
 };
 
-float CalculateRestitution(RigidBody *a, RigidBody *b)
+float CalculateRestitution(Primitive *a, Primitive *b)
 {
-	return (std::min(a->restitution, b->restitution));
+	RigidBody* bodyA = a->GetOwner()->has(RigidBody);
+	RigidBody* bodyB = b->GetOwner()->has(RigidBody);
+	if (bodyA && bodyB)
+	{
+		return (std::min(bodyA->restitution, bodyB->restitution));
+	}
+	else
+		return 0;
 }
 
-void CircleAndCircle(RigidBody *a, RigidBody *b, Manifold *data)
+void CircleAndCircle(Primitive *Circle1, Primitive *Circle2, Manifold *data)
 {
 	// Create pointers
-	Circle *Circle1 = reinterpret_cast<Circle *>(a->bodyShape);
-	Circle *Circle2 = reinterpret_cast<Circle *>(b->bodyShape);
+	//Circle *Circle1 = reinterpret_cast<Circle *>(a);
+	//Circle *Circle2 = reinterpret_cast<Circle *>(b);
+	Transform* trans1 = Circle1->GetOwner()->has(Transform);
+	Transform* trans2 = Circle2->GetOwner()->has(Transform);
 
 	// Calculate the vector between Circle1 and Circle2
-	Vector2 midline = Circle2->body->position - Circle1->body->position;
+	Vector2 midline = trans2->GetPositionXY() - trans1->GetPositionXY();
 
 	// Calculate the distance squared
 	float distSqr = midline.SqrMagnitude();
@@ -50,7 +59,7 @@ void CircleAndCircle(RigidBody *a, RigidBody *b, Manifold *data)
 	{
 		data->penetration = Circle1->radius;
 		data->normal = Vector2(1, 0);
-		data->contact[0] = a->position;
+		data->contact[0] = trans1->GetPositionXY();
 	}
 
 	// Case 2: if circles intersects
@@ -58,53 +67,62 @@ void CircleAndCircle(RigidBody *a, RigidBody *b, Manifold *data)
 	{
 		data->penetration = radius - distance;
 		data->normal = midline.Normalize();
-		data->contact[0] = data->normal * Circle1->radius + a->position;
+		data->contact[0] = data->normal * Circle1->radius + trans1->GetPositionXY();
 	}
 
 	// Add contact
-	data->A = Circle1->body;
-	data->B = Circle2->body;
+	RigidBody* bodyA = data->A->GetOwner()->has(RigidBody);
+	RigidBody* bodyB = data->B->GetOwner()->has(RigidBody);
+	if (bodyA && bodyB)
+	{
+		bodyA = Circle1->body;
+		bodyB = Circle2->body;
+	}
 
-	data->restitution = CalculateRestitution(Circle1->body, Circle2->body);
+	data->restitution = CalculateRestitution(data->A, data->B);
 }
 
-void AABBAndAABB(RigidBody *a, RigidBody *b, Manifold *data)
+void AABBAndAABB(Primitive *a, Primitive *b, Manifold *data)
 {
-	AABB *AABB1 = reinterpret_cast<AABB *>(a->bodyShape);
-	AABB *AABB2 = reinterpret_cast<AABB *>(b->bodyShape);
+	//AABB *AABB1 = reinterpret_cast<AABB *>(a);
+	//AABB *AABB2 = reinterpret_cast<AABB *>(b);
+	Transform* transA = a->GetOwner()->has(Transform);
+	Transform* transB = b->GetOwner()->has(Transform);
 
 	// Calculate the vector between the objects
-	Vector2 midline = AABB1->body->position - AABB2->body->position;
+	Vector2 midline = transA->GetPositionXY() - transB->GetPositionXY();
 
-	float xOverlap = (AABB1->halfSize.x) + (AABB2->halfSize.x) - fabs(midline.x);
+	float xOverlap = (a->halfSize.x) + (b->halfSize.x) - fabs(midline.x);
 	data->contactCount = 1;
 	if (xOverlap > 0)
 	{
 		data->contactCount = 1;
-		float yOverlap = (AABB1->halfSize.y) + (AABB2->halfSize.y) - fabs(midline.y);
+		float yOverlap = (a->halfSize.y) + (b->halfSize.y) - fabs(midline.y);
 
 		if (yOverlap > 0)
 		{
 			if (xOverlap < yOverlap)
 			{
 				Vector2 normal = midline.x < 0 ? Vector2(1, 0) : Vector2(-1, 0);
-				data->A = AABB1->body;
-				data->B = AABB2->body;
+				data->A = a;
+				data->B = b;
 				data->normal = normal;
 				data->penetration = xOverlap;
-				data->restitution = CalculateRestitution(AABB1->body, AABB2->body);
-				data->contact[0] = data->normal * a->bodyShape->halfSize.x + a->position;
+				data->restitution = CalculateRestitution(a, b);
+				AABB * shapeA = a->GetOwner()->has(AABB);
+				data->contact[0] = data->normal * shapeA->halfSize.x + transA->GetPositionXY();
 				return;
 			}
 			else
 			{
 				Vector2 normal = midline.y < 0 ? Vector2(0, 1) : Vector2(0, -1);
-				data->A = AABB1->body;
-				data->B = AABB2->body;
+				data->A = a;
+				data->B = b;
 				data->normal = normal;
 				data->penetration = yOverlap;
-				data->restitution = CalculateRestitution(AABB1->body, AABB2->body);
-				data->contact[0] = data->normal * a->bodyShape->halfSize.y + a->position;
+				data->restitution = CalculateRestitution(a, b);
+				AABB * shapeB = b->GetOwner()->has(AABB)
+				data->contact[0] = data->normal * shapeB->halfSize.y + transB->GetPositionXY();
 				return;
 			}
 		}
@@ -114,12 +132,12 @@ void AABBAndAABB(RigidBody *a, RigidBody *b, Manifold *data)
 
 }
 
-void AABBAndCircle(RigidBody *a, RigidBody *b, Manifold *data)
+void AABBAndCircle(Primitive *shapeAABB, Primitive *shapeCircle, Manifold *data)
 {
-	AABB *aabb;
+	/*AABB *aabb;
 	Circle *circle;
 	// Create pointers based on what is what
-	if (a->bodyShape->GetID() == Primitive::pCircle)
+	if (a->GetID() == Primitive::pCircle)
 	{
 		aabb = reinterpret_cast<AABB *>(b->bodyShape);
 		circle = reinterpret_cast<Circle *>(a->bodyShape);
@@ -128,17 +146,19 @@ void AABBAndCircle(RigidBody *a, RigidBody *b, Manifold *data)
 	{
 		aabb = reinterpret_cast<AABB *>(a->bodyShape);
 		circle = reinterpret_cast<Circle *>(b->bodyShape);
-	}
+	}*/
+	Transform* transAABB = shapeAABB->GetOwner()->has(Transform);
+	Transform* transCircle = shapeCircle->GetOwner()->has(Transform);
 
 	//  Calculate the vector between the objects
-	Vector2 midline = circle->body->position - aabb->body->position;
+	Vector2 midline = transCircle->GetPositionXY() - transAABB->GetPositionXY();
 
 	// Closest point on A to the center of B
 	Vector2 closest = midline;
 
 	// Calculate half extent for each axis
-	float x_extent = aabb->halfSize.x;
-	float y_extent = aabb->halfSize.y;
+	float x_extent = shapeAABB->halfSize.x;
+	float y_extent = shapeAABB->halfSize.y;
 
 	// Clamp t0=o point to edges of AABB
 	closest.x = Clamp(-x_extent, x_extent, closest.x);
@@ -175,7 +195,7 @@ void AABBAndCircle(RigidBody *a, RigidBody *b, Manifold *data)
 
 	Vector2 normal = midline - closest;
 	float distance = normal.Magnitude();
-	float radius = circle->radius;
+	float radius = shapeCircle->radius;
 
 	// Circle not inside the AABB
 	if (distance > radius * radius && !inside)
@@ -192,24 +212,24 @@ void AABBAndCircle(RigidBody *a, RigidBody *b, Manifold *data)
 	{
 		data->normal = -midline;
 		data->penetration = radius - distance;
-		data->restitution = CalculateRestitution(aabb->body, circle->body);
+		data->restitution = CalculateRestitution(shapeAABB , shapeCircle);
 	}
 	else
 	{
 		data->normal = midline;
 		data->penetration = radius - distance;
-		data->restitution = CalculateRestitution(aabb->body, circle->body);
+		data->restitution = CalculateRestitution(shapeAABB, shapeCircle);
 	}
 
 	// Update contact
 	data->contactCount = 1;
-	data->A = aabb->body;
-	data->B = circle->body;
+	data->A = shapeAABB;
+	data->B = shapeCircle;
 }
 
-void CircleAndAABB(RigidBody *b, RigidBody *a, Manifold *data)
+void CircleAndAABB(Primitive *b, Primitive *a, Manifold *data)
 {
-	AABBAndCircle(b, a, data);
+	AABBAndCircle(a, b, data);
 }
 
 float Clamp(float min, float max, float x)

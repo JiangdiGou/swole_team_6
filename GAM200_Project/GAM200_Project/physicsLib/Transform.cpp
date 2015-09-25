@@ -1,6 +1,5 @@
 //#include "our precompiled header"
 #include"Transform.h"
-#include"../Composition.h"
 
 
 Transform::Transform( Vector3 pos, Vector3 rot, Vector3 scal) :
@@ -37,6 +36,14 @@ Vector3& Transform::GetRotation()
 Vector3& Transform::GetScale()
 {
 	return scale;
+}
+
+Vector2& Transform::GetPositionXY()
+{
+	Vector2 xyVector;
+	xyVector.x = position.x;
+	xyVector.y = position.y;
+	return xyVector;
 }
 
 void Transform::SetPosition(const Vector2 pos)

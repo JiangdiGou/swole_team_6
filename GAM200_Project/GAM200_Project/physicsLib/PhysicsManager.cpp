@@ -58,9 +58,10 @@ void PhysicsManager::ColliderCheck()
 			{
 				continue;
 			}
-
-			Vector3 posA = a->GetOwner()->has(Transform)->GetPosition();
-			Vector3 posB = b->GetOwner()->has(Transform)->GetPosition();
+			Transform* transA = a->GetOwner()->has(Transform);
+			Vector3 posA = transA->GetPosition();
+			Transform* transB = b->GetOwner()->has(Transform);
+			Vector3 posB = transB->GetPosition();
 
 			if (a->Id == Primitive::pCircle && b->Id == Primitive::pCircle)
 			{
@@ -75,8 +76,8 @@ void PhysicsManager::ColliderCheck()
 				{
 					printf("AABB");
 					//We get to this point twice for one collision, right? If so, only need this one call.
-					reinterpret_cast<RigidBody*>((a->GetOwner())->GetComponent(CT_Body))->Trigger(b->GetOwner());
-					reinterpret_cast<RigidBody*>((b->GetOwner())->GetComponent(CT_Body))->Trigger(a->GetOwner());
+					reinterpret_cast<RigidBody*>((a->GetOwner())->GetComponent(CT_RigidBody))->Trigger(b->GetOwner());
+					reinterpret_cast<RigidBody*>((b->GetOwner())->GetComponent(CT_RigidBody))->Trigger(a->GetOwner());
 
 				}
 			}
@@ -98,72 +99,34 @@ void PhysicsManager::ColliderCheck()
 	}
 }
 
-void PhysicsManager::RigidBodyCheck()
-{
-	// Go through the bodies
-	for (unsigned int i = 0; i < bodies.size(); ++i)
-	{
-		if (bodies[i] == NULL)
-		{
-			continue;
-		}
-
-		RigidBody *a = bodies[i];
-
-		// Loop through the next body
-		for (unsigned int j = i + 1; j < bodies.size(); ++j)
-		{
-			RigidBody *b = bodies[j];
-
-			// Check if these object are static
-			if (a->isStatic == true && b->isStatic == true)
-			{
-				continue;
-			}
-
-			// Set manifold data
-			Manifold m(a, b);
-
-			// Solve
-			m.Solve();
-
-			//Check if there's any contact count
-			if (m.contactCount)
-			{
-				// Append new element to the end
-				contacts.emplace_back(m);
-			}
-		}
-	}
-}
 
 void PhysicsManager::RigidBodyCheck()
 {
 	// Go through the bodies
-	for (unsigned int i = 0; i < bodies.size(); ++i)
+	for (unsigned int i = 0; i < colliders.size(); ++i)
 	{
-		if (bodies[i] == NULL)
+		if (colliders[i] == NULL)
 		{
 			continue;
 		}
 
-		RigidBody *a = bodies[i];
+		Primitive *a = colliders[i];
 
 		// Loop through the next body
 		for (unsigned int j = i + 1; j < bodies.size(); ++j)
 		{
-			RigidBody *b = bodies[j];
+			Primitive *b = colliders[j];
 
 			// Check if these object are static
-			if (a->isStatic == true && b->isStatic == true)
+		/*	if (a->body->isStatic == true && b->body->isStatic == true)
 			{
 				continue;
-			}
+			}*/
 
-			// Set manifold data
+			//// Set manifold data
 			Manifold m(a, b);
 
-			// Solve
+			//// Solve
 			m.Solve();
 
 			//Check if there's any contact count

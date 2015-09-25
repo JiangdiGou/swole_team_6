@@ -7,6 +7,7 @@
 #include "Body.h"
 #include "CollisionCheck.h"
 #include "Collision.h"
+#include "Transform.h"
 #include <string>
 #include <vector>
 #include <map>

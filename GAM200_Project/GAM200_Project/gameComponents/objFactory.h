@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <vector>
 
+#ifndef OBJFACTORY_H
+#define OBJFACTORY_H
+
 class objFactory
 {
 private:
@@ -14,3 +17,5 @@ public:
 
 };
 extern objFactory * FACTORY;
+
+#endif

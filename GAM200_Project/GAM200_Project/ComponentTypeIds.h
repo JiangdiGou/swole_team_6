@@ -11,7 +11,9 @@ enum ComponentTypeId
 	CT_Camera,
 	CT_Sprite,
 	//Physics
-	CT_Body,
+	CT_RigidBody,
+	CT_AABB,
+	CT_Circle,
 	//Max
 	CT_MaxComponents,
 	CT_CircleCollider,

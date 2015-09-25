@@ -2,6 +2,7 @@
 #define COMPOSITION_H
 #include "Component.h"
 #include "ComponentTypeIds.h"
+//#include "gameComponents/objFactory.h"
 #include <vector>//TO BE MOVED - container header
 
 //Game object ID type

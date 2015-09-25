@@ -19,7 +19,7 @@ void Manifold::Solve(void)
 {
 	// Give the current data
 	
-	[A->bodyShape->GetID()][B->bodyShape->GetID()](A, B, this);
+	CollisionRegistry[A->GetID()][B->GetID()](A, B, this);
 }
 
 void Manifold::PreStep(float dt)
@@ -28,29 +28,33 @@ void Manifold::PreStep(float dt)
 	const float EPSILON = 0.0001f;
 
 	// Calculate the average restitution
-	e = std::min(A->restitution, B->restitution);
+	if (A->body && B->body)
+		e = std::min(A->body->restitution, B->body->restitution);
 
 	// Calculate the static and dynamic friction
-	staticFriction = std::sqrt( A->stFric * B->stFric );
-	dynamicFriction = std::sqrt( A->dynFric * B->dynFric );
+	
+	//staticFriction = std::sqrt( A->stFric * B->stFric );
+	//dynamicFriction = std::sqrt( A->dynFric * B->dynFric );
 
-	staticFriction = std::sqrt(A->bodyshape->material.staticFriction *
-		B->bodyShape->material.staticFriction);
+	staticFriction = std::sqrt(A->material.staticFriction *
+		B->material.staticFriction);
 
-	dynamicFriction = std::sqrt(A->bodyShape->material.dynamicFriction *
-		B->bodyShape->material.dynamicFriction);
+	dynamicFriction = std::sqrt(A->material.dynamicFriction *
+		B->material.dynamicFriction);
 
 	for (unsigned int i = 0; i < contactCount; ++i)
 	{
 		// Calculate the radii
-		Vector2 radii_A = contact[i] - A->position;
-		Vector2 radii_B = contact[i] - B->position;
+		Vector2 radii_A = contact[i] - A->pTrans->GetPositionXY();
+		Vector2 radii_B = contact[i] - B->pTrans->GetPositionXY();
+		if (A->body && B->body)
+		{
+			Vector2 relativeVel = B->body->velocity + Vector2::CrossProduct(B->body->angularVelocity, radii_B) -
+				A->body->velocity - Vector2::CrossProduct(A->body->angularVelocity, radii_A);
 
-		Vector2 relativeVel = B->velocity + Vector2::CrossProduct(B->angularVelocity, radii_B) -
-			A->velocity - Vector2::CrossProduct(A->angularVelocity, radii_A);
-
-		if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vec2D(0, *physics->GRAVITY))).Magnitude() + EPSILON)
-			e = 0.0f;
+			if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vec2D(0, *physics->GRAVITY))).Magnitude() + EPSILON)
+				e = 0.0f;
+		}
 	}
 
 
@@ -59,14 +63,15 @@ void Manifold::PreStep(float dt)
 void Manifold::AppyImpulse(void)
 {
 	// If static
-	if (A->isStatic && B->isStatic)
+	//RigidBody* 
+	if (A->body->isStatic && B->body->isStatic)
 	{
-		A->velocity.Clear();
-		B->velocity.Clear();
+		A->body->velocity.Clear();
+		B->body->velocity.Clear();
 		return;
 	}
 
-	if (A->isGhost == true || B->isGhost == true)
+	if (A->body->isGhost == true || B->body->isGhost == true)
 	{
 		return;
 	}
@@ -74,12 +79,12 @@ void Manifold::AppyImpulse(void)
 	for (unsigned int i = 0; i < contactCount; ++i)
 	{
 		// Calculate radii from center of mass to contact
-		Vector2 radii_a = contact[i] - A->position;
-		Vector2 radii_b = contact[i] - B->position;
+		Vector2 radii_a = contact[i] - A->body->position;
+		Vector2 radii_b = contact[i] - B->body->position;
 
 		// Relative velocity at contact
-		Vector2 relativeVel = B->velocity + Vec2D::CrossProduct(B->angularVelocity, radii_b) -
-			A->velocity - Vec2D::CrossProduct(A->angularVelocity, radii_a);
+		Vector2 relativeVel = B->body->velocity + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
+			A->body->velocity - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
 
 		// Relative velocity along normal
 		float contactVel = Vec2D::DotProduct(relativeVel, normal);
@@ -92,7 +97,7 @@ void Manifold::AppyImpulse(void)
 
 		float crossA = Vec2D::CrossProduct(radii_a, normal);
 		float crossB = Vec2D::CrossProduct(radii_b, normal);
-		float invMassSum = A->invMass + B->invMass + (crossA * crossA) * A->invInertia + (crossB * crossB) * B->invInertia;
+		float invMassSum = A->body->invMass + B->body->invMass + (crossA * crossA) * A->body->invInertia + (crossB * crossB) * B->body->invInertia;
 		e = 0.2003f; //epsilon value
 		// Calculate the impulse scalar
 		float j = -(1.0f + e) * contactVel;
@@ -101,12 +106,12 @@ void Manifold::AppyImpulse(void)
 
 		// Apply the impulse
 		Vector2 impulse = normal * (j / 2);
-		A->ApplyImpulse(-impulse, radii_a);
-		B->ApplyImpulse(impulse, radii_b);
+		A->body->ApplyImpulse(-impulse, radii_a);
+		B->body->ApplyImpulse(impulse, radii_b);
 
 		// Friction impulse
-		relativeVel = B->velocity + Vec2D::CrossProduct(B->angularVelocity, radii_b) -
-			A->velocity - Vec2D::CrossProduct(A->angularVelocity, radii_a);
+		relativeVel = B->body->velocity + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
+			A->body->velocity - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
 
 		Vector2 tangentVec = relativeVel - (normal * Vec2D::DotProduct(relativeVel, normal));
 		tangentVec.Normalize();
@@ -141,7 +146,7 @@ void Manifold::AppyImpulse(void)
 
 void Manifold::CorrectPosition(void)
 {
-	if (A->isGhost == true || B->isGhost == true)
+	if (A->body->isGhost == true || B->body->isGhost == true)
 	{
 		return;
 	}
@@ -150,9 +155,9 @@ void Manifold::CorrectPosition(void)
 	const float percent = 0.8f;//0.4f; // 40% //0.2
 
 	// Allows object to penetrate slightly without position correction from occurring 
-	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->invMass + B->invMass)) * normal * percent;
+	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent;
 
-	A->position -= correction * A->invMass;
-	B->position += correction * B->invMass;
+	A->body->position -= correction * A->body->invMass;
+	B->body->position += correction * B->body->invMass;
 
 }

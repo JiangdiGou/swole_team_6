@@ -1,9 +1,9 @@
-//#ifndef RESOLUTION_H
-//#define RESOLUTION_H
-#pragma once
+#ifndef RESOLUTION_H
+#define RESOLUTION_H
+//#pragma once
 #include "Body.h"
-#include "Collision.h"
-#include "primitive.h"
+//#include "Collision.h"
+//#include "primitive.h"
 
 
 struct Contact
@@ -36,12 +36,12 @@ struct Manifold
 {
 	Manifold() {}
 
-	Manifold(RigidBody *a, RigidBody *b) : A(a), B(b) {}
-
-	RigidBody *A;
-
-	RigidBody *B;
-
+	//Manifold(RigidBody *a, RigidBody *b) : A(a), B(b) {}
+	Manifold(Primitive *a, Primitive *b) : A(a), B(b) {}
+	//RigidBody *A;
+	Primitive *A;
+		//RigidBody *B;
+	Primitive *B;
 	float penetration;
 
 	float restitution;
@@ -70,4 +70,4 @@ struct Manifold
 
 };
 
-//#endif 
+#endif 

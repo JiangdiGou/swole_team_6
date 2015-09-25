@@ -1,11 +1,11 @@
 //#include "collision_narrow.h"
-//#ifndef PHYSICSMANAGER_H
-//#define PHYSICSMANAGER_H
+#ifndef PHYSICSMANAGER_H
+#define PHYSICSMANAGER_H
 #pragma once
 #include "Body.h"
 #include "Resolution.h"
 #include "Collision.h"
-#include "Precompiled.h"
+//#include "Precompiled.h"
 // Physics system
 class PhysicsManager //: public ISystem
 {
@@ -34,4 +34,4 @@ public:
 
 extern PhysicsManager *physics;
 
-//#endif
+#endif

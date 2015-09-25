@@ -9,6 +9,12 @@
 //#include "vector2d.h"
 //#include "PhysicsManager.h"
 #include "Trigger.h"
+#include "Transform.h"
+//class Primitive;
+//class Circle;
+//class AABB;
+
+//RigidBody Componenet
 class RigidBody : public GameComponent
 	{
 	public:
@@ -19,7 +25,7 @@ class RigidBody : public GameComponent
 		friend class AABB;
 		//WE NEED A TRANSFORM COMPONET
 		Transform *pTrans;
-		Primitive *bodyShape;
+		
 		Vector2 position;       // Holds the position of the rigid body
 		Vector2 acceleration;
 		Vector2 velocity;       // Holds the linear velocity of the rigid body
@@ -42,7 +48,7 @@ class RigidBody : public GameComponent
 
 
 		// WE NEED ENTITY FILE AND PRIMITIVE
-		RigidBody(Primitive *shape);
+		RigidBody();
 		//RigidBody();
 		~RigidBody();
 

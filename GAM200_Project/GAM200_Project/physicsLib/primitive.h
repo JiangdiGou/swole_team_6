@@ -3,10 +3,11 @@
 #include <cstdlib>
 #include "Body.h"
 #include "Transform.h"
-#include "Precompiled.h"
+//#include "Precompiled.h"
 #include "../Composition.h"
+#include "Resolution.h"
 
-class Primitive : GameComponent
+class Primitive : public GameComponent
 {
 public:
 	enum ShapeID
@@ -29,14 +30,16 @@ public:
 	void Update(float dt);
 	void Release();
 
-	//Primitive();
+	Primitive();
 	//Primitive(IEntity* Owner);
-	Primitive( ShapeID pID, ComponentTypeId type);
+	//Primitive( ShapeID pID);
 
 	virtual ~Primitive() = 0;
 	virtual Primitive *Clone(void) const = 0;
 	virtual void SetOrientation(float radians) const = 0;
 	virtual ShapeID GetID(void) const = 0;
+
+
 };
 
 class Circle : public Primitive
@@ -44,7 +47,7 @@ class Circle : public Primitive
 public:
 
 	Circle();
-	Circle(GameObjectComposition Owner);
+	//Circle(GameObjectComposition Owner);
 	~Circle();
 
 	void Initialize() ;
@@ -69,7 +72,7 @@ class AABB : public Primitive
 {
 public:
 	AABB();
-	AABB(GameObjectComposition Owner);
+	//AABB();
 	~AABB();
 
 	

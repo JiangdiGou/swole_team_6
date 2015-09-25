@@ -3,7 +3,7 @@
 //#include "all the header" //Math/Vec3.h
 #include "../Composition.h"
 #include "math_utility.h"
-//#include "Precompiled.h"
+//Transform Component
 class Transform : public GameComponent
 {
 public:

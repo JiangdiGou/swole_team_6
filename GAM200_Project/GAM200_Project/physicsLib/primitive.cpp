@@ -4,9 +4,11 @@
 //#include "../Component.h"
 
 ////// PRIMITIVE //////
-Primitive::Primitive( ShapeID pID,ComponentTypeId type)
-	: Id(pID)
+
+Primitive::Primitive()
 {
+	pTrans = GetOwner()->has(Transform);
+	body = GetOwner()->has(RigidBody);
 	radius = 0.0f;
 	active = true; //false;
 }
@@ -35,16 +37,17 @@ void Primitive::Release(){}
 
 ////// CIRCLE //////
 Circle::Circle()
-	: Primitive(nullptr, pCircle,
-ComponentTypeID_CT_CircleCollider)
+	
 {
-
+	radius = 0.0f;
+	active = true;
+	Id = pCircle;
 }
 
-Circle::Circle()
+//Circle::Circle()
 	//: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
-{
-}
+//{
+//}
 
 Circle::~Circle(){}
 
@@ -62,14 +65,17 @@ void Circle::Release(){}
 ////// AABB //////
 AABB::AABB()
 {
-	GetOwner()->has(BoxCollider);
+	radius = 0.0f;
+	active = true;
+	Id = pAABB;
+	//GetOwner()->has(BoxCollider);
 }
 
-AABB::AABB(GameObject Owner)
-	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
-{
-
-}
+//AABB::AABB()
+//	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
+//{
+//
+//}
 AABB::~AABB()
 {
 }

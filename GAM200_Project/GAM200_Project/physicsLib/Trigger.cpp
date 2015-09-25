@@ -8,5 +8,5 @@ CollisionDelegate::CollisionDelegate(GameObjectComposition *parent) : parent_(pa
 
 void CollisionDelegate::InitializeCollisionCallback()
 {
-	reinterpret_cast<RigidBody*>(parent_->GetComponent(CT_Body))->AddTriggerCallback(this);
+	reinterpret_cast<RigidBody*>(parent_->GetComponent(CT_RigidBody))->AddTriggerCallback(this);
 }
