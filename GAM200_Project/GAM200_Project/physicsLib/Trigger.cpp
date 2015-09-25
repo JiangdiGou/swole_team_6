@@ -1,4 +1,4 @@
-//#include "Precompiled.h"
+#include "Precompiled.h"
 #include "../Composition.h"
 #include "Trigger.h"
 
@@ -8,5 +8,5 @@ CollisionDelegate::CollisionDelegate(GameObjectComposition *parent) : parent_(pa
 
 void CollisionDelegate::InitializeCollisionCallback()
 {
-	reinterpret_cast<RigidBody*>(parent->GetComponent(CT_Body))->AddTriggerCallback(this);
+	reinterpret_cast<RigidBody*>(parent_->GetComponent(CT_Body))->AddTriggerCallback(this);
 }
