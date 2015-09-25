@@ -11,6 +11,7 @@
 #include "../_EntryPoint.h"
 #include <Windows.h>
 #include "instancedSprite.h"
+#include "FramerateController.h"
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -56,6 +57,11 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   Sprite calm = Sprite(basicShader);
   Sprite animated = Sprite(basicShader);
   Sprite player = Sprite(basicShader);
+  /*
+  Sprite player2 = Sprite(basicShader);
+  Sprite player3 = Sprite(basicShader);
+  Sprite player4 = Sprite(basicShader);
+  */
   pPlayer = &player;
 
 	//Sets up textures 
@@ -73,8 +79,13 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   excited.texture = textureExcited;
   calm.texture = textureCalm;
 	animated.texture = textureAnimated;
-	player.texture = texturePlayerIdle;
 
+	player.texture = texturePlayerIdle;
+  /*
+  player2.texture = texturePlayerRun;
+  player3.texture = texturePlayerRun;
+  player4.texture = texturePlayerRun;
+  */
   //Sets inital values of sprites for their respective tests
   smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
   excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
@@ -103,6 +114,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     testScaling(smiley);
 
     basicCamera.Update();
+
     Sprite::drawSprites();
 
 	  //Again, not ideal, but there will eventually be a draw all function or something
@@ -119,6 +131,8 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 	  debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
 	  debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
 
+    
+    FramerateController::frameEnd();
     SwapBuffers(deviceContext);
 
     if (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
@@ -128,6 +142,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     }
 
     wglMakeCurrent(NULL, NULL);
+
   }
   return 0;
 }
