@@ -3,8 +3,8 @@
 //#include "../Component.h"
 
 ////// PRIMITIVE //////
-Primitive::Primitive(GameObjectComposition parent, ShapeID pID,ComponentTypeId type)
-	:GameComponent(type, parent), Id(pID)
+Primitive::Primitive( ShapeID pID,ComponentTypeId type)
+	: Id(pID)
 {
 	radius = 0.0f;
 	active = true; //false;
@@ -22,10 +22,10 @@ Primitive::~Primitive()
 	}
 }
 
-bool Primitive::Initialize()
+void Primitive::Initialize()
 {
 	physics->colliders.push_back(this);
-	return true;
+	//return true;
 }
 
 void Primitive::Update(float dt) {}
@@ -33,52 +33,53 @@ void Primitive::Release(){}
 
 
 ////// CIRCLE //////
-Circle::Circle()
-	: Primitive(nullptr, pCircle, ComponentTypeId::CT_CircleCollider)
-{
-
-}
-
-Circle::Circle(GameObject Owner)
-	: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
-{
-}
-
-Circle::~Circle(){}
-
-bool Circle::Initialize()
-{
-	pTrans = Owner->GetTransform();
-	physics->colliders.push_back(this);
-	return true;
-}
-
-void Circle::Update(float dt){}
-
-void Circle::Release(){}
-
-////// AABB //////
-AABB::AABB()
-	:Primitive(Owner, pAABB, ComponentTypeId::CT_BoxCollider)
-{
-}
-
-AABB::AABB(GameObject Owner)
-	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
-{
-
-}
-AABB::~AABB()
-{
-}
-
-bool AABB::Initialize()
-{
-	pTrans = Owner->GetTransform();
-	physics->colliders.push_back(this);
-	return true;
-}
-void AABB::Update(float dt){}
-
-void AABB::Release(){}
+//Circle::Circle()
+//	: Primitive(nullptr, pCircle,
+//CT_CircleCollider)
+//{
+//
+//}
+//
+//Circle::Circle()
+//	//: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
+//{
+//}
+//
+//Circle::~Circle(){}
+//
+//void Circle::Initialize()
+//{
+//	pTrans = GetOwner()->has(Transform);
+//	physics->colliders.push_back(this);
+//	//return true;
+//}
+//
+//void Circle::Update(float dt){}
+//
+//void Circle::Release(){}
+//
+//////// AABB //////
+//AABB::AABB()
+//{
+//	GetOwner()->has(BoxCollider);
+//}
+//
+//AABB::AABB(GameObject Owner)
+//	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
+//{
+//
+//}
+//AABB::~AABB()
+//{
+//}
+//
+//void AABB::Initialize()
+//{
+//	pTrans = GetOwner()->has(Transform);
+//	physics->colliders.push_back(this);
+//	//return true;
+//}
+//void AABB::Update(float dt){}
+//
+//void AABB::Release(){}
 

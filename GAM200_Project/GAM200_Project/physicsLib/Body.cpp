@@ -10,13 +10,12 @@ float Random(float low, float high)
   return a;
 }
 
-RigidBody::RigidBody(GameObjectComposition* Owner, Primitive *shape) :
-GameComponent(ComponentTypeId::CT_Body, Owner), bodyShape(shape->Clone())
+RigidBody::RigidBody() //: bodyShape(shape->Clone())
 {
-  bodyShape->body = this;
-  bodyShape->radius = shape->radius;
-  bodyShape->halfSize.x = shape->halfSize.x;
-  bodyShape->halfSize.y = shape->halfSize.y;
+  //bodyShape->body = this;
+  //bodyShape->radius = shape->radius;
+  //bodyShape->halfSize.x = shape->halfSize.x;
+  //bodyShape->halfSize.y = shape->halfSize.y;
   restitution = 0.2f;
   velocity.Clear();
   acceleration.Clear();
@@ -49,18 +48,7 @@ GameComponent(ComponentTypeId::CT_Body, Owner), bodyShape(shape->Clone())
 
 RigidBody::~RigidBody()
 {
-  // delete the body list
-  physics->bodies.clear();
-    
-	//Let's say if we have physics manager
-    for (auto iter = physics->bodies.begin(); iter != physics->bodies.end(); ++iter)
-    {
-        if (*iter == this)
-        {
-            physics->bodies.erase(iter);
-            return;
-        }
-    }
+  
 }
 
 void RigidBody::set(float mass_num)
@@ -75,37 +63,35 @@ void RigidBody::set(float mass_num)
     mass = mass_num;
     invMass = 1.0f/mass;
 
-    // Calculate inertia
-    if (bodyShape->Id == Primitive::pAABB)
-    {
-      inertia = mass * (bodyShape->halfSize.x * bodyShape->halfSize.x +
-      bodyShape->halfSize.y * bodyShape->halfSize.y);
-      invInertia = 1.0f / inertia;
+    //// Calculate inertia
+    //if (bodyShape->Id == Primitive::pAABB)
+    //{
+    //  inertia = mass * (bodyShape->halfSize.x * bodyShape->halfSize.x +
+    //  bodyShape->halfSize.y * bodyShape->halfSize.y);
+    //  invInertia = 1.0f / inertia;
 
-    }
-    else if (bodyShape->Id == Primitive::pCircle)
-    {
-      inertia = mass * bodyShape->radius * bodyShape->radius;
-      invInertia = 1.0f/inertia;
-    }
+    //}
+    //else if (bodyShape->Id == Primitive::pCircle)
+    //{
+    //  inertia = mass * bodyShape->radius * bodyShape->radius;
+    //  invInertia = 1.0f/inertia;
+    //}
   }
 
 }
 
-bool RigidBody::Initialize()
+void RigidBody::Initialize()
 {
-  pTrans = Owner->GetTransform();
+  pTrans = GetOwner()->has(Transform);
 
-  position.x = pTrans->position.x;
-  position.y = pTrans->position.y;
 
   physics->bodies.push_back(this);
-  return true;
+  //return true;
 }
 
-void RigidBody::Update(float dt)
+void RigidBody::Update()
 {
-  pTrans->SetPosition(position);
+  /*pTrans->SetPosition(position);*/
 }
 
 void RigidBody::Release(){}
@@ -115,12 +101,11 @@ void RigidBody::setPosition(const Vector2 &position)
   this->position = position;
 }
 
-void RigidBody::setPosition(const float x, const float y)
-{
-  position.x = x;
-  position.y = y;
-
-}
+//void RigidBody::setPosition(const float x, const float y)
+//{
+//  //positi
+//
+//}
 
 Vector2 RigidBody::getPosition() const
 {
@@ -209,7 +194,7 @@ void RigidBody::ApplyImpulse(const Vector2& impulse, const Vec2D& contactVec)
 void RigidBody::SetOrientation(float radians)
 {
   orientation = radians;
-  bodyShape->SetOrientation(radians);
+  //bodyShape->SetOrientation(radians);
 }
 
 //void RigidBody::Trigger(IEntity *collObj)
@@ -243,26 +228,26 @@ void RigidBody::MovePosition (Vector2 &pos)
   position = pos;
 }
 
-void RigidBody::SetDensity(float density)
-{
-  // This is useful to set the mass to a value 
-  // which scales with the size of the colliders.
-  // D/V = M
-
-  if (bodyShape->GetID() == Primitive::pCircle)
-  {
-    // Circle pi*r^2
-    mass = FLOAT_PI * (bodyShape->radius * bodyShape->radius);
-    invMass = 1.0f / mass;
-
-  }
-  else if (bodyShape->GetID() == Primitive::pAABB)
-  {
-    // AABB A * b
-    mass = (bodyShape->halfSize.x + bodyShape->halfSize.x) *
-           (bodyShape->halfSize.y + bodyShape->halfSize.y);
-    invMass = 1.0f / mass; // Need to check if mass is not zero
-  }
-  
-
-}
+//void RigidBody::SetDensity(float density)
+//{
+//  // This is useful to set the mass to a value 
+//  // which scales with the size of the colliders.
+//  // D/V = M
+//
+//  if (bodyShape->GetID() == Primitive::pCircle)
+//  {
+//    // Circle pi*r^2
+//    mass = FLOAT_PI * (bodyShape->radius * bodyShape->radius);
+//    invMass = 1.0f / mass;
+//
+//  }
+//  else if (bodyShape->GetID() == Primitive::pAABB)
+//  {
+//    // AABB A * b
+//    mass = (bodyShape->halfSize.x + bodyShape->halfSize.x) *
+//           (bodyShape->halfSize.y + bodyShape->halfSize.y);
+//    invMass = 1.0f / mass; // Need to check if mass is not zero
+//  }
+//  
+//
+//}

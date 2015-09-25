@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TRANSFORM_H
+#define TRANSFORM_H
 //#include "all the header" //Math/Vec3.h
 #include "../Composition.h"
 #include "math_utility.h"
@@ -6,7 +7,7 @@ class Transform : public GameComponent
 {
 public:
 	friend class RigidBody;
-	Transform(GameObjectComposition* Owner = NULL, Vector3 pos = Vector3(), Vector3 rot = Vector3(),
+	Transform( Vector3 pos = Vector3(), Vector3 rot = Vector3(),
 		Vector3 scal = Vector3());
 	~Transform() override;
 
@@ -19,6 +20,9 @@ public:
 	Vector3& GetPosition();
 	Vector3& GetRotation();
 	Vector3& GetScale();
+	Vector2& GetPositionXY();
+	float GetPositionX();
+	float GetPositionY();
 
 	//Setters
 	void SetPosition(const Vector3 pos);
@@ -48,3 +52,5 @@ private:
 	Vector3 scale;
 	Vector3 rotation;
 };
+
+#endif TRANSFORM_H

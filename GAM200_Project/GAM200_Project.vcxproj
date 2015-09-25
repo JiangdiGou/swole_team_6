@@ -46,10 +46,10 @@
     <ClInclude Include="GAM200_Project\physicsLib\range.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Resolution.h" />
     <ClInclude Include="GAM200_Project\physicsLib\shapes.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\Transform.h" />
     <ClInclude Include="GAM200_Project\physicsLib\vector2d.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h" />
-    <ClInclude Include="GAM200_Project\Transform.h" />
     <ClInclude Include="GAM200_Project\Utilities.h" />
     <ClInclude Include="GAM200_Project\_EntryPoint.h" />
   </ItemGroup>
@@ -79,8 +79,8 @@
     <ClCompile Include="GAM200_Project\physicsLib\PhysicsManager.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp" />
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp" />
-    <ClCompile Include="GAM200_Project\Transform.cpp" />
     <ClCompile Include="GAM200_Project\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 //#include "other stuff"
 #include "PhysicsManager.h"
 //#include "game setting file?"
-#include "Resolution.h"
+//#include "Resolution.h"
 //#include "math_utility.h"
 
 PhysicsManager *physics = nullptr;
@@ -129,7 +129,7 @@ void PhysicsManager::Step(float dt)
 
 	for (unsigned int i = 0; i < bodies.size(); ++i)
 	{
-		bodies[i]->Update(dt);
+		bodies[i]->Update();
 	}
 }
 

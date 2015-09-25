@@ -1,3 +1,5 @@
+#ifndef MATH_UTILITY_H
+#define MATH_UTILITY_H
 #include <math.h>
 
 #define FLOAT_PI 3.14159265358979323846f
@@ -573,3 +575,5 @@ public:
 	}
 };
 typedef Vector3D Vector3;
+
+#endif

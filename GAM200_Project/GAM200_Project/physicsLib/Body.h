@@ -1,22 +1,24 @@
-#pragma once
+#ifndef BODY_H
+#define BODY_H
+
 #include "math_utility.h"
 //#include "our entity header file"
 #include <vector> //for the vector of trigger callbacks
 #include <utility> //pair
 #include "../Composition.h"
 //#include "vector2d.h"
-#include "PhysicsManager.h"
+//#include "PhysicsManager.h"
 class RigidBody : public GameComponent
 	{
 	public:
 
 		// Will make these variables private later
-		friend class Primitive;
-		friend class Circle;
-		friend class AABB;
+		//friend class Primitive;
+		//friend class Circle;
+		//friend class AABB;
 		//WE NEED A TRANSFORM COMPONET
 		Transform *pTrans;
-		Primitive *bodyShape;
+		//Primitive *bodyShape;
 		Vector2 position;       // Holds the position of the rigid body
 		Vector2 acceleration;
 		Vector2 velocity;       // Holds the linear velocity of the rigid body
@@ -41,7 +43,8 @@ class RigidBody : public GameComponent
 
 
 		// WE NEED ENTITY FILE AND PRIMITIVE
-		RigidBody(GameObjectComposition* Owner, Primitive *shape);
+		//RigidBody(Primitive *shape);
+		RigidBody();
 		~RigidBody();
 
 		void Initialize() override;
@@ -87,6 +90,9 @@ class RigidBody : public GameComponent
 		//Vector of pairs of collision delegate methods and the objects they're in.
 		//(Is all of this necessary? Could you just have one function since it's all the same name?)
 		//std::vector <CollisionDelegate *> triggerCallbacks;
-
+	//private:
+		//PhysicsManager *physics;
 	};
 //}
+
+#endif 

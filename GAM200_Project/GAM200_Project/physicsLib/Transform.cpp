@@ -3,8 +3,8 @@
 #include"../Composition.h"
 
 
-Transform::Transform(GameObjectComposition* Owner, Vector3 pos, Vector3 rot, Vector3 scal) :
-GameComponent(ComponentTypeId::CT_Transform, Owner), position(pos),rotation(rot), scale(scal)
+Transform::Transform( Vector3 pos, Vector3 rot, Vector3 scal) :
+ position(pos),rotation(rot), scale(scal)
 {
 }
 

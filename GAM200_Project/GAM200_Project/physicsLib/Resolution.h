@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RESOLUTION_H
+#define RESOLUTION_H
 #include "Body.h"
 //#include "collision_narrow.h"
 #include "primitive.h"
@@ -66,3 +67,5 @@ struct Manifold
 	void CorrectPosition(void);
 
 };
+
+#endif RESOLUTION_H
