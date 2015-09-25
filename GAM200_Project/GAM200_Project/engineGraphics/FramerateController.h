@@ -2,7 +2,7 @@
 #define FRAMERATECONTROLLER_H
 
 #define FRAMERATE 60.0
-#define FRWARNINGPERCENT 10.0
+#define FRWARNINGPERCENT 25.0
 
 #include "Graphics.h"
 
@@ -12,14 +12,14 @@
 class FramerateController
 {
 public: 
-  static float getPreviousDt();
+  static unsigned getPreviousDt();
   static void frameEnd();
  
 private:
   static unsigned dt;
   static unsigned frameStartTime;
   //Returns how long the current frame has been going on, in ms
-  static float getCurrentFrameDuration();
+  static unsigned getCurrentFrameDuration();
 
 };
 
