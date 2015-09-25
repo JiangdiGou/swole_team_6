@@ -43,7 +43,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   //Creates the core shader and camera 
   Shader basicShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
-  Camera basicCamera = Camera(basicShader);
+  Camera basicCamera = Camera();
 
   //Instancing Testing 
   //Shader basicShader2 = Shader("resources/VertexShader2.txt", "resources/FragmentShader2.txt");
@@ -102,7 +102,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     testRotation(excited);
     testScaling(smiley);
 
-    basicCamera.update();
+    basicCamera.Update();
     Sprite::drawSprites();
 
 	  //Again, not ideal, but there will eventually be a draw all function or something
