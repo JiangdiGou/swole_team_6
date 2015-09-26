@@ -202,8 +202,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\c.lavelle\Desktop\Repo\GAM200_Project\GAM200_Project\engineGraphics;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\c.lavelle\Desktop\Repo\GAM200_Project\graphicsLibsWin;Libararies;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\GAM200_Project\engineGraphics;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProejctDir)\graphicsLibsWin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
