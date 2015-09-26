@@ -1,3 +1,5 @@
+//author Nolan Yoo
+
 class AssertionError : public std::exception
 {
 public:

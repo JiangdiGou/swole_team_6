@@ -1,3 +1,5 @@
+//author Nolan Yoo
+
 #include "objFactory.h"
 #include <random>
 

@@ -1,3 +1,5 @@
+//author Nolan Yoo
+
 //a single string argument
 template<>
 inline void luaRunner::runFile<std::string>(const std::string& fileName, std::string value, int args)

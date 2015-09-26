@@ -1,3 +1,5 @@
+//author Nolan Yoo
+
 #include "luaRunner.h"
 #include "../Utilities.h"
 

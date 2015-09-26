@@ -1,3 +1,5 @@
+//author Nolan Yoo
+
 /* only one of these at a time*/
 
 //#define GFX_RUN

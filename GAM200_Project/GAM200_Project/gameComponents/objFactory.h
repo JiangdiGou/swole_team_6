@@ -1,3 +1,5 @@
+//author Nolan Yoo
+
 #include "baseObject.h"
 #include <stdlib.h>
 #include <vector>

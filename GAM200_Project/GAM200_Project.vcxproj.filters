@@ -302,9 +302,6 @@
     <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp">
       <Filter>Universal</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\AssertionError\AssertionError.cpp">
-      <Filter>AssertionError</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GAM200_Project\resources\Smiley1.png">
