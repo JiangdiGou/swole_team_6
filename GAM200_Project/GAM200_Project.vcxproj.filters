@@ -46,6 +46,9 @@
     <Filter Include="Main">
       <UniqueIdentifier>{32d850cf-c236-4a14-9f1d-a31702ba05d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AssertionError">
+      <UniqueIdentifier>{4479c391-ffb0-4b74-8e83-20d613787791}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -192,6 +195,9 @@
     <ClInclude Include="GAM200_Project\engineGraphics\ft2build.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\AssertionError\AssertionError.h">
+      <Filter>AssertionError</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -295,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp">
       <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\AssertionError\AssertionError.cpp">
+      <Filter>AssertionError</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

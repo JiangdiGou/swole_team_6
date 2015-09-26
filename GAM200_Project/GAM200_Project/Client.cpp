@@ -58,7 +58,8 @@ void logRoutine()
   printstr("(Log Test 1)");
   txtlog *thisLog = new txtlog("log.txt");
   thisLog->write("log test");
-  thisLog->write("ERROR");
+  printstr("Wrote " + thisLog-> + " \"log test\" to thisLog.");
+  //thisLog->write("ERROR");
 }
 
 void factoryRoutine()

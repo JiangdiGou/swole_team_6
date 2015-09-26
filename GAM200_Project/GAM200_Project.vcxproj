@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GAM200_Project\AssertionError\AssertionError.h" />
     <ClInclude Include="GAM200_Project\Component.h" />
     <ClInclude Include="GAM200_Project\ComponentCreator.h" />
     <ClInclude Include="GAM200_Project\ComponentTypeIds.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="GAM200_Project\_EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GAM200_Project\AssertionError\AssertionError.cpp" />
     <ClCompile Include="GAM200_Project\Client.cpp" />
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />

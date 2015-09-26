@@ -12,9 +12,10 @@
 class txtlog
 {
 public:
-  txtlog(std::string fileName);
-  void write(std::string message);
+	txtlog(std::string fileName);
+	void write(std::string message);
 private:
-  std::fstream logStream;
-  std::string fileName;
+	std::fstream logStream;
+	std::string fileName;
+	const std::string dateTime();
 };
