@@ -203,7 +203,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)\GAM200_Project\engineGraphics;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProejctDir)\graphicsLibsWin;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)\graphicsLibsWin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
