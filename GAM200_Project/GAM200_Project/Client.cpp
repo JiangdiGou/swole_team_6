@@ -58,7 +58,7 @@ void logRoutine()
   printstr("(Log Test 1)");
   txtlog *thisLog = new txtlog("log.txt");
   thisLog->write("log test");
-  printstr("Wrote " + thisLog->dateTime() + " \"log test\" to thisLog.");
+  printstr("Wrote \"log test\" to thisLog.");
   //thisLog->write("ERROR");
 }
 

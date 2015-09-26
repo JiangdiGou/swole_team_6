@@ -1,6 +1,8 @@
 #ifndef TEXT_H
 #define TEXT_H
 
+#pragma comment(lib, "graphicsLibsWin/freetype26_D.lib")
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <iostream>

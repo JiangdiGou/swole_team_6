@@ -22,18 +22,18 @@ txtlog::txtlog(std::string fileName)
 
 void txtlog::write(std::string message)
 {
-	logStream << '[' << dateTime() << ']' << message.c_str() << '\n';
+	logStream << '[' << this->dateTime() << "] " << message.c_str() << '\n';
 	logStream.close();
 	logStream.open(fileName.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
 }
 
-const std::string dateTime()
+const std::string txtlog::dateTime()
 {
 	time_t     now = time(0);
 	struct tm  tstruct;
 	char       buf[80];
 	tstruct = *localtime(&now);
-	strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+	strftime(buf, sizeof(buf), "%Y-%m-%d | %X", &tstruct);
 
-	return buf;
+	return std::string(buf);
 }
