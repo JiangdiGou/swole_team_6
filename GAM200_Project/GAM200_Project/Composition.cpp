@@ -1,6 +1,9 @@
 #include "Composition.h"
 #include "gameComponents/objFactory.h"
 #include <algorithm>
+
+objFactory *FACTORY;//extern I believe still requires the declaration
+
   //Used to sort components using their type Id.
 struct ComponentSorter
 {
@@ -78,5 +81,5 @@ void GameObjectComposition::Destroy()
 	//Signal the factory that is object needs to be destroyed
 	//this will happen at the end of the frame.
 	//FACTORY = new objFactory();
-	//FACTORY->destroyObject(this->ObjectId);
+	FACTORY->destroyObject(this->ObjectId);
 }
