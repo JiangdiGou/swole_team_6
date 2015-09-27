@@ -22,7 +22,10 @@ Header for libraries and engine includes
 
 #include "engineGraphics\Graphics.h"
 #include "Composition.h"
-#include "Transform.h"
+#include "./physicsLib/Transform.h"
 #include "./gameComponents/objFactory.h"
+#include "System.h"
+#include "Core.h"
+#include "../physicsLib/PhysicsManager.h"
 
 #endif

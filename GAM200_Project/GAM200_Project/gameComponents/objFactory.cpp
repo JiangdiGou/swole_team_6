@@ -10,9 +10,9 @@ objFactory::objFactory()
   
 }
 
-gameObject* objFactory::makeObject(std::string Name)
+GameObjectComposition* objFactory::makeObject(std::string Name)
 {
-  gameObject *toReturn = new gameObject(Name);
+  GameObjectComposition *toReturn = new GameObjectComposition();
 
   std::mt19937 init_generator;//Mersenne Twister 19937 generator
   init_generator.seed(std::random_device()());
@@ -26,7 +26,7 @@ gameObject* objFactory::makeObject(std::string Name)
     gen = idgen(init_generator);
   }
 
-  toReturn->setObjID(gen);
+  toReturn->ObjectId = gen;
   objIDs.push_back(gen);
   gameObjs.push_back(toReturn);
   return toReturn;
@@ -46,6 +46,25 @@ void objFactory::destroyObject(int killID)
     std::vector<int>::iterator pos = std::find(objIDs.begin(), objIDs.end(), killID);
     int whereAt = pos - objIDs.begin();
     objIDs.erase(pos);
-    gameObjs.at(whereAt)->~gameObject();
+    gameObjs.at(whereAt)->~GameObjectComposition();
   }
+}
+void objFactory::destroyAllObjects()
+{
+  std::vector<int>::iterator it = objIDs.begin();
+  for (; it != objIDs.end(); ++it)
+    destroyObject(*it);
+}
+// Overloaded methods
+void objFactory::Initialize()
+{
+
+}
+void objFactory::Update(float dt)
+{
+
+}
+void objFactory::Shutdown()
+{
+
 }

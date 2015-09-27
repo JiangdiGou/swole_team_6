@@ -22,9 +22,8 @@ PhysicsManager::~PhysicsManager()
 {
 }
 
-bool PhysicsManager::Initialize()
+void PhysicsManager::Initialize()
 {
-	return true;
 }
 
 void PhysicsManager::Update(float dt)
@@ -221,7 +220,7 @@ void PhysicsManager::IntegrateVelocity(RigidBody *body, float dt)
 	{
 		return;
 	}
-	body->position += body->velocity * dt;
+  body->pTrans->SetPosition(body->pTrans->GetPositionXY() + body->velocity * dt);
 	body->orientation += body->angularVelocity * dt;
 	body->SetOrientation(body->orientation);
 	IntegrateForces(body, dt);

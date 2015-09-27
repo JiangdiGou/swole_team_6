@@ -16,6 +16,7 @@
     <ClInclude Include="GAM200_Project\ComponentCreator.h" />
     <ClInclude Include="GAM200_Project\ComponentTypeIds.h" />
     <ClInclude Include="GAM200_Project\Composition.h" />
+    <ClInclude Include="GAM200_Project\Core.h" />
     <ClInclude Include="GAM200_Project\Engine.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h" />
@@ -28,15 +29,20 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\text.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
-    <ClInclude Include="GAM200_Project\gameComponents\baseObject.h" />
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h" />
-    <ClInclude Include="GAM200_Project\gameLevel.h" />
+    <ClInclude Include="GAM200_Project\gameLevel.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
     <ClInclude Include="GAM200_Project\logger\logger.h" />
-    <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h" />
-    <ClInclude Include="GAM200_Project\lvlTools\levelGenerator.h" />
+    <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\levelGenerator.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\main.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Body.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -92,14 +98,24 @@
     <ClInclude Include="GAM200_Project\physicsLib\vector2d.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\runLua\luaRunner.h" />
-    <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h" />
-    <ClInclude Include="GAM200_Project\Utilities.h" />
+    <ClInclude Include="GAM200_Project\runLua\luaRunner.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\runLua\luaRunnerInline.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\System.h" />
+    <ClInclude Include="GAM200_Project\Utilities.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\_EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GAM200_Project\Client.cpp" />
+    <ClCompile Include="GAM200_Project\Client.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\Composition.cpp" />
+    <ClCompile Include="GAM200_Project\Core.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\FramerateController.cpp" />
@@ -110,15 +126,20 @@
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\text.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
-    <ClCompile Include="GAM200_Project\gameComponents\baseObject.cpp" />
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp" />
-    <ClCompile Include="GAM200_Project\gameLevel.cpp" />
+    <ClCompile Include="GAM200_Project\gameLevel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />
     <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp" />
     <ClCompile Include="GAM200_Project\logger\logger.cpp" />
-    <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp" />
-    <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp" />
+    <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\levelGenerator.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -152,8 +173,12 @@
     <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp" />
-    <ClCompile Include="GAM200_Project\Utilities.cpp" />
+    <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Utilities.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GAM200_Project\resources\ExampleSpriteSheet.png" />

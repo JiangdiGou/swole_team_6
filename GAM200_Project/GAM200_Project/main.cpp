@@ -14,7 +14,7 @@
 #ifdef GAMELOOP_RUN
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #else
-void falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
+int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
 {
   //Opens a console for debugging and testing 
@@ -29,8 +29,18 @@ void falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_l
   //Creates a window, saves it in hwnd, and shows on screen
   window = createWindow(instance);
   ShowWindow(window, show);
-  GameStateMgrInit(GS_GAME);
+  /**************/
+  CoreEngine* engine = new CoreEngine();
 
+  engine->AddSystem(new PhysicsManager());
+  engine->AddSystem(new objFactory());
+
+  engine->Initialize();
+
+  Shader basicShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
+  Camera basicCamera = Camera();
+  /******************/
+  GameStateMgrInit(GS_GAME);
   while (gGameStateCurr != GS_QUIT)
   {
 
@@ -62,4 +72,11 @@ void falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_l
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
   }
+  FACTORY->destroyAllObjects();
+
+  engine->DestroySystems();
+
+  delete engine;
+
+  return 0;
 }

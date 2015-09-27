@@ -17,5 +17,7 @@
 
 // game state manager
 #include "GameState\GameStateManager.h"
+#include "Sprite.h"
+#include "Camera.h"
 
 #endif // MAIN_H
