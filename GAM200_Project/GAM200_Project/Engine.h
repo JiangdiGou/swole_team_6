@@ -24,5 +24,6 @@ Header for libraries and engine includes
 #include "Composition.h"
 #include "Transform.h"
 #include "./gameComponents/objFactory.h"
+#include "System.h"
 
 #endif

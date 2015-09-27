@@ -5,9 +5,10 @@
 #include "Body.h"
 #include "Resolution.h"
 #include "Collision.h"
+#include "../Engine.h"
 //#include "Precompiled.h"
 // Physics system
-class PhysicsManager //: public ISystem
+class PhysicsManager : public ISystem
 {
 public:
 	PhysicsManager();
