@@ -186,10 +186,14 @@ void gameLevel::insertCol(int x, int count)
   for (int i = 0; i < oldHeight; i++)
   {
 	  delete this->tileMap[i];
-	  this->tileMap[i] = newTileMap[i];
 	  delete this->entityMap[i];
-	  this->entityMap[i] = newEntityMap[i];
   }
+
+  delete[] this->tileMap;
+  delete[] this->entityMap;
+
+  this->tileMap = newTileMap;
+  this->entityMap = newEntityMap;
 }
 
 void gameLevel::insertRow(int y, int count)
@@ -248,12 +252,11 @@ void gameLevel::insertRow(int y, int count)
 		delete this->tileMap[i];
 		delete this->entityMap[i];
 	}
-	this->tileMap = new char*[newHeight];
-	this->entityMap = new char*[newHeight];
-	for (int i = 0; i < newHeight; i++)
-	{
-		this->tileMap[i] = newTileMap[i];
-		this->entityMap[i] = newEntityMap[i];
-	}
+
+	delete[] this->tileMap;
+	delete[] this->entityMap;
+
+	this->tileMap = newTileMap;
+	this->entityMap = newEntityMap;
 }
 
