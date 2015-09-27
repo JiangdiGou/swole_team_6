@@ -476,6 +476,13 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
+		GoToLevel = 
+		{
+			bool IsExternal = false,
+			bool GoToGameDataLevel = false,
+			string GameData_Level = "553552b3f7cd2d35:PowerSelect",
+			string Level_Name = "551f871f885a5f4b:Level",
+		},
 	},
 	Cog = 
 	{
@@ -616,17 +623,12 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		LevelSelectButton = 
-		{
-			bool BIsFirst = false,
-			int ISelected = -1,
-		},
 		GoToLevel = 
 		{
 			bool IsExternal = false,
 			bool GoToGameDataLevel = false,
 			string GameData_Level = "",
-			string Level_Name = "",
+			string Level_Name = "563704b0383d5798:MainMenu",
 		},
 		Reactive = 
 		{

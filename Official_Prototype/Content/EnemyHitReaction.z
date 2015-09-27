@@ -23,64 +23,46 @@ class EnemyHitReaction : ZilchComponent
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
-        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollision);
     }
     
     
     function OnLogicUpdate(event: UpdateEvent)
     {
-        this.Owner.SpriteText.Text = "`this.IHealth`";
+        //this.Owner.SpriteText.Text = "`this.IHealth`";
         
+        //If the player has been juggling the enemy corpse too long, destroys this enemy
         if(this.IOverkillHealth <= 0)
         {
             this.Owner.Destroy();
         }
         
+        //Starts despawning the enemy once their hp is below 0
         if(this.IHealth <= 0)
         {
             this.IDespawnTime -= 1;
         }
         
+        //Destroys this enemy if their hp is below 0 too long
         if(this.IDespawnTime <= 0)
         {
             this.Owner.Destroy();
         }
     }
     
-    
-    function OnCollision(event:CollisionEvent)
-    {
-        var sOtherObject = event.OtherObject;
-        
-        if(sOtherObject.Name == "AttackBox")
-        {
-            this.OnHit(sOtherObject.DamageProperties.IDamageDealt, sOtherObject.DamageProperties.BCanStun, sOtherObject.DamageProperties.BKnockUp);
-            /*var iPlaceholder:Integer = sOtherObject.DamageProperties.IDamageDealt;
-            var bPlaceholder:Boolean = sOtherObject.DamageProperties.BKnockUp;
-            
-            this.IHealth -= iPlaceholder;
-            this.IOverkillHealth -= iPlaceholder;
-            
-            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
-            
-            if(bPlaceholder)
-            {
-                this.Owner.RigidBody.Velocity += Real3(0, 10, 0);
-            }*/
-        }
-    }
-    
-    
+    //Takes the amount of damage this enemy takes, if the attack stuns, and if the attack knocks up.
     function OnHit(iDamageTaken_:Integer, bIsStunned_:Boolean, bKnockedUp_:Boolean)
     {
+        //Reduces the object's hp by the damage taken
         this.IHealth -= iDamageTaken_;
         this.IOverkillHealth -= iDamageTaken_;
         
+        //Knocks this object up into the air if the attack knocks up
         if(bKnockedUp_)
         {
             this.Owner.RigidBody.Velocity += Real3(0.0, 10.0, 0.0);
         }
         
+        //Increases the player's combo by calling the AttackHit function in the ComboManager
         this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
     }
 }
