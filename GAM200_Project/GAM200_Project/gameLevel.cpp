@@ -10,6 +10,7 @@
 /******************************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
+#define _SCL_SECURE_NO_WARNINGS
 
 #include "gameLevel.h"
 #include "Utilities.h"
@@ -34,14 +35,20 @@ void gameLevel::printLevel()
   std::cout << "Tile Map:" << std::endl;
   for (int i = 0; i < levelHeight; i++)
   {
-    string garbage(tileMap[i]);
-    std::cout << garbage << std::endl;
+	  for (int j = 0; j < levelWidth; j++)
+	  {
+		  std::cout << tileMap[i][j];
+	  }
+	  std::cout << std::endl;
   }
   std::cout << "Entity Map:" << std::endl;
   for (int i = 0; i < levelHeight; i++)
   {
-    string garbage(entityMap[i]);
-    std::cout << garbage << std::endl;
+	  for (int j = 0; j < levelWidth; j++)
+	  {
+		  std::cout << entityMap[i][j];
+	  }
+	  std::cout << std::endl;
   }
 }
 
@@ -81,7 +88,7 @@ void gameLevel::loadLevelFrom(std::string fileName)
   {
     tileMap[i] = new char[arrayX];
     garbage = getLineFromFile(5 + i + 2, fileName);
-    strcpy(tileMap[i], garbage.c_str());
+	std::copy(garbage.begin(), garbage.end(), tileMap[i]);
   }
 
   entityMap = new char*[arrayY];
@@ -89,7 +96,7 @@ void gameLevel::loadLevelFrom(std::string fileName)
   {
     entityMap[i] = new char[arrayX];
     garbage = getLineFromFile(5 + i + 1 + 2 + arrayY, fileName);
-    strcpy(entityMap[i], garbage.c_str());
+	std::copy(garbage.begin(), garbage.end(), entityMap[i]);
   }
 
   this->levelName = levelName;
@@ -127,32 +134,10 @@ bool gameLevel::changeEntity(char entity, int x, int y)
 
 void gameLevel::insertCol(int x, int count)
 {
-  char ** oldTileMap;
-  char ** oldEntityMap;
   char ** newTileMap;
   char ** newEntityMap;
   int oldHeight = this->levelHeight;
   int oldWidth = this->levelWidth;
-
-  //save the old data
-  oldTileMap = new char*[oldHeight];
-  for (int i = 0; i < oldHeight; i++)
-  {
-    oldTileMap[i] = new char[oldWidth];
-  }
-  oldEntityMap = new char*[oldHeight];
-  for (int i = 0; i < oldHeight; i++)
-  {
-    oldEntityMap[i] = new char[oldWidth];
-  }
-  for (int i = 0; i < oldHeight; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      oldTileMap[i][j] = this->tileMap[i][j];
-      oldEntityMap[i][j] = this->entityMap[i][j];
-    }
-  }
 
   //re-alloc memory
   this->levelWidth = this->levelWidth + count;
@@ -184,8 +169,8 @@ void gameLevel::insertCol(int x, int count)
   {
     for (int j = 0; j < x; j++)
     {
-      newTileMap[i][j] = oldTileMap[i][j];
-      newEntityMap[i][j] = oldEntityMap[i][j];
+      newTileMap[i][j] = tileMap[i][j];
+      newEntityMap[i][j] = entityMap[i][j];
     }
   }
   //set memory part 2 (after new columns)
@@ -193,143 +178,82 @@ void gameLevel::insertCol(int x, int count)
   {
     for (int j = x; j < oldWidth; j++)
     {
-      newTileMap[i][j + count] = oldTileMap[i][j];
-      newEntityMap[i][j + count] = oldEntityMap[i][j];
+	  newTileMap[i][j + count] = tileMap[i][j];
+	  newEntityMap[i][j + count] = entityMap[i][j];
     }
   }
 
-  //clear memory
   for (int i = 0; i < oldHeight; i++)
   {
-    delete [] this->tileMap[i];
-    delete [] this->entityMap[i];
-  }
-  delete [] this->tileMap;
-  delete [] this->entityMap;
-
-  //copy + realloc memory
-  this->tileMap = new char*[oldHeight];
-
-  for (int i = 0; i < oldHeight; i++)
-  {
-    this->tileMap[i] = new char[newWidth];
-  }
-  this->entityMap = new char*[oldHeight];
-  for (int i = 0; i < oldHeight; i++)
-  {
-    this->entityMap[i] = new char[newWidth];
-  }
-  for (int i = 0; i < oldHeight; i++)
-  {
-    for (int j = 0; j < newWidth; j++)
-    {
-      this->tileMap[i][j] = newTileMap[i][j];
-      this->entityMap[i][j] = newEntityMap[i][j];
-    }
+	  delete this->tileMap[i];
+	  this->tileMap[i] = newTileMap[i];
+	  delete this->entityMap[i];
+	  this->entityMap[i] = newEntityMap[i];
   }
 }
 
 void gameLevel::insertRow(int y, int count)
 {
-  char ** oldTileMap;
-  char ** oldEntityMap;
-  char ** newTileMap;
-  char ** newEntityMap;
-  int oldHeight = this->levelHeight;
-  int oldWidth = this->levelWidth;
+	char ** newTileMap;
+	char ** newEntityMap;
+	int oldHeight = this->levelHeight;
+	int oldWidth = this->levelWidth;
 
-  //save the old data
-  oldTileMap = new char*[oldHeight];
-  for (int i = 0; i < oldHeight; i++)
-  {
-    oldTileMap[i] = new char[oldWidth];
-  }
-  oldEntityMap = new char*[oldHeight];
-  for (int i = 0; i < oldHeight; i++)
-  {
-    oldEntityMap[i] = new char[oldWidth];
-  }
-  for (int i = 0; i < oldHeight; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      oldTileMap[i][j] = this->tileMap[i][j];
-      oldEntityMap[i][j] = this->entityMap[i][j];
-    }
-  }
+	//re-alloc memory
+	this->levelHeight = this->levelHeight + count;
+	int newHeight = this->levelHeight;
 
-  //re-alloc memory
-  this->levelHeight = this->levelHeight + count;
-  int newHeight = this->levelHeight;
+	newTileMap = new char*[newHeight];
+	for (int i = 0; i < newHeight; i++)
+	{
+		newTileMap[i] = new char[oldWidth];
+	}
+	newEntityMap = new char*[newHeight];
+	for (int i = 0; i < newHeight; i++)
+	{
+		newEntityMap[i] = new char[oldWidth];
+	}
 
-  newTileMap = new char*[newHeight];
-  for (int i = 0; i < newHeight; i++)
-  {
-    newTileMap[i] = new char[oldWidth];
-  }
-  newEntityMap = new char*[newHeight];
-  for (int i = 0; i < newHeight; i++)
-  {
-    newEntityMap[i] = new char[oldWidth];
-  }
+	//set memory part 0 (give everything a 0)
+	for (int i = 0; i < newHeight; i++)
+	{
+		for (int j = 0; j < oldWidth; j++)
+		{
+			newTileMap[i][j] = '0';
+			newEntityMap[i][j] = '0';
+		}
+	}
 
-  //set memory part 0 (give everything a 0)
-  for (int i = 0; i < newHeight; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      newTileMap[i][j] = '0';
-      newEntityMap[i][j] = '0';
-    }
-  }
+	//set memory part 1 (before new columns)
+	for (int i = 0; i < y; i++)
+	{
+		for (int j = 0; j < oldWidth; j++)
+		{
+			newTileMap[i][j] = tileMap[i][j];
+			newEntityMap[i][j] = entityMap[i][j];
+		}
+	}
+	//set memory part 2 (after new columns)
+	for (int i = y; i < oldHeight; i++)
+	{
+		for (int j = 0; j < oldWidth; j++)
+		{
+			newTileMap[i + count][j] = tileMap[i][j];
+			newEntityMap[i + count][j] = entityMap[i][j];
+		}
+	}
 
-  //set memory part 1 (before new rows)
-  for (int i = 0; i < y; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      newTileMap[i][j] = oldTileMap[i][j];
-      newEntityMap[i][j] = oldEntityMap[i][j];
-    }
-  }
-  //set memory part 2 (after new rows)
-  for (int i = y; i < oldHeight; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      newTileMap[i + count][j] = oldTileMap[i][j];
-      newEntityMap[i + count][j] = oldEntityMap[i][j];
-    }
-  }
-
-  //clear memory
-  for (int i = 0; i < oldHeight; i++)
-  {
-    delete [] this->tileMap[i];
-    delete [] this->entityMap[i];
-  }
-  delete [] this->tileMap;
-  delete [] this->entityMap;
-
-  //copy + realloc memory
-  this->tileMap = new char*[newHeight];
-
-  for (int i = 0; i < newHeight; i++)
-  {
-    this->tileMap[i] = new char[oldWidth];
-  }
-  this->entityMap = new char*[newHeight];
-  for (int i = 0; i < newHeight; i++)
-  {
-    this->entityMap[i] = new char[oldWidth];
-  }
-  for (int i = 0; i < newHeight; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      this->tileMap[i][j] = newTileMap[i][j];
-      this->entityMap[i][j] = newEntityMap[i][j];
-    }
-  }
+	for (int i = 0; i < oldHeight; i++)
+	{
+		delete this->tileMap[i];
+		delete this->entityMap[i];
+	}
+	this->tileMap = new char*[newHeight];
+	this->entityMap = new char*[newHeight];
+	for (int i = 0; i < newHeight; i++)
+	{
+		this->tileMap[i] = newTileMap[i];
+		this->entityMap[i] = newEntityMap[i];
+	}
 }
 

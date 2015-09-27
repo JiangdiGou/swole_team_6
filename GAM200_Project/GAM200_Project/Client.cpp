@@ -10,6 +10,7 @@
 /******************************************************************************/
 
 #define NO_SDK 1
+#define ILLEGAL_DEMO 0
 
 #include "lvlTools/levelGenerator.h"
 #include "lvlTools/levelEditor.h"
@@ -68,8 +69,11 @@ void factoryRoutine()
   objFactory *makeThings = new objFactory();
   gameObject unicorn = *makeThings->makeObject("SampleThing");
   std::cout<<"Unicorn's ID: "<<unicorn.getObjID()<<std::endl;
-  makeThings->destroyObject(unicorn.getObjID());
-  //makeThings->destroyObject(23);
+  if (ILLEGAL_DEMO)
+  {
+	  std::cout << "Attempting destruction of illegal object #23.";
+	makeThings->destroyObject(23);
+  }
 }
 
 #ifdef LDM_RUN
