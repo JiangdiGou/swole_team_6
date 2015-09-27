@@ -7,8 +7,6 @@
 
 Primitive::Primitive()
 {
-	pTrans = GetOwner()->has(Transform);
-	body = GetOwner()->has(RigidBody);
 	radius = 0.0f;
 	active = true; //false;
 }
@@ -27,6 +25,8 @@ Primitive::~Primitive()
 
 void Primitive::Initialize()
 {
+  pTrans = GetOwner()->has(Transform);
+  body = GetOwner()->has(RigidBody);
 	physics->colliders.push_back(this);
 	//return true;
 }
@@ -43,11 +43,6 @@ Circle::Circle()
 	active = true;
 	Id = pCircle;
 }
-
-//Circle::Circle()
-	//: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
-//{
-//}
 
 Circle::~Circle(){}
 
@@ -71,11 +66,7 @@ AABB::AABB()
 	//GetOwner()->has(BoxCollider);
 }
 
-//AABB::AABB()
-//	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
-//{
-//
-//}
+
 AABB::~AABB()
 {
 }

@@ -5,7 +5,7 @@
 //#include "Resolution.h"
 //#include "math_utility.h"
 
-PhysicsManager *physics = nullptr;
+PhysicsManager *physics;
 
 
 
@@ -13,6 +13,7 @@ PhysicsManager *physics = nullptr;
 
 PhysicsManager::PhysicsManager()// : ISystem("Physics", SystemType::ST_Physics)
 {
+  physics = this;
 //	float *temp = NULL;
 //	GlobalSettings->GetFloatValue("___ PHYSICS SETTINGS ___", temp, false);
 //	GlobalSettings->GetFloatValue("Gravity", GRAVITY, true);
@@ -22,9 +23,8 @@ PhysicsManager::~PhysicsManager()
 {
 }
 
-bool PhysicsManager::Initialize()
+void PhysicsManager::Initialize()
 {
-	return true;
 }
 
 void PhysicsManager::Update(float dt)
@@ -161,7 +161,7 @@ void PhysicsManager::Step(float dt)
 	}
 
 	//Solve collisions
-	for (int j = 0; j < 10/*TEMP NUMBER*/; ++j)
+	for (int j = 0; j < 10; ++j)
 	{
 		for (unsigned int i = 0; i < contacts.size(); ++i)
 		{
@@ -221,7 +221,7 @@ void PhysicsManager::IntegrateVelocity(RigidBody *body, float dt)
 	{
 		return;
 	}
-	body->position += body->velocity * dt;
+	body->pTrans->SetPosition(body->pTrans->GetPositionXY() + body->velocity * dt);
 	body->orientation += body->angularVelocity * dt;
 	body->SetOrientation(body->orientation);
 	IntegrateForces(body, dt);

@@ -1,15 +1,9 @@
 #include "text.h"
 
-/* THIS CURRENTLY DOES NOT WORK .*/
-
-
-
-
-
-Shader* Text::shader = nullptr;
 std::map<GLchar, Character> Text::characters = {};
 GLuint Text::vertexArray = 0;
 GLuint Text::vertexBuffer = 0;
+GLuint Text::textureBuffer = 0;
 
 void Text::initText(Shader shader)
 {
@@ -27,16 +21,119 @@ void Text::initText(Shader shader)
   else
     std::cout << "Freetype successfully loaded a font." << std::endl;
 
+  //Sets up the Height and width of our font 
+  FT_Set_Pixel_Sizes(face, 0, 48);
+
   //Try to load a glypg from our font. 
   if (FT_Load_Char(face, 'X', FT_LOAD_RENDER))
     std::cout << "Failed to load test Glyph X" << std::endl;
   else
     std::cout << "Succssfully accessed glyph from font." << std::endl;
 
-  //Sets up the Height and width of our font 
-  FT_Set_Pixel_Sizes(face, 0, 48);
+
   //Normally, openGL will align textures to 4 bytes, but we want it to be 1 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1); 
+
+  generateTexturesFromFont(face);
+
+  GLfloat vertices[] = {
+    //X    Y     Z     
+    0.5f, -0.5f, 0.0f,
+    -0.5f, 0.5f, 0.0f,
+    -0.5f, -0.5f, 0.0f,
+    0.5f, -0.5f, 0.0f,
+    0.5f, 0.5f, 0.0f,
+    -0.5f, 0.5f, 0.0f
+  };
+
+  GLfloat texCoords[] = {
+    //X   Y
+    0.0f, 1.0f,
+    1.0f, 0.0f,
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f
+  };
+
+  // Configure VAO/VBO for texture quads
+  glGenVertexArrays(1, &vertexArray);
+  glGenBuffers(1, &vertexBuffer);
+  glGenBuffers(1, &textureBuffer);
+
+  //Binds the VAO and VBO so future GL fx calls will affet them
+  glBindVertexArray(vertexArray);
+  glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+
+  //Copies the Vertex data into the buffer
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+  //Sets up Vertex position information
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+  //Activates Vertex Position Information
+  glEnableVertexAttribArray(0);
+
+  //Binds the texture buffer and sends it data 
+  glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(texCoords), texCoords, GL_STREAM_DRAW);
+
+  //Sets up Texture coordinate information 
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+  //Activates texture coordinate information 
+  glEnableVertexAttribArray(1);
+
+  //We're done with the buffers now, so unbinds them 
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
+
+  FT_Done_Face(face);
+  FT_Done_FreeType(ft);
+
+}
+
+void Text::Update()
+{
+  GLint transformLocation, colorLocation;
+  std::string::const_iterator characterIt;
+  glm::vec3 initialTranslation;
+
+  glBindVertexArray(vertexArray);
+  shader.Use();
+
+  //saves initial translation since its gonna be moved over each time for diffferent letters
+  initialTranslation = translation;
+  for (characterIt = message.begin(); characterIt != message.end(); ++characterIt)
+  {
+    //Binds the texture from the map
+    glBindTexture(GL_TEXTURE_2D, characters[*characterIt].textureID);
+    //Moves over based on how far along we are in the word
+    translation += glm::vec3(((characterIt - message.begin())*-scale.x), 0, 0);
+
+    //Sends the text's transformation matrix into the shader
+    transformLocation = glGetUniformLocation(shader.Program, "uniformTransform");
+    glUniformMatrix4fv(transformLocation, 1, GL_FALSE,
+      glm::value_ptr(calculateTransform()));
+
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+ 
+    glBindTexture(GL_TEXTURE_2D, 0);
+    //Since we actually modified the translation, reset it for the next letter
+    translation = initialTranslation;
+  }
+
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
+}
+
+Text::Text(std::string initialMessage, Shader textShader)
+{
+  message = initialMessage;
+  translation = glm::vec3(0.0f, 0.0f, 0.0f);
+  scale = glm::vec3(-0.5f, 0.5f, 1.0f);
+  shader = textShader;
+}
+
+void Text::generateTexturesFromFont(FT_Face face)
+{
 
   //Loops through the first 128 characters and saves all their data into a map
   for (GLubyte c = 0; c < 128; c++)
@@ -56,15 +153,22 @@ void Text::initText(Shader shader)
     //p1 - target
     //p2 - level(has to do with mipmaps)
     //p3 - internal format of texture 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+    //p4 - width
+    //p5 - height
+    //p6 - always 0
+    //p7 - same as p3
+    //p8 - type of data
+    //p9 - data
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
       face->glyph->bitmap.width, face->glyph->bitmap.rows, 0,
-      GL_RGBA, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
+      GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
 
     // Set texture options
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
     // Now store character for later use
     Character character = {
       texture,
@@ -75,88 +179,19 @@ void Text::initText(Shader shader)
 
     Text::characters.insert(std::pair<GLchar, Character>(c, character));
   }
-
-  // Configure VAO/VBO for texture quads
-  glGenVertexArrays(1, &vertexArray);
-  glGenBuffers(1, &vertexBuffer);
-  glBindVertexArray(vertexArray);
-  glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-  //6 times 4 cause six verts in a quad, 4 
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindVertexArray(0);
-
-  Text::shader = &shader;
-
-  glm::mat4 projection = 
-    glm::ortho(0.0f, static_cast<GLfloat>(WINDOWWIDTH), 0.0f, static_cast<GLfloat>(WINDOWHEIGHT));
-  shader.Use();
-  glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-
-  FT_Done_Face(face);
-  FT_Done_FreeType(ft);
 }
 
-void Text::Update()
+//This is straight copypasta'd from the sprite class. I modeled this after the sprite class to get it to work,
+//and for some reason, It wont let me send matricies but through this function. I can look into it more later, 
+//I'm just trying to finish up what i've got so far. 
+glm::mat4 Text::calculateTransform(void)
 {
-  // Activate corresponding render state	
-  shader->Use();
-  glUniform3f(glGetUniformLocation(shader->Program, "textColor"), 1.0f, 1.0f, 1.0f);
-  //glActiveTexture(GL_TEXTURE0);
-  glBindVertexArray(vertexArray);
+  glm::mat4 transform;
+  transform = glm::translate(transform, translation);
+  //Since we're in 2d, rotation occurs about the Z axis
+  //Can be changed later if you want different types of rotation
+  transform = glm::rotate(transform, 0.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+  transform = glm::scale(transform, scale);
 
-  // Iterate through all characters
-  std::string::const_iterator c;
-  for (c = message.begin(); c != message.end(); c++)
-  {
-    Character ch = characters[*c];
-
-    GLfloat xpos = translation.x + ch.bearing.x * scale;
-    GLfloat ypos = translation.y - (ch.size.y - ch.bearing.y) * scale;
-
-    GLfloat w = ch.size.x * scale;
-    GLfloat h = ch.size.y * scale;
-
-    GLfloat vertices[6][4] = {
-        { xpos, ypos + h, 0.0, 0.0 },
-        { xpos, ypos, 0.0, 1.0 },
-        { xpos + w, ypos, 1.0, 1.0 },
-
-        { xpos, ypos + h, 0.0, 0.0 },
-        { xpos + w, ypos, 1.0, 1.0 },
-        { xpos + w, ypos + h, 1.0, 0.0 }
-    };
-
-    glBindTexture(GL_TEXTURE_2D, ch.textureID);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
-    translation.x += (ch.advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64)
-  }
-  glBindVertexArray(0);
-  glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-Text::Text()
-{
-  std::cout << "This default constructor ain't shit but hoes and tricks" << std::endl;
-}
-
-Text::~Text()
-{
-  std::cout << "This destructor ain't shit but hoes and tricks" << std::endl;
-}
-
-Text::Text(std::string initialMessage)
-{
-  message = initialMessage;
-  color = glm::vec3(1.0f, 1.0f, 1.0f);
-  translation = glm::vec3(0.0f, 0.0f, 0.0f);
-  scale = 1.0f;
+  return transform;
 }

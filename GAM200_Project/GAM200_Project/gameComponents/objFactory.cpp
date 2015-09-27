@@ -4,15 +4,16 @@
 #include <random>
 
 #include "../AssertionError/AssertionError.h"
-
+bool FACTORY_EXISTS;
 objFactory::objFactory()
 {
-  
+  FACTORY = this;
+  FACTORY_EXISTS = true;
 }
 
-gameObject* objFactory::makeObject(std::string Name)
+GameObjectComposition* objFactory::makeObject(std::string Name)
 {
-  gameObject *toReturn = new gameObject(Name);
+  GameObjectComposition *toReturn = new GameObjectComposition();
 
   std::mt19937 init_generator;//Mersenne Twister 19937 generator
   init_generator.seed(std::random_device()());
@@ -20,21 +21,20 @@ gameObject* objFactory::makeObject(std::string Name)
 
   int gen = idgen(init_generator);
 
-  while (std::find(objIDs.begin(), objIDs.end(), gen) != objIDs.end())
+  while (gameObjs[gen] != NULL)
   {
     //already using gen
     gen = idgen(init_generator);
   }
 
-  toReturn->setObjID(gen);
-  objIDs.push_back(gen);
-  gameObjs.push_back(toReturn);
+  toReturn->ObjectId = gen;
+  gameObjs[gen] = toReturn;
   return toReturn;
 }
 
 void objFactory::destroyObject(int killID)
 {
-  if (std::find(objIDs.begin(), objIDs.end(), killID) == objIDs.end())
+  if (gameObjs[killID] == NULL)
   {
     //already using gen
     throw AssertionError(std::string("Object ID " + std::to_string(killID)
@@ -43,9 +43,30 @@ void objFactory::destroyObject(int killID)
   }
   else
   {
-    std::vector<int>::iterator pos = std::find(objIDs.begin(), objIDs.end(), killID);
-    int whereAt = pos - objIDs.begin();
-    objIDs.erase(pos);
-    gameObjs.at(whereAt)->~gameObject();
+    gameObjs.at(killID)->~GameObjectComposition();
+    gameObjs.erase(killID);
   }
+}
+void objFactory::destroyAllObjects()
+{
+  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    destroyObject(it->first);
+  }
+
+  gameObjs.clear();
+}
+// Overloaded methods
+void objFactory::Initialize()
+{
+
+}
+void objFactory::Update(float dt)
+{
+
+}
+void objFactory::Shutdown()
+{
+
 }

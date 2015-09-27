@@ -45,6 +45,14 @@ Vector2& Transform::GetPositionXY()
 	xyVector.y = position.y;
 	return xyVector;
 }
+float Transform::GetPositionX()
+{
+  return position.x;
+}
+float Transform::GetPositionY()
+{
+  return position.x;
+}
 
 void Transform::SetPosition(const Vector2 pos)
 {

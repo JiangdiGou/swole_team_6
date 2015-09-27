@@ -2,7 +2,6 @@
 #define PRIMITIVE_H
 #include <cstdlib>
 #include "Body.h"
-#include "Transform.h"
 //#include "Precompiled.h"
 #include "../Composition.h"
 #include "Resolution.h"

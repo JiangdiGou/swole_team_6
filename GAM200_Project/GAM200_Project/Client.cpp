@@ -21,6 +21,8 @@
 #include "gameComponents/baseObject.h"
 #include "gameComponents/objFactory.h"
 
+#include "../Composition.h"
+
 #include "Utilities.h"
 #include "_EntryPoint.h"
 
@@ -67,8 +69,8 @@ void factoryRoutine()
 {
   printstr("(Factory Test 1)");
   objFactory *makeThings = new objFactory();
-  gameObject unicorn = *makeThings->makeObject("SampleThing");
-  std::cout<<"Unicorn's ID: "<<unicorn.getObjID()<<std::endl;
+  GameObjectComposition* unicorn = makeThings->makeObject("SampleThing");
+  std::cout<<"Unicorn's ID: "<<unicorn->GetId()<<std::endl;
   if (ILLEGAL_DEMO)
   {
 	  std::cout << "Attempting destruction of illegal object #23.";

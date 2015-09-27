@@ -79,8 +79,8 @@ void Manifold::AppyImpulse(void)
 	for (unsigned int i = 0; i < contactCount; ++i)
 	{
 		// Calculate radii from center of mass to contact
-		Vector2 radii_a = contact[i] - A->body->position;
-		Vector2 radii_b = contact[i] - B->body->position;
+		Vector2 radii_a = contact[i] - A->body->pTrans->GetPositionXY();
+		Vector2 radii_b = contact[i] - B->body->pTrans->GetPositionXY();
 
 		// Relative velocity at contact
 		Vector2 relativeVel = B->body->velocity + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
@@ -157,7 +157,7 @@ void Manifold::CorrectPosition(void)
 	// Allows object to penetrate slightly without position correction from occurring 
 	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent;
 
-	A->body->position -= correction * A->body->invMass;
-	B->body->position += correction * B->body->invMass;
+  A->body->pTrans->SetPosition(A->body->pTrans->GetPositionXY() - correction * A->body->invMass);
+  B->body->pTrans->SetPosition(B->body->pTrans->GetPositionXY() + correction * B->body->invMass);
 
 }

@@ -12,12 +12,10 @@
 #include <Windows.h>
 #include "instancedSprite.h"
 #include "FramerateController.h"
+#include "text.h"
 
-#include "ft2build.h"
-#include FT_FREETYPE_H
-
-HDC deviceContext;
-HGLRC renderingContext;
+HDC deviceContextGFX;
+HGLRC renderingContextGFX;
 
 Sprite* pPlayer;
 Texture* pTexturePlayerRun;
@@ -32,18 +30,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
 int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
 {
-  //Openas a console for debugging and testing 
   AllocConsole();
   freopen("CONOUT$", "w", stdout);
-  
-  FT_Library ft;
-  if (FT_Init_FreeType(&ft))
-    std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
-  
-  FT_Face face;
-  if (FT_New_Face(ft, "resources/fonts/OpenSans-Regular.ttf", 0, &face))
-    std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
-
 
   //Stores the window being created
   HWND window; 
@@ -76,6 +64,10 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   */
   pPlayer = &player;
 
+  Text::initText(basicShader);
+  Text textTest1 = Text("swoLe team 6", basicShader);
+  Text textFps = Text("FPS: ", basicShader);
+
 	//Sets up textures 
   Texture textureSmiley = Texture("resources/Smiley1.png");
   Texture textureExcited = Texture("resources/Smiley2.png");
@@ -99,40 +91,53 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   player4.texture = texturePlayerRun;
   */
   //Sets inital values of sprites for their respective tests
-  smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
-  excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
-  calm.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-  smiley.scale = glm::vec3(0.15f, 0.15f, 0.15f);
-	animated.translation = glm::vec3(-1.5f, 1.0f, 0.0f);
+ // smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
+ // excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
+ // calm.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+ // smiley.scale = glm::vec3(0.15f, 0.15f, 0.15f);
+	//animated.translation = glm::vec3(-1.5f, 1.0f, 0.0f);
 
 
 	//I know three parts to drawing isnt ideal but this will eventually be in a larger
 	//init graphics function or something. 
-	initDebugDraw(basicShader); 
+	//initDebugDraw(basicShader); 
   basicShader.Use();
+
+  //textTest1.translation = glm::vec3(-2.5, -1.5, 0);
+  //textFps.scale = glm::vec3(-0.35, 0.35, 1);
+  //textFps.translation = glm::vec3(1.25, 1.75, 0);
 
   //This should probably eventually use a game state manager like cs230
   //But this is fine for now 
   while (!shouldQuit)
   {
-    wglMakeCurrent(deviceContext, renderingContext);
+    wglMakeCurrent(deviceContextGFX, renderingContextGFX);
 
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.5f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    testColor(calm);
-    testTranslate(calm);
-    testRotation(excited);
-    testScaling(smiley);
+
+    //testColor(calm);
+    //testTranslate(calm);
+    //testRotation(excited);
+    //testScaling(smiley);
 
     basicCamera.Update();
 
-    Sprite::drawSprites();
+
+   Sprite::drawSprites();
+   textTest1.Update();
+
+   std::string fpsMessage;
+   fpsMessage = "FPS: ";
+   fpsMessage += std::to_string((int)(1000.0f / FramerateController::getPreviousDt()));
+   textFps.message = fpsMessage;
+   textFps.Update();
 
 	  //Again, not ideal, but there will eventually be a draw all function or something
-	  debugDrawFrame();
+	  //debugDrawFrame();
 
-	  debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
+	/*  debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
 	  debugDrawLine(excited.translation, calm.translation, glm::vec3());
 	  debugDrawLine(animated.translation, calm.translation, glm::vec3());
 
@@ -142,25 +147,26 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
 	  debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
 	  debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
-
+*/
     
     FramerateController::frameEnd();
-    SwapBuffers(deviceContext);
+    SwapBuffers(deviceContextGFX);
 
     if (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
     {
       TranslateMessage(&msg);
       DispatchMessage(&msg);
     }
-
-    wglMakeCurrent(NULL, NULL);
-
   }
   return 0;
 }
 
 //Callback function 
+#ifdef GFX_RUN
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
+#else
+int falseCallback1(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
+#endif
 {
   switch (msg)
   {
@@ -170,19 +176,18 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		{
 			case VK_LEFT:
 			{
-				pPlayer->translation.x = pPlayer->translation.x -= 0.25;
-				pPlayer->scale.x = -1;
-				pPlayer->texture = *pTexturePlayerRun;
+				//pPlayer->translation.x = pPlayer->translation.x -= 0.25;
+				//pPlayer->scale.x = -1;
+				//pPlayer->texture = *pTexturePlayerRun;
         break;
 			}
 			case VK_RIGHT:
 			{
-				pPlayer->translation.x = pPlayer->translation.x += 0.25;
-				pPlayer->scale.x = 1;
-				pPlayer->texture = *pTexturePlayerRun;
+				//pPlayer->translation.x = pPlayer->translation.x += 0.25;
+				//pPlayer->scale.x = 1;
+				//pPlayer->texture = *pTexturePlayerRun;
         break;
 			}
-
 			default:
 			{
 				if (pPlayer->texture.ID != pTexturePlayerIdle->ID)
@@ -197,10 +202,10 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
   {
     //Creates a Dummy Context so a real context can be created
     //Why? I dunno. They made it this way. It's dumb. 
-    deviceContext = GetDC(hWnd);
-    setupPixelFormatDescriptor(deviceContext);
-    HGLRC dummyContext = wglCreateContext(deviceContext);
-    wglMakeCurrent(deviceContext, dummyContext);
+    deviceContextGFX = GetDC(hWnd);
+    setupPixelFormatDescriptor(deviceContextGFX);
+    HGLRC dummyContext = wglCreateContext(deviceContextGFX);
+    wglMakeCurrent(deviceContextGFX, dummyContext);
 
     //Initalizes Glew
     glewExperimental = GL_TRUE;
@@ -219,16 +224,17 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     };
       
     //Creates the Real context and activates it 
-    renderingContext = wglCreateContextAttribsARB(deviceContext, 0, contextAttributes);
-    wglMakeCurrent(deviceContext, renderingContext);
+    renderingContextGFX = wglCreateContextAttribsARB(deviceContextGFX, 0, contextAttributes);
+    wglMakeCurrent(deviceContextGFX, renderingContextGFX);
       
     //Deletes Dummy Context 
     wglDeleteContext(dummyContext);
 
-    if (!renderingContext)
+    if (!renderingContextGFX)
       std::cout << "Failed to Create Rendering Context." << std::endl;
     else
       std::cout << "Redering Context Created Successfully." << std::endl;
+  
   }
   break;
 

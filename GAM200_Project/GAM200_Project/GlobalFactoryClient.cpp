@@ -7,6 +7,6 @@ int main(int argc, char **argv)
 int falseMain4(int argc, char **argv)
 #endif
 {
-	FACTORY = new objFactory();
+	//FACTORY = new objFactory();
 	return 0;
 }

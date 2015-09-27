@@ -5,7 +5,7 @@
 //  Created by Nolan Yoo on 9/18/15.
 //  Copyright (c) 2015 Nolan Yoo. All rights reserved.
 //
-
+/*
 #ifndef BASEOBJECT_H
 #define BASEOBJECT_H
 
@@ -13,7 +13,7 @@
 #include <string>
 #include "../engineGraphics/glm/vec3.hpp"
 
-class Transform
+/*class Transform
 {
     glm::vec3 translation;
   glm::vec3 rotation;
@@ -32,6 +32,4 @@ public:
   ~gameObject();
   int getObjID();
   void setObjID(int newID);
-};
-
-#endif
+};*/

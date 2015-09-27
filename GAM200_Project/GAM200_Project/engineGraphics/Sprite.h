@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include <vector>
 #include "Texture.h"
+#include "../physicsLib/Transform.h"
 #include "../Composition.h"
 
 class Sprite : public GameComponent
@@ -19,10 +20,11 @@ public:
 	~Sprite();
 
 	//Transformations
+  /*
 	glm::vec3 translation;
 	GLfloat rotation;
 	glm::vec3 scale;
-
+  */
 
 	//Color and Texture
 	glm::vec4 color;

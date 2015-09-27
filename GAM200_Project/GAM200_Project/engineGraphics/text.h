@@ -14,6 +14,8 @@
 struct Character
 {
   GLuint textureID;  //Handle
+  //This is mathmatical information about the character that i hopefully
+  //will be able to use later to make the rendered text look less bad
   glm::ivec2 size;
   glm::ivec2 bearing; //Offset from baseline to top of glyph
   GLuint advance;     //Offset to next glyph
@@ -22,25 +24,24 @@ struct Character
 class Text : public GameComponent
 {
 public:
-  Text();
-  ~Text();
-  Text(std::string initialMessage);
-
-  void RenderText(GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+  Text(std::string initialMessage, Shader textShader);
   void Update() override;
 
   static void initText(Shader shader);
 
   std::string message;
-  glm::vec3 color;
   glm::vec3 translation;
-  float scale;
+  glm::vec3 scale;
 
 private:
-  static Shader* shader;
+  Shader shader;
+  glm::mat4 calculateTransform(void);
   static std::map<GLchar, Character> characters;
   static GLuint vertexArray;
   static GLuint vertexBuffer;
+  static GLuint textureBuffer;
+  //Void b/c acts on the map characters 
+  static void generateTexturesFromFont(FT_Face face);
 };
 
 
