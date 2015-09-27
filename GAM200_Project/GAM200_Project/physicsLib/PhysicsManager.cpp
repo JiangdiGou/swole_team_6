@@ -160,7 +160,7 @@ void PhysicsManager::Step(float dt)
 	}
 
 	//Solve collisions
-	for (int j = 0; j < 10/*TEMP NUMBER*/; ++j)
+	for (int j = 0; j < 10; ++j)
 	{
 		for (unsigned int i = 0; i < contacts.size(); ++i)
 		{
@@ -220,7 +220,7 @@ void PhysicsManager::IntegrateVelocity(RigidBody *body, float dt)
 	{
 		return;
 	}
-  body->pTrans->SetPosition(body->pTrans->GetPositionXY() + body->velocity * dt);
+	body->pTrans->SetPosition(body->pTrans->GetPositionXY() + body->velocity * dt);
 	body->orientation += body->angularVelocity * dt;
 	body->SetOrientation(body->orientation);
 	IntegrateForces(body, dt);

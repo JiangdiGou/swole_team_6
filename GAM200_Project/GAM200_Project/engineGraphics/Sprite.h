@@ -5,6 +5,7 @@
 #include <vector>
 #include "Texture.h"
 #include "../Composition.h"
+#include "../physicsLib/Body.h"
 
 class Sprite : public GameComponent
 {
@@ -23,7 +24,8 @@ public:
 	GLfloat rotation;
 	glm::vec3 scale;
 
-
+	//RigidBody *pbody;
+	
 	//Color and Texture
 	glm::vec4 color;
 	Texture texture;
@@ -44,6 +46,7 @@ private:
   //A sprite's personal draw function, called by drawsprites 
   void draw(void);
 
+ 
   //Calculates a sprite's transformation matrix using the 
   glm::mat4 calculateTransorm(void);
 

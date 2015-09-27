@@ -13,6 +13,7 @@
 #include "instancedSprite.h"
 #include "FramerateController.h"
 #include "text.h"
+#include "../physicsLib/Body.h"
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -177,6 +178,14 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 				pPlayer->translation.x = pPlayer->translation.x -= 0.25;
 				pPlayer->scale.x = -1;
 				pPlayer->texture = *pTexturePlayerRun;
+
+			//case VK_UP:
+			//{
+				//pPlayer->pbody->velocity.y += 0.25;
+				//pPlayer->translation.y = pPlayer->translation.y += 0.25;
+				//pPlayer->scale.x = 1;
+				//pPlayer->texture = *pTexturePlayerRun;
+			//}
         break;
 			}
 			case VK_RIGHT:

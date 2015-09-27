@@ -44,11 +44,6 @@ Circle::Circle()
 	Id = pCircle;
 }
 
-//Circle::Circle()
-	//: Primitive(Owner, pCircle, Component_Type::CT_CircleCollider)
-//{
-//}
-
 Circle::~Circle(){}
 
 void Circle::Initialize()
@@ -71,11 +66,7 @@ AABB::AABB()
 	//GetOwner()->has(BoxCollider);
 }
 
-//AABB::AABB()
-//	: Primitive(Owner, pAABB, Component_Type::CT_BoxCollider)
-//{
-//
-//}
+
 AABB::~AABB()
 {
 }
