@@ -12,9 +12,7 @@
 #include <Windows.h>
 #include "instancedSprite.h"
 #include "FramerateController.h"
-
-#include "ft2build.h"
-#include FT_FREETYPE_H
+#include "text.h"
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -32,18 +30,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
 int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
 {
-  //Openas a console for debugging and testing 
   AllocConsole();
   freopen("CONOUT$", "w", stdout);
-  
-  FT_Library ft;
-  if (FT_Init_FreeType(&ft))
-    std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
-  
-  FT_Face face;
-  if (FT_New_Face(ft, "resources/fonts/OpenSans-Regular.ttf", 0, &face))
-    std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
-
 
   //Stores the window being created
   HWND window; 
@@ -75,6 +63,10 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   Sprite player4 = Sprite(basicShader);
   */
   pPlayer = &player;
+
+  Text::initText(basicShader);
+  Text textTest1 = Text("swoLe team 6", basicShader);
+  Text textFps = Text("FPS: ", basicShader);
 
 	//Sets up textures 
   Texture textureSmiley = Texture("resources/Smiley1.png");
@@ -111,6 +103,10 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 	initDebugDraw(basicShader); 
   basicShader.Use();
 
+  textTest1.translation = glm::vec3(-2.5, -1.5, 0);
+  textFps.scale = glm::vec3(-0.35, 0.35, 1);
+  textFps.translation = glm::vec3(1.25, 1.75, 0);
+
   //This should probably eventually use a game state manager like cs230
   //But this is fine for now 
   while (!shouldQuit)
@@ -127,7 +123,15 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
     basicCamera.Update();
 
-    Sprite::drawSprites();
+
+   Sprite::drawSprites();
+   textTest1.Update();
+
+   std::string fpsMessage;
+   fpsMessage = "FPS: ";
+   fpsMessage += std::to_string((int)(1000.0f / FramerateController::getPreviousDt()));
+   textFps.message = fpsMessage;
+   textFps.Update();
 
 	  //Again, not ideal, but there will eventually be a draw all function or something
 	  debugDrawFrame();

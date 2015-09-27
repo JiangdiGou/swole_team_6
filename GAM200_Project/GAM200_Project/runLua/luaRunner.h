@@ -1,3 +1,5 @@
+//author Nolan Yoo
+
 #include <string>
 #include <iostream>
 
