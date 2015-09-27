@@ -204,6 +204,9 @@
     <ClInclude Include="GAM200_Project\main.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\graphicsManager.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -307,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Core.cpp">
       <Filter>BaseEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\graphicsManager.cpp">
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

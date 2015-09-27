@@ -15,8 +15,8 @@
 #include "text.h"
 #include "../physicsLib/Body.h"
 
-HDC deviceContext;
-HGLRC renderingContext;
+HDC deviceContextGFX;
+HGLRC renderingContextGFX;
 
 Sprite* pPlayer;
 Texture* pTexturePlayerRun;
@@ -112,9 +112,9 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   //But this is fine for now 
   while (!shouldQuit)
   {
-    wglMakeCurrent(deviceContext, renderingContext);
+    wglMakeCurrent(deviceContextGFX, renderingContextGFX);
 
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.5f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     testColor(calm);
@@ -150,22 +150,23 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
     
     FramerateController::frameEnd();
-    SwapBuffers(deviceContext);
+    SwapBuffers(deviceContextGFX);
 
     if (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
     {
       TranslateMessage(&msg);
       DispatchMessage(&msg);
     }
-
-    wglMakeCurrent(NULL, NULL);
-
   }
   return 0;
 }
 
 //Callback function 
+#ifdef GFX_RUN
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
+#else
+int falseCallback1(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
+#endif
 {
   switch (msg)
   {
@@ -195,7 +196,6 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 				pPlayer->texture = *pTexturePlayerRun;
         break;
 			}
-
 			default:
 			{
 				if (pPlayer->texture.ID != pTexturePlayerIdle->ID)
@@ -210,10 +210,10 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
   {
     //Creates a Dummy Context so a real context can be created
     //Why? I dunno. They made it this way. It's dumb. 
-    deviceContext = GetDC(hWnd);
-    setupPixelFormatDescriptor(deviceContext);
-    HGLRC dummyContext = wglCreateContext(deviceContext);
-    wglMakeCurrent(deviceContext, dummyContext);
+    deviceContextGFX = GetDC(hWnd);
+    setupPixelFormatDescriptor(deviceContextGFX);
+    HGLRC dummyContext = wglCreateContext(deviceContextGFX);
+    wglMakeCurrent(deviceContextGFX, dummyContext);
 
     //Initalizes Glew
     glewExperimental = GL_TRUE;
@@ -232,16 +232,17 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     };
       
     //Creates the Real context and activates it 
-    renderingContext = wglCreateContextAttribsARB(deviceContext, 0, contextAttributes);
-    wglMakeCurrent(deviceContext, renderingContext);
+    renderingContextGFX = wglCreateContextAttribsARB(deviceContextGFX, 0, contextAttributes);
+    wglMakeCurrent(deviceContextGFX, renderingContextGFX);
       
     //Deletes Dummy Context 
     wglDeleteContext(dummyContext);
 
-    if (!renderingContext)
+    if (!renderingContextGFX)
       std::cout << "Failed to Create Rendering Context." << std::endl;
     else
       std::cout << "Redering Context Created Successfully." << std::endl;
+  
   }
   break;
 
