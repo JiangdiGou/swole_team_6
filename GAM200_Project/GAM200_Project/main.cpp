@@ -11,6 +11,7 @@
 #include "main.h"
 #include "_EntryPoint.h"
 #include "graphicsManager.h"
+#include "GameLogic.h"
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -41,13 +42,14 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   Shader coreShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
   engine->AddSystem(new GraphicsManager(coreShader, coreShader));
+  engine->AddSystem(new GameLogic());
 
   engine->Initialize();
 
   Camera basicCamera = Camera();
   /******************/
-  GameStateMgrInit(GS_GAME);
-  while (gGameStateCurr != GS_QUIT)
+  /*GameStateMgrInit(GS_GAME);
+  /*while (gGameStateCurr != GS_QUIT)
   {
 
     // If not restarting, load the gamestate
@@ -77,7 +79,9 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
-  }
+  }*/
+  engine->GameLoop();
+
   FACTORY->destroyAllObjects();
 
   engine->DestroySystems();
