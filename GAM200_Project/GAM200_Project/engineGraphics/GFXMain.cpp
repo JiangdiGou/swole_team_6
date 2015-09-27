@@ -91,21 +91,21 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   player4.texture = texturePlayerRun;
   */
   //Sets inital values of sprites for their respective tests
-  smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
-  excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
-  calm.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-  smiley.scale = glm::vec3(0.15f, 0.15f, 0.15f);
-	animated.translation = glm::vec3(-1.5f, 1.0f, 0.0f);
+ // smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
+ // excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
+ // calm.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+ // smiley.scale = glm::vec3(0.15f, 0.15f, 0.15f);
+	//animated.translation = glm::vec3(-1.5f, 1.0f, 0.0f);
 
 
 	//I know three parts to drawing isnt ideal but this will eventually be in a larger
 	//init graphics function or something. 
-	initDebugDraw(basicShader); 
+	//initDebugDraw(basicShader); 
   basicShader.Use();
 
-  textTest1.translation = glm::vec3(-2.5, -1.5, 0);
-  textFps.scale = glm::vec3(-0.35, 0.35, 1);
-  textFps.translation = glm::vec3(1.25, 1.75, 0);
+  //textTest1.translation = glm::vec3(-2.5, -1.5, 0);
+  //textFps.scale = glm::vec3(-0.35, 0.35, 1);
+  //textFps.translation = glm::vec3(1.25, 1.75, 0);
 
   //This should probably eventually use a game state manager like cs230
   //But this is fine for now 
@@ -116,10 +116,11 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     glClearColor(0.5f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    testColor(calm);
-    testTranslate(calm);
-    testRotation(excited);
-    testScaling(smiley);
+
+    //testColor(calm);
+    //testTranslate(calm);
+    //testRotation(excited);
+    //testScaling(smiley);
 
     basicCamera.Update();
 
@@ -134,9 +135,9 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
    textFps.Update();
 
 	  //Again, not ideal, but there will eventually be a draw all function or something
-	  debugDrawFrame();
+	  //debugDrawFrame();
 
-	  debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
+	/*  debugDrawLine(smiley.translation, calm.translation, glm::vec3(1.0f, 1.0f, 1.0f));
 	  debugDrawLine(excited.translation, calm.translation, glm::vec3());
 	  debugDrawLine(animated.translation, calm.translation, glm::vec3());
 
@@ -146,7 +147,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
 	  debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
 	  debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
-
+*/
     
     FramerateController::frameEnd();
     SwapBuffers(deviceContextGFX);
@@ -175,16 +176,16 @@ int falseCallback1(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		{
 			case VK_LEFT:
 			{
-				pPlayer->translation.x = pPlayer->translation.x -= 0.25;
-				pPlayer->scale.x = -1;
-				pPlayer->texture = *pTexturePlayerRun;
+				//pPlayer->translation.x = pPlayer->translation.x -= 0.25;
+				//pPlayer->scale.x = -1;
+				//pPlayer->texture = *pTexturePlayerRun;
         break;
 			}
 			case VK_RIGHT:
 			{
-				pPlayer->translation.x = pPlayer->translation.x += 0.25;
-				pPlayer->scale.x = 1;
-				pPlayer->texture = *pTexturePlayerRun;
+				//pPlayer->translation.x = pPlayer->translation.x += 0.25;
+				//pPlayer->scale.x = 1;
+				//pPlayer->texture = *pTexturePlayerRun;
         break;
 			}
 			default:

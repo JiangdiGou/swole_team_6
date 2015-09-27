@@ -84,9 +84,11 @@ Sprite::Sprite(Shader intendedShader)
 
 	//Initalizes remaining members
 	shader = intendedShader;
+  /*
 	scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	translation = glm::vec3(0.0f, 0.0f, 0.0f);
 	rotation = 0;
+  */
 	color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
   sprites.push_back(this);
@@ -113,12 +115,24 @@ Sprite::~Sprite()
 //**********************
 glm::mat4 Sprite::calculateTransorm(void)
 {
-	glm::mat4 transform;
-	transform = glm::translate(transform, translation);
+  glm::mat4 transform, translate, rotate, scale;
+  Transform *transformComponent = GetOwner()->has(Transform)
+
+    transform = glm::translate(transform,
+    glm::vec3(
+    transformComponent->GetPosition().x,
+    transformComponent->GetPosition().y,
+    transformComponent->GetPosition().z
+    ));
 	//Since we're in 2d, rotation occurs about the Z axis
 	//Can be changed later if you want different types of rotation
-	transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-	transform = glm::scale(transform, scale);
+	transform = glm::rotate(transform, (transformComponent->GetRotation()).z, glm::vec3(0.0f, 0.0f, 1.0f));
+	transform = glm::scale(transform, 
+    glm::vec3(
+    transformComponent->GetPosition().x,
+    transformComponent->GetPosition().y,
+    transformComponent->GetPosition().z
+    ));
 
 	return transform;
 }
