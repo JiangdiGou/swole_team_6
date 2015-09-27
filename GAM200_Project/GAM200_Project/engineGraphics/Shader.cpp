@@ -169,5 +169,5 @@ GLuint Shader::compileShaderProgram(GLuint vertexShader, GLuint fragmentShader)
 //**********************
 void Shader::Use()
 {
-	glUseProgram(this->Program);
+	glUseProgram(Program);
 }
