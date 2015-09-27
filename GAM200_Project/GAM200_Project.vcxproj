@@ -23,6 +23,7 @@
     <ClInclude Include="GAM200_Project\engineGraphics\FramerateController.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\ft2build.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\graphicsManager.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\ShaderManager.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="GAM200_Project\engineGraphics\FramerateController.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\graphicsManager.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
