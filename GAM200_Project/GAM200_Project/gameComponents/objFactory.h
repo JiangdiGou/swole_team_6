@@ -1,21 +1,27 @@
 //author Nolan Yoo
 
-#include "baseObject.h"
+#include "../Composition.h"
 #include <stdlib.h>
 #include <vector>
+#include "../System.h"
 
 #ifndef OBJFACTORY_H
 #define OBJFACTORY_H
 
-class objFactory
+class objFactory : public ISystem
 {
 private:
   std::vector<int> objIDs;
-  std::vector<gameObject*> gameObjs;
+  std::vector<GameObjectComposition*> gameObjs;
 public:
   objFactory();
-  gameObject* makeObject(std::string Name);
+  GameObjectComposition* makeObject(std::string Name);
   void destroyObject(int killID);
+  void destroyAllObjects();
+  // Overloaded methods
+  void Initialize();// override;
+  void Update(float dt);//override;
+  void Shutdown();// override;
 
 };
 extern objFactory * FACTORY;

@@ -49,6 +49,9 @@
     <Filter Include="AssertionError">
       <UniqueIdentifier>{4479c391-ffb0-4b74-8e83-20d613787791}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BaseEngine\Core">
+      <UniqueIdentifier>{5ce4221d-ebdc-4cc1-a6ed-7238ffe65ee3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -126,17 +129,11 @@
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h">
       <Filter>GameState</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\main.h">
-      <Filter>Universal</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\logger\logger.h">
       <Filter>logger</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\_EntryPoint.h">
       <Filter>Universal</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\gameComponents\baseObject.h">
-      <Filter>gameObject</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h">
       <Filter>BaseEngine\Factory</Filter>
@@ -198,6 +195,15 @@
     <ClInclude Include="GAM200_Project\AssertionError\AssertionError.h">
       <Filter>AssertionError</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\System.h">
+      <Filter>BaseEngine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Core.h">
+      <Filter>BaseEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\main.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -233,9 +239,6 @@
     <ClCompile Include="GAM200_Project\Utilities.cpp">
       <Filter>Universal</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\Client.cpp">
-      <Filter>Universal</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\gameLevel.cpp">
       <Filter>Universal</Filter>
     </ClCompile>
@@ -250,9 +253,6 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp">
       <Filter>Systems\engineGraphics</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\gameComponents\baseObject.cpp">
-      <Filter>gameObject</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp">
       <Filter>BaseEngine\Factory</Filter>
@@ -301,6 +301,12 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp">
       <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Client.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Core.cpp">
+      <Filter>BaseEngine\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -92,21 +92,11 @@ void RigidBody::Update()
 
 void RigidBody::Release(){}
 
-void RigidBody::setPosition(const Vector2 &position)
-{
-  this->position = position;
-}
-
 //void RigidBody::setPosition(const float x, const float y)
 //{
 //  //positi
 //
 //}
-
-Vector2 RigidBody::getPosition() const
-{
-  return position;
-}
 
 void RigidBody::setAcceleration(const Vector2 &acc)
 {
@@ -217,11 +207,6 @@ bool RigidBody::IsStatic()
 bool RigidBody::CheckDetectsCollision()
 {
   return isGhost;
-}
-
-void RigidBody::MovePosition (Vector2 &pos)
-{
-  position = pos;
 }
 
 void RigidBody::SetDensity(float density)

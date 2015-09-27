@@ -14,7 +14,7 @@
 //class Circle;
 //class AABB;
 
-//RigidBody Componenet
+//RigidBody GameComponent
 class RigidBody : public GameComponent
 	{
 	public:
@@ -24,9 +24,8 @@ class RigidBody : public GameComponent
 		friend class Circle;
 		friend class AABB;
 		//WE NEED A TRANSFORM COMPONET
-		Transform *pTrans;
+    Transform *pTrans;
 		
-		Vector2 position;       // Holds the position of the rigid body
 		Vector2 acceleration;
 		Vector2 velocity;       // Holds the linear velocity of the rigid body
 		Vector2 forceAccum;     // Accumlated force
@@ -57,10 +56,6 @@ class RigidBody : public GameComponent
 		void Release() override;
 
 		void set(float mass);
-		// Sets the position
-		void setPosition(const Vector2 &position);
-		void setPosition(const float x, const float y);
-		Vector2 getPosition() const;
 
 		// Set the acceleration
 		void setAcceleration(const Vector2 &acc);
@@ -80,12 +75,11 @@ class RigidBody : public GameComponent
 
 		void AddForce(const Vector2 &force);
 		void SetStatic(void);
-		void ApplyImpulse(const Vector2 & impulse, const Vector2 & contactVec);
+    void ApplyImpulse(const Vector2& impulse, const Vec2D& contactVec);
 		void SetOrientation(float radians);
 
 		bool IsStatic();
 		bool CheckDetectsCollision();
-		void MovePosition(Vector2 &pos); // Moves the rigidbody to position.
 		void SetDensity(float density);  //Sets the mass based on the attached colliders assuming a constant density.
 
 

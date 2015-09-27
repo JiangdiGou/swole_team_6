@@ -17,11 +17,10 @@ public:
   ///Initializes all systems in the game.
   void Initialize();
 private:
-  //Tracks all the systems the game uses
+  //System Container
   std::vector<ISystem*> Systems;
   //The last time the game was updated
   unsigned LastTime;
-  //Is the game running (true) or being shut down (false)?
   bool GameActive;
 };
 #endif

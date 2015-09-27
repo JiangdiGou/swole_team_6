@@ -4,7 +4,7 @@ class ISystem
 {
 public:
   ///All systems are updated every game frame.
-  virtual void Update(float timeslice) = 0;
+  virtual void Update(float dt) = 0;
 
   ///Initialize the system.
   virtual void Initialize() {};
