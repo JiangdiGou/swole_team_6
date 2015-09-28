@@ -4,10 +4,11 @@
 #include <random>
 
 #include "../AssertionError/AssertionError.h"
-
+bool FACTORY_EXISTS;
 objFactory::objFactory()
 {
-  
+  FACTORY = this;
+  FACTORY_EXISTS = true;
 }
 
 GameObjectComposition* objFactory::makeObject(std::string Name)
@@ -20,21 +21,20 @@ GameObjectComposition* objFactory::makeObject(std::string Name)
 
   int gen = idgen(init_generator);
 
-  while (std::find(objIDs.begin(), objIDs.end(), gen) != objIDs.end())
+  while (gameObjs[gen] != NULL)
   {
     //already using gen
     gen = idgen(init_generator);
   }
 
   toReturn->ObjectId = gen;
-  objIDs.push_back(gen);
-  gameObjs.push_back(toReturn);
+  gameObjs[gen] = toReturn;
   return toReturn;
 }
 
 void objFactory::destroyObject(int killID)
 {
-  if (std::find(objIDs.begin(), objIDs.end(), killID) == objIDs.end())
+  if (gameObjs[killID] == NULL)
   {
     //already using gen
     throw AssertionError(std::string("Object ID " + std::to_string(killID)
@@ -43,17 +43,19 @@ void objFactory::destroyObject(int killID)
   }
   else
   {
-    std::vector<int>::iterator pos = std::find(objIDs.begin(), objIDs.end(), killID);
-    int whereAt = pos - objIDs.begin();
-    objIDs.erase(pos);
-    gameObjs.at(whereAt)->~GameObjectComposition();
+    gameObjs.at(killID)->~GameObjectComposition();
+    gameObjs.erase(killID);
   }
 }
 void objFactory::destroyAllObjects()
 {
-  std::vector<int>::iterator it = objIDs.begin();
-  for (; it != objIDs.end(); ++it)
-    destroyObject(*it);
+  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    destroyObject(it->first);
+  }
+
+  gameObjs.clear();
 }
 // Overloaded methods
 void objFactory::Initialize()
@@ -62,7 +64,11 @@ void objFactory::Initialize()
 }
 void objFactory::Update(float dt)
 {
-
+  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    it->second->Update();
+  }
 }
 void objFactory::Shutdown()
 {

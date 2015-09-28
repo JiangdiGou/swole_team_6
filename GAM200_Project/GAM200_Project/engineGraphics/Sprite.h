@@ -20,11 +20,11 @@ public:
 	~Sprite();
 
 	//Transformations
-  /*
+
 	glm::vec3 translation;
 	GLfloat rotation;
 	glm::vec3 scale;
-  */
+  
 
 	//Color and Texture
 	glm::vec4 color;
@@ -32,7 +32,7 @@ public:
 
   void Update() override;
 
-  void static drawSprites(void);  
+  //void static drawSprites(void);  
   static std::vector<Sprite*> sprites;
 
 private:
@@ -47,7 +47,7 @@ private:
   void draw(void);
 
   //Calculates a sprite's transformation matrix using the 
-  glm::mat4 calculateTransorm(void);
+  glm::mat4 calculateTransform(void);
 
 };
 

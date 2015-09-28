@@ -8,6 +8,8 @@ public:
 
   ///Initialize the system.
   virtual void Initialize() {};
+  ///Initialize the system.
+  virtual void Draw() {};
 
   ///All systems need a virtual destructor to have their destructor called 
   virtual ~ISystem() {}

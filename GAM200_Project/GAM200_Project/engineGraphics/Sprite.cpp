@@ -84,11 +84,11 @@ Sprite::Sprite(Shader intendedShader)
 
 	//Initalizes remaining members
 	shader = intendedShader;
-  /*
+
 	scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	translation = glm::vec3(0.0f, 0.0f, 0.0f);
 	rotation = 0;
-  */
+
 	color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
   sprites.push_back(this);
@@ -113,27 +113,16 @@ Sprite::~Sprite()
 //Output      : mat4 - the calculated transformation matrix 
 //Description : calculates the transformation matrix of a sprite. 
 //**********************
-glm::mat4 Sprite::calculateTransorm(void)
+glm::mat4 Sprite::calculateTransform(void)
 {
-  glm::mat4 transform, translate, rotate, scale;
-  Transform *transformComponent = GetOwner()->has(Transform)
+  glm::mat4 transform;
+//  Transform *transformComponent = GetOwner()->has(Transform)
 
-    transform = glm::translate(transform,
-    glm::vec3(
-    transformComponent->GetPosition().x,
-    transformComponent->GetPosition().y,
-    transformComponent->GetPosition().z
-    ));
+    transform = glm::translate(transform, translation);
 	//Since we're in 2d, rotation occurs about the Z axis
 	//Can be changed later if you want different types of rotation
-	transform = glm::rotate(transform, (transformComponent->GetRotation()).z, glm::vec3(0.0f, 0.0f, 1.0f));
-	transform = glm::scale(transform, 
-    glm::vec3(
-    transformComponent->GetPosition().x,
-    transformComponent->GetPosition().y,
-    transformComponent->GetPosition().z
-    ));
-
+	transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+  transform = glm::scale(transform, scale);
 	return transform;
 }
 
@@ -143,7 +132,7 @@ glm::mat4 Sprite::calculateTransorm(void)
 //Output      : none
 //Description : animated sprite if necessary, draws sprite on screen 
 //**********************
-void Sprite::draw(void)
+void Sprite::Update(void)
 {
 	GLint transformLocation, colorLocation;
 
@@ -163,11 +152,12 @@ void Sprite::draw(void)
 	//Sends the sprite's transformation matrix into the shader
 	transformLocation = glGetUniformLocation(shader.Program, "uniformTransform");
 	glUniformMatrix4fv(transformLocation, 1, GL_FALSE,
-			              glm::value_ptr(calculateTransorm()));
+			              glm::value_ptr(calculateTransform()));
 
 	//Sends the sprite's color information in the the shader 
 	colorLocation = glGetUniformLocation(shader.Program, "uniformColor");
 	glUniform4f(colorLocation, color.w, color.x, color.y, color.z);
+
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -175,7 +165,11 @@ void Sprite::draw(void)
   glBindTexture(GL_TEXTURE_2D, 0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+  //std::cout << "swag";
+  //std::cout << "i triefsadsd to draw" << std::endl;
 }
+
 
 //**********************
 //Function    : Sprite.drawSprites
@@ -183,6 +177,7 @@ void Sprite::draw(void)
 //Output      : none
 //Description : draws all sprites
 //**********************
+/*
 void Sprite::drawSprites(void)
 {
   for (std::vector<Sprite*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
@@ -192,4 +187,4 @@ void Sprite::drawSprites(void)
 void Sprite::Update()
 {
   draw();
-}
+}*/

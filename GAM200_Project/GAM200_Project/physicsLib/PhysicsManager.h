@@ -30,7 +30,7 @@ public:
 	void RigidBodyCheck();
 
 	//I changed this from a Vector2D so I could load it from Setting
-	float *GRAVITY;
+	float GRAVITY = 10.0;
 };
 
 extern PhysicsManager *physics;

@@ -5,7 +5,7 @@
 //#include "Resolution.h"
 //#include "math_utility.h"
 
-PhysicsManager *physics = nullptr;
+PhysicsManager *physics;
 
 
 
@@ -13,6 +13,7 @@ PhysicsManager *physics = nullptr;
 
 PhysicsManager::PhysicsManager()// : ISystem("Physics", SystemType::ST_Physics)
 {
+  physics = this;
 //	float *temp = NULL;
 //	GlobalSettings->GetFloatValue("___ PHYSICS SETTINGS ___", temp, false);
 //	GlobalSettings->GetFloatValue("Gravity", GRAVITY, true);
@@ -204,7 +205,7 @@ void PhysicsManager::IntegrateForces(RigidBody *body, float dt)
 	if (body->useGravity)
 	{
 		// Symplectic Euler w/ gravity
-		body->velocity += ((body->forceAccum * body->invMass + Vec2D(0, *physics->GRAVITY)) * (dt / 2.0f));
+    body->velocity += ((body->forceAccum * body->invMass + Vec2D(0, GRAVITY)) * (dt / 2.0f));
 	}
 	else
 	{

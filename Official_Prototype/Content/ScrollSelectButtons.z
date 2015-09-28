@@ -17,6 +17,8 @@ class ScrollSelectButtons : ZilchComponent
 
     function OnMouseDown(event : MouseEvent)
     {
+        var seq1 = Action.Sequence(this.Owner.Actions);
+        
         //If this scroll isn't already selected by the player
         if(this.BIsSelected == false)
         {
@@ -30,9 +32,8 @@ class ScrollSelectButtons : ZilchComponent
                 //Calls the ChangeData function to save info in GameData
                 this.ChangeData(true);
                 //Increases this scroll's size to be very visibly selected
-                this.Owner.Transform.Scale = Real3(7.2, 2, 2);
-                
-            Console.WriteLine("ScrollSelect.SetColor Crane color: `this.Owner.Sprite.Color`");
+                //this.Owner.Transform.Scale = Real3(7.2, 2, 2);
+                Action.Property(seq1, @this.Owner.Transform.Scale, Real3(7.2, 2, 2), 0.15, Ease.SinOut);
             }
         }
         //If this scroll is already selected, clicking again deselects it
@@ -45,7 +46,8 @@ class ScrollSelectButtons : ZilchComponent
             //Updates the data in GameData
             this.ChangeData(false);
             //Decreases this scroll's size to go back to normal
-            this.Owner.Transform.Scale = Real3(5.5, 1.5, 1.5);
+            //this.Owner.Transform.Scale = Real3(5.5, 1.5, 1.5);
+            Action.Property(seq1, @this.Owner.Transform.Scale, Real3(5.5, 1.5, 1.5), 0.2, Ease.SinIn);
         }
     }
     

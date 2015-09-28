@@ -7,8 +7,6 @@
 
 Primitive::Primitive()
 {
-	pTrans = GetOwner()->has(Transform);
-	body = GetOwner()->has(RigidBody);
 	radius = 0.0f;
 	active = true; //false;
 }
@@ -27,6 +25,8 @@ Primitive::~Primitive()
 
 void Primitive::Initialize()
 {
+  pTrans = GetOwner()->has(Transform);
+  body = GetOwner()->has(RigidBody);
 	physics->colliders.push_back(this);
 	//return true;
 }

@@ -21,7 +21,10 @@ class PowerSelectButtons : ZilchComponent
     
     function OnMouseDown(event : MouseEvent)
     {
-        this.CogHighlighter.Cog.Transform.Translation = Real3(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y, -0.1);
+        var seq1 = Action.Sequence(this.CogHighlighter.Cog.Actions);
+        
+        Action.Property(seq1, @this.CogHighlighter.Cog.Transform.Translation, Real3(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y, -0.1), 0.2, Ease.SinOut);
+        //this.CogHighlighter.Cog.Transform.Translation = Real3(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y, -0.1);
         this.LevelSettings.PowerActivator.ChangeValue(this.LevelNumber, this.Value);
     }
 }

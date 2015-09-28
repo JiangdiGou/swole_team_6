@@ -2,7 +2,7 @@
 
 #include "../Composition.h"
 #include <stdlib.h>
-#include <vector>
+#include <map>
 #include "../System.h"
 
 #ifndef OBJFACTORY_H
@@ -11,8 +11,7 @@
 class objFactory : public ISystem
 {
 private:
-  std::vector<int> objIDs;
-  std::vector<GameObjectComposition*> gameObjs;
+  std::map<int, GameObjectComposition*> gameObjs;//id, Game object
 public:
   objFactory();
   GameObjectComposition* makeObject(std::string Name);
@@ -25,5 +24,6 @@ public:
 
 };
 extern objFactory * FACTORY;
+extern bool FACTORY_EXISTS;
 
 #endif
