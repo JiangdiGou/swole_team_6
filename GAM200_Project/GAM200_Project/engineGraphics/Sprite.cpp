@@ -116,13 +116,26 @@ Sprite::~Sprite()
 glm::mat4 Sprite::calculateTransform(void)
 {
   glm::mat4 transform;
-//  Transform *transformComponent = GetOwner()->has(Transform)
 
-    transform = glm::translate(transform, translation);
-	//Since we're in 2d, rotation occurs about the Z axis
+  Transform *transformComponent = GetOwner()->has(Transform)
+
+  Vector3 scale = transformComponent->GetScale();
+
+  Vector3 position = transformComponent->GetPosition();
+
+  transform = glm::translate(transform, glm::vec3(
+    position.x, position.y, position.z));
+    //Since we're in 2d, rotation occurs about the Z axis
 	//Can be changed later if you want different types of rotation
-	transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-  transform = glm::scale(transform, scale);
+	transform = glm::rotate(transform, transformComponent->GetRotation().z, glm::vec3(0.0f, 0.0f, 1.0f));
+  transform = glm::scale(transform, glm::vec3(scale.x, scale.y, scale.z));
+
+  //transform = glm::translate(transform, translation);
+  //   //Since we're in 2d, rotation occurs about the Z axis
+  ////Can be changed later if you want different types of rotation
+  //transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+  // transform = glm::scale(transform, glm::vec3(scale.x, scale.y, scale.z));
+
 	return transform;
 }
 

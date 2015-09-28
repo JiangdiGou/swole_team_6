@@ -5,6 +5,8 @@
 Transform::Transform( Vector3 pos, Vector3 rot, Vector3 scal) :
  position(pos),rotation(rot), scale(scal)
 {
+  scale = Vector3(1.0f, 1.0f, 1.0f);
+  position = Vector3(-1.0f, 1.0f, 1.0f);
 }
 
 Transform::~Transform()

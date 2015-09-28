@@ -27,27 +27,35 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  
+  Texture textureBackground = Texture("resources/background.png");
+  Texture textureSmiley = Texture("resources/Smiley1.png");
+
+
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
   camera->AddComponent(CT_Camera, new Camera());
   camera->Initialize();
 
-  GOC * gameObject = FACTORY->makeObject("dude");
+  GOC * background = FACTORY->makeObject("background");
   Transform * transform = new Transform();
-  transform->SetPosition(1, 0, 0);
-  gameObject->AddComponent(CT_Transform, transform);
-
-  RigidBody * body = new RigidBody();
-  body->mass = 0.0f;
-  body->restitution = 0.3f;
-  Circle * guyBody = new Circle();
-  gameObject->AddComponent(CT_RigidBody, body);
-
+  transform->SetPosition(0, 0, 1);
+  transform->SetScale(6, 4, 0);
+  background->AddComponent(CT_Transform, transform);
   Sprite * sprite = new Sprite(*(graphics->coreShader));
-  gameObject->AddComponent(CT_Sprite, sprite);
+  sprite->texture = textureBackground;
+  background->AddComponent(CT_Sprite, sprite);
 
-  gameObject->Initialize();
+  GOC * smileyObj = FACTORY->makeObject("dude");
+  Transform * transform2 = new Transform();
+  transform2->SetPosition(0, 0, 0);
+  Sprite * sprite2 = new Sprite(*(graphics->coreShader));
+  sprite2->texture = textureSmiley;
+  smileyObj->AddComponent(CT_Transform, transform2);
+  smileyObj->AddComponent(CT_Transform, sprite2);
+  
+  camera->Initialize();
+  smileyObj->Initialize();
+  background->Initialize();
 }
 
 GameLogic::GameLogic()

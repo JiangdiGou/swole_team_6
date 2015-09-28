@@ -85,12 +85,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   }*/
 
   engine->GameLoop();
-
-
-
-  
   FACTORY->destroyAllObjects();
-
   engine->DestroySystems();
 
   delete engine;
@@ -113,6 +108,7 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     {
     case VK_LEFT:
     {
+
       break;
     }
     case VK_RIGHT:
