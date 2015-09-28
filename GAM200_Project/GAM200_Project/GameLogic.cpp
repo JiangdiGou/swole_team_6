@@ -29,7 +29,10 @@ void GameLogic::Initialize()
 {
   Texture textureBackground = Texture("resources/background.png");
   Texture textureSmiley = Texture("resources/Smiley1.png");
-
+  Texture textureIdleGreen = Texture("resources/NewRunStuff.png", 4, 64, 64, 100);
+  Texture textureRunGreen = Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 64);
+  textureIdleBlue = &Texture("resources/NewRunStuff.png", 4, 64, 64, 100, 0, 128);
+  textureRunBlue = &Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 192);
 
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
@@ -45,35 +48,34 @@ void GameLogic::Initialize()
   sprite->texture = textureBackground;
   background->AddComponent(CT_Sprite, sprite);*/
 
-  GOC * smileyObj = FACTORY->makeObject("dude");
+  GOC * greenObj = FACTORY->makeObject("greenGuy");
   Transform * transform2 = new Transform();
   transform2->SetPosition(0, 0, 0);
   Sprite * sprite2 = new Sprite(*(graphics->coreShader));
-  sprite2->texture = textureSmiley;
-  smileyObj->AddComponent(CT_Transform, transform2);
-  smileyObj->AddComponent(CT_Sprite, sprite2);
+  sprite2->texture = textureIdleGreen;
+  greenObj->AddComponent(CT_Transform, transform2);
+  greenObj->AddComponent(CT_Sprite, sprite2);
   RigidBody* dudeBody = new RigidBody();
-  //dudeBody->SetStatic();
   dudeBody->isGhost = false;
-  smileyObj->AddComponent(CT_RigidBody, dudeBody);
+  dudeBody->useGravity = true;
+  greenObj->AddComponent(CT_RigidBody, dudeBody);
   AABB* dudeCollision = new AABB();
-  smileyObj->AddComponent(CT_Circle, dudeCollision);
+  greenObj->AddComponent(CT_Circle, dudeCollision);
 
-  GOC * ground = FACTORY->makeObject("ground");
+  GOC * blueObj = FACTORY->makeObject("blueGuy");
   Transform * transform3 = new Transform();
-  transform3->SetPosition(0, -2, 0);
+  transform3->SetPosition(-1, 0, 0);
   Sprite * sprite3 = new Sprite(*(graphics->coreShader));
-  ground->AddComponent(CT_Transform, transform3);
-  ground->AddComponent(CT_Sprite, sprite3);
+  sprite3->texture = *textureIdleBlue;
+  blueObj->AddComponent(CT_Transform, transform3);
+  blueObj->AddComponent(CT_Sprite, sprite3);
   RigidBody* groundBOdy = new RigidBody();
-  groundBOdy->SetStatic();
-  groundBOdy->isGhost = false;
-  ground->AddComponent(CT_RigidBody, groundBOdy);
-  AABB* groundCollision = new AABB();
-  ground->AddComponent(CT_AABB, groundCollision);
+  blueObj->AddComponent(CT_RigidBody, groundBOdy);
   
-  ground->Initialize();
-  smileyObj->Initialize();
+  player = blueObj;
+
+  blueObj->Initialize();
+  greenObj->Initialize();
   camera->Initialize();
 
   //background->Initialize();
@@ -81,7 +83,7 @@ void GameLogic::Initialize()
 
 GameLogic::GameLogic()
 {
-
+  LOGIC = this;
 }
 
 GameLogic::~GameLogic()

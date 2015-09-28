@@ -191,8 +191,8 @@ Texture::Texture(const char* filePath, int numberOfFrames, int frameWidth, int f
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	//Calculates number of rows and columns
-	numRows = (textureHeight + startOffsetY) / frameHeight;
-	numColumns = (textureWidth + startOffsetX) / frameWidth;
+	numRows = (textureHeight) / frameHeight;
+	numColumns = (textureWidth) / frameWidth;
 
 	ID = texture;
 	numFrames = numberOfFrames;
