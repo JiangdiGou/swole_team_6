@@ -205,7 +205,7 @@ void PhysicsManager::IntegrateForces(RigidBody *body, float dt)
 	if (body->useGravity)
 	{
 		// Symplectic Euler w/ gravity
-		body->velocity += ((body->forceAccum * body->invMass + Vec2D(0, *physics->GRAVITY)) * (dt / 2.0f));
+    body->velocity += ((body->forceAccum * body->invMass + Vec2D(0, GRAVITY)) * (dt / 2.0f));
 	}
 	else
 	{

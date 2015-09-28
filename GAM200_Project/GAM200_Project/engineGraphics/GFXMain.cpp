@@ -125,7 +125,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     basicCamera.Update();
 
 
-   Sprite::drawSprites();
+   //Sprite::drawSprites();
    textTest1.Update();
 
    std::string fpsMessage;

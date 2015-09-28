@@ -78,7 +78,7 @@ void RigidBody::set(float mass_num)
 
 void RigidBody::Initialize()
 {
-	pTrans;// = GetOwner()->has(Transform);
+	pTrans = GetOwner()->has(Transform);
 
 
   physics->bodies.push_back(this);
