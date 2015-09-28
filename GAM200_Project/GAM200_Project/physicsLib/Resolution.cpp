@@ -52,7 +52,7 @@ void Manifold::PreStep(float dt)
 			Vector2 relativeVel = B->body->velocity + Vector2::CrossProduct(B->body->angularVelocity, radii_B) -
 				A->body->velocity - Vector2::CrossProduct(A->body->angularVelocity, radii_A);
 
-			if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vec2D(0, *physics->GRAVITY))).Magnitude() + EPSILON)
+			if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vec2D(0, physics->GRAVITY))).Magnitude() + EPSILON)
 				e = 0.0f;
 		}
 	}

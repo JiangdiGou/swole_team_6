@@ -38,15 +38,18 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   CoreEngine* engine = new CoreEngine();
 
   engine->AddSystem(new PhysicsManager());
-  engine->AddSystem(new objFactory());
 
-  Shader coreShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
-  engine->AddSystem(new GraphicsManager(coreShader, coreShader));
+  Shader basicShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
+  engine->AddSystem(new GraphicsManager(basicShader, basicShader));
   engine->AddSystem(new GameLogic());
+  engine->AddSystem(new objFactory());
 
   engine->Initialize();
 
-  Camera basicCamera = Camera();
+  graphics->setDeviceContext(deviceContext);
+  graphics->setRenderingContext(renderingContext);
+
+  //Camera basicCamera = Camera();
   /******************/
   /*GameStateMgrInit(GS_GAME);
   /*while (gGameStateCurr != GS_QUIT)
@@ -80,8 +83,12 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
   }*/
+
   engine->GameLoop();
 
+
+
+  
   FACTORY->destroyAllObjects();
 
   engine->DestroySystems();
@@ -90,6 +97,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   return 0;
 }
+
 
 #ifdef GAMELOOP_RUN
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)

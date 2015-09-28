@@ -1,14 +1,16 @@
 #include "graphicsManager.h"
 
-GraphicsManager *graphics = nullptr;
+GraphicsManager *graphics;
 
 void GraphicsManager::InitWMCreate(HWND window)
 {
   
 }
 
-GraphicsManager::GraphicsManager(Shader textShader, Shader debugShader)
+GraphicsManager::GraphicsManager(Shader& textShader, Shader& debugShader)
 {
+  graphics = this;
+  coreShader = &debugShader;
   Text::initText(textShader);
   initDebugDraw(debugShader);
 
@@ -17,7 +19,8 @@ GraphicsManager::GraphicsManager(Shader textShader, Shader debugShader)
 
 void GraphicsManager::Update(float dt)
 {
-  glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+  wglMakeCurrent(deviceContext, renderingContext);
+  glClearColor(0.9f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
@@ -26,7 +29,7 @@ void GraphicsManager::Draw()
   SwapBuffers(deviceContext);
 }
 
-void GraphicsManager::setDeviceContext(HDC newDeviceContext)
+void GraphicsManager::setDeviceContext(HDC& newDeviceContext)
 {
   deviceContext = newDeviceContext;
 }
@@ -36,7 +39,7 @@ HDC GraphicsManager::getDeviceContext()
   return deviceContext;
 }
 
-void GraphicsManager::setRenderingContext(HGLRC newRenderingContext)
+void GraphicsManager::setRenderingContext(HGLRC& newRenderingContext)
 {
   renderingContext = newRenderingContext;
 }

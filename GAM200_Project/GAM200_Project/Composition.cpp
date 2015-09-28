@@ -48,6 +48,13 @@ void GameObjectComposition::Initialize()
 	}
 }
 
+void GameObjectComposition::Update()
+{
+  for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
+  {
+    (*it)->Update();
+  }
+}
 GameObjectComposition::GameObjectComposition()
 {
 	

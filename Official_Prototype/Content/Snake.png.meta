@@ -2,15 +2,15 @@ ImageContent =
 {
 	SpriteSourceBuilder = 
 	{
-		string Name = "ETS_Sword",
-		uint64 ResourceId = 563ae58cfa36bac1,
+		string Name = "Snake",
+		uint64 ResourceId = 563867138bc3a0e2,
 		uint64 AtlasId = 5274cf95e4a661fd,
 		uint FrameSizeX = 0,
 		uint FrameSizeY = 0,
 		uint FrameCount = 1,
 		float FrameDelay = 0.0833333358,
-		float OriginX = 200,
-		float OriginY = 200,
+		float OriginX = 360,
+		float OriginY = 188,
 		float PixelsPerUnit = 64,
 		bool Smoothing = true,
 		bool Looping = true,

@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PauseGameplay",
+		uint64 ResourceId = 56371d154ba1858c,
+	},
+},
