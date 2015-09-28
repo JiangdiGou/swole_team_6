@@ -39,7 +39,7 @@ void Primitive::Release(){}
 Circle::Circle()
 	
 {
-	radius = 0.0f;
+	radius = 1.0f;
 	active = true;
 	Id = pCircle;
 }
@@ -48,7 +48,8 @@ Circle::~Circle(){}
 
 void Circle::Initialize()
 {
-	pTrans = GetOwner()->has(Transform);
+  pTrans = GetOwner()->has(Transform);
+  body = GetOwner()->has(RigidBody);
 	physics->colliders.push_back(this);
 	//return true;
 }
@@ -60,7 +61,7 @@ void Circle::Release(){}
 ////// AABB //////
 AABB::AABB()
 {
-	radius = 0.0f;
+	radius = 1.0f;
 	active = true;
 	Id = pAABB;
 	//GetOwner()->has(BoxCollider);
@@ -73,7 +74,8 @@ AABB::~AABB()
 
 void AABB::Initialize()
 {
-	pTrans = GetOwner()->has(Transform);
+  pTrans = GetOwner()->has(Transform);
+  body = GetOwner()->has(RigidBody);
 	physics->colliders.push_back(this);
 	//return true;
 }

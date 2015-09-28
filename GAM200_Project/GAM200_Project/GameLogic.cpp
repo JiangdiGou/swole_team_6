@@ -36,14 +36,14 @@ void GameLogic::Initialize()
   camera->AddComponent(CT_Camera, new Camera());
   camera->Initialize();
 
-  GOC * background = FACTORY->makeObject("background");
+  /*GOC * background = FACTORY->makeObject("background");
   Transform * transform = new Transform();
   transform->SetPosition(0, 0, 1);
   transform->SetScale(6, 4, 0);
   background->AddComponent(CT_Transform, transform);
   Sprite * sprite = new Sprite(*(graphics->coreShader));
   sprite->texture = textureBackground;
-  background->AddComponent(CT_Sprite, sprite);
+  background->AddComponent(CT_Sprite, sprite);*/
 
   GOC * smileyObj = FACTORY->makeObject("dude");
   Transform * transform2 = new Transform();
@@ -51,11 +51,32 @@ void GameLogic::Initialize()
   Sprite * sprite2 = new Sprite(*(graphics->coreShader));
   sprite2->texture = textureSmiley;
   smileyObj->AddComponent(CT_Transform, transform2);
-  smileyObj->AddComponent(CT_Transform, sprite2);
+  smileyObj->AddComponent(CT_Sprite, sprite2);
+  RigidBody* dudeBody = new RigidBody();
+  //dudeBody->SetStatic();
+  dudeBody->isGhost = false;
+  smileyObj->AddComponent(CT_RigidBody, dudeBody);
+  AABB* dudeCollision = new AABB();
+  smileyObj->AddComponent(CT_Circle, dudeCollision);
+
+  GOC * ground = FACTORY->makeObject("ground");
+  Transform * transform3 = new Transform();
+  transform3->SetPosition(0, -2, 0);
+  Sprite * sprite3 = new Sprite(*(graphics->coreShader));
+  ground->AddComponent(CT_Transform, transform3);
+  ground->AddComponent(CT_Sprite, sprite3);
+  RigidBody* groundBOdy = new RigidBody();
+  groundBOdy->SetStatic();
+  groundBOdy->isGhost = false;
+  ground->AddComponent(CT_RigidBody, groundBOdy);
+  AABB* groundCollision = new AABB();
+  ground->AddComponent(CT_AABB, groundCollision);
   
-  camera->Initialize();
+  ground->Initialize();
   smileyObj->Initialize();
-  background->Initialize();
+  camera->Initialize();
+
+  //background->Initialize();
 }
 
 GameLogic::GameLogic()

@@ -221,7 +221,8 @@ void PhysicsManager::IntegrateVelocity(RigidBody *body, float dt)
 	{
 		return;
 	}
-	body->pTrans->SetPosition(body->pTrans->GetPositionXY() + body->velocity * dt);
+  Vector2 positionXY = body->pTrans->GetPositionXY();
+  body->pTrans->SetPosition(positionXY + body->velocity*dt);
 	body->orientation += body->angularVelocity * dt;
 	body->SetOrientation(body->orientation);
 	IntegrateForces(body, dt);

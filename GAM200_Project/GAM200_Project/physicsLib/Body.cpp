@@ -12,7 +12,7 @@ float Random(float low, float high)
 
 RigidBody::RigidBody()
 {
-
+  
   restitution = 0.2f;
   velocity.Clear();
   acceleration.Clear();
@@ -26,7 +26,7 @@ RigidBody::RigidBody()
   invInertia = 1.0f/inertia;
   isStatic = false;
   angularVelocity = 0.0f;
-  orientation = Random(-FLOAT_PI,FLOAT_PI);
+  orientation = Random(-FLOAT_PI, FLOAT_PI);
   isGhost = false;
   useGravity = true; // By default set gravity to on
   isKinematic = false;

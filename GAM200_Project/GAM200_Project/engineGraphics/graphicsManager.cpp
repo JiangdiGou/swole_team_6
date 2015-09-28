@@ -51,7 +51,7 @@ HGLRC GraphicsManager::getRenderingContext()
 
 void GraphicsManager::Initialize()
 {
-
+  glDepthFunc(GL_NEVER);
 }
 
 GraphicsManager::~GraphicsManager()
