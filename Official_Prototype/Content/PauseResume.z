@@ -1,0 +1,21 @@
+class PauseResume : ZilchComponent
+{
+    var BPreventDestroy:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(Zero.Keyboard.KeyIsPressed(Keys.P) && this.BPreventDestroy)
+        {
+            this.GameSession.FindSpaceByName("Main").TimeSpace.Paused = false;
+            this.GameSession.FindSpaceByName("HUDSpace").TimeSpace.Paused = false;
+            this.Space.Destroy();
+        }
+        
+        this.BPreventDestroy = true;
+    }
+}

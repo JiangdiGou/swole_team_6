@@ -102,6 +102,10 @@ Level =
 			string TigerScroll = "55c16e8a571aa798:TigerScroll",
 			string DragonScroll = "55c00e1150af24f1:DragonScroll",
 		},
+		PauseGameplay = 
+		{
+			string PauseLevel = "56d954b27303aad3:PauseMenu",
+		},
 	},
 	Cog = 
 	{
@@ -115,7 +119,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.946122229, 40.5825996, 50],
+			Vec3 Translation = [0.514403164, 40.5725822, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -127,7 +131,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 14.9568939,
+			float Size = 11.080348,
 		},
 		EditorCameraController = 
 		{
@@ -135,7 +139,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0.946122229, 40.5825996, -2.57359289e-007],
+			Vec3 LookTarget = [0.514403164, 40.5725822, -3.26193856e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -159,8 +163,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 40.33284, 0],
-			Vec3 Scale = [1, 1, 1],
+			Vec3 Translation = [0, 40.8272705, 0],
+			Vec3 Scale = [3, 3, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -173,7 +177,7 @@ Level =
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "563ae58cfa36bac1:ETS_Sword",
+			string SpriteSource = "5639b65c984dbca8:ETS_Sword000",
 			bool RenderMask = false,
 			bool FlipX = false,
 			bool FlipY = false,
@@ -200,12 +204,12 @@ Level =
 			bool Seamless = true,
 			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 			string SerializedGroupName = "55344c3e53a95305:CollisionGroup_Player",
-			Vec3 Offset = [-0.200000003, -0.100000001, 0],
-			Vec3 Size = [0.5, 1.17499995, 0.5],
+			Vec3 Offset = [-0.100000001, -0.129999995, 0],
+			Vec3 Size = [0.200000003, 0.474999994, 0.5],
 		},
 		PlayerMovement = 
 		{
-			float RSpeed = 0.300000012,
+			float RSpeed = 24,
 			float RJumpHeight = 14,
 			float RDashSpeedX = 100,
 		},

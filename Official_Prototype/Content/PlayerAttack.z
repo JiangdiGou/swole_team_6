@@ -16,6 +16,8 @@ class PlayerAttack : ZilchComponent
     //Stops player's velocity when it hits 0 or they keep sliding after a slash
     var ISlashStop:Integer = 0;
     
+    //Particle Emitter for slashing things n stuff
+    var SlashParticle:Cog;
     
     //*******************************************************************************************************************************************
     function Initialize(init : CogInitializer)
@@ -60,7 +62,7 @@ class PlayerAttack : ZilchComponent
             var rYDifference:Real = this.RMouseReleasePos.Y - this.RMouseClickPos.Y;
             
             //If the drag of the mouse isn't long enough, it won't register as a slash, just a standard attack
-            if(rXDifference <= 1 && rXDifference >= -1 && rYDifference <= 1 && rYDifference >= -1)
+            if(rXDifference <= 1 && rXDifference >= -2 && rYDifference <= 2 && rYDifference >= -2)
             {
                 this.StandardAttack(this.RMouseReleasePos.X, this.RMouseReleasePos.Y);
             }
@@ -99,16 +101,19 @@ class PlayerAttack : ZilchComponent
         else if(rAngle > 22.5 && rAngle < 67.5)
         {
             iAttackID = 11;
+            this.Owner.Sprite.FlipX = false;
         }
         //Right attack
         else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
         {
             iAttackID = 12;
+            this.Owner.Sprite.FlipX = false;
         }
         //Down-Right attack
         else if(rAngle < -22.5 && rAngle > -67.5)
         {
             iAttackID = 13;
+            this.Owner.Sprite.FlipX = false;
         }
         //Down attack
         else if(rAngle >= -112.5 && rAngle <= -67.5)
@@ -119,16 +124,19 @@ class PlayerAttack : ZilchComponent
         else if(rAngle < -112.5 && rAngle > -157.5)
         {
             iAttackID = 15;
+            this.Owner.Sprite.FlipX = true;
         }
         //Left attack
         else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
         {
             iAttackID = 16;
+            this.Owner.Sprite.FlipX = true;
         }
         //Down-Left attack
         else if(rAngle > 112.5 && rAngle < 157.5)
         {
             iAttackID = 17;
+            this.Owner.Sprite.FlipX = true;
         }
         
         var segAttackStart:Real3 = this.Owner.Transform.Translation;
@@ -138,11 +146,6 @@ class PlayerAttack : ZilchComponent
         var iDamage:Integer = 10;
         var bStun:Boolean = false;
         
-        var lineDraw = DebugLine();
-        lineDraw.Start(segAttackStart);
-        lineDraw.End(segAttackEnd);
-        lineDraw.Width(10);
-        lineDraw.Float4Color(Real4(1,0,0,1));
         
         //If the player did 3 regular attacks in the same direction fast enough, it combos to a strong 3rd hit
         //Heavy Right Attack
@@ -166,7 +169,6 @@ class PlayerAttack : ZilchComponent
         {
             this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,iAttackID);
             this.IAttackCD = 10;
-            lineDraw.Float4Color(Real4(0,0,1,1));
         }
         
         
@@ -186,7 +188,11 @@ class PlayerAttack : ZilchComponent
             --s;
         }
         
-        lineDraw.Draw();
+        this.SlashParticle = this.Space.CreateAtPosition(Archetype.Find("SlashEffect"), this.Owner.Transform.Translation + Real3(0,0,1));
+        this.SlashParticle.RigidBody.Velocity = Real3(Math.Cos(rAngle * (Math.Pi/180)) * 40, Math.Sin(rAngle * (Math.Pi/180)) * 40, 0);
+        //var seq1 = Action.Sequence(this.SlashParticle.Actions);
+        
+        //Action.Property(seq1, @this.SlashParticle.RigidBody.Velocity, Real3(Math.Cos(rAngle * (Math.Pi/180)) * 20, Math.Sin(rAngle * (Math.Pi/180)) * 20, 0), 0.2, Ease.Linear);
     }
     
     //*******************************************************************************************************************************************
@@ -240,16 +246,19 @@ class PlayerAttack : ZilchComponent
         else if(rAngle > 22.5 && rAngle < 67.5)
         {
             iSlashID += 1;
+            this.Owner.Sprite.FlipX = false;
         }
         //Right slash
         else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
         {
             iSlashID += 2;
+            this.Owner.Sprite.FlipX = false;
         }
         //Down-Right slash
         else if(rAngle < -22.5 && rAngle > -67.5)
         {
             iSlashID += 3;
+            this.Owner.Sprite.FlipX = false;
         }
         //Down slash
         else if(rAngle >= -112.5 && rAngle <= -67.5)
@@ -260,24 +269,27 @@ class PlayerAttack : ZilchComponent
         else if(rAngle < -112.5 && rAngle > -157.5)
         {
             iSlashID += 5;
+            this.Owner.Sprite.FlipX = true;
         }
         //Left slash
         else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
         {
             iSlashID += 6;
+            this.Owner.Sprite.FlipX = true;
         }
         //Up-Left slash
         else if(rAngle > 112.5 && rAngle < 157.5)
         {
             iSlashID += 7;
+            this.Owner.Sprite.FlipX = true;
         }
         
         //Gives the player momentum in the direction they slashed
-        this.Owner.RigidBody.Velocity += Real3(Math.Cos(rAngle * (Math.Pi/180)) * rSpeed,Math.Sin(rAngle * (Math.Pi/180)) * rSpeed,0);
+        this.Owner.RigidBody.Velocity += Real3(Math.Cos(rAngle * (Math.Pi/180)) * rSpeed,Math.Sin(rAngle * (Math.Pi/180)) * rSpeed, 0);
         //stops the slash momentum in 6 frames
         this.ISlashStop = 6;
         //Sets the cooldown before the player can attack again
-        this.IAttackCD = 10;
+        this.IAttackCD = 20;
         
         //Creates a segment cast (like ray cast) to determine what the player hits in the attack
         var segSlashStart:Real3 = this.Owner.Transform.Translation;
@@ -287,11 +299,14 @@ class PlayerAttack : ZilchComponent
         var segSlashSegment = this.Space.PhysicsSpace.CastSegmentResults(segSlashStart, segSlashEnd, 10);
         
         //Debug line to show exactly where the player traveled
-        var lineDraw = DebugLine();
+        /*var lineDraw = DebugLine();
         lineDraw.Start(segSlashStart);
         lineDraw.End(segSlashEnd);
         lineDraw.Width(10);
-        lineDraw.Float4Color(Real4(0,1,0,1));
+        lineDraw.Float4Color(Real4(0,1,0,1));*/
+        
+        this.SlashParticle = this.Space.CreateAtPosition(Archetype.Find("SlashEffect"), this.Owner.Transform.Translation + Real3(0,0,1));
+        this.SlashParticle.RigidBody.Velocity = this.Owner.RigidBody.Velocity / 1.8;
         
         //Loops through all of the objects the segment hit in the order that they were hit
         for(var s:Integer = 0; s < segSlashSegment.Size(); ++s)
@@ -305,13 +320,13 @@ class PlayerAttack : ZilchComponent
             else if(segSlashSegment.Front().ObjectHit.Name == "DefaultTile")
             {
                 //this.Owner.RigidBody.Velocity = Real3(0,0,0);
-                var newX:Real = segSlashSegment.Current.WorldPosition.X + 0.5 - Math.Cos(rAngle * Math.Pi/180);
-                var newY:Real = segSlashSegment.Current.WorldPosition.Y + 0.5 - Math.Sin(rAngle * Math.Pi/180);
+                var newX:Real = segSlashSegment.Current.WorldPosition.X + 1 - Math.Cos(rAngle * Math.Pi/180);
+                var newY:Real = segSlashSegment.Current.WorldPosition.Y + 1 - Math.Sin(rAngle * Math.Pi/180);
                 
-                //this.Owner.Transform.Translation = Real3(newX, newY, 0);
-                this.Owner.Transform.Translation = Real3(segSlashSegment.Current.WorldPosition.X, segSlashSegment.Current.WorldPosition.Y,0);
+                this.Owner.Transform.Translation = Real3(newX, newY, 0);
+                //this.Owner.Transform.Translation = Real3(segSlashSegment.Current.WorldPosition.X, segSlashSegment.Current.WorldPosition.Y, 0);
                 this.Owner.RigidBody.Velocity = Real3(0,0,0);
-                lineDraw.End(Real3(newX,newY,0));
+                //lineDraw.End(Real3(newX,newY,0));
                 break;//stops the slash as soon as it hits a wall so it doesn't pass though
             }
             
@@ -320,8 +335,8 @@ class PlayerAttack : ZilchComponent
             --s;
         }
         
-        lineDraw.Draw();
-        
+        //lineDraw.Draw();
+        this.Owner.PlayerMovement.BCanMove = false;
         //Sends the slash's attack ID to the combo manager
         this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,iSlashID);
     }

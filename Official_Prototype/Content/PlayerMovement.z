@@ -49,13 +49,13 @@ class PlayerMovement : ZilchComponent
             //Move left when A or Left Arrow are pressed
             if(Zero.Keyboard.KeyIsDown(Keys.A) || Zero.Keyboard.KeyIsDown(Keys.Left))
             {
-                this.Owner.RigidBody.Velocity = Real3(-this.RSpeed * 80, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.RigidBody.Velocity = Real3(-this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
                 this.Owner.Sprite.FlipX = true;
             }
             //Move right when D or Right Arrow are pressed
             else if(Zero.Keyboard.KeyIsDown(Keys.D) || Zero.Keyboard.KeyIsDown(Keys.Right))
             {
-                this.Owner.RigidBody.Velocity = Real3(this.RSpeed * 80, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.RigidBody.Velocity = Real3(this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
                 this.Owner.Sprite.FlipX = false;
             }
             else
@@ -89,7 +89,7 @@ class PlayerMovement : ZilchComponent
         if(iDirection_ == 1)//Dash left
         {
             //Gives the player momentum to move left
-            this.Owner.RigidBody.Velocity -= Real3(this.RDashSpeedX, 0, 0);
+            this.Owner.RigidBody.Velocity = Real3(-this.RDashSpeedX, 0, 0);
             //Sends this dash's ID to the combo Manager in LevelSettings
             this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,4);//Dash Left ID = 4
             //Sets the end location of the dash for the segment cast
@@ -99,7 +99,7 @@ class PlayerMovement : ZilchComponent
         else if(iDirection_ == 2)//Dash right
         {
             //Gives the player momentum to move right
-            this.Owner.RigidBody.Velocity += Real3(this.RDashSpeedX, 0, 0);
+            this.Owner.RigidBody.Velocity = Real3(this.RDashSpeedX, 0, 0);
             //Sends this dash's ID to the combo manager in LevelSettings
             this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,3);//Dash Right ID = 3
             //Sets the end location of the dash for the segment cast
@@ -139,6 +139,7 @@ class PlayerMovement : ZilchComponent
         this.IDashCD = 30;
         //The number of frames that the player will have the dash velocity applied to them
         this.IDashStop = 6;
+        this.BCanMove = false;
     }
     
     //*******************************************************************************************************************************************
