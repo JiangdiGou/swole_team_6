@@ -190,6 +190,8 @@ class PlayerAttack : ZilchComponent
         
         this.SlashParticle = this.Space.CreateAtPosition(Archetype.Find("SlashEffect"), this.Owner.Transform.Translation + Real3(0,0,1));
         this.SlashParticle.RigidBody.Velocity = Real3(Math.Cos(rAngle * (Math.Pi/180)) * 40, Math.Sin(rAngle * (Math.Pi/180)) * 40, 0);
+        //Play sound
+        this.Space.FindObjectByName("BackgroundMusic").BackgroundMusic.SwordSound();
         //var seq1 = Action.Sequence(this.SlashParticle.Actions);
         
         //Action.Property(seq1, @this.SlashParticle.RigidBody.Velocity, Real3(Math.Cos(rAngle * (Math.Pi/180)) * 20, Math.Sin(rAngle * (Math.Pi/180)) * 20, 0), 0.2, Ease.Linear);
@@ -307,6 +309,8 @@ class PlayerAttack : ZilchComponent
         
         this.SlashParticle = this.Space.CreateAtPosition(Archetype.Find("SlashEffect"), this.Owner.Transform.Translation + Real3(0,0,1));
         this.SlashParticle.RigidBody.Velocity = this.Owner.RigidBody.Velocity / 1.8;
+        //play sound
+        this.Space.FindObjectByName("BackgroundMusic").BackgroundMusic.SwordSound();
         
         //Loops through all of the objects the segment hit in the order that they were hit
         for(var s:Integer = 0; s < segSlashSegment.Size(); ++s)

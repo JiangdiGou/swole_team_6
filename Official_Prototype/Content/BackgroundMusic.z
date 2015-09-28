@@ -1,0 +1,39 @@
+class BackgroundMusic : ZilchComponent
+{
+    var BackgroundMusicObject : Cog;
+    [Property]
+    var SwordSlash : SoundCue;
+    
+    [Property]
+    var Music : SoundCue;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.BackgroundMusicObject = this.Space.FindObjectByName("BackgroundMusic");
+        
+        this.PlayMusic();
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function PlayMusic()
+    {
+        if (this.BackgroundMusicObject.SoundEmitter.IsPlaying() == false)
+        {
+            this.BackgroundMusicObject.SoundEmitter.PlayCue(this.Music);
+        }
+    }
+    
+    function StopMusic()
+    {
+        this.BackgroundMusicObject.SoundEmitter.Stop();
+    }
+    
+    function SwordSound()
+    {
+        this.BackgroundMusicObject.SoundEmitter.PlayCue(this.SwordSlash);
+    }
+}
