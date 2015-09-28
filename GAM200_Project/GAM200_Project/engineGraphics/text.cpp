@@ -100,13 +100,27 @@ void Text::Update()
   shader.Use();
 
   //saves initial translation since its gonna be moved over each time for diffferent letters
-  initialTranslation = translation;
+  Transform *transformComponent = GetOwner()->has(Transform)
+
+  
+  initialTranslation = glm::vec3(
+    transformComponent->GetPosition().x,
+    transformComponent->GetPosition().y,
+    transformComponent->GetPosition().z);
+
   for (characterIt = message.begin(); characterIt != message.end(); ++characterIt)
   {
     //Binds the texture from the map
     glBindTexture(GL_TEXTURE_2D, characters[*characterIt].textureID);
-    //Moves over based on how far along we are in the word
-    translation += glm::vec3(((characterIt - message.begin())*-scale.x), 0, 0);
+    //Moves over based on how far along w3e are in the word
+    glm::vec3 newPosition = glm::vec3(
+      initialTranslation +
+      glm::vec3(((characterIt - message.begin())*-transformComponent->GetScale().x), 0, 0)
+      );
+    transformComponent->SetPosition(
+      newPosition.x,
+      newPosition.y,
+      newPosition.z);
 
     //Sends the text's transformation matrix into the shader
     transformLocation = glGetUniformLocation(shader.Program, "uniformTransform");
@@ -117,7 +131,7 @@ void Text::Update()
  
     glBindTexture(GL_TEXTURE_2D, 0);
     //Since we actually modified the translation, reset it for the next letter
-    translation = initialTranslation;
+    transformComponent->SetPosition(initialTranslation.x, initialTranslation.y, initialTranslation.z);
   }
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -127,8 +141,8 @@ void Text::Update()
 Text::Text(std::string initialMessage, Shader textShader)
 {
   message = initialMessage;
-  translation = glm::vec3(0.0f, 0.0f, 0.0f);
-  scale = glm::vec3(-0.5f, 0.5f, 1.0f);
+  /*translation = glm::vec3(0.0f, 0.0f, 0.0f);
+  scale = glm::vec3(-0.5f, 0.5f, 1.0f);*/
   shader = textShader;
 }
 
@@ -184,14 +198,26 @@ void Text::generateTexturesFromFont(FT_Face face)
 //This is straight copypasta'd from the sprite class. I modeled this after the sprite class to get it to work,
 //and for some reason, It wont let me send matricies but through this function. I can look into it more later, 
 //I'm just trying to finish up what i've got so far. 
-glm::mat4 Text::calculateTransform(void)
+glm::mat4 Text::calculateTransform()
 {
-  glm::mat4 transform;
-  transform = glm::translate(transform, translation);
+  glm::mat4 transform, translate, rotate, scale;
+  Transform *transformComponent = GetOwner()->has(Transform)
+
+    transform = glm::translate(transform,
+    glm::vec3(
+    transformComponent->GetPosition().x,
+    transformComponent->GetPosition().y,
+    transformComponent->GetPosition().z
+    ));
   //Since we're in 2d, rotation occurs about the Z axis
   //Can be changed later if you want different types of rotation
-  transform = glm::rotate(transform, 0.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-  transform = glm::scale(transform, scale);
+  transform = glm::rotate(transform, (transformComponent->GetRotation()).z, glm::vec3(0.0f, 0.0f, 1.0f));
+  transform = glm::scale(transform,
+    glm::vec3(
+    transformComponent->GetPosition().x,
+    transformComponent->GetPosition().y,
+    transformComponent->GetPosition().z
+    ));
 
   return transform;
 }

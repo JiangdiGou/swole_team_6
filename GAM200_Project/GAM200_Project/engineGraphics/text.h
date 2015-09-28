@@ -9,6 +9,7 @@
 #include "Shader.h"
 #include <map>
 #include <string>
+#include "../physicsLib/Transform.h"
 #include "../Composition.h"
 
 struct Character
@@ -30,8 +31,9 @@ public:
   static void initText(Shader shader);
 
   std::string message;
-  glm::vec3 translation;
-  glm::vec3 scale;
+  //glm::vec3 translation;
+  //glm::vec3 scale;
+
 
 private:
   Shader shader;
