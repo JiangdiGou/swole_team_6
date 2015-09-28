@@ -16,11 +16,13 @@ public:
   void AddSystem(ISystem* system);
   ///Initializes all systems in the game.
   void Initialize();
+  unsigned LastTime;
+  bool GameActive;
 private:
   //System Container
   std::vector<ISystem*> Systems;
   //The last time the game was updated
-  unsigned LastTime;
-  bool GameActive;
+
+
 };
 #endif

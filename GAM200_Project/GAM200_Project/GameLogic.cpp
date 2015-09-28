@@ -59,8 +59,8 @@ void GameLogic::Initialize()
   dudeBody->isGhost = false;
   dudeBody->useGravity = true;
   greenObj->AddComponent(CT_RigidBody, dudeBody);
-  AABB* dudeCollision = new AABB();
-  greenObj->AddComponent(CT_Circle, dudeCollision);
+  //AABB* dudeCollision = new AABB();
+  //greenObj->AddComponent(CT_Circle, dudeCollision);
 
   GOC * blueObj = FACTORY->makeObject("blueGuy");
   Transform * transform3 = new Transform();
@@ -69,8 +69,10 @@ void GameLogic::Initialize()
   sprite3->texture = *textureIdleBlue;
   blueObj->AddComponent(CT_Transform, transform3);
   blueObj->AddComponent(CT_Sprite, sprite3);
-  RigidBody* groundBOdy = new RigidBody();
-  blueObj->AddComponent(CT_RigidBody, groundBOdy);
+  RigidBody* blueObjBody = new RigidBody();
+  blueObjBody->useGravity = false;
+
+  blueObj->AddComponent(CT_RigidBody, blueObjBody);
   
   player = blueObj;
 

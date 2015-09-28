@@ -31,11 +31,6 @@ void CoreEngine::Initialize()
 
 void CoreEngine::GameLoop()
 {
-  LastTime = timeGetTime();
-
-  while (GameActive)
-  {
-
     unsigned currenttime = timeGetTime();
     //Convert it to the time passed since the last frame (in seconds)
     float dt = (currenttime - LastTime) / 1000.0f;
@@ -48,9 +43,6 @@ void CoreEngine::GameLoop()
 
     for (unsigned i = 0; i < Systems.size(); ++i)
       Systems[i]->Draw();
-     
-    
-  }
 
 }
 

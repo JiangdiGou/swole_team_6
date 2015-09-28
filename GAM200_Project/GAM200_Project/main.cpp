@@ -12,6 +12,7 @@
 #include "_EntryPoint.h"
 #include "graphicsManager.h"
 #include "GameLogic.h"
+#include "Core.h"
 
 HDC deviceContext;
 HGLRC renderingContext;
@@ -84,7 +85,18 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStateCurr = gGameStateNext;
   }*/
 
-  engine->GameLoop();
+  engine->LastTime = timeGetTime();
+  while (engine->GameActive)
+  {
+    engine->GameLoop();
+
+    if (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
+    {
+      TranslateMessage(&msg);
+      DispatchMessage(&msg);
+    }
+  }
+
   FACTORY->destroyAllObjects();
   engine->DestroySystems();
 
@@ -100,6 +112,15 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 #endif
 {
+  RigidBody* body = NULL;
+  Sprite* sprite = NULL;
+  Transform* transform = NULL;
+  if (LOGIC != NULL && LOGIC->player != NULL)
+  {
+    body = (LOGIC->player)->has(RigidBody);
+    sprite = (LOGIC->player)->has(Sprite);
+    transform = (LOGIC->player)->has(Transform);
+  }
   switch (msg)
   {
   case WM_KEYDOWN:
@@ -108,11 +129,17 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     {
     case VK_LEFT:
     {
-
+      body->velocity.x = -0.5;
+      if (sprite->texture.ID != LOGIC->textureRunBlue->ID)
+      {
+        sprite->texture = *(LOGIC->textureRunBlue);
+        
+      }
       break;
     }
     case VK_RIGHT:
     {
+      body->velocity.x = 0.5;
       break;
     }
     default:
