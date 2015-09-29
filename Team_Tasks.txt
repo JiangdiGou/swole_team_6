@@ -1,20 +1,25 @@
 Task Manager:
 Connor:
-
+- Sprite Text Polish
+- Graphics 2.0
+	- Particles
+- Z-Ordering Fix
 
 Jiangdi:
-Transform component
+- Collision itegration 
+- Apply 'impulse'
 
 Gabe:
-Game loop skeleton
+- Messaging
+- Data Driven architecture (Components, Factories, etc.)
 
 Mitch:
-2 proof of concepts
+- 
 
 Nolan:
-I. components
-II. ObiID
-III. game level object
+- Tile Map on screen (Lua)
+- Archetyped Tile reading (Lua)
 
 Josh:
-Draft a GUI concept 
+- Art for main character
+- Script tile and 'player' archetypes (Lua)
