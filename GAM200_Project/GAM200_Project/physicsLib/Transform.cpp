@@ -40,12 +40,9 @@ Vector3& Transform::GetScale()
 	return scale;
 }
 
-Vector2& Transform::GetPositionXY()
+Vector2 Transform::GetPositionXY()
 {
-	Vector2 xyVector;
-	xyVector.x = position.x;
-	xyVector.y = position.y;
-	return xyVector;
+	return Vector2(position.x, position.y);
 }
 float Transform::GetPositionX()
 {

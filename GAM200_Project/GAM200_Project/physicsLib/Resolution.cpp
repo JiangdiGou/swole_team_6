@@ -157,7 +157,9 @@ void Manifold::CorrectPosition(void)
 	// Allows object to penetrate slightly without position correction from occurring 
 	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent;
 
-  A->body->pTrans->SetPosition(A->body->pTrans->GetPositionXY() - correction * A->body->invMass);
-  B->body->pTrans->SetPosition(B->body->pTrans->GetPositionXY() + correction * B->body->invMass);
+	Vector2 Apos = A->body->pTrans->GetPositionXY();
+	Vector2 Bpos = B->body->pTrans->GetPositionXY();
+	A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
+	B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
 
 }

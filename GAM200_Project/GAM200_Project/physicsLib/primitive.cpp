@@ -1,6 +1,8 @@
 //#include "our precompile header.h"
 #include "Precompiled.h"
 #include "primitive.h"
+#include "../engineGraphics/debugDraw.h"
+#include "../engineGraphics/Graphics.h"
 //#include "../Component.h"
 
 ////// PRIMITIVE //////
@@ -31,7 +33,7 @@ void Primitive::Initialize()
 	//return true;
 }
 
-void Primitive::Update(float dt) {}
+void Primitive::Update() {}
 void Primitive::Release(){}
 
 
@@ -39,7 +41,7 @@ void Primitive::Release(){}
 Circle::Circle()
 	
 {
-	radius = 1.0f;
+	radius = 1.01f;
 	active = true;
 	Id = pCircle;
 }
@@ -54,7 +56,10 @@ void Circle::Initialize()
 	//return true;
 }
 
-void Circle::Update(float dt){}
+void Circle::Update(){
+	Vector3 pos = pTrans->GetPosition();
+	debugDrawCircle(glm::vec3(pos.x, pos.y, pos.z), radius, glm::vec3(0, 0, 0), 10);
+}
 
 void Circle::Release(){}
 
@@ -79,7 +84,10 @@ void AABB::Initialize()
 	physics->colliders.push_back(this);
 	//return true;
 }
-void AABB::Update(float dt){}
+void AABB::Update(){
+	Vector3 pos = pTrans->GetPosition();
+	debugDrawSquare(glm::vec3(pos.x, pos.y, pos.z), halfSize.x, halfSize.y, glm::vec3(0,0,0));
+}
 
 void AABB::Release(){}
 

@@ -51,7 +51,7 @@ bool CollisionChecker::AABBAndCircle(AABB *a, Vector3 aPos, Circle *b, Vector3 b
 	}
 	else if (circle.x < box.x - a->halfSize.x)
 	{
-		point.x = circle.x - a->halfSize.x;
+		point.x =circle.x - a->halfSize.x;
 	}
 
 	// y-axis

@@ -31,8 +31,9 @@ void GameLogic::Initialize()
   Texture textureSmiley = Texture("resources/Smiley1.png");
   Texture textureIdleGreen = Texture("resources/NewRunStuff.png", 4, 64, 64, 100);
   Texture textureRunGreen = Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 64);
-  textureIdleBlue = &Texture("resources/NewRunStuff.png", 4, 64, 64, 100, 0, 128);
-  textureRunBlue = &Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 192);
+  textureIdleBlue = new Texture("resources/NewRunStuff.png", 4, 64, 64, 100, 0, 128);
+  textureRunBlue = new Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 192);
+  
 
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
@@ -50,29 +51,33 @@ void GameLogic::Initialize()
 
   GOC * greenObj = FACTORY->makeObject("greenGuy");
   Transform * transform2 = new Transform();
-  transform2->SetPosition(0, 0, 0);
+  transform2->SetPosition(3, 0, 0);
   Sprite * sprite2 = new Sprite(*(graphics->coreShader));
   sprite2->texture = textureIdleGreen;
   greenObj->AddComponent(CT_Transform, transform2);
   greenObj->AddComponent(CT_Sprite, sprite2);
   RigidBody* dudeBody = new RigidBody();
   dudeBody->isGhost = false;
-  dudeBody->useGravity = true;
+  dudeBody->useGravity = false;
   greenObj->AddComponent(CT_RigidBody, dudeBody);
-  //AABB* dudeCollision = new AABB();
-  //greenObj->AddComponent(CT_Circle, dudeCollision);
+  Circle* dudeCollision = new Circle();
+ // dudeCollision->SetHalfSize(2, 2);
+  greenObj->AddComponent(CT_Circle, dudeCollision);
 
   GOC * blueObj = FACTORY->makeObject("blueGuy");
   Transform * transform3 = new Transform();
-  transform3->SetPosition(-1, 0, 0);
+  transform3->SetPosition(-3, 0, 0);
   Sprite * sprite3 = new Sprite(*(graphics->coreShader));
   sprite3->texture = *textureIdleBlue;
   blueObj->AddComponent(CT_Transform, transform3);
   blueObj->AddComponent(CT_Sprite, sprite3);
   RigidBody* blueObjBody = new RigidBody();
+  //dudeBody->isGhost = false;
   blueObjBody->useGravity = false;
-
   blueObj->AddComponent(CT_RigidBody, blueObjBody);
+  AABB* blueCollision = new AABB();
+  blueCollision->SetHalfSize(2, 2);
+  blueObj->AddComponent(CT_AABB, blueCollision);
   
   player = blueObj;
 

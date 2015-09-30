@@ -21,7 +21,7 @@ public:
 	Vector3& GetPosition();
 	Vector3& GetRotation();
 	Vector3& GetScale();
-	Vector2& GetPositionXY();
+	Vector2 GetPositionXY();
 	float GetPositionX();
 	float GetPositionY();
 
