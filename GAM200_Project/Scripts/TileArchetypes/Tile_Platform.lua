@@ -2,7 +2,7 @@
 character = "_";
 
 --[Collision]
-Sides()
+Sides
 {
 	top;
 }
