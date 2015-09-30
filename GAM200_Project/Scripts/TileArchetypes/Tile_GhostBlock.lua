@@ -1,3 +1,12 @@
+--Sides
+enum Side
+{
+   Side_Top;
+   Side_Bottom;
+   Side_Left;
+   Side_Right
+};
+
 --[Tile_GhostBlock]
 character = "!";
 

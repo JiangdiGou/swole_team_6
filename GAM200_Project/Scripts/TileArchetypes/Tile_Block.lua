@@ -1,10 +1,19 @@
+--Sides
+enum Side
+{
+   Side_Top;
+   Side_Bottom;
+   Side_Left;
+   Side_Right
+};
+
 --[Tile_Block]
 character = "2";
 
 --[Collision]
 Sides
 {
-	top, bottom, left, right;
+	Side_Top, Side_Bottom, Side_Left, Side_Right;
 }
 
 Lethal = false;
