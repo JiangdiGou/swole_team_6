@@ -21,7 +21,7 @@
 #include "gameComponents/baseObject.h"
 #include "gameComponents/objFactory.h"
 
-#include "../Composition.h"
+#include "Composition.h"
 
 #include "Utilities.h"
 #include "_EntryPoint.h"
