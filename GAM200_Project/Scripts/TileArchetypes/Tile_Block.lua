@@ -2,7 +2,7 @@
 character = "2";
 
 --[Collision]
-Sides()
+Sides
 {
 	top, bottom, left, right;
 }
