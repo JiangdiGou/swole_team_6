@@ -1,24 +1,24 @@
 --Sides
-enum Side
+SideTypes = 
 {
-   Side_Top;
-   Side_Bottom;
-   Side_Left;
-   Side_Right
-};
+   Side_Top = 0;
+   Side_Right = 1;
+   Side_Left = 2;
+   Side_Bottom = 3;
+}
 
 --[Tile_Background]
 character = "1";
 
 --[Collision]
-Sides
+Sides =
 {
 }
 
 Lethal = false;
 
 --[Kill_From]
-KillSides
+KillSides =
 {
 }
 
