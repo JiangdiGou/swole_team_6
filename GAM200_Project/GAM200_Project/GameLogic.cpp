@@ -76,7 +76,7 @@ void GameLogic::Initialize()
   blueObjBody->useGravity = false;
   blueObj->AddComponent(CT_RigidBody, blueObjBody);
   AABB* blueCollision = new AABB();
-  blueCollision->SetHalfSize(2, 2);
+  blueCollision->SetHalfSize(1, 1);
   blueObj->AddComponent(CT_AABB, blueCollision);
   
   player = blueObj;

@@ -49,8 +49,8 @@ void Manifold::PreStep(float dt)
 		Vector2 radii_B = contact[i] - B->pTrans->GetPositionXY();
 		if (A->body && B->body)
 		{
-			Vector2 relativeVel = B->body->velocity + Vector2::CrossProduct(B->body->angularVelocity, radii_B) -
-				A->body->velocity - Vector2::CrossProduct(A->body->angularVelocity, radii_A);
+			Vector2 relativeVel = B->body->getVelocity() + Vector2::CrossProduct(B->body->angularVelocity, radii_B) -
+				A->body->getVelocity() - Vector2::CrossProduct(A->body->angularVelocity, radii_A);
 
 			if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vec2D(0, physics->GRAVITY))).Magnitude() + EPSILON)
 				e = 0.0f;
@@ -66,8 +66,8 @@ void Manifold::AppyImpulse(void)
 	//RigidBody* 
 	if (A->body->isStatic && B->body->isStatic)
 	{
-		A->body->velocity.Clear();
-		B->body->velocity.Clear();
+		A->body->getVelocity().Clear();
+		B->body->getVelocity().Clear();
 		return;
 	}
 
@@ -83,8 +83,8 @@ void Manifold::AppyImpulse(void)
 		Vector2 radii_b = contact[i] - B->body->pTrans->GetPositionXY();
 
 		// Relative velocity at contact
-		Vector2 relativeVel = B->body->velocity + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
-			A->body->velocity - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
+		Vector2 relativeVel = B->body->getVelocity() + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
+			A->body->getVelocity() - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
 
 		// Relative velocity along normal
 		float contactVel = Vec2D::DotProduct(relativeVel, normal);
@@ -105,13 +105,13 @@ void Manifold::AppyImpulse(void)
 		j /= (float)contactCount;
 
 		// Apply the impulse
-		Vector2 impulse = normal * (j / 2);
-		A->body->ApplyImpulse(-impulse, radii_a);
-		B->body->ApplyImpulse(impulse, radii_b);
+		//Vector2 impulse = normal * (j /2);
+		//A->body->ApplyImpulse(-impulse, radii_a);
+		//B->body->ApplyImpulse(impulse, radii_b);
 
 		// Friction impulse
-		relativeVel = B->body->velocity + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
-			A->body->velocity - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
+		relativeVel = B->body->getVelocity() + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
+			A->body->getVelocity() - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
 
 		Vector2 tangentVec = relativeVel - (normal * Vec2D::DotProduct(relativeVel, normal));
 		tangentVec.Normalize();
@@ -130,15 +130,13 @@ void Manifold::AppyImpulse(void)
 		// Clamp magnitude of friction and create impulse vector
 		Vector2 tangentImpulse;
 		tangentImpulse = tangentVec * jt;
-		if (std::abs(jt)< j * staticFriction)
-			tangentImpulse = tangentVec * jt;
+		if (std::abs(jt) < j * staticFriction)
+			tangentImpulse = tangentVec *jt;
 		else
 			tangentImpulse = tangentVec * -j * dynamicFriction;
 
 
-		// Apply friction impulse
-		/*  A->ApplyImpulse(-1 * (tangentImpulse), radii_a);
-		B->ApplyImpulse((tangentImpulse), radii_b);*/
+	
 	}
 
 
@@ -155,11 +153,11 @@ void Manifold::CorrectPosition(void)
 	const float percent = 0.8f;//0.4f; // 40% //0.2
 
 	// Allows object to penetrate slightly without position correction from occurring 
-	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent;
+	/*Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent;
 
 	Vector2 Apos = A->body->pTrans->GetPositionXY();
 	Vector2 Bpos = B->body->pTrans->GetPositionXY();
 	A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
-	B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
+	B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);*/
 
 }

@@ -27,7 +27,7 @@ class RigidBody : public GameComponent
     Transform *pTrans;
 		
 		Vector2 acceleration;
-		Vector2 velocity;       // Holds the linear velocity of the rigid body
+		      // Holds the linear velocity of the rigid body
 		Vector2 forceAccum;     // Accumlated force
 		float mass;             // Holds the mass of the rigid body
 		float invMass;          // Holds the inverted mass
@@ -91,6 +91,9 @@ class RigidBody : public GameComponent
 		std::vector <CollisionDelegate *> triggerCallbacks;
 	//private:
 		//PhysicsManager *physics;
+
+	private:
+		Vector2 velocity;
 	};
 //}
 

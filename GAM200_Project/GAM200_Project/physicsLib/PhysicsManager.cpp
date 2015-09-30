@@ -205,13 +205,17 @@ void PhysicsManager::IntegrateForces(RigidBody *body, float dt)
 	if (body->useGravity)
 	{
 		// Symplectic Euler w/ gravity
-    body->velocity += ((body->forceAccum * body->invMass + Vec2D(0, GRAVITY)) * (dt / 2.0f));
+        Vec2D gravityY = (body->forceAccum * body->invMass + Vec2D(0, GRAVITY)) * (dt / 2.0f);
+		body->setVelocity(body->getVelocity() + gravityY);
 		//body->velocity.x += GRAVITY;
+		
 	}
 	else
 	{
 		// Without gravity
-		body->velocity += ((body->forceAccum * body->invMass) * (dt / 2.0f));
+		Vec2D correctionY = ((body->forceAccum * body->invMass) * (dt / 2.0f));
+		body->setVelocity(body->getVelocity() + correctionY);
+		std::cout << body->getVelocity().x << "vx" << std::endl;
 	}
 }
 
@@ -223,7 +227,7 @@ void PhysicsManager::IntegrateVelocity(RigidBody *body, float dt)
 		return;
 	}
   Vector2 positionXY = body->pTrans->GetPositionXY();
-  body->pTrans->SetPosition(positionXY + body->velocity*dt);
+  body->pTrans->SetPosition(positionXY + body->getVelocity() *dt);
 	body->orientation += body->angularVelocity * dt;
 	body->SetOrientation(body->orientation);
 	IntegrateForces(body, dt);

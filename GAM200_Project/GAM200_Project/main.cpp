@@ -129,7 +129,7 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     {
     case VK_LEFT:
     {
-      body->velocity.x = -0.5;
+      body->setVelocity(-0.5, body->getVelocity().y) ;
       if (sprite->texture.ID != LOGIC->textureRunBlue->ID)
       {
         sprite->texture = *(LOGIC->textureRunBlue);
@@ -139,7 +139,7 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     }
     case VK_RIGHT:
     {
-      body->velocity.x = 0.5;
+		body->setVelocity(0.5, body->getVelocity().y);
       break;
     }
     default:
