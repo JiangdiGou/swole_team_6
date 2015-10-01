@@ -13,7 +13,7 @@ character = "^";
 --[Collision]
 Sides =
 {
-	Side_Top;
+	SideTypes.Side_Top;
 }
 
 Lethal = true;
@@ -21,7 +21,7 @@ Lethal = true;
 --[Kill_From]
 KillSides =
 {
-	Side_Top;
+	SideTypes.Side_Top;
 }
 
 --[Components]

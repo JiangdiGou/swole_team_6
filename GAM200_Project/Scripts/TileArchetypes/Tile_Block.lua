@@ -13,7 +13,10 @@ character = "2";
 --[Collision]
 Sides =
 {
-	Side_Top, Side_Bottom, Side_Left, Side_Right;
+	SideTypes.Side_Top;
+	SideTypes.Side_Right;
+	SideTypes.Side_Left;
+	SideTypes.Side_Bottom;
 }
 
 Lethal = false;

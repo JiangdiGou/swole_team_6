@@ -7,6 +7,7 @@ public:
   AssertionError(std::string m="Unknown AssertionError!") : msg(m)
   {
 	  txtlog *logError = new txtlog("log.txt");
+    logError->write("[AssertionError] (SEE BELOW LINE!)");
 	  logError->write(m);
   }
   //AssertionError() throw() {}

@@ -47,6 +47,8 @@ bool vectorHas(std::vector<T> vector, T value)
   return std::find(std::begin(vector), std::end(vector), value) != std::end(vector);
 }
 
+bool isReallyInt(float checkMe);
+
 void visLine();
 void printstr(std::string toPrint);
 void waitForKB();

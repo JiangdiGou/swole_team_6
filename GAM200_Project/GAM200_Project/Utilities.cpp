@@ -44,6 +44,19 @@ bool fileExists(const char* fileName)
   return infile.good();
 }
 
+bool isReallyInt(float checkMe)
+{
+  while(checkMe > 0)
+  {
+    checkMe -= 1.0f;
+  }
+  if(checkMe == 0.0f)
+  {
+    return true;
+  }
+  return false;
+}
+
 void visLine()
 {
   std::cout<<"=========="<<std::endl;

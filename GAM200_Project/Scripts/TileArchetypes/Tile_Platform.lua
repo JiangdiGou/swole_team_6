@@ -13,7 +13,7 @@ character = "_";
 --[Collision]
 Sides =
 {
-	Side_Top;
+	SideTypes.Side_Top;
 }
 
 Lethal = false;

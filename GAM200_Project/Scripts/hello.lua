@@ -12,4 +12,4 @@ test =
     candy = "Actually popcorn",
 }
 
-exam = 12;
+exam = 12.5;

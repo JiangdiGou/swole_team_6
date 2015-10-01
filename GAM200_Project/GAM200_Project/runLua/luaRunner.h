@@ -1,7 +1,12 @@
 //author Nolan Yoo
 
+#ifndef LUARUNNER_H
+#define LUARUNNER_H
+
 #include <string>
 #include <iostream>
+#include <vector>
+#include "../multiType.h"
 
 #ifdef _WIN32
   #pragma comment(lib, "luaWin/lua53.lib")
@@ -25,6 +30,8 @@ public:
   void loadFile(const std::string& fileName);
 
   bool lua_checkstack(const std::string& request);
+
+  lua_State* getState();
 
   //wrapper for lua_get (on a good day)
   template<typename T>
@@ -50,6 +57,8 @@ public:
     return result;
   }
 
+  std::vector<multiType> getTable(std::string tableName);
+
   template<typename T>
   T lua_null()
   {
@@ -72,3 +81,5 @@ private:
 };
 
 #include "luaRunnerInline.h"
+
+#endif

@@ -15,11 +15,13 @@
 #include "lvlTools/levelGenerator.h"
 #include "lvlTools/levelEditor.h"
 
+#include "runLua/luaTranslate.h"
 #include "runLua/luaRunner.h"
 #include "logger/logger.h"
 
 #include "gameComponents/baseObject.h"
 #include "gameComponents/objFactory.h"
+#include "gameComponents/Tile.h"
 
 #include "Composition.h"
 
@@ -53,6 +55,20 @@ void luaRoutine(std::string arg)
 
   printstr("(Lua Test 3)");
   testLua.runFile<std::string>("Scripts/paramTest.lua", "Lua argument test");
+  std::cout<<'\n';
+
+  printstr("(Lua Test 4)");
+  luaTranslate testTranslate = *new luaTranslate();
+  Tile testTile = *testTranslate.luaToTile("Scripts/TileArchetypes/Tile_Spikes.lua");
+  std::cout<<"The char was "<<testTile.character<<std::endl;
+  std::cout<<"The KillSides are: "<<std::endl;
+  for(int i = 0; i < 4; i++)
+  {
+    if(testTile.killSides[i])
+    {
+      std::cout<<i<<std::endl;
+    }
+  }
   //std::cout<<'\n';
 }
 

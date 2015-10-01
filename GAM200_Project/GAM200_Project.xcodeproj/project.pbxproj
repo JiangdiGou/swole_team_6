@@ -51,6 +51,7 @@
 		F61B22051BAF452700EE43BF /* objFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = objFactory.cpp; sourceTree = "<group>"; };
 		F61B22061BAF452700EE43BF /* objFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objFactory.h; sourceTree = "<group>"; };
 		F61B23811BAF519F00EE43BF /* AssertionError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssertionError.h; sourceTree = "<group>"; };
+		F6420F021BBCA7FD00D1B767 /* multiType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = multiType.h; sourceTree = "<group>"; };
 		F647008B1BBC6BBB005DB854 /* luaTranslate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = luaTranslate.cpp; path = GAM200_Project/runLua/luaTranslate.cpp; sourceTree = "<group>"; };
 		F647008C1BBC6BBB005DB854 /* luaTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = luaTranslate.h; path = GAM200_Project/runLua/luaTranslate.h; sourceTree = "<group>"; };
 		F647008E1BBC6C83005DB854 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 				F6FDBA051B9D0FF0007EF209 /* runLua */,
 				F6FDB9EC1B9D0E94007EF209 /* Utilities.cpp */,
 				F6FDB9ED1B9D0E94007EF209 /* Utilities.h */,
+				F6420F021BBCA7FD00D1B767 /* multiType.h */,
 			);
 			path = GAM200_Project;
 			sourceTree = "<group>";

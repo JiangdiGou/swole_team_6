@@ -123,6 +123,51 @@ bool luaRunner::lua_checkstack(const std::string& request)
   return true;
 }
 
+lua_State* luaRunner::getState()
+{
+  return this->running;
+}
+
+std::vector<multiType> luaRunner::getTable(std::string tableName)
+{
+  std::vector<multiType> returnMe;
+
+  lua_getglobal(running, tableName.c_str());
+  lua_pushnil(running);
+
+  while(lua_next(running, -2))
+  //for (lua_pushnil(running); lua_next(running, -2); lua_pop(running, 1))
+  {
+    printstr("trying something...");
+    multiType pushMe = *new multiType();
+    if(lua_isnumber(running, -1))
+    {
+      float checkMe = lua_tonumber(running, -1);
+      if(isReallyInt(checkMe))
+      {
+        pushMe.integer = (int)checkMe;
+        pushMe.wrapperType = ISINT;
+        returnMe.push_back(pushMe);
+      }
+      else
+      {
+        pushMe.shortDec = checkMe;
+        pushMe.wrapperType = ISFLOAT;
+        returnMe.push_back(pushMe);
+      }
+    }
+
+    else if(lua_isstring(running, -1))
+    {
+      pushMe.word = lua_tostring(running, -1);
+      pushMe.wrapperType = ISSTRING;
+      returnMe.push_back(pushMe);
+    }
+    lua_pop(running, 1);
+  }
+  return returnMe;
+}
+
 void luaRunner::popTop()
 {
   lua_pop(running, lua_gettop(running));
