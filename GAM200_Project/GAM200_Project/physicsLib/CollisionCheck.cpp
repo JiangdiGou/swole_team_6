@@ -23,10 +23,10 @@ bool CollisionChecker::AABBAndAABB(AABB *a, Vector3 aPos, AABB *b, Vector3 bPos)
 	Vector3 aPosition = aPos;
 	Vector3 bPosition = bPos;
 
-	if (aPosition.y + a->halfSize.y <= bPosition.y - b->halfSize.y ||
-		bPosition.y + b->halfSize.y <= aPosition.y - a->halfSize.y ||
-		aPosition.x + a->halfSize.x <= bPosition.x - b->halfSize.x ||
-		bPosition.x + b->halfSize.x <= aPosition.x - a->halfSize.x)
+	if (aPosition.y + a->halfSize.y/2.0f <= bPosition.y - b->halfSize.y/2.0f ||
+		bPosition.y + b->halfSize.y/2.0f <= aPosition.y - a->halfSize.y/2.0f ||
+		aPosition.x + a->halfSize.x/2.0f <= bPosition.x - b->halfSize.x/2.0f ||
+		bPosition.x + b->halfSize.x/2.0f <= aPosition.x - a->halfSize.x/2.0f)
 	{
 		return false;
 	}
@@ -85,23 +85,23 @@ bool CollisionChecker::CircleAndAABB(Circle *a, Vector3 aPos, AABB *b, Vector3 b
 	point.y = aPos.y;
 
 	// x-axis
-	if (circle.x > box.x + b->halfSize.x)
+	if (circle.x > box.x + b->halfSize.x/2.0f)
 	{
-		point.x = box.x + b->halfSize.x;
+		point.x = box.x + b->halfSize.x/2.0f;
 	}
-	else if (circle.x < box.x - b->halfSize.x)
+	else if (circle.x < box.x - b->halfSize.x/2.0f)
 	{
-		point.x = box.x - b->halfSize.x;
+		point.x = box.x - b->halfSize.x/2.0f;
 	}
 
 	// y-axis
-	if (circle.y  > box.y + b->halfSize.y)
+	if (circle.y  > box.y + b->halfSize.y/2.0f)
 	{
-		point.y = box.y + b->halfSize.y;
+		point.y = box.y + b->halfSize.y/2.0f;
 	}
-	else if (circle.y < box.y - b->halfSize.y)
+	else if (circle.y < box.y - b->halfSize.y/2.0f)
 	{
-		point.y = box.y - b->halfSize.y;
+		point.y = box.y - b->halfSize.y/2.0f;
 	}
 
 	float distance = Vector3::Distance(circle, point);

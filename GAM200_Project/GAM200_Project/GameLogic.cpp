@@ -60,8 +60,8 @@ void GameLogic::Initialize()
   dudeBody->isGhost = false;
   dudeBody->useGravity = false;
   greenObj->AddComponent(CT_RigidBody, dudeBody);
-  Circle* dudeCollision = new Circle();
- // dudeCollision->SetHalfSize(2, 2);
+  Circle *dudeCollision = new Circle();
+  //dudeCollision->SetHalfSize(1, 1);
   greenObj->AddComponent(CT_Circle, dudeCollision);
 
   GOC * blueObj = FACTORY->makeObject("blueGuy");
