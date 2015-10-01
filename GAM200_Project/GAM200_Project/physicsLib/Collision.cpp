@@ -92,12 +92,12 @@ void AABBAndAABB(Primitive *a, Primitive *b, Manifold *data)
 	// Calculate the vector between the objects
 	Vector2 midline = transA->GetPositionXY() - transB->GetPositionXY();
 
-	float xOverlap = (a->halfSize.x) + (b->halfSize.x) - fabs(midline.x);
+	float xOverlap = (a->halfSize.x/2.0f) + (b->halfSize.x/2.0f) - fabs(midline.x);
 	data->contactCount = 1;
 	if (xOverlap > 0)
 	{
 		data->contactCount = 1;
-		float yOverlap = (a->halfSize.y) + (b->halfSize.y) - fabs(midline.y);
+		float yOverlap = (a->halfSize.y/2.0f) + (b->halfSize.y/2.0f) - fabs(midline.y);
 
 		if (yOverlap > 0)
 		{
@@ -157,8 +157,8 @@ void AABBAndCircle(Primitive *shapeAABB, Primitive *shapeCircle, Manifold *data)
 	Vector2 closest = midline;
 
 	// Calculate half extent for each axis
-	float x_extent = shapeAABB->halfSize.x;
-	float y_extent = shapeAABB->halfSize.y;
+	float x_extent = shapeAABB->halfSize.x /2.0f;
+	float y_extent = shapeAABB->halfSize.y /2.0f;
 
 	// Clamp t0=o point to edges of AABB
 	closest.x = Clamp(-x_extent, x_extent, closest.x);
@@ -211,13 +211,13 @@ void AABBAndCircle(Primitive *shapeAABB, Primitive *shapeCircle, Manifold *data)
 	if (inside)
 	{
 		data->normal = -midline;
-		data->penetration = radius - distance;
+		data->penetration = radius - distance /2.0f;
 		data->restitution = CalculateRestitution(shapeAABB , shapeCircle);
 	}
 	else
 	{
 		data->normal = midline;
-		data->penetration = radius - distance;
+		data->penetration = radius - distance /2.0f;
 		data->restitution = CalculateRestitution(shapeAABB, shapeCircle);
 	}
 

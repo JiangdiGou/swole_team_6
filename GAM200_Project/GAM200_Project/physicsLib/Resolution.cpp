@@ -153,12 +153,12 @@ void Manifold::CorrectPosition(void)
 	const float percent = 0.8f;//0.4f; // 40% //0.2
 
 	// Allows object to penetrate slightly without position correction from occurring 
-	// change std max to mim so we can pull things! max for push things
-	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent;
+	 //change std max to mim so we can pull things! max for push things
+	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent /2.0f;
 
 	Vector2 Apos = A->body->pTrans->GetPositionXY();
 	Vector2 Bpos = B->body->pTrans->GetPositionXY();
 	A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
-	B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
+	B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass) ;
 
 }

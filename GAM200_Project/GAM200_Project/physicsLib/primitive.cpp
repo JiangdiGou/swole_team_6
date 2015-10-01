@@ -41,7 +41,7 @@ void Primitive::Release(){}
 Circle::Circle()
 	
 {
-	radius = 1.01f;
+	radius = 1.0f;
 	active = true;
 	Id = pCircle;
 }

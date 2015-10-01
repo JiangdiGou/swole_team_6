@@ -45,23 +45,23 @@ bool CollisionChecker::AABBAndCircle(AABB *a, Vector3 aPos, Circle *b, Vector3 b
 	point.y = bPos.y;
 
 	// x-axis
-	if (circle.x > box.x + a->halfSize.x / 2.0f)
+	if (circle.x > box.x + a->halfSize.x/2.0f )
 	{
-		point.x = box.x + a->halfSize.x / 2.0f;
+		point.x = box.x + a->halfSize.x /2.0f;
 	}
-	else if (circle.x < box.x - a->halfSize.x / 2.0f)
+	else if (circle.x < box.x - a->halfSize.x /2.0f)
 	{
-		point.x = box.x - a->halfSize.x / 2.0f;
+		point.x = box.x - a->halfSize.x/2.0f ;
 	}
 
 	// y-axis
-	if (circle.y  > box.y + a->halfSize.y / 2.0f)
+	if (circle.y  > box.y + a->halfSize.y /2.0f )
 	{
-		point.y = box.y + a->halfSize.y / 2.0f;
+		point.y = box.y + a->halfSize.y /2.0f;
 	}
-	else if (circle.y < box.y - a->halfSize.y / 2.0f)
+	else if (circle.y < box.y - a->halfSize.y /2.0f)
 	{
-		point.y = box.y - a->halfSize.y / 2.0f;
+		point.y = box.y - a->halfSize.y /2.0f;
 	}
 
 	float distance = Vector3::Distance(circle, point);
@@ -85,23 +85,23 @@ bool CollisionChecker::CircleAndAABB(Circle *a, Vector3 aPos, AABB *b, Vector3 b
 	point.y = aPos.y;
 
 	// x-axis
-	if (circle.x > box.x + b->halfSize.x/2.0f)
+	if (circle.x > box.x + b->halfSize.x)
 	{
-		point.x = box.x + b->halfSize.x/2.0f;
+		point.x = box.x + b->halfSize.x;
 	}
-	else if (circle.x < box.x - b->halfSize.x/2.0f)
+	else if (circle.x < box.x - b->halfSize.x)
 	{
-		point.x = box.x - b->halfSize.x/2.0f;
+		point.x = box.x - b->halfSize.x;
 	}
 
 	// y-axis
-	if (circle.y  > box.y + b->halfSize.y/2.0f)
+	if (circle.y  > box.y + b->halfSize.y)
 	{
-		point.y = box.y + b->halfSize.y/2.0f;
+		point.y = box.y + b->halfSize.y;
 	}
-	else if (circle.y < box.y - b->halfSize.y/2.0f)
+	else if (circle.y < box.y - b->halfSize.y)
 	{
-		point.y = box.y - b->halfSize.y/2.0f;
+		point.y = box.y - b->halfSize.y;
 	}
 
 	float distance = Vector3::Distance(circle, point);
