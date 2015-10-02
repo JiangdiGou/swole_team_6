@@ -16,6 +16,7 @@ public:
   unsigned GrabbedObjectId;
 
   GOC* player = NULL;
+  GOC* player2 = NULL; 
   Texture* textureRunBlue = NULL;
   Texture* textureIdleBlue = NULL;
 };

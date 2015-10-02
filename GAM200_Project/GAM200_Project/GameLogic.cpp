@@ -51,22 +51,22 @@ void GameLogic::Initialize()
 
   GOC * greenObj = FACTORY->makeObject("greenGuy");
   Transform * transform2 = new Transform();
-  transform2->SetPosition(3, 0, 0);
+  transform2->SetPosition(-1, 0, 0);
   Sprite * sprite2 = new Sprite(*(graphics->coreShader));
   sprite2->texture = textureIdleGreen;
   greenObj->AddComponent(CT_Transform, transform2);
   greenObj->AddComponent(CT_Sprite, sprite2);
   RigidBody* dudeBody = new RigidBody();
-  dudeBody->isGhost = false;
+  //dudeBody->isGhost = false;
   dudeBody->useGravity = false;
   greenObj->AddComponent(CT_RigidBody, dudeBody);
-  Circle *dudeCollision = new Circle();
-  //dudeCollision->SetHalfSize(1, 1);
-  greenObj->AddComponent(CT_Circle, dudeCollision);
+  AABB *dudeCollision = new AABB();
+  dudeCollision->SetHalfSize(1, 1);
+  greenObj->AddComponent(CT_AABB, dudeCollision);
 
   GOC * blueObj = FACTORY->makeObject("blueGuy");
   Transform * transform3 = new Transform();
-  transform3->SetPosition(-3, 0, 0);
+  transform3->SetPosition(-2, 0, 0);
   Sprite * sprite3 = new Sprite(*(graphics->coreShader));
   sprite3->texture = *textureIdleBlue;
   blueObj->AddComponent(CT_Transform, transform3);
@@ -75,14 +75,32 @@ void GameLogic::Initialize()
   //dudeBody->isGhost = false;
   blueObjBody->useGravity = false;
   blueObj->AddComponent(CT_RigidBody, blueObjBody);
-  Circle* blueCollision = new Circle();
-  //blueCollision->SetHalfSize(1, 1);
-  blueObj->AddComponent(CT_Circle, blueCollision);
+  AABB* blueCollision = new AABB();
+  blueCollision->SetHalfSize(1, 1);
+  blueObj->AddComponent(CT_AABB, blueCollision);
+
+  GOC * blackObj = FACTORY->makeObject("blackbox");
+  Transform * transform4 = new Transform();
+  transform4->SetPosition(1, 0, 0);
+  Sprite * sprite4 = new Sprite(*(graphics->coreShader));
+  sprite4->texture = *textureIdleBlue;
+  blackObj->AddComponent(CT_Transform, transform4);
+  blackObj->AddComponent(CT_Sprite, sprite4);
+  RigidBody* blackObjBody = new RigidBody();
+  //dudeBody->isGhost = false;
+  blackObjBody->isStatic = true;
+  blackObjBody->useGravity = true;
+  blackObj->AddComponent(CT_RigidBody, blackObjBody);
+  AABB* blackCollision = new AABB();
+  blackCollision->SetHalfSize(1, 1);
+  blackObj->AddComponent(CT_AABB, blackCollision);
   
   player = blueObj;
+  player2 = blackObj;
 
   blueObj->Initialize();
   greenObj->Initialize();
+  blackObj->Initialize(); 
   camera->Initialize();
 
   //background->Initialize();

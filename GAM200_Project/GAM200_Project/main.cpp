@@ -115,11 +115,20 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
   RigidBody* body = NULL;
   Sprite* sprite = NULL;
   Transform* transform = NULL;
+  RigidBody* body2 = NULL;
+  Sprite* sprite2 = NULL;
+  Transform* transform2 = NULL;
   if (LOGIC != NULL && LOGIC->player != NULL)
   {
     body = (LOGIC->player)->has(RigidBody);
     sprite = (LOGIC->player)->has(Sprite);
     transform = (LOGIC->player)->has(Transform);
+  }
+  else if (LOGIC != NULL && LOGIC->player2 != NULL)
+  {
+	  body2 = (LOGIC->player2)->has(RigidBody);
+	  sprite2 = (LOGIC->player2)->has(Sprite);
+	  transform2 = (LOGIC->player2)->has(Transform);
   }
   switch (msg)
   {
@@ -142,10 +151,18 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		body->setVelocity(1.5, body->getVelocity().y);
       break;
     }
+	case 'A':
+	{
+		body2->setVelocity(-1.5, body2->getVelocity().y);
+	}
+		break;
+
+
     default:
     {
       break;
     }
+   	
     }
   }
   break;

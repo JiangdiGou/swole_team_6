@@ -105,9 +105,9 @@ void Manifold::AppyImpulse(void)
 		j /= (float)contactCount;
 
 		// Apply the impulse
-		//Vector2 impulse = normal * (j /2);
-		//A->body->ApplyImpulse(-impulse, radii_a);
-		//B->body->ApplyImpulse(impulse, radii_b);
+		Vector2 impulse = normal * (j /2);
+		A->body->ApplyImpulse(-impulse, radii_a);
+		B->body->ApplyImpulse(impulse, radii_b);
 
 		// Friction impulse
 		relativeVel = B->body->getVelocity() + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
