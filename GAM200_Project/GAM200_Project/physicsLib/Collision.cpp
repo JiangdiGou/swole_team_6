@@ -18,7 +18,7 @@ float CalculateRestitution(Primitive *a, Primitive *b)
 	RigidBody* bodyB = b->GetOwner()->has(RigidBody);
 	if (bodyA && bodyB)
 	{
-		return (std::min(bodyA->restitution, bodyB->restitution));
+		return (std::max(bodyA->restitution, bodyB->restitution));
 	}
 	else
 		return 0;
