@@ -124,7 +124,7 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
     sprite = (LOGIC->player)->has(Sprite);
     transform = (LOGIC->player)->has(Transform);
   }
-  else if (LOGIC != NULL && LOGIC->player2 != NULL)
+  if (LOGIC != NULL && LOGIC->player2 != NULL)
   {
 	  body2 = (LOGIC->player2)->has(RigidBody);
 	  sprite2 = (LOGIC->player2)->has(Sprite);
@@ -154,6 +154,11 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 	case 'A':
 	{
 		body2->setVelocity(-1.5, body2->getVelocity().y);
+	}
+		break;
+	case 'D':
+	{
+		body2->setVelocity(+1.5, body2->getVelocity().y);
 	}
 		break;
 

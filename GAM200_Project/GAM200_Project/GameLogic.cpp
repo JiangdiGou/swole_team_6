@@ -51,7 +51,7 @@ void GameLogic::Initialize()
 
   GOC * greenObj = FACTORY->makeObject("greenGuy");
   Transform * transform2 = new Transform();
-  transform2->SetPosition(0, 1, 0);
+  transform2->SetPosition(0, 3, 0);
   Sprite * sprite2 = new Sprite(*(graphics->coreShader));
   sprite2->texture = textureIdleGreen;
   greenObj->AddComponent(CT_Transform, transform2);
@@ -82,14 +82,14 @@ void GameLogic::Initialize()
 
   GOC * boObj = FACTORY->makeObject("boGuy");
   Transform * transformbo = new Transform();
-  transformbo->SetPosition(-2, 0, 0);
+  transformbo->SetPosition(3, 0, 0);
   Sprite * spritebo = new Sprite(*(graphics->coreShader));
   spritebo->texture = *textureIdleBlue;
   boObj->AddComponent(CT_Transform, transformbo);
   boObj->AddComponent(CT_Sprite, spritebo);
   RigidBody* boObjBody = new RigidBody();
   dudeBody->isGhost = false;
-  boObjBody->useGravity = false;
+  boObjBody->useGravity = true;
   boObj->AddComponent(CT_RigidBody, boObjBody);
   AABB* boCollision = new AABB();
   boCollision->SetHalfSize(1, 1);
@@ -98,7 +98,7 @@ void GameLogic::Initialize()
 
   GOC * blueObj = FACTORY->makeObject("blueGuy");
   Transform * transform3 = new Transform();
-  transform3->SetPosition(-2, -1, 0);
+  transform3->SetPosition(-2, 0, 0);
   Sprite * sprite3 = new Sprite(*(graphics->coreShader));
   sprite3->texture = *textureIdleBlue;
   blueObj->AddComponent(CT_Transform, transform3);
@@ -129,7 +129,7 @@ void GameLogic::Initialize()
   blackObj->AddComponent(CT_AABB, blackCollision);
   
   player = blueObj;
-  player2 = blackObj;
+  player2 = boObj;
 
   blueObj->Initialize();
   greenObj->Initialize();
