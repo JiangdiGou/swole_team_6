@@ -9,7 +9,7 @@ bool CollisionChecker::CircleAndCircle(Circle *a, Vector3 aPos, Circle *b, Vecto
 	float distance = Vector3::Distance(aPosition, bPosition);
 
 
-	if (distance <= a->radius * b->radius)
+	if (distance <= (a->radius *  b->radius) *2.0f)
 	{
 		return true;
 	}

@@ -57,7 +57,7 @@ void CircleAndCircle(Primitive *Circle1, Primitive *Circle2, Manifold *data)
 	// Case 1: if circles are on top of each other
 	if (distance == 0.0f)
 	{
-		data->penetration = Circle1->radius;
+		data->penetration = Circle1->radius ;
 		data->normal = Vector2(1, 0);
 		data->contact[0] = trans1->GetPositionXY();
 	}
