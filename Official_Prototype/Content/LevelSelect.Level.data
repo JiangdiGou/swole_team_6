@@ -110,7 +110,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [1.79842114, 3.02204967, 50],
+			Vec3 Translation = [1.6279124, -0.302871495, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -122,7 +122,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 24.4280987,
+			float Size = 26.997221,
 		},
 		EditorCameraController = 
 		{
@@ -130,7 +130,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [1.79842114, 3.02204967, 7.86120751e-008],
+			Vec3 LookTarget = [1.6279124, -0.302871495, 7.1158901e-008],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -423,75 +423,6 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "LevelButton3",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [7.05882978, -5.34528017, 0],
-			Vec3 Scale = [1.99743998, 1.99743998, 1.99743998],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		SpriteText = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0, 0, 0, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string FontName = "4e7bac697bec55c5:Verdana",
-			uint FontSize = 15,
-			string Text = "Level 3",
-			TextAlign Align = Center,
-			float PixelsPerUnit = 64,
-			bool Smoothing = true,
-		},
-		LevelSelectButton = 
-		{
-			bool BIsFirst = false,
-			int ISelected = 3,
-		},
-		Reactive = 
-		{
-			bool Active = true,
-			bool CaptureMouse = true,
-		},
-		GoToLevel = 
-		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "553552b3f7cd2d35:PowerSelect",
-			string Level_Name = "551f871f885a5f4b:Level",
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 9,
-		},
-		Named = 
-		{
 			string Name = "Sprite",
 		},
 		Transform = 
@@ -523,7 +454,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 10,
+			uint Id = 9,
 		},
 		Named = 
 		{
@@ -558,42 +489,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 11,
-		},
-		Named = 
-		{
-			string Name = "Sprite",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [1.20360994, -4.25594997, -0.200000003],
-			Vec3 Scale = [10.7785997, 0.407766998, 1],
-			Quat Rotation = [0, 0, -0.0988050029, 0.995106995],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0, 0, 0, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 12,
+			uint Id = 10,
 		},
 		Named = 
 		{
@@ -640,7 +536,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 11,
 		},
 		Named = 
 		{
