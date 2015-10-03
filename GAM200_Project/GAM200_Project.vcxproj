@@ -25,10 +25,8 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\graphicsManager.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h" />
-    <ClInclude Include="GAM200_Project\engineGraphics\ShaderManager.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
-    <ClInclude Include="GAM200_Project\engineGraphics\text.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h" />
     <ClInclude Include="GAM200_Project\gameLevel.h">
@@ -129,7 +127,6 @@
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
-    <ClCompile Include="GAM200_Project\engineGraphics\text.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp" />
     <ClCompile Include="GAM200_Project\gameLevel.cpp">
@@ -268,7 +265,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;SOIL.lib;freetype26.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

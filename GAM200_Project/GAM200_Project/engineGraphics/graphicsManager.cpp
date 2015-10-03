@@ -11,7 +11,6 @@ GraphicsManager::GraphicsManager(Shader& textShader, Shader& debugShader)
 {
   graphics = this;
   coreShader = &debugShader;
-  Text::initText(textShader);
   initDebugDraw(debugShader);
 
   debugShader.Use();

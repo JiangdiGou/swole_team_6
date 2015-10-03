@@ -75,9 +75,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\ShaderManager.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h">
       <Filter>luaRunner</Filter>
     </ClInclude>
@@ -187,9 +184,6 @@
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\text.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\ft2build.h">
@@ -303,9 +297,6 @@
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\FramerateController.cpp">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\engineGraphics\text.cpp">
       <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp">

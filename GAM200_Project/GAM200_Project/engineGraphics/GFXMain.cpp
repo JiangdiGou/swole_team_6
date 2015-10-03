@@ -12,7 +12,6 @@
 #include <Windows.h>
 #include "instancedSprite.h"
 #include "FramerateController.h"
-#include "text.h"
 
 HDC deviceContextGFX;
 HGLRC renderingContextGFX;
@@ -63,10 +62,6 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   Sprite player4 = Sprite(basicShader);
   */
   pPlayer = &player;
-
-  Text::initText(basicShader);
-  Text textTest1 = Text("swoLe team 6", basicShader);
-  Text textFps = Text("FPS: ", basicShader);
 
 	//Sets up textures 
   Texture textureSmiley = Texture("resources/Smiley1.png");
@@ -123,16 +118,6 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     //testScaling(smiley);
 
     basicCamera.Update();
-
-
-   //Sprite::drawSprites();
-   textTest1.Update();
-
-   std::string fpsMessage;
-   fpsMessage = "FPS: ";
-   fpsMessage += std::to_string((int)(1000.0f / FramerateController::getPreviousDt()));
-   textFps.message = fpsMessage;
-   textFps.Update();
 
 	  //Again, not ideal, but there will eventually be a draw all function or something
 	  //debugDrawFrame();
