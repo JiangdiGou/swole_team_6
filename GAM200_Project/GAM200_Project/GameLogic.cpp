@@ -89,7 +89,7 @@ void GameLogic::Initialize()
   boObj->AddComponent(CT_Sprite, spritebo);
   RigidBody* boObjBody = new RigidBody();
   dudeBody->isGhost = false;
-  boObjBody->useGravity = true;
+  boObjBody->useGravity = false;
   boObj->AddComponent(CT_RigidBody, boObjBody);
   AABB* boCollision = new AABB();
   boCollision->SetHalfSize(1, 1);
@@ -105,7 +105,7 @@ void GameLogic::Initialize()
   blueObj->AddComponent(CT_Sprite, sprite3);
   RigidBody* blueObjBody = new RigidBody();
   dudeBody->isGhost = false;
-  blueObjBody->useGravity = true;
+  blueObjBody->useGravity = false;
   blueObj->AddComponent(CT_RigidBody, blueObjBody);
   AABB* blueCollision = new AABB();
   blueCollision->SetHalfSize(1, 1);

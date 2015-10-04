@@ -26,6 +26,10 @@ class RigidBody : public GameComponent
 		//WE NEED A TRANSFORM COMPONET
     Transform *pTrans;
 		
+	//are we suppose to have a pos var?
+	Vector2 position;
+	//are we suppose to have a velocity var as well?
+	//Vector2 velocity;
 		Vector2 acceleration;
 		      // Holds the linear velocity of the rigid body
 		Vector2 forceAccum;     // Accumlated force
