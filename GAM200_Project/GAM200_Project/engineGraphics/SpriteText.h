@@ -13,6 +13,7 @@ class SpriteText : public GameComponent
 public:
   void static SpriteText::initText(Shader* shader, Texture* font);
   static void drawAllText();
+  static void renderText(std::string message, Vector3 position, Vector3 scale);
   SpriteText(std::string initialMessage);
 
   void Update() override;

@@ -26,6 +26,7 @@ void GraphicsManager::Update(float dt)
   glClearColor(0.9f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
   debugDrawFrame();
+  SpriteText::renderText("qq", Vector3(-1, 0, 0), Vector3(1, 1, 1));
   SpriteText::drawAllText();
 }
 

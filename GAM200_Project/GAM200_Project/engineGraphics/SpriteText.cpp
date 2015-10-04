@@ -275,3 +275,112 @@ glm::mat4 SpriteText::calculateTransform()
 
   return transform;
 }
+
+void SpriteText::renderText(std::string message, Vector3 position, Vector3 scale)
+{
+  std::string::const_iterator characterIt;
+  glm::vec3 initialTranslation, initialScale;
+  glm::vec4 transformedPosition;
+  glm::mat4 transform;
+  int newLines = 0;
+  int newLinePos = 0;
+
+  glBindVertexArray(vertexArray);
+  pShader->Use();
+
+  //saves initial translation and scale 
+  initialTranslation = glm::vec3(position.x, position.y, position.z);
+  initialScale = glm::vec3(scale.x, scale.y, scale.z);
+
+  for (characterIt = message.begin(); characterIt != message.end(); ++characterIt)
+  {
+    //A lot of convuluted stuff is done in here but its really the same as 
+    //the Text's update function so I'm not gonna explain it again here. 
+    int characterOffset = characterIt - message.begin() - newLinePos;
+
+    //Handles special cases 
+    if (*characterIt == ' ')
+      continue;
+    else if (*characterIt == '\n')
+    {
+      ++newLines;
+      newLinePos = characterIt - message.begin() + 1;
+      continue;
+    }
+
+    //Calculates a new position, accounting for offset in the word
+    glm::vec3 newPosition = glm::vec3(
+      initialTranslation +
+      glm::vec3((characterOffset * scale.x), (-newLines * scale.y), 0));
+
+    //Calculates a transformation matrix
+    transform = glm::translate(transform,
+      glm::vec3(newPosition.x, newPosition.y, newPosition.z));
+    transform = glm::rotate(transform, 0.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+    transform = glm::scale(transform, glm::vec3(1, 1, 1));
+
+    //Vertex 1
+    glm::vec4 transformedPosition = (transform * glm::vec4(
+      newPosition.x + 0.5*initialScale.x, newPosition.y - 0.5*initialScale.y,
+      newPosition.z, 0));
+    vertices.push_back(transformedPosition.x);
+    vertices.push_back(transformedPosition.y);
+    vertices.push_back(transformedPosition.z);
+
+    //Vertex 2
+    transformedPosition = (transform * glm::vec4(
+      newPosition.x - 0.5*initialScale.x, newPosition.y + 0.5*initialScale.y,
+      newPosition.z, 0));
+    vertices.push_back(transformedPosition.x);
+    vertices.push_back(transformedPosition.y);
+    vertices.push_back(transformedPosition.z);
+
+    //Vertex 3
+    transformedPosition = (transform * glm::vec4(
+      newPosition.x - 0.5*initialScale.x, newPosition.y - 0.5*initialScale.y,
+      newPosition.z, 0));
+    vertices.push_back(transformedPosition.x);
+    vertices.push_back(transformedPosition.y);
+    vertices.push_back(transformedPosition.z);
+
+    //Vertex 4
+    transformedPosition = (transform * glm::vec4(
+      newPosition.x + 0.5*initialScale.x, newPosition.y - 0.5*initialScale.y,
+      newPosition.z, 0));
+    vertices.push_back(transformedPosition.x);
+    vertices.push_back(transformedPosition.y);
+    vertices.push_back(transformedPosition.z);
+
+    //Vertex 5
+    transformedPosition = (transform * glm::vec4(
+      newPosition.x + 0.5*initialScale.x, newPosition.y + 0.5*initialScale.y,
+      newPosition.z, 0));
+    vertices.push_back(transformedPosition.x);
+    vertices.push_back(transformedPosition.y);
+    vertices.push_back(transformedPosition.z);
+
+    //Vertex 6
+    transformedPosition = (transform * glm::vec4(
+      newPosition.x - 0.5*initialScale.x, newPosition.y + 0.5*initialScale.y,
+      newPosition.z, 0));
+    vertices.push_back(transformedPosition.x);
+    vertices.push_back(transformedPosition.y);
+    vertices.push_back(transformedPosition.z);
+
+    //Deals with tex coords
+    pFont->offsetXBytes = offsets[*characterIt].x,
+      pFont->offsetYBytes = offsets[*characterIt].y;
+    pFont->updateAnimation();
+
+    for (int i = 0; i < 12; ++i)
+      texCoords.push_back(pFont->textureCoordinates[i]);
+
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    pFont->offsetXBytes = 0;
+    pFont->offsetYBytes = 0;
+  }
+}
+
