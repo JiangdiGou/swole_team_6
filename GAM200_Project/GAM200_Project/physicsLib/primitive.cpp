@@ -58,7 +58,7 @@ void Circle::Initialize()
 
 void Circle::Update(){
 	Vector3 pos = pTrans->GetPosition();
-	debugDrawCircle(glm::vec3(pos.x, pos.y, pos.z), radius, glm::vec3(0, 0, 0), 10);
+  debugDrawCircle(Vector3(pos.x, pos.y, pos.z), radius, Vector3(0, 0, 0), 10);
 }
 
 void Circle::Release(){}
@@ -86,7 +86,7 @@ void AABB::Initialize()
 }
 void AABB::Update(){
 	Vector3 pos = pTrans->GetPosition();
-	debugDrawSquare(glm::vec3(pos.x, pos.y, pos.z), halfSize.x, halfSize.y, glm::vec3(0,0,0));
+  debugDrawSquare(Vector3(pos.x, pos.y, pos.z), halfSize.x, halfSize.y, Vector3(0, 0, 0));
 }
 
 void AABB::Release(){}

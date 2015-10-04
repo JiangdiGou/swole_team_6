@@ -3,23 +3,21 @@
 
 #include "Graphics.h"
 #include "Shader.h"
+#include "../physicsLib/math_utility.h"
 
 
 class DebugDraw
 {
 public:
 	DebugDraw();
-	friend void debugDrawLine(glm::vec3 startPoint, glm::vec3 endPoint,
-		glm::vec3 color);
-	friend void debugDrawSquare(glm::vec3 center, float width, float height,
-		glm::vec3 color);
-	friend void debugDrawSquare(glm::vec3 topLeft, glm::vec3 topRight,
-		glm::vec3 bottomLeft, glm::vec3 bottomRight,
-		glm::vec3 color);
-	friend void debugDrawCircle(glm::vec3 center, float radius, glm::vec3 color,
+  friend void debugDrawLine(Vector3 startPoint, Vector3 endPoint,
+    Vector3 color);
+  friend void debugDrawSquare(Vector3 center, float width, float height,
+    Vector3 color);
+  friend void debugDrawSquare(Vector3 topLeft, Vector3 topRight,
+    Vector3 bottomLeft, Vector3 bottomRight,Vector3 color);
+  friend void debugDrawCircle(Vector3 center, float radius, Vector3 color,
 		int segments);
-	friend void debugDrawArrow(glm::vec3 startPoint, glm::vec3 endPoint,
-		glm::vec3 color);
 
 	friend void initDebugDraw(Shader shader);
 	friend void debugDrawFrame(void);

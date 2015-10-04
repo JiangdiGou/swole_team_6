@@ -65,7 +65,7 @@ void debugDrawFrame(void)
 	debugVertices.clear();
 }
 
-void debugDrawLine(glm::vec3 startPoint, glm::vec3 endPoint, glm::vec3 color)
+void debugDrawLine(Vector3 startPoint, Vector3 endPoint, Vector3 color)
 {
 	debugVertices.push_back(startPoint.x);
 	debugVertices.push_back(startPoint.y);
@@ -75,27 +75,36 @@ void debugDrawLine(glm::vec3 startPoint, glm::vec3 endPoint, glm::vec3 color)
 	debugVertices.push_back(endPoint.z);
 }
 
-void debugDrawSquare(glm::vec3 center, float width, float height, glm::vec3 color)
+void debugDrawSquare(Vector3 center, float width, float height, Vector3 color)
 {
 	debugDrawLine(
-		glm::vec3((center.x - 0.5*width), (center.y + 0.5*height), center.z),
-		glm::vec3((center.x + 0.5*width), (center.y + 0.5*height), center.z),
-		glm::vec3());
+    Vector3((center.x - 0.5*width), (center.y + 0.5*height), center.z),
+    Vector3((center.x + 0.5*width), (center.y + 0.5*height), center.z),
+    Vector3());
 	debugDrawLine(
-		glm::vec3((center.x + 0.5*width), (center.y + 0.5*height), center.z),
-		glm::vec3((center.x + 0.5*width), (center.y - 0.5*height), center.z),
-		glm::vec3());
+    Vector3((center.x + 0.5*width), (center.y + 0.5*height), center.z),
+    Vector3((center.x + 0.5*width), (center.y - 0.5*height), center.z),
+    Vector3());
 	debugDrawLine(
-		glm::vec3((center.x + 0.5*width), (center.y - 0.5*height), center.z),
-		glm::vec3((center.x - 0.5*width), (center.y - 0.5*height), center.z),
-		glm::vec3());
+    Vector3((center.x + 0.5*width), (center.y - 0.5*height), center.z),
+    Vector3((center.x - 0.5*width), (center.y - 0.5*height), center.z),
+    Vector3());
 	debugDrawLine(
-		glm::vec3((center.x - 0.5*width), (center.y - 0.5*height), center.z),
-		glm::vec3((center.x - 0.5*width), (center.y + 0.5*height), center.z),
-		glm::vec3());
+    Vector3((center.x - 0.5*width), (center.y - 0.5*height), center.z),
+    Vector3((center.x - 0.5*width), (center.y + 0.5*height), center.z),
+    Vector3());
 }
 
-void debugDrawCircle(glm::vec3 center, float radius, glm::vec3 color, int segments)
+void debugDrawSquare(Vector3 topLeft, Vector3 topRight,
+  Vector3 bottomLeft, Vector3 bottomRight, Vector3 color)
+{
+  debugDrawLine(topLeft, topRight, Vector3());
+  debugDrawLine(topRight, bottomRight, Vector3());
+  debugDrawLine(bottomRight, bottomLeft, Vector3());
+  debugDrawLine(bottomLeft, topLeft, Vector3());
+}
+
+void debugDrawCircle(Vector3 center, float radius, Vector3 color, int segments)
 {
 	float angle, angle2, x, x2, y, y2;
 	for (int i = 1; i <= 2 * segments; ++i)
@@ -109,14 +118,9 @@ void debugDrawCircle(glm::vec3 center, float radius, glm::vec3 color, int segmen
 		y2 = sin(angle2);
 
 		debugDrawLine(
-		glm::vec3((center.x + radius*x), (center.y + radius*y), center.z),
-		glm::vec3((center.x + radius*x2), (center.y + radius*y2), center.z),
-		glm::vec3());
-
-		/*
-		debugVertices.push_back(center.x + radius*x);
-		debugVertices.push_back(center.y + radius*y);
-		debugVertices.push_back(center.z);
-		*/
+		Vector3((center.x + radius*x), (center.y + radius*y), center.z),
+    Vector3((center.x + radius*x2), (center.y + radius*y2), center.z),
+    Vector3());
 	}
 }
+
