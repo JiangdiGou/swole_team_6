@@ -2,7 +2,6 @@
 #define PRIMITIVE_H
 #include <cstdlib>
 #include "Body.h"
-//#include "Precompiled.h"
 #include "../Composition.h"
 #include "Resolution.h"
 
@@ -22,7 +21,7 @@ public:
 	ShapeID Id;       // The Shape ID
 	RigidBody *body;  // The rigidbody the collider is attached to
 	PhysicsMaterial material;
-	bool active;      // True for search
+	bool active;      
 
 
 	void Initialize();
@@ -30,8 +29,6 @@ public:
 	void Release();
 
 	Primitive();
-	//Primitive(IEntity* Owner);
-	//Primitive( ShapeID pID);
 
 	virtual ~Primitive() = 0;
 	virtual Primitive *Clone(void) const = 0;
@@ -46,7 +43,6 @@ class Circle : public Primitive
 public:
 
 	Circle();
-	//Circle(GameObjectComposition Owner);
 	~Circle();
 
 	void Initialize() ;

@@ -1,8 +1,4 @@
-
 #include "Resolution.h"
-//#include <algorithm>
-//#include <math.h>
-//#include "math_utility.h"
 #include "Precompiled.h"
 
 PhysicsMaterial::PhysicsMaterial()
@@ -12,7 +8,6 @@ PhysicsMaterial::PhysicsMaterial()
 	dynamicFriction = 0.3f;
 	dynamicFriction2 = 0.3f;
 	frictionCombine = 0.0f;
-	//friction = 0.2f;
 }
 
 void Manifold::Solve(void)
@@ -33,9 +28,6 @@ void Manifold::PreStep(float dt)
 
 	// Calculate the static and dynamic friction
 	
-	//staticFriction = std::sqrt( A->stFric * B->stFric );
-	//dynamicFriction = std::sqrt( A->dynFric * B->dynFric );
-
 	staticFriction = std::sqrt(A->material.staticFriction *
 		B->material.staticFriction);
 
@@ -63,7 +55,6 @@ void Manifold::PreStep(float dt)
 void Manifold::AppyImpulse(void)
 {
 	// If static
-	//RigidBody* 
 	if (A->body->isStatic && B->body->isStatic)
 	{
 		A->body->getVelocity().Clear();

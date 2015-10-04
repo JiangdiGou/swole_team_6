@@ -13,7 +13,7 @@ float maximum(float a, float b)
 
 bool equal_floats(float a, float b)
 {
-	const float epsilon = 1.0f / 8192.0f;/* should be small enough for 1.0f == pixel width */
+	const float epsilon = 1.0f / 8192.0f;
 	return fabsf(a - b) < epsilon;
 }
 
@@ -142,19 +142,17 @@ Vec2D operator/(const float scale, const Vec2D& vec)
 		return Vec2D(vec.x / scale, vec.y / scale);
 }
 
-// Returns true if the vectors are equal.
+
 bool  Vec2D::operator==(const Vec2D& rhs)
 {
 	return (x == rhs.x && y == rhs.y);
 }
 
-// Returns true if vectors are not equal
 bool  Vec2D::operator!=(const Vec2D& rhs)
 {
 	return !(*this == rhs);
 }
 
-// Adds the vector to this, scaled by the given amount
 void  Vec2D::AddScale(const Vec2D& vec, float scale)
 {
 	x += vec.x * scale;
@@ -174,7 +172,6 @@ void Vector3D::Set(float newX, float newY, float newZ)
 	z = newZ;
 }
 
-// Zero all the components of the vector
 void Vector3D::Clear()
 {
 	x = 0.0f;

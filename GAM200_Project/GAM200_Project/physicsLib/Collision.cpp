@@ -27,8 +27,6 @@ float CalculateRestitution(Primitive *a, Primitive *b)
 void CircleAndCircle(Primitive *Circle1, Primitive *Circle2, Manifold *data)
 {
 	// Create pointers
-	//Circle *Circle1 = reinterpret_cast<Circle *>(a);
-	//Circle *Circle2 = reinterpret_cast<Circle *>(b);
 	Transform* trans1 = Circle1->GetOwner()->has(Transform);
 	Transform* trans2 = Circle2->GetOwner()->has(Transform);
 
@@ -38,7 +36,7 @@ void CircleAndCircle(Primitive *Circle1, Primitive *Circle2, Manifold *data)
 	// Calculate the distance squared
 	float distSqr = midline.SqrMagnitude();
 
-	// Calculated added radii
+	// Calculated added radian
 	float radius = Circle1->radius + Circle2->radius;
 
 	// Case 0: No Intersection
@@ -84,8 +82,6 @@ void CircleAndCircle(Primitive *Circle1, Primitive *Circle2, Manifold *data)
 
 void AABBAndAABB(Primitive *a, Primitive *b, Manifold *data)
 {
-	//AABB *AABB1 = reinterpret_cast<AABB *>(a);
-	//AABB *AABB2 = reinterpret_cast<AABB *>(b);
 	Transform* transA = a->GetOwner()->has(Transform);
 	Transform* transB = b->GetOwner()->has(Transform);
 

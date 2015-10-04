@@ -5,7 +5,6 @@
 #include "../engineGraphics/Graphics.h"
 //#include "../Component.h"
 
-////// PRIMITIVE //////
 
 Primitive::Primitive()
 {

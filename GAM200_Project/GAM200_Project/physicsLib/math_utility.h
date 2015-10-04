@@ -116,7 +116,6 @@ public:
 	}
 
 	// Max
-	// Returns a vector that is made from the largest components of two vectors.
 	static Vec2D Max(Vec2D &pVec0, Vec2D &pVec1)
 	{
 		Vec2D max;
@@ -185,7 +184,6 @@ public:
 
 	void Set(float newX, float newY, float newZ);
 
-	// Zero all the components of the vector
 	void Clear();
 
 	float Magnitude();
@@ -282,8 +280,6 @@ public:
 		s.y *= 2.0f;
 		s.z *= 2.0f;
 
-		// r = 2 * (v dot n)n - v
-		// r = s - v
 		return Vector3D(s.x - inDir.x, s.y - inDir.y, s.z - inDir.z);
 	}
 

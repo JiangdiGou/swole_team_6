@@ -57,11 +57,11 @@ struct Manifold
 
 	float dynamicFriction;
 
-	float e; // epsilon
+	float e; 
 
 	Contact contacts[2];
 
-	unsigned contactCount; // The number of contacts found so far
+	unsigned contactCount;
 
 	void Solve(void);
 	void PreStep(float dt);
