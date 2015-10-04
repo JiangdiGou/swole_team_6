@@ -182,7 +182,7 @@ void SpriteText::Update()
       newPosition.z);
   
     transformComponent->SetScale(1, 1, 1);
-    transform = calculateTransform();
+    transform = transformComponent->calculateTransformMatrix();
 
     //Reset this stuff, it was only for the transformation matrix 
     transformComponent->SetScale(initialScale.x, initialScale.y, initialScale.z);
@@ -250,30 +250,6 @@ void SpriteText::Update()
 
   pFont->offsetXBytes = 0;
   pFont->offsetYBytes = 0;
-}
-
-glm::mat4 SpriteText::calculateTransform()
-{
-  glm::mat4 transform, translate, rotate, scale;
-  Transform *transformComponent = GetOwner()->has(Transform)
-
-    transform = glm::translate(transform,
-    glm::vec3(
-    transformComponent->GetPosition().x,
-    transformComponent->GetPosition().y,
-    transformComponent->GetPosition().z
-    ));
-  //Since we're in 2d, rotation occurs about the Z axis
-  //Can be changed later if you want different types of rotation
-  transform = glm::rotate(transform, (transformComponent->GetRotation()).z, glm::vec3(0.0f, 0.0f, 1.0f));
-  transform = glm::scale(transform,
-    glm::vec3(
-    transformComponent->GetScale().x,
-    transformComponent->GetScale().y,
-    transformComponent->GetScale().z
-    ));
-
-  return transform;
 }
 
 void SpriteText::renderText(std::string message, Vector3 position, Vector3 scale)

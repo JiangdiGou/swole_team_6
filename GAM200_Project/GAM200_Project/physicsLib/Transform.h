@@ -2,7 +2,9 @@
 #define TRANSFORM_H
 //#include "all the header" //Math/Vec3.h
 #include "../Composition.h"
+#include "../engineGraphics/Graphics.h"
 #include "math_utility.h"
+
 //Transform Component
 class Transform : public GameComponent
 {
@@ -47,6 +49,7 @@ public:
 	void SetScaleZ(float z);
 	void SetScale(float x, float y, float z);
 
+  glm::mat4 calculateTransformMatrix();
 
 private:
 	Vector3 position;

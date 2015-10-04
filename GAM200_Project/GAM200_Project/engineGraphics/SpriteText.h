@@ -34,7 +34,7 @@ private:
   static GLint transformLocation;
 
   static void loadCharacters();
-  glm::mat4 calculateTransform(void);
+
 };
 
 #endif

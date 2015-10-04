@@ -107,37 +107,6 @@ Sprite::~Sprite()
   glDeleteBuffers(1, &textureBuffer);
 }
 
-//**********************
-//Function    : Sprite.calculateTransform
-//Input       : none
-//Output      : mat4 - the calculated transformation matrix 
-//Description : calculates the transformation matrix of a sprite. 
-//**********************
-glm::mat4 Sprite::calculateTransform(void)
-{
-  glm::mat4 transform;
-
-  Transform *transformComponent = GetOwner()->has(Transform)
-
-  Vector3 scale = transformComponent->GetScale();
-
-  Vector3 position = transformComponent->GetPosition();
-
-  transform = glm::translate(transform, glm::vec3(
-    position.x, position.y, position.z));
-    //Since we're in 2d, rotation occurs about the Z axis
-	//Can be changed later if you want different types of rotation
-	transform = glm::rotate(transform, transformComponent->GetRotation().z, glm::vec3(0.0f, 0.0f, 1.0f));
-  transform = glm::scale(transform, glm::vec3(scale.x, scale.y, scale.z));
-
-  //transform = glm::translate(transform, translation);
-  //   //Since we're in 2d, rotation occurs about the Z axis
-  ////Can be changed later if you want different types of rotation
-  //transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-  // transform = glm::scale(transform, glm::vec3(scale.x, scale.y, scale.z));
-
-	return transform;
-}
 
 //**********************
 //Function    : Sprite.draw
@@ -148,6 +117,7 @@ glm::mat4 Sprite::calculateTransform(void)
 void Sprite::Update(void)
 {
 	GLint transformLocation, colorLocation;
+  Transform *transformComponent = GetOwner()->has(Transform);
 
 	glBindVertexArray(vertexArray);
 	glBindTexture(GL_TEXTURE_2D, texture.ID);
@@ -165,7 +135,7 @@ void Sprite::Update(void)
 	//Sends the sprite's transformation matrix into the shader
 	transformLocation = glGetUniformLocation(shader.Program, "uniformTransform");
 	glUniformMatrix4fv(transformLocation, 1, GL_FALSE,
-			              glm::value_ptr(calculateTransform()));
+			              glm::value_ptr(transformComponent->calculateTransformMatrix()));
 
 	//Sends the sprite's color information in the the shader 
 	colorLocation = glGetUniformLocation(shader.Program, "uniformColor");
