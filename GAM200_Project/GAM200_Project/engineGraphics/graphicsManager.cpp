@@ -13,6 +13,10 @@ GraphicsManager::GraphicsManager(Shader& textShader, Shader& debugShader)
   coreShader = &debugShader;
   initDebugDraw(debugShader);
 
+  Texture * courier = new Texture("resources/courier.png", 1, 43, 83, 0);
+
+  SpriteText::initText(&debugShader, courier);
+
   debugShader.Use();
 }
 
@@ -22,6 +26,7 @@ void GraphicsManager::Update(float dt)
   glClearColor(0.9f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
   debugDrawFrame();
+  SpriteText::drawAllText();
 }
 
 void GraphicsManager::Draw()

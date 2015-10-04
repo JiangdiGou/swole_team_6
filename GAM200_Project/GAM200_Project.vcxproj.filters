@@ -186,9 +186,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\ft2build.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\AssertionError\AssertionError.h">
       <Filter>AssertionError</Filter>
     </ClInclude>
@@ -206,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameLogic.h">
       <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h">
+      <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,25 +314,9 @@
     <ClCompile Include="GAM200_Project\GameLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="GAM200_Project\resources\Smiley1.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="GAM200_Project\resources\Smiley2.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="GAM200_Project\resources\Smiley3.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="GAM200_Project\resources\ExampleSpriteSheet.png">
-      <Filter>resources</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\Fonts\OpenSans-Regular.ttf">
-      <Filter>resources</Filter>
-    </Font>
+    <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">

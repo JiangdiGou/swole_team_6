@@ -10,6 +10,7 @@ enum ComponentTypeId
 	//Graphics
 	CT_Camera,
 	CT_Sprite,
+  CT_SpriteText,
 	//Physics
 	CT_RigidBody,
 	CT_AABB,

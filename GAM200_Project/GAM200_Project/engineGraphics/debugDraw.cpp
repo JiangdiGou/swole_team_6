@@ -46,7 +46,7 @@ void debugDrawFrame(void)
 	//std::cout << pShader->Program << std::endl;
 
 	if (pShader == NULL)
-		std::cout << "pShader is null";
+		std::cout << "Debug Draw: pShader is null";
 
 	//Sends Idenity Matrix to Shader
 	//transformLocation = glGetUniformLocation(pShader->Program, "uniformTransform");
@@ -56,7 +56,7 @@ void debugDrawFrame(void)
 	//colorLocation = glGetUniformLocation(pShader->Program, "uniformColor");
 	//std::cout << colorLocation << std::endl;
 	glUniform4f(colorLocation, 0.0f, 1.0f, 0.0f, 1.0f);
-	glDrawArrays(GL_LINES, 0, debugVertices.size() / 2.0f);
+	glDrawArrays(GL_LINES, 0, debugVertices.size() / 3.0f);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
