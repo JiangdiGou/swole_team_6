@@ -145,7 +145,6 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   }
   return 0;
 }
-
 //Callback function 
 #ifdef GFX_RUN
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)

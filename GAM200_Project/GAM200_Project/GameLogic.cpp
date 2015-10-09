@@ -19,6 +19,7 @@
 #include "./engineGraphics/Camera.h"
 #include "./gameComponents/objFactory.h"
 #include "./engineGraphics/graphicsManager.h"
+#include "./WindowsSystem.h"
 
 #include <ctime>
 
@@ -112,7 +113,7 @@ void GameLogic::Initialize()
   SpriteText * testText2 = new SpriteText("this is also\ntext");
   text2->AddComponent(CT_SpriteText, testText2);
 
-  GOC * blackObj = FACTORY->makeObject("blackbox");
+  GOC * blackObj = FACTORY->makeObject("");
   Transform * transform5 = new Transform();
   transform5->SetPosition(0, -2, 0);
   Sprite * sprite4 = new Sprite(*(graphics->coreShader));
@@ -144,6 +145,46 @@ void GameLogic::Initialize()
   //background->Initialize();
 }
 
+void GameLogic::SendMessages(Message * m)
+{
+  switch (m->MessageId)
+  {
+    // The user has pressed a (letter/number) key, we may respond by creating
+    // a specific object based on the key pressed.
+  case Mid::CharacterKey:
+  {
+    break;
+  }
+  case Mid::MouseMove:
+  {
+    //The mouse has moved, update the mouse's world position
+    MouseMove * mouseMove = (MouseMove*)m;
+    break;
+  }
+  case Mid::MouseButton:
+  {
+    MouseButton * mouse = (MouseButton*)m;
+    //Update the world mouse position
+
+    if (mouse->ButtonIsPressed)
+    {
+      if (mouse->MouseButtonIndex == MouseButton::LeftMouse)
+      {
+      }
+      else if (mouse->MouseButtonIndex == MouseButton::RightMouse)
+      {
+      }
+    }
+    else
+    {
+      //If the mouse has been release let go of the grabbed object
+      GrabbedObjectId = 0;
+    }
+    break;
+  }
+  }
+
+};
 GameLogic::GameLogic()
 {
   LOGIC = this;

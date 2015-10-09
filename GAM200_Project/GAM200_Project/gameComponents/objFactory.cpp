@@ -4,6 +4,7 @@
 #include <random>
 
 #include "../AssertionError/AssertionError.h"
+#include "../WindowsSystem.h"
 bool FACTORY_EXISTS;
 objFactory::objFactory()
 {
@@ -73,4 +74,23 @@ void objFactory::Update(float dt)
 void objFactory::Shutdown()
 {
 
+}
+void objFactory::SendMessages(Message * message)
+{
+  switch (message->MessageId)
+  {
+    // The user has pressed a (letter/number) key, we may respond by creating
+    // a specific object based on the key pressed.
+  case Mid::CharacterKey:
+  {
+    //MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
+    std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+    for (; it != gameObjs.end(); ++it)
+    {
+      it->second->SendMessages(message);
+    }
+    break;
+  }
+
+    }
 }

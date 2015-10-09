@@ -12,6 +12,8 @@ public:
   void GameLoop();
   ///Destroy all systems in reverse order that they were added.
   void DestroySystems();
+  ///Broadcasts a message to all systems.
+  void BroadcastMessage(Message* m);
   ///Adds a new system to the game.
   void AddSystem(ISystem* system);
   ///Initializes all systems in the game.
@@ -25,4 +27,13 @@ private:
 
 
 };
+class MessageQuit : public Message
+{
+public:
+  MessageQuit() : Message(Mid::Quit) {};
+};
+//A global pointer to the instance of the 
+
+
+extern CoreEngine* CORE;
 #endif

@@ -31,9 +31,6 @@
     <Filter Include="Systems\engineGraphics">
       <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\physics">
-      <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="gameObject">
       <UniqueIdentifier>{76ae88c4-daec-4b1d-a43a-6122a9ff8abf}</UniqueIdentifier>
     </Filter>
@@ -54,6 +51,12 @@
     </Filter>
     <Filter Include="GameLogic">
       <UniqueIdentifier>{98c2a2db-e159-474d-8df4-248ef856e31e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Windows">
+      <UniqueIdentifier>{46b15852-26d0-4827-9c98-2f1d900c96f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\physics">
+      <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +109,6 @@
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\shapes.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\vector2d.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\boolean.h">
@@ -206,6 +206,15 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h">
       <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Message.h">
+      <Filter>BaseEngine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\WindowsSystem.h">
+      <Filter>Systems\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\swag.h">
+      <Filter>Systems\physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp">
       <Filter>Systems\engineGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\WindowsSystem.cpp">
+      <Filter>Systems\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

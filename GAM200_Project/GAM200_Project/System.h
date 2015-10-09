@@ -1,8 +1,11 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
+#include "Message.h"
+
 class ISystem
 {
 public:
+  virtual void SendMessages(Message* message) {};
   ///All systems are updated every game frame.
   virtual void Update(float dt) = 0;
 

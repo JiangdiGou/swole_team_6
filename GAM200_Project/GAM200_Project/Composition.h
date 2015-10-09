@@ -18,6 +18,10 @@ friend class objFactory;
 
 GameComponent* GetComponent(ComponentTypeId typeId);
 
+///Message interface See Message.h
+///Message will be sent to each component on this composition.
+void SendMessages(Message* message);
+
 ///Type safe way of accessing components.
 template<typename type>
 type* GetComponentType(ComponentTypeId typeId);

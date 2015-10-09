@@ -1,7 +1,6 @@
 //author Nolan Yoo
 
 #include "../Composition.h"
-#include <stdlib.h>
 #include <map>
 #include "../System.h"
 
@@ -21,6 +20,7 @@ public:
   void Initialize();// override;
   void Update(float dt);//override;
   void Shutdown();// override;
+  void objFactory::SendMessages(Message * message);
 
 };
 extern objFactory * FACTORY;

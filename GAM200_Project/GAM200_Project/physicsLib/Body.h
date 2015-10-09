@@ -10,6 +10,7 @@
 //#include "PhysicsManager.h"
 #include "Trigger.h"
 #include "Transform.h"
+#include "../WindowsSystem.h"
 //class Primitive;
 //class Circle;
 //class AABB;
@@ -53,7 +54,8 @@ class RigidBody : public GameComponent
 
 		void Initialize() override;
 		void Update() override;
-		void Release() override;
+    void Release() override;
+    void SendMessages(Message * message) override;
 
 		void set(float mass);
 
@@ -85,7 +87,7 @@ class RigidBody : public GameComponent
 
 		//Called in PhysicsManager when two objects collide
 		void Trigger(GameObjectComposition *collObj);
-		void AddTriggerCallback(CollisionDelegate *del);
+    void AddTriggerCallback(CollisionDelegate *del);
 		//Vector of pairs of collision delegate methods and the objects they're in.
 		//(Is all of this necessary? Could you just have one function since it's all the same name?)
 		std::vector <CollisionDelegate *> triggerCallbacks;

@@ -13,9 +13,14 @@
 #include "graphicsManager.h"
 #include "GameLogic.h"
 #include "Core.h"
+#include "WindowsSystem.h"
 
 HDC deviceContext;
 HGLRC renderingContext;
+
+const char windowTitle[] = "Swag";
+const int ClientWidth = 800;
+const int ClientHeight = 600;
 
 #ifdef GAMELOOP_RUN
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
@@ -28,15 +33,17 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   freopen("CONOUT$", "w", stdout);
 
   //Stores the window being created
-  HWND window;
+  /*HWND window;
   //Stores windows messages 
   MSG msg;
 
   //Creates a window, saves it in hwnd, and shows on screen
   window = createWindow(instance);
-  ShowWindow(window, show);
+  ShowWindow(window, show);*/
   /**************/
   CoreEngine* engine = new CoreEngine();
+
+  WindowsSystem* windows = new WindowsSystem(windowTitle, ClientWidth, ClientHeight);
 
   engine->AddSystem(new PhysicsManager());
 
@@ -49,6 +56,8 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   graphics->setDeviceContext(deviceContext);
   graphics->setRenderingContext(renderingContext);
+
+  windows->ActivateWindow();
 
   //Camera basicCamera = Camera();
   /******************/
@@ -84,9 +93,9 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
   }*/
-
-  engine->LastTime = timeGetTime();
-  while (engine->GameActive)
+  engine->GameLoop();
+  //engine->LastTime = timeGetTime();
+/*  while (engine->GameActive)
   {
     engine->GameLoop();
 
@@ -95,7 +104,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
       TranslateMessage(&msg);
       DispatchMessage(&msg);
     }
-  }
+  }*/
 
   FACTORY->destroyAllObjects();
   engine->DestroySystems();
@@ -105,7 +114,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   return 0;
 }
 
-
+/*
 #ifdef GAMELOOP_RUN
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 #else
@@ -212,4 +221,4 @@ int falseCallback2(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
   default:
     return DefWindowProc(hWnd, msg, wp, lp);
   }
-}
+}*/

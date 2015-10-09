@@ -12,6 +12,7 @@ public:
   void Initialize();
   void Update(float timeslice);
   virtual std::string GetName() { return "GameLogic"; }
+  virtual void SendMessages(Message *);
   void LoadLevelFile(const std::string& file);
   unsigned GrabbedObjectId;
 

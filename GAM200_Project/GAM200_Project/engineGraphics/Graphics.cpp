@@ -33,7 +33,7 @@ void setupPixelFormatDescriptor(HDC deviceContext)
 //Output      : HWND - handle to the window that is created 
 //Description : Creates a window and returns a handle to it. 
 //**********************
-HWND createWindow(HINSTANCE instance)
+/*HWND createWindow(HINSTANCE instance)
 {
   WNDCLASS windowClass;
   //Class Style
@@ -83,5 +83,5 @@ HWND createWindow(HINSTANCE instance)
     instance,
     //Pointer to value associated with WM_CREATE message
     NULL);
-}
+}*/
 

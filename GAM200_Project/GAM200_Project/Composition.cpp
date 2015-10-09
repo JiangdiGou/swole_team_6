@@ -90,3 +90,12 @@ void GameObjectComposition::Destroy()
 	//FACTORY = new objFactory();
 	FACTORY->destroyObject(this->ObjectId);
 }
+
+void GameObjectComposition::SendMessages(Message * message)
+{
+  //When a message is sent to a composition it sends to
+  //all of its components
+  //for( MapIt it = Map.begin();it!=Map.end();++it)
+  for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
+    (*it)->SendMessages(message);
+}

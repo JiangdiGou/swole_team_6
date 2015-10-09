@@ -89,7 +89,25 @@ void RigidBody::Update()
 {
   /*pTrans->SetPosition(position);*/
 }
-
+void RigidBody::SendMessages(Message * message)
+{
+  switch (message->MessageId)
+  {
+    // The user has pressed a (letter/number) key, we may respond by creating
+    // a specific object based on the key pressed.
+  case Mid::CharacterKey:
+  {
+    MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
+    switch (messageChar->character)
+    {
+    case 'a':
+    {
+      setVelocity(1.5, getVelocity().y);
+    }
+    }
+  }
+  }
+}
 void RigidBody::Release(){}
 
 //void RigidBody::setPosition(const float x, const float y)

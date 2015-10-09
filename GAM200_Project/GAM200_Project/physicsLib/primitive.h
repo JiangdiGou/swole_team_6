@@ -5,7 +5,7 @@
 //#include "Precompiled.h"
 #include "../Composition.h"
 #include "Resolution.h"
-
+//Primitive Component
 class Primitive : public GameComponent
 {
 public:

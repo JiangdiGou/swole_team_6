@@ -8,9 +8,10 @@
 #include <Windows.h>
 #include "Core.h"
 #include "Graphics.h"
+#include "Message.h"
 
-//A global pointer to the core
-CoreEngine* CORE;
+
+CoreEngine* CORE = NULL;
 
 CoreEngine::CoreEngine()
 {
@@ -31,6 +32,9 @@ void CoreEngine::Initialize()
 
 void CoreEngine::GameLoop()
 {
+  LastTime = timeGetTime();
+  while (GameActive)
+  {
     unsigned currenttime = timeGetTime();
     //Convert it to the time passed since the last frame (in seconds)
     float dt = (currenttime - LastTime) / 1000.0f;
@@ -43,9 +47,22 @@ void CoreEngine::GameLoop()
 
     for (unsigned i = 0; i < Systems.size(); ++i)
       Systems[i]->Draw();
+  }
 
 }
 
+void CoreEngine::BroadcastMessage(Message* message)
+{
+  //The message that tells the game to quit
+  if (message->MessageId == Mid::Quit)
+    GameActive = false;
+
+  //Send the message to every system--each
+  //system can figure out whether it cares
+  //about a given message or not
+  for (unsigned i = 0; i < Systems.size(); ++i)
+    Systems[i]->SendMessages(message);
+}
 void CoreEngine::AddSystem(ISystem* system)
 {
   Systems.push_back(system);
