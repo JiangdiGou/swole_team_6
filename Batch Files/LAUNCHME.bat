@@ -1,5 +1,9 @@
 @echo off
 @echo Trying to pack sprites into a sheet
-@cd "%cd%\..\GAM200_Project\resources\SpriteSheetPacker
-sspack.exe /il:"%cd%\..\Textures" /image:"myDummyFiles.png" "DummySheet1.png DummySheet2.png"
+@echo "%cd%"
+@cd "..\GAM200_Project\resources\Textures"
+
+dir /b "..\Textures" > fileList.txt
+
+"spriteSheetPacker/sspack.exe" /image:out.png /il:fileList.txt /r
 pause
