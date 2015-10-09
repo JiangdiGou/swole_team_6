@@ -207,6 +207,12 @@
     <ClInclude Include="GAM200_Project\GameLogic.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\PlayerState.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -313,6 +319,12 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic.cpp">
       <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\PlayerState.cpp">
+      <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\BinaryMap.cpp">
+      <Filter>Systems\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -11,12 +11,10 @@ PhysicsManager *physics;
 
 //MOVEMENT COLLISION FORCESS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-PhysicsManager::PhysicsManager()// : ISystem("Physics", SystemType::ST_Physics)
+PhysicsManager::PhysicsManager()
 {
   physics = this;
-//	float *temp = NULL;
-//	GlobalSettings->GetFloatValue("___ PHYSICS SETTINGS ___", temp, false);
-//	GlobalSettings->GetFloatValue("Gravity", GRAVITY, true);
+
 }
 
 PhysicsManager::~PhysicsManager()
@@ -40,7 +38,7 @@ void PhysicsManager::Shutdown()
 
 void PhysicsManager::ColliderCheck()
 {
-	//  COLLIDER LIST
+	
 	for (unsigned int i = 0; i < colliders.size(); ++i)
 	{
 		if (colliders[i] == NULL)
@@ -118,10 +116,6 @@ void PhysicsManager::RigidBodyCheck()
 			Primitive *b = colliders[j];
 
 			// Check if these object are static
-		/*	if (a->body->isStatic == true && b->body->isStatic == true)
-			{
-				continue;
-			}*/
 
 			//// Set manifold data
 			Manifold m(a, b);
