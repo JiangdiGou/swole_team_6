@@ -46,9 +46,6 @@ private:
   //A sprite's personal draw function, called by drawsprites 
   void draw(void);
 
-  //Calculates a sprite's transformation matrix using the 
-  glm::mat4 calculateTransform(void);
-
 };
 
 #endif 

@@ -151,3 +151,20 @@ void Transform::SetScale(const Vector2 scal)
 	scale.x = scal.x;
 	scale.y = scal.y;
 }
+
+glm::mat4 Transform::calculateTransformMatrix()
+{
+  glm::mat4 transform;
+  Vector3 scale = GetScale();
+  Vector3 position = GetPosition();
+  float rotation = GetRotation().z;
+
+  transform = glm::translate(transform, glm::vec3(
+    position.x, position.y, position.z));
+  //Since we're in 2d, rotation occurs about the Z axis
+  //Can be changed later if you want different types of rotation
+  transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+  transform = glm::scale(transform, glm::vec3(scale.x, scale.y, scale.z));
+
+  return transform;
+}

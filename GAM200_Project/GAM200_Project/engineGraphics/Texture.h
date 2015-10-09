@@ -5,6 +5,7 @@
 
 class Texture
 {
+  friend class SpriteText;
 
 public:
   //Default constructor, does nothing
@@ -42,8 +43,6 @@ private:
   GLfloat getRightX();
   GLfloat getTopY();
   GLfloat getBottomY();
-
-
 
 };
 

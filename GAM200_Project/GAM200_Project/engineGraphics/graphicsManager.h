@@ -5,6 +5,8 @@
 #include "Shader.h"
 #include "debugDraw.h"
 #include "Graphics.h"
+#include "SpriteText.h"
+#include "FramerateController.h"
 
 
 class GraphicsManager : public ISystem
