@@ -23,6 +23,7 @@ GraphicsManager::GraphicsManager(Shader& textShader, Shader& debugShader)
 
 void GraphicsManager::Update(float dt)
 {
+  coreShader->Use();
   wglMakeCurrent(deviceContext, renderingContext);
   glClearColor(0.9f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
@@ -32,6 +33,8 @@ void GraphicsManager::Update(float dt)
   SpriteText::renderText(fTime, Vector3(-2, -1.45, 0), Vector3(0.25, 0.45, 1));
 
   SpriteText::drawAllText();
+  glBindVertexArray(0);
+  glUseProgram(0);
 }
 
 void GraphicsManager::Draw()

@@ -13,10 +13,11 @@
 #include "graphicsManager.h"
 #include "GameLogic.h"
 #include "Core.h"
+#include "engineGraphics\Graphics.h"
 #include "WindowsSystem.h"
 
-HDC deviceContext;
-HGLRC renderingContext;
+//HDC deviceContext;
+//HGLRC renderingContext;
 
 const char windowTitle[] = "Swag";
 const int ClientWidth = 800;
@@ -33,17 +34,19 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   freopen("CONOUT$", "w", stdout);
 
   //Stores the window being created
-  /*HWND window;
-  //Stores windows messages 
-  MSG msg;
+  //HWND window;
+  ////Stores windows messages 
+  //MSG msg;
 
-  //Creates a window, saves it in hwnd, and shows on screen
-  window = createWindow(instance);
-  ShowWindow(window, show);*/
-  /**************/
+  ////Creates a window, saves it in hwnd, and shows on screen
+
+  ///**************/
+  //window = createWindow(instance);
+  //ShowWindow(window, show); 
+
   CoreEngine* engine = new CoreEngine();
 
-  WindowsSystem* windows = new WindowsSystem(windowTitle, ClientWidth, ClientHeight);
+  WindowsSystem* windows = new WindowsSystem(windowTitle, ClientWidth, ClientHeight, show);
 
   engine->AddSystem(new PhysicsManager());
 
@@ -54,8 +57,8 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   engine->Initialize();
 
-  graphics->setDeviceContext(deviceContext);
-  graphics->setRenderingContext(renderingContext);
+  graphics->setDeviceContext(windows->deviceContext);
+  graphics->setRenderingContext(windows->renderingContext);
 
   windows->ActivateWindow();
 

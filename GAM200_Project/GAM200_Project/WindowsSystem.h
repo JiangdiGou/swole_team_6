@@ -6,10 +6,11 @@
 #include "System.h"
 #include <string>
 
+
 class WindowsSystem : public ISystem
 {
 public:
-  WindowsSystem(const char* windowTitle, int ClientWidth, int ClientHeight);	//The constructor
+  WindowsSystem(const char* windowTitle, int ClientWidth, int ClientHeight, int show);	//The constructor
   ~WindowsSystem();															//The destructor
 
   void ActivateWindow();								//Activate the game window so it is actually visible
@@ -19,6 +20,8 @@ public:
   HWND hWnd;											//The handle to the game window
   HINSTANCE hInstance;								//The handle to the instance
   POINTS MousePosition;
+  HDC deviceContext;
+  HGLRC renderingContext;
 };
 
 ///Message signaling that a key is pressed.
