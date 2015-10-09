@@ -186,9 +186,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\ft2build.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\AssertionError\AssertionError.h">
       <Filter>AssertionError</Filter>
     </ClInclude>
@@ -207,11 +204,16 @@
     <ClInclude Include="GAM200_Project\GameLogic.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="GAM200_Project\physicsLib\PlayerState.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h">
       <Filter>Systems\physics</Filter>
+=======
+    <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h">
+      <Filter>Systems\engineGraphics</Filter>
+>>>>>>> origin/master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +322,7 @@
     <ClCompile Include="GAM200_Project\GameLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="GAM200_Project\physicsLib\PlayerState.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
@@ -345,6 +348,11 @@
     <Font Include="resources\Fonts\OpenSans-Regular.ttf">
       <Filter>resources</Filter>
     </Font>
+=======
+    <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClCompile>
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">

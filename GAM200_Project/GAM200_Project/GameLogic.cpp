@@ -29,8 +29,8 @@ void GameLogic::Initialize()
 {
   Texture textureBackground = Texture("resources/background.png");
   Texture textureSmiley = Texture("resources/Smiley1.png");
-  Texture textureIdleGreen = Texture("resources/NewRunStuff.png", 4, 64, 64, 100);
-  Texture textureRunGreen = Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 64);
+  Texture textureIdleGreen = Texture("resources/courier.png", 26, 43, 83, 100, 0, 0);
+  Texture textureRunGreen = Texture("resources/courier.png", 26, 43, 83, 100, 0, 0);
   textureIdleBlue = new Texture("resources/NewRunStuff.png", 4, 64, 64, 100, 0, 128);
   textureRunBlue = new Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 192);
   
@@ -96,8 +96,9 @@ void GameLogic::Initialize()
   boObj->AddComponent(CT_AABB, boCollision);
 
 
-  GOC * blueObj = FACTORY->makeObject("blueGuy");
+  GOC * text1 = FACTORY->makeObject("blueGuy");
   Transform * transform3 = new Transform();
+<<<<<<< HEAD
   transform3->SetPosition(-2, 0, 0);
   Sprite * sprite3 = new Sprite(*(graphics->coreShader));
   sprite3->texture = *textureIdleBlue;
@@ -110,13 +111,28 @@ void GameLogic::Initialize()
   AABB* blueCollision = new AABB();
   blueCollision->SetHalfSize(1, 1);
   blueObj->AddComponent(CT_AABB, blueCollision);
+=======
+  transform3->SetPosition(-3.25, 1.5, 0);
+  transform3->SetScale(0.25, 0.5, 1);
+  text1->AddComponent(CT_Transform, transform3);
+  SpriteText * testText = new SpriteText("hi there\nI handle\nnew Lines\nand can have long lines too");
+  text1->AddComponent(CT_SpriteText, testText);
+>>>>>>> origin/master
+
+  GOC * text2 = FACTORY->makeObject("blueGuy");
+  Transform * transform4 = new Transform();
+  transform4->SetPosition(0.25, 1.5, 0);
+  transform4->SetScale(0.25, 0.5, 1);
+  text2->AddComponent(CT_Transform, transform4);
+  SpriteText * testText2 = new SpriteText("this is also\ntext");
+  text2->AddComponent(CT_SpriteText, testText2);
 
   GOC * blackObj = FACTORY->makeObject("blackbox");
-  Transform * transform4 = new Transform();
-  transform4->SetPosition(0, -2, 0);
+  Transform * transform5 = new Transform();
+  transform5->SetPosition(0, -2, 0);
   Sprite * sprite4 = new Sprite(*(graphics->coreShader));
   sprite4->texture = *textureIdleBlue;
-  blackObj->AddComponent(CT_Transform, transform4);
+  blackObj->AddComponent(CT_Transform, transform5);
   blackObj->AddComponent(CT_Sprite, sprite4);
   RigidBody* blackObjBody = new RigidBody();
   blackObjBody->isGhost = false;
@@ -128,10 +144,12 @@ void GameLogic::Initialize()
   blackCollision->SetHalfSize(6, 0.5);
   blackObj->AddComponent(CT_AABB, blackCollision);
   
-  player = blueObj;
-  player2 = boObj;
+  player = boObj;
+  //player2 = boObj;
 
-  blueObj->Initialize();
+  //blueObj->Initialize();
+  text1->Initialize();
+  text2->Initialize();
   greenObj->Initialize();
   blackObj->Initialize(); 
   camera->Initialize();
