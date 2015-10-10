@@ -1,3 +1,0 @@
-DummySheet1.png
-DummySheet2.png
-DummySheet3.png

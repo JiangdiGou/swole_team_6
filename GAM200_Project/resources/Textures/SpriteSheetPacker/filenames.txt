@@ -1,3 +1,0 @@
-..\Textures\DummySheet1.png
-..\Textures\DummySheet2.png
-..\Textures\DummySheet3.png
