@@ -204,16 +204,8 @@
     <ClInclude Include="GAM200_Project\GameLogic.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="GAM200_Project\physicsLib\PlayerState.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h">
-      <Filter>Systems\physics</Filter>
-=======
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h">
       <Filter>Systems\engineGraphics</Filter>
->>>>>>> origin/master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -322,37 +314,9 @@
     <ClCompile Include="GAM200_Project\GameLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="GAM200_Project\physicsLib\PlayerState.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\BinaryMap.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="GAM200_Project\resources\Smiley1.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="GAM200_Project\resources\Smiley2.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="GAM200_Project\resources\Smiley3.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="GAM200_Project\resources\ExampleSpriteSheet.png">
-      <Filter>resources</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\Fonts\OpenSans-Regular.ttf">
-      <Filter>resources</Filter>
-    </Font>
-=======
     <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp">
       <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">
