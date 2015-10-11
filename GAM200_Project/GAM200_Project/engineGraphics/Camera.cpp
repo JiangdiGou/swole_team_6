@@ -6,13 +6,20 @@
 //Output      : Camera - the constructed Camera
 //Description : The constructor you should use to make a camera. 
 //**********************
-Camera::Camera()
+Camera::Camera(const Shader& shader)
 {
-  zoom = 1.0f;
+  zoom = 0.75;
 
   cameraPosition = glm::vec3(0.0f, 0.0f, 2.0);
   cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
   worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+  shaderID = shader.Program;
+
+  projectionLocation = glGetUniformLocation(shaderID, "uniformProjection");
+
+  //Gets the location of the view matrix uniform and sends it to the shader. 
+  viewLocation = glGetUniformLocation(shaderID, "uniformView");
 }
 
 //**********************
@@ -25,7 +32,6 @@ Camera::~Camera()
 {
 }
 
-
 //**********************
 //Function    : Camera.update
 //Input       : none
@@ -34,6 +40,8 @@ Camera::~Camera()
 //**********************
 void Camera::Update()
 {
+  glUseProgram(shaderID);
+
   //Gets the Aspect Ratio of the Window to set up the camera's coordinates 
   float ratio = (float)WINDOWWIDTH / (float)WINDOWHEIGHT;
 
@@ -46,16 +54,8 @@ void Camera::Update()
   glm::mat4 viewMatrix;
   viewMatrix = glm::lookAt(cameraPosition, cameraTarget, worldUp);
 
-  for (std::vector<Shader*>::iterator it = Shader::shaders.begin(); it != Shader::shaders.end(); ++it)
-  {
-    //Gets the location of the projection matrix uniform then sends it to the shader 
-    GLuint projectionLocation = glGetUniformLocation((*it)->Program, "uniformProjection");
-    glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-
-    //Gets the location of the view matrix uniform and sends it to the shader. 
-    GLuint viewLocation = glGetUniformLocation((*it)->Program, "uniformView");
-    glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-  }
+  glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+  glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
 }
 
 //**********************

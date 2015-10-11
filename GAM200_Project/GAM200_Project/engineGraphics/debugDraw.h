@@ -23,12 +23,10 @@ public:
 	friend void debugDrawFrame(void);
 private:
 	static std::vector<GLfloat> debugVertices;
-	static std::vector<GLfloat> debugColors;
+
 	static GLuint vertexArray;
 	static GLuint vertexBuffer;
-	static GLint transformLocation;
-	static GLint colorLocatgion;
-	static Shader *pShader;
+  static GLuint shaderID;
 };
 
 #endif DEBUGDRAW_H  

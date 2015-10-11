@@ -1,12 +1,9 @@
 #include "debugDraw.h"
 
 std::vector<GLfloat> debugVertices = {};
-std::vector<GLfloat> debugColors = {};
-GLuint vertexArray = -1;
-GLuint vertexBuffer = -1;
-GLint transformLocation = -1;
-GLint colorLocation = -1;
-Shader *pShader = NULL;
+GLuint vertexArray = 0;
+GLuint vertexBuffer = 0;
+GLuint shaderID = 0;
 
 void initDebugDraw(Shader shader)
 {
@@ -21,47 +18,23 @@ void initDebugDraw(Shader shader)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
 		(GLvoid*)0);
 
-	/*
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat),
-	(GLvoid*)(3 * sizeof(GLfloat)));
-	*/
-	//Gets uniform locations from shader 
-	transformLocation = glGetUniformLocation(shader.Program, "uniformTransform");
-	colorLocation = glGetUniformLocation(shader.Program, "uniformColor");
-
-	glLineWidth(1.0f);
-	pShader = &shader;
+  shaderID = shader.Program;
 	glBindVertexArray(0);
 }
 
 void debugDrawFrame(void)
 {
 	//Prepares to Draw
+  glUseProgram(shaderID);
 	glBindVertexArray(vertexArray);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, debugVertices.size() * sizeof(GLfloat), debugVertices.data(), GL_STATIC_DRAW);
 
-	pShader->Use();
-	//std::cout << pShader->Program << std::endl;
-
-	if (pShader == NULL)
-		std::cout << "Debug Draw: pShader is null";
-
-	//Sends Idenity Matrix to Shader
-	//transformLocation = glGetUniformLocation(pShader->Program, "uniformTransform");
-	glUniformMatrix4fv(transformLocation, 1, GL_FALSE,
-		glm::value_ptr((glm::mat4())));
-
-	//colorLocation = glGetUniformLocation(pShader->Program, "uniformColor");
-	//std::cout << colorLocation << std::endl;
-	glUniform4f(colorLocation, 0.0f, 1.0f, 0.0f, 1.0f);
-  //std::cout << "DebugDraw :: Draw Call" << std::endl;
 	glDrawArrays(GL_LINES, 0, debugVertices.size() / 3.0f);
 
+  //Cleanup
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
 	debugVertices.clear();
 }
 

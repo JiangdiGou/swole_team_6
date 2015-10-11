@@ -51,11 +51,12 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   engine->AddSystem(new PhysicsManager());
 
-  Shader* basicShader = new Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
-  engine->AddSystem(new GraphicsManager(*basicShader, *basicShader));
+  Shader* pBasicShader = new Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
+  const Shader &basicShader = *pBasicShader;
+  engine->AddSystem(new GraphicsManager(basicShader));
+
   engine->AddSystem(new GameLogic());
   engine->AddSystem(new objFactory());
-
   engine->Initialize();
 
   graphics->setDeviceContext(windows->deviceContext);

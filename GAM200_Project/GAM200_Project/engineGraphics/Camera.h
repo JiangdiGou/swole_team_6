@@ -12,7 +12,7 @@
 class Camera : public GameComponent 
 {
 public:
-  Camera();
+  Camera(const Shader& shader);
   ~Camera();
 
   float zoom;
@@ -24,6 +24,10 @@ private:
   glm::vec3 worldUp;
   glm::vec3 cameraPosition;
   glm::vec3 cameraTarget;
+
+  GLuint shaderID;
+  GLuint viewLocation;
+  GLuint projectionLocation;
 };
 
 

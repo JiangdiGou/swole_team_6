@@ -38,7 +38,7 @@ void GameLogic::Initialize()
 
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
-  camera->AddComponent(CT_Camera, new Camera());
+  camera->AddComponent(CT_Camera, new Camera((graphics->coreShader)));
   camera->Initialize();
 
   //GOC * background = FACTORY->makeObject("background");
@@ -53,7 +53,7 @@ void GameLogic::Initialize()
   GOC * greenObj = FACTORY->makeObject("greenGuy");
   Transform * transform2 = new Transform();
   transform2->SetPosition(0, 3, 0);
-  Sprite * sprite2 = new Sprite(*(graphics->coreShader));
+  Sprite * sprite2 = new Sprite();
   sprite2->texture = textureIdleGreen;
   greenObj->AddComponent(CT_Transform, transform2);
   greenObj->AddComponent(CT_Sprite, sprite2);
@@ -84,7 +84,7 @@ void GameLogic::Initialize()
   GOC * boObj = FACTORY->makeObject("boGuy");
   Transform * transformbo = new Transform();
   transformbo->SetPosition(3, 0, 0);
-  Sprite * spritebo = new Sprite(*(graphics->coreShader));
+  Sprite * spritebo = new Sprite();
   spritebo->texture = *textureIdleBlue;
   boObj->AddComponent(CT_Transform, transformbo);
   boObj->AddComponent(CT_Sprite, spritebo);
@@ -116,7 +116,7 @@ void GameLogic::Initialize()
   GOC * blackObj = FACTORY->makeObject("");
   Transform * transform5 = new Transform();
   transform5->SetPosition(0, -2, 0);
-  Sprite * sprite4 = new Sprite(*(graphics->coreShader));
+  Sprite * sprite4 = new Sprite();
   sprite4->texture = *textureIdleBlue;
   blackObj->AddComponent(CT_Transform, transform5);
   blackObj->AddComponent(CT_Sprite, sprite4);

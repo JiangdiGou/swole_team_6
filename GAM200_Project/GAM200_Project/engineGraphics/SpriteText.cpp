@@ -1,16 +1,15 @@
 #include "SpriteText.h"
 
-Shader* SpriteText::pShader = 0;
+GLuint SpriteText::shaderID = 0;
+GLuint SpriteText::vertexArray = 0;
+GLuint SpriteText::vertexBuffer = 0;
+GLuint SpriteText::textureBuffer = 0;
 Texture* SpriteText::pFont = 0;
 std::vector<GLfloat> SpriteText::vertices = {};
 std::vector<GLfloat> SpriteText::texCoords = {};
 std::map<char, glm::vec2> SpriteText::offsets = {};
-GLuint SpriteText::vertexArray = 0;
-GLuint SpriteText::vertexBuffer = 0;
-GLuint SpriteText::textureBuffer = 0;
-GLint SpriteText::transformLocation = 0;
 
-void SpriteText::initText(Shader* shader, Texture* font)
+void SpriteText::initText(const Shader& shader, Texture* font)
 {
   //Generates static members 
   glGenVertexArrays(1, &vertexArray);
@@ -30,10 +29,9 @@ void SpriteText::initText(Shader* shader, Texture* font)
   glEnableVertexAttribArray(1);
   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 
-  pShader = shader;
+  //pShader = &shader;
+  shaderID = shader.Program;
   pFont = font;
-
-  transformLocation = glGetUniformLocation(pShader->Program, "uniformTransform");
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
@@ -92,8 +90,7 @@ void SpriteText::loadCharacters()
 
 void SpriteText::drawAllText()
 {
-  //Prepares to Draw
-  pShader->Use();
+  glUseProgram(shaderID); 
 
   glBindTexture(GL_TEXTURE_2D, pFont->ID);
 
@@ -104,10 +101,6 @@ void SpriteText::drawAllText()
   glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
   glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(GLfloat), texCoords.data(), GL_STREAM_DRAW);
 
-  glUniformMatrix4fv(transformLocation, 1, GL_FALSE,
-    glm::value_ptr((glm::mat4())));
-
-  //std::cout << "SpriteText :: Draw Call" << std::endl;
   glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3.0f);
   glBindVertexArray(0);
 
@@ -130,7 +123,7 @@ void SpriteText::Update()
   int newLinePos = 0;
 
   glBindVertexArray(vertexArray);
-  pShader->Use();
+  glUseProgram(shaderID);
 
   //saves initial translation since its gonna be moved over each time for diffferent letters
   Transform *transformComponent = GetOwner()->has(Transform)
@@ -263,7 +256,7 @@ void SpriteText::renderText(std::string message, Vector3 position, Vector3 scale
   int newLinePos = 0;
 
   glBindVertexArray(vertexArray);
-  pShader->Use();
+  glUseProgram(shaderID);
 
   //saves initial translation and scale 
   initialTranslation = glm::vec3(position.x, position.y, position.z);

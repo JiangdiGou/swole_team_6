@@ -18,7 +18,7 @@ class Shader
 	  //Shader Program ID 
 	  GLuint Program;
 	  //Tells OpenGL to use this shader 
-	  void Use();
+    void Use() const;
 
     static std::vector < Shader* > shaders;
 

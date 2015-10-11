@@ -167,7 +167,7 @@ GLuint Shader::compileShaderProgram(GLuint vertexShader, GLuint fragmentShader)
 //Output      : none
 //Description : tells openGL to use this shader program 
 //**********************
-void Shader::Use()
+void Shader::Use() const
 {
 	glUseProgram(Program);
 }

@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-Shader* Sprite::pShader = 0;
+GLuint Sprite::shaderID = 0;
 std::vector<GLfloat> Sprite::vertices = {};
 std::vector<GLfloat> Sprite::texCoords = {};
 GLuint Sprite::vertexArray = 0;
@@ -12,22 +12,25 @@ GLuint Sprite::textureBuffer = 0;
 //Input       : none
 //Output      : Sprite - The Constrcuted Sprite 
 //Description : Default Constructor for Sprite, does nothing
-//**********************
+//**********************/
+/*
 Sprite::Sprite()
 {
   std::cout << "ERROR: Sprite was Implicitly Constructed." << std::endl;
 	std::cout << "Sprite requires shader to construct properly." << std::endl;
 }
+*/
 
 //**********************
 //Function    : Sprite
-//Input       : intendedShader - the shader you intend to use with the sprite
+//Input       : none
 //Output      : Sprite - The constructed Sprite 
 //Description : Constructor for the sprite class 
 //**********************
-Sprite::Sprite(Shader intendedShader)
+Sprite::Sprite()
 {
   /*
+  //OLD, NON BATCH DRAWING SYSTEM
   GLfloat vertices[] = {
     //X    Y     Z     
     0.5f, -0.5f, 0.0f,
@@ -46,8 +49,8 @@ Sprite::Sprite(Shader intendedShader)
     0.0f, 1.0f,
     0.0f, 0.0f,
     1.0f, 0.0f
-  };*/
-  /*
+  };
+ 
 	//Generates their IDs and saves them in vars
 	glGenVertexArrays(1, &vertexArray);
 	glGenBuffers(1, &vertexBuffer);
@@ -82,18 +85,12 @@ Sprite::Sprite(Shader intendedShader)
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 	//Activates texture coordinate information 
 	glEnableVertexAttribArray(1);
-  */
+  
 	//We're done with the buffers now, so unbinds them 
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-	//glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+  */
 
-	//Initalizes remaining members
-
-
-  //Ok, this is really weird. The sprite class needs a member, shader
-  //Even though this member is never used anywhere, if it does not exist, 
-  //NONE of the graphics work. 
-	shader = intendedShader;
 	color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
@@ -105,9 +102,6 @@ Sprite::Sprite(Shader intendedShader)
 //**********************
 Sprite::~Sprite()
 {
-  //De allocates resources 
-  glDeleteBuffers(1, &vertexBuffer);
-  glDeleteBuffers(1, &textureBuffer);
 }
 
 
@@ -120,6 +114,7 @@ Sprite::~Sprite()
 void Sprite::Update(void)
 {
   /*
+  //OLD NON BATCH DRAWING SYSTEM
   GLint transformLocation, colorLocation;
   Transform *transformComponent = GetOwner()->has(Transform);
 
@@ -156,16 +151,14 @@ void Sprite::Update(void)
   glBindTexture(GL_TEXTURE_2D, 0);
   //glBindBuffer(GL_ARRAY_BUFFER, 0);
 	//glBindVertexArray(0);
-  
   */
-  
   
   
   glm::vec4 transformedPosition, initialPosition;
   glm::vec3 scale;
 
   glBindVertexArray(vertexArray);
-  pShader->Use();
+  glUseProgram(shaderID);
 
   //Initialize vars I'm gonna need
   Transform *transform = GetOwner()->has(Transform);
@@ -231,9 +224,10 @@ void Sprite::Update(void)
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindTexture(GL_TEXTURE_2D, 0);
   glBindVertexArray(0);
+  
 }
 
-void Sprite::initSprites(Shader shader)
+void Sprite::initSprites(const Shader& shader)
 {
   //Generates Static Members
   glGenVertexArrays(1, &vertexArray);
@@ -253,7 +247,7 @@ void Sprite::initSprites(Shader shader)
   glEnableVertexAttribArray(1);
   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 
-  pShader = &shader;
+  shaderID = shader.Program;
 
   //Unbind stuff
   glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -270,10 +264,9 @@ void Sprite::pushVertices(const glm::vec4 &verts)
 
 void Sprite::drawAllSprites()
 {
-  GLuint transformLocation;
+  glUseProgram(shaderID);
 
-  pShader->Use();
-
+  //The binding of the atlas texture needs to go here 
   //glBindTexture(GL_TEXTURE_2D, texture.ID);
 
   glBindVertexArray(vertexArray);
@@ -283,11 +276,6 @@ void Sprite::drawAllSprites()
   glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
   glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(GLfloat), texCoords.data(), GL_STREAM_DRAW);
 
-  transformLocation = glGetUniformLocation(pShader->Program, "uniformTransform");
-  glUniformMatrix4fv(transformLocation, 1, GL_FALSE,
-    glm::value_ptr(glm::mat4()));
-
-  //std::cout << "Sprite :: Draw Call" << std::endl;
   glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3.0f);
   glBindVertexArray(0);
 

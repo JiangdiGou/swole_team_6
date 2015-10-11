@@ -16,20 +16,18 @@ class GraphicsManager : public ISystem
   friend class DebugDraw;
 
 public:
-  GraphicsManager(Shader& textShader, Shader& debugShader);
+  GraphicsManager(const Shader& coreShader);
   ~GraphicsManager();
 
   void Initialize()  override;
   void Update(float dt) override;
   void Draw() override;
 
-  void InitWMCreate(HWND window);
-
   void setDeviceContext(HDC& newDeviceContext);
   HDC getDeviceContext();
   void setRenderingContext(HGLRC& renderingContext);
   HGLRC getRenderingContext();
-  Shader* coreShader;
+  Shader coreShader;
 
 private:
   HDC deviceContext;

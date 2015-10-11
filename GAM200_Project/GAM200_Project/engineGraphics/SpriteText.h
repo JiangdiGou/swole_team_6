@@ -11,17 +11,18 @@
 class SpriteText : public GameComponent
 {
 public:
-  void static SpriteText::initText(Shader* shader, Texture* font);
-  static void drawAllText();
-  static void renderText(std::string message, Vector3 position, Vector3 scale);
   SpriteText(std::string initialMessage);
 
   void Update() override;
 
   std::string message;
 
+  static void renderText(std::string message, Vector3 position, Vector3 scale);
+  void static SpriteText::initText(const Shader& shader, Texture* font);
+  static void drawAllText();
+
 private:
-  static Shader *pShader;
+  static GLuint shaderID;
   static Texture *pFont;
 
   static std::map<char, glm::vec2> offsets;
@@ -31,10 +32,8 @@ private:
   static GLuint vertexArray;
   static GLuint vertexBuffer;
   static GLuint textureBuffer;
-  static GLint transformLocation;
 
   static void loadCharacters();
-
 };
 
 #endif
