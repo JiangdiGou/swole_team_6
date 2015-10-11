@@ -51,8 +51,8 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   engine->AddSystem(new PhysicsManager());
 
-  Shader basicShader = Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
-  engine->AddSystem(new GraphicsManager(basicShader, basicShader));
+  Shader* basicShader = new Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
+  engine->AddSystem(new GraphicsManager(*basicShader, *basicShader));
   engine->AddSystem(new GameLogic());
   engine->AddSystem(new objFactory());
 
