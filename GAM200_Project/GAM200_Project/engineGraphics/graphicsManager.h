@@ -7,6 +7,7 @@
 #include "Graphics.h"
 #include "SpriteText.h"
 #include "FramerateController.h"
+#include "Sprite.h"
 
 
 class GraphicsManager : public ISystem

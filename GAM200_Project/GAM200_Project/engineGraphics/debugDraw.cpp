@@ -56,11 +56,11 @@ void debugDrawFrame(void)
 	//colorLocation = glGetUniformLocation(pShader->Program, "uniformColor");
 	//std::cout << colorLocation << std::endl;
 	glUniform4f(colorLocation, 0.0f, 1.0f, 0.0f, 1.0f);
+  //std::cout << "DebugDraw :: Draw Call" << std::endl;
 	glDrawArrays(GL_LINES, 0, debugVertices.size() / 3.0f);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
 
 	debugVertices.clear();
 }

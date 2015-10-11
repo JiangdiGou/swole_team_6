@@ -99,14 +99,15 @@ void SpriteText::drawAllText()
 
   glBindVertexArray(vertexArray);
   glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), vertices.data(), GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), vertices.data(), GL_STREAM_DRAW);
 
   glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
-  glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(GLfloat), texCoords.data(), GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(GLfloat), texCoords.data(), GL_STREAM_DRAW);
 
   glUniformMatrix4fv(transformLocation, 1, GL_FALSE,
     glm::value_ptr((glm::mat4())));
 
+  //std::cout << "SpriteText :: Draw Call" << std::endl;
   glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3.0f);
   glBindVertexArray(0);
 
@@ -351,7 +352,7 @@ void SpriteText::renderText(std::string message, Vector3 position, Vector3 scale
     for (int i = 0; i < 12; ++i)
       texCoords.push_back(pFont->textureCoordinates[i]);
 
-
+    glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 

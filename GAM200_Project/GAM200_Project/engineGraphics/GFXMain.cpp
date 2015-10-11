@@ -13,6 +13,7 @@
 #include "instancedSprite.h"
 #include "FramerateController.h"
 
+/*
 HDC deviceContextGFX;
 HGLRC renderingContextGFX;
 
@@ -60,7 +61,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   Sprite player2 = Sprite(basicShader);
   Sprite player3 = Sprite(basicShader);
   Sprite player4 = Sprite(basicShader);
-  */
+  
   pPlayer = &player;
 
 	//Sets up textures 
@@ -84,7 +85,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   player2.texture = texturePlayerRun;
   player3.texture = texturePlayerRun;
   player4.texture = texturePlayerRun;
-  */
+  
   //Sets inital values of sprites for their respective tests
  // smiley.translation = glm::vec3(1.0f, 0.5f, 0.0f);
  // excited.translation = glm::vec3(-1.4f, -0.75f, 0.0f);
@@ -132,7 +133,7 @@ int falseMain1(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
 	  debugDrawCircle(calm.translation, calm.scale.x, glm::vec3(), 100);
 	  debugDrawCircle(animated.translation, 0.5*animated.scale.x, glm::vec3(), 100);
-*/
+
     
     FramerateController::frameEnd();
     SwapBuffers(deviceContextGFX);
@@ -230,3 +231,5 @@ int falseCallback1(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
       return DefWindowProc(hWnd, msg, wp, lp);
   }
 }
+
+*/
