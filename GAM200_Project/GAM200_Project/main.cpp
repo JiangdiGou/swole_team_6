@@ -47,6 +47,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   CoreEngine* engine = new CoreEngine();
 
   WindowsSystem* windows = new WindowsSystem(windowTitle, ClientWidth, ClientHeight, show);
+  engine->AddSystem(windows);
 
   engine->AddSystem(new PhysicsManager());
 
