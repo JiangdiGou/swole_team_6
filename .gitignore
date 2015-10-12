@@ -6,3 +6,14 @@ GAM200_Project/GAM200_Project/build/Debug/*
 GAM200_Project/GAM200_Project/build/Release/*
 GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*
 GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*/*/*/*
+LevelEditor/errors.txt
+LevelEditor/tmp/
+LevelEditor/log.txt
+LevelEditor/traceback.txt
+LevelEditor/game/*.rpyc
+LevelEditor/game/*.bak
+LevelEditor/game/modules/*.rpyc
+LevelEditor/game/*.rpyb
+LevelEditor/game/saves/
+LevelEditor/debuglog.txt
+LevelEditor/*.autosave
