@@ -1,5 +1,3 @@
-# DO NOT CLOC.
-
 #        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
 #                    Version 2, December 2004 
 #
@@ -108,7 +106,7 @@ init python:
             file.write("%s" % given_message)
             file.close()
         except: 
-            renpy.say(None, build.executable_name + " tried to write a file: " + magic_file + ". It could not be written. Try fixing your permissions in the containing folder. Moving to main menu.")
+            renpy.say(None, build.executable_name + " tried to read a file: " + magic_file + ". It could not be read. Try fixing your permissions in the containing folder. Moving to main menu.")
             renpy.full_restart()
         #
         return
