@@ -1,19 +1,12 @@
-﻿# You can place the script of your game in this file.
-
-# Declare images below this line, using the image statement.
-# eg. image eileen happy = "eileen_happy.png"
-
-# Declare characters used by this game.
-
-
-# The game starts here.
-label start:
+﻿label start:
     menu:
         "Existing file or new file?"
         "Existing":
             jump existing
         "New":
             jump new
+        "QUICK":
+            jump quickDebugNew
 
 label existing:
     $ loadLevel = ui_find_file("Select the Level file.", home)  
@@ -30,11 +23,26 @@ label new:
     $ baselineFile = renpy.input("Name the file")
     $ levelStruct.FileLoc += ("/" + baselineFile)
     $ levelStruct.writeFile()
-    hide screen say
+    show screen gui_menu(levelStruct)
+    jump loop1
+
+label quickDebugNew:
+    $ levelStruct = Level()
+    $ levelStruct.LevelName = "Debug Level"
+    $ levelStruct.ArrayWidth = "20"
+    $ levelStruct.ArrayHeight = "7"
+    $ levelStruct.FileLoc =  ui_find_folder("Select where to save the Level file.", home)
+    $ baselineFile = "ProjectTest.txt"
+    $ levelStruct.FileLoc += ("/" + baselineFile)
+    $ levelStruct.writeFile()
     show screen gui_menu(levelStruct)
     jump loop1
 
 label loop1:
     ""
     show screen gui_menu(levelStruct)
+    jump loop1
+
+label newName:
+    $ levelStruct.LevelName = renpy.input("New name of level:")
     jump loop1

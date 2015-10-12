@@ -37,6 +37,17 @@ init python:
             return int(self.ArrayWidth)
 
 screen gui_menu(lo):
+    frame:
+        xpos 0
+        xsize 260
+        vbox:#leftside
+            text "Name:"
+            textbutton "[lo.LevelName]" action Jump("newName")
+    frame:
+        xpos 1660
+        vbox:#righside
+            ysize 200
+            textbutton "???"
     window:
         xsize 1400
         ysize (config.screen_height - 250)
@@ -74,3 +85,6 @@ screen gui_menu(lo):
                                 null width 10
         bar value XScrollValue("gm") ysize 20
         vbar value YScrollValue("gm") xsize 20
+
+screen gui_nameChange(lo):
+    modal True
