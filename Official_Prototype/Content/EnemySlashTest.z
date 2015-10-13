@@ -1,0 +1,61 @@
+class EnemySlashTest : ZilchComponent
+{
+    //Amount of time between mouse over and mouse exit. If fast enough, registers as a slash
+    var SlashTime:Real = 0;
+    //Determines if this script should start timing the slash
+    var SlashStarted:Boolean = false;
+    //Position that the mouse entered
+    var StartPoint:Real3 = Real3(0,0,0);
+    //Position that the mouse exited
+    var EndPoint:Real3 = Real3(0,0,0);
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.SlashStarted)
+        {
+            this.SlashTime += event.Dt;
+        }
+    }
+    
+    function OnMouseEnter(event : ViewportMouseEvent)
+    {
+        //sets the timer to 0 so it can count up
+        this.SlashTime = 0;
+        //tells this script to start timing the slash
+        this.SlashStarted = true;
+        //gets the location of the beginning of the slash
+        this.StartPoint = event.HitPosition;
+    }
+    
+    function OnMouseExit(event : ViewportMouseEvent)
+    {
+        //tells the script to stop timing the slash
+        this.SlashStarted = false;
+        //gets the location of the end of the slash
+        this.EndPoint = event.HitPosition;
+        
+        if(this.SlashTime < 0.08)
+        {
+            this.Slash();
+        }
+    }
+    
+    function Slash()
+    {
+        Console.WriteLine("EnemySlashTest.Slash, Start: `this.StartPoint`, End: `this.EndPoint`");
+        var slashLine = DebugLine();
+        slashLine.Start(this.StartPoint);
+        slashLine.End(this.EndPoint);
+        slashLine.Float4Color(Real4(1, 1, 1, 1));
+        slashLine.Width(5.0);
+        slashLine.Duration(0.5);
+        slashLine.Draw();
+    }
+}
