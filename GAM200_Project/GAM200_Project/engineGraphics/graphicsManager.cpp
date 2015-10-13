@@ -68,6 +68,8 @@ HGLRC GraphicsManager::getRenderingContext()
 
 void GraphicsManager::Initialize()
 {
+  TextureAtlas testAtlas = TextureAtlas("resources/Textures/Atlas/testAtlas.png");
+  testAtlas.parseTextureList("resources/Textures/tList_testAtlas.txt");
   glDepthFunc(GL_ALWAYS);
 }
 

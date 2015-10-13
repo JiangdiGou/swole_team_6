@@ -8,6 +8,7 @@
 #include "SpriteText.h"
 #include "FramerateController.h"
 #include "Sprite.h"
+#include "textureAtlas.h"
 
 
 class GraphicsManager : public ISystem

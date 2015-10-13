@@ -18,6 +18,7 @@
     <ClInclude Include="GAM200_Project\Composition.h" />
     <ClInclude Include="GAM200_Project\Core.h" />
     <ClInclude Include="GAM200_Project\Engine.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\atlasTexture.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\FramerateController.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\textureAtlas.h" />
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h" />
     <ClInclude Include="GAM200_Project\gameLevel.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -120,6 +122,7 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\Core.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\atlasTexture.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\FramerateController.cpp" />
@@ -133,6 +136,7 @@
     <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\textureAtlas.cpp" />
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp" />
     <ClCompile Include="GAM200_Project\gameLevel.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -241,6 +245,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -257,6 +262,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

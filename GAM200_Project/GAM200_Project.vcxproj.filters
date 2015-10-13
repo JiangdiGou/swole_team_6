@@ -216,6 +216,12 @@
     <ClInclude Include="GAM200_Project\physicsLib\swag.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\textureAtlas.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\atlasTexture.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -328,6 +334,12 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\WindowsSystem.cpp">
       <Filter>Systems\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\textureAtlas.cpp">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineGraphics\atlasTexture.cpp">
+      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

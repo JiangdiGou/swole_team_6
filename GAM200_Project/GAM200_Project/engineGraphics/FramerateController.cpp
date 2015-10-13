@@ -15,7 +15,6 @@ void FramerateController::frameEnd()
   unsigned frameTime = (unsigned)(1000.0f / FRAMERATE);
 
   timeBeginPeriod(1);
-  //std::cout << "----- FRAME END -----" << std::endl;
 
   while (deltaTime < frameTime)
     deltaTime = timeGetTime() - frameStartTime;
