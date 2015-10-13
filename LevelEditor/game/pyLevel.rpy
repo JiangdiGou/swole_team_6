@@ -2,9 +2,18 @@ init -2 python:
     import os
     def registerClick(x, y):
         renpy.log(str(x) + "," + str(y))
+        guiView.x = x
+        guiView.y = y
+        renpy.jump("loop1")
 
 
 init python:
+    class View:
+        x = -1
+        y = -1
+        def __init__(self):
+            return
+
     class Level:
         FileLoc = ""
         LevelName = ""
@@ -36,17 +45,43 @@ init python:
         def width(self):
             return int(self.ArrayWidth)
 
-screen gui_menu(lo):
+screen gui_menu(lo, vi):
+    #leftside
     frame:
         xpos 0
         xsize 260
-        vbox:#leftside
+        vbox:
+            xsize 260
+            ysize 400
+            $ tempWidth = lo.width()
+            $ tempHeight = lo.height()
             text "Name:"
-            textbutton "[lo.LevelName]" action Jump("newName")
+            textbutton "[lo.LevelName]" xalign 0.5 action Jump("newName")
+            text "Width:"
+            textbutton "[tempWidth]" xalign 0.5 action NullAction()
+            text "Height:"
+            textbutton "[tempHeight]" xalign 0.5 action NullAction()
+        vbox:
+            xsize 260
+            ypos 400
+            text "Tile Selection"
+            text "[vi.x], [vi.y]"
+    #always show this leftside preset
     frame:
+        xpos 0
+        xsize 260
+        ypos (config.screen_height - 450)
+        ysize 200
+        vbox:
+            xsize 260
+            text "View Presets"
+            hbox:
+                textbutton "1" action NullAction()
+    frame:#righside
         xpos 1660
-        vbox:#righside
-            ysize 200
+        xsize 260
+        vbox:
+            xsize 200
             textbutton "???"
     window:
         xsize 1400
@@ -61,18 +96,18 @@ screen gui_menu(lo):
             vbox:
                 null height 10
                 hbox:
-                    null width 74
+                    null width 42
                     for x in range(0, lo.width()):
                         vbox:
-                            null width 74
+                            null width 42
                             text "[x]"  
-                ysize (lo.height() * 74)
+                ysize (lo.height() * 42)
                 for y in range(0, lo.height()):
                     null height 10
                     hbox:
                         null width 10
                         vbox:
-                            null width 74
+                            null width 42
                             text "[y]"
                         hbox:
                             for x in range(0, lo.width()):
@@ -86,5 +121,5 @@ screen gui_menu(lo):
         bar value XScrollValue("gm") ysize 20
         vbar value YScrollValue("gm") xsize 20
 
-screen gui_nameChange(lo):
+screen disableGui:
     modal True

@@ -15,6 +15,7 @@ label existing:
     return
 
 label new:
+    $ guiView = View()
     $ levelStruct = Level()
     $ levelStruct.LevelName = renpy.input("Name of level:")
     $ levelStruct.ArrayWidth = renpy.input("Width of level:")
@@ -23,26 +24,30 @@ label new:
     $ baselineFile = renpy.input("Name the file")
     $ levelStruct.FileLoc += ("/" + baselineFile)
     $ levelStruct.writeFile()
-    show screen gui_menu(levelStruct)
+    show screen gui_menu(levelStruct, guiView)
     jump loop1
 
 label quickDebugNew:
+    $ guiView = View()
     $ levelStruct = Level()
     $ levelStruct.LevelName = "Debug Level"
-    $ levelStruct.ArrayWidth = "20"
-    $ levelStruct.ArrayHeight = "7"
+    $ levelStruct.ArrayWidth = "45"
+    $ levelStruct.ArrayHeight = "14"
     $ levelStruct.FileLoc =  ui_find_folder("Select where to save the Level file.", home)
     $ baselineFile = "ProjectTest.txt"
     $ levelStruct.FileLoc += ("/" + baselineFile)
     $ levelStruct.writeFile()
-    show screen gui_menu(levelStruct)
+    show screen gui_menu(levelStruct, guiView)
     jump loop1
 
 label loop1:
+    hide screen disableGui
     ""
     show screen gui_menu(levelStruct)
     jump loop1
 
 label newName:
+    show screen disableGui
     $ levelStruct.LevelName = renpy.input("New name of level:")
+    $ levelStruct.writeFile()
     jump loop1
