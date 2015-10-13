@@ -218,7 +218,7 @@ class PlayerAttack : ZilchComponent
         {
             //A short slash's ID will be between 10-19
             iSlashID += 20;
-            rSpeed = 60;
+            rSpeed = 70; //60
             rRayDistance = 5.0;
         }
         //Medium slash
@@ -226,7 +226,7 @@ class PlayerAttack : ZilchComponent
         {
             //A medium slash's ID will be between 20-29
             iSlashID += 30;
-            rSpeed = 90;
+            rSpeed = 70; //90
             rRayDistance = 10.0;
         }
         //Long slash
@@ -234,7 +234,7 @@ class PlayerAttack : ZilchComponent
         {
             //A long slash's ID will be between 30-39
             iSlashID += 40;
-            rSpeed = 120;
+            rSpeed = 70; //120
             rRayDistance = 15.0;
         }
         
