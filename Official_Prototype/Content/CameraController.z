@@ -1,0 +1,48 @@
+class CameraController : ZilchComponent
+{
+    var Player : Cog;
+    
+    [Property]
+    var DistanceCheckX : Real;
+    
+    [Property]
+    var DistanceCheckY : Real;
+    
+    [Property]
+    var Xoffset : Real;
+    
+    var PreventRepeat : Boolean = true;
+    
+    var NotShifting : Boolean = true;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        this.Player = this.Space.FindObjectByName("Player");
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var playerPos = Real2(this.Player.Transform.Translation.X, this.Player.Transform.Translation.Y);
+        var cameraPos = Real2(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y);
+        var difference = playerPos - cameraPos;
+        //var seq = Actions.Sequence(this.Owner.Actions); 
+        
+        if(Math.Distance(playerPos, cameraPos) > this.DistanceCheckX)
+        {
+            this.Owner.Transform.Translation += Real3( difference.X * event.Dt, 0, 0);
+        }
+        
+        if(Math.Distance(playerPos, cameraPos) > this.DistanceCheckY)
+        {
+            this.Owner.Transform.Translation += Real3(0, difference.Y * event.Dt, 0);
+        }
+        
+        if(playerPos != cameraPos)
+        {
+            this.Owner.Transform.Translation += Real3( difference.X * event.Dt, 0, 0);
+        }
+    }
+    
+}

@@ -119,7 +119,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [3.19338059, 42.805191, 50],
+			Vec3 Translation = [0.511000514, 41.4596252, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -131,7 +131,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 14.9569006,
+			float Size = 22.3130646,
 		},
 		EditorCameraController = 
 		{
@@ -139,7 +139,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [3.19338059, 42.805191, -3.26193856e-007],
+			Vec3 LookTarget = [0.511000514, 41.4596252, -3.26193856e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -149,6 +149,43 @@ Level =
 			bool DrawDebugObjects = true,
 			bool DrawEditorIcons = true,
 			bool Wireframe = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 2,
+		},
+		Named = 
+		{
+			string Name = "PlayerCamera",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 40.8272705, 40],
+			Vec3 Scale = [3, 1.11193204, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Camera = 
+		{
+			ProjectionMode ProjectionMode = Orthographic,
+			Facing Facing = NegativeZ,
+			CameraTransparentSort TransparentSort = InheritFromSpace,
+			float FieldOfView = 49,
+			float NearPlane = 0.5,
+			float FarPlane = 200,
+			float Size = 15.2038803,
+		},
+		SoundListener = 
+		{
+			bool Active = true,
+		},
+		CameraController = 
+		{
+			float DistanceCheckX = 7,
+			float DistanceCheckY = 2,
+			float Xoffset = 0.0900000036,
 		},
 	},
 	Cog = 
@@ -209,7 +246,7 @@ Level =
 		},
 		PlayerMovement = 
 		{
-			float RSpeed = 24,
+			float RSpeed = 10,
 			float RJumpHeight = 14,
 			float RDashSpeedX = 100,
 		},
@@ -224,37 +261,6 @@ Level =
 		},
 		Hierarchy = 
 		{
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 2,
-				},
-				Named = 
-				{
-					string Name = "PlayerCamera",
-				},
-				Transform = 
-				{
-					Vec3 Translation = [0, 0, 40],
-					Vec3 Scale = [1, 0.370644003, 1],
-					Quat Rotation = [0, 0, 0, 1],
-				},
-				Camera = 
-				{
-					ProjectionMode ProjectionMode = Orthographic,
-					Facing Facing = NegativeZ,
-					CameraTransparentSort TransparentSort = InheritFromSpace,
-					float FieldOfView = 45,
-					float NearPlane = 0.5,
-					float FarPlane = 200,
-					float Size = 14.5184002,
-				},
-				SoundListener = 
-				{
-					bool Active = true,
-				},
-			},
 		},
 	},
 	Cog = 
