@@ -1,0 +1,82 @@
+class PowerAttack : ZilchComponent
+{
+    var PreventRepeat : Boolean = false;
+    
+    var BothDown : Boolean = false;
+    
+    var Seq : ActionSet;
+    
+    var BlackSq : Cog;
+    
+    var ClearSq : Cog;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        var gameCamera = this.Space.FindObjectByName("PlayerCamera");
+        Zero.Connect(gameCamera, Events.MouseDown, this.OnLeftMouseDown);
+        //Zero.Connect(gameCamera, Events.RightMouseDown, this.OnRightMouseDown);
+        Zero.Connect(gameCamera, Events.MouseUp, this.OnMouseUp);
+        
+        
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnLeftMouseDown(event : ViewportMouseEvent)
+    {
+        this.Seq = Actions.Sequence(this.Owner.Actions);
+        this.ClearSq = this.Space.CreateAtPosition(Archetype.Find("ClearSquare"), Real3(0,0,1));
+        this.ClearSq.TimedDeath.RTimeTilDead = 10;
+        
+        if(Zero.Mouse.IsButtonDown(MouseButtons.Right) && !this.PreventRepeat)
+        {
+            this.PreventRepeat = true;
+            Action.Property(this.Seq, @this.ClearSq.Sprite.Color, Real4(0,0,0,1), 2, Ease.Linear);
+        }
+    }
+    
+    function OnMouseUp(event : ViewportMouseEvent)
+    {
+        Console.WriteLine("action cancled");
+        
+        this.Seq.Cancel();
+        this.PreventRepeat = false;
+        
+        if(this.ClearSq != null)
+        {
+            this.ClearSq.Destroy();
+        }
+        
+        if(this.BlackSq != null)
+        {
+            this.BlackSq.Destroy();
+        }
+    }
+
+    
+    function FuckShitUp()
+    {
+        this.Seq = Actions.Sequence(this.Owner.Actions);
+        var square = this.Space.CreateAtPosition(Archetype.Find("BlackSquare"), Real3(0,0,1));
+        square.TimedDeath.RTimeTilDead = 10;
+        
+        if(Zero.Mouse.IsButtonDown(MouseButtons.Right) && Zero.Mouse.IsButtonDown(MouseButtons.Left))
+        {
+            Action.Property(this.Seq, @square.Sprite.Color, Real4(0,0,0,0), 2, Ease.Linear);
+            Action.Property(this.Seq, @this.PreventRepeat, false, 0.001, Ease.Linear);
+        }
+        else
+        {
+            this.Seq.Cancel();
+            
+            if(square != null)
+            {
+                square.Destroy();
+            }
+        }
+    }
+}
