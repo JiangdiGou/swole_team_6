@@ -14,8 +14,8 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-5.76940012, 40.6072006, 0],
-		Vec3 Scale = [2, 2, 1],
+		Vec3 Translation = [-9.3845253, 40.6072006, 0],
+		Vec3 Scale = [1.60000002, 1.60000002, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
@@ -81,5 +81,13 @@ Cog =
 		int IOverkillHealth = 150,
 		int IDespawnTime = 200,
 		int IStunCD = 60,
+	},
+	Reactive = 
+	{
+		bool Active = true,
+		bool CaptureMouse = false,
+	},
+	EnemySlashTest = 
+	{
 	},
 },
