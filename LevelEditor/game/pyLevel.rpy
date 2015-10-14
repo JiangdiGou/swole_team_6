@@ -123,3 +123,7 @@ screen gui_menu(lo, vi):
 
 screen disableGui:
     modal True
+    textbutton "Never Mind":
+        xalign 0.5
+        yalign 0.7
+        action Jump("loop1")
