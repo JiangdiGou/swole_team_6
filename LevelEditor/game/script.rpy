@@ -43,11 +43,12 @@ label quickDebugNew:
 label loop1:
     hide screen disableGui
     ""
-    show screen gui_menu(levelStruct)
+    show screen gui_menu(levelStruct, guiView)
     jump loop1
 
 label newName:
     show screen disableGui
-    $ levelStruct.LevelName = renpy.input("New name of level:")
+    $ temp = renpy.input("New name of level:")
+    $ levelStruct.LevelName = temp
     $ levelStruct.writeFile()
     jump loop1
