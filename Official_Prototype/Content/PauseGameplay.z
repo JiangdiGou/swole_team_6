@@ -8,11 +8,19 @@ class PauseGameplay : ZilchComponent
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.GameSession, Events.GameRequestQuit, this.OnEscapeDown);
     }
-
+    
+    //Prevents the game from being destroyed when escape is pressed
+    function OnEscapeDown(event : GameEvent)
+    {
+        event.Handled = true;
+    }
+    
+    //pauses the game space when escape is pressed
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(Zero.Keyboard.KeyIsPressed(Keys.P))
+        if(Zero.Keyboard.KeyIsPressed(Keys.Escape))
         {
             this.PauseSpace = this.GameSession.CreateNamedSpace("PauseSpace", Archetype.Find("Space"));
             this.PauseSpace.LoadLevel(this.PauseLevel);

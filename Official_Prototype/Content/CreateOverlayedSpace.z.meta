@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "CreateOverlayedSpace",
+		uint64 ResourceId = 56c50558c037b33a,
+	},
+},

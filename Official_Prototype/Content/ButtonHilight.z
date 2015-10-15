@@ -1,19 +1,31 @@
 class ButtonHilight : ZilchComponent
 {
+    [Property]
+    var ScaleUp:Boolean = true;
+    [Property]
+    var Glow:Boolean = true;
+    
     var BaseColor:Real4;
     var BaseSize:Real3;
     
     function Initialize(init : CogInitializer)//##########################################################################################
     {
         //Makes the button slightly more dull colored so it pops when clicked
-        this.BaseColor = this.Owner.Sprite.Color;
-        this.BaseSize = this.Owner.Transform.Scale;
+        if(this.Glow)
+        {
+            this.BaseColor = this.Owner.Sprite.Color;
+            
+            var rColor:Real = this.BaseColor.X * 0.75;
+            var gColor:Real = this.BaseColor.Y * 0.75;
+            var bColor:Real = this.BaseColor.Z * 0.75;
+            
+            this.Owner.Sprite.Color = Real4(rColor, gColor, bColor, 1);
+        }
         
-        var rColor:Real = this.BaseColor.X * 0.75;
-        var gColor:Real = this.BaseColor.Y * 0.75;
-        var bColor:Real = this.BaseColor.Z * 0.75;
-        
-        this.Owner.Sprite.Color = Real4(rColor, gColor, bColor, 1);
+        if(this.ScaleUp)
+        {
+            this.BaseSize = this.Owner.Transform.Scale;
+        }
         
         Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
         Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
@@ -33,8 +45,15 @@ class ButtonHilight : ZilchComponent
         var bColor:Real = this.BaseColor.Z;
         
         //Increase button size and brighter color
-        Action.Property(seqEnter, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.03, Ease.Linear);
-        Action.Property(seqEnter, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.03, Ease.Linear);
+        if(this.Glow)
+        {
+            Action.Property(seqEnter, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.03, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqEnter, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.03, Ease.Linear);
+        }
     }
     
     function OnMouseExit(event : MouseEvent)//##########################################################################################
@@ -49,8 +68,15 @@ class ButtonHilight : ZilchComponent
         var bColor:Real = this.BaseColor.Z * 0.75;
         
         //Sets size and color back to normal
-        Action.Property(seqExit, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.12, Ease.Linear);
-        Action.Property(seqExit, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.12, Ease.Linear);
+        if(this.Glow)
+        {
+            Action.Property(seqExit, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.12, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqExit, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.12, Ease.Linear);
+        }
     }
     
     function OnMouseDown(event : MouseEvent)//##########################################################################################
@@ -65,8 +91,15 @@ class ButtonHilight : ZilchComponent
         var bColor:Real = this.BaseColor.Z * 0.55;
         
         //Slightly decreases the size and dims the button
-        Action.Property(seqDown, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.02, Ease.Linear);
-        Action.Property(seqDown, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.08, Ease.Linear);
+        if(this.Glow)
+        {
+            Action.Property(seqDown, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.02, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqDown, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.08, Ease.Linear);
+        }
     }
     
     function OnMouseUp(event : MouseEvent)///##########################################################################################
@@ -81,8 +114,15 @@ class ButtonHilight : ZilchComponent
         var bColor:Real = this.BaseColor.Z * 0.85;
         
         //Makes the button brighter and bigger again to indicate the click
-        Action.Property(seqUp, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.06, Ease.Linear);
-        Action.Property(seqUp, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.12, Ease.Linear);
+        if(this.Glow)
+        {
+            Action.Property(seqUp, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.06, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqUp, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.12, Ease.Linear);
+        }
     }
 }
 

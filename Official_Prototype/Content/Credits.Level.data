@@ -103,7 +103,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, 50],
+			Vec3 Translation = [2.24913025, 0.968375444, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -115,7 +115,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 20,
+			float Size = 24.428051,
 		},
 		EditorCameraController = 
 		{
@@ -123,7 +123,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0, 0, 0],
+			Vec3 LookTarget = [2.24913025, 0.968375444, 9.83126043e-008],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -269,19 +269,15 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		GoToLevel = 
-		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "",
-			string Level_Name = "563704b0383d5798:MainMenu",
-		},
 		Reactive = 
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
 		ButtonHilight = 
+		{
+		},
+		DestroySpaceButton = 
 		{
 		},
 	},

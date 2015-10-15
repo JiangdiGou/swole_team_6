@@ -1,0 +1,82 @@
+class PowerDescription : ZilchComponent
+{
+    [Property]
+    var NameLine:CogPath;
+    [Property]
+    var CostLine:CogPath;
+    [Property]
+    var TypeLine:CogPath;
+    
+    [Property]
+    var TextLine1:CogPath;
+    [Property]
+    var TextLine2:CogPath;
+    [Property]
+    var TextLine3:CogPath;
+    [Property]
+    var TextLine4:CogPath;
+    [Property]
+    var TextLine5:CogPath;
+    [Property]
+    var TextLine6:CogPath;
+    [Property]
+    var TextLine7:CogPath;
+    [Property]
+    var TextLine8:CogPath;
+    [Property]
+    var TextLine9:CogPath;
+    [Property]
+    var TextLine10:CogPath;
+    
+    //Initializes the Power Descriptions as blank since the player hasn't selected anything yet
+    function Initialize(init : CogInitializer)
+    {
+        this.BlankText();
+    }
+    
+    //Function called by PowerSelectDescriptionButton to set the text explination of what each power does
+    function DisplayText(name_:String, cost_:String, type_:String, line1_:String, line2_:String, line3_:String, line4_:String, line5_:String, line6_:String, line7_:String, line8_:String, line9_:String, line10_:String)
+    {
+        if(name_ != "")
+        {
+            this.NameLine.Cog.SpriteText.Text = "Power Name: `name_`";
+            this.CostLine.Cog.SpriteText.Text = "Energy Cost: `cost_`";
+            this.TypeLine.Cog.SpriteText.Text = "Type: `type_`";
+            
+            this.TextLine1.Cog.SpriteText.Text = line1_;
+            this.TextLine2.Cog.SpriteText.Text = line2_;
+            this.TextLine3.Cog.SpriteText.Text = line3_;
+            this.TextLine4.Cog.SpriteText.Text = line4_;
+            this.TextLine5.Cog.SpriteText.Text = line5_;
+            this.TextLine6.Cog.SpriteText.Text = line6_;
+            this.TextLine7.Cog.SpriteText.Text = line7_;
+            this.TextLine8.Cog.SpriteText.Text = line8_;
+            this.TextLine9.Cog.SpriteText.Text = line9_;
+            this.TextLine10.Cog.SpriteText.Text = line10_;
+        }
+        else
+        {
+            this.BlankText();
+        }
+        
+    }
+    
+    //clears the text from all of the sprite text fields
+    function BlankText()
+    {
+        this.NameLine.Cog.SpriteText.Text = "No Power";
+        this.CostLine.Cog.SpriteText.Text = "";
+        this.TypeLine.Cog.SpriteText.Text = "";
+            
+        this.TextLine1.Cog.SpriteText.Text = "";
+        this.TextLine2.Cog.SpriteText.Text = "";
+        this.TextLine3.Cog.SpriteText.Text = "";
+        this.TextLine4.Cog.SpriteText.Text = "";
+        this.TextLine5.Cog.SpriteText.Text = "";
+        this.TextLine6.Cog.SpriteText.Text = "";
+        this.TextLine7.Cog.SpriteText.Text = "";
+        this.TextLine8.Cog.SpriteText.Text = "";
+        this.TextLine9.Cog.SpriteText.Text = "";
+        this.TextLine10.Cog.SpriteText.Text = "";
+    }
+}

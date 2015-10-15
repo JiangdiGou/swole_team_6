@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "DestroySpaceButton",
+		uint64 ResourceId = 56c503cd75af21fc,
+	},
+},

@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PowerSelectDescriptionButton",
+		uint64 ResourceId = 56c57b76f0a2f80a,
+	},
+},

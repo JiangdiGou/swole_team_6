@@ -1,0 +1,36 @@
+class CreateOverlayedSpace : ZilchComponent
+{
+    [Property]
+    var MouseClick:Boolean = false;
+    [Property]
+    var Automatic:Boolean = false;
+    [Property]
+    var OverlayedLevel: Level = null;
+    var OverlayedSpace: Space = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //If this script is button activated, calls the CreateSpace function
+        if(this.MouseClick)
+        {
+            Zero.Connect(this.Owner, Events.MouseUp, this.OnMouseUp);
+        }
+        else if(this.Automatic)
+        {
+            this.CreateSpace();
+        }
+        //Otherwise, CreateSpace is called externally
+    }
+    
+    function OnMouseUp(event : MouseEvent)
+    {
+        this.CreateSpace();
+    }
+    
+    //Function that can be called externally or internally to create the level designated
+    function CreateSpace()
+    {
+        this.OverlayedSpace = this.GameSession.CreateNamedSpace(this.OverlayedLevel.Name, Archetype.Find("Space"));
+        this.OverlayedSpace.LoadLevel(this.OverlayedLevel);
+    }
+}

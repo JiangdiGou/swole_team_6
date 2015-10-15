@@ -1,21 +1,43 @@
 class PauseResume : ZilchComponent
 {
+    //bool to stop the game from being unpaused on the same frame it was paused
     var BPreventDestroy:Boolean = false;
     
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.LeftMouseUp, this.OnMouseUp);
+        Zero.Connect(this.GameSession, Events.GameRequestQuit, this.OnEscapeDown);
     }
-
+    
+    //Lets the player press escape to unpause the game
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(Zero.Keyboard.KeyIsPressed(Keys.P) && this.BPreventDestroy)
+        if(Zero.Keyboard.KeyIsPressed(Keys.Escape) && this.BPreventDestroy)
         {
-            this.GameSession.FindSpaceByName("Main").TimeSpace.Paused = false;
-            this.GameSession.FindSpaceByName("HUDSpace").TimeSpace.Paused = false;
-            this.Space.Destroy();
+            this.Resume();
         }
         
         this.BPreventDestroy = true;
+    }
+    
+    //Resumes the game when this button is pressed
+    function OnMouseUp(event : MouseEvent)
+    {
+        this.Resume();
+    }
+    
+    //stops the game from exiting when escape is pressed
+    function OnEscapeDown(event : GameEvent)
+    {
+        event.Handled = true;
+    }
+    
+    //Unpauses the main gamespace and hud, destroys the pause screen
+    function Resume()
+    {
+        this.GameSession.FindSpaceByName("Main").TimeSpace.Paused = false;
+        this.GameSession.FindSpaceByName("HUDSpace").TimeSpace.Paused = false;
+        this.Space.Destroy();
     }
 }
