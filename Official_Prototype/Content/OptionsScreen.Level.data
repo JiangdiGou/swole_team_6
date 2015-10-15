@@ -280,5 +280,8 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
+		ButtonHilight = 
+		{
+		},
 	},
 },

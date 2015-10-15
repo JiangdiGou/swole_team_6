@@ -276,6 +276,9 @@ Level =
 			string GameData_Level = "551f871f885a5f4b:Level",
 			string Level_Name = "553552b3f7cd2d35:PowerSelect",
 		},
+		ButtonHilight = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -345,6 +348,9 @@ Level =
 			string GameData_Level = "551f871f885a5f4b:Level",
 			string Level_Name = "553552b3f7cd2d35:PowerSelect",
 		},
+		ButtonHilight = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -413,6 +419,9 @@ Level =
 			bool GoToGameDataLevel = false,
 			string GameData_Level = "551f871f885a5f4b:Level",
 			string Level_Name = "553552b3f7cd2d35:PowerSelect",
+		},
+		ButtonHilight = 
+		{
 		},
 	},
 	Cog = 
@@ -530,6 +539,9 @@ Level =
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
+		},
+		ButtonHilight = 
+		{
 		},
 	},
 	Cog = 

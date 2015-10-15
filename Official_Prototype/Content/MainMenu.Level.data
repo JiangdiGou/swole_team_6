@@ -212,6 +212,9 @@ Level =
 			string GameData_Level = "",
 			string Level_Name = "5637063944d8f04a:Credits",
 		},
+		ButtonHilight = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -258,6 +261,9 @@ Level =
 			bool GoToGameDataLevel = false,
 			string GameData_Level = "",
 			string Level_Name = "56373f8c4ab6300c:HowToPlay",
+		},
+		ButtonHilight = 
+		{
 		},
 	},
 	Cog = 
@@ -306,6 +312,9 @@ Level =
 			string GameData_Level = "",
 			string Level_Name = "56373fcb789cf268:OptionsScreen",
 		},
+		ButtonHilight = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -347,6 +356,9 @@ Level =
 			bool CaptureMouse = true,
 		},
 		Quit = 
+		{
+		},
+		ButtonHilight = 
 		{
 		},
 	},
@@ -531,6 +543,9 @@ Level =
 			bool GoToGameDataLevel = false,
 			string GameData_Level = "",
 			string Level_Name = "553573c03722f285:LevelSelect",
+		},
+		ButtonHilight = 
+		{
 		},
 	},
 	Cog = 

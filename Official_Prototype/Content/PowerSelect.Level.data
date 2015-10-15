@@ -106,7 +106,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.195332348, 0.457652926, 49.949501],
+			Vec3 Translation = [-2.2404995, -4.30231094, 49.949501],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -118,7 +118,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 29.836462,
+			float Size = 16.3746071,
 		},
 		EditorCameraController = 
 		{
@@ -126,7 +126,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0.195332348, 0.457652926, -0.0505001098],
+			Vec3 LookTarget = [-2.2404995, -4.30231094, -0.0505002066],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -395,6 +395,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -455,6 +458,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -514,6 +520,9 @@ Level =
 				{
 					bool Active = true,
 					bool CaptureMouse = false,
+				},
+				ButtonHilight = 
+				{
 				},
 			},
 			Cog = 
@@ -682,6 +691,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -742,6 +754,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -801,6 +816,9 @@ Level =
 				{
 					bool Active = true,
 					bool CaptureMouse = false,
+				},
+				ButtonHilight = 
+				{
 				},
 			},
 			Cog = 
@@ -969,6 +987,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -1029,6 +1050,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -1088,6 +1112,9 @@ Level =
 				{
 					bool Active = true,
 					bool CaptureMouse = false,
+				},
+				ButtonHilight = 
+				{
 				},
 			},
 			Cog = 
@@ -1256,6 +1283,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -1316,6 +1346,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -1375,6 +1408,9 @@ Level =
 				{
 					bool Active = true,
 					bool CaptureMouse = false,
+				},
+				ButtonHilight = 
+				{
 				},
 			},
 			Cog = 
@@ -1543,6 +1579,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -1603,6 +1642,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -1662,6 +1704,9 @@ Level =
 				{
 					bool Active = true,
 					bool CaptureMouse = false,
+				},
+				ButtonHilight = 
+				{
 				},
 			},
 			Cog = 
@@ -1830,6 +1875,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -1949,6 +1997,9 @@ Level =
 				{
 					bool Active = true,
 					bool CaptureMouse = false,
+				},
+				ButtonHilight = 
+				{
 				},
 			},
 			Cog = 
@@ -2117,6 +2168,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -2177,6 +2231,9 @@ Level =
 					bool Active = true,
 					bool CaptureMouse = false,
 				},
+				ButtonHilight = 
+				{
+				},
 			},
 			Cog = 
 			{
@@ -2236,6 +2293,11 @@ Level =
 				{
 					bool Active = true,
 					bool CaptureMouse = false,
+				},
+				LevelSelectButton = 
+				{
+					bool BIsFirst = false,
+					int ISelected = 0,
 				},
 			},
 			Cog = 
@@ -2461,6 +2523,9 @@ Level =
 			float PixelsPerUnit = 64,
 			bool Smoothing = true,
 		},
+		ButtonHilight = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -2524,6 +2589,9 @@ Level =
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
+		},
+		ButtonHilight = 
+		{
 		},
 	},
 	Cog = 
