@@ -114,7 +114,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [1.60154116, -0.440004647, 50],
+			Vec3 Translation = [0.244809747, 1.01580369, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -126,7 +126,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 13.4064064,
+			float Size = 16.3746185,
 		},
 		EditorCameraController = 
 		{
@@ -134,7 +134,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [1.60154116, -0.440004647, 7.00056262e-008],
+			Vec3 LookTarget = [0.244809747, 1.01580369, 1.0701001e-008],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -759,6 +759,168 @@ Level =
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
 			string SpriteSource = "563867138bc2489d:Crane",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 15,
+		},
+		Named = 
+		{
+			string Name = "LeftRoll",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-1.16999996, 0.239999995, 0.100000001],
+			Vec3 Scale = [2.31818151, 12.5479498, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.741176486, 0.643137276, 0.400000036, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5586f579ca73ecc2:SquareBordered",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = true,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = false,
+			bool Fade = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 16,
+		},
+		Named = 
+		{
+			string Name = "RightRoll",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [1.16234362, 0.239999995, 0.100000001],
+			Vec3 Scale = [2.31818151, 12.5479498, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.741176486, 0.643137276, 0.400000036, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5586f579ca73ecc2:SquareBordered",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = true,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = false,
+			bool Fade = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 17,
+		},
+		Named = 
+		{
+			string Name = "LeftTimer",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-1.16999996, 0.239999995, 0.200000003],
+			Vec3 Scale = [1, 11, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.78039223, 0.78039223, 0.78039223, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 18,
+		},
+		Named = 
+		{
+			string Name = "LeftTimer",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [1.16999996, 0.239999995, 0.200000003],
+			Vec3 Scale = [1, 11, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.78039223, 0.78039223, 0.78039223, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
 			bool RenderMask = false,
 			bool FlipX = false,
 			bool FlipY = false,

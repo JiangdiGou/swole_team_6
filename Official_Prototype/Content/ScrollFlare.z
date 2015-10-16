@@ -1,0 +1,149 @@
+class ScrollFlare : ZilchComponent
+{
+    //Left roll of the scroll
+    [Property]
+    var LeftScroll:Boolean = false;
+    //Right roll of the scroll
+    [Property]
+    var RightScroll:Boolean = false;
+    //The charge bar to the left of the scroll
+    [Property]
+    var LeftCharge:Boolean = false;
+    //The charge bar to the right of the scroll
+    [Property]
+    var RightCharge:Boolean = false;
+    //Sheet of the scroll
+    [Property]
+    var Paper:Boolean = false;
+    //The image on the scroll
+    [Property]
+    var Picture:Boolean = false;
+    //One of the points where the mouse needs to hit
+    [Property]
+    var ScrollPoint:Boolean = false;
+    //Background image fade
+    [Property]
+    var Fade:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        if(this.LeftScroll)
+        {
+            this.Owner.Transform.Translation = Real3(-1.17, 0.24, 0.1);
+            this.ScrollMovement(true, true);
+        }
+        else if(this.RightScroll)
+        {
+            this.Owner.Transform.Translation = Real3(1.17, 0.24, 0.1);
+            this.ScrollMovement(true, false);
+        }
+        else if(this.LeftCharge)
+        {
+            this.Owner.Transform.Translation = Real3(-1.17, 0.24, 0.1);
+            this.ChargeBar(this.Owner.Sprite.Color);
+        }
+        else if(this.RightCharge)
+        {
+            this.Owner.Transform.Translation = Real3(1.17, 0.24, 0.1);
+            this.ChargeBar(this.Owner.Sprite.Color);
+        }
+        else if(this.Paper)
+        {
+            this.Owner.Transform.Scale = Real3(1.0, 11.423, 1.427);
+            this.PaperScale(true);
+        }
+        else if(this.Picture)
+        {
+            
+        }
+        else if(this.ScrollPoint)
+        {
+            
+        }
+        else if(this.Fade)
+        {
+            
+        }
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    //Controls the movement of the scroll rolls
+    function ScrollMovement(start_:Boolean, left_:Boolean)
+    {
+        var seqScroll = Action.Sequence(this.Owner.Actions);
+        var endPos:Real3 = Real3(0,0,0);
+        var moveTime:Real = 0.0;
+        
+        //Move to the open position
+        if(start_)
+        {
+            if(left_)
+            {
+                endPos = Real3(-10.75, 0.24, 0.1);
+            }
+            else
+            {
+                endPos = Real3(10.75, 0.24, 0.1);
+            }
+            
+            moveTime = 0.1;
+        }
+        //Move back to the close position
+        else
+        {
+            if(left_)
+            {
+                endPos = Real3(-1.17, 0.24, 0.1);
+            }
+            else
+            {
+                endPos = Real3(1.17, 0.24, 0.1);
+            }
+            
+            moveTime = 0.5;
+        }
+        
+        Action.Property(seqScroll, @this.Owner.Transform.Translation, endPos, moveTime, Ease.Linear);
+    }
+    
+    //Controls the movement of the scroll rolls
+    function ChargeBar(baseColor_:Real4)
+    {
+        var seqCharge = Action.Sequence(this.Owner.Actions);
+        this.Owner.Sprite.Color = Real4(1, 1, 1, 0);
+        
+        Action.Delay(seqCharge, 0.2);
+        Action.Property(seqCharge, @this.Owner.Sprite.Color, baseColor_, 0.03, Ease.Linear);
+    }
+    
+    //Controls the scale of the main sheet of paper
+    function PaperScale(start_:Boolean)
+    {
+        var seqPaper = Action.Sequence(this.Owner.Actions);
+        var endScale:Real3 = Real3(1,1,1);
+        
+        if(start_)
+        {
+            endScale = Real3(21.42, 11.423, 1.427);
+        }
+        else
+        {
+            endScale = Real3(1.0, 11.423, 1.427);
+        }
+        
+        Action.Property(seqPaper, @this.Owner.Transform.Scale, endScale, 0.1, Ease.Linear);
+    }
+    
+    //Controls the scale of the scroll picture
+    function PictureScale()
+    {
+        var seqPic = Action.Sequence(this.Owner.Actions);
+        var endScale:Real3 = Real3(1.8,1.8,1);
+        this.Owner.Transform.Scale = Real3(0.5, this.Owner.Transform.Scale.Y, 1);
+        
+        Action.Property(seqPic, @this.Owner.Transform.Scale, endScale, 0.09, Ease.Linear);
+    }
+}
