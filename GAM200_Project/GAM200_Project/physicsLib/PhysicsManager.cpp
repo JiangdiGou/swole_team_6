@@ -67,14 +67,14 @@ void PhysicsManager::ColliderCheck()
 			{
 				if (CollisionChecker::CircleAndCircle(reinterpret_cast<Circle *>(a), posA, reinterpret_cast<Circle *>(b), posB))
 				{
-					printf("Circle");
+					printf("Circle\n");
 				}
 			}
 			else if (a->Id == Primitive::pAABB && b->Id == Primitive::pAABB)
 			{
 				if (CollisionChecker::AABBAndAABB(reinterpret_cast<AABB *>(a), posA, reinterpret_cast<AABB *>(b), posB))
 				{
-					printf("AABB");
+					printf("AABB\n");
 					//We get to this point twice for one collision, right? If so, only need this one call.
 					reinterpret_cast<RigidBody*>((a->GetOwner())->GetComponent(CT_RigidBody))->Trigger(b->GetOwner());
 					reinterpret_cast<RigidBody*>((b->GetOwner())->GetComponent(CT_RigidBody))->Trigger(a->GetOwner());
@@ -85,14 +85,14 @@ void PhysicsManager::ColliderCheck()
 			{
 				if (CollisionChecker::AABBAndCircle(reinterpret_cast<AABB *>(a), posA, reinterpret_cast<Circle *>(b), posB))
 				{
-					printf("AABB to Circle");
+					printf("AABB to Circle\n");
 				}
 			}
 			else if (a->Id == Primitive::pCircle && b->Id == Primitive::pAABB)
 			{
 				if (CollisionChecker::CircleAndAABB(reinterpret_cast<Circle *>(a), posA, reinterpret_cast<AABB *>(b), posB))
 				{
-					printf("Circle to AABB");
+					printf("Circle to AABB\n");
 				}
 			}
 		}

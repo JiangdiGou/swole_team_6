@@ -3,7 +3,8 @@
 
 #include "Shader.h"
 #include <vector>
-#include "Texture.h"
+#include "AtlasTexture.h"
+#include "textureAtlas.h"
 #include "../physicsLib/Transform.h"
 #include "../Composition.h"
 
@@ -15,11 +16,11 @@ public:
   ~Sprite();
 
 	glm::vec4 color;
-	Texture texture;
+	AtlasTexture texture;
 
   void Update() override;
 
-  static void initSprites(const Shader& shader);
+  static void initSprites(const Shader& shader, const TextureAtlas& atlas);
   void static drawAllSprites();
 
 private:
@@ -27,6 +28,7 @@ private:
   static GLuint vertexBuffer;
   static GLuint textureBuffer;
   static GLuint shaderID;
+  static GLuint atlasID;
 
   static std::vector<GLfloat> vertices;
   static std::vector<GLfloat> texCoords;

@@ -28,14 +28,9 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  Texture textureBackground = Texture("resources/background.png");
-  Texture textureSmiley = Texture("resources/Smiley1.png");
-  Texture textureIdleGreen = Texture("resources/courier.png", 26, 43, 83, 100, 0, 0);
-  Texture textureRunGreen = Texture("resources/courier.png", 26, 43, 83, 100, 0, 0);
   textureIdleBlue = new Texture("resources/NewRunStuff.png", 4, 64, 64, 100, 0, 128);
   textureRunBlue = new Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 192);
   
-
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
   camera->AddComponent(CT_Camera, new Camera((graphics->coreShader)));
@@ -54,7 +49,8 @@ void GameLogic::Initialize()
   Transform * transform2 = new Transform();
   transform2->SetPosition(0, 3, 0);
   Sprite * sprite2 = new Sprite();
-  sprite2->texture = textureIdleGreen;
+  sprite2->texture = graphics->spriteAtlas.textures[std::string("Smiley3")];
+
   greenObj->AddComponent(CT_Transform, transform2);
   greenObj->AddComponent(CT_Sprite, sprite2);
   RigidBody* dudeBody = new RigidBody();
@@ -85,7 +81,7 @@ void GameLogic::Initialize()
   Transform * transformbo = new Transform();
   transformbo->SetPosition(3, 0, 0);
   Sprite * spritebo = new Sprite();
-  spritebo->texture = *textureIdleBlue;
+  spritebo->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
   boObj->AddComponent(CT_Transform, transformbo);
   boObj->AddComponent(CT_Sprite, spritebo);
   RigidBody* boObjBody = new RigidBody();
@@ -117,7 +113,8 @@ void GameLogic::Initialize()
   Transform * transform5 = new Transform();
   transform5->SetPosition(0, -2, 0);
   Sprite * sprite4 = new Sprite();
-  sprite4->texture = *textureIdleBlue;
+  sprite4->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+
   blackObj->AddComponent(CT_Transform, transform5);
   blackObj->AddComponent(CT_Sprite, sprite4);
   RigidBody* blackObjBody = new RigidBody();

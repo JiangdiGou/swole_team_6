@@ -1,19 +1,27 @@
 #include "atlasTexture.h"
 
-AtlasTexture::AtlasTexture(int atlasWidth, int atlasHeight, int numberOfFrames,
+AtlasTexture::AtlasTexture(int aWidth, int aHeight, int numberOfFrames,
   int frameTime, int xOffset, int yOffset, int textureWidth, int textureHeight)
 {
+  //All this does is set members in obvious ways that dont warrant explaining
   numFrames = numberOfFrames;
 
+  atlasWidth = aWidth;
+  atlasHeight = aHeight;
+
+  //Ok, I'll explain these though. Theyre just used for animation. Specifiically
+  //The get functions you see below are based on these, 
   numRows = atlasHeight / textureHeight;
-  numColumns = atlasWidth / (textureWidth*numFrames);
+  numColumns = atlasWidth / (textureWidth/numFrames);
 
   currentFrame = 0;
   frameDuration = frameTime;
 
   offsetX = xOffset;
   offsetY = yOffset;
-  /*
+
+  frameStartTime = GetTickCount();
+
   textureCoordinates[0] = getRightX();
   textureCoordinates[1] = getBottomY();
   textureCoordinates[2] = getLeftX();
@@ -26,9 +34,7 @@ AtlasTexture::AtlasTexture(int atlasWidth, int atlasHeight, int numberOfFrames,
   textureCoordinates[9] = getTopY();
   textureCoordinates[10] = getLeftX();
   textureCoordinates[11] = getTopY();
-  */
 }
-
 
 //**********************
 //Function    : AtlasTexture.getBottomY
@@ -104,5 +110,10 @@ void AtlasTexture::updateAnimation()
   textureCoordinates[9] = getTopY();
   textureCoordinates[10] = getLeftX();
   textureCoordinates[11] = getTopY();
+}
+
+AtlasTexture::AtlasTexture()
+{
+
 }
 

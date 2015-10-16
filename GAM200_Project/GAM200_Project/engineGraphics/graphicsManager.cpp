@@ -4,16 +4,16 @@ GraphicsManager *graphics;
 
 GraphicsManager::GraphicsManager(const Shader& shader)
 {
-  graphics = this;
-  coreShader = shader;
+  spriteAtlas = *(new TextureAtlas("resources/Textures/Atlas/testAtlas2.png", 
+                                  "resources/Textures/tList_testAtlas2.txt"));
+  Texture * courier = new Texture("resources/courier.png", 1, 43, 83, 0);
 
   initDebugDraw(shader);
-
-  Sprite::initSprites(shader);
-
-  Texture * courier = new Texture("resources/courier.png", 1, 43, 83, 0);
+  Sprite::initSprites(shader, spriteAtlas);
   SpriteText::initText(shader, courier);
 
+  graphics = this;
+  coreShader = shader;
   shader.Use();
 }
 
@@ -68,8 +68,6 @@ HGLRC GraphicsManager::getRenderingContext()
 
 void GraphicsManager::Initialize()
 {
-  TextureAtlas testAtlas = TextureAtlas("resources/Textures/Atlas/testAtlas.png");
-  testAtlas.parseTextureList("resources/Textures/tList_testAtlas.txt");
   glDepthFunc(GL_ALWAYS);
 }
 

@@ -27,5 +27,5 @@ echo Generating map: %textureList%
 ECHO -----------------------
 
 REM packs the files into an atas
-"..\spriteSheetPacker\sspack.exe" /image:%outputName% /il:%textureList% /map:%textureList% /r
+"..\spriteSheetPacker\sspack.exe" /image:%outputName% /il:%textureList% /map:%textureList% /r /pow2 /sqr
 PAUSE

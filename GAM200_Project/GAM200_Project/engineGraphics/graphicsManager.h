@@ -24,6 +24,8 @@ public:
   void Update(float dt) override;
   void Draw() override;
 
+  TextureAtlas spriteAtlas;
+
   void setDeviceContext(HDC& newDeviceContext);
   HDC getDeviceContext();
   void setRenderingContext(HGLRC& renderingContext);

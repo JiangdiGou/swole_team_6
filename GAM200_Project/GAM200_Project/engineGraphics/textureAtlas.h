@@ -9,16 +9,22 @@
 class TextureAtlas
 {
 public:
-  const char* atlasFileName;
-
-  TextureAtlas(const char* atlasname);
-  void parseTextureList(const char* filename);
+  //Constructor from a filename, what should be used. 
+  TextureAtlas(const char* atlasname, const char* tListName);
+  //It needs adefault constructor for reasons. But it doesnt do anything. 
+  TextureAtlas();
+  //Actual openGL texture ID 
   GLuint ID;
-  std::map<const char*, AtlasTexture> textures;
-
+  //Map storing all its inner textures 
+  std::map<std::string, AtlasTexture> textures;
+  //W and H needed for animation to convert shit to tex coords 
   float width, height;
-
+  //Prints out all info about atlasTextures in the map 
   void debugMap();
+private:
+  //parses a texture list file to populate the map
+  void parseTextureList(const char* filename);
+
 };
 
 #endif
