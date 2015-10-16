@@ -1,4 +1,3 @@
-//ALSO STUFF
 #ifndef ATLASTEXTURE_H
 #define ATLASTEXTURE_H
 

@@ -4,9 +4,9 @@ GraphicsManager *graphics;
 
 GraphicsManager::GraphicsManager(const Shader& shader)
 {
-  spriteAtlas = *(new TextureAtlas("resources/Textures/Atlas/testAtlas2.png", 
-                                  "resources/Textures/tList_testAtlas2.txt"));
-  Texture * courier = new Texture("resources/courier.png", 1, 43, 83, 0);
+  spriteAtlas = *(new TextureAtlas("resources/Textures/Atlas/testAtlas.png", 
+                                  "resources/Textures/tList_testAtlas.txt"));
+  Texture * courier = new Texture("resources/fonts/courier.png", 1, 43, 83, 0);
 
   initDebugDraw(shader);
   Sprite::initSprites(shader, spriteAtlas);

@@ -1,4 +1,0 @@
-ExampleSpriteSheet_3 = 0 0 192 64
-Smiley1_1 = 0 65 64 64
-Smiley2_1 = 0 130 64 64
-Smiley3_1 = 65 65 64 64

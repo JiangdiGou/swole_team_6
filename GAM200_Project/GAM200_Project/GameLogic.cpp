@@ -5,7 +5,7 @@
 //	is to walk through all the code in game logic and follow the execution through
 //	the rest of the engine.
 //	
-//	Authors: Chris Peters, Benjamin Ellinger
+//	Authors: Chris Peters, Benjamin Ellinger <- did they author this lol? 
 //	Copyright 2010, Digipen Institute of Technology
 //
 ///////////////////////////////////////////////////////////////////////////////////////
