@@ -10,10 +10,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
 #include "_EntryPoint.h"
-#include "graphicsManager.h"
+#include "engineGraphics/graphicsManager.h"
 #include "GameLogic.h"
 #include "Core.h"
-#include "engineGraphics\Graphics.h"
+#include "engineGraphics/Graphics.h"
 #include "WindowsSystem.h"
 
 //HDC deviceContext;

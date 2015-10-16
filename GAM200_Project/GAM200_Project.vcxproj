@@ -232,7 +232,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\GAM200_Project\engineGraphics;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\GAM200_Project;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\graphicsLibsWin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
