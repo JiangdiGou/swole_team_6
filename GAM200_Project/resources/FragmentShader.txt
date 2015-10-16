@@ -1,6 +1,7 @@
 #version 330 core
 
 in vec2 TexCoords;
+in vec4 colorVar;
 
 out vec4 color;
 
@@ -8,7 +9,7 @@ uniform sampler2D Texture;
 
 void main()
 {
-    vec4 texColor = texture(Texture, TexCoords);
+    vec4 texColor = texture(Texture, TexCoords) * colorVar;
     if(texColor.a < 0.1)
         discard;
 

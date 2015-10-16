@@ -27,11 +27,13 @@ private:
   static GLuint vertexArray;
   static GLuint vertexBuffer;
   static GLuint textureBuffer;
+  static GLuint colorBuffer;
   static GLuint shaderID;
   static GLuint atlasID;
 
   static std::vector<GLfloat> vertices;
   static std::vector<GLfloat> texCoords;
+  static std::vector<GLfloat> colors;
 
   //Helper Function, pushes xyz to vertices
   void pushVertices(const glm::vec4 &verts);
