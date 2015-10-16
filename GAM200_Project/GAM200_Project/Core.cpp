@@ -7,7 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 #include <Windows.h>
 #include "Core.h"
-#include "Graphics.h"
+#include "engineGraphics/Graphics.h"
 #include "Message.h"
 
 
