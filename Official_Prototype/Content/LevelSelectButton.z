@@ -25,15 +25,15 @@ class LevelSelectButton : ZilchComponent
         var iOwnerY:Real = this.Owner.Transform.Translation.Y;
         
         //Checks if this button has the hilighter behind it, indicating that it's selected
-        if(iOwnerX == iHilightX && iOwnerY == iHilightY)
-        {
-            this.Owner.GoToLevel.ExternalGoTo();
-        }
-        //If it isn't selected, moves the hilighter to it
-        else
-        {
-            this.MoveHilight();
-        }
+        //if(iOwnerX == iHilightX && iOwnerY == iHilightY)
+        //{
+        //    this.Owner.GoToLevel.ExternalGoTo();
+        //}
+        ////If it isn't selected, moves the hilighter to it
+        //else
+        //{
+        //    this.MoveHilight();
+        //}
     }
     
     //Moves the level hilighter to this button

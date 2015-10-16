@@ -5,4 +5,10 @@ TextContent =
 		string Name = "PlayerNotification",
 		uint64 ResourceId = 563ac250def2e01a,
 	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+		],
+	},
 },

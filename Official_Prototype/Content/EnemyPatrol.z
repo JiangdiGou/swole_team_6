@@ -1,0 +1,67 @@
+class EnemyPatrol : ZilchComponent
+{
+    [Property]
+    var StartPos:Real3;
+    [Property]
+    var EndPos:Real3;
+    
+    var GoToStart:Boolean = false;
+    
+    [Property]
+    var WaitTime:Real;
+    var CurrentWait:Real = 0;
+    
+    [Property]
+    var WalkTime:Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Owner.Transform.Translation = this.StartPos;
+        this.CurrentWait = this.WaitTime;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //Counts down until the wait is over
+        if(this.CurrentWait > 0.0)
+        {
+            //
+            this.CurrentWait -= event.Dt;
+            
+            if(this.CurrentWait <= 0)
+            {
+                this.Patrol();
+            }
+        }
+    }
+    
+    function Patrol()
+    {
+        var seqMove = Action.Sequence(this.Owner.Actions);
+        
+        //Moves to the end position
+        if(this.GoToStart == false)
+        {
+            Action.Property(seqMove, @this.Owner.Transform.Translation, this.EndPos, this.WalkTime, Ease.Linear);
+        }
+        //Moves to the start position
+        else
+        {
+            Action.Property(seqMove, @this.Owner.Transform.Translation, this.StartPos, this.WalkTime, Ease.Linear);
+        }
+        
+        //slight delay before telling this enemy to wait
+        Action.Delay(seqMove, this.WalkTime - 1);
+        //Tells this enemy to wait
+        Action.Call(seqMove, this.SetWait);
+        //Changes the direction of the next movement
+        this.GoToStart = !this.GoToStart;
+    }
+    
+    //Tells this enemy to wait before it can move again
+    function SetWait()
+    {
+        this.CurrentWait = this.WaitTime;
+    }
+}
