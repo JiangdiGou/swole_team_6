@@ -55,7 +55,7 @@ int test(int argc, char **argv)
 
 	// Create a sample sound
 	FMSound soundSample;
-	sound.createSound(&soundSample, "C:\\Users\\n.yoo\\Desktop\\help.wav");
+	sound.createSound(&soundSample, "resources//audio//help.wav");
 
 	// Play the sound, with loop mode
 	sound.playSound(soundSample, true);
