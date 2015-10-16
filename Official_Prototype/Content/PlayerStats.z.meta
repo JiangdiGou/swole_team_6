@@ -2,8 +2,8 @@ TextContent =
 {
 	ZilchScriptBuilder = 
 	{
-		string Name = "PlayerAttack",
-		uint64 ResourceId = 551f7a227678d6dc,
+		string Name = "PlayerStats",
+		uint64 ResourceId = 56fa279eb34d2aa6,
 	},
 	ContentTags = 
 	{

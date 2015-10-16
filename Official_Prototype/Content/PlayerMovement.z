@@ -4,20 +4,12 @@ class PlayerMovement : ZilchComponent
     [Property]
     var RSpeed:Real = 0.3;
     
-    //How high the player can jump
-    [Property]
-    var RJumpHeight:Real = 10.0;
+    var LeftCollision:Boolean = false;
+    var RightCollision:Boolean = false;
     
-    //X velocity of the player during a dash
-    [Property]
-    var RDashSpeedX:Real = 60.0;
     
     //Boolean that prevents the player from moving at certain times (like when dashing)
     var BCanMove:Boolean = true;
-    //Frame counter where the dash isn't available (after use)
-    var IDashCD:Integer = 0;
-    //Stops player's X velocity when it hits 0 or they keep sliding after a dash
-    var IDashStop:Integer = 0;
     
     //Collider for the CheckCollisions collider to reference
     var Collider:Collider = null;
@@ -31,142 +23,83 @@ class PlayerMovement : ZilchComponent
     //*******************************************************************************************************************************************
     function OnLogicUpdate(event : UpdateEvent)
     {
-        this.DecreaseCounters();
-        
         if(this.BCanMove)
         {
-            //Dash left when Q is pressed
-            if(Zero.Keyboard.KeyIsPressed(Keys.Q) && this.IDashCD == 0)
-            {
-                this.Dash(1);
-            }
-            //Dash right when E is pressed
-            if(Zero.Keyboard.KeyIsPressed(Keys.E) && this.IDashCD == 0)
-            {
-                this.Dash(2);
-            }
+            this.LeftCollision = this.CheckCollision(-Real3.XAxis);
+            this.RightCollision = this.CheckCollision(Real3.XAxis);
             
             //Move left when A or Left Arrow are pressed
             if(Zero.Keyboard.KeyIsDown(Keys.A) || Zero.Keyboard.KeyIsDown(Keys.Left))
             {
-                this.Owner.RigidBody.Velocity = Real3(-this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
-                this.Owner.Sprite.FlipX = true;
+                if(!this.LeftCollision)
+                {
+                    this.Owner.RigidBody.Velocity = Real3(-this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                    this.Owner.Sprite.FlipX = true;
+                }
             }
+            
             //Move right when D or Right Arrow are pressed
             else if(Zero.Keyboard.KeyIsDown(Keys.D) || Zero.Keyboard.KeyIsDown(Keys.Right))
             {
-                this.Owner.RigidBody.Velocity = Real3(this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
-                this.Owner.Sprite.FlipX = false;
-            }
-            else
-            {
-                if(this.Owner.PlayerAttack.ISlashStop == 0 && this.IDashStop == 0)
+                if(!this.RightCollision)
                 {
-                    this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                    this.Owner.RigidBody.Velocity = Real3(this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                    this.Owner.Sprite.FlipX = false;
                 }
             }
             
-            //Jump when Space is pressed
-            if(Zero.Keyboard.KeyIsPressed(Keys.Space))
-            {
-                //Will only jump if the player's Y velocity is low enough. Prevents infinite air jumping
-                if(this.Owner.RigidBody.Velocity.Y <= 1.0 && this.Owner.RigidBody.Velocity.Y >= 0.0)
-                {
-                    this.Owner.RigidBody.Velocity += Real3(0.0, this.RJumpHeight, 0.0);
-                    this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,1);//Jump ID = 1
-                }
-            }
-        }
-    }
-    
-    //*******************************************************************************************************************************************
-    function Dash(iDirection_:Integer)
-    {
-        var rXDistance:Real = 0;
-        var rYDistance:Real = this.Owner.Transform.Translation.Y;
-        
-        //For iDirection, 1 is left, 2 is right
-        if(iDirection_ == 1)//Dash left
-        {
-            //Gives the player momentum to move left
-            this.Owner.RigidBody.Velocity = Real3(-this.RDashSpeedX, 0, 0);
-            //Sends this dash's ID to the combo Manager in LevelSettings
-            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,4);//Dash Left ID = 4
-            //Sets the end location of the dash for the segment cast
-            rXDistance = this.Owner.Transform.Translation.X - 10.5;
-            this.Owner.Sprite.FlipX = true;
-        }
-        else if(iDirection_ == 2)//Dash right
-        {
-            //Gives the player momentum to move right
-            this.Owner.RigidBody.Velocity = Real3(this.RDashSpeedX, 0, 0);
-            //Sends this dash's ID to the combo manager in LevelSettings
-            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,3);//Dash Right ID = 3
-            //Sets the end location of the dash for the segment cast
-            rXDistance = this.Owner.Transform.Translation.X + 10.5;
-            this.Owner.Sprite.FlipX = false;
-        }
-        
-        //Sets the starting location of the segment cast at the player's location
-        var segDashStart:Real3 = Real3(this.Owner.Transform.Translation.X, rYDistance, 0);
-        //Sets the end location of the segment cast depending on which direction they move
-        var segDashEnd:Real3 = Real3(rXDistance, rYDistance, 0);
-        //Creates a filter so that the dash segment ignores dynamic objects
-        var fFilter = CastFilter();
-        fFilter.IgnoreDynamic = true;
-        //Casts the segment dash
-        var segDash = this.Space.PhysicsSpace.CastSegmentResultsFiltered(segDashStart, segDashEnd, 5, fFilter);
-        
-        //Loops through all of the objects the segment hit to see if it hit the tile map
-        for(var s:Integer = 0; s < segDash.Size(); ++s)
-        {
-            //If the current object hit is the tile map, stops the player where they hit the tile
-            if(segDash.Front().ObjectHit.Name == "DefaultTile")
-            {
-                //Finds the location where the player hit the tile map and stops the player there
-                this.Owner.Transform.Translation = Real3(segDash.Current.WorldPosition.X, segDash.Current.WorldPosition.Y,0);
-                this.Owner.RigidBody.Velocity = Real3(0,0,0);
-                break;//stops the slash as soon as it hits a wall so it doesn't pass though
-            }
-            
-            //removes the objects hit info from the segment cast and checks the new front
-            segDash.PopFront();
-            --s;
-        }
-        
-        this.Owner.BoxCollider.Ghost = true;
-        //Players have to wait 30 frames until they can dash again
-        this.IDashCD = 30;
-        //The number of frames that the player will have the dash velocity applied to them
-        this.IDashStop = 6;
-        this.BCanMove = false;
-    }
-    
-    //*******************************************************************************************************************************************
-    function DecreaseCounters()
-    {
-        //Decrements the cooldown until the player can dash again
-        if(this.IDashCD > 0)
-        {
-            --this.IDashCD;
-        }
-        
-        //Decrements the amount of time the player is moving from a dash
-        if(this.IDashStop > 0)
-        {
-            --this.IDashStop;
-            
-            //prevents the player from recieving collision while dashing
-            this.Owner.BoxCollider.Ghost = true;
-            this.Owner.RigidBody.Velocity = Real3(this.Owner.RigidBody.Velocity.X, 0, 0);
-            this.BCanMove = false;
-            
-            if(this.IDashStop == 0)
+            //safety checks to stop the player from continuously moving only if they arent in the middle of slashing or dashing
+            else if(this.Owner.PlayerSlashAttack != null && this.Owner.PlayerSlashAttack.ISlashStop == 0)
             {
                 this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
-                this.Owner.BoxCollider.Ghost = false;
-                this.BCanMove = true;
             }
+            else if(this.Owner.PlayerDash != null && this.Owner.PlayerDash.IDashStop == 0)
+            {
+                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+            }
+            
+            
+            if(this.LeftCollision || this.RightCollision && this.Owner.RigidBody.Velocity.Y < 0)
+            {
+                this.Owner.RigidBody.Velocity = Real3(this.Owner.RigidBody.Velocity.X, this.Owner.RigidBody.Velocity.Y * 0.8, this.Owner.RigidBody.Velocity.Z);
+            }
+        }
+    }
+    
+    //Casts a ray and checks if the object hit is close enough to the player
+    function CheckCollision(direction_:Real3):Boolean
+    {
+        var ray = Ray();
+        ray.Start = this.Owner.Transform.Translation;
+        ray.Direction = direction_;
+        var filter = CastFilter();
+        filter.IgnoreDynamic = true;
+        var results = this.Space.PhysicsSpace.CastRayFirstFiltered(ray, filter);
+        var difference:Real = 0.0;
+        
+        if(results.ObjectHit == null)
+        {
+            return false;
+        }
+        
+        //If checking right
+        if(direction_.X > 0)
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        //If checking left
+        else
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        
+        if(difference <= 0.8)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

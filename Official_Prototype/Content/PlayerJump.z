@@ -1,0 +1,57 @@
+class PlayerJump : ZilchComponent
+{
+    
+    //How high the player can jump
+    [Property]
+    var RJumpHeight:Real = 10.0;
+    var Grounded:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Grounded = this.CheckGrounded(-Real3.YAxis);
+        
+        if(this.Owner.PlayerStats.CanMove)
+        {
+            //Jump when Space is pressed
+            if(Zero.Keyboard.KeyIsPressed(Keys.Space))
+            {
+                if(this.Grounded)
+                {
+                    this.Owner.RigidBody.Velocity += Real3(0.0, this.RJumpHeight, 0.0);
+                    this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,1);//Jump ID = 1
+                }
+            }
+        }
+    }
+    
+    //Casts a ray down and checks if the object hit is close enough to the player to let them jump
+    function CheckGrounded(direction_:Real3):Boolean
+    {
+        var ray = Ray();
+        ray.Start = this.Owner.Transform.Translation;
+        ray.Direction = direction_;
+        var filter = CastFilter();
+        filter.IgnoreDynamic;
+        var results = this.Space.PhysicsSpace.CastRayFirstFiltered(ray, filter);
+        var difference:Real = this.Owner.Transform.Translation.Y - results.WorldPosition.Y;
+        
+        if(results.ObjectHit == null)
+        {
+            return false;
+        }
+        
+        if(difference <= 1.55)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}

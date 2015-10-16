@@ -1,0 +1,126 @@
+class PlayerDash : ZilchComponent
+{
+    //X velocity of the player during a dash
+    [Property]
+    var RDashSpeedX:Real = 60.0;
+    
+    //Frame counter where the dash isn't available (after use)
+    var IDashCD:Integer = 0;
+    //Stops player's X velocity when it hits 0 or they keep sliding after a dash
+    var IDashStop:Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.DecreaseCounters();
+        
+        if(this.Owner.PlayerStats.CanMove)
+        {
+            //Dash left when Q is pressed
+            if(Zero.Keyboard.KeyIsPressed(Keys.Q) && this.IDashCD == 0)
+            {
+                this.Dash(1);
+            }
+            //Dash right when E is pressed
+            if(Zero.Keyboard.KeyIsPressed(Keys.E) && this.IDashCD == 0)
+            {
+                this.Dash(2);
+            }
+        }
+    }
+    
+    //*******************************************************************************************************************************************
+    function Dash(iDirection_:Integer)
+    {
+        var rXDistance:Real = 0;
+        var rYDistance:Real = this.Owner.Transform.Translation.Y;
+        
+        //For iDirection, 1 is left, 2 is right
+        if(iDirection_ == 1)//Dash left
+        {
+            //Gives the player momentum to move left
+            this.Owner.RigidBody.Velocity = Real3(-this.RDashSpeedX, 0, 0);
+            //Sends this dash's ID to the combo Manager in LevelSettings
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,4);//Dash Left ID = 4
+            //Sets the end location of the dash for the segment cast
+            rXDistance = this.Owner.Transform.Translation.X - 10.5;
+            this.Owner.Sprite.FlipX = true;
+        }
+        else if(iDirection_ == 2)//Dash right
+        {
+            //Gives the player momentum to move right
+            this.Owner.RigidBody.Velocity = Real3(this.RDashSpeedX, 0, 0);
+            //Sends this dash's ID to the combo manager in LevelSettings
+            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,3);//Dash Right ID = 3
+            //Sets the end location of the dash for the segment cast
+            rXDistance = this.Owner.Transform.Translation.X + 10.5;
+            this.Owner.Sprite.FlipX = false;
+        }
+        
+        //Sets the starting location of the segment cast at the player's location
+        var segDashStart:Real3 = Real3(this.Owner.Transform.Translation.X, rYDistance, 0);
+        //Sets the end location of the segment cast depending on which direction they move
+        var segDashEnd:Real3 = Real3(rXDistance, rYDistance, 0);
+        //Creates a filter so that the dash segment ignores dynamic objects
+        var fFilter = CastFilter();
+        fFilter.IgnoreDynamic = true;
+        //Casts the segment dash
+        var segDash = this.Space.PhysicsSpace.CastSegmentResultsFiltered(segDashStart, segDashEnd, 5, fFilter);
+        
+        //Loops through all of the objects the segment hit to see if it hit the tile map
+        for(var s:Integer = 0; s < segDash.Size(); ++s)
+        {
+            //If the current object hit is the tile map, stops the player where they hit the tile
+            if(segDash.Front().ObjectHit.Name == "DefaultTile")
+            {
+                //Finds the location where the player hit the tile map and stops the player there
+                this.Owner.Transform.Translation = Real3(segDash.Current.WorldPosition.X, segDash.Current.WorldPosition.Y,0);
+                this.Owner.RigidBody.Velocity = Real3(0,0,0);
+                break;//stops the slash as soon as it hits a wall so it doesn't pass though
+            }
+            
+            //removes the objects hit info from the segment cast and checks the new front
+            segDash.PopFront();
+            --s;
+        }
+        
+        this.Owner.BoxCollider.Ghost = true;
+        //Players have to wait 30 frames until they can dash again
+        this.IDashCD = 30;
+        //The number of frames that the player will have the dash velocity applied to them
+        this.IDashStop = 6;
+        this.Owner.PlayerStats.CanMove = false;
+    }
+    
+    //*******************************************************************************************************************************************
+    function DecreaseCounters()
+    {
+        //Decrements the cooldown until the player can dash again
+        if(this.IDashCD > 0)
+        {
+            --this.IDashCD;
+        }
+        
+        //Decrements the amount of time the player is moving from a dash
+        if(this.IDashStop > 0)
+        {
+            --this.IDashStop;
+            
+            //prevents the player from recieving collision while dashing
+            this.Owner.BoxCollider.Ghost = true;
+            this.Owner.RigidBody.Velocity = Real3(this.Owner.RigidBody.Velocity.X, 0, 0);
+            this.Owner.PlayerStats.CanMove = false;
+            
+            if(this.IDashStop == 0)
+            {
+                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.BoxCollider.Ghost = false;
+                this.Owner.PlayerStats.CanMove = true;
+            }
+        }
+    }
+}
