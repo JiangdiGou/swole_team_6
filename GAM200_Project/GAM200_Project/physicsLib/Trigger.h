@@ -18,12 +18,12 @@ public:
 	void InitializeCollisionCallback();
 	//The callback function
 	virtual void OnCollision(GameObjectComposition *object) = 0;
-
+	CollisionDelegate();
 
 private:
 	GameObjectComposition *const parent_;
 	//These should never happen:
-	CollisionDelegate();
+	//CollisionDelegate();
 	CollisionDelegate(CollisionDelegate &rhs);
 };
 

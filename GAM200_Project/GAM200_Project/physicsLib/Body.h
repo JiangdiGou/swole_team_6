@@ -26,7 +26,7 @@ class RigidBody : public GameComponent
 		friend class AABB;
 		//WE NEED A TRANSFORM COMPONET
     Transform *pTrans;
-		
+		Vector2 position;
 		Vector2 acceleration;
 		      // Holds the linear velocity of the rigid body
 		Vector2 forceAccum;     // Accumlated force

@@ -48,6 +48,7 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\main.h" />
     <ClInclude Include="GAM200_Project\Message.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Body.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -78,6 +79,7 @@
     <ClInclude Include="GAM200_Project\physicsLib\PhysicsManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\PlayerState.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Precompiled.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -159,6 +161,7 @@
     <ClCompile Include="GAM200_Project\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\BinaryMap.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\Body.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -174,6 +177,7 @@
     <ClCompile Include="GAM200_Project\physicsLib\PhysicsManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\PlayerState.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
