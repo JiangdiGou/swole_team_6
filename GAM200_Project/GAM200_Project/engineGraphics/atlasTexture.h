@@ -16,8 +16,10 @@ private:
   //Literally every private member here is used for animation 
   int currentFrame;
   int numFrames;
-  int numRows;
-  int numColumns;
+
+  int frameWidth;
+  int frameHeight;
+
   int offsetX;
   int offsetY;
   int atlasWidth;
