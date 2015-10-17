@@ -1,4 +1,8 @@
-ExampleSpriteSheet_3 = 0 0 192 64
-Smiley1_1 = 0 65 64 64
-Smiley2_1 = 0 130 64 64
-Smiley3_1 = 65 65 64 64
+background = 0 0 256 160
+DummySheet1_3 = 0 161 192 64
+DummySheet2_3 = 257 0 192 64
+DummySheet3_3 = 257 65 192 64
+ExampleSpriteSheet_3 = 193 161 192 64
+Smiley1_1 = 386 130 64 64
+Smiley2_1 = 0 226 64 64
+Smiley3_1 = 0 291 64 64
