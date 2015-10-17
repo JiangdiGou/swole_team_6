@@ -1,0 +1,90 @@
+/*
+Script Author: Nolan T Yoo
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+
+Comment: Allows access to the global SoundSpace.
+*/
+
+class SoundGlobal : ZilchComponent
+{
+    
+    var SoundWhere : Space;
+    [Property]
+    var SoundLevel : Level;
+    
+    var BGMCog : Cog;
+    function Initialize(init : CogInitializer)
+    {
+        this.SoundWhere = this.GameSession.FindSpaceByName("SoundSpace");
+        if(this.SoundWhere == null)
+        {
+            this.SoundWhere = 
+                this.GameSession.CreateNamedSpace("SoundSpace", Archetype.Find("Space"));
+            this.SoundWhere.LoadLevel(this.SoundLevel);
+            this.BGMCog = this.SoundWhere.FindObjectByName("BGM");
+        }
+        else
+        {
+            this.BGMCog = this.SoundWhere.FindObjectByName("BGM");
+        }
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.SoundWhere = this.GameSession.FindSpaceByName("SoundSpace");
+        if(this.SoundWhere == null)
+        {
+            this.SoundWhere = 
+                this.GameSession.CreateNamedSpace("SoundSpace", Archetype.Find("Space"));
+            this.SoundWhere.LoadLevel(this.SoundLevel);
+            this.BGMCog = this.SoundWhere.FindObjectByName("BGM");
+        }
+        else
+        {
+            this.BGMCog = this.SoundWhere.FindObjectByName("BGM");
+        }
+    }
+    
+    function BGMIsPlaying() : Boolean
+    {
+        if(this.BGMCog == null)
+        {
+            return false;
+        }
+        return (this.BGMCog.SEManager.IsPlaying());
+    }
+    
+    function CurrentBGM() : SoundCue
+    {
+        if(this.BGMCog == null)
+        {
+            return null;
+        }
+        return this.BGMCog.SEManager.BGMPlaying;
+    }
+    
+    function PlayBGM(sc : SoundCue)
+    {
+        if(this.BGMCog == null)
+        {
+            return;
+        }Console.WriteLine("Attempted play.");
+        this.BGMCog.SEManager.PlayBGM(sc);
+    }
+    
+    function PlaySFX(sc : SoundCue)
+    {
+        this.SoundWhere.FindObjectByName("SFX").SoundEmitter.PlayCue(sc);
+    }
+    
+    function MuffleBGM()
+    {
+        this.SoundWhere.FindObjectByName("BGM").SoundEmitter.Volume = 
+        this.SoundWhere.FindObjectByName("BGM").SoundEmitter.Volume - 0.9;
+    }
+    
+    function UnmuffleBGM()
+    {
+        this.SoundWhere.FindObjectByName("BGM").SoundEmitter.Volume = 1.0;
+    }
+}

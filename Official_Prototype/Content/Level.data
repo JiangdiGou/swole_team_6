@@ -102,9 +102,11 @@ Level =
 			string TigerScroll = "55c16e8a571aa798:TigerScroll",
 			string DragonScroll = "55c00e1150af24f1:DragonScroll",
 		},
-		PauseGameplay = 
+		LevelListener = 
 		{
-			string PauseLevel = "56d954b27303aad3:PauseMenu",
+			string PauseKind = "InterruptSpace",
+			bool Pausable = true,
+			string InterruptLevel = "56d954b27303aad3:PauseMenu",
 		},
 	},
 	Cog = 

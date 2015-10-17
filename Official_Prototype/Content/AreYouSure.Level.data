@@ -90,6 +90,9 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
+		LayeredPause = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -285,9 +288,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		Quit = 
+		GenericButton = 
 		{
+			Enum ButtonType = FullQuit,
+			string LoadThisLevel = "",
 		},
 	},
 	Cog = 
@@ -433,9 +440,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		DestroySpaceButton = 
+		GenericButton = 
 		{
+			Enum ButtonType = LevelBreak,
+			string LoadThisLevel = "",
 		},
 	},
 },

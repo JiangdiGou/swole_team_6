@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PowerSelectLoadLevel",
+		uint64 ResourceId = 561e7ee0cdf6d577,
+	},
+},

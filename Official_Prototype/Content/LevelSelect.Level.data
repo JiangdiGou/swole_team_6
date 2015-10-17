@@ -92,10 +92,16 @@ Level =
 		},
 		LevelSelect = 
 		{
-			string SLevel0Name = "",
-			string SLevel1Name = "",
+			string SLevel0Name = "Level",
+			string SLevel1Name = "Level2",
 			string SLevel2Name = "",
 			string SLevel3Name = "",
+		},
+		LevelListener = 
+		{
+			string PauseKind = "InterruptSpace",
+			bool Pausable = false,
+			string InterruptLevel = "",
 		},
 	},
 	Cog = 
@@ -263,6 +269,7 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 0,
+			string LevelToLoad = "551f871f885a5f4b:Level",
 		},
 		Reactive = 
 		{
@@ -271,12 +278,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		CreateOverlayedSpace = 
+		GenericButton = 
 		{
-			bool MouseClick = true,
-			bool Automatic = false,
-			string OverlayedLevel = "553552b3f7cd2d35:PowerSelect",
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553552b3f7cd2d35:PowerSelect",
 		},
 	},
 	Cog = 
@@ -334,6 +342,7 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 1,
+			string LevelToLoad = "5637989e125c6505:Level2",
 		},
 		Reactive = 
 		{
@@ -342,12 +351,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		CreateOverlayedSpace = 
+		GenericButton = 
 		{
-			bool MouseClick = true,
-			bool Automatic = false,
-			string OverlayedLevel = "553552b3f7cd2d35:PowerSelect",
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553552b3f7cd2d35:PowerSelect",
 		},
 	},
 	Cog = 
@@ -405,6 +415,7 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 2,
+			string LevelToLoad = "5637989e125c6505:Level2",
 		},
 		Reactive = 
 		{
@@ -413,12 +424,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		CreateOverlayedSpace = 
+		GenericButton = 
 		{
-			bool MouseClick = true,
-			bool Automatic = false,
-			string OverlayedLevel = "553552b3f7cd2d35:PowerSelect",
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553552b3f7cd2d35:PowerSelect",
 		},
 	},
 	Cog = 
@@ -532,9 +544,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		DestroySpaceButton = 
+		GenericButton = 
 		{
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "563704b0383d5798:MainMenu",
 		},
 	},
 	Cog = 

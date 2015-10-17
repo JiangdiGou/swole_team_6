@@ -90,8 +90,11 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
-		PauseResume = 
+		LevelListener = 
 		{
+			string PauseKind = "InterruptSpace",
+			bool Pausable = true,
+			string InterruptLevel = "",
 		},
 	},
 	Cog = 
@@ -233,7 +236,7 @@ Level =
 					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
 					string FontName = "4e7bac697bec55c5:Verdana",
 					uint FontSize = 30,
-					string Text = "Change Powers",
+					string Text = "Credits",
 					TextAlign Align = Center,
 					float PixelsPerUnit = 64,
 					bool Smoothing = true,
@@ -348,9 +351,13 @@ Level =
 				},
 				ButtonHilight = 
 				{
+					bool ScaleUp = true,
+					bool Glow = true,
 				},
-				PauseResume = 
+				GenericButton = 
 				{
+					Enum ButtonType = Unpause,
+					string LoadThisLevel = "",
 				},
 			},
 			Cog = 
@@ -496,6 +503,13 @@ Level =
 				},
 				ButtonHilight = 
 				{
+					bool ScaleUp = true,
+					bool Glow = true,
+				},
+				GenericButton = 
+				{
+					Enum ButtonType = LoadLevel,
+					string LoadThisLevel = "56373fcb789cf268:OptionsScreen",
 				},
 			},
 			Cog = 
@@ -539,6 +553,8 @@ Level =
 				},
 				ButtonHilight = 
 				{
+					bool ScaleUp = true,
+					bool Glow = true,
 				},
 			},
 			Cog = 
@@ -582,6 +598,13 @@ Level =
 				},
 				ButtonHilight = 
 				{
+					bool ScaleUp = true,
+					bool Glow = true,
+				},
+				GenericButton = 
+				{
+					Enum ButtonType = ReturnableLevel,
+					string LoadThisLevel = "5637063944d8f04a:Credits",
 				},
 			},
 			Cog = 
@@ -625,6 +648,13 @@ Level =
 				},
 				ButtonHilight = 
 				{
+					bool ScaleUp = true,
+					bool Glow = true,
+				},
+				GenericButton = 
+				{
+					Enum ButtonType = QuitGame,
+					string LoadThisLevel = "56c5027fa4851517:AreYouSure",
 				},
 			},
 		},

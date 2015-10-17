@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "LayeredPause",
+		uint64 ResourceId = 561e19fa2479fe30,
+	},
+},
