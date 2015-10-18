@@ -52,9 +52,9 @@ void GraphicsManager::Update(float dt)
 
   wglMakeCurrent(deviceContext, renderingContext);
 
-  SpriteText::renderText(std::string("Frame\nTime: "), Vector3(-3.25, -1.0, 0), Vector3(0.25, 0.45, 1));
-  std::string fTime = std::to_string(FramerateController::getPreviousDt());
-  SpriteText::renderText(fTime, Vector3(-2, -1.45, 0), Vector3(0.25, 0.45, 1));
+  SpriteText::renderText(std::string("FPS:"), Vector3(-3.25, -1.5, 0), Vector3(0.25, 0.45, 1));
+  std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
+  SpriteText::renderText(fTime, Vector3(-2.25, -1.5, 0), Vector3(0.25, 0.45, 1));
 
   debugDrawFrame();
 #ifdef GFXLOG

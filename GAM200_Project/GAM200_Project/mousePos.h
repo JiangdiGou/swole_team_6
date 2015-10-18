@@ -9,8 +9,9 @@ void updateMousePos()
   {
     if (ScreenToClient(WINDOWSSYSTEM->hWnd, &mousePos))
     {
-      mousePos.y = WINDOWSSYSTEM-> - mousePos.y;
-      std::cout << mousePos.x << ", " << mousePos.y << std::endl;
+      //Get Window height from gabe, windowheight - mousepos.y will flip it so 0,0 is the bottom left corner 
+      //mousePos.y = WINDOWSSYSTEM-> - mousePos.y;
+      //std::cout << mousePos.x << ", " << mousePos.y << std::endl;
     }
   }
 
