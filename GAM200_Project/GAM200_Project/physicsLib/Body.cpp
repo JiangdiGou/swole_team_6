@@ -100,10 +100,14 @@ void RigidBody::SendMessages(Message * message)
     MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
     switch (messageChar->character)
     {
-    case 'a':
+    case 'd':
     {
-      setVelocity(1.5, getVelocity().y);
+      setVelocity(.5, getVelocity().y);
     }
+	case 'a':
+	{
+		setVelocity(.5, getVelocity().y);
+	}
     }
   }
   }
