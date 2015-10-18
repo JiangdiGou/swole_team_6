@@ -48,6 +48,7 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\main.h" />
     <ClInclude Include="GAM200_Project\Message.h" />
+    <ClInclude Include="GAM200_Project\mousePos.h" />
     <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Body.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

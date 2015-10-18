@@ -9,6 +9,7 @@
 #include "Core.h"
 #include "engineGraphics/Graphics.h"
 #include "Message.h"
+#include "mousePos.h"
 
 
 CoreEngine* CORE = NULL;
@@ -33,8 +34,11 @@ void CoreEngine::Initialize()
 void CoreEngine::GameLoop()
 {
   LastTime = timeGetTime();
+
   while (GameActive)
   {
+    updateMousePos();
+
     unsigned currenttime = timeGetTime();
     //Convert it to the time passed since the last frame (in seconds)
     float dt = (currenttime - LastTime) / 1000.0f;
