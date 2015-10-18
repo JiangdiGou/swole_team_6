@@ -144,7 +144,8 @@ void Manifold::AppyImpulse(void)
 
 void Manifold::CorrectPosition(void)
 {
-	if (A->body->isGhost == true || B->body->isGhost == true || A->body->isStatic == true)
+	//HOLY FUCK THIS MESSED UP LIKE &%@!# :*(, NEVER SET isStatic to true, did I even do that? fk
+	if (A->body->isGhost == true || B->body->isGhost == true || A->body->isStatic == false)
 	{
 		return;
 	}
@@ -160,6 +161,6 @@ void Manifold::CorrectPosition(void)
 	Vector2 Apos = A->body->pTrans->GetPositionXY();
 	//Vector2 Bpos = B->body->pTrans->GetPositionXY();
 	A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
-	//B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass) ;
+	//B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
 
 }

@@ -118,10 +118,10 @@ void PhysicsManager::RigidBodyCheck()
 			Primitive *b = colliders[j];
 
 			// Check if these object are static
-		/*	if (a->body->isStatic == true && b->body->isStatic == true)
+			if (a->body->isStatic == true && b->body->isStatic == true)
 			{
 				continue;
-			}*/
+			}
 
 			//// Set manifold data
 			Manifold m(a, b);
@@ -147,6 +147,7 @@ void PhysicsManager::Step(float dt)
 	contacts.clear();
 
 	RigidBodyCheck();
+	//if (body->isStatic)
 
 	// Integrate forces
 	for (unsigned int i = 0; i < bodies.size(); ++i)

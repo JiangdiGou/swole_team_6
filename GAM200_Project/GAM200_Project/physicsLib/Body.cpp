@@ -102,11 +102,11 @@ void RigidBody::SendMessages(Message * message)
     {
     case 'd':
     {
-      setVelocity(.5, getVelocity().y);
+      setVelocity(0.1, getVelocity().y);
     }
 	case 'a':
 	{
-		setVelocity(.5, getVelocity().y);
+		setVelocity(-0.1, getVelocity().y);
 	}
     }
   }
