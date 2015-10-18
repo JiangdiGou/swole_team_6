@@ -19,7 +19,7 @@ public:
   friend void debugDrawCircle(Vector3 center, float radius, Vector3 color,
 		int segments);
 
-	friend void initDebugDraw(Shader shader);
+	friend void initDebugDraw(const Shader& shader);
 	friend void debugDrawFrame(void);
 private:
 	static std::vector<GLfloat> debugVertices;

@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Nolan Yoo. All rights reserved.
 //
 
+#ifndef LOGGER_H
+#define LOGGER_H
+
 #include <fstream>
 #include <string>
 
@@ -19,3 +22,5 @@ private:
 	std::string fileName;
 	const std::string dateTime();
 };
+
+#endif

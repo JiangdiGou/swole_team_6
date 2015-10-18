@@ -2,7 +2,6 @@
 #define FRAMERATECONTROLLER_H
 
 #define FRAMERATE 60.0
-#define FRWARNINGPERCENT 25.0
 
 #include "Graphics.h"
 

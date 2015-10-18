@@ -90,6 +90,7 @@ TextureAtlas::TextureAtlas(const char* atlasname, const char* tListName)
   height = textureHeight;
 
   parseTextureList(tListName);
+
 }
 
 void TextureAtlas::debugMap()
