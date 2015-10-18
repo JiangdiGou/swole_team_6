@@ -233,6 +233,9 @@
     <ClInclude Include="GAM200_Project\mousePos.h">
       <Filter>Universal</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\ParticleSystem.h">
+      <Filter>Systems\engineGraphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">

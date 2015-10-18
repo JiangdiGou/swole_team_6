@@ -25,6 +25,7 @@
     <ClInclude Include="GAM200_Project\engineGraphics\FramerateController.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Graphics.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\graphicsManager.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\ParticleSystem.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h" />

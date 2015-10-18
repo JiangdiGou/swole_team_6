@@ -27,4 +27,11 @@
 #ifndef PARTICLESYSTEM_H
 #define PARTICLESYSTEM_H
 
+#include"../Composition.h"
+
+class ParticleSystem : public GameComponent
+{
+
+};
+
 #endif
