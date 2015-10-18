@@ -92,23 +92,6 @@ void GameLogic::Initialize()
   boCollision->SetHalfSize(1, 1);
   boObj->AddComponent(CT_AABB, boCollision);
 
-
-  GOC * text1 = FACTORY->makeObject("blueGuy");
-  Transform * transform3 = new Transform();
-  transform3->SetPosition(-3.25, 1.5, 0);
-  transform3->SetScale(0.25, 0.5, 1);
-  text1->AddComponent(CT_Transform, transform3);
-  SpriteText * testText = new SpriteText("hi there\nI handle\nnew Lines\nand can have long lines too");
-  text1->AddComponent(CT_SpriteText, testText);
-
-  GOC * text2 = FACTORY->makeObject("blueGuy");
-  Transform * transform4 = new Transform();
-  transform4->SetPosition(0.25, 1.5, 0);
-  transform4->SetScale(0.25, 0.5, 1);
-  text2->AddComponent(CT_Transform, transform4);
-  SpriteText * testText2 = new SpriteText("this is also\ntext");
-  text2->AddComponent(CT_SpriteText, testText2);
-
   GOC * blackObj = FACTORY->makeObject("");
   Transform * transform5 = new Transform();
   transform5->SetPosition(0, -2, 0);
@@ -131,8 +114,6 @@ void GameLogic::Initialize()
   //player2 = boObj;
 
   //blueObj->Initialize();
-  text1->Initialize();
-  text2->Initialize();
   greenObj->Initialize();
   blackObj->Initialize(); 
   camera->Initialize();
