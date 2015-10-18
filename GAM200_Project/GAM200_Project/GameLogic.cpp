@@ -79,7 +79,7 @@ void GameLogic::Initialize()
 
   GOC * boObj = FACTORY->makeObject("boGuy");
   Transform * transformbo = new Transform();
-  transformbo->SetPosition(3, 0, 0);
+  transformbo->SetPosition(0, 0, 0);
   Sprite * spritebo = new Sprite();
   spritebo->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
   boObj->AddComponent(CT_Transform, transformbo);
@@ -124,7 +124,7 @@ void GameLogic::Initialize()
   //blackObjBody->isKinematic = true;
   blackObj->AddComponent(CT_RigidBody, blackObjBody);
   AABB* blackCollision = new AABB();
-  blackCollision->SetHalfSize(6, 0.5);
+  blackCollision->SetHalfSize(1.5, 1.5);
   blackObj->AddComponent(CT_AABB, blackCollision);
   
   player = boObj;
