@@ -228,6 +228,11 @@
     <ClInclude Include="GAM200_Project\engineAudio\Audio.h">
       <Filter>Systems\audio</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\PlayerState.h" />
+    <ClInclude Include="GAM200_Project\mousePos.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -350,6 +355,8 @@
     <ClCompile Include="GAM200_Project\engineAudio\Audio.cpp">
       <Filter>Systems\audio</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\BinaryMap.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\PlayerState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">

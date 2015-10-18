@@ -5,7 +5,7 @@ GLuint vertexArray = 0;
 GLuint vertexBuffer = 0;
 GLuint shaderID = 0;
 
-void initDebugDraw(Shader shader)
+void initDebugDraw(const Shader &shader)
 {
 	glGenVertexArrays(1, &vertexArray);
 	glGenBuffers(1, &vertexBuffer);

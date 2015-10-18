@@ -1,6 +1,7 @@
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
 
+
 #include "../Engine.h"
 #include "Shader.h"
 #include "debugDraw.h"
@@ -9,7 +10,7 @@
 #include "FramerateController.h"
 #include "Sprite.h"
 #include "textureAtlas.h"
-
+#include "../logger/logger.h"
 
 class GraphicsManager : public ISystem
 {

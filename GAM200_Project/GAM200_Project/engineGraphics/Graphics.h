@@ -25,8 +25,9 @@
 
 //Printing out stuff
 #include<iostream>
-
+#include "../logger/logger.h"
 #include <vector>
+#include <string>
 
 #define WINDOWWIDTH 960
 #define WINDOWHEIGHT 540
@@ -36,5 +37,15 @@ HWND createWindow(HINSTANCE instance);
 
 //This function prototype is in here so createwindow can see it 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
+
+//#define GFXLOG
+
+#ifdef GFXLOG
+#define WARNINGFRAMETIME 33
+#define STARTUPFRAMES 5
+extern int frameNumber;
+extern txtlog *gfxErrorLog;
+void logGfxError(std::string precedingMessage);
+#endif
 
 #endif

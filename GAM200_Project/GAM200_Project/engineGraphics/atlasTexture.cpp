@@ -9,10 +9,8 @@ AtlasTexture::AtlasTexture(int aWidth, int aHeight, int numberOfFrames,
   atlasWidth = aWidth;
   atlasHeight = aHeight;
 
-  //Ok, I'll explain these though. Theyre just used for animation. Specifiically
-  //The get functions you see below are based on these, 
-  numRows = atlasHeight / textureHeight;
-  numColumns = atlasWidth / (textureWidth/numFrames);
+  frameWidth = textureWidth / numberOfFrames;
+  frameHeight = textureHeight; 
 
   currentFrame = 0;
   frameDuration = frameTime;
@@ -44,7 +42,7 @@ AtlasTexture::AtlasTexture(int aWidth, int aHeight, int numberOfFrames,
 //**********************
 GLfloat AtlasTexture::getBottomY()
 {
-  return (((currentFrame / numColumns) + 1) * (1.0 / (float)numRows)) + ((float)offsetY / atlasHeight);
+  return ((float)offsetY + (float)frameHeight) / (float)atlasHeight;
 }
 
 //**********************
@@ -55,7 +53,7 @@ GLfloat AtlasTexture::getBottomY()
 //**********************
 GLfloat AtlasTexture::getTopY()
 {
-  return ((currentFrame / numColumns) * (1.0 / (float)numRows)) + ((float)offsetY / atlasHeight);
+  return (float)offsetY / (float)atlasHeight;
 }
 
 //**********************
@@ -66,7 +64,7 @@ GLfloat AtlasTexture::getTopY()
 //**********************
 GLfloat AtlasTexture::getLeftX()
 {
-  return ((currentFrame % numColumns) * (1.0 / (float)numColumns)) + ((float)offsetX / atlasWidth);
+  return ((float)(currentFrame * frameWidth) + offsetX) / ((float)atlasWidth);
 }
 
 //**********************
@@ -77,7 +75,7 @@ GLfloat AtlasTexture::getLeftX()
 //**********************
 GLfloat AtlasTexture::getRightX()
 {
-  return (((currentFrame % numColumns) + 1) * (1.0 / (float)numColumns)) + ((float)offsetX / atlasWidth);
+  return ((float)(currentFrame * frameWidth) + offsetX + frameWidth) / ((float)atlasWidth);
 }
 
 void AtlasTexture::updateAnimation()

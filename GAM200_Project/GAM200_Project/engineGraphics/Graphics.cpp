@@ -1,5 +1,13 @@
 #include "Graphics.h"
 
+#ifdef GFXLOG
+
+txtlog *gfxErrorLog;
+int frameNumber = 0;
+
+#endif
+
+
 //**********************
 //Function    : setupPixelFormatDescriptor
 //Input       : deviceContext - the device context of the window. 
@@ -27,61 +35,21 @@ void setupPixelFormatDescriptor(HDC deviceContext)
     std::cout << "Pixel Format Descriptor Creation Successful." << std::endl;
 }
 
-//**********************
-//Function    : createWindow
-//Input       : instance - paramter from winMain 
-//Output      : HWND - handle to the window that is created 
-//Description : Creates a window and returns a handle to it. 
-//**********************
-/*HWND createWindow(HINSTANCE instance)
+#ifdef GFXLOG
+void logGfxError(std::string precedingMessage)
 {
-  WNDCLASS windowClass;
-  //Class Style
-  windowClass.style = CS_HREDRAW | CS_VREDRAW;
-  //Pointer to Winproc
-  windowClass.lpfnWndProc = WinProc;
-  //Extra Bytes the class needs 
-  windowClass.cbClsExtra = 0;
-  //Extra Bytes the window needs 
-  windowClass.cbWndExtra = 0;
-  //Instance from winmain parameter
-  windowClass.hInstance = instance;
-  //Icon in top left of window 
-  windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-  //Handle to cursor class 
-  windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-  //Handle to window background
-  windowClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-  //Something for menus, which we're not using
-  windowClass.lpszMenuName = NULL;
-  //Name of class 
-  windowClass.lpszClassName = "window";
+  if (frameNumber < STARTUPFRAMES)
+    return;
 
-  RegisterClass(&windowClass);
-
-
-  return CreateWindow(
-    // The name of the window class of this window 
-    windowClass.lpszClassName,
-    // The caption in the created window 
-    "graphicsPrototype",
-    //The style of the window
-    WS_OVERLAPPEDWINDOW,
-    //Window's starting X coordinate
-    200,
-    //Window's starting Y coordinate
-    200,
-    //Window's Width
-    WINDOWWIDTH,
-    //Window's Height
-    WINDOWHEIGHT,
-    //Handle to the parent window 
-    NULL,
-    //Handle to a menu 
-    NULL,
-    //Instance parameter from winmain
-    instance,
-    //Pointer to value associated with WM_CREATE message
-    NULL);
-}*/
+  int errorCode = glGetError();
+  if (errorCode)
+  {
+    std::string errorStr = std::to_string(errorCode);
+    std::string output = std::string("Error #");
+    output.append(errorStr);
+    precedingMessage.append(output);
+    gfxErrorLog->write(precedingMessage);
+  }
+}
+#endif
 

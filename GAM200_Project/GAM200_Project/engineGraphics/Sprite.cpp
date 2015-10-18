@@ -4,9 +4,12 @@ GLuint Sprite::shaderID = 0;
 GLuint Sprite::atlasID = 0;
 std::vector<GLfloat> Sprite::vertices = {};
 std::vector<GLfloat> Sprite::texCoords = {};
+std::vector<GLfloat> Sprite::colors = {};
 GLuint Sprite::vertexArray = 0;
 GLuint Sprite::vertexBuffer = 0;
 GLuint Sprite::textureBuffer = 0;
+GLuint Sprite::colorBuffer = 0;
+
 
 //**********************
 //Function    : Sprite
@@ -30,7 +33,7 @@ Sprite::Sprite()
 //**********************
 Sprite::Sprite()
 {
-	color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	color = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
 }
 
 //**********************
@@ -119,6 +122,12 @@ void Sprite::Update(void)
   for (int i = 0; i < 12; ++i)
     texCoords.push_back(texture.textureCoordinates[i]);
 
+  //Pushes Color
+  colors.push_back(color.x);
+  colors.push_back(color.y);
+  colors.push_back(color.z);
+  colors.push_back(color.w);
+
   //Unbind Stuff
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindTexture(GL_TEXTURE_2D, 0);
@@ -132,6 +141,7 @@ void Sprite::initSprites(const Shader& shader, const TextureAtlas& atlas)
   glGenVertexArrays(1, &vertexArray);
   glGenBuffers(1, &vertexBuffer);
   glGenBuffers(1, &textureBuffer);
+  glGenBuffers(1, &colorBuffer);
 
   //Binds VA and vertex buffer
   glBindVertexArray(vertexArray);
@@ -145,6 +155,11 @@ void Sprite::initSprites(const Shader& shader, const TextureAtlas& atlas)
   glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
   glEnableVertexAttribArray(1);
   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
+
+  //Set up the color buffer information
+  glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+  glEnableVertexAttribArray(2);
+  glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 
   shaderID = shader.Program;
   atlasID = atlas.ID;
@@ -176,6 +191,10 @@ void Sprite::drawAllSprites()
   //Sends tex coords to gfx card
   glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
   glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(GLfloat), texCoords.data(), GL_STREAM_DRAW);
+
+  //Sends color to gfx card
+  glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+  glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(GLfloat), colors.data(), GL_STREAM_DRAW);
 
   //draws
   glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3.0f);

@@ -36,6 +36,10 @@ void TextureAtlas::parseTextureList(const char* filename)
           tokens.push_back(std::string(pToken));
           pToken = std::strtok(NULL, " _=");
         }
+
+        //If there isn't frame info, add it
+        if (tokens.size() < 6)
+          tokens.insert(tokens.begin() + 1, "1");
         
         //Generates a new AtlasTexture based on the tokens we got from file 
         AtlasTexture newTexture = AtlasTexture(width, height, std::stoi(tokens[1]),
@@ -86,6 +90,7 @@ TextureAtlas::TextureAtlas(const char* atlasname, const char* tListName)
   height = textureHeight;
 
   parseTextureList(tListName);
+
 }
 
 void TextureAtlas::debugMap()
