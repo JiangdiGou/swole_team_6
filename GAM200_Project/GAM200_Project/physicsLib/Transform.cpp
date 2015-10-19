@@ -19,6 +19,8 @@ void Transform::Initialize()
 
 void Transform::Update()
 {
+	pos2d.x = position.x;
+	pos2d.y = position.y;
 }
 
 void Transform::Release()
@@ -40,7 +42,7 @@ Vector3& Transform::GetScale()
 	return scale;
 }
 
-Vector2 Transform::GetPositionXY()
+Vector2& Transform::GetPositionXY()
 {
 	return Vector2(position.x, position.y);
 }

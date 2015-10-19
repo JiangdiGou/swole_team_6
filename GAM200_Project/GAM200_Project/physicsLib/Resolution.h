@@ -43,6 +43,7 @@ struct Manifold
 		//RigidBody *B;
 	Primitive *B;
 	float penetration;
+	//Vector2 position;
 
 	float restitution;
 

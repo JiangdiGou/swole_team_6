@@ -26,8 +26,9 @@ class RigidBody : public GameComponent
 		friend class AABB;
 		//WE NEED A TRANSFORM COMPONET
     Transform *pTrans;
-		Vector2 position;
+		//Vector2 position;
 		Vector2 acceleration;
+		Primitive *bodyShape;
 		      // Holds the linear velocity of the rigid body
 		Vector2 forceAccum;     // Accumlated force
 		float mass;             // Holds the mass of the rigid body
@@ -48,7 +49,7 @@ class RigidBody : public GameComponent
 
 
 		// WE NEED ENTITY FILE AND PRIMITIVE
-		RigidBody();
+		RigidBody(/*Primitive *shape*/);
 		//RigidBody();
 		~RigidBody();
 
@@ -58,6 +59,9 @@ class RigidBody : public GameComponent
     void SendMessages(Message * message) override;
 
 		void set(float mass);
+		/*void setPosition(const Vector2 &position);
+		void setPosition(const float x, const float y);
+		Vector2 getPosition() const;*/
 
 		// Set the acceleration
 		void setAcceleration(const Vector2 &acc);

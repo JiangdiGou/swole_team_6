@@ -23,7 +23,7 @@ public:
 	Vector3& GetPosition();
 	Vector3& GetRotation();
 	Vector3& GetScale();
-	Vector2 GetPositionXY();
+	Vector2& GetPositionXY();
 	float GetPositionX();
 	float GetPositionY();
 
@@ -52,10 +52,14 @@ public:
   glm::mat4 calculateTransformMatrix();
 
 private:
+	
 	Vector3 position;
 	Vector3 scale;
 	Vector3 rotation;
 	bool dontRotate;
+
+public:
+	Vector2 pos2d;//...
 };
 
 #endif TRANSFORM_H

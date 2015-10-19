@@ -90,8 +90,8 @@ void AABBAndAABB(Primitive *a, Primitive *b, Manifold *data)
 	Transform* transB = b->GetOwner()->has(Transform);
 
 	// Calculate the vector between the objects
-	Vector2 midline = transA->GetPositionXY() - transB->GetPositionXY();
-
+	Vector2 midline = transA->pos2d - transB->pos2d;
+	printf("GetPoSxyIN COLLISION %f, %f", transA->pos2d.x, transA->pos2d.y);
 	float xOverlap = (a->halfSize.x/2.0f) + (b->halfSize.x/2.0f) - fabs(midline.x);
 	data->contactCount = 1;
 	if (xOverlap > 0)
@@ -110,7 +110,7 @@ void AABBAndAABB(Primitive *a, Primitive *b, Manifold *data)
 				data->penetration = xOverlap;
 				data->restitution = CalculateRestitution(a, b);
 				AABB * shapeA = a->GetOwner()->has(AABB);
-				data->contact[0] = data->normal * shapeA->halfSize.x + transA->GetPositionXY();
+				//data->contact[0] = data->normal * shapeA->halfSize.x + transA->GetPositionXY();
 				return;
 			}
 			else
@@ -122,7 +122,7 @@ void AABBAndAABB(Primitive *a, Primitive *b, Manifold *data)
 				data->penetration = yOverlap;
 				data->restitution = CalculateRestitution(a, b);
 				AABB * shapeB = b->GetOwner()->has(AABB)
-				data->contact[0] = data->normal * shapeB->halfSize.y + transB->GetPositionXY();
+				//data->contact[0] = data->normal * shapeB->halfSize.y + transB->GetPositionXY();
 				return;
 			}
 		}
@@ -152,7 +152,7 @@ void AABBAndCircle(Primitive *shapeAABB, Primitive *shapeCircle, Manifold *data)
 
 	//  Calculate the vector between the objects
 	Vector2 midline = transCircle->GetPositionXY() - transAABB->GetPositionXY();
-
+	//printf("CirclePos: %f, %f", transCircle->GetPositionXY().x, transCircle->GetPositionXY().y);
 	// Closest point on A to the center of B
 	Vector2 closest = midline;
 

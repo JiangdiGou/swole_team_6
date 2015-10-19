@@ -16,6 +16,7 @@ public:
 		pCount
 	};
 	
+	//Vector2 position;
 	Transform *pTrans;// position
 	float radius;     // For circle
 	Vector2 halfSize; // halfsize

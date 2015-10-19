@@ -155,22 +155,29 @@ void Manifold::CorrectPosition(void)
 	//	return;
 	//}
 
-	const float slop = 0.05f;//0.01
-	const float percent = 0.8f;//0.4f; // 40% //0.2
+	const float slop = 0.01f;//0.01
+	const float percent = 0.4f;//0.4f; // 40% //0.2
 
 	// Allows object to penetrate slightly without position correction from occurring 
 	 //change std max to mim so we can pull things! max for push things
-	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent /2.0f;
+	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent;
 
 
-		//Vector2 Apos = A->body->pTrans->GetPositionXY();
+		Vector2 Apos = A->body->pTrans->GetPositionXY();
 		Vector2 Bpos = B->body->pTrans->GetPositionXY();
-		//A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
+		A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
 	
 		B->body->pTrans->SetPosition(Bpos  + correction * B->body->invMass );
+		A->body->setVelocity(0.0f, 0.0f);
+		B->body->setVelocity(0.0f, 0.0f);
+		
+		//if (A->body != nullptr)
+			//A->body->pTrans->SetPosition(Apos, Bpos);
 		//printf("correction: %i", correction);
-		printf("invMass: %i", A->body->invMass);
-		printf("normal: %i", normal);
-		printf("slop: %i", slop);
-		printf("penetration: %i", penetration);
+		printf("BposInRes: %f, %f", B->body->pTrans->pos2d);
+	/*	printf("invMass: %f", A->body->invMass);
+		printf("normal: %f", normal);
+		printf("slop: %f", slop);*/
+		printf("penetration: %f", penetration);
+		printf("velocity %f", B->body->getVelocity());
 }

@@ -10,9 +10,12 @@ float Random(float low, float high)
   return a;
 }
 
-RigidBody::RigidBody()
+RigidBody::RigidBody(/*Primitive*shape*/) //: bodyShape(shape->Clone())
 {
-  
+	/*bodyShape->body = this;
+	bodyShape->radius = shape->radius;
+	bodyShape->halfSize.x = shape->halfSize.x;
+	bodyShape->halfSize.y = shape->halfSize.y;*/
   restitution = 0.2f;
   velocity.Clear();
   acceleration.Clear();
@@ -79,7 +82,10 @@ void RigidBody::set(float mass_num)
 void RigidBody::Initialize()
 {
 	pTrans = GetOwner()->has(Transform);
+	/*position.x = pTrans->position.x;
+	position.y = pTrans->position.y;*/
 
+	//physics->bodies.push_back(this);
 
   physics->bodies.push_back(this);
   //return true;
@@ -87,6 +93,7 @@ void RigidBody::Initialize()
 
 void RigidBody::Update()
 {
+	//pTrans->SetPosition(position);
   /*pTrans->SetPosition(position);*/
 }
 void RigidBody::SendMessages(Message * message)
@@ -118,6 +125,23 @@ void RigidBody::Release(){}
 //{
 //  //positi
 //
+//}
+
+//void RigidBody::setPosition(const Vector2 &position)
+//{
+//	this->position = position;
+//}
+//
+//void RigidBody::setPosition(const float x, const float y)
+//{
+//	position.x = x;
+//	position.y = y;
+//
+//}
+//
+//Vector2 RigidBody::getPosition() const
+//{
+//	return position;
 //}
 
 void RigidBody::setAcceleration(const Vector2 &acc)
