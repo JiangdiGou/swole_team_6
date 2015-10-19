@@ -10,8 +10,8 @@ SET textureList=tList_%outputName%.txt
 REM Moves from batch dir to texture dir 
 CD "..\GAM200_Project\resources\Textures\AtlasInput"
 
-set outputName="..\Atlas\%outputName%.png"
-set textureList="..\%textureList%"
+SET outputName="..\Atlas\%outputName%.png"
+SET textureList="..\%textureList%"
 
 REM deletes files that this generates if they exist
 IF EXIST %textureList%  DEL /F %textureList%
