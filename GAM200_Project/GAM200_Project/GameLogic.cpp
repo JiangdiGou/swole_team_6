@@ -45,22 +45,23 @@ void GameLogic::Initialize()
   //sprite->texture = textureBackground;
   //background->AddComponent(CT_Sprite, sprite);
 
-  GOC * greenObj = FACTORY->makeObject("greenGuy");
-  Transform * transform2 = new Transform();
-  transform2->SetPosition(0, 3, 0);
-  Sprite * sprite2 = new Sprite();
-  sprite2->texture = graphics->spriteAtlas.textures[std::string("Smiley3")];
+  //GOC * greenObj = FACTORY->makeObject("greenGuy");
+  //Transform * transform2 = new Transform();
+  //transform2->SetPosition(0, 3, 0);
+  //Sprite * sprite2 = new Sprite();
+  //sprite2->texture = graphics->spriteAtlas.textures[std::string("Smiley3")];
 
-  greenObj->AddComponent(CT_Transform, transform2);
-  greenObj->AddComponent(CT_Sprite, sprite2);
-  RigidBody* dudeBody = new RigidBody();
-  dudeBody->isStatic = false;
-  dudeBody->isGhost = false;
-  dudeBody->useGravity = true;
-  greenObj->AddComponent(CT_RigidBody, dudeBody);
-  Circle *dudeCollision = new Circle();
-  //dudeCollision->SetHalfSize(1, 1);
-  greenObj->AddComponent(CT_Circle, dudeCollision);
+  //greenObj->AddComponent(CT_Transform, transform2);
+  //greenObj->AddComponent(CT_Sprite, sprite2);
+  //RigidBody* dudeBody = new RigidBody();
+  //dudeBody->isStatic = false;
+  //dudeBody->isGhost = false;
+  //dudeBody->useGravity = true;
+  //greenObj->AddComponent(CT_RigidBody, dudeBody);
+  //Circle *dudeCollision = new Circle();
+
+  ////dudeCollision->SetHalfSize(1, 1);
+  //greenObj->AddComponent(CT_Circle, dudeCollision);
 
   //GOC * lalalaObj = FACTORY->makeObject("laGuy");
   //Transform * transformla = new Transform();
@@ -86,9 +87,9 @@ void GameLogic::Initialize()
   boObj->AddComponent(CT_Transform, transformbo);
   boObj->AddComponent(CT_Sprite, spritebo);
   RigidBody* boObjBody = new RigidBody();
-  dudeBody->isStatic = false;
-  dudeBody->isGhost = false;
-  boObjBody->useGravity = true;
+  boObjBody->isStatic = false;
+  boObjBody->isGhost = false;
+  boObjBody->useGravity = false;
   boObj->AddComponent(CT_RigidBody, boObjBody);
   AABB* boCollision = new AABB();
   boCollision->SetHalfSize(1, 1);
@@ -96,7 +97,7 @@ void GameLogic::Initialize()
 
   GOC * blackObj = FACTORY->makeObject("");
   Transform * transform5 = new Transform();
-  transform5->SetPosition(0, -2, 0);
+  transform5->SetPosition(-2, 0, 0);
   Sprite * sprite4 = new Sprite();
   sprite4->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
 
@@ -104,19 +105,19 @@ void GameLogic::Initialize()
   blackObj->AddComponent(CT_Sprite, sprite4);
   RigidBody* blackObjBody = new RigidBody();
   blackObjBody->isGhost = false;
-  blackObjBody->isStatic = true;
+  blackObjBody->isStatic = false;
   blackObjBody->useGravity = false;
   //blackObjBody->isKinematic = true;
   blackObj->AddComponent(CT_RigidBody, blackObjBody);
   AABB* blackCollision = new AABB();
-  blackCollision->SetHalfSize(1.5, 1.5);
+  blackCollision->SetHalfSize(1, 1);
   blackObj->AddComponent(CT_AABB, blackCollision);
   
   player = boObj;
   //player2 = boObj;
 
   //blueObj->Initialize();
-  greenObj->Initialize();
+ // greenObj->Initialize();
   blackObj->Initialize(); 
   camera->Initialize();
   //lalalaObj-> Initialize();

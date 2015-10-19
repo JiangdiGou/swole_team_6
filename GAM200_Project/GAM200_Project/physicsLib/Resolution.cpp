@@ -28,7 +28,7 @@ void Manifold::PreStep(float dt)
 	const float EPSILON = 0.0001f;
 
 	// Calculate the average restitution
-	if (A->body && B->body)
+	//if (A->body && B->body)
 		e = std::min(A->body->restitution, B->body->restitution);
 
 	// Calculate the static and dynamic friction
@@ -68,6 +68,7 @@ void Manifold::AppyImpulse(void)
 	{
 		A->body->getVelocity().Clear();
 		B->body->getVelocity().Clear();
+
 		return;
 	}
 
@@ -149,10 +150,10 @@ void Manifold::CorrectPosition(void)
 	{
 		return;
 	}
-	if (A->body->isStatic == false)
-	{
-		return;
-	}
+	//if (A->body->isStatic == false)
+	//{
+	//	return;
+	//}
 
 	const float slop = 0.05f;//0.01
 	const float percent = 0.8f;//0.4f; // 40% //0.2
@@ -161,9 +162,15 @@ void Manifold::CorrectPosition(void)
 	 //change std max to mim so we can pull things! max for push things
 	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent /2.0f;
 
-	Vector2 Apos = A->body->pTrans->GetPositionXY();
-	//Vector2 Bpos = B->body->pTrans->GetPositionXY();
-	A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
-	//B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
 
+		//Vector2 Apos = A->body->pTrans->GetPositionXY();
+		Vector2 Bpos = B->body->pTrans->GetPositionXY();
+		//A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
+	
+		B->body->pTrans->SetPosition(Bpos  + correction * B->body->invMass );
+		//printf("correction: %i", correction);
+		printf("invMass: %i", A->body->invMass);
+		printf("normal: %i", normal);
+		printf("slop: %i", slop);
+		printf("penetration: %i", penetration);
 }

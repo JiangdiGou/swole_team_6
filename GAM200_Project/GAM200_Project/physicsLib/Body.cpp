@@ -102,11 +102,11 @@ void RigidBody::SendMessages(Message * message)
     {
     case 'd':
     {
-      setVelocity(0.1, getVelocity().y);
+      setVelocity(0.5, getVelocity().x);
     }
 	case 'a':
 	{
-		setVelocity(-0.1, getVelocity().y);
+		setVelocity(-0.5, getVelocity().x);
 	}
     }
   }
@@ -186,6 +186,8 @@ void RigidBody::SetStatic(void)
   // Sets the object to static
   isStatic = true;
 
+  velocity.x = 0.0f;
+  velocity.y = 0.0f;
   mass = 0.0f;
   invMass = 0.0f;
   inertia = 0.0f;
