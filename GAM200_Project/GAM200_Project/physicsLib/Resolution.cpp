@@ -145,11 +145,14 @@ void Manifold::AppyImpulse(void)
 void Manifold::CorrectPosition(void)
 {
 	//HOLY FUCK THIS MESSED UP LIKE &%@!# :*(, NEVER SET isStatic to true, did I even do that? fk
-	if (A->body->isGhost == true || B->body->isGhost == true || A->body->isStatic == false)
+	if (A->body->isGhost == true || B->body->isGhost == true )
 	{
 		return;
 	}
-
+	if (A->body->isStatic == false)
+	{
+		return;
+	}
 
 	const float slop = 0.05f;//0.01
 	const float percent = 0.8f;//0.4f; // 40% //0.2
@@ -159,8 +162,8 @@ void Manifold::CorrectPosition(void)
 	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent /2.0f;
 
 	Vector2 Apos = A->body->pTrans->GetPositionXY();
-	//Vector2 Bpos = B->body->pTrans->GetPositionXY();
-	A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
-	//B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
+	Vector2 Bpos = B->body->pTrans->GetPositionXY();
+	//A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
+	B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
 
 }

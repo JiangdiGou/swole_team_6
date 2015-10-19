@@ -54,6 +54,7 @@ void GameLogic::Initialize()
   greenObj->AddComponent(CT_Transform, transform2);
   greenObj->AddComponent(CT_Sprite, sprite2);
   RigidBody* dudeBody = new RigidBody();
+  dudeBody->isStatic = false;
   dudeBody->isGhost = false;
   dudeBody->useGravity = true;
   greenObj->AddComponent(CT_RigidBody, dudeBody);
@@ -85,6 +86,7 @@ void GameLogic::Initialize()
   boObj->AddComponent(CT_Transform, transformbo);
   boObj->AddComponent(CT_Sprite, spritebo);
   RigidBody* boObjBody = new RigidBody();
+  dudeBody->isStatic = false;
   dudeBody->isGhost = false;
   boObjBody->useGravity = true;
   boObj->AddComponent(CT_RigidBody, boObjBody);
