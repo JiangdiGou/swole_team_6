@@ -109,7 +109,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [2.24913025, 0.968375444, 50],
+			Vec3 Translation = [6.5993309, 2.97616005, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -129,7 +129,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [2.24913025, 0.968375444, 9.83126043e-008],
+			Vec3 LookTarget = [6.5993309, 2.97616005, 2.88465941e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -253,7 +253,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [13.2084999, 7.61456013, 1.30868997e-007],
+			Vec3 Translation = [11.1003256, 7.61456013, 1.30868997e-007],
 			Vec3 Scale = [6.67507982, 2.34746003, 2.34746003],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -285,10 +285,8 @@ Level =
 			bool ScaleUp = true,
 			bool Glow = true,
 		},
-		GenericButton = 
+		DestroySpaceButton = 
 		{
-			Enum ButtonType = Unpause,
-			string LoadThisLevel = "",
 		},
 	},
 	Cog = 
@@ -303,7 +301,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [13.2084999, 8.39696026, 1.30868997e-007],
+			Vec3 Translation = [11.1003256, 8.39696026, 1.30868997e-007],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},

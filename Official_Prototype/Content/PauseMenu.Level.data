@@ -121,7 +121,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 9.07181454,
+			float Size = 14.9568863,
 		},
 		EditorCameraController = 
 		{
@@ -165,7 +165,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 200,
-			float Size = 20,
+			float Size = 15,
 		},
 		SoundListener = 
 		{
@@ -506,10 +506,11 @@ Level =
 					bool ScaleUp = true,
 					bool Glow = true,
 				},
-				GenericButton = 
+				CreateOverlayedSpace = 
 				{
-					Enum ButtonType = LoadLevel,
-					string LoadThisLevel = "56373fcb789cf268:OptionsScreen",
+					bool MouseClick = true,
+					bool Automatic = false,
+					string OverlayedLevel = "56373fcb789cf268:OptionsScreen",
 				},
 			},
 			Cog = 
@@ -601,10 +602,11 @@ Level =
 					bool ScaleUp = true,
 					bool Glow = true,
 				},
-				GenericButton = 
+				CreateOverlayedSpace = 
 				{
-					Enum ButtonType = ReturnableLevel,
-					string LoadThisLevel = "5637063944d8f04a:Credits",
+					bool MouseClick = true,
+					bool Automatic = false,
+					string OverlayedLevel = "5637063944d8f04a:Credits",
 				},
 			},
 			Cog = 
@@ -651,10 +653,11 @@ Level =
 					bool ScaleUp = true,
 					bool Glow = true,
 				},
-				GenericButton = 
+				CreateOverlayedSpace = 
 				{
-					Enum ButtonType = QuitGame,
-					string LoadThisLevel = "56c5027fa4851517:AreYouSure",
+					bool MouseClick = true,
+					bool Automatic = false,
+					string OverlayedLevel = "56c5027fa4851517:AreYouSure",
 				},
 			},
 		},
