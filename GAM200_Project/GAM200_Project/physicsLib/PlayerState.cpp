@@ -1,6 +1,6 @@
 //#include "PlayerState.h"
 //
-//
+//#define MORE_FRAME 0.02f
 //#define PER_FRAME 0.03f
 //PlayerState::PlayerState() ://: parent(Parent),,
 ////controller(new PlayerControllerListener(Parent, this, Controller)),
@@ -85,7 +85,7 @@
 //				float YDis = TransPlat->GetPosition().y - PreviousPlatformPosition.y;
 //
 //
-//				playerBody->position.x += XDis;
+//				playerBody->pTrans->GetPositionXY().x += XDis;
 //				Trans->GetPosition().x += XDis;
 //
 //				float PlatformYVelocity = ((RigidBody*)Platform->GetComponent(CT_RigidBody))->getVelocity().y;
@@ -95,7 +95,7 @@
 //
 //				if (YDis <= 0)
 //				{
-//					playerBody->position.y += YDis;
+//					playerBody->pTrans->GetPositionXY().y += YDis;
 //					Trans->GetPosition().y += YDis;
 //				}
 //				// move the player with the platform
@@ -167,12 +167,43 @@
 //	}
 //}
 //
+//void PlayerState::OnCollision(GameObjectComposition* someObject)
+//{
+//	
+//	if ((someObject->GetComponent(CT_MOVEPLATFORM)) && JumpTimer > MORE_FRAME)
+//	{
+//		MyPlayerState = Grounded;
+//		JumpTimer = 0;
+//		Platform = someObject;
+//		Transform* TransSO = someObject->has(Transform);
+//		PreviousPlatformPosition = TransSO->GetPosition();
+//		jumpButtonReleased = false;
+//	}
+//
+//	if ((someObject->GetComponent(CT_SPAWNBLOCK) || someObject->GetComponent(CT_DESTROY)) && JumpTimer > MORE_FRAME)
+//	{
+//		MyPlayerState = Grounded;
+//		JumpTimer = 0;
+//		jumpButtonReleased = false;
+//	}
+//
+//	//If we hit a "DIE, JUST DIE" object, reload at maybe a checkpoint????
+//	//(after 2 seconds- see the beginning of Update)
+//	if (someObject->GetComponent(CT_PLAYERDEATH))
+//	{
+//		ripPlayer();
+//	}
+//}
+//
+//void PlayerState::ripPlayer()
+//{	
+//	IsAlive = false;
+//}
 //
 //int PlayerState::getJumpState(void)
 //{
 //	return MyPlayerState;
 //}
-//
 //
 //
 //float PlayerState::getJumpTimer(void)

@@ -129,6 +129,10 @@ void GameLogic::Initialize()
   blackObjBody->isStatic = true;
   blackObjBody->useGravity = false;
   //blackObjBody->isKinematic = true;
+  if (blackObjBody->isStatic)
+  {
+	  transform5->SetPosition(0, -2, 0);
+  }
   blackObj->AddComponent(CT_RigidBody, blackObjBody);
   AABB* blackCollision = new AABB();
   blackCollision->SetHalfSize(1, 1);
@@ -138,7 +142,9 @@ void GameLogic::Initialize()
   
   //Ground1
   GOC * blackObj2 = FACTORY->makeObject("");
+//  blackObj2->InitPosition = (whatever, whatever, whatever);
   Transform * transform6 = new Transform();
+
   transform6->SetPosition(-1, -2, 0);
   Sprite * sprite5 = new Sprite();
   sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
@@ -149,6 +155,10 @@ void GameLogic::Initialize()
   blackObjBody2->isGhost = false;
   blackObjBody2->isStatic = true;
   blackObjBody2->useGravity = false;
+  if (blackObjBody2->isStatic)
+  {
+	  transform6->SetPosition(-1,-2,0);
+  }
   //blackObjBody->isKinematic = true;
   blackObj2->AddComponent(CT_RigidBody, blackObjBody2);
   AABB* blackCollision2 = new AABB();

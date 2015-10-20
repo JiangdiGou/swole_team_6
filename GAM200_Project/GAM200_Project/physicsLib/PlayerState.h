@@ -29,7 +29,7 @@
 //        
 //        void HoldJump();
 //        void ReleaseJump();
-//
+//		void ripPlayer();
 //        //Can be modified
 //        float *playerRunSpeed;
 //        float *playerJumpVelocity;

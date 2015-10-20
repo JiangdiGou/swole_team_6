@@ -1,4 +1,4 @@
-
+//
 //#include "../Composition.h"
 //#include "../GameComponents/objFactory.h"
 //#include "Transform.h"
@@ -14,15 +14,15 @@
 //  void Initialize() override;
 //  void Update(float dt) ;
 //  void Release() override;
-//
+//  Transform* TransTile = GetOwner()->has(Transform);
+//  Transform* TransBody = GetOwner()->has(Transform);
 //  //Returns the tilemap ID of the object, and sets reference to the object if it hit something.
 //  /*int GetCurrentGameObject(GameObject &ref);*/
 //  bool TopIsColliding();
 //  bool BottomIsColliding();
 //  bool LeftIsColliding();
 //  bool RightIsColliding();
-//  Transform* TransTile = GetOwner()->has(Transform);
-//  Transform* TransBody = GetOwner()->has(Transform);
+//  
 //private:
 //  TileMapCollision();
 //
@@ -36,7 +36,7 @@
 //  Vector2 &vel_;
 //  Vector2 &acc_;
 //
-//  GameObjectComposition currentTile;
+//  GameObjectComposition* currentTile;
 //
 //  //Valid reference as long as FactoryManager is alive,
 //  //and TileMapCollision is only alive while FactoryManager is.

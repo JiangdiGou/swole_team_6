@@ -21,6 +21,10 @@ enum ComponentTypeId
 	CT_BoxCollider,
 	CT_TileMapCollider,
 	CT_Player_Controller,
+	CT_MOVEPLATFORM,
+	CT_DESTROY,
+	CT_SPAWNBLOCK,
+	CT_PLAYERDEATH,
 	
 };
 #endif

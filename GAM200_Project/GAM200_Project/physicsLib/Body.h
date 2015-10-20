@@ -59,7 +59,8 @@ class RigidBody : public GameComponent
     void SendMessages(Message * message) override;
 
 		void set(float mass);
-		/*void setPosition(const Vector2 &position);
+		/*void 
+		(const Vector2 &position);
 		void setPosition(const float x, const float y);
 		Vector2 getPosition() const;*/
 

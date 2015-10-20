@@ -19,7 +19,7 @@
 ////Gethas->???
 //
 //TileMapCollision::TileMapCollision() :
-//pos_((Transform*)GetOwner()->GetPosition()), //tilemap_(tilemap),
+//pos_(TransTile->GetPosition()), //tilemap_(tilemap),
 //rigid_(*reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody))),
 //vel_(reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody))->getVelocity()),
 //acc_(reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody))->acceleration),
@@ -42,9 +42,9 @@
 //
 //  if (gridCollisionflag_ & COLLISION_TOP) //too tired to think about why this is happening, split into four if-statements and adjusted
 //  {
-//    SnapToCellY(pos_.y, rigid_.position.y);
+//	  SnapToCellY(pos_.y, rigid_.pTrans->GetPositionXY().y);
 //    pos_.y -= HALF_TILE_WIDTH;
-//    rigid_.position.y = pos_.y;
+//	rigid_.pTrans->GetPositionXY().y = pos_.y;
 //    if (vel_.y > 0)
 //      vel_.y = 0;
 //    if (acc_.y > 0)
@@ -53,7 +53,7 @@
 //  }
 //  if (gridCollisionflag_ & COLLISION_BOTTOM )
 //  {
-//    SnapToCellY(pos_.y, rigid_.position.y);
+//	  SnapToCellY(pos_.y, rigid_.pTrans->GetPositionXY().y);
 //    if (vel_.y < 0)
 //      vel_.y = 0;
 //	  if (acc_.y < 0)
@@ -61,7 +61,7 @@
 //  }
 //  if (gridCollisionflag_ & COLLISION_LEFT)
 //  {
-//    SnapToCellX(pos_.x, rigid_.position.x);
+//	  SnapToCellX(pos_.x, rigid_.pTrans->GetPositionXY().x);
 //    if (vel_.x < 0)
 //      vel_.x = 0;
 //    if (acc_.x < 0)
@@ -69,7 +69,7 @@
 //  }
 //  if (gridCollisionflag_ & COLLISION_RIGHT)
 //  {
-//    SnapToCellX(pos_.x, rigid_.position.x);
+//	  SnapToCellX(pos_.x, rigid_.pTrans->GetPositionXY().x);
 //    if (vel_.x > 0)
 //      vel_.x = 0;
 //    if (acc_.x > 0)
@@ -210,8 +210,8 @@
 //      if (rigid_.getVelocity().y < 0)
 //      {
 //        //If our "feet" are touching the top half of the tile, and if they're touching it JUST BARELY
-//        if (static_cast<int>(rigid_.position.y) % 2 == 1)
-//          if (rigid_.position.y - static_cast<float>(static_cast<int>(rigid_.position.y)) > .95f)
+//        if (static_cast<int>(rigid_.pTrans->GetPositionXY().y) % 2 == 1)
+//			if (rigid_.pTrans->GetPositionXY().y - static_cast<float>(static_cast<int>(rigid_.pTrans->GetPositionXY().y)) > .95f)
 //            flag_ = flag_ | COLLISION_BOTTOM;
 //      }
 //

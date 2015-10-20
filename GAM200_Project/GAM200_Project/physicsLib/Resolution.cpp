@@ -150,6 +150,12 @@ void Manifold::CorrectPosition(void)
 	{
 		return;
 	}
+	//???
+	//if (A->body->isStatic == true)
+	//{
+	//	return;
+	//}
+
 	//if (A->body->isStatic == false)
 	//{
 	//	return;
@@ -165,11 +171,31 @@ void Manifold::CorrectPosition(void)
 
 		Vector2 Apos = A->body->pTrans->GetPositionXY();
 		Vector2 Bpos = B->body->pTrans->GetPositionXY();
-		A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
-	
-		B->body->pTrans->SetPosition(Bpos  + correction * B->body->invMass );
-		A->body->setVelocity(0.0f, 0.0f);
-		B->body->setVelocity(0.0f, 0.0f);
+		if (A->body->isStatic == false)
+		{
+			A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
+			A->body->setVelocity(0.0f, 0.0f);
+		}
+		//Apos -= correction * A->body->invMass;
+		//Bpos += correction * A->body->invMass;
+		if (B->body->isStatic == false)
+		{
+			B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass);
+			B->body->setVelocity(0.0f, 0.0f);
+		}
+		//if (A->body->pTrans->GetPositionXY().x == B->body->pTrans->GetPositionXY().x)
+		//{
+		//	Vector2 correction = Vec2D(0.0f,0.0f);
+		//}
+		//
+		//Vector2 no = Vec2D();
+		//if (A->body != NULL && B->body != NULL);
+		//{
+		///*	A->body->pTrans->GetPositionXY(Apos,Bpos);
+		//	B->body->pTrans->SetPosition.y;*/
+		//	A->body->pTrans->SetPosition(Apos);
+		//	B->body->pTrans->SetPosition(Bpos);
+		//}
 		
 		//if (A->body != nullptr)
 			//A->body->pTrans->SetPosition(Apos, Bpos);
@@ -179,5 +205,6 @@ void Manifold::CorrectPosition(void)
 		printf("normal: %f", normal);
 		printf("slop: %f", slop);*/
 		printf("penetration: %f", penetration);
-		printf("velocity %f", B->body->getVelocity());
+		printf("Bvelocity %f", B->body->getVelocity());
+		printf("Avelocity %f", A->body->getVelocity());
 }

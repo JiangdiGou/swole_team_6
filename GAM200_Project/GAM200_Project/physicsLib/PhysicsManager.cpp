@@ -187,6 +187,7 @@ void PhysicsManager::Step(float dt)
 	{
 		RigidBody *b = bodies[i];
 		b->forceAccum.Clear();
+		
 	}
 
 	for (unsigned int i = 0; i < bodies.size(); ++i)
