@@ -19,6 +19,7 @@ LastframeDT(1.0f / 60.0f), jumpButtonReleased(false)
   PreviousPlatformPosition.z = 0;
 
   // should we assign the value of each properties in the header file or here?
+  // ok so I did that in the header file and removed the pointer
   
 
 }
@@ -40,11 +41,132 @@ void PlayerState::Initialize()
 
 PlayerState::~PlayerState()
 {
-    // same things we should put in the last function for the messaging system call
+    // where we should destruct the keyboard event if necessceary?
+	
 }
+
+
+// this function maybe should put into a input manager instead of the player controller. but who knows
+// I need a enum list for key button state like this
+// enum KEY_STATE{KEY_DOWN, KEY_RELEASED, KEY_TRIGGERED, KEY_UP}; in somewhere and can be integrate with
+// the messaging system
+
+// But since our game going to be mouse control mainly, the keyboard button maybe useless !!!
+
 
 void PlayerState::SendMessages(Message * message)
 {
+	//KeyMessage * GivenInput = reinterpret_cast<KeyMessage *>(SentMessage);
+
+	//switch (GivenInput->KeyNumber)
+	//{
+	//case VK_UP:
+	//	if (GivenInput->KeyStatus == KEY_STATE::KEY_TRIGGERED)
+	//	{
+	//		// we can do anything here also sounds
+
+	//		if (this->playerController->getJumpState() == StateList::Grounded)
+	//		{
+	//			// pause player sprite state here
+	//		}
+
+	//		playerController->PressJump();
+	//	}
+
+	//	else if (GivenInput->KeyStatus == KEY_STATE::KEY_RELEASED)
+	//	{
+	//		//change player sprite state here
+
+
+	//		playerController->ReleaseJump();
+	//	}
+	//	else if (GivenInput->KeyStatus == KEY_STATE::KEY_DOWN)
+	//	{
+	//		// do nothing
+
+	//	}
+
+
+	//	break;
+
+	//case VK_DOWN:
+	//	// we don't need to down key anyway 
+	//	break;
+
+	//case VK_LEFT:
+	//	if (this->playerController->getJumpState() == JumpStates::JS_Grounded || this->playerController->getJumpState() == JumpStates::JS_PLATFORM)
+	//	{
+	//		//PlayerSprite->GetCurrentSprite()->Set_Paused(false);
+
+	//		if (this->playerController->WalkTimer > 0.4 && this->playerController->getJumpTimer() < MORE_FRAME)
+	//		{
+
+	//			this->playerController->WalkTimer = 0.0f;
+	//		}
+	//	}
+
+	//	if (GivenInput->KeyStatus == KEY_TRIGGERED || GivenInput->KeyStatus == KEY_DOWN)
+	//	{
+	//		// change player sprite state here 
+
+
+	//		playerBody->getVelocity().x = -(*playerController->playerRunSpeed);
+
+	//		//Make the player face left
+	//		if (PlayerTransform->GetScale().x > 0)
+	//		{
+	//			PlayerTransform->GetScale().x *= -1.0f;
+	//		}
+	//	}
+
+	//	if (GivenInput->KeyStatus == KEY_RELEASED)
+	//	{
+	//		PlayerSprite->ChangeState("idle");
+	//		playerBody->getVelocity().x = 0.0f;
+	//	}
+
+	//	break;
+
+	//case VK_RIGHT:
+
+	//	// if the player is grounded and the player is pressing right, play move sound effect
+	//	if (this->playerController->getJumpState() == StateList::Grounded || this->playerController->getJumpState() == StateList::OnGround)
+	//	{
+	//		// pause the player sprite state here
+
+	//		if (this->playerController->WalkTimer > 0.4 && this->playerController->getJumpTimer() < MORE_FRAME)
+	//		{
+
+	//			this->playerController->WalkTimer = 0.0f;
+	//		}
+	//	}
+
+	//	// change sprite and flip sprite if necessary
+	//	if (GivenInput->KeyStatus == KEY_TRIGGERED || GivenInput->KeyStatus == KEY_DOWN)
+	//	{
+	//		// we can change the player sprite to dashing or sth here?
+
+
+	//		playerBody->getVelocity().x = *playerController->playerRunSpeed;
+
+	//		if (PlayerTransform->GetScale().x < 0)
+	//		{
+	//			//Face the player right
+	//			PlayerTransform->GetScale().x *= -1.0f;
+	//		}
+	//	}
+
+	//	// revert changes when the key is released
+	//	if (GivenInput->KeyStatus == KEY_RELEASED)
+	//	{
+	//		//player should be idle here?
+
+
+	//		playerBody->getVelocity().x = 0.0f;
+	//	}
+
+	//	break;
+	//}
 
 }
 
@@ -127,6 +249,8 @@ void PlayerState::Update(float dt)
 		}
 	}
 
+
+	// On the ground
 	if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
 	{
 		jumpCount = 0;
