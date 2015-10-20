@@ -139,7 +139,7 @@ void objFactory::loadLevelFrom(std::string fileName)
   for (int i = 0; i < arrayY; i++)
   {
     tileMap[i] = new char[arrayX];
-    garbage = getLineFromFile(5 + i + 2, fileName);
+    garbage = getLineFromFile(5 + arrayY-1-i + 2, fileName);
     std::copy(garbage.begin(), garbage.end(), tileMap[i]);
   }
 
@@ -147,7 +147,7 @@ void objFactory::loadLevelFrom(std::string fileName)
   for (int i = 0; i < arrayY; i++)
   {
     entityMap[i] = new char[arrayX];
-    garbage = getLineFromFile(5 + i + 1 + 2 + arrayY, fileName);
+    garbage = getLineFromFile(5 + arrayY-1-i + 1 + 2 + arrayY, fileName);
     std::copy(garbage.begin(), garbage.end(), entityMap[i]);
   }
 
@@ -170,10 +170,10 @@ void objFactory::createTiles()
       switch (tileMap[i][j])
       {
       case '1':
-        createTile(j - levelWidth/2,levelHeight/2-i, std::string("Smiley2"));
+        createTile(j - levelWidth/2, -levelHeight / 2 + i, std::string("Smiley2"));
         break;
       case '2':
-        createTile(j - levelWidth / 2, levelHeight / 2 - i, std::string("Smiley3"));
+        createTile(j - levelWidth / 2, -levelHeight / 2 + i, std::string("Smiley3"));
         break;
       }
     }
