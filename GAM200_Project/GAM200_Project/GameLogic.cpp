@@ -35,8 +35,11 @@ void GameLogic::Initialize()
   
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
-  camera->AddComponent(CT_Camera, new Camera((graphics->coreShader)));
+  Camera *mainCamera = new Camera((graphics->coreShader));
+  camera->AddComponent(CT_Camera, mainCamera);
   camera->Initialize();
+  //This move is so that the bottom left corner is 0,0
+  mainCamera->move(glm::vec3(4.5, 2.25, 0));
 
   FACTORY->createTiles();
 
@@ -53,9 +56,20 @@ void GameLogic::Initialize()
   //circle
   //GOC * greenObj = FACTORY->makeObject("greenGuy");
   //Transform * transform2 = new Transform();
-  //transform2->SetPosition(0, 1, 0);
+  //transform2->SetPosition(0, 0, 0);
   //Sprite * sprite2 = new Sprite();
-  //sprite2->texture = graphics->spriteAtlas.textures[std::string("Smiley3")];
+  //sprite2->texture = graphics->spriteAtlas.textures[std::string("Smiley1")];
+  //greenObj->AddComponent(CT_Transform, transform2);
+  //greenObj->AddComponent(CT_Sprite, sprite2);
+
+  //GOC * greenObj2 = FACTORY->makeObject("greenGuy2");
+  //Transform * transform3 = new Transform();
+  //transform3->SetPosition(1, 0, 0);
+  //Sprite * sprite3 = new Sprite();
+  //sprite3->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
+  //greenObj2->AddComponent(CT_Transform, transform3);
+  //greenObj2->AddComponent(CT_Sprite, sprite3);
+
 
   //greenObj->AddComponent(CT_Transform, transform2);
   //greenObj->AddComponent(CT_Sprite, sprite2);
@@ -176,7 +190,9 @@ void GameLogic::Initialize()
   //blueObj->Initialize();
  //greenObj->Initialize();
   blackObj->Initialize(); 
-  camera->Initialize();
+  
+  
+  ->Initialize();
   //lalalaObj-> Initialize();
   boObj->Initialize();
   blackObj2->Initialize();
