@@ -27,7 +27,7 @@ public:
 
 
 	void Initialize();
-	void Update() override;
+	void Update(float dt) override;
 	void Release();
 
 	Primitive();
@@ -51,7 +51,7 @@ public:
 	~Circle();
 
 	void Initialize() ;
-	void Update() override;
+	void Update(float dt) override;
 	void Release();
 
 	Primitive *Clone(void) const
@@ -77,7 +77,7 @@ public:
 
 	
 	void Initialize() ;
-	void Update() override;
+	void Update(float dt) override;
 	void Release() ;
 
 	Primitive *Clone(void) const

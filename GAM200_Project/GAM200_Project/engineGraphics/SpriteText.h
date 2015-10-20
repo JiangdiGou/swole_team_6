@@ -13,7 +13,7 @@ class SpriteText : public GameComponent
 public:
   SpriteText(std::string initialMessage);
 
-  void Update() override;
+  void Update(float dt) override;
 
   std::string message;
 

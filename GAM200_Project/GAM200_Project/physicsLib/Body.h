@@ -54,7 +54,7 @@ class RigidBody : public GameComponent
 		~RigidBody();
 
 		void Initialize() override;
-		void Update() override;
+		void Update(float dt) override;
     void Release() override;
     void SendMessages(Message * message) override;
 

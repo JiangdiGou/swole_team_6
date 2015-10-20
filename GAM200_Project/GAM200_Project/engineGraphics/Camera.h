@@ -18,7 +18,7 @@ public:
   float zoom;
   void move(glm::vec3 translation);
 
-  void Update() override;
+  void Update(float dt) override;
 
 private:
   glm::vec3 worldUp;

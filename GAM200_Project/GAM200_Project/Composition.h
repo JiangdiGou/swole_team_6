@@ -28,7 +28,7 @@ type* GetComponentType(ComponentTypeId typeId);
 
 void Initialize();
 
-void Update();
+void Update(float dt);
 
 void Destroy();
 

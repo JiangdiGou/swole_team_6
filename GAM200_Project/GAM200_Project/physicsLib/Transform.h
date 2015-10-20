@@ -16,7 +16,7 @@ public:
 
 	//Inherited Methods
 	void Initialize() override;
-	void Update() override;
+	void Update(float dt) override;
 	void Release() override;
 
 	//Getters

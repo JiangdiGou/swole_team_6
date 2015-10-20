@@ -38,7 +38,7 @@ Camera::~Camera()
 //Output      : none
 //Description : Sends the camera information to te shader. 
 //**********************
-void Camera::Update()
+void Camera::Update(float dt)
 {
   glUseProgram(shaderID);
 

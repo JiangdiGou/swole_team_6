@@ -17,7 +17,7 @@ void Transform::Initialize()
 {
 }
 
-void Transform::Update()
+void Transform::Update(float dt)
 {
 	pos2d.x = position.x;
 	pos2d.y = position.y;

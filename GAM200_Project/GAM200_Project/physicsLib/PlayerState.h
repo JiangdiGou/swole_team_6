@@ -1,3 +1,6 @@
+#ifndef PLAYERSTATE_H
+#define PLAYERSTATE_H
+
 #include "../Composition.h"
 #include "Trigger.h"
 #include "math_utility.h"
@@ -85,3 +88,5 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 
 
 };
+
+#endif

@@ -15,40 +15,43 @@
 
 #define CEILING_TILE 2
 #define HOPPABLE_PLATFORM 9
+#define SPIKE '_'
+#define BLOCKONE 
+#define BLOCKTWO
 
 //Gethas->???
 
-TileMapCollision::TileMapCollision() :
-pos_(TransTile->GetPosition()), //tilemap_(tilemap),
-rigid_(*reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody))),
-vel_(reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody))->getVelocity()),
-acc_(reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody))->acceleration),
-transform_(*reinterpret_cast<Transform *>(GetOwner()->GetComponent(CT_Transform)))
+TileMapCollision::TileMapCollision()
 {
-  tileMap = FACTORY->tileMap;
-  mapWidth = &FACTORY->levelWidth;
-  mapHeight = &FACTORY->levelHeight;
-  int* mapHeight;
-  //owner->GetComponent(CT_Body)
-  //Where do I add the component so it gets updated?
-  //pos_ = transform_->GetPosition();
+  
 }
 
-void TileMapCollision::Initialize()
+void TileMapCollision::Initialize() 
 {
- 
+	transform_ = reinterpret_cast<Transform *>(GetOwner()->GetComponent(CT_Transform));
+	rigid_ = reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody));
+	tileMap = FACTORY->tileMap;
+	mapWidth = &FACTORY->levelWidth;
+	mapHeight = &FACTORY->levelHeight;
+	int* mapHeight;
+	//owner->GetComponent(CT_Body)
+	//Where do I add the component so it gets updated?
+	//pos_ = transform_->GetPosition();
 }
 
 //Last thing to change: Edge cases from player hitting the corner of a tile head-on
 void TileMapCollision::Update(float dt)
 {
+	Vector3 pos_ = transform_->GetPosition();
+	Vector2 vel_ = rigid_->getVelocity();
+	Vector2 acc_ = rigid_->acceleration;
   int gridCollisionflag_ = CheckBinaryMapCollision(pos_.x + HALF_TILE_WIDTH, pos_.y + HALF_TILE_WIDTH);
 
   if (gridCollisionflag_ & COLLISION_TOP) //too tired to think about why this is happening, split into four if-statements and adjusted
   {
-	  SnapToCellY(pos_.y, rigid_.pTrans->GetPositionXY().y);
+	  SnapToCellY(pos_.y, rigid_->pTrans->GetPositionXY().y);
     pos_.y -= HALF_TILE_WIDTH;
-	rigid_.pTrans->GetPositionXY().y = pos_.y;
+	rigid_->pTrans->GetPositionXY().y = pos_.y;
     if (vel_.y > 0)
       vel_.y = 0;
     if (acc_.y > 0)
@@ -57,7 +60,7 @@ void TileMapCollision::Update(float dt)
   }
   if (gridCollisionflag_ & COLLISION_BOTTOM )
   {
-	  SnapToCellY(pos_.y, rigid_.pTrans->GetPositionXY().y);
+	  SnapToCellY(pos_.y, rigid_->pTrans->GetPositionXY().y);
     if (vel_.y < 0)
       vel_.y = 0;
 	  if (acc_.y < 0)
@@ -65,7 +68,7 @@ void TileMapCollision::Update(float dt)
   }
   if (gridCollisionflag_ & COLLISION_LEFT)
   {
-	  SnapToCellX(pos_.x, rigid_.pTrans->GetPositionXY().x);
+	  SnapToCellX(pos_.x, rigid_->pTrans->GetPositionXY().x);
     if (vel_.x < 0)
       vel_.x = 0;
     if (acc_.x < 0)
@@ -73,7 +76,7 @@ void TileMapCollision::Update(float dt)
   }
   if (gridCollisionflag_ & COLLISION_RIGHT)
   {
-	  SnapToCellX(pos_.x, rigid_.pTrans->GetPositionXY().x);
+	  SnapToCellX(pos_.x, rigid_->pTrans->GetPositionXY().x);
     if (vel_.x > 0)
       vel_.x = 0;
     if (acc_.x > 0)
@@ -124,7 +127,7 @@ int TileMapCollision::GetCellValue(int fx, int fy)
   //int index = tilemap_.numTiles - 1 - (tilemap_.width * (tilemap_.height - 1 - y)) - (tilemap_.width - 1 - x);
   //int index = tileMap.numTiles - 1 - (tileMap.width - 1) + x - (tileMap.width * y);
   //return (*(tilemap_.tiles))[index];
-  return tileMap[fx][fy];
+  return tileMap[fx][fy]-48;
 }
 
 
@@ -179,8 +182,12 @@ int TileMapCollision::CheckBinaryMapCollision(float PosX, float PosY)
   checkID2 = GetCellValue(PosX - QUARTER_TILE_WIDTH, PosY - HALF_TILE_WIDTH + 0.20f);
   if (checkID1 || checkID2)
   {
-    if (checkID1 != HOPPABLE_PLATFORM && checkID2 != HOPPABLE_PLATFORM)
-      flag_ = flag_ | COLLISION_LEFT;
+	  if (checkID1 != HOPPABLE_PLATFORM && checkID2 != HOPPABLE_PLATFORM)
+	  {
+		  flag_ = flag_ | COLLISION_LEFT;
+//		  if (checkID1 == SPIKE || checkID2 == SPIKE)
+
+	  }
   }
   /* Right */
   checkID1 = GetCellValue(PosX + QUARTER_TILE_WIDTH, PosY + HALF_TILE_WIDTH - 0.20f);
@@ -212,11 +219,11 @@ int TileMapCollision::CheckBinaryMapCollision(float PosX, float PosY)
       //Case 1: Upward velocity? Do nothing
       //Case 2: Downward velocity, player is in middle of platform, do nothing
       //Case 3: Downward velocity, player is comfortably above middle of platform, do something!
-      if (rigid_.getVelocity().y < 0)
+		if (rigid_->getVelocity().y < 0)
       {
         //If our "feet" are touching the top half of the tile, and if they're touching it JUST BARELY
-        if (static_cast<int>(rigid_.pTrans->GetPositionXY().y) % 2 == 1)
-			if (rigid_.pTrans->GetPositionXY().y - static_cast<float>(static_cast<int>(rigid_.pTrans->GetPositionXY().y)) > .95f)
+			if (static_cast<int>(rigid_->pTrans->GetPositionXY().y) % 2 == 1)
+				if (rigid_->pTrans->GetPositionXY().y - static_cast<float>(static_cast<int>(rigid_->pTrans->GetPositionXY().y)) > .95f)
             flag_ = flag_ | COLLISION_BOTTOM;
       }
 
@@ -236,6 +243,9 @@ int TileMapCollision::CheckBinaryMapCollision(float PosX, float PosY)
 
 bool TileMapCollision::TopIsColliding()
 {
+	//if (flag_ && "")
+
+
   return (flag_ & COLLISION_TOP) != 0;
 }
 bool TileMapCollision::BottomIsColliding()

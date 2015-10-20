@@ -53,7 +53,7 @@ Sprite::~Sprite()
 //Output      : none
 //Description : animated sprite if necessary, draws sprite on screen 
 //**********************
-void Sprite::Update(void)
+void Sprite::Update(float dt)
 {
   glm::vec4 transformedPosition, initialPosition;
   glm::vec3 scale;

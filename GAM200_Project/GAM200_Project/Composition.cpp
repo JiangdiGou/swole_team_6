@@ -48,11 +48,11 @@ void GameObjectComposition::Initialize()
 	}
 }
 
-void GameObjectComposition::Update()
+void GameObjectComposition::Update(float dt)
 {
   for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
   {
-    (*it)->Update();
+	  (*it)->Update(dt);
   }
 }
 GameObjectComposition::GameObjectComposition()

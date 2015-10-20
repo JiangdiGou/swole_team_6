@@ -1,4 +1,5 @@
-
+#ifndef BINARYMAP_H
+#define BINARYMAP_H
 #include "../Composition.h"
 #include "../GameComponents/objFactory.h"
 #include "Transform.h"
@@ -12,10 +13,9 @@ public:
 	TileMapCollision();//gameLevel::TileMapData &tilemap);//, gameLevel::);//objFactory::TileMapData &tilemap);
   friend RigidBody;
   void Initialize() override;
-  void Update(float dt) ;
+  void Update(float dt) override;
   void Release() override;
-  Transform* TransTile = GetOwner()->has(Transform);
-  Transform* TransBody = GetOwner()->has(Transform);
+  //Transform* TransTile;
   //Returns the tilemap ID of the object, and sets reference to the object if it hit something.
   /*int GetCurrentGameObject(GameObject &ref);*/
   bool TopIsColliding();
@@ -29,12 +29,12 @@ private:
   int flag_; //Our collision flag
 
   //In our owner's Transform:
-  Transform &transform_;
-  Vector3 &pos_;
+  Transform *transform_;
+  //Vector3 *pos_;
   //In our owner's RigidBody:
-  RigidBody &rigid_;
-  Vector2 &vel_;
-  Vector2 &acc_;
+  RigidBody *rigid_;
+  //Vector2 *vel_;
+  //Vector2 *acc_;
 
   char** tileMap;
   int* mapWidth;
@@ -57,3 +57,5 @@ private:
   int GetCellValue(int fx, int fy);
 
 };
+
+#endif

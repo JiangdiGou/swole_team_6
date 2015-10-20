@@ -68,7 +68,7 @@ void objFactory::Update(float dt)
   std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
   for (; it != gameObjs.end(); ++it)
   {
-    it->second->Update();
+    it->second->Update(dt);
   }
 }
 void objFactory::Shutdown()
@@ -170,10 +170,10 @@ void objFactory::createTiles()
       switch (tileMap[i][j])
       {
       case '1':
-        createTile(j - levelWidth/2, -levelHeight / 2 + i, std::string("Smiley2"));
+        createTile(j, i, std::string("Smiley2"));
         break;
       case '2':
-        createTile(j - levelWidth / 2, -levelHeight / 2 + i, std::string("Smiley3"));
+        createTile(j, i, std::string("Smiley3"));
         break;
       }
     }

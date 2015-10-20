@@ -28,8 +28,8 @@ void PlayerState::Initialize()
 {
   // we need messaging system here to connect the player controller first
   
-  
-  playerTileCollision = reinterpret_cast<TileMapCollision*>(parent->GetComponent(CT_TileMapCollider));
+  parent = GetOwner();
+  playerTileCollision = reinterpret_cast<TileMapCollision*>(parent->GetComponent(CT_TileMapCollision));
   playerBody = reinterpret_cast<RigidBody *>(parent->GetComponent(CT_RigidBody));
   //playerSpriteRend = reinterpret_cast<SpriteRenderer *>(parent->GetComponent(CT_SpriteRenderer));
  // we need to initialize the messaging system here!!

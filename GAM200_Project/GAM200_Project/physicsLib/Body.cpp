@@ -91,7 +91,7 @@ void RigidBody::Initialize()
   //return true;
 }
 
-void RigidBody::Update()
+void RigidBody::Update(float dt)
 {
 	//pTrans->SetPosition(position);
   /*pTrans->SetPosition(position);*/

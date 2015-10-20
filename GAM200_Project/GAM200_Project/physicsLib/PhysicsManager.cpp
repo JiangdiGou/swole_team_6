@@ -190,10 +190,10 @@ void PhysicsManager::Step(float dt)
 		
 	}
 
-	for (unsigned int i = 0; i < bodies.size(); ++i)
+	/*for (unsigned int i = 0; i < bodies.size(); ++i)
 	{
-		bodies[i]->Update();
-	}
+		bodies[i]->Update(dt);
+	}*/
 }
 
 void PhysicsManager::IntegrateForces(RigidBody *body, float dt)

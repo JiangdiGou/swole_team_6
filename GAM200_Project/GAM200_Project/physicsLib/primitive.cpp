@@ -33,7 +33,7 @@ void Primitive::Initialize()
 	//return true;
 }
 
-void Primitive::Update() {}
+void Primitive::Update(float dt) {}
 void Primitive::Release(){}
 
 
@@ -56,7 +56,7 @@ void Circle::Initialize()
 	//return true;
 }
 
-void Circle::Update(){
+void Circle::Update(float dt){
 	Vector3 pos = pTrans->GetPosition();
   debugDrawCircle(Vector3(pos.x, pos.y, pos.z), radius, Vector3(0, 0, 0), 10);
 }
@@ -84,7 +84,7 @@ void AABB::Initialize()
 	physics->colliders.push_back(this);
 	//return true;
 }
-void AABB::Update(){
+void AABB::Update(float dt){
 	Vector3 pos = pTrans->GetPosition();
   debugDrawSquare(Vector3(pos.x, pos.y, pos.z), halfSize.x, halfSize.y, Vector3(0, 0, 0));
 }

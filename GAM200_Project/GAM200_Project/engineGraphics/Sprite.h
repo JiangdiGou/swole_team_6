@@ -18,7 +18,7 @@ public:
 	glm::vec4 color;
 	AtlasTexture texture;
 
-  void Update() override;
+  void Update(float dt) override;
 
   static void initSprites(const Shader& shader, const TextureAtlas& atlas);
   void static drawAllSprites();

@@ -20,6 +20,8 @@
 #include "./gameComponents/objFactory.h"
 #include "./engineGraphics/graphicsManager.h"
 #include "./WindowsSystem.h"
+#include "physicsLib/BinaryMap.h"
+#include "physicsLib/PlayerState.h"
 
 #include <ctime>
 
@@ -119,21 +121,7 @@ void GameLogic::Initialize()
   printf("bo2's velocity: %f, %f", boObjBody2->getVelocity().x, boObjBody2->getVelocity().y);
 
 
-  GOC * boObj = FACTORY->makeObject("boGuy");
-  Transform * transformbo = new Transform();
-  transformbo->SetPosition(0, 0, 0);
-  Sprite * spritebo = new Sprite();
-  spritebo->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
-  boObj->AddComponent(CT_Transform, transformbo);
-  boObj->AddComponent(CT_Sprite, spritebo);
-  RigidBody* boObjBody = new RigidBody();
-  boObjBody->isStatic = false;
-  boObjBody->isGhost = false;
-  boObjBody->useGravity = true;
-  boObj->AddComponent(CT_RigidBody, boObjBody);
-  AABB* boCollision = new AABB();
-  boCollision->SetHalfSize(1, 1);
-  boObj->AddComponent(CT_AABB, boCollision);
+
 
   GOC * blackObj = FACTORY->makeObject("");
   Transform * transform5 = new Transform();
@@ -198,6 +186,26 @@ void GameLogic::Initialize()
   blackObj2->Initialize();
 
   //background->Initialize();*/
+
+GOC * boObj = FACTORY->makeObject("boGuy");
+Transform * transformbo = new Transform();
+transformbo->SetPosition(4, 3, 0);
+Sprite * spritebo = new Sprite();
+spritebo->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
+boObj->AddComponent(CT_Transform, transformbo);
+boObj->AddComponent(CT_Sprite, spritebo);
+RigidBody* boObjBody = new RigidBody();
+boObjBody->isStatic = false;
+boObjBody->isGhost = false;
+boObjBody->useGravity = true;
+boObj->AddComponent(CT_RigidBody, boObjBody);
+AABB* boCollision = new AABB();
+boCollision->SetHalfSize(1, 1);
+boObj->AddComponent(CT_AABB, boCollision);
+TileMapCollision* boTileCollision = new TileMapCollision();
+boObj->AddComponent(CT_TileMapCollision, boTileCollision);
+PlayerState* playerState = new PlayerState();
+boObj->AddComponent(CT_PlayerState, playerState);
   FACTORY->intializeObjects();
 }
 
