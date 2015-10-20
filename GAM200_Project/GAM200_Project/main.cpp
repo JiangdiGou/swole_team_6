@@ -56,7 +56,10 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   engine->AddSystem(new GraphicsManager(basicShader));
 
   engine->AddSystem(new GameLogic());
-  engine->AddSystem(new objFactory());
+
+  objFactory* factory = new objFactory();
+  engine->AddSystem(factory);
+
   engine->Initialize();
 
   graphics->setDeviceContext(windows->deviceContext);

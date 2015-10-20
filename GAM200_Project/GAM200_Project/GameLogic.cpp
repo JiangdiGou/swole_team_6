@@ -28,6 +28,8 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
+  FACTORY->loadLevelFrom("BetaLevel.txt");
+
   textureIdleBlue = new Texture("resources/NewRunStuff.png", 4, 64, 64, 100, 0, 128);
   textureRunBlue = new Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 192);
   
@@ -35,6 +37,8 @@ void GameLogic::Initialize()
   camera->AddComponent(CT_Transform, new Transform());
   camera->AddComponent(CT_Camera, new Camera((graphics->coreShader)));
   camera->Initialize();
+
+  FACTORY->createTiles();
 
   //GOC * background = FACTORY->makeObject("background");
   //Transform * transform = new Transform();
@@ -82,6 +86,7 @@ void GameLogic::Initialize()
 
 
   //Anoother Boguy
+  /*
   GOC * boObj2 = FACTORY->makeObject("boGuy");
   Transform * transformbo2 = new Transform();
   transformbo2->SetPosition(-1, 2, 0);
@@ -176,7 +181,8 @@ void GameLogic::Initialize()
   boObj->Initialize();
   blackObj2->Initialize();
 
-  //background->Initialize();
+  //background->Initialize();*/
+  FACTORY->intializeObjects();
 }
 
 void GameLogic::SendMessages(Message * m)

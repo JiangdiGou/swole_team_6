@@ -1,0 +1,6 @@
+template<typename type>
+void ChangeOverTime(type initial, type end, float dt, float* timetochange)
+{
+  initial += (end-initial) * (dt/timetochange);
+  timetochange -= dt;
+}
