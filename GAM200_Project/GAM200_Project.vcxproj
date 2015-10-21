@@ -41,6 +41,7 @@
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
+    <ClInclude Include="GAM200_Project\initInfo.h" />
     <ClInclude Include="GAM200_Project\logger\logger.h" />
     <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -160,6 +161,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\initInfo.cpp" />
     <ClCompile Include="GAM200_Project\logger\logger.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

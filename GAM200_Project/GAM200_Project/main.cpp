@@ -18,6 +18,10 @@ main loop
 #include "runLua/luaTranslate.h"
 #include "runLua/luaRunner.h"
 
+#include "initInfo.h"
+
+initInfo * INITINFO;
+
 //HDC deviceContext;
 //HGLRC renderingContext;
 
@@ -26,15 +30,12 @@ std::string windowTitle = "Swag";
 int ClientWidth = 800;
 int ClientHeight = 600;
 
-void luaInitFile()
+void baseInitRoutine()
 {
-  luaRunner iniFile;
-  //iniFile.loadFile("Scripts/ini.lua");
-  iniFile.runFile("Scripts/ini.lua");
-  windowTitle = iniFile.get<std::string>("init.windowTitle");
-  ClientWidth = iniFile.get<int>("init.clientWidth");
-  ClientHeight = iniFile.get<int>("init.clientHeight");
-  iniFile.stop();
+  windowTitle = INITINFO->windowTitle;
+  ClientWidth = INITINFO->clientWidth;
+  ClientHeight = INITINFO->clientHeight;
+  std::cout << ClientHeight << std::endl;
 }
 
 #ifdef GAMELOOP_RUN
@@ -49,6 +50,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   freopen("CONOUT$", "w", stdout);
 
   luaInitFile();
+  baseInitRoutine();
   //Stores the window being created
   //HWND window;
   ////Stores windows messages 

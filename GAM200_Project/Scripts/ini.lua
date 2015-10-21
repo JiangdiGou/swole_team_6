@@ -17,6 +17,10 @@ init = {
 
   --[debugMode]
   debugMode = true,
+  
+  --[assetConfig]
+  atlasPNG = "resources/Textures/Atlas/testAtlas.png",
+  atlasINFO = "resources/Textures/tList_testAtlas.txt"
 }
 
 --print (init.windowTitle)
