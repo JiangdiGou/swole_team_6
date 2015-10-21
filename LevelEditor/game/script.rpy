@@ -31,7 +31,7 @@ label new:
     $ levelStruct.FileLoc =  ui_find_folder("Select where to save the Level file.", home)
     $ baselineFile = renpy.input("Name the file")
     $ levelStruct.FileLoc += ("/" + baselineFile)
-    $ levelStruct.writeFile()
+    $ levelStruct.initFile()
     show screen gui_menu(levelStruct, guiView)
     jump loop1
 
@@ -45,7 +45,7 @@ label quickDebugNew:
     $ levelStruct.FileLoc =  ui_find_folder("Select where to save the Level file.", home)
     $ baselineFile = "ProjectTest.txt"
     $ levelStruct.FileLoc += ("/" + baselineFile)
-    $ levelStruct.writeFile()
+    $ levelStruct.initFile()
     show screen gui_menu(levelStruct, guiView)
     jump loop1
 

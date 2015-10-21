@@ -28,7 +28,7 @@ init python:
         def __init__(self):
             return
 
-        def writeFile(self):
+        def initFile(self):
             file = open(self.FileLoc, 'w+')
             #levelName Block
             file.write("%s\n" % "[LevelName]")
@@ -41,7 +41,30 @@ init python:
             file.write("%s\n" % "[TileMap]")
             for x in range(0, self.height()):
                 self.TileMap.append("0"*(int(self.ArrayWidth)))
-            for line in self.TileMap:
+            for line in reversed(self.TileMap):
+                file.write("%s\n" % line)
+
+            file.write("%s\n" % "[EntityList]")
+            for entity in self.EntityList:
+                if entity == []:
+                    return
+                file.write("%s " % entity.name)
+                file.write("at (%f, %f)\n" % x, y)
+                for component in entity.components:
+                    file.write("%s\n", component)
+
+        def writeFile(self):
+            file = open(self.FileLoc, 'w+')
+            #levelName Block
+            file.write("%s\n" % "[LevelName]")
+            file.write("%s\n" % self.LevelName)
+            #arraySpecs Block
+            file.write("%s\n" % "[ArraySpecs]")
+            file.write("%s\n" % self.ArrayWidth)
+            file.write("%s\n" % self.ArrayHeight)
+            #tileMap Block
+            file.write("%s\n" % "[TileMap]")
+            for line in reversed(self.TileMap):
                 file.write("%s\n" % line)
 
             file.write("%s\n" % "[EntityList]")
