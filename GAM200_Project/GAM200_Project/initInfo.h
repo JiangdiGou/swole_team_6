@@ -13,6 +13,7 @@ public:
   std::string windowTitle;
   int clientWidth;
   int clientHeight;
+  int FPSlimit;
 
   std::string atlasPNG;
   std::string atlasINFO;

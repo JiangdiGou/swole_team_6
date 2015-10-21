@@ -35,7 +35,6 @@ void baseInitRoutine()
   windowTitle = INITINFO->windowTitle;
   ClientWidth = INITINFO->clientWidth;
   ClientHeight = INITINFO->clientHeight;
-  std::cout << ClientHeight << std::endl;
 }
 
 #ifdef GAMELOOP_RUN

@@ -14,6 +14,7 @@ init = {
     --1920x1080 when?
   clientWidth = 1200,
   clientHeight = 900,
+  FPSlimit = 120,
 
   --[debugMode]
   debugMode = true,
