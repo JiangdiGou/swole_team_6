@@ -81,7 +81,7 @@ Level =
 		},
 		LevelData = 
 		{
-			int ILevelTimer = 100,
+			int ILevelTimer = 60,
 		},
 	},
 	Cog = 
@@ -108,7 +108,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 24.4281559,
+			float Size = 36.4425125,
 		},
 		EditorCameraController = 
 		{

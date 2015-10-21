@@ -119,7 +119,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.511000514, 41.4596252, 50],
+			Vec3 Translation = [2.02095294, 41.4596252, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -139,7 +139,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0.511000514, 41.4596252, -3.26193856e-007],
+			Vec3 LookTarget = [2.02095294, 41.4596252, -3.26193856e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -247,8 +247,6 @@ Level =
 		PlayerMovement = 
 		{
 			float RSpeed = 10,
-			float RJumpHeight = 14,
-			float RDashSpeedX = 100,
 		},
 		PlayerAttack = 
 		{
@@ -260,6 +258,13 @@ Level =
 		{
 		},
 		PowerAttack = 
+		{
+		},
+		PlayerJump = 
+		{
+			float RJumpHeight = 10,
+		},
+		PlayerStats = 
 		{
 		},
 		Hierarchy = 

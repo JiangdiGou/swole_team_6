@@ -35,6 +35,9 @@ class EnemyHitReaction : ZilchComponent
         //If the player has been juggling the enemy corpse too long, destroys this enemy
         if(this.IOverkillHealth <= 0)
         {
+            //subtract 1 from amount of enemies alive
+            this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
+            Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
             this.Owner.Destroy();
         }
         
@@ -47,6 +50,9 @@ class EnemyHitReaction : ZilchComponent
         //Destroys this enemy if their hp is below 0 too long
         if(this.IDespawnTime <= 0)
         {
+            //subtract 1 from amount of enemies alive
+            this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
+            Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
             this.Owner.Destroy();
         }
     }
