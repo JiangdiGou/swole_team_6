@@ -26,7 +26,7 @@ init python:
     import sys
     import platform
     import shutil
-    dirname = "ProjectExist"#change this to something like your game name
+    dirname = "LevelEditor"#change this to something like your game name
     
     from os.path import expanduser
     home = expanduser("~")

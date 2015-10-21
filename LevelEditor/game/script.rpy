@@ -1,4 +1,7 @@
 ﻿label start:
+    if(persistent.scripts == ""):
+        "Returning to Main Menu. You must have a valid Scripts folder selected."
+        return
     menu:
         "Existing file or new file?"
         "Existing":
@@ -8,6 +11,10 @@
         "QUICK":
             jump quickDebugNew
 
+label modFolder:
+    $ persistent.scripts = ui_find_folder("Select the Scripts folder", home)
+    return
+
 label existing:
     $ loadLevel = ui_find_file("Select the Level file.", home)  
     "Loading [loadLevel]...{nw}"
@@ -15,6 +22,7 @@ label existing:
     return
 
 label new:
+    $ scriptsToRegistrar(persistent.scripts)
     $ guiView = View()
     $ levelStruct = Level()
     $ levelStruct.LevelName = renpy.input("Name of level:")
@@ -28,6 +36,7 @@ label new:
     jump loop1
 
 label quickDebugNew:
+    $ scriptsToRegistrar(persistent.scripts)
     $ guiView = View()
     $ levelStruct = Level()
     $ levelStruct.LevelName = "Debug Level"
@@ -50,5 +59,12 @@ label newName:
     show screen disableGui
     $ temp = renpy.input("New name of level:")
     $ levelStruct.LevelName = temp
+    $ levelStruct.writeFile()
+    jump loop1
+
+label changeTile:
+    show screen disableGui
+    $ temp = renpy.input("New character:")
+    $ levelStruct.tileChange(guiView.x, guiView.y, temp)
     $ levelStruct.writeFile()
     jump loop1
