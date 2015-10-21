@@ -236,6 +236,9 @@
     <ClInclude Include="GAM200_Project\engineGraphics\ParticleSystem.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\runLua\luaTranslate.h">
+      <Filter>luaRunner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -360,6 +363,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\BinaryMap.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\PlayerState.cpp" />
+    <ClCompile Include="GAM200_Project\runLua\luaTranslate.cpp">
+      <Filter>luaRunner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">

@@ -4,7 +4,7 @@
 \author Gabriel Neumann
 \par    email: g.neumann\@digipen.edu
 \brief
-  main loop
+main loop
 */
 /******************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
@@ -15,13 +15,27 @@
 #include "Core.h"
 #include "engineGraphics/Graphics.h"
 #include "WindowsSystem.h"
+#include "runLua/luaTranslate.h"
+#include "runLua/luaRunner.h"
 
 //HDC deviceContext;
 //HGLRC renderingContext;
 
-const char windowTitle[] = "Swag";
-const int ClientWidth = 800;
-const int ClientHeight = 600;
+/* we can no longer promise to not change these */
+std::string windowTitle = "Swag";
+int ClientWidth = 800;
+int ClientHeight = 600;
+
+void luaInitFile()
+{
+  luaRunner iniFile;
+  //iniFile.loadFile("Scripts/ini.lua");
+  iniFile.runFile("Scripts/ini.lua");
+  windowTitle = iniFile.get<std::string>("init.windowTitle");
+  ClientWidth = iniFile.get<int>("init.clientWidth");
+  ClientHeight = iniFile.get<int>("init.clientHeight");
+  iniFile.stop();
+}
 
 #ifdef GAMELOOP_RUN
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
@@ -29,10 +43,12 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
 int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
 {
+
   //Opens a console for debugging and testing 
   AllocConsole();
   freopen("CONOUT$", "w", stdout);
 
+  luaInitFile();
   //Stores the window being created
   //HWND window;
   ////Stores windows messages 
@@ -46,7 +62,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   CoreEngine* engine = new CoreEngine();
 
-  WindowsSystem* windows = new WindowsSystem(windowTitle, ClientWidth, ClientHeight, show);
+  WindowsSystem* windows = new WindowsSystem(windowTitle.c_str(), ClientWidth, ClientHeight, show);
   engine->AddSystem(windows);
 
   engine->AddSystem(new PhysicsManager());

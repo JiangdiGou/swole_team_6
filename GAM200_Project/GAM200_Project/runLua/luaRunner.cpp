@@ -1,5 +1,6 @@
 //author Nolan Yoo
 
+#include "../logger/logger.h"
 #include "luaRunner.h"
 #include "../Utilities.h"
 
@@ -25,23 +26,29 @@ void luaRunner::printError(const std::string& source, const std::string& reason)
 
 void luaRunner::runFile(const std::string& fileName)
 {
-  lua_State *local = luaL_newstate();
+  //lua_State *local = luaL_newstate();
+  running = luaL_newstate();
   std::string trueName = "";
 
 #ifndef _WIN32
   trueName += macAppend;
 #endif
   trueName += fileName;
-  int fileCall = luaL_loadfile(local, trueName.c_str());
+  int fileCall = luaL_loadfile(running, trueName.c_str());
 
   if(fileCall == 0)//file can actually be ran
   {
-    luaL_openlibs(local);
-    fileCall = lua_pcall(local, 0, LUA_MULTRET, 0);
-    printError(local, fileCall);
+    luaL_openlibs(running);
+    fileCall = lua_pcall(running, 0, LUA_MULTRET, 0);
+    printError(running, fileCall);
   }
 
-  lua_close(local);
+  //lua_close(running);
+}
+
+void luaRunner::stop()
+{
+  lua_close(running);
 }
 
 void luaRunner::loadFile(const std::string& fileName)
