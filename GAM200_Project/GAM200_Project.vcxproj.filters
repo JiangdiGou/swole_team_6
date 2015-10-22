@@ -242,6 +242,9 @@
     <ClInclude Include="GAM200_Project\initInfo.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\ObjectLinkedList.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">

@@ -80,6 +80,7 @@
     <ClInclude Include="GAM200_Project\physicsLib\movement_collision_detection.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\ObjectLinkedList.h" />
     <ClInclude Include="GAM200_Project\physicsLib\PhysicsManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

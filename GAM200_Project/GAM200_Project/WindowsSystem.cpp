@@ -5,11 +5,6 @@
 //A global pointer to the windows system
 WindowsSystem* WINDOWSSYSTEM = NULL;
 
-enum keyStatus {
-  KEY_PRESSED,
-  KEY_DOWN,
-  KEY_RELEASED
-};
 
 const char windowsClassName[] = "FrameworkEngineWindowClass";
 
