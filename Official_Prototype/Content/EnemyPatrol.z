@@ -1,67 +1,89 @@
 class EnemyPatrol : ZilchComponent
 {
-    [Property]
-    var StartPos:Real3;
-    [Property]
-    var EndPos:Real3;
-    
-    var GoToStart:Boolean = false;
-    
-    [Property]
-    var WaitTime:Real;
-    var CurrentWait:Real = 0;
-    
-    [Property]
-    var WalkTime:Real;
+    var PlayerPos:Real3;
+    var YDifference:Real;
+    var MoveSpeed:Real = 10;
     
     function Initialize(init : CogInitializer)
     {
-        this.Owner.Transform.Translation = this.StartPos;
-        this.CurrentWait = this.WaitTime;
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        //Counts down until the wait is over
-        if(this.CurrentWait > 0.0)
+        this.PlayerPos = this.Space.FindObjectByName("Player").Transform.Translation;
+        
+        this.YDifference = Math.Abs(this.PlayerPos.Y - this.Owner.Transform.Translation.Y);
+        
+        //Moves the enemy in the direction of the player. 
+        if(this.PlayerPos.X > this.Owner.Transform.Translation.X && this.YDifference <= 5)
         {
-            //
-            this.CurrentWait -= event.Dt;
-            
-            if(this.CurrentWait <= 0)
+            if(this.CheckCollision(Real3(1, -1, 0), 1))
             {
-                this.Patrol();
+                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                Console.WriteLine("Move left, stopped");
+            }
+            //Checks collision to the right
+            else if(!this.CheckCollision(Real3.XAxis, 1.0))
+            {
+                this.Owner.RigidBody.Velocity = Real3(this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.Sprite.FlipX = true;
             }
         }
-    }
-    
-    function Patrol()
-    {
-        var seqMove = Action.Sequence(this.Owner.Actions);
-        
-        //Moves to the end position
-        if(this.GoToStart == false)
+        else if(this.PlayerPos.X < this.Owner.Transform.Translation.X && this.YDifference <= 5)
         {
-            Action.Property(seqMove, @this.Owner.Transform.Translation, this.EndPos, this.WalkTime, Ease.Linear);
+            if(this.CheckCollision(Real3(-1, -1, 0), 1))
+            {
+                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                Console.WriteLine("Move left, stopped");
+            }
+            //Checks collision to the left
+            else if(!this.CheckCollision(-Real3.XAxis, 1.0))
+            {
+                this.Owner.RigidBody.Velocity = Real3(-this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                this.Owner.Sprite.FlipX = false;
+            }
         }
-        //Moves to the start position
         else
         {
-            Action.Property(seqMove, @this.Owner.Transform.Translation, this.StartPos, this.WalkTime, Ease.Linear);
+            this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
         }
-        
-        //slight delay before telling this enemy to wait
-        Action.Delay(seqMove, this.WalkTime - 1);
-        //Tells this enemy to wait
-        Action.Call(seqMove, this.SetWait);
-        //Changes the direction of the next movement
-        this.GoToStart = !this.GoToStart;
     }
     
-    //Tells this enemy to wait before it can move again
-    function SetWait()
+    //Casts a ray and checks if the object hit is close enough to this enemy
+    function CheckCollision(direction_:Real3, checkDistance_:Real):Boolean
     {
-        this.CurrentWait = this.WaitTime;
+        var ray = Ray();
+        ray.Start = this.Owner.Transform.Translation;
+        ray.Direction = direction_;
+        var filter = CastFilter();
+        filter.IgnoreDynamic = true;
+        var results = this.Space.PhysicsSpace.CastRayFirstFiltered(ray, filter);
+        var difference:Real = 0.0;
+        
+        if(results.ObjectHit == null)
+        {
+            return false;
+        }
+        
+        //If checking right
+        if(direction_.X > 0)
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        //If checking left
+        else
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        
+        if(difference <= checkDistance_)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

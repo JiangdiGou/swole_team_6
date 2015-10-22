@@ -1,0 +1,88 @@
+class CameraController2 : ZilchComponent
+{
+    var PlayerObject:Cog;
+    
+    [Property]
+    var MaxX:Real = 1.0;
+    [Property]
+    var MinX:Real = 1.0;
+    
+    [Property]
+    var MaxY:Real = 1.0;
+    [Property]
+    var MinY:Real = 1.0;
+    
+    [Property]
+    var XOffset:Real = 0.0;
+    [Property]
+    var YOffset:Real = 0.0;
+    
+    [Property]
+    var XVelocityBuffer:Real = 1.0;
+    [Property]
+    var YVelocityBuffer:Real = 1.0;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.PlayerObject = this.Space.FindObjectByName("Player");
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.PlayerObject.RigidBody.Velocity.X < this.XVelocityBuffer && this.PlayerObject.RigidBody.Velocity.X > -this.XVelocityBuffer)
+        {
+            
+        }
+        
+        this.DrawConstraints();
+    }
+    
+    function DrawConstraints()
+    {
+        this.Space.DebugDraw();
+        
+        /*var topLeft:Real3 = Real3(this.PlayerObject.Transform.Translation.X + this.MinX, this.PlayerObject.Transform.Translation.Y + this.MaxY, 0);
+        var topRight:Real3 = Real3(this.PlayerObject.Transform.Translation.X + this.MaxX, this.PlayerObject.Transform.Translation.Y + this.MaxY, 0);
+        var bottomLeft:Real3 = Real3(this.PlayerObject.Transform.Translation.X + this.MinX, this.PlayerObject.Transform.Translation.Y + this.MinY, 0);
+        var bottomRight:Real3 = Real3(this.PlayerObject.Transform.Translation.X + this.MaxX, this.PlayerObject.Transform.Translation.Y + this.MinY, 0);*/
+        var topLeft:Real3 = this.PlayerObject.Transform.Translation;
+        var topRight:Real3 = this.PlayerObject.Transform.Translation;
+        var bottomLeft:Real3 = this.PlayerObject.Transform.Translation;
+        var bottomRight:Real3 = this.PlayerObject.Transform.Translation;
+        
+        var topLine:DebugLine = DebugLine();
+        topLine.Start(topLeft);
+        topLine.End(topRight);
+        topLine.Width(1.0);
+        topLine.Float4Color(Real4(1, 0, 0, 1));
+        topLine.Duration(1.0);
+        
+        var bottomLine:DebugLine = DebugLine();
+        bottomLine.Start(bottomLeft);
+        bottomLine.End(bottomRight);
+        bottomLine.Width(1.0);
+        bottomLine.Float4Color(Real4(1, 0, 0, 1));
+        bottomLine.Duration(1.0);
+        
+        var leftLine:DebugLine = DebugLine();
+        leftLine.Start(topLeft);
+        leftLine.End(bottomLeft);
+        leftLine.Width(1.0);
+        leftLine.Float4Color(Real4(1, 0, 0, 1));
+        leftLine.Duration(1.0);
+        
+        var rightLine:DebugLine = DebugLine();
+        rightLine.Start(topRight);
+        rightLine.End(bottomRight);
+        rightLine.Width(1.0);
+        rightLine.Float4Color(Real4(1, 0, 0, 1));
+        rightLine.Duration(1.0);
+        
+        topLine.Draw();
+        bottomLine.Draw();
+        leftLine.Draw();
+        rightLine.Draw();
+    }
+}

@@ -33,7 +33,7 @@ class CameraController : ZilchComponent
         
         if(playerPos != cameraPos)
         {
-            this.Owner.Transform.Translation += Real3( difference.X * (event.Dt * 3), difference.Y * (event.Dt * 3), 0);
+            this.Owner.Transform.Translation += Real3( difference.X * (event.Dt * 4), difference.Y * (event.Dt * 4), 0);
         }
     }
     
