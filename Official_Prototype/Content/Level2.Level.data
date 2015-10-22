@@ -119,7 +119,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [2.02095294, 41.4596252, 50],
+			Vec3 Translation = [3.18191075, 21.4530048, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -131,7 +131,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 22.3130646,
+			float Size = 60.6531563,
 		},
 		EditorCameraController = 
 		{
@@ -139,7 +139,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [2.02095294, 41.4596252, -3.26193856e-007],
+			Vec3 LookTarget = [3.18191075, 21.4530048, -2.09444721e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -163,7 +163,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 40.8272705, 40],
+			Vec3 Translation = [-0.332346439, 13.0763798, 40],
 			Vec3 Scale = [3, 1.11193204, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -200,7 +200,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 40.8272705, 0],
+			Vec3 Translation = [0, 13.2110615, 0],
 			Vec3 Scale = [3, 3, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -258,13 +258,6 @@ Level =
 		{
 		},
 		PowerAttack = 
-		{
-		},
-		PlayerJump = 
-		{
-			float RJumpHeight = 10,
-		},
-		PlayerStats = 
 		{
 		},
 		Hierarchy = 

@@ -90,6 +90,12 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
+		LevelListener = 
+		{
+			string PauseKind = "InterruptSpace",
+			bool Pausable = true,
+			string InterruptLevel = "",
+		},
 	},
 	Cog = 
 	{
@@ -207,6 +213,8 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
 		CreateOverlayedSpace = 
 		{
@@ -256,6 +264,8 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
 		CreateOverlayedSpace = 
 		{
@@ -305,6 +315,8 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
 		CreateOverlayedSpace = 
 		{
@@ -354,12 +366,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		CreateOverlayedSpace = 
+		GenericButton = 
 		{
-			bool MouseClick = true,
-			bool Automatic = false,
-			string OverlayedLevel = "56c5027fa4851517:AreYouSure",
+			Enum ButtonType = ReturnableLevel,
+			string LoadThisLevel = "56c5027fa4851517:AreYouSure",
 		},
 	},
 	Cog = 
@@ -539,12 +552,13 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
-		CreateOverlayedSpace = 
+		GenericButton = 
 		{
-			bool MouseClick = true,
-			bool Automatic = false,
-			string OverlayedLevel = "553573c03722f285:LevelSelect",
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553573c03722f285:LevelSelect",
 		},
 	},
 	Cog = 

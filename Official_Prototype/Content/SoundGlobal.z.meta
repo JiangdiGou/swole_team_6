@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "SoundGlobal",
+		uint64 ResourceId = 561e02dedffc96a4,
+	},
+},
