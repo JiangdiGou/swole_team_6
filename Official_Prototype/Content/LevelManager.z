@@ -1,0 +1,42 @@
+class LevelManager : ZilchComponent
+{
+    var GameOver : Boolean = false;
+    
+    [Property]
+    var LevelToLoad : Level;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Owner.EnemyCounter.EnemiesAlive <= 0)
+        {
+            var square = this.Space.CreateAtPosition(Archetype.Find("ClearSquare"), this.Owner.Transform.Translation + Real3(0,0,5));
+            
+            var seq = Action.Sequence(this.Owner.Actions);
+            
+            Action.Property(seq, @square.Sprite.Color, Real4(0,0,0,1), 2, Ease.Linear);
+            Action.Call(seq, this.LoadNextLv);
+        }
+        
+        if(this.GameOver)
+        {
+            this.GameOver = false;
+            
+            var square = this.Space.CreateAtPosition(Archetype.Find("ClearSquare"), this.Owner.Transform.Translation + Real3(0,0,5));
+            
+            var seq = Action.Sequence(this.Owner.Actions);
+            
+            Action.Property(seq, @square.Sprite.Color, Real4(0,0,0,1), 2, Ease.Linear);
+            Action.Call(seq, this.LoadNextLv);
+        }
+    }
+    
+    function LoadNextLv()
+    {
+        this.Space.LoadLevel(this.LevelToLoad);
+    }
+}

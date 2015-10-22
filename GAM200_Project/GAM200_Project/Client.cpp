@@ -43,6 +43,7 @@ void luaRoutine(std::string arg)
   
   printstr("(Lua Test 1)");
   testLua.runFile("Scripts/hello.lua");
+  testLua.stop();
   std::cout<<'\n';
 
   printstr("(Lua Test 2)");
@@ -55,6 +56,7 @@ void luaRoutine(std::string arg)
 
   printstr("(Lua Test 3)");
   testLua.runFile<std::string>("Scripts/paramTest.lua", "Lua argument test");
+  testLua.stop();
   std::cout<<'\n';
 
   printstr("(Lua Test 4)");

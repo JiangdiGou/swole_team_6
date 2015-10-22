@@ -1,4 +1,5 @@
 #include "graphicsManager.h"
+#include "initInfo.h"
 
 GraphicsManager *graphics;
 
@@ -11,8 +12,10 @@ GraphicsManager::GraphicsManager(const Shader& shader)
 
   //Flush out the error
   glGetError();
-  spriteAtlas = *(new TextureAtlas("resources/Textures/Atlas/testAtlas.png", 
-                                  "resources/Textures/tList_testAtlas.txt"));
+  spriteAtlas = *(new TextureAtlas(
+                                  (INITINFO->atlasPNG).c_str(),
+                                  (INITINFO->atlasINFO).c_str()
+                                   ));
 #ifdef GFXLOG
   logGfxError("TEXTUREATLAS:: Error in texture Atlas construction. ");
 #endif

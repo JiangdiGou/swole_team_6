@@ -5,7 +5,11 @@
 //A global pointer to the windows system
 WindowsSystem* WINDOWSSYSTEM = NULL;
 
-
+enum keyStatus {
+  KEY_PRESSED,
+  KEY_DOWN,
+  KEY_RELEASED
+};
 
 const char windowsClassName[] = "FrameworkEngineWindowClass";
 
@@ -77,33 +81,25 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 		break;
 	}
 	case WM_KEYDOWN:
-	{
-		switch (wParam)
-		{
-		case 0x41:
-		{
-			MessageCharacterKey m;
-			m.character = 'a';
-			CORE->BroadcastMessage(&m);
-		}
-		case 0x44:
-		{
-			MessageCharacterKey m;
-			m.character = 'd';
-			CORE->BroadcastMessage(&m);
-		}
-		case 0x20:
-		{
-			MessageCharacterKey m;
-			m.character = VK_SPACE;
-			CORE->BroadcastMessage(&m);
-		}
-		}
+  {
+    MessageCharacterKey m;
+    if (lParam & 0x40000000)
+      m.keyStatus = KEY_DOWN;
+    else
+      m.keyStatus = KEY_PRESSED;
+    m.character = (char)wParam;
+    CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_KEYUP:
-		break;
-	case WM_CREATE:
+  {
+    MessageCharacterKey m;
+    m.keyStatus = KEY_RELEASED;
+    m.character = (char)wParam;
+    CORE->BroadcastMessage(&m);
+    break;
+  }
+  case WM_CREATE:
 	{
 		WINDOWSSYSTEM->deviceContext = GetDC(hWnd);
 		setupPixelFormatDescriptor(WINDOWSSYSTEM->deviceContext);
@@ -229,6 +225,10 @@ WindowsSystem::WindowsSystem(const char* windowTitle, int ClientWidth, int Clien
 
   DragAcceptFiles(hWnd, true);
   ShowWindow(hWnd, show);
+}
+
+void WindowsSystem::SendMessages(Message* m)
+{
 }
 
 WindowsSystem::~WindowsSystem()

@@ -1,7 +1,7 @@
 #ifndef FRAMERATECONTROLLER_H
 #define FRAMERATECONTROLLER_H
 
-#define FRAMERATE 60.0
+//#define FRAMERATE 60.0
 
 #include "Graphics.h"
 

@@ -93,6 +93,12 @@ Level =
 		PowerActivator = 
 		{
 		},
+		LevelListener = 
+		{
+			string PauseKind = "InterruptSpace",
+			bool Pausable = false,
+			string InterruptLevel = "",
+		},
 	},
 	Cog = 
 	{
@@ -1228,13 +1234,6 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		GoToLevel = 
-		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = true,
-			string GameData_Level = "",
-			string Level_Name = "",
-		},
 		Reactive = 
 		{
 			bool Active = true,
@@ -1244,6 +1243,9 @@ Level =
 		{
 			bool ScaleUp = true,
 			bool Glow = true,
+		},
+		PowerSelectLoadLevel = 
+		{
 		},
 	},
 	Cog = 
@@ -1562,8 +1564,10 @@ Level =
 			bool ScaleUp = true,
 			bool Glow = true,
 		},
-		DestroySpaceButton = 
+		GenericButton = 
 		{
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553573c03722f285:LevelSelect",
 		},
 	},
 	Cog = 

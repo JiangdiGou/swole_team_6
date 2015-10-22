@@ -10,9 +10,6 @@ class ScrollPoint : ZilchComponent
     //Determines which point is the next in the sequence. Leave blank if this is the last point
     [Property]
     var NextPoint:CogPath;
-    //Points to the next path sprite leading to the point. Leave blank if this is the last point
-    [Property]
-    var PathSprite:CogPath;
     //Sprite that this point turns into when hit
     [Property]
     var Circle : SpriteSource;
@@ -54,7 +51,6 @@ class ScrollPoint : ZilchComponent
             else
             {
                 this.NextPoint.Cog.ScrollPoint.ActivatePoint();
-                this.PathSprite.Cog.Sprite.Color = Real4(1,1,1,0.7);
             }
         }
     }

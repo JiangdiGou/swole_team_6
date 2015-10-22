@@ -197,6 +197,7 @@ screen main_menu():
         has vbox
 
         textbutton _("Start Editor") action Start()
+        textbutton _("Set Scripts Folder") action Start("modFolder")
         textbutton _("Preferences") action ShowMenu("preferences")
         textbutton _("Quit") action Quit(confirm=False)
 

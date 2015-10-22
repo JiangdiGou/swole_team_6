@@ -1,6 +1,9 @@
 #include "FramerateController.h"
 #include "Graphics.h"
+#include "../initInfo.h"
 #include <mmsystem.h>
+
+//initInfo * INITINFO;
 
 unsigned FramerateController::frameStartTime = timeGetTime();
 unsigned FramerateController::dt = 0;
@@ -12,7 +15,7 @@ unsigned FramerateController::getPreviousDt()
 void FramerateController::frameEnd()
 {
   unsigned deltaTime = timeGetTime() - frameStartTime;
-  unsigned frameTime = (unsigned)(1000.0f / FRAMERATE);
+  unsigned frameTime = (unsigned)(1000.0f / INITINFO->FPSlimit);
 
   timeBeginPeriod(1);
 

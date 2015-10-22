@@ -16,6 +16,7 @@ public:
   void ActivateWindow();								//Activate the game window so it is actually visible
   virtual void Update(float dt);						//Update the system every frame
   virtual std::string GetName() { return "Windows"; }	//Get the string name of the system
+  void SendMessages(Message* m) override;
 
   HWND hWnd;											//The handle to the game window
   HINSTANCE hInstance;								//The handle to the instance
@@ -30,6 +31,7 @@ class MessageCharacterKey : public Message
 public:
   MessageCharacterKey() : Message(Mid::CharacterKey) {};
   char character;
+  int keyStatus;
 };
 
 ///Message signaling that a mouse button state has changed.

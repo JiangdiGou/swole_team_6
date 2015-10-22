@@ -28,7 +28,7 @@ public:
     return;
   }
   void loadFile(const std::string& fileName);
-
+  void stop();
   bool lua_checkstack(const std::string& request);
 
   lua_State* getState();

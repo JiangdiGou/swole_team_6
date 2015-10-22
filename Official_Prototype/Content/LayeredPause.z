@@ -1,0 +1,37 @@
+/*
+Script Author: Nolan T Yoo
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+
+Comment: Allows me to pause a space from within a space.
+*/
+
+
+class LayeredPause : ZilchComponent
+{
+    var Unlayer : Space;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.GameSession, Events.GameRequestQuit, this.OnEscapeDown);
+    }
+    
+    function OnEscapeDown(event : GameEvent)
+    {
+        if(this.Unlayer == null)
+        {
+            return;
+        }
+        event.Handled = true;
+        this.Unlayer.LevelSettings.LevelListener.IgnoreKeyOnce = true;
+        this.BreakMe();
+    }
+    
+    function BreakMe()
+    {
+        Console.WriteLine("Bye to LayeredPause.");
+        this.Owner.Space.Destroy();
+        this.Unlayer.LevelSettings.LevelListener.IsThePauseLevel = true;
+        this.Unlayer.LevelSettings.LevelListener.IgnoreKey = false;
+        
+    }
+}

@@ -90,6 +90,9 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
+		LayeredPause = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -159,7 +162,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 200,
-			float Size = 20,
+			float Size = 15,
 		},
 		SoundListener = 
 		{
@@ -285,6 +288,8 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
 		Quit = 
 		{
@@ -433,6 +438,8 @@ Level =
 		},
 		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
 		},
 		DestroySpaceButton = 
 		{
