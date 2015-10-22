@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "DynamicHUD",
+		uint64 ResourceId = 56176b1754bf38fc,
+	},
+},

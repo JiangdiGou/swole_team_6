@@ -1,0 +1,32 @@
+class DynamicHUD : ZilchComponent
+{
+    [Property]
+    var XPercent:Real;
+    [Property]
+    var YPercent:Real;
+    
+    var FirstRun : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(!this.FirstRun)
+        {
+            this.FirstRun = true;
+            
+            var xPos:Real = (this.XPercent / 100) * this.LevelSettings.CameraViewport.ResolutionOrAspect.X;
+            var yPos:Real = (this.YPercent / 100) * this.LevelSettings.CameraViewport.ResolutionOrAspect.Y;
+            
+            //this.Owner.Transform.Translation = Real3(xPos, yPos, 0);
+            var tempReal2:Real2 = this.LevelSettings.CameraViewport.WorldToScreen(this.Owner.Transform.Translation);
+            
+            Console.WriteLine(this.Owner.Transform.Translation);
+            
+            Console.WriteLine("WorldToScreen: `tempReal2`");
+        }
+    }
+}
