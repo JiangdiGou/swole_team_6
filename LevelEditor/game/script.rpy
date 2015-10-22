@@ -51,6 +51,7 @@ label quickDebugNew:
 
 label loop1:
     hide screen disableGui
+    hide screen understood
     ""
     show screen gui_menu(levelStruct, guiView)
     jump loop1
@@ -63,8 +64,14 @@ label newName:
     jump loop1
 
 label changeTile:
-    show screen disableGui
-    $ temp = renpy.input("New character:")
+    #show screen disableGui
+    #$ temp = renpy.input("New character:")
+    $ temp = askTile(luaTiles)
+    if temp not in luaChars:
+        hide screen disableGui
+        show screen understood
+        "Bad chararcter."
+        return
     $ levelStruct.tileChange(guiView.x, guiView.y, temp)
     $ levelStruct.writeFile()
     jump loop1

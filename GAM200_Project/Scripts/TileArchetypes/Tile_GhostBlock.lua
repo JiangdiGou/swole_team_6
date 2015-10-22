@@ -1,3 +1,8 @@
+--Editor Info
+aType = {
+	name = "GhostBlock"	
+}
+
 --Sides
 SideTypes = 
 {

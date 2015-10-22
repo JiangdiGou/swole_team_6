@@ -28,6 +28,47 @@ init python:
         oldval = obj.yadjustment.get_value()
         obj.yadjustment.change(oldval + step)
 
+init python:
+    adj=ui.adjustment()
+    def askTile(tiles):
+        menu_answers = []
+        for tile in tiles:
+            menu_answers.append((tile[0], tile[1]))
+        q = []
+        q.extend(menu_answers)
+        return menu(q, screen="packedMenu")
+
+screen packedMenu:
+    zorder 2
+    modal True
+    window:
+        style "menu_window"
+        xalign 0.5
+        ymaximum 400
+        xsize 590
+        side "c r":
+            frame:
+                has viewport:
+                    mousewheel True
+                    draggable True
+                    yinitial 0.0
+                    yadjustment adj
+                vbox:
+                    style "menu"
+                    spacing 2
+                    for caption, action, chosen in items:
+
+                        if action:
+
+                            button:
+                                action action
+                                style "menu_choice_button"
+                                text caption style "menu_choice"
+
+                        else:
+                            text caption style "menu_caption"
+            bar adjustment adj style 'vscrollbar'
+
 screen vpkm(obj):
     $ local = renpy.get_widget(None, obj)
     key "input_right" action [[Function(modright, local)]]
@@ -72,6 +113,7 @@ screen gui_menu(lo, vi):
         xsize 260
         vbox:
             xsize 200
+            text "Character:"
             if(vi.x == -1 or vi.y == -1):
                 textbutton "Bad Tile"
             else:
@@ -118,4 +160,12 @@ screen disableGui:
     textbutton "Never Mind":
         xalign 0.5
         yalign 0.7
+        action Jump("loop1")
+
+screen understood:
+    modal True
+    zorder 1
+    textbutton "Sorry!":
+        xalign 0.5
+        yalign 0.9
         action Jump("loop1")
