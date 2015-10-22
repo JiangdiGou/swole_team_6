@@ -38,11 +38,11 @@ HWND createWindow(HINSTANCE instance);
 //This function prototype is in here so createwindow can see it 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
 
-//#define GFXLOG
+#define GFXLOG
 
 #ifdef GFXLOG
 #define WARNINGFRAMETIME 33
-#define STARTUPFRAMES 5
+#define STARTUPFRAMES 60
 extern int frameNumber;
 extern txtlog *gfxErrorLog;
 void logGfxError(std::string precedingMessage);

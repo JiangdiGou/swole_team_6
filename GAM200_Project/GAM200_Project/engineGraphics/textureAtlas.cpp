@@ -81,7 +81,8 @@ TextureAtlas::TextureAtlas(const char* atlasname, const char* tListName)
   //Sets the Blending mode 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   //de allocates resources and unbinds texture 
   SOIL_free_image_data(image);
   glBindTexture(GL_TEXTURE_2D, 0);
