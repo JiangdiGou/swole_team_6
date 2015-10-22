@@ -12,7 +12,7 @@ enum ComponentTypeId
 	CT_Sprite,
   CT_SpriteText,
 	//Physics
-	CT_RigidBody,
+	CT_Body,
 	CT_AABB,
 	CT_Circle,
 	//Max
@@ -25,6 +25,7 @@ enum ComponentTypeId
 	CT_DESTROY,
 	CT_SPAWNBLOCK,
 	CT_PLAYERDEATH,
+	CT_ShapeAAB,
 	
 };
 #endif

@@ -92,6 +92,12 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 			m.character = 'd';
 			CORE->BroadcastMessage(&m);
 		}
+		case 0x20:
+		{
+			MessageCharacterKey m;
+			m.character = VK_SPACE;
+			CORE->BroadcastMessage(&m);
+		}
 		}
 		break;
 	}

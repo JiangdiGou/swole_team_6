@@ -49,7 +49,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   WindowsSystem* windows = new WindowsSystem(windowTitle, ClientWidth, ClientHeight, show);
   engine->AddSystem(windows);
 
-  engine->AddSystem(new PhysicsManager());
+  engine->AddSystem(new Physics());
 
   Shader* pBasicShader = new Shader("resources/shaders/VertexShader.txt", "resources/shaders/FragmentShader.txt");
   const Shader &basicShader = *pBasicShader;

@@ -187,26 +187,112 @@ void GameLogic::Initialize()
 
   //background->Initialize();*/
 
-GOC * boObj = FACTORY->makeObject("boGuy");
-Transform * transformbo = new Transform();
-transformbo->SetPosition(4, 3, 0);
-Sprite * spritebo = new Sprite();
-spritebo->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
-boObj->AddComponent(CT_Transform, transformbo);
-boObj->AddComponent(CT_Sprite, spritebo);
-RigidBody* boObjBody = new RigidBody();
-boObjBody->isStatic = false;
-boObjBody->isGhost = false;
-boObjBody->useGravity = true;
-boObj->AddComponent(CT_RigidBody, boObjBody);
-AABB* boCollision = new AABB();
-boCollision->SetHalfSize(1, 1);
-boObj->AddComponent(CT_AABB, boCollision);
-TileMapCollision* boTileCollision = new TileMapCollision();
-boObj->AddComponent(CT_TileMapCollision, boTileCollision);
-PlayerState* playerState = new PlayerState();
-boObj->AddComponent(CT_PlayerState, playerState);
+//GOC * boObj = FACTORY->makeObject("boGuy");
+//Transform * transformbo = new Transform();
+//transformbo->SetPosition(4, 3, 0);
+//Sprite * spritebo = new Sprite();
+//spritebo->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
+//boObj->AddComponent(CT_Transform, transformbo);
+//boObj->AddComponent(CT_Sprite, spritebo);
+//RigidBody* boObjBody = new RigidBody();
+////boObjBody->set(5.0f);
+//
+////boObjBody->restitution = 0;
+//boObjBody->isStatic = false;
+//boObjBody->isGhost = false;
+//boObjBody->useGravity = true;
+//boObj->AddComponent(CT_RigidBody, boObjBody);
+//AABB* boCollision = new AABB();
+//boCollision->SetHalfSize(1.0f, 1.0f);
+//boObj->AddComponent(CT_AABB, boCollision);
+//TileMapCollision* boTileCollision = new TileMapCollision();
+//boObj->AddComponent(CT_TileMapCollision, boTileCollision);
+//PlayerState* playerState = new PlayerState();
+//boObj->AddComponent(CT_PlayerState, playerState);
+
+
+// new falling object
+GOC * Fbox = FACTORY->makeObject("");
+Transform * transformFbox = new Transform();
+transformFbox->SetPosition(4, 4, 0);
+Fbox->AddComponent(CT_Transform, transformFbox);
+Body * bodyFbox = new Body();
+bodyFbox->Mass = 3;
+bodyFbox->Restitution = 0.3f;
+bodyFbox->Friction = 0.3f;
+ShapeAAB * boxFbox = new ShapeAAB();
+boxFbox->Extents = Vec2D(.5, .5);
+bodyFbox->BodyShape = boxFbox;
+//bodyFbox->SetVelocity(Vec2D(0,0));
+//bodyFbox->AddForce(Vec2D(0, -3));
+Fbox->AddComponent(CT_Body, bodyFbox);
+printf("my v%f, %f", bodyFbox->Velocity.x, bodyFbox->Velocity.y);
+//bodyFbox->AddForce((Vec2D(0,0) - bodyFbox->Position) * 50);
+Vec2D testV = bodyFbox->Velocity;
+
+printf("my pos%f, %f", bodyFbox->Position, bodyFbox->Position.y);
+
+if (Fbox && boxFbox && bodyFbox && bodyFbox->IsStatic == false)
+{
+	std::cout << "Fbox exist" << std::endl;
+	//std::cout << testV << std::endl;
+}
+//  blackObj2->InitPosition = (whatever, whatever, whatever);
+//Transform * transform6 = new Transform();
+//
+//transform6->SetPosition(4, 1, 0);
+
+Sprite * spriteFbox = new Sprite();
+spriteFbox->texture = graphics->spriteAtlas.textures[std::string("sliceTest-1")];
+Fbox->AddComponent(CT_Sprite, spriteFbox);
+
+
+
+
+// ground
+GOC * blackObj2 = FACTORY->makeObject("");
+Transform * transform = new Transform();
+transform->SetPosition(4, 1,0);
+blackObj2->AddComponent(CT_Transform, transform);
+Body * body = new Body();
+body->Mass = 0.0f;
+body->Restitution = 0.3f;
+body->Friction = 0.3f;
+ShapeAAB * box = new ShapeAAB();
+box->Extents = Vec2D(0.5, 0.5);
+body->BodyShape = box;
+blackObj2->AddComponent(CT_Body, body);
+if (blackObj2 && box && body && body->IsStatic == false)
+{
+	std::cout << "I exist" << std::endl;
+}
+//  blackObj2->InitPosition = (whatever, whatever, whatever);
+//Transform * transform6 = new Transform();
+//
+//transform6->SetPosition(4, 1, 0);
+
+Sprite * sprite5 = new Sprite();
+sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+blackObj2->AddComponent(CT_Sprite, sprite5);
+
+
+//blackObj2->AddComponent(CT_Transform, transform6);
+//blackObj2->AddComponent(CT_Sprite, sprite5);
+//RigidBody* blackObjBody2 = new RigidBody();
+//blackObjBody2->isGhost = false;
+//blackObjBody2->SetStatic();
+//blackObjBody2->useGravity = false;
+//if (blackObjBody2->isStatic)
+//{
+//	transform6->SetPosition(4, 1, 0);
+//}
+//blackObjBody->isKinematic = true;
+//blackObj2->AddComponent(CT_RigidBody, blackObjBody2);
+//AABB* blackCollision2 = new AABB();
+//blackCollision2->SetHalfSize(1.0f, 1.0f);
+//blackObj2->AddComponent(CT_AABB, blackCollision2);
   FACTORY->intializeObjects();
+  //player = Fbox;
 }
 
 void GameLogic::SendMessages(Message * m)
@@ -249,6 +335,31 @@ void GameLogic::SendMessages(Message * m)
   }
 
 };
+
+
+//void GameLogic::SendMessages(Message * message)
+//{
+//  switch (message->MessageId)
+//  {
+//    // The user has pressed a (letter/number) key, we may respond by creating
+//    // a specific object based on the key pressed.
+//  case Mid::CharacterKey:
+//  {
+//    MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
+//    switch (messageChar->character)
+//    {
+//    case 'd':
+//    {
+//       setVelocity(0.5, 0);
+//    }
+//	case 'a':
+//	{
+//		setVelocity(-0.5, 0);
+//	}
+//    }
+//  }
+//  }
+//}
 GameLogic::GameLogic()
 {
   LOGIC = this;

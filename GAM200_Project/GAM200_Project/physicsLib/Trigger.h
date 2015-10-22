@@ -9,22 +9,22 @@
 //When the object collides with another, all collision delegates will be called.
 
 //Forward declaration
-class GameObjectComposition; //<-- This will suffice
-
-class CollisionDelegate
-{
-public:
-	CollisionDelegate(GameObjectComposition *parent);
-	void InitializeCollisionCallback();
-	//The callback function
-	virtual void OnCollision(GameObjectComposition *object) = 0;
-	CollisionDelegate();
-
-private:
-	GameObjectComposition *const parent_;
-	//These should never happen:
-	//CollisionDelegate();
-	CollisionDelegate(CollisionDelegate &rhs);
-};
+//class GameObjectComposition; //<-- This will suffice
+//
+//class CollisionDelegate
+//{
+//public:
+//	CollisionDelegate(GameObjectComposition *parent);
+//	void InitializeCollisionCallback();
+//	//The callback function
+//	virtual void OnCollision(GameObjectComposition *object) = 0;
+//	CollisionDelegate();
+//
+//private:
+//	GameObjectComposition *const parent_;
+//	//These should never happen:
+//	//CollisionDelegate();
+//	CollisionDelegate(CollisionDelegate &rhs);
+//};
 
 #endif
