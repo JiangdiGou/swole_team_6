@@ -1,10 +1,6 @@
 init -2:
     $ config.keymap.update({"input_up":[ 'K_UP', 'repeat_K_UP' ]})
     $ config.keymap.update({"input_down":[ 'K_DOWN', 'repeat_K_DOWN' ]})
-    #$ config.keymap['viewport_up'].append('K_UP')
-    #$ config.keymap['viewport_up'].append('repeat_K_UP')
-    #$ config.keymap['viewport_down'].append('K_DOWN')
-    #$ config.keymap['viewport_down'].append('repeat_K_DOWN')
 
 init -2 python:
     import os
@@ -15,8 +11,6 @@ init -2 python:
         renpy.jump("loop1")
 
 init python:
-    # actually make this its own library later >:)
-    # renpytom said we shouldn't do this...
     def modright(obj):
         step = obj.xadjustment.get_step()
         oldval = obj.xadjustment.get_value()
@@ -33,6 +27,13 @@ init python:
         step = obj.yadjustment.get_step()
         oldval = obj.yadjustment.get_value()
         obj.yadjustment.change(oldval + step)
+
+screen vpkm(obj):
+    $ local = renpy.get_widget(None, obj)
+    key "input_right" action [[Function(modright, local)]]
+    key "input_left" action [[Function(modleft, local)]]
+    key "input_up" action [[Function(modup, local)]]
+    key "input_down" action [[Function(moddown, local)]]
 
 screen gui_menu(lo, vi):
     #leftside
@@ -110,11 +111,7 @@ screen gui_menu(lo, vi):
                                 #    action Function(registerClick, x, y)
         bar value XScrollValue("gm") ysize 20
         vbar value YScrollValue("gm") xsize 20
-        $ local = renpy.get_widget(None, "gm")
-        key "input_right" action [[Function(modright, local)]]
-        key "input_left" action [[Function(modleft, local)]]
-        key "input_up" action [[Function(modup, local)]]
-        key "input_down" action [[Function(moddown, local)]]
+    use vpkm("gm")
 
 screen disableGui:
     modal True
