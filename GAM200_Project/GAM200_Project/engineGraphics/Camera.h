@@ -2,7 +2,9 @@
 #define CAMERA_H
 
 #include "Shader.h"
+#include "../GameLogic.h"
 #include "../Composition.h"
+#include "../physicsLib/Transform.h"
 
 //This controls the coordinate range 
 //Basically works the same way as zoom. 
@@ -19,6 +21,8 @@ public:
   void move(glm::vec3 translation);
 
   void Update(float dt) override;
+
+  bool followingPlayer = true;
 
 private:
   glm::vec3 worldUp;

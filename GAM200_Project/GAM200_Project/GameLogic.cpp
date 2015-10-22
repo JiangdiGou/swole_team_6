@@ -10,7 +10,6 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 
-
 #include "GameLogic.h"
 #include "./physicsLib//Transform.h"
 #include "./physicsLib/Body.h"
@@ -45,210 +44,28 @@ void GameLogic::Initialize()
 
   FACTORY->createTiles();
 
-  //GOC * background = FACTORY->makeObject("background");
-  //Transform * transform = new Transform();
-  //transform->SetPosition(0, 0, 1);
-  //transform->SetScale(6, 4, 0);
-  //background->AddComponent(CT_Transform, transform);
-  //Sprite * sprite = new Sprite(*(graphics->coreShader));
-  //sprite->texture = textureBackground;
-  //background->AddComponent(CT_Sprite, sprite);
+  //PLAYER
+  GOC * player = FACTORY->makeObject("player");
+  Transform * transformPlayer = new Transform();
+  transformPlayer->SetPosition(4, 4, 0);
+  player->AddComponent(CT_Transform, transformPlayer);
+  Body * bodyPlayer = new Body();
+  bodyPlayer->Mass = 3;
+  bodyPlayer->Restitution = 0.3f;
+  bodyPlayer->Friction = 0.3f;
+  ShapeAAB * boxColliderPlayer = new ShapeAAB();
+  boxColliderPlayer->Extents = Vec2D(.5, .5);
+  bodyPlayer->BodyShape = boxColliderPlayer;
 
+  player->AddComponent(CT_Body, bodyPlayer);
+  PlayerState * controller = new PlayerState();
+  player->AddComponent(CT_PlayerState, controller);
 
-  //circle
-  //GOC * greenObj = FACTORY->makeObject("greenGuy");
-  //Transform * transform2 = new Transform();
-  //transform2->SetPosition(0, 0, 0);
-  //Sprite * sprite2 = new Sprite();
-  //sprite2->texture = graphics->spriteAtlas.textures[std::string("Smiley1")];
-  //greenObj->AddComponent(CT_Transform, transform2);
-  //greenObj->AddComponent(CT_Sprite, sprite2);
+  Sprite * spritePlayer = new Sprite();
+  spritePlayer->texture = graphics->spriteAtlas.textures[std::string("sliceTest-14")];
+  player->AddComponent(CT_Sprite, spritePlayer);
 
-  //GOC * greenObj2 = FACTORY->makeObject("greenGuy2");
-  //Transform * transform3 = new Transform();
-  //transform3->SetPosition(1, 0, 0);
-  //Sprite * sprite3 = new Sprite();
-  //sprite3->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
-  //greenObj2->AddComponent(CT_Transform, transform3);
-  //greenObj2->AddComponent(CT_Sprite, sprite3);
-
-
-  //greenObj->AddComponent(CT_Transform, transform2);
-  //greenObj->AddComponent(CT_Sprite, sprite2);
-  //RigidBody* dudeBody = new RigidBody();
-  //dudeBody->isStatic = false;
-  //dudeBody->isGhost = false;
-  //dudeBody->useGravity = true;
-  //greenObj->AddComponent(CT_RigidBody, dudeBody);
-  //Circle *dudeCollision = new Circle();
-
-  ////dudeCollision->SetHalfSize(1, 1);
-  //greenObj->AddComponent(CT_Circle, dudeCollision);
-
-  //GOC * lalalaObj = FACTORY->makeObject("laGuy");
-  //Transform * transformla = new Transform();
-  //transformla->SetPosition(-3,1.5, 0);
-  //Sprite * spritela = new Sprite(*(graphics->coreShader));
-  //spritela->texture = textureIdleGreen;
-  //lalalaObj->AddComponent(CT_Transform, transformla);
-  //lalalaObj->AddComponent(CT_Sprite, spritela);
-  //RigidBody* laBody = new RigidBody();
-  ////dudeBody->isGhost = false;
-  //laBody->useGravity = false;
-  //lalalaObj->AddComponent(CT_RigidBody, laBody);
-  //Circle *laCollision = new Circle();
-  ////dudeCollision->SetHalfSize(1, 1);
-  //lalalaObj->AddComponent(CT_Circle, laCollision);
-
-
-  //Anoother Boguy
-  /*
-  GOC * boObj2 = FACTORY->makeObject("boGuy");
-  Transform * transformbo2 = new Transform();
-  transformbo2->SetPosition(-1, 2, 0);
-  Sprite * spritebo2 = new Sprite();
-  spritebo2->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
-  boObj2->AddComponent(CT_Transform, transformbo2);
-  boObj2->AddComponent(CT_Sprite, spritebo2);
-  RigidBody* boObjBody2 = new RigidBody();
-  boObjBody2->isStatic = false;
-  boObjBody2->isGhost = false;
-  boObjBody2->useGravity = true;
-  boObj2->AddComponent(CT_RigidBody, boObjBody2);
-  AABB* boCollision2 = new AABB();
-  boCollision2->SetHalfSize(1, 1);
-  boObj2->AddComponent(CT_AABB, boCollision2);
-  printf("bo2's velocity: %f, %f", boObjBody2->getVelocity().x, boObjBody2->getVelocity().y);
-
-
-
-
-  GOC * blackObj = FACTORY->makeObject("");
-  Transform * transform5 = new Transform();
-  transform5->SetPosition(0, -2, 0);
-  Sprite * sprite4 = new Sprite();
-  sprite4->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
-
-  blackObj->AddComponent(CT_Transform, transform5);
-  blackObj->AddComponent(CT_Sprite, sprite4);
-  RigidBody* blackObjBody = new RigidBody();
-  blackObjBody->isGhost = false;
-  blackObjBody->isStatic = true;
-  blackObjBody->useGravity = false;
-  //blackObjBody->isKinematic = true;
-  if (blackObjBody->isStatic)
-  {
-	  transform5->SetPosition(0, -2, 0);
-  }
-  blackObj->AddComponent(CT_RigidBody, blackObjBody);
-  AABB* blackCollision = new AABB();
-  blackCollision->SetHalfSize(1, 1);
-  blackObj->AddComponent(CT_AABB, blackCollision);
-
-
-  
-  //Ground1
-  GOC * blackObj2 = FACTORY->makeObject("");
-//  blackObj2->InitPosition = (whatever, whatever, whatever);
-  Transform * transform6 = new Transform();
-
-  transform6->SetPosition(-1, -2, 0);
-  Sprite * sprite5 = new Sprite();
-  sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
-
-  blackObj2->AddComponent(CT_Transform, transform6);
-  blackObj2->AddComponent(CT_Sprite, sprite5);
-  RigidBody* blackObjBody2 = new RigidBody();
-  blackObjBody2->isGhost = false;
-  blackObjBody2->isStatic = true;
-  blackObjBody2->useGravity = false;
-  if (blackObjBody2->isStatic)
-  {
-	  transform6->SetPosition(-1,-2,0);
-  }
-  //blackObjBody->isKinematic = true;
-  blackObj2->AddComponent(CT_RigidBody, blackObjBody2);
-  AABB* blackCollision2 = new AABB();
-  blackCollision2->SetHalfSize(1, 1);
-  blackObj2->AddComponent(CT_AABB, blackCollision2);
-
-  player = boObj;
-  //player2 = boObj;
-  boObj2->Initialize();
-  //blueObj->Initialize();
- //greenObj->Initialize();
-  blackObj->Initialize(); 
-  
-  
-  ->Initialize();
-  //lalalaObj-> Initialize();
-  boObj->Initialize();
-  blackObj2->Initialize();
-
-  //background->Initialize();*/
-
-//GOC * boObj = FACTORY->makeObject("boGuy");
-//Transform * transformbo = new Transform();
-//transformbo->SetPosition(4, 3, 0);
-//Sprite * spritebo = new Sprite();
-//spritebo->texture = graphics->spriteAtlas.textures[std::string("Smiley2")];
-//boObj->AddComponent(CT_Transform, transformbo);
-//boObj->AddComponent(CT_Sprite, spritebo);
-//RigidBody* boObjBody = new RigidBody();
-////boObjBody->set(5.0f);
-//
-////boObjBody->restitution = 0;
-//boObjBody->isStatic = false;
-//boObjBody->isGhost = false;
-//boObjBody->useGravity = true;
-//boObj->AddComponent(CT_RigidBody, boObjBody);
-//AABB* boCollision = new AABB();
-//boCollision->SetHalfSize(1.0f, 1.0f);
-//boObj->AddComponent(CT_AABB, boCollision);
-//TileMapCollision* boTileCollision = new TileMapCollision();
-//boObj->AddComponent(CT_TileMapCollision, boTileCollision);
-//PlayerState* playerState = new PlayerState();
-//boObj->AddComponent(CT_PlayerState, playerState);
-
-
-// new falling object
-GOC * Fbox = FACTORY->makeObject("");
-Transform * transformFbox = new Transform();
-transformFbox->SetPosition(4, 4, 0);
-Fbox->AddComponent(CT_Transform, transformFbox);
-Body * bodyFbox = new Body();
-bodyFbox->Mass = 3;
-bodyFbox->Restitution = 0.3f;
-bodyFbox->Friction = 0.3f;
-ShapeAAB * boxFbox = new ShapeAAB();
-boxFbox->Extents = Vec2D(.5, .5);
-bodyFbox->BodyShape = boxFbox;
-//bodyFbox->SetVelocity(Vec2D(0,0));
-//bodyFbox->AddForce(Vec2D(0, -3));
-Fbox->AddComponent(CT_Body, bodyFbox);
-PlayerState * controller = new PlayerState();
-Fbox->AddComponent(CT_PlayerState, controller);
-printf("my v%f, %f", bodyFbox->Velocity.x, bodyFbox->Velocity.y);
-//bodyFbox->AddForce((Vec2D(0,0) - bodyFbox->Position) * 50);
-Vec2D testV = bodyFbox->Velocity;
-
-printf("my pos%f, %f", bodyFbox->Position, bodyFbox->Position.y);
-
-if (Fbox && boxFbox && bodyFbox && bodyFbox->IsStatic == false)
-{
-	std::cout << "Fbox exist" << std::endl;
-	//std::cout << testV << std::endl;
-}
-//  blackObj2->InitPosition = (whatever, whatever, whatever);
-//Transform * transform6 = new Transform();
-//
-//transform6->SetPosition(4, 1, 0);
-
-Sprite * spriteFbox = new Sprite();
-spriteFbox->texture = graphics->spriteAtlas.textures[std::string("sliceTest-1")];
-Fbox->AddComponent(CT_Sprite, spriteFbox);
-
-
+  LOGIC->player = player;
 
 
 // ground
