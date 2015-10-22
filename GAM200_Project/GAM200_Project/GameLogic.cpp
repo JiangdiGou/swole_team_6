@@ -226,6 +226,8 @@ bodyFbox->BodyShape = boxFbox;
 //bodyFbox->SetVelocity(Vec2D(0,0));
 //bodyFbox->AddForce(Vec2D(0, -3));
 Fbox->AddComponent(CT_Body, bodyFbox);
+PlayerState * controller = new PlayerState();
+Fbox->AddComponent(CT_PlayerState, controller);
 printf("my v%f, %f", bodyFbox->Velocity.x, bodyFbox->Velocity.y);
 //bodyFbox->AddForce((Vec2D(0,0) - bodyFbox->Position) * 50);
 Vec2D testV = bodyFbox->Velocity;
@@ -303,6 +305,8 @@ void GameLogic::SendMessages(Message * m)
     // a specific object based on the key pressed.
   case Mid::CharacterKey:
   {
+	  MessageCharacterKey* CharacterMessage = (MessageCharacterKey*)m;
+	  switch (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
     break;
   }
   case Mid::MouseMove:

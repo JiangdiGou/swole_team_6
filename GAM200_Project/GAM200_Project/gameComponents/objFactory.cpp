@@ -189,6 +189,15 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   tileSprite->texture = graphics->spriteAtlas.textures[textureName];//TileAtlas
   newTile->AddComponent(CT_Transform, tileTransform);
   newTile->AddComponent(CT_Sprite, tileSprite);
+  Body * tileBody = new Body();
+  tileBody->Mass = 0;
+  tileBody->Restitution = 0.3f;
+  tileBody->Friction = 0.3f;
+  newTile->AddComponent(CT_Body, tileBody);
+  ShapeAAB * boxCollider = new ShapeAAB();
+  boxCollider->Extents = Vec2D(.5, .5);
+  tileBody->BodyShape = boxCollider;
+  newTile->AddComponent(CT_ShapeAAB, boxCollider);
 
   return newTile;
 }
