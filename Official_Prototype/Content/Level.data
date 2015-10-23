@@ -121,7 +121,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [15.664279, 17.740078, 50],
+			Vec3 Translation = [16.5214958, 17.3590908, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -141,7 +141,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [15.664279, 17.740078, 3.36176328e-007],
+			Vec3 LookTarget = [16.5214958, 17.3590908, 3.73646287e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -587,10 +587,6 @@ Level =
 		},
 		EnemyPatrol = 
 		{
-			Vec3 StartPos = [4, 40, 0],
-			Vec3 EndPos = [-4, 40, 0],
-			float WaitTime = 2,
-			float WalkTime = 1,
 		},
 	},
 	ArchetypeInstance = 
@@ -1445,6 +1441,24 @@ Level =
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
 			},
+		},
+	},
+	ArchetypeInstance = 
+	{
+		string Name = "56175132ce1d6ef5:LevelManager",
+		LinkId = 
+		{
+			uint Id = 36,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [36.9041519, 44.4089737, 0],
+			Vec3 Scale = [4.58702707, 4.10941362, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Named = 
+		{
+			string Name = "LevelManager",
 		},
 	},
 },
