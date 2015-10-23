@@ -123,10 +123,14 @@ void Sprite::Update(float dt)
     texCoords.push_back(texture.textureCoordinates[i]);
 
   //Pushes Color
-  colors.push_back(color.x);
-  colors.push_back(color.y);
-  colors.push_back(color.z);
-  colors.push_back(color.w);
+  //For each of the 6 verts
+  for (int i = 0; i < 6; ++i)
+  {
+    colors.push_back(color.x);
+    colors.push_back(color.y);
+    colors.push_back(color.z);
+    colors.push_back(color.w);
+  }
 
   //Unbind Stuff
   glBindBuffer(GL_ARRAY_BUFFER, 0);

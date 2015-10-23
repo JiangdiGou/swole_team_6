@@ -63,6 +63,7 @@ void GameLogic::Initialize()
 
   Sprite * spritePlayer = new Sprite();
   spritePlayer->texture = graphics->spriteAtlas.textures[std::string("sliceTest-14")];
+  spritePlayer->color = glm::vec4(0.25, 1, 0, 1);
   player->AddComponent(CT_Sprite, spritePlayer);
 
   LOGIC->player = player;
@@ -92,6 +93,7 @@ if (blackObj2 && box && body && body->IsStatic == false)
 
 Sprite * sprite5 = new Sprite();
 sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+sprite5->color = glm::vec4(0, 0, 1, 1);
 blackObj2->AddComponent(CT_Sprite, sprite5);
 
 
