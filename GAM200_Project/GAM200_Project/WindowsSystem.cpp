@@ -1,4 +1,5 @@
 #include "WindowsSystem.h"
+#include "initInfo.h"
 #include "engineGraphics\Graphics.h"
 #include "Core.h"
 
