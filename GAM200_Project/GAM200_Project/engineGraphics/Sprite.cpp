@@ -10,21 +10,6 @@ GLuint Sprite::vertexBuffer = 0;
 GLuint Sprite::textureBuffer = 0;
 GLuint Sprite::colorBuffer = 0;
 
-
-//**********************
-//Function    : Sprite
-//Input       : none
-//Output      : Sprite - The Constrcuted Sprite 
-//Description : Default Constructor for Sprite, does nothing
-//**********************/
-/*
-Sprite::Sprite()
-{
-  std::cout << "ERROR: Sprite was Implicitly Constructed." << std::endl;
-	std::cout << "Sprite requires shader to construct properly." << std::endl;
-}
-*/
-
 //**********************
 //Function    : Sprite
 //Input       : none

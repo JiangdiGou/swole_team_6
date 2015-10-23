@@ -131,6 +131,16 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 
 		break;
 	}
+  case WM_SIZE:
+  {
+     int width = LOWORD(lParam);
+     int height = HIWORD(lParam);
+     INITINFO->clientWidth = width;
+     INITINFO->clientHeight = height;
+     glViewport(0, 0, width, height); 
+
+     break;
+  }
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;

@@ -5,15 +5,12 @@
 #include "../GameLogic.h"
 #include "../Composition.h"
 #include "../physicsLib/Transform.h"
-
-//This controls the coordinate range 
-//Basically works the same way as zoom. 
-//The purpose of this is to keep zom in reasonable values 
-#define SCENESCALE 2.0f
+#include "../initInfo.h"
 
 class Camera : public GameComponent 
 {
 public:
+  Camera(); 
   Camera(const Shader& shader);
   ~Camera();
 

@@ -29,16 +29,9 @@
 #include <vector>
 #include <string>
 
-#define WINDOWWIDTH 960
-#define WINDOWHEIGHT 540
-
 void setupPixelFormatDescriptor(HDC handleDeviceContext);
-HWND createWindow(HINSTANCE instance);
 
-//This function prototype is in here so createwindow can see it 
-LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
-
-#define GFXLOG
+//#define GFXLOG
 
 #ifdef GFXLOG
 #define WARNINGFRAMETIME 33

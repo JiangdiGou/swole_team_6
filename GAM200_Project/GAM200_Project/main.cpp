@@ -21,20 +21,15 @@ main loop
 #include "initInfo.h"
 
 initInfo * INITINFO;
-
 //HDC deviceContext;
 //HGLRC renderingContext;
 
 /* we can no longer promise to not change these */
 std::string windowTitle = "Swag";
-int ClientWidth = 800;
-int ClientHeight = 600;
 
 void baseInitRoutine()
 {
   windowTitle = INITINFO->windowTitle;
-  ClientWidth = INITINFO->clientWidth;
-  ClientHeight = INITINFO->clientHeight;
 }
 
 #ifdef GAMELOOP_RUN
@@ -63,7 +58,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   CoreEngine* engine = new CoreEngine();
 
-  WindowsSystem* windows = new WindowsSystem(windowTitle.c_str(), ClientWidth, ClientHeight, show);
+  WindowsSystem* windows = new WindowsSystem(windowTitle.c_str(), INITINFO->clientWidth, INITINFO->clientHeight, show);
   engine->AddSystem(windows);
 
   engine->AddSystem(new Physics());
