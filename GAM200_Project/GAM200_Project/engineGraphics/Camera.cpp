@@ -1,5 +1,11 @@
 #include "Camera.h"
 
+//It was bitching at me for no default
+Camera::Camera()
+{
+
+}
+
 //**********************
 //Function    : Camera
 //Input       : none
@@ -8,7 +14,7 @@
 //**********************
 Camera::Camera(const Shader& shader)
 {
-  zoom = 0.75;
+  zoom = 0.25;
 
   cameraPosition = glm::vec3(0.0f, 0.0f, 2.0);
   cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -55,13 +61,18 @@ void Camera::Update(float dt)
   }
 
   //Gets the Aspect Ratio of the Window to set up the camera's coordinates 
-  float ratio = (float)WINDOWWIDTH / (float)WINDOWHEIGHT;
+  float ratio = (float)INITINFO->clientWidth / (float)INITINFO->clientWidth;
 
   //Gets the Orthographic Projection Matrix 
   glm::mat4 projectionMatrix;
-  projectionMatrix = glm::ortho((-ratio / zoom)*SCENESCALE, (ratio / zoom)*SCENESCALE, 
-                                (-1.0f / zoom)*SCENESCALE, (1.0f / zoom)*SCENESCALE,
+  //Left, Right, Bottom, Top, Near, Far
+  //This random magic 1000.0f is just to make everything have a reasonable value
+  projectionMatrix = glm::ortho((float)-INITINFO->clientWidth / (1000.0f*zoom), 
+                                (float)INITINFO->clientWidth / (1000.0f*zoom),
+                                (float)-INITINFO->clientHeight / (1000.0f*zoom), 
+                                (float)INITINFO->clientHeight / (1000.0f*zoom),
                                 0.1f, 5.0f);
+
   //Gets the view matrix 
   glm::mat4 viewMatrix;
   viewMatrix = glm::lookAt(cameraPosition, cameraTarget, worldUp);
