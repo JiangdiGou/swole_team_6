@@ -1,6 +1,7 @@
 #include "Collision.h"
 //#include "Precompiled.h"
 #include "PhysicsManager.h"
+#include "Transform.h"
 
 //sample
 
@@ -29,9 +30,17 @@ bool ShapeCircle::TestPoint(Vec2D testPoint)
 	return false;
 }
 
+void ShapeAAB::Initialize()
+{
+  /*body = GetOwner()->has(Body);
+  if (body == NULL)
+    return;
+  body->BodyShape = this;*/
+}
 
 void ShapeAAB::Draw()
 {
+
 	//Drawer::Instance.MoveTo(body->Position + Vec2(Extents.x, Extents.y));
 	//Drawer::Instance.LineTo(body->Position + Vec2(-Extents.x, Extents.y));
 	//Drawer::Instance.LineTo(body->Position + Vec2(-Extents.x, -Extents.y));
@@ -183,8 +192,13 @@ bool  DetectCollisionCircleAABox(Shape*a, Vec2D at, Shape*b, Vec2D bt, ContactSe
 bool  DetectCollisionAABoxAABox(Shape*a, Vec2D at, Shape*b, Vec2D bt, ContactSet*c)
 {
 	ShapeAAB * boxA = (ShapeAAB*)a;
-	ShapeAAB * boxB = (ShapeAAB*)b;
+  ShapeAAB * boxB = (ShapeAAB*)b;
 
+  GOC* bowner = b->GetOwner();
+  Transform* aTrans = a->GetOwner()->has(Transform);
+  Transform* bTrans = b->GetOwner()->has(Transform);
+  at = aTrans->GetPositionXY();
+  bt = bTrans->GetPositionXY();
 	//Check X
 	Vec2D positionDelta = at - bt;
 	float xDiff = boxA->Extents.x + boxB->Extents.x - fabs(positionDelta.x);

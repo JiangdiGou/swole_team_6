@@ -58,6 +58,7 @@ void GameLogic::Initialize()
   bodyPlayer->BodyShape = boxColliderPlayer;
 
   player->AddComponent(CT_Body, bodyPlayer);
+  player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
   PlayerState * controller = new PlayerState();
   player->AddComponent(CT_PlayerState, controller);
 
@@ -95,6 +96,7 @@ Sprite * sprite5 = new Sprite();
 sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
 sprite5->color = glm::vec4(0, 0, 1, 1);
 blackObj2->AddComponent(CT_Sprite, sprite5);
+blackObj2->AddComponent(CT_ShapeAAB, box);
 
 
 //blackObj2->AddComponent(CT_Transform, transform6);
