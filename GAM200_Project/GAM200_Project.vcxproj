@@ -18,7 +18,9 @@
     <ClInclude Include="GAM200_Project\Composition.h" />
     <ClInclude Include="GAM200_Project\Core.h" />
     <ClInclude Include="GAM200_Project\Engine.h" />
-    <ClInclude Include="GAM200_Project\engineAudio\Audio.h" />
+    <ClInclude Include="GAM200_Project\engineAudio\Audio.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\atlasTexture.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h" />
@@ -134,7 +136,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\Core.cpp" />
-    <ClCompile Include="GAM200_Project\engineAudio\Audio.cpp" />
+    <ClCompile Include="GAM200_Project\engineAudio\Audio.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\atlasTexture.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Camera.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />

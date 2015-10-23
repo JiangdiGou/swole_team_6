@@ -39,6 +39,7 @@ public:
 	ShapeId Id;
 	Body * body;
 	Shape(ShapeId pid) : Id(pid) {};
+  //void Initialize() override;
 	virtual void Draw() = 0;
 	virtual bool TestPoint(Vec2D) = 0;
 };
@@ -58,6 +59,7 @@ class ShapeAAB : public Shape
 {
 public:
 	ShapeAAB() : Shape(SidBox){};
+  void Initialize() override;
 	Vec2D Extents;
 	virtual void Draw();
 	virtual bool TestPoint(Vec2D);
