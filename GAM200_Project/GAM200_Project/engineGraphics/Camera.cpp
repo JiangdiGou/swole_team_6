@@ -42,6 +42,18 @@ void Camera::Update(float dt)
 {
   glUseProgram(shaderID);
 
+  if (followingPlayer)
+  {
+    Transform* playerTransform = LOGIC->player->has(Transform);
+    glm::vec3 newPosition = glm::vec3(playerTransform->GetPosition().x,
+      playerTransform->GetPosition().y, cameraPosition.z);
+    glm::vec3 newTarget = glm::vec3(playerTransform->GetPosition().x,
+      playerTransform->GetPosition().y, playerTransform->GetPosition().z);
+
+    cameraPosition = newPosition;
+    cameraTarget = newTarget;
+  }
+
   //Gets the Aspect Ratio of the Window to set up the camera's coordinates 
   float ratio = (float)WINDOWWIDTH / (float)WINDOWHEIGHT;
 

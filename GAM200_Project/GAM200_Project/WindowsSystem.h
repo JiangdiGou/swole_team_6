@@ -7,6 +7,12 @@
 #include <string>
 
 
+enum keyStatus {
+	KEY_PRESSED,
+	KEY_DOWN,
+	KEY_RELEASED
+};
+
 class WindowsSystem : public ISystem
 {
 public:

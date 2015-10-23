@@ -9,7 +9,7 @@
 class Transform : public GameComponent
 {
 public:
-	friend class RigidBody;
+	friend class Body;
 	Transform( Vector3 pos = Vector3(), Vector3 rot = Vector3(),
 		Vector3 scal = Vector3());
 	~Transform() override;

@@ -15,7 +15,7 @@ Physics::Physics()
 	PHYSICS = this;
 	DebugDrawingActive = false;
 	TimeAccumulation = 0.0f;
-	Gravity = Vec2D(0, -.5);
+	Gravity = Vec2D(0, -5);
 	MaxVelocity = 1000;
 	MaxVelocitySq = MaxVelocity*MaxVelocity;
 	PenetrationEpsilon = 0.2f;
