@@ -482,7 +482,7 @@ Level =
 		DynamicHUD = 
 		{
 			float XPercent = 15,
-			float YPercent = 12.6999998,
+			float YPercent = 16,
 		},
 	},
 	Cog = 

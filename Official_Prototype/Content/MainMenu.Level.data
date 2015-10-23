@@ -369,10 +369,11 @@ Level =
 			bool ScaleUp = true,
 			bool Glow = true,
 		},
-		GenericButton = 
+		CreateOverlayedSpace = 
 		{
-			Enum ButtonType = ReturnableLevel,
-			string LoadThisLevel = "56c5027fa4851517:AreYouSure",
+			bool MouseClick = true,
+			bool Automatic = false,
+			string OverlayedLevel = "56c5027fa4851517:AreYouSure",
 		},
 	},
 	Cog = 

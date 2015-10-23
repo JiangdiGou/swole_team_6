@@ -18,19 +18,19 @@ class EnemyPathPoint : ZilchComponent
     {
         this.Owner.Transform.Translation = Real3(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y, 0);
         
-        if(this.Path1.Cog.EnemyPathPoint != null)
+        if(this.Path1.Cog != null && this.Path1.Cog.EnemyPathPoint != null)
         {
             this.P1Between = this.FindBetween(this.Owner.Transform.Translation, this.Path1.Cog.Transform.Translation);
         }
-        if(this.Path2.Cog.EnemyPathPoint != null)
+        if(this.Path2.Cog != null && this.Path2.Cog.EnemyPathPoint != null)
         {
             this.P2Between = this.FindBetween(this.Owner.Transform.Translation, this.Path2.Cog.Transform.Translation);
         }
-        if(this.Path3.Cog.EnemyPathPoint != null)
+        if(this.Path3.Cog != null && this.Path3.Cog.EnemyPathPoint != null)
         {
             this.P3Between = this.FindBetween(this.Owner.Transform.Translation, this.Path3.Cog.Transform.Translation);
         }
-        if(this.Path4.Cog.EnemyPathPoint != null)
+        if(this.Path4.Cog != null && this.Path4.Cog.EnemyPathPoint != null)
         {
             this.P4Between = this.FindBetween(this.Owner.Transform.Translation, this.Path4.Cog.Transform.Translation);
         }
@@ -43,7 +43,7 @@ class EnemyPathPoint : ZilchComponent
         var yLoc:Real = 0;
         var zLoc:Real = 0;
         
-        xLoc = end_.X - start_.X;
+        xLoc = (start_.X + end_.X) / 2;
         
         if(start_.Y > end_.Y)
         {
@@ -51,11 +51,57 @@ class EnemyPathPoint : ZilchComponent
         }
         else
         {
-            yLoc = end_.Y + 2;
+            yLoc = end_.Y + 1;
         }
         
         zLoc = end_.Z - start_.Z;
         
+        if(this.Owner.Name == "EnemyPathPoint")
+        {
+            Console.WriteLine("Start: `start_`, End: `end_`, Midpoint: `Real3(xLoc, yLoc, zLoc)`");
+        }
         return Real3(xLoc, yLoc, zLoc);
+    }
+    
+    
+    function ClosestPointToPlayer():Real3
+    {
+        var playerPos:Real3 = this.Space.FindObjectByName("Player").Transform.Translation;
+        
+        var closestPoint:Real3 = Real3.Zero;
+        var correctMidpoint:Real3 = Real3.Zero;
+        
+        if(this.Path1.Cog != null)
+        {
+            closestPoint = this.Path1.Cog.Transform.Translation;
+            correctMidpoint = this.P1Between;
+        }
+        else if(this.Path2.Cog != null)
+        {
+            if(Math.DistanceSq(playerPos, closestPoint) > Math.DistanceSq(playerPos, this.Path2.Cog.Transform.Translation))
+            {
+                closestPoint = this.Path2.Cog.Transform.Translation;
+                correctMidpoint = this.P2Between;
+            }
+        }
+        else if(this.Path3.Cog != null)
+        {
+            if(Math.DistanceSq(playerPos, closestPoint) > Math.DistanceSq(playerPos, this.Path3.Cog.Transform.Translation))
+            {
+                closestPoint = this.Path3.Cog.Transform.Translation;
+                correctMidpoint = this.P3Between;
+            }
+        }
+        else if(this.Path4.Cog != null)
+        {
+            if(Math.DistanceSq(playerPos, closestPoint) > Math.DistanceSq(playerPos, this.Path4.Cog.Transform.Translation))
+            {
+                closestPoint = this.Path4.Cog.Transform.Translation;
+                correctMidpoint = this.P4Between;
+            }
+        }
+        
+        Console.WriteLine("Correct Mid Point: `correctMidpoint`");
+        return correctMidpoint;
     }
 }

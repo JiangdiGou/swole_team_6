@@ -3,45 +3,56 @@ class EnemyPatrol : ZilchComponent
     var PlayerPos:Real3;
     var YDifference:Real;
     var MoveSpeed:Real = 10;
+    var IgnorePathPointTime:Real = 0;
     
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
+        if(this.IgnorePathPointTime > 0)
+        {
+            this.IgnorePathPointTime -= event.Dt;
+        }
+        
         this.PlayerPos = this.Space.FindObjectByName("Player").Transform.Translation;
         
         this.YDifference = Math.Abs(this.PlayerPos.Y - this.Owner.Transform.Translation.Y);
         
         //Moves the enemy in the direction of the player. 
-        if(this.PlayerPos.X > this.Owner.Transform.Translation.X && this.YDifference <= 5)
+        if(this.PlayerPos.X > this.Owner.Transform.Translation.X && this.YDifference <= 7)
         {
-            if(this.CheckCollision(Real3(1, -1, 0), 1))
-            {
-                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
-                Console.WriteLine("Move left, stopped");
-            }
             //Checks collision to the right
-            else if(!this.CheckCollision(Real3.XAxis, 1.0))
+            if(!this.CheckCollision(Real3.XAxis, 1.0))
             {
-                this.Owner.RigidBody.Velocity = Real3(this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
-                this.Owner.Sprite.FlipX = true;
+                if(Math.Abs(this.Owner.Transform.Translation.X - this.PlayerPos.X) < 1.5)
+                {
+                    this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                }
+                else
+                {
+                    this.Owner.RigidBody.Velocity = Real3(this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                    this.Owner.Sprite.FlipX = true;
+                }
             }
         }
-        else if(this.PlayerPos.X < this.Owner.Transform.Translation.X && this.YDifference <= 5)
+        else if(this.PlayerPos.X < this.Owner.Transform.Translation.X && this.YDifference <= 7)
         {
-            if(this.CheckCollision(Real3(-1, -1, 0), 1))
-            {
-                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
-                Console.WriteLine("Move left, stopped");
-            }
             //Checks collision to the left
-            else if(!this.CheckCollision(-Real3.XAxis, 1.0))
+            if(!this.CheckCollision(-Real3.XAxis, 1.0))
             {
-                this.Owner.RigidBody.Velocity = Real3(-this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
-                this.Owner.Sprite.FlipX = false;
+                if(Math.Abs(this.Owner.Transform.Translation.X - this.PlayerPos.X) < 1.5)
+                {
+                    this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                }
+                else
+                {
+                    this.Owner.RigidBody.Velocity = Real3(-this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                    this.Owner.Sprite.FlipX = false;
+                }
             }
         }
         else
@@ -84,6 +95,20 @@ class EnemyPatrol : ZilchComponent
         else
         {
             return false;
+        }
+    }
+    
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if(event.OtherObject.EnemyPathPoint != null && this.IgnorePathPointTime <= 0.0)
+        {
+            var seqJump = Action.Sequence(this.Owner.Actions);
+            
+            var jumpPoint:Real3 = event.OtherObject.EnemyPathPoint.ClosestPointToPlayer();
+            Action.Property(seqJump, @this.Owner.Transform.Translation, jumpPoint, 0.2, Ease.Linear);
+            
+            this.IgnorePathPointTime = 0.8;
         }
     }
 }
