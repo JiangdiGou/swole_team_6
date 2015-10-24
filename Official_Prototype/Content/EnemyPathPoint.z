@@ -101,7 +101,15 @@ class EnemyPathPoint : ZilchComponent
             }
         }
         
-        Console.WriteLine("Correct Mid Point: `correctMidpoint`");
-        return correctMidpoint;
+        
+        if(Math.DistanceSq(closestPoint, playerPos) > Math.DistanceSq(this.Owner.Transform.Translation, playerPos))
+        {
+            return Real3(0, 0, 200);
+        }
+        else
+        {
+            Console.WriteLine("Correct Mid Point: `correctMidpoint`");
+            return correctMidpoint;
+        }
     }
 }

@@ -106,9 +106,13 @@ class EnemyPatrol : ZilchComponent
             var seqJump = Action.Sequence(this.Owner.Actions);
             
             var jumpPoint:Real3 = event.OtherObject.EnemyPathPoint.ClosestPointToPlayer();
-            Action.Property(seqJump, @this.Owner.Transform.Translation, jumpPoint, 0.2, Ease.Linear);
             
-            this.IgnorePathPointTime = 0.8;
+            if(jumpPoint.Z <= 2)
+            {
+                Action.Property(seqJump, @this.Owner.Transform.Translation, jumpPoint, 0.2, Ease.Linear);
+                
+                this.IgnorePathPointTime = 0.8;
+            }
         }
     }
 }
