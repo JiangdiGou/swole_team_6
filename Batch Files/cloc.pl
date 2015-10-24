@@ -2904,7 +2904,7 @@ sub generate_report {                        # {{{1
         }
 
         if (!$opt_by_file_by_lang or $ALREADY_SHOWED_XML_SECTION) {
-    	    push @results, "</results>";
+          push @results, "</results>";
         } else {
             $ALREADY_SHOWED_XML_SECTION = 1;
         }
@@ -3478,9 +3478,9 @@ sub files {                                  # {{{1
     # See also find_preprocessor() which prunes undesired directories.
 
     my $Dir = cwd(); # not $File::Find::dir which just gives relative path
-	if ($opt_match_f    ) {	return unless /$opt_match_f/;     }
-    if ($opt_not_match_f) {	return if     /$opt_not_match_f/; }
-	if ($opt_match_d    ) {	return unless $Dir =~ m{$opt_match_d}     }
+  if ($opt_match_f    ) { return unless /$opt_match_f/;     }
+    if ($opt_not_match_f) { return if     /$opt_not_match_f/; }
+  if ($opt_match_d    ) { return unless $Dir =~ m{$opt_match_d}     }
 
     my $nBytes = -s $_ ;
     if (!$nBytes) {
@@ -4899,6 +4899,7 @@ sub set_constants {                          # {{{1
             'pp'          => 'Pascal/Puppet'         ,
             'psql'        => 'SQL'                   ,
             'py'          => 'Python'                ,
+            'rpy'         => 'RenPy'                ,
             'pyx'         => 'Cython'                ,
             'qml'         => 'QML'                   ,
             'rb'          => 'Ruby'                  ,
@@ -4910,8 +4911,8 @@ sub set_constants {                          # {{{1
             'rs'          => 'Rust'                  ,
             's'           => 'Assembly'              ,
             'S'           => 'Assembly'              ,
-			'SCA'         => 'Visual Fox Pro'        ,
-			'sca'         => 'Visual Fox Pro'        ,			
+      'SCA'         => 'Visual Fox Pro'        ,
+      'sca'         => 'Visual Fox Pro'        ,      
             'scala'       => 'Scala'                 ,
             'sbl'         => 'Softbridge Basic'      ,
             'SBL'         => 'Softbridge Basic'      ,
@@ -5000,6 +5001,7 @@ sub set_constants {                          # {{{1
             'y'           => 'yacc'                  ,
             'yaml'        => 'YAML'                  ,
             'yml'         => 'YAML'                  ,
+            'z'           => 'Zilch/Zero'            ,
             );
 # 1}}}
 %{$rh_Language_by_Script}    = (             # {{{1
@@ -5468,6 +5470,12 @@ sub set_constants {                          # {{{1
                                 [ 'call_regexp_common'  , 'C'      ],
                                 [ 'remove_inline'       , '#.*$'   ],
                             ], 
+    'RenPy'             => [   
+                                [ 'remove_matches'      , '^\s*#'  ], 
+                                [ 'docstring_to_C'                 ], 
+                                [ 'call_regexp_common'  , 'C'      ],
+                                [ 'remove_inline'       , '#.*$'   ],
+                            ], 
     'PHP'                => [   
                                 [ 'remove_matches'      , '^\s*#'  ],
                                 [ 'remove_matches'      , '^\s*//' ], 
@@ -5607,9 +5615,9 @@ sub set_constants {                          # {{{1
                             ],
     'Visual Fox Pro'     =>  [
                                 [ 'remove_matches'      , '^\s*\*' ],
-								[ 'remove_inline'       , '\*.*$'  ],
+                [ 'remove_inline'       , '\*.*$'  ],
                                 [ 'remove_matches'      , '^\s*&&' ],
-								[ 'remove_inline'       , '&&.*$'  ],								
+                [ 'remove_inline'       , '&&.*$'  ],               
                             ],
     'Softbridge Basic'   => [   [ 'remove_above'        , '^\s*Attribute\s+VB_Name\s+=' ],               
                                 [ 'remove_matches'      , '^\s*Attribute\s+'],
@@ -5746,6 +5754,11 @@ sub set_constants {                          # {{{1
                                 [ 'call_regexp_common'  , 'HTML'   ], ],
     'MSBuild script'    => [   [ 'remove_html_comments',          ],
                                 [ 'call_regexp_common'  , 'HTML'   ], ],
+    'Zilch/Zero'             => [   
+                                [ 'remove_matches'      , '^\s*//' ], 
+                                [ 'remove_inline'       , '//.*$'  ], 
+                                [ 'call_regexp_common'  , 'C'      ],# >:)
+                            ],
     );
 # 1}}}
 %{$rh_EOL_continuation_re} = (               # {{{1
@@ -5782,6 +5795,7 @@ sub set_constants {                          # {{{1
     'Patran Command Language'=> '\\\\$'         ,
     'PowerShell'         =>     '\\\\$'         ,
     'Python'             =>     '\\\\$'         ,
+    'RenPy'              =>     '\\\\$'         ,
     'R'                  =>     '\\\\$'         ,
     'Ruby'               =>     '\\\\$'         ,
     'sed'                =>     '\\\\$'         ,
@@ -5796,6 +5810,7 @@ sub set_constants {                          # {{{1
     'lex'                =>     '\\\\$'         ,
     'Vala'               =>     '\\\\$'         ,
     'Vala Header'        =>     '\\\\$'         ,
+    'Zilch/Zero'       =>     '\\\\$'         ,
     );
 # 1}}}
 %{$rh_Not_Code_Extension}    = (             # {{{1
@@ -6475,7 +6490,7 @@ sub set_constants {                          # {{{1
     'visual basic dos'             =>   2.00,
     'visual c++'                   =>   2.35,
     'visual cobol'                 =>   4.00,
-	'Visual Fox Pro'               =>   4.00, # Visual Fox Pro is not available in the language gearing ratios listed at Mayes Consulting web site
+  'Visual Fox Pro'               =>   4.00, # Visual Fox Pro is not available in the language gearing ratios listed at Mayes Consulting web site
     'visual objects'               =>   5.00,
     'visualage'                    =>   3.81,
     'Visualforce Component'        =>   1.9 ,
@@ -6526,12 +6541,14 @@ sub set_constants {                          # {{{1
     'Modula3'                      => 2.00,
     'PHP'                          => 3.50,
     'Python'                       => 4.20,
+    'RenPy'                        => 4.20,
     'Cython'                       => 3.80,
     'Ruby'                         => 4.20,
     'Ruby HTML'                    => 4.00,
     'sed'                          => 4.00,
     'Lua'                          => 4.00,
     'OpenCL'                       => 1.50,
+    'Zilch/Zero'                   => 1.50,
 #   'Lisp/Julia'                   => 4.00,
 #   'Lisp/OpenCL'                  => 1.50,
 #   'MATLAB/Objective C/MUMPS/Mercury' => 3.00,
@@ -9837,7 +9854,7 @@ EO_XSL
           table-layout: auto;
           border-collapse: collapse;
           empty-cells: show;
-		  margin: 1em;
+      margin: 1em;
         }
         td, th {
           padding: 4px;
@@ -9859,10 +9876,10 @@ EO_DIFF_XSL
 
     if ($opt_by_file) {
         $XSL_DIFF.= <<'EO_DIFF_XSL'; # {{{2
-		<table>
+    <table>
           <thead>
-		  <tr><th colspan="4">Same</th>
-		  </tr>
+      <tr><th colspan="4">Same</th>
+      </tr>
             <tr>
               <th>File</th>
               <th>Blank</th>
@@ -9881,11 +9898,11 @@ EO_DIFF_XSL
           </xsl:for-each>            
           </tbody>
         </table>
-		
-		<table>
+    
+    <table>
           <thead>
-		  <tr><th colspan="4">Modified</th>
-		  </tr>
+      <tr><th colspan="4">Modified</th>
+      </tr>
             <tr>
               <th>File</th>
               <th>Blank</th>
@@ -9904,11 +9921,11 @@ EO_DIFF_XSL
           </xsl:for-each>            
           </tbody>
         </table>
-		
-		<table>
+    
+    <table>
           <thead>
-		  <tr><th colspan="4">Added</th>
-		  </tr>
+      <tr><th colspan="4">Added</th>
+      </tr>
             <tr>
               <th>File</th>
               <th>Blank</th>
@@ -9927,11 +9944,11 @@ EO_DIFF_XSL
           </xsl:for-each>            
           </tbody>
         </table>
-		
-		<table>
+    
+    <table>
           <thead>
-		  <tr><th colspan="4">Removed</th>
-		  </tr>
+      <tr><th colspan="4">Removed</th>
+      </tr>
             <tr>
               <th>File</th>
               <th>Blank</th>
@@ -9956,10 +9973,10 @@ EO_DIFF_XSL
 
     if (!$opt_by_file or $opt_by_file_by_lang) {
         $XSL_DIFF.= <<'EO_DIFF_XSL'; # {{{2
-		<table>
+    <table>
           <thead>
-		  <tr><th colspan="5">Same</th>
-		  </tr>
+      <tr><th colspan="5">Same</th>
+      </tr>
             <tr>
               <th>Language</th>
               <th>Files</th>
@@ -9980,11 +9997,11 @@ EO_DIFF_XSL
           </xsl:for-each>            
           </tbody>
         </table>
-		
-		<table>
+    
+    <table>
           <thead>
-		  <tr><th colspan="5">Modified</th>
-		  </tr>
+      <tr><th colspan="5">Modified</th>
+      </tr>
             <tr>
               <th>Language</th>
               <th>Files</th>
@@ -10005,11 +10022,11 @@ EO_DIFF_XSL
           </xsl:for-each>            
           </tbody>
         </table>
-		
-		<table>
+    
+    <table>
           <thead>
-		  <tr><th colspan="5">Added</th>
-		  </tr>
+      <tr><th colspan="5">Added</th>
+      </tr>
             <tr>
               <th>Language</th>
               <th>Files</th>
@@ -10030,11 +10047,11 @@ EO_DIFF_XSL
           </xsl:for-each>            
           </tbody>
         </table>
-		
-		<table>
+    
+    <table>
           <thead>
-		  <tr><th colspan="5">Removed</th>
-		  </tr>
+      <tr><th colspan="5">Removed</th>
+      </tr>
             <tr>
               <th>Language</th>
               <th>Files</th>
