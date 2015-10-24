@@ -17,9 +17,9 @@ public:
 	FMSoundSys();
 	FMOD::System *fmodsys;
 
-	void createSound(FMSound *pSound, const char* pFile);
-	void playSound(FMSound pSound, bool loop = false);
-	void releaseSound(FMSound pSound);
+	void createSound(FMSound *sound, const char* pFile);
+	void playSound(FMSound sound, bool loop = false);
+	void releaseSound(FMSound sound);
 };
 
 
