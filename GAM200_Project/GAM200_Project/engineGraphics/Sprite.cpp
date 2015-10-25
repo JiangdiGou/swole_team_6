@@ -10,21 +10,6 @@ GLuint Sprite::vertexBuffer = 0;
 GLuint Sprite::textureBuffer = 0;
 GLuint Sprite::colorBuffer = 0;
 
-
-//**********************
-//Function    : Sprite
-//Input       : none
-//Output      : Sprite - The Constrcuted Sprite 
-//Description : Default Constructor for Sprite, does nothing
-//**********************/
-/*
-Sprite::Sprite()
-{
-  std::cout << "ERROR: Sprite was Implicitly Constructed." << std::endl;
-	std::cout << "Sprite requires shader to construct properly." << std::endl;
-}
-*/
-
 //**********************
 //Function    : Sprite
 //Input       : none
@@ -123,10 +108,14 @@ void Sprite::Update(float dt)
     texCoords.push_back(texture.textureCoordinates[i]);
 
   //Pushes Color
-  colors.push_back(color.x);
-  colors.push_back(color.y);
-  colors.push_back(color.z);
-  colors.push_back(color.w);
+  //For each of the 6 verts
+  for (int i = 0; i < 6; ++i)
+  {
+    colors.push_back(color.x);
+    colors.push_back(color.y);
+    colors.push_back(color.z);
+    colors.push_back(color.w);
+  }
 
   //Unbind Stuff
   glBindBuffer(GL_ARRAY_BUFFER, 0);

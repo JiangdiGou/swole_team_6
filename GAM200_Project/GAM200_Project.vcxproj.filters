@@ -135,9 +135,6 @@
     <ClInclude Include="GAM200_Project\logger\logger.h">
       <Filter>logger</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\_EntryPoint.h">
-      <Filter>Universal</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h">
       <Filter>BaseEngine\Factory</Filter>
     </ClInclude>
@@ -245,6 +242,9 @@
     <ClInclude Include="GAM200_Project\physicsLib\ObjectLinkedList.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\_EntryPoint.h">
+      <Filter>Systems\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -325,9 +325,6 @@
     <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
@@ -374,6 +371,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\initInfo.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
+      <Filter>Universal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

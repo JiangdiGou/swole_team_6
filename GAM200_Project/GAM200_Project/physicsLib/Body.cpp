@@ -46,7 +46,8 @@ void Body::Integrate(float dt)
 	Transform* ownerTrans = GetOwner()->has(Transform);
 	//Integrate the position using Euler 
 	Position = Position + Velocity * dt; //acceleration term is small
-	ownerTrans->SetPosition(ownerTrans->GetPositionXY() + Velocity*dt);
+  ownerTrans->SetPosition(ownerTrans->GetPositionXY() + Velocity*dt);
+
 	//Determine the acceleration
 	Acceleration = PHYSICS->Gravity;
 	Vec2D newAcceleration = AccumulatedForce * InvMass + Acceleration;
@@ -140,7 +141,7 @@ void Body::AddForce(Vec2D force)
 void Body::SetPosition(Vec2D p)
 {
 	Position = p;
-	tx->GetPositionXY() = p;
+	tx->SetPosition(p);
 }
 
 void Body::SetVelocity(Vec2D v)

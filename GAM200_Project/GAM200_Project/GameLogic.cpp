@@ -58,11 +58,13 @@ void GameLogic::Initialize()
   bodyPlayer->BodyShape = boxColliderPlayer;
 
   player->AddComponent(CT_Body, bodyPlayer);
+  player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
   PlayerState * controller = new PlayerState();
   player->AddComponent(CT_PlayerState, controller);
 
   Sprite * spritePlayer = new Sprite();
   spritePlayer->texture = graphics->spriteAtlas.textures[std::string("sliceTest-14")];
+  spritePlayer->color = glm::vec4(0.25, 1, 0, 1);
   player->AddComponent(CT_Sprite, spritePlayer);
 
   LOGIC->player = player;
@@ -92,7 +94,9 @@ if (blackObj2 && box && body && body->IsStatic == false)
 
 Sprite * sprite5 = new Sprite();
 sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+sprite5->color = glm::vec4(0, 0, 1, 1);
 blackObj2->AddComponent(CT_Sprite, sprite5);
+blackObj2->AddComponent(CT_ShapeAAB, box);
 
 
 //blackObj2->AddComponent(CT_Transform, transform6);

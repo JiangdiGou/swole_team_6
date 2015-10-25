@@ -8,5 +8,6 @@ class Quit : ZilchComponent
     function MouseDown(event : MouseEvent)
     {
         this.GameSession.RequestQuit();
+        //this.GameSession.Quit();
     }
 }
