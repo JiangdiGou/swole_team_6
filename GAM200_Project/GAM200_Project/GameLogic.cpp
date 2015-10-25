@@ -85,6 +85,7 @@ if (blackObj2 && box && body && body->IsStatic == false)
 {
 	std::cout << "I exist" << std::endl;
 }
+printf("my v%f", body->Velocity.x);
 //  blackObj2->InitPosition = (whatever, whatever, whatever);
 //Transform * transform6 = new Transform();
 //
