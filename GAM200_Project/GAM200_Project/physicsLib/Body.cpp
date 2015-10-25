@@ -40,11 +40,10 @@ void Body::Integrate(float dt)
 	//Do not integrate static bodies
 	if (IsStatic) return;
 
-	Transform* ownerTrans = GetOwner()->has(Transform);
 	//Store prev position
-	PrevPosition = ownerTrans->GetPositionXY();
+	PrevPosition = Position;
 	ShapeAAB * debugbody = GetOwner()->has(ShapeAAB);
-	
+	Transform* ownerTrans = GetOwner()->has(Transform);
 	//Integrate the position using Euler 
 	Position = Position + Velocity * dt; //acceleration term is small
 	ownerTrans->SetPosition(ownerTrans->GetPositionXY() + Velocity*dt);

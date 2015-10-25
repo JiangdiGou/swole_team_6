@@ -12,7 +12,7 @@ class Body;
 
 ///Data for a contact between two bodies.
 ///Used to resolve world collisions.
-struct BodyContact : public GameComponent
+struct BodyContact
 {
 	Body* Bodies[2];
 	Vec2D Movement[2];

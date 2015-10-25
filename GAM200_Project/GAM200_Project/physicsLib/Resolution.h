@@ -5,8 +5,7 @@
 #include "Collision.h"
 //#include "primitive.h"
 #include "math_utility.h"
-#include "Transform.h"
-#include "../Composition.h"
+
 //engine include 
 
 
@@ -78,7 +77,7 @@
 //};
 
 
-class ContactSet : public GameComponent
+class ContactSet
 {
 public:
 	BodyContact * GetNextContact();

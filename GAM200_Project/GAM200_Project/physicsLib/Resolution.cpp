@@ -168,7 +168,7 @@ void ResolvePenetration(BodyContact& c, float dt)
 	// Calculate the the movement amounts
 	c.Movement[0] = movePerIMass * c.Bodies[0]->InvMass;
 	c.Movement[1] = movePerIMass * -c.Bodies[1]->InvMass;
-	//Transform* ownerTrans = GetOwner()->has(Transform);
+
 	// Apply the penetration resolution
 	c.Bodies[0]->Position = c.Bodies[0]->Position + c.Movement[0];
 	c.Bodies[1]->Position = c.Bodies[1]->Position + c.Movement[1];
