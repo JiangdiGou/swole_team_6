@@ -29,7 +29,7 @@
 //void TileMapCollision::Initialize() 
 //{
 //	transform_ = reinterpret_cast<Transform *>(GetOwner()->GetComponent(CT_Transform));
-//	rigid_ = reinterpret_cast<RigidBody *>(GetOwner()->GetComponent(CT_RigidBody));
+//	rigid_ = reinterpret_cast<Body *>(GetOwner()->GetComponent(CT_Body));
 //	tileMap = FACTORY->tileMap;
 //	mapWidth = &FACTORY->levelWidth;
 //	mapHeight = &FACTORY->levelHeight;
@@ -43,10 +43,10 @@
 //void TileMapCollision::Update(float dt)
 //{
 //	Vector3 pos_ = transform_->GetPosition();
-//	Vector2 vel_ = rigid_->getVelocity();
-//	Vector2 acc_ = rigid_->acceleration;
+//	Vector2 vel_ = rigid_->Velocity;
+//	Vector2 acc_ = rigid_->Acceleration;
 //  int gridCollisionflag_ = CheckBinaryMapCollision(pos_.x + HALF_TILE_WIDTH, pos_.y + HALF_TILE_WIDTH);
-//
+//  //rigid_->tx = GetOwner()->has(Transform);
 //  if (gridCollisionflag_ & COLLISION_TOP) //too tired to think about why this is happening, split into four if-statements and adjusted
 //  {
 //	  SnapToCellY(pos_.y, rigid_->pTrans->GetPositionXY().y);
@@ -219,7 +219,7 @@
 //      //Case 1: Upward velocity? Do nothing
 //      //Case 2: Downward velocity, player is in middle of platform, do nothing
 //      //Case 3: Downward velocity, player is comfortably above middle of platform, do something!
-//		if (rigid_->getVelocity().y < 0)
+//		if (rigid_->Velocity.y < 0)
 //      {
 //        //If our "feet" are touching the top half of the tile, and if they're touching it JUST BARELY
 //			if (static_cast<int>(rigid_->pTrans->GetPositionXY().y) % 2 == 1)

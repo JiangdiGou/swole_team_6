@@ -170,8 +170,8 @@ void ResolvePenetration(BodyContact& c, float dt)
 	c.Movement[1] = movePerIMass * -c.Bodies[1]->InvMass;
 
 	// Apply the penetration resolution
-	c.Bodies[0]->Position = c.Bodies[0]->Position + c.Movement[0];
-	c.Bodies[1]->Position = c.Bodies[1]->Position + c.Movement[1];
+	c.Bodies[0]->Position = c.Bodies[0]->Position +c.Movement[0];
+	c.Bodies[1]->Position = c.Bodies[1]->Position +c.Movement[1];
 }
 
 
