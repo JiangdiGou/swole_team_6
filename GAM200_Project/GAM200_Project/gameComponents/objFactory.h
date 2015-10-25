@@ -4,13 +4,13 @@
 #include <map>
 #include "../System.h"
 #include "../Utilities.h"
-#include "./physicsLib//Transform.h"
-#include "./physicsLib/Body.h"
-#include "./physicsLib/primitive.h"
-#include "./engineGraphics/Sprite.h"
-#include "./engineGraphics/Camera.h"
-#include "./engineGraphics/graphicsManager.h"
-#include "./WindowsSystem.h"
+#include "../physicsLib/Transform.h"
+#include "../physicsLib/Body.h"
+#include "../physicsLib/primitive.h"
+#include "../engineGraphics/Sprite.h"
+#include "../engineGraphics/Camera.h"
+#include "../engineGraphics/graphicsManager.h"
+#include "../WindowsSystem.h"
 
 #ifndef OBJFACTORY_H
 #define OBJFACTORY_H

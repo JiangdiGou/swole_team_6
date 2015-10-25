@@ -1,5 +1,5 @@
 #include "graphicsManager.h"
-#include "initInfo.h"
+#include "../initInfo.h"
 
 GraphicsManager *graphics;
 

@@ -1,12 +1,28 @@
 //author Nolan Yoo
 #include "../Utilities.h"
+#include <cstdarg>
+
+
 //a single string argument
-template<>
-inline void luaRunner::runFile<std::string>(const std::string& fileName, std::string value, int args)
+inline void luaRunner::runFile(const std::string& fileName, const char* format,...)
 {
   lua_State *local = luaL_newstate();
   std::string trueName = "";
 
+  va_list args;
+  float num;
+  std::vector<char> argTypes = {};
+
+
+  va_start(args, format);
+  /*
+  std::cout << "----------------" << std::endl;
+
+  std::cout << args << std::endl;
+  std::cout << (&args) << std::endl;
+  std::cout << (*args) << std::endl;
+
+  std::cout << "----------------" << std::endl;*/
 #ifndef _WIN32
   trueName += macAppend;
 #endif
@@ -17,14 +33,52 @@ inline void luaRunner::runFile<std::string>(const std::string& fileName, std::st
   {
     luaL_openlibs(local);
 
+    //Saves a bunch of F's and S'es into a vector 
+    const char * head = format;
+    while (*head)
+    {
+      if ((*head) == '%')
+      {
+        ++head;
+        argTypes.push_back(*head);
+      }
+      ++head;
+
+    }
+
+    int count = argTypes.size();
+    std::cout << count << std::endl;
+
+
+    // RESEARCH va_arg(args, int);
+    //va_arg(args, char);
+    //va_arg(args, char);
+
     // start arg structure
-    lua_createtable(local, args, 0);
+    lua_createtable(local, count, 0);
 
-    // set element i to value
-    lua_pushnumber(local, 1);
-    lua_pushstring(local, value.c_str());
-    lua_settable(local, -3);
+    for (std::vector<char>::iterator it = argTypes.begin(); it != argTypes.end(); ++it)
+    {
+      std::cout << "Trying to push " << (*it) << std::endl;
+      //Pushes Index
+      lua_pushnumber(local, it - argTypes.begin() + 1);
 
+      //Pushes float if f or string if s
+      if ((*it) == 'f' || (*it) == 'F')
+      {
+        num = va_arg(args, float);
+        std::cout << "Pushing float " << num << std::endl;
+        lua_pushnumber(local, num);
+      }
+      else if ((*it) == 's' || (*it) == 'S')
+      {
+        std::string sStr = (va_arg(args, std::string));
+        std::cout << "Pushing string " << sStr << std::endl;
+        lua_pushstring(local, sStr.c_str());
+      }
+      lua_settable(local, -3);
+    }
+    va_end(args);
     // set the name of the array that the script will access
     lua_setglobal(local, "arg");
 
@@ -33,6 +87,7 @@ inline void luaRunner::runFile<std::string>(const std::string& fileName, std::st
   }
 
   lua_close(local);
+  
 }
 
 //special string case
