@@ -6,15 +6,18 @@
 //a single string argument
 inline void luaRunner::runFile(const std::string& fileName, const char* format,...)
 {
+  va_list args;
+  va_start(args, format);
+
   lua_State *local = luaL_newstate();
   std::string trueName = "";
 
-  va_list args;
+
   float num;
   std::vector<char> argTypes = {};
 
 
-  va_start(args, format);
+
   /*
   std::cout << "----------------" << std::endl;
 
@@ -59,22 +62,22 @@ inline void luaRunner::runFile(const std::string& fileName, const char* format,.
 
     for (std::vector<char>::iterator it = argTypes.begin(); it != argTypes.end(); ++it)
     {
-      std::cout << "Trying to push " << (*it) << std::endl;
+      //std::cout << "Trying to push " << (*it) << std::endl;
       //Pushes Index
       lua_pushnumber(local, it - argTypes.begin() + 1);
 
       //Pushes float if f or string if s
       if ((*it) == 'f' || (*it) == 'F')
       {
-        num = va_arg(args, float);
-        std::cout << "Pushing float " << num << std::endl;
+        num = va_arg(args, double);
+        //std::cout << "Pushing float " << num << std::endl;
         lua_pushnumber(local, num);
       }
       else if ((*it) == 's' || (*it) == 'S')
       {
-        std::string sStr = (va_arg(args, std::string));
-        std::cout << "Pushing string " << sStr << std::endl;
-        lua_pushstring(local, sStr.c_str());
+        char * sStr = (va_arg(args, char *));
+        //std::cout << "Pushing string " << sStr << std::endl;
+        lua_pushstring(local, sStr);
       }
       lua_settable(local, -3);
     }
