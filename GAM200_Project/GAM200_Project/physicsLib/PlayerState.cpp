@@ -112,12 +112,12 @@ void PlayerState::SendMessages(Message * message)
 			{
 				// change player sprite state here 
 
-				/*if (playerBody->Velocity.x >= 0.5f)
+				if (playerBody->Velocity.x >= 0.2f)
 					break;
 
 				playerBody->Velocity.x += -(playerRunSpeed);
-				printf("vel while moving right: %f", playerBody->Velocity.x);*/
-				playerBody->AddForce(Vec2D(-50, 0));
+				printf("vel while moving right: %f", playerBody->Velocity.x);
+				//playerBody->AddForce(Vec2D(-50, 0));
 				
 				
 				//Make the player face left
@@ -155,12 +155,12 @@ void PlayerState::SendMessages(Message * message)
 			{
 				// we can change the player sprite to dashing or sth here?
 
-				//if (playerBody->Velocity.x >= 0.5f)
-				//	break;
-				//playerBody->Velocity.x += playerRunSpeed;
+				if (playerBody->Velocity.x <= -0.2f)
+					break;
+				playerBody->Velocity.x += (playerRunSpeed);
 			
-				//printf("lalal: %f", playerBody->Velocity.x);
-				playerBody->AddForce(Vec2D(50, 0));
+				printf("lalal: %f", playerBody->Velocity.x);
+				//playerBody->AddForce(Vec2D(50, 0));
 
 
 				//if (PlayerTransform->GetScale().x < 0)
