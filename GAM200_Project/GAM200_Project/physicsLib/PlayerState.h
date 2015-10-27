@@ -40,7 +40,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 	    //gravity should be -40.0f but now is -.5, thus adjust the value here maybe
 
 		// everything divide by 80 if possible
-        float playerRunSpeed = 0.925f;   //9.25 oringinally 
+        float playerRunSpeed = 2.925f;   //9.25 oringinally 
 		float playerJumpVelocity = 0.08f;   // originally 0.8
 
         int getJumpState(void);

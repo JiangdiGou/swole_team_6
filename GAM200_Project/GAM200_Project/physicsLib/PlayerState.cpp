@@ -115,7 +115,7 @@ void PlayerState::SendMessages(Message * message)
 				if (playerBody->Velocity.x >= 0.2f)
 					break;
 
-				playerBody->Velocity.x += -(playerRunSpeed);
+				playerBody->Velocity.x = -(playerRunSpeed);
 				printf("vel while moving right: %f", playerBody->Velocity.x);
 				//playerBody->AddForce(Vec2D(-50, 0));
 				
@@ -157,7 +157,7 @@ void PlayerState::SendMessages(Message * message)
 
 				if (playerBody->Velocity.x <= -0.2f)
 					break;
-				playerBody->Velocity.x += (playerRunSpeed);
+				playerBody->Velocity.x = (playerRunSpeed);
 			
 				printf("lalal: %f", playerBody->Velocity.x);
 				//playerBody->AddForce(Vec2D(50, 0));
