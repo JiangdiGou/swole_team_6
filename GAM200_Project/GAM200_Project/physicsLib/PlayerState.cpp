@@ -71,8 +71,8 @@ void PlayerState::SendMessages(Message * message)
 				// we can do anything here also sounds
 
 				//variableJumpHeightEnabled = true;
-				//PressJump();
-				playerBody->AddForce(Vec2D(0, 500));
+				PressJump();
+				//playerBody->AddForce(Vec2D(0, 1000));
 				printf("my jumping v: %f", playerBody->Velocity.y);
 			}
 
@@ -118,7 +118,7 @@ void PlayerState::SendMessages(Message * message)
 				playerBody->Velocity.x += -(playerRunSpeed);
 				printf("vel while moving right: %f", playerBody->Velocity.x);*/
 				playerBody->AddForce(Vec2D(-50, 0));
-
+				
 				
 				//Make the player face left
 				/*		if (PlayerTransform->GetScale().x > 0)
@@ -315,7 +315,7 @@ void PlayerState::PressJump()
 
 		 if(variableJumpHeightEnabled)*/
 	//if (variableJumpHeightEnabled)
-			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
+	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, 8.0f));//playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
 		//else
 			//playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + playerJumpVelocity));
 

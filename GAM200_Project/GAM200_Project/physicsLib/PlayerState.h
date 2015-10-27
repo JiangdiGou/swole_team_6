@@ -73,8 +73,8 @@ class PlayerState : public GameComponent//, public CollisionDelegate
         bool variableJumpHeightEnabled = false;
         unsigned jumpCount;
         float JumpTimer;
-        float variableJumpTime = 4.0f;
-        float variableJumpPower = 24.0f;
+        float variableJumpTime = 2.0f;
+        float variableJumpPower = 12.0f;
 		float maxDownwardsVelocity = 40.0f;//40.0f;
 		float maxUpwardsVelocity = 20.0f;//20.0f;
         bool jumpButtonReleased; //if the jump button has been released, after jumping, before hitting the ground
