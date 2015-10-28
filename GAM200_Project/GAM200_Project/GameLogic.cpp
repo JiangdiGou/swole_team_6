@@ -76,7 +76,7 @@ Transform * transform = new Transform();
 transform->SetPosition(7, 6,0);
 blackObj2->AddComponent(CT_Transform, transform);
 Body * body = new Body();
-body->Mass = 3.0f;
+body->Mass = 6.0f;
 body->Restitution = 0.3f;
 body->Friction = 0.3f;
 ShapeAAB * box = new ShapeAAB();
