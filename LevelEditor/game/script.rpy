@@ -53,15 +53,16 @@ label quickDebugNew:
     jump loop1
 
 label loop1:
+    show screen gui_menu(levelStruct, guiView)
     hide screen disableGui
     hide screen understood
     ""
-    show screen gui_menu(levelStruct, guiView)
     jump loop1
 
 label newName:
     show screen disableGui
     $ temp = renpy.input("New name of level:")
+    $ levelStruct.saveState()
     $ levelStruct.LevelName = temp
     $ levelStruct.writeFile()
     jump loop1
@@ -75,6 +76,16 @@ label changeTile:
         show screen understood
         "Bad chararcter."
         return
+    $ levelStruct.saveState()
     $ levelStruct.tileChange(guiView.x, guiView.y, temp)
+    $ levelStruct.writeFile()
+    jump loop1
+
+label doUndo:
+    if(levelStruct.UndoState == None):
+        hide screen disableGui
+        show screen understood
+        "Nothing to undo."
+    $ levelStruct = levelStruct.UndoState
     $ levelStruct.writeFile()
     jump loop1
