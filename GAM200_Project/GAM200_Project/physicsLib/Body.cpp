@@ -26,6 +26,7 @@ Body::Body()
 	Friction = 0.0f;
 	Restitution = 0.0f;
 	IsStatic = false;
+	IsGhost = false;
 	AccumulatedForce = Vec2D(0, 0);
 }
 
@@ -39,6 +40,7 @@ void Body::Integrate(float dt)
 {
 	//Do not integrate static bodies
 	if (IsStatic) return;
+	
 
 	//Store prev position
 	PrevPosition = Position;
@@ -74,6 +76,11 @@ void Body::Integrate(float dt)
 void Body::PublishResults()
 {
 	tx->GetPositionXY() = Position;
+}
+
+bool Body::CheckDetectsCollision()
+{
+  return IsGhost;
 }
 
 void Body::DebugDraw()

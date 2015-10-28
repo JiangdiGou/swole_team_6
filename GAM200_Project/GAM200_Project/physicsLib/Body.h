@@ -55,8 +55,8 @@ public:
 	Shape * BodyShape;
 	//Static object are immovable fixed objects
 	bool IsStatic;
-
-
+	bool IsGhost;
+	bool CheckDetectsCollision();
 };
 
 
