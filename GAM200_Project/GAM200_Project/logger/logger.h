@@ -15,6 +15,11 @@
 class txtlog
 {
 public:
+  //I added these pointless functions so it would compile
+  //ignore the and do not use them. 
+  txtlog() {};
+  txtlog(const txtlog& source) {};
+
 	txtlog(std::string fileName);
 	void write(std::string message);
 private:
