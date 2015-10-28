@@ -6,7 +6,7 @@
 #include "System.h"
 #include <string>
 
-
+//Enum used to determine status of key for keyboard messages
 enum keyStatus {
 	KEY_PRESSED,
 	KEY_DOWN,
@@ -22,7 +22,7 @@ public:
   void ActivateWindow();								//Activate the game window so it is actually visible
   virtual void Update(float dt);						//Update the system every frame
   virtual std::string GetName() { return "Windows"; }	//Get the string name of the system
-  void SendMessages(Message* m) override;
+  void SendMessages(Message* m) override; //Function for messages to be sent to this msystem
 
   HWND hWnd;											//The handle to the game window
   HINSTANCE hInstance;								//The handle to the instance
@@ -31,7 +31,7 @@ public:
   HGLRC renderingContext;
 };
 
-///Message signaling that a key is pressed.
+//Keyboard Message has character of button pressed and state of button
 class MessageCharacterKey : public Message
 {
 public:
@@ -40,7 +40,8 @@ public:
   int keyStatus;
 };
 
-///Message signaling that a mouse button state has changed.
+//MouseButton message, info includes which button, button state, and position
+//of mouse
 class MouseButton : public Message
 {
 public:
@@ -57,20 +58,12 @@ public:
   Vec2D MousePosition;
 };
 
-///Message signaling that the mouse has moved.
+//Message signaling that the mouse has moved. Has new position of mouse
 class MouseMove : public Message
 {
 public:
   MouseMove(Vec2D position) : Message(Mid::MouseMove), MousePosition(position) {};
   Vec2D MousePosition;
-};
-
-///Message signaling that a file was dropped onto the window.
-class FileDrop : public Message
-{
-public:
-  FileDrop(std::string filename) : Message(Mid::FileDrop), FileName(filename) {};
-  std::string FileName;
 };
 
 bool IsShiftHeld();

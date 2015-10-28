@@ -50,8 +50,8 @@ void objFactory::destroyObject(int killID)
 }
 void objFactory::destroyAllObjects()
 {
-  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
-  for (; it != gameObjs.end(); ++it)
+  std::map<int, GameObjectComposition*>::iterator it;
+  for (it = gameObjs.begin(); gameObjs.size() > 0; it = gameObjs.begin())
   {
     destroyObject(it->first);
   }
