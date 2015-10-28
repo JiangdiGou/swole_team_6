@@ -47,7 +47,7 @@ void GameLogic::Initialize()
   //PLAYER
   GOC * player = FACTORY->makeObject("player");
   Transform * transformPlayer = new Transform();
-  transformPlayer->SetPosition(4, 4, 0);
+  transformPlayer->SetPosition(2, 6, 0);
   player->AddComponent(CT_Transform, transformPlayer);
   Body * bodyPlayer = new Body();
   bodyPlayer->Mass = 3;
@@ -73,7 +73,7 @@ void GameLogic::Initialize()
 // ground
 GOC * blackObj2 = FACTORY->makeObject("");
 Transform * transform = new Transform();
-transform->SetPosition(4, 1,0);
+transform->SetPosition(7, 6,0);
 blackObj2->AddComponent(CT_Transform, transform);
 Body * body = new Body();
 body->Mass = 3.0f;
@@ -128,32 +128,6 @@ blackObj3->AddComponent(CT_ShapeAAB, box1);
 
 
 // 2
-//GOC * blackObj4 = FACTORY->makeObject("");
-//Transform * transform2 = new Transform();
-//transform2->SetPosition(12, 0, 0);
-//blackObj4->AddComponent(CT_Transform, transform2);
-//Body * body2 = new Body();
-//body2->Mass = 0.0f;
-//body2->Restitution = 0.3f;
-//body2->Friction = 0.3f;
-//ShapeAAB * box2 = new ShapeAAB();
-//box2->Extents = Vec2D(0.5, 0.5);
-//body2->BodyShape = box2;
-//blackObj4->AddComponent(CT_Body, body1);
-//if (blackObj4 && box2 && body2 && body2->IsStatic == false)
-//{
-//	std::cout << "I exist 2" << std::endl;
-//}
-////  blackObj4->InitPosition = (whatever, whatever, whatever);
-////Transform * transform6 = new Transform();
-////
-////transform6->SetPosition(4, 1, 0);
-//
-//Sprite * sprite7 = new Sprite();
-//sprite7->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
-//sprite7->color = glm::vec4(0, 0, 1, 1);
-//blackObj4->AddComponent(CT_Sprite, sprite7);
-//blackObj4->AddComponent(CT_ShapeAAB, box2);
 
 
 

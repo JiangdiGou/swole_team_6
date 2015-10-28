@@ -132,6 +132,7 @@ void PlayerState::SendMessages(Message * message)
 				playerBody->AddForce(Vec2D(0,0));
 				//PlayerSprite->ChangeState("idle");
 				playerBody->Velocity.x = 0.0f;
+				//playerBody->Friction = 0.0f; 
 			}
 
 			break;
@@ -177,6 +178,7 @@ void PlayerState::SendMessages(Message * message)
 
 				playerBody->AddForce(Vec2D(0, 0));
 				playerBody->Velocity.x = 0.0f;
+				//playerBody->Friction = 0.0f;
 			}
 
 			break;
