@@ -207,7 +207,7 @@ void PlayerState::Update(float dt)
 	//if (playerBody->Velocity.y < -(maxDownwardsVelocity))
 	//	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y +  */-(maxDownwardsVelocity)));
 	//if (playerBody->Velocity.y > maxUpwardsVelocity)
-	//	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y + */ (maxUpwardsVelocity)));
+		//playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y + */ 0));
 	    
 
 	//if (MyPlayerState == Gwrounded)
@@ -265,7 +265,7 @@ void PlayerState::Update(float dt)
 	//		}
 
 	//	}
-	}
+	//}
 
 
 	// On the ground
@@ -294,7 +294,7 @@ void PlayerState::Update(float dt)
 
 
 
-//}
+}
 
 void PlayerState::Release()
 {
@@ -314,10 +314,11 @@ void PlayerState::PressJump()
 			MyPlayerState = Jumping;
 
 		 if(variableJumpHeightEnabled)*/
-	//if (variableJumpHeightEnabled)
-	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, 8.0f));//playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
-		//else
-			//playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + playerJumpVelocity));
+		if (variableJumpHeightEnabled)
+			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, (playerJumpVelocity * (variableJumpPower))));//playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
+		else
+			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + playerJumpVelocity));
+
 
 			
 		JumpTimer = 0.0f;

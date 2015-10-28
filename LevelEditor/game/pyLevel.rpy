@@ -3,6 +3,8 @@ init -1:
         $ persistent.scripts = ""
 
 init python:
+    import copy
+
     class Entity:
         x = -1.1
         y = -1.1
@@ -24,6 +26,7 @@ init python:
         ArrayHeight = 0
         TileMap = []
         EntityList = [[]]
+        UndoState = None
 
         def __init__(self):
             return
@@ -107,3 +110,6 @@ init python:
         def tileChange(self, x, y, new):
             self.TileMap[y] = (self.TileMap[y])[:x] + new + (self.TileMap[y])[(x+1):]
             return True
+        def saveState(self):
+            self.UndoState = copy.deepcopy(self)
+            self.UndoState.TileMap = copy.deepcopy(self.TileMap)

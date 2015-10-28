@@ -119,6 +119,9 @@ screen gui_menu(lo, vi):
             else:
                 $ tile = (lo.TileMap[vi.y])[vi.x]
                 textbutton "[tile]" xalign 0.5 action Jump("changeTile")
+
+            text "Toolbox:"
+            textbutton "Undo" xalign 0.5 action Jump("doUndo")
     window:
         xsize 1400
         ysize (config.screen_height - 250)

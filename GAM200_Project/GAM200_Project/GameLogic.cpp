@@ -76,7 +76,7 @@ Transform * transform = new Transform();
 transform->SetPosition(4, 1,0);
 blackObj2->AddComponent(CT_Transform, transform);
 Body * body = new Body();
-body->Mass = 0.0f;
+body->Mass = 3.0f;
 body->Restitution = 0.3f;
 body->Friction = 0.3f;
 ShapeAAB * box = new ShapeAAB();
@@ -97,6 +97,64 @@ sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteShee
 sprite5->color = glm::vec4(0, 0, 1, 1);
 blackObj2->AddComponent(CT_Sprite, sprite5);
 blackObj2->AddComponent(CT_ShapeAAB, box);
+
+// 1
+GOC * blackObj3 = FACTORY->makeObject("");
+Transform * transform1 = new Transform();
+transform1->SetPosition(12, 0, 0);
+blackObj3->AddComponent(CT_Transform, transform1);
+Body * body1 = new Body();
+body1->Mass = 0.0f;
+body1->Restitution = 0.3f;
+body1->Friction = 0.3f;
+ShapeAAB * box1 = new ShapeAAB();
+box1->Extents = Vec2D(0.5, 0.5);
+body1->BodyShape = box1;
+blackObj3->AddComponent(CT_Body, body1);
+if (blackObj3 && box1 && body1 && body1->IsStatic == false)
+{
+	std::cout << "I exist 1" << std::endl;
+}
+//  blackObj3->InitPosition = (whatever, whatever, whatever);
+//Transform * transform6 = new Transform();
+//
+//transform6->SetPosition(4, 1, 0);
+
+Sprite * sprite6 = new Sprite();
+sprite6->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+sprite6->color = glm::vec4(0, 0, 1, 1);
+blackObj3->AddComponent(CT_Sprite, sprite6);
+blackObj3->AddComponent(CT_ShapeAAB, box1);
+
+
+// 2
+//GOC * blackObj4 = FACTORY->makeObject("");
+//Transform * transform2 = new Transform();
+//transform2->SetPosition(12, 0, 0);
+//blackObj4->AddComponent(CT_Transform, transform2);
+//Body * body2 = new Body();
+//body2->Mass = 0.0f;
+//body2->Restitution = 0.3f;
+//body2->Friction = 0.3f;
+//ShapeAAB * box2 = new ShapeAAB();
+//box2->Extents = Vec2D(0.5, 0.5);
+//body2->BodyShape = box2;
+//blackObj4->AddComponent(CT_Body, body1);
+//if (blackObj4 && box2 && body2 && body2->IsStatic == false)
+//{
+//	std::cout << "I exist 2" << std::endl;
+//}
+////  blackObj4->InitPosition = (whatever, whatever, whatever);
+////Transform * transform6 = new Transform();
+////
+////transform6->SetPosition(4, 1, 0);
+//
+//Sprite * sprite7 = new Sprite();
+//sprite7->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+//sprite7->color = glm::vec4(0, 0, 1, 1);
+//blackObj4->AddComponent(CT_Sprite, sprite7);
+//blackObj4->AddComponent(CT_ShapeAAB, box2);
+
 
 
 //blackObj2->AddComponent(CT_Transform, transform6);
