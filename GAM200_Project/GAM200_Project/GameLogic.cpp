@@ -50,9 +50,9 @@ void GameLogic::Initialize()
   transformPlayer->SetPosition(2, 6, 0);
   player->AddComponent(CT_Transform, transformPlayer);
   Body * bodyPlayer = new Body();
-  bodyPlayer->Mass = 3;
+  bodyPlayer->Mass = 3.0f;
   bodyPlayer->Restitution = 0.3f;
-  bodyPlayer->Friction = 0.3f;
+  bodyPlayer->Friction = 0.0f;
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
   boxColliderPlayer->Extents = Vec2D(.5, .5);
   bodyPlayer->BodyShape = boxColliderPlayer;
@@ -73,12 +73,12 @@ void GameLogic::Initialize()
 // ground
 GOC * blackObj2 = FACTORY->makeObject("");
 Transform * transform = new Transform();
-transform->SetPosition(7, 6,0);
+transform->SetPosition(8, 7,0);
 blackObj2->AddComponent(CT_Transform, transform);
 Body * body = new Body();
 body->Mass = 6.0f;
 body->Restitution = 0.3f;
-body->Friction = 0.3f;
+body->Friction = 0.0f;
 ShapeAAB * box = new ShapeAAB();
 box->Extents = Vec2D(0.5, 0.5);
 body->BodyShape = box;
@@ -98,10 +98,37 @@ sprite5->color = glm::vec4(0, 0, 1, 1);
 blackObj2->AddComponent(CT_Sprite, sprite5);
 blackObj2->AddComponent(CT_ShapeAAB, box);
 
+
+//down 1
+//GOC * bo1 = FACTORY->makeObject("");
+//Transform * transformbo = new Transform();
+//transformbo->SetPosition(12, 1, 0);
+//bo1->AddComponent(CT_Transform, transformbo);
+//Body * bodybo = new Body();
+//bodybo->Mass = 6.0f;
+//bodybo->Restitution = 0.3f;
+//bodybo->Friction = 0.3f;
+//ShapeAAB * boxbo = new ShapeAAB();
+//boxbo->Extents = Vec2D(0.5, 0.5);
+//bodybo->BodyShape = boxbo;
+//bo1->AddComponent(CT_Body, bodybo);
+//
+////  blackObj2->InitPosition = (whatever, whatever, whatever);
+////Transform * transform6 = new Transform();
+////
+////transform6->SetPosition(4, 1, 0);
+//
+//Sprite * spritebo = new Sprite();
+//spritebo->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+//spritebo->color = glm::vec4(0, 0, 1, 1);
+//bo1->AddComponent(CT_Sprite, spritebo);
+//bo1->AddComponent(CT_ShapeAAB, boxbo);
+
+
 // 1
 GOC * blackObj3 = FACTORY->makeObject("");
 Transform * transform1 = new Transform();
-transform1->SetPosition(12, 0, 0);
+transform1->SetPosition(4, 1, 0);
 blackObj3->AddComponent(CT_Transform, transform1);
 Body * body1 = new Body();
 body1->Mass = 0.0f;
@@ -128,7 +155,32 @@ blackObj3->AddComponent(CT_ShapeAAB, box1);
 
 
 // 2
-
+//GOC * blackObj4 = FACTORY->makeObject("");
+//Transform * transform2 = new Transform();
+//transform2->SetPosition(13, 2, 0);
+//blackObj4->AddComponent(CT_Transform, transform2);
+//Body * body2 = new Body();
+//body2->Mass = 0.0f;
+//body2->Restitution = 0.3f;
+//body2->Friction = 0.3f;
+//ShapeAAB * box2 = new ShapeAAB();
+//box2->Extents = Vec2D(0.5, 0.5);
+//body2->BodyShape = box2;
+//blackObj4->AddComponent(CT_Body, body2);
+//if (blackObj4 && box2 && body2 && body2->IsStatic == false)
+//{
+//	std::cout << "I exist 1" << std::endl;
+//}
+////  blackObj3->InitPosition = (whatever, whatever, whatever);
+////Transform * transform6 = new Transform();
+////
+////transform6->SetPosition(4, 1, 0);
+//
+//Sprite * sprite7 = new Sprite();
+//sprite7->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+//sprite7->color = glm::vec4(0, 0, 1, 1);
+//blackObj4->AddComponent(CT_Sprite, sprite7);
+//blackObj4->AddComponent(CT_ShapeAAB, box2);
 
 
 //blackObj2->AddComponent(CT_Transform, transform6);
