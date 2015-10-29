@@ -21,7 +21,10 @@ class LayeredPause : ZilchComponent
         {
             return;
         }
-        event.Handled = true;
+        if(!this.GameSession.GameData.CanQuit)
+        {
+            event.Handled = true;
+        }
         this.Unlayer.LevelSettings.LevelListener.IgnoreKeyOnce = true;
         this.BreakMe();
     }

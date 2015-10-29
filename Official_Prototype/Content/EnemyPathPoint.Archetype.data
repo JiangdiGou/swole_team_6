@@ -6,7 +6,7 @@ Cog =
 	},
 	Named = 
 	{
-		string Name = "EnemyPathPoint",
+		string Name = "EnemyPathPoint9",
 	},
 	Archetyped = 
 	{
@@ -14,13 +14,13 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [13, 1, 0],
+		Vec3 Translation = [2.5, 6, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
 	{
-		bool Visible = true,
+		bool Visible = false,
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = true,
 		bool CastShadows = false,
@@ -40,7 +40,7 @@ Cog =
 	{
 		CogPath Path1 = 
 		{
-			string Path = ":/EnemyPathPoint1",
+			string Path = ":/EnemyPathPoint8",
 			bool ErrorOnResolveToNull = false,
 			bool ErrorOnPathCantCompute = false,
 			bool ErrorOnDirectLinkFail = false,
