@@ -62,17 +62,15 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   engine->AddSystem(windows);
 
   engine->AddSystem(new Physics());
-
   Shader* pBasicShader = new Shader("resources/shaders/VertexShader.txt", "resources/shaders/FragmentShader.txt");
   const Shader &basicShader = *pBasicShader;
   engine->AddSystem(new GraphicsManager(basicShader));
 
   engine->AddSystem(new GameLogic());
-
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
 
-  engine->Initialize();
+  engine->Initialize();/* this is the fucking problem */
 
   graphics->setDeviceContext(windows->deviceContext);
   graphics->setRenderingContext(windows->renderingContext);
