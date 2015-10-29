@@ -201,7 +201,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   Body * tileBody = new Body();
   tileBody->Mass = 0;
   tileBody->Restitution = 0.3f;
-  tileBody->Friction = 0.3f;
+  tileBody->Friction = 0.0f;
   ShapeAAB * boxCollider = new ShapeAAB();
   boxCollider->Extents = Vec2D(.5, .5);
   tileBody->BodyShape = boxCollider;
