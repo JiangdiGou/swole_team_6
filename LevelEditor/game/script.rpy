@@ -16,10 +16,13 @@ label modFolder:
     return
 
 label existing:
-    $ loadLevel = ui_find_file("Select the Level file.", home)  
+    $ loadLevel = ui_find_file("Select the Level file.", home)
+    $ guiView = View()
     "Loading [loadLevel]...{nw}"
     $ levelStruct = Level()
-    return
+    $ levelStruct.loadFrom(loadLevel)
+    show screen gui_menu(levelStruct, guiView)
+    jump loop1
 
 label new:
     $ scriptsToRegistrar(persistent.scripts)
