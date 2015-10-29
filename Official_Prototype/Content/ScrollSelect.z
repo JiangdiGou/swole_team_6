@@ -151,17 +151,17 @@ class ScrollSelect : ZilchComponent
         
         if(this.IScrollNumber == this.IScrollSelected)
         {
-            Action.Property(seq1, @this.Owner.Transform.Translation, Real3(16.5, 8.5, 0.1), 0.08, Ease.Linear);
+            Action.Property(seq1, @this.Owner.Transform.Translation, Real3(12.5, 8.5, 0.1), 0.08, Ease.Linear);
             Action.Property(seq1, @this.Owner.Transform.Scale, Real3(6, 1.5, 0), 0.08, Ease.Linear);
         }
         else if(this.IScrollNumber == 1 && this.IScrollSelected == 0 || this.IScrollNumber == 2 && this.IScrollSelected == 1 || this.IScrollNumber == 0 && this.IScrollSelected == 2)
         {
-            Action.Property(seq1, @this.Owner.Transform.Translation, Real3(16.5, 7.5, 0), 0.08, Ease.Linear);
+            Action.Property(seq1, @this.Owner.Transform.Translation, Real3(12.5, 7.5, 0), 0.08, Ease.Linear);
             Action.Property(seq1, @this.Owner.Transform.Scale, Real3(4, 1, 0), 0.08, Ease.Linear);
         }
         else if(this.IScrollNumber == 0 && this.IScrollSelected == 1 || this.IScrollNumber == 1 && this.IScrollSelected == 2 || this.IScrollNumber == 2 && this.IScrollSelected == 0)
         {
-            Action.Property(seq1, @this.Owner.Transform.Translation, Real3(16.5, 9.5, 0), 0.08, Ease.Linear);
+            Action.Property(seq1, @this.Owner.Transform.Translation, Real3(12.5, 9.5, 0), 0.08, Ease.Linear);
             Action.Property(seq1, @this.Owner.Transform.Scale, Real3(4, 1, 0), 0.08, Ease.Linear);
         }
     }

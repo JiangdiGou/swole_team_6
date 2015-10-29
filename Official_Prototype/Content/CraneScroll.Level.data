@@ -157,7 +157,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 22.1034374,
+			float Size = 16.3746376,
 		},
 		EditorCameraController = 
 		{
@@ -220,7 +220,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [7.17026186, -2.49060392, 0.0450443476],
+			Vec3 Translation = [-6.68785286, -3.8350482, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -292,7 +292,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-7.38512182, -3.11531115, 0.0450443476],
+			Vec3 Translation = [-4.28255844, 3.46901703, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -364,7 +364,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.0157999061, 0.247734725, -1.38287687],
+			Vec3 Translation = [0.0157999061, 33.0820084, -1.38287687],
 			Vec3 Scale = [21.4188194, 11.4233704, 1.4279213],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -386,17 +386,6 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		ScrollFlare = 
-		{
-			bool LeftScroll = false,
-			bool RightScroll = false,
-			bool LeftCharge = false,
-			bool RightCharge = false,
-			bool Paper = true,
-			bool Picture = false,
-			bool ScrollPoint = false,
-			bool Fade = false,
-		},
 	},
 	Cog = 
 	{
@@ -410,7 +399,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [1.68002546, -2.1633842, 0.0450443476],
+			Vec3 Translation = [1.14569569, -3.23204517, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -482,7 +471,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-2.44032955, -1.53174567, 0.0450443476],
+			Vec3 Translation = [2.71337247, 4.34588718, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -554,7 +543,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-4.7056179, 3.54903698, 0.0450443476],
+			Vec3 Translation = [5.79138756, -1.25993538, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -626,7 +615,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, -1],
+			Vec3 Translation = [0, 32.8342743, -1],
 			Vec3 Scale = [1.79452085, 1.79452085, 1.79452085],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -648,17 +637,6 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		ScrollFlare = 
-		{
-			bool LeftScroll = false,
-			bool RightScroll = false,
-			bool LeftCharge = false,
-			bool RightCharge = false,
-			bool Paper = false,
-			bool Picture = true,
-			bool ScrollPoint = false,
-			bool Fade = false,
-		},
 	},
 	Cog = 
 	{
@@ -672,7 +650,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-11.0594902, 0.239999995, 0.100000001],
+			Vec3 Translation = [-9.5, 0.239999995, 0.100000001],
 			Vec3 Scale = [2.31818151, 12.5479498, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -718,7 +696,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [11.1655064, 0.239999995, 0.100000001],
+			Vec3 Translation = [9.5, 0.239999995, 0.100000001],
 			Vec3 Scale = [2.31818151, 12.5479498, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -764,7 +742,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-11.0594902, 0.239999995, 0.200000003],
+			Vec3 Translation = [-9.5, 0.239999995, 0.200000003],
 			Vec3 Scale = [1, 11, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -810,7 +788,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [11.1731625, 0.239999995, 0.200000003],
+			Vec3 Translation = [9.5, 0.239999995, 0.200000003],
 			Vec3 Scale = [1, 11, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -888,6 +866,52 @@ Level =
 			bool Picture = false,
 			bool ScrollPoint = false,
 			bool Fade = true,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 16,
+		},
+		Named = 
+		{
+			string Name = "Crane_Scroll",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0.239999995, 0],
+			Vec3 Scale = [0.37862587, 0.37862587, 0.37862587],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "560d3b1f59de5804:Crane_Scroll",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = true,
+			bool ScrollPoint = false,
+			bool Fade = false,
 		},
 	},
 },

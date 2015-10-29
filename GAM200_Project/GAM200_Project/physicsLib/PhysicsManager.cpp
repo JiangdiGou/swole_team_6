@@ -53,7 +53,10 @@ void Physics::DetectContacts(float dt)
 			//Do not collide static bodies with other static bodies
 			if (!bodyA->IsStatic || !bodyB->IsStatic)
 			{
-				Collsion.GenerateContacts((bodyA)->BodyShape, (bodyA)->Position, (bodyB)->BodyShape, (bodyB)->Position, &Contacts);
+				if (Collsion.GenerateContacts((bodyA)->BodyShape, (bodyA)->Position, (bodyB)->BodyShape, (bodyB)->Position, &Contacts))
+				{
+
+				}
 			}
 		}
 	}
