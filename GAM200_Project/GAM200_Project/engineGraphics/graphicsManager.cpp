@@ -55,7 +55,6 @@ void GraphicsManager::Update(float dt)
 
   wglMakeCurrent(deviceContext, renderingContext);
 
-  SpriteText::renderText(std::string("FPS:"), Vector3(-4.5, -2.5, 0), Vector3(0.15, 0.25, 1));
   std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
 
@@ -124,7 +123,7 @@ HGLRC GraphicsManager::getRenderingContext()
 
 void GraphicsManager::Initialize()
 {
-  //glDepthFunc(GL_ALWAYS);
+  glDepthFunc(GL_ALWAYS);
 }
 
 GraphicsManager::~GraphicsManager()
