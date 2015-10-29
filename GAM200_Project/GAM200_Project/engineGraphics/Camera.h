@@ -21,6 +21,8 @@ public:
 
   bool followingPlayer = true;
 
+  void SendMessages(Message*) override {};
+
 private:
   glm::vec3 worldUp;
   glm::vec3 cameraPosition;

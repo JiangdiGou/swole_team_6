@@ -26,6 +26,7 @@ enum ComponentTypeId
 	CT_SPAWNBLOCK,
 	CT_PLAYERDEATH,
 	CT_ShapeAAB,
+  CT_MouseVector
 	
 };
 #endif

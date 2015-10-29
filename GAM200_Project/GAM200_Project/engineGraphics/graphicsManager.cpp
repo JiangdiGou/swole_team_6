@@ -124,7 +124,7 @@ HGLRC GraphicsManager::getRenderingContext()
 
 void GraphicsManager::Initialize()
 {
-  glDepthFunc(GL_ALWAYS);
+  //glDepthFunc(GL_ALWAYS);
 }
 
 GraphicsManager::~GraphicsManager()
