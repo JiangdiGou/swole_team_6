@@ -145,21 +145,6 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
-	case WM_DROPFILES:
-	{
-		unsigned int itemCount = DragQueryFile((HDROP)wParam, 0xFFFFFFFF, 0, 0);
-		if (itemCount)
-		{
-			char  buffer[512] = { 0 };
-			DragQueryFile((HDROP)wParam, 0, buffer, 512);
-			DragFinish((HDROP)wParam);
-
-
-			FileDrop drop(buffer);
-			CORE->BroadcastMessage(&drop);
-		}
-		return 0;
-	}
 	case WM_SYSKEYDOWN:
 	{
 		//Eat the WM_SYSKEYDOWN message to prevent freezing the game when

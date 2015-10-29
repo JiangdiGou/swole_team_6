@@ -50,8 +50,8 @@ void objFactory::destroyObject(int killID)
 }
 void objFactory::destroyAllObjects()
 {
-  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
-  for (; it != gameObjs.end(); ++it)
+  std::map<int, GameObjectComposition*>::iterator it;
+  for (it = gameObjs.begin(); gameObjs.size() > 0; it = gameObjs.begin())
   {
     destroyObject(it->first);
   }
@@ -170,10 +170,19 @@ void objFactory::createTiles()
       switch (tileMap[i][j])
       {
       case '1':
-        createTile(j, i, std::string("Smiley2"));
+        createTile(j, i, std::string("sliceTest-207"));
         break;
       case '2':
-        createTile(j, i, std::string("Smiley3"));
+        createTile(j, i, std::string("sliceTest-72"));
+		break;
+	  case '3':
+		  createTile(j, i, std::string("sliceTest-246"));
+		  break;
+	  case '4':
+		  createTile(j, i, std::string("sliceTest-181"));
+		  break;
+	  case '5':
+		  createTile(j, i, std::string("sliceTest-165"));
         break;
       }
     }
