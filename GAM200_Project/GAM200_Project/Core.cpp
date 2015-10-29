@@ -28,7 +28,7 @@ CoreEngine::~CoreEngine()
 void CoreEngine::Initialize()
 {
   for (unsigned i = 0; i < Systems.size(); ++i)
-    Systems[i]->Initialize();
+	  Systems[i]->Initialize();/* so which system !? */
 }
 
 void CoreEngine::GameLoop()

@@ -83,6 +83,9 @@ void objFactory::SendMessages(Message * message)
     // a specific object based on the key pressed.
   case Mid::CharacterKey:
   {
+  }
+  case Mid::MouseButton:
+  {
     //MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
     std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
     for (; it != gameObjs.end(); ++it)

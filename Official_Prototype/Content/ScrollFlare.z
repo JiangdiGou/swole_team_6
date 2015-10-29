@@ -80,11 +80,11 @@ class ScrollFlare : ZilchComponent
         {
             if(left_)
             {
-                endPos = Real3(-10.75, 0.24, 0.1);
+                endPos = Real3(-9.5, 0.24, 0.1);
             }
             else
             {
-                endPos = Real3(10.75, 0.24, 0.1);
+                endPos = Real3(9.5, 0.24, 0.1);
             }
             
             Action.Delay(seqScroll, 0.1);
@@ -117,11 +117,11 @@ class ScrollFlare : ZilchComponent
         //Move to the open position
         if(left_)
         {
-            endPos = Real3(-10.75, 0.24, 0.1);
+            endPos = Real3(-9.5, 0.24, 0.1);
         }
         else
         {
-            endPos = Real3(10.75, 0.24, 0.1);
+            endPos = Real3(9.5, 0.24, 0.1);
         }
         
         this.Owner.Transform.Translation = endPos;
