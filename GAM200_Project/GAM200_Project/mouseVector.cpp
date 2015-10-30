@@ -47,7 +47,7 @@ void mouseVector::Update(float dt)
     //std::cout << mouseDownPos.x << " " << mouseDownPos.y << " " << std::endl;
     //std::cout << mouseUpPos.x << " " << mouseUpPos.y << " " << std::endl;
 
-    //debugDrawLine(Vector3(mouseDownPos), Vector3(mouseUpPos), Vector3());
+    debugDrawLine(Vector3(mouseDownPos), Vector3(mouseUpPos), Vector3());
   }
 }
 

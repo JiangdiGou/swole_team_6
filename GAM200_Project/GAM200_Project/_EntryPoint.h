@@ -9,4 +9,4 @@
 //#define AUDIOTEST_RUN
 
 /* as needed */
-//#define AUDIO_AT_PRESENTATION
+#define AUDIO_AT_PRESENTATION
