@@ -59,7 +59,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
         Vector3 PreviousPlatformPosition;
         GameObjectComposition* Platform;
         Body *playerBody;
-        
+		TileMapCollision* playerTileCollision;
         
         //now we need some functions for player to connect with messaging system.
 		//?????????????

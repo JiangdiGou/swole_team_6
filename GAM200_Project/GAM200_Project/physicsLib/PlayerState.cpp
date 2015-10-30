@@ -66,31 +66,34 @@ void PlayerState::SendMessages(Message * message)
 		switch (CharacterMessage->character)
 		{
 		case 'W':
-			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
-			{
-				// we can do anything here also sounds
+			//if (StateList::Grounded)
+			//{
+				if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+				{
+					// we can do anything here also sounds
 
-				//variableJumpHeightEnabled = true;
-				PressJump();
-				//playerBody->AddForce(Vec2D(0, 1000));
-				printf("my jumping v: %f", playerBody->Velocity.y);
-			}
+					//variableJumpHeightEnabled = true;
+					PressJump();
+					//playerBody->AddForce(Vec2D(0, 1000));
+					printf("my jumping v: %f", playerBody->Velocity.y);
+				}
 
-			else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
-			{
-				//change player sprite state here
+				else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
+				{
+					//change player sprite state here
 
-				//variableJumpHeightEnabled = false;
-				ReleaseJump();
-			}
-			else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
-			{
-				// do nothing
+					//variableJumpHeightEnabled = false;
+					ReleaseJump();
+				}
+				else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
+				{
+					// do nothing
 
-			}
+				}
 
 
-			break;
+				break;
+			//}
 
 		case 'S':
 			// we don't need to down key anyway so do shit 
@@ -270,7 +273,7 @@ void PlayerState::Update(float dt)
 	//}
 
 
-	// On the ground
+	 //On the ground
 	//if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
 	//{
 	//	jumpCount = 0;
