@@ -279,14 +279,14 @@ void PlayerState::Update(float dt)
 
 
 	 //On the ground
-	//if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
-	//{
-	//	jumpCount = 0;
-	//	JumpTimer = 0;
-	//	MyPlayerState = Grounded;
-	//	jumpButtonReleased = false;
-	//	return;
-	//}
+	if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
+	{
+		jumpCount = 0;
+		JumpTimer = 0;
+		MyPlayerState = Grounded;
+		jumpButtonReleased = false;
+		return;
+	}
 
 	////Keep our variable-height jump going up to the max height
 	//if (MyPlayerState == StartJump)

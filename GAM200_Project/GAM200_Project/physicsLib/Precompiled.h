@@ -3,7 +3,6 @@
 
 #include "math_utility.h"
 #include "PhysicsManager.h"
-#include "primitive.h"
 #include "Body.h"
 #include "CollisionCheck.h"
 #include "Collision.h"
