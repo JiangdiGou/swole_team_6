@@ -21,12 +21,10 @@ public:
   void printError(lua_State *L, int status);
   void printError(const std::string& source, const std::string& reason);
 
+  //void runFile(const std::string& fileName);
   void runFile(const std::string& fileName);
-  template<typename T>
-  void runFile(const std::string& fileName, T value, int args = 1)
-  {
-    return;
-  }
+  void runFile(const std::string& fileName, const char *format, ...);
+
   void loadFile(const std::string& fileName);
   void stop();
   bool lua_checkstack(const std::string& request);

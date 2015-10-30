@@ -51,21 +51,20 @@ int test(int argc, char **argv)
 {
 	// Initialize our sound system
 	FMSoundSys sound = *new FMSoundSys();
-	//sound.Initialize();
+	//sound.Initialize(); <-- deprecated
 
-	// Create a sample sound
 	FMSound soundSample;
 	sound.createSound(&soundSample, "resources//audio//help.wav");
 
-	// Play the sound, with loop mode
+	// loop the sound
 	sound.playSound(soundSample, true);
 
 	// Do something meanwhile...
 	while (true)
 	{
-
+    //sound plays until released because it looped
 	}
 
-	// Release the sound
+	// done with the sound
 	sound.releaseSound(soundSample);
 }

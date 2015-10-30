@@ -40,8 +40,8 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 	    //gravity should be -40.0f but now is -.5, thus adjust the value here maybe
 
 		// everything divide by 80 if possible
-        float playerRunSpeed = 9.25f;   //9.25 oringinally 
-		float playerJumpVelocity = 0.8f;   // originally 0.8
+        float playerRunSpeed = 2.925f;   //9.25 oringinally 
+		float playerJumpVelocity = 0.08f;   // originally 0.8
 
         int getJumpState(void);
         float WalkTimer;
@@ -73,10 +73,10 @@ class PlayerState : public GameComponent//, public CollisionDelegate
         bool variableJumpHeightEnabled = true;
         unsigned jumpCount;
         float JumpTimer;
-        float variableJumpTime = 0.2f;
-        float variableJumpPower = 1.2f;
+        float variableJumpTime = 8.0f;
+        float variableJumpPower = 48.0f;
 		float maxDownwardsVelocity = 40.0f;//40.0f;
-		float maxUpwardsVelocity = 20.0f;//20.0f;
+		float maxUpwardsVelocity = 4.0f;//20.0f;
         bool jumpButtonReleased; //if the jump button has been released, after jumping, before hitting the ground
 
         float LastframeDT;

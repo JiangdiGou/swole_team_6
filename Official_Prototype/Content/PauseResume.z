@@ -30,7 +30,10 @@ class PauseResume : ZilchComponent
     //stops the game from exiting when escape is pressed
     function OnEscapeDown(event : GameEvent)
     {
-        event.Handled = true;
+        if(!this.GameSession.GameData.CanQuit)
+        {
+            event.Handled = true;
+        }
     }
     
     //Unpauses the main gamespace and hud, destroys the pause screen

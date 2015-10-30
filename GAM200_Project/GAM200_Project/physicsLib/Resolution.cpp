@@ -77,6 +77,7 @@ void ContactSet::Reset()
 
 float BodyContact::CalculateSeparatingVelocity()
 {
+	
 	Vec2D relativeVelocity = Bodies[0]->Velocity - Bodies[1]->Velocity;
 
 	//Get the separating velocity by projecting along the contact normal
@@ -87,6 +88,7 @@ float BodyContact::CalculateSeparatingVelocity()
 
 void ResloveContactVelocity(BodyContact& c, float dt)
 {
+	
 	//Find the velocity of the two object along the contact normal
 	float separatingVelocity = c.CalculateSeparatingVelocity();
 
@@ -154,6 +156,7 @@ void ResloveContactVelocity(BodyContact& c, float dt)
 
 void ResolvePenetration(BodyContact& c, float dt)
 {
+	
 	// The movement of each object is based on their inverse mass, so
 	// total that.
 	float totalInverseMass = c.Bodies[0]->InvMass + c.Bodies[1]->InvMass;
@@ -170,8 +173,8 @@ void ResolvePenetration(BodyContact& c, float dt)
 	c.Movement[1] = movePerIMass * -c.Bodies[1]->InvMass;
 
 	// Apply the penetration resolution
-	c.Bodies[0]->Position = c.Bodies[0]->Position + c.Movement[0];
-	c.Bodies[1]->Position = c.Bodies[1]->Position + c.Movement[1];
+	c.Bodies[0]->Position = c.Bodies[0]->Position +c.Movement[0];
+	c.Bodies[1]->Position = c.Bodies[1]->Position +c.Movement[1];
 }
 
 
@@ -258,6 +261,11 @@ void ContactSet::ResolveVelocities(float dt)
 
 void ContactSet::ResolveContacts(float dt)
 {
+	//if (myshape->body->IsGhost == true)
+	//{	
+	//	return;
+	//} 
+
 	this->ResolvePositions(dt);
 	this->ResolveVelocities(dt);
 }

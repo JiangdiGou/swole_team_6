@@ -70,15 +70,17 @@ void PlayerState::SendMessages(Message * message)
 			{
 				// we can do anything here also sounds
 
-
+				//variableJumpHeightEnabled = true;
 				PressJump();
+				//playerBody->AddForce(Vec2D(0, 1000));
+				printf("my jumping v: %f", playerBody->Velocity.y);
 			}
 
 			else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
 			{
 				//change player sprite state here
 
-
+				//variableJumpHeightEnabled = false;
 				ReleaseJump();
 			}
 			else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
@@ -110,9 +112,14 @@ void PlayerState::SendMessages(Message * message)
 			{
 				// change player sprite state here 
 
+				if (playerBody->Velocity.x >= 0.2f)
+					break;
 
 				playerBody->Velocity.x = -(playerRunSpeed);
-
+				printf("vel while moving right: %f", playerBody->Velocity.x);
+				//playerBody->AddForce(Vec2D(-50, 0));
+				
+				
 				//Make the player face left
 				/*		if (PlayerTransform->GetScale().x > 0)
 						{
@@ -122,8 +129,10 @@ void PlayerState::SendMessages(Message * message)
 
 			if (CharacterMessage->keyStatus == KEY_RELEASED)
 			{
+				playerBody->AddForce(Vec2D(0,0));
 				//PlayerSprite->ChangeState("idle");
 				playerBody->Velocity.x = 0.0f;
+				//playerBody->Friction = 0.0f; 
 			}
 
 			break;
@@ -147,8 +156,13 @@ void PlayerState::SendMessages(Message * message)
 			{
 				// we can change the player sprite to dashing or sth here?
 
+				if (playerBody->Velocity.x <= -0.2f)
+					break;
+				playerBody->Velocity.x = (playerRunSpeed);
+			
+				printf("lalal: %f", playerBody->Velocity.x);
+				//playerBody->AddForce(Vec2D(50, 0));
 
-				playerBody->Velocity.x = playerRunSpeed;
 
 				//if (PlayerTransform->GetScale().x < 0)
 				//{
@@ -162,8 +176,9 @@ void PlayerState::SendMessages(Message * message)
 			{
 				//player should be idle here?
 
-
+				playerBody->AddForce(Vec2D(0, 0));
 				playerBody->Velocity.x = 0.0f;
+				//playerBody->Friction = 0.0f;
 			}
 
 			break;
@@ -191,13 +206,13 @@ void PlayerState::Update(float dt)
 		return;
 	}
 
-	//if (playerBody->getVelocity().y < -(maxDownwardsVelocity))
-	//	playerBody->setVelocity(playerBody->getVelocity().x, playerBody->getVelocity().y + -(maxDownwardsVelocity));
-	//if (playerBody->getVelocity().y > maxUpwardsVelocity)
-	//	playerBody->setVelocity(playerBody->getVelocity().x, playerBody->getVelocity().y + (maxUpwardsVelocity));
+	//if (playerBody->Velocity.y < -(maxDownwardsVelocity))
+	//	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y +  */-(maxDownwardsVelocity)));
+	//if (playerBody->Velocity.y > maxUpwardsVelocity)
+		//playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y + */ 0));
 	    
 
-	//if (MyPlayerState == Grounded)
+	//if (MyPlayerState == Gwrounded)
 	//{
 	//	if (playerTileCollision->BottomIsColliding())
 	//		JumpTimer = 0;
@@ -252,7 +267,7 @@ void PlayerState::Update(float dt)
 	//		}
 
 	//	}
-	}
+	//}
 
 
 	// On the ground
@@ -281,7 +296,7 @@ void PlayerState::Update(float dt)
 
 
 
-//}
+}
 
 void PlayerState::Release()
 {
@@ -300,11 +315,14 @@ void PlayerState::PressJump()
 		else
 			MyPlayerState = Jumping;
 
-		if (variableJumpHeightEnabled)*/
-			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
-		//else
+		 if(variableJumpHeightEnabled)*/
+		if (variableJumpHeightEnabled)
+			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, (playerJumpVelocity * (variableJumpPower))));//playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
+		else
 			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + playerJumpVelocity));
 
+
+			
 		JumpTimer = 0.0f;
 		++jumpCount;
 		return;
@@ -314,10 +332,11 @@ void PlayerState::PressJump()
 void PlayerState::ReleaseJump()
 {
 	//A: If we have variable jump height, switch us to the upward state
-	if (variableJumpHeightEnabled)
+	if (!variableJumpHeightEnabled)
 	{
 		//myJumpState = JS_Jumping;
 		playerBody->Velocity.y = playerJumpVelocity;
+		//playerBody->Velocity.y = 0;
 		jumpButtonReleased = true;
 	}
 }

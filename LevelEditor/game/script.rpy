@@ -1,5 +1,5 @@
 ﻿label start:
-    if(persistent.scripts == ""):
+    if(persistent.scripts == "" or persistent.scripts is None):
         "Returning to Main Menu. You must have a valid Scripts folder selected."
         return
     menu:
@@ -13,22 +13,40 @@
 
 label modFolder:
     $ persistent.scripts = ui_find_folder("Select the Scripts folder", home)
+    if(persistent.scripts == "" or persistent.scripts is None):
+        jump folderWarning
+    return
+
+label folderWarning:
+    "Returning to Main Menu. You must have a valid folder selected."
     return
 
 label existing:
-    $ loadLevel = ui_find_file("Select the Level file.", home)  
+    $ state = scriptsToRegistrar(persistent.scripts)
+    if (not state):
+        "Illegal operation attempted. Scripts folder is likely not the Swole Team 6 folder. Aborting."
+        return
+    $ loadLevel = ui_find_file("Select the Level file.", home)
+    $ guiView = View()
     "Loading [loadLevel]...{nw}"
     $ levelStruct = Level()
-    return
+    $ levelStruct.loadFrom(loadLevel)
+    show screen gui_menu(levelStruct, guiView)
+    jump loop1
 
 label new:
-    $ scriptsToRegistrar(persistent.scripts)
+    $ state = scriptsToRegistrar(persistent.scripts)
+    if (not state):
+        "Illegal operation attempted. Scripts folder is likely not the Swole Team 6 folder. Aborting."
+        return
     $ guiView = View()
     $ levelStruct = Level()
     $ levelStruct.LevelName = renpy.input("Name of level:")
     $ levelStruct.ArrayWidth = renpy.input("Width of level:")
     $ levelStruct.ArrayHeight = renpy.input("Height of level:")
     $ levelStruct.FileLoc =  ui_find_folder("Select where to save the Level file.", home)
+    if(levelStruct.FileLoc == "" or levelStruct.FileLoc is None):
+        jump folderWarning
     $ baselineFile = renpy.input("Name the file")
     $ levelStruct.FileLoc += ("/" + baselineFile)
     $ levelStruct.initFile()
@@ -36,13 +54,18 @@ label new:
     jump loop1
 
 label quickDebugNew:
-    $ scriptsToRegistrar(persistent.scripts)
+    $ state = scriptsToRegistrar(persistent.scripts)
+    if (not state):
+        "Illegal operation attempted. Scripts folder is likely not the Swole Team 6 folder. Aborting."
+        return
     $ guiView = View()
     $ levelStruct = Level()
     $ levelStruct.LevelName = "Debug Level"
     $ levelStruct.ArrayWidth = "45"
     $ levelStruct.ArrayHeight = "14"
     $ levelStruct.FileLoc =  ui_find_folder("Select where to save the Level file.", home)
+    if(levelStruct.FileLoc == "" or levelStruct.FileLoc is None):
+        jump folderWarning
     $ baselineFile = "ProjectTest.txt"
     $ levelStruct.FileLoc += ("/" + baselineFile)
     $ levelStruct.initFile()
@@ -50,15 +73,16 @@ label quickDebugNew:
     jump loop1
 
 label loop1:
+    show screen gui_menu(levelStruct, guiView)
     hide screen disableGui
     hide screen understood
     ""
-    show screen gui_menu(levelStruct, guiView)
     jump loop1
 
 label newName:
     show screen disableGui
     $ temp = renpy.input("New name of level:")
+    $ levelStruct.saveState()
     $ levelStruct.LevelName = temp
     $ levelStruct.writeFile()
     jump loop1
@@ -72,6 +96,16 @@ label changeTile:
         show screen understood
         "Bad chararcter."
         return
+    $ levelStruct.saveState()
     $ levelStruct.tileChange(guiView.x, guiView.y, temp)
+    $ levelStruct.writeFile()
+    jump loop1
+
+label doUndo:
+    if(levelStruct.UndoState == None):
+        hide screen disableGui
+        show screen understood
+        "Nothing to undo."
+    $ levelStruct = levelStruct.UndoState
     $ levelStruct.writeFile()
     jump loop1

@@ -83,6 +83,9 @@ public:
 	BodyContact * GetNextContact();
 	void ResolveContacts(float dt);
 	void Reset();
+	Shape * myshape;
+
+
 private:
 	friend class Physics;
 	static const int MaxContacts = 1024;

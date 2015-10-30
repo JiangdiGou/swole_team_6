@@ -50,8 +50,8 @@ void objFactory::destroyObject(int killID)
 }
 void objFactory::destroyAllObjects()
 {
-  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
-  for (; it != gameObjs.end(); ++it)
+  std::map<int, GameObjectComposition*>::iterator it;
+  for (it = gameObjs.begin(); gameObjs.size() > 0; it = gameObjs.begin())
   {
     destroyObject(it->first);
   }
@@ -82,6 +82,9 @@ void objFactory::SendMessages(Message * message)
     // The user has pressed a (letter/number) key, we may respond by creating
     // a specific object based on the key pressed.
   case Mid::CharacterKey:
+  {
+  }
+  case Mid::MouseButton:
   {
     //MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
     std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
@@ -170,10 +173,19 @@ void objFactory::createTiles()
       switch (tileMap[i][j])
       {
       case '1':
-        createTile(j, i, std::string("Smiley2"));
+        createTile(j, i, std::string("sliceTest-207"));
         break;
       case '2':
-        createTile(j, i, std::string("Smiley3"));
+        createTile(j, i, std::string("sliceTest-72"));
+		break;
+	  case '3':
+		  createTile(j, i, std::string("sliceTest-246"));
+		  break;
+	  case '4':
+		  createTile(j, i, std::string("sliceTest-181"));
+		  break;
+	  case '5':
+		  createTile(j, i, std::string("sliceTest-165"));
         break;
       }
     }
@@ -186,13 +198,13 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   Transform * tileTransform = new Transform();
   tileTransform->SetPosition(positionX, positionY, 0);
   Sprite * tileSprite = new Sprite();
-  tileSprite->texture = graphics->spriteAtlas.textures[textureName];//TileAtlas
+  tileSprite->texture = GRAPHICS->getSpriteAtlas()->textures[textureName];//TileAtlas
   newTile->AddComponent(CT_Transform, tileTransform);
   newTile->AddComponent(CT_Sprite, tileSprite);
   Body * tileBody = new Body();
   tileBody->Mass = 0;
   tileBody->Restitution = 0.3f;
-  tileBody->Friction = 0.3f;
+  tileBody->Friction = 0.0f;
   ShapeAAB * boxCollider = new ShapeAAB();
   boxCollider->Extents = Vec2D(.5, .5);
   tileBody->BodyShape = boxCollider;

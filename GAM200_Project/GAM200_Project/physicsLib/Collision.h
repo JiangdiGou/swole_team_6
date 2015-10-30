@@ -14,6 +14,8 @@ class Body;
 ///Used to resolve world collisions.
 struct BodyContact
 {
+	
+	
 	Body* Bodies[2];
 	Vec2D Movement[2];
 	Vec2D ContactNormal;

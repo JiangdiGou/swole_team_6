@@ -245,6 +245,12 @@
     <ClInclude Include="GAM200_Project\_EntryPoint.h">
       <Filter>Systems\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\Swole.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\mouseVector.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -373,6 +379,12 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Swole.cpp">
+      <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\mouseVector.cpp">
       <Filter>Universal</Filter>
     </ClCompile>
   </ItemGroup>

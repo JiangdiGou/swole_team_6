@@ -1,7 +1,7 @@
 #include "graphicsManager.h"
-#include "initInfo.h"
+#include "../initInfo.h"
 
-GraphicsManager *graphics;
+GraphicsManager *GRAPHICS;
 
 GraphicsManager::GraphicsManager(const Shader& shader)
 {
@@ -41,7 +41,7 @@ GraphicsManager::GraphicsManager(const Shader& shader)
   logGfxError("SPRITETEXT:: Error in initialization. ");
 #endif
 
-  graphics = this;
+  GRAPHICS = this;
   coreShader = shader;
   shader.Use();
 }
@@ -55,7 +55,6 @@ void GraphicsManager::Update(float dt)
 
   wglMakeCurrent(deviceContext, renderingContext);
 
-  SpriteText::renderText(std::string("FPS:"), Vector3(-4.5, -2.5, 0), Vector3(0.15, 0.25, 1));
   std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
 
@@ -130,4 +129,19 @@ void GraphicsManager::Initialize()
 GraphicsManager::~GraphicsManager()
 {
   //wgldeletecontext of context
+}
+
+Camera* GraphicsManager::getCamera()
+{
+  return &mainCamera;
+}
+
+Shader* GraphicsManager::getCoreShader()
+{
+  return &coreShader;
+}
+
+TextureAtlas* GraphicsManager::getSpriteAtlas()
+{
+  return &spriteAtlas;
 }

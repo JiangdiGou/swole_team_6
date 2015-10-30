@@ -54,6 +54,7 @@
     <ClInclude Include="GAM200_Project\main.h" />
     <ClInclude Include="GAM200_Project\Message.h" />
     <ClInclude Include="GAM200_Project\mousePos.h" />
+    <ClInclude Include="GAM200_Project\mouseVector.h" />
     <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Body.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -120,6 +121,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="GAM200_Project\runLua\luaTranslate.h" />
+    <ClInclude Include="GAM200_Project\Swole.h" />
     <ClInclude Include="GAM200_Project\System.h" />
     <ClInclude Include="GAM200_Project\Utilities.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -177,6 +179,7 @@
     <ClCompile Include="GAM200_Project\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\mouseVector.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\BinaryMap.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\Body.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -214,6 +217,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\runLua\luaTranslate.cpp" />
+    <ClCompile Include="GAM200_Project\Swole.cpp" />
     <ClCompile Include="GAM200_Project\Utilities.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -262,7 +266,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\GraphicsLibWin;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -293,7 +297,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
