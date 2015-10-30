@@ -51,7 +51,7 @@ void GameLogic::Initialize()
   GOC * player = FACTORY->makeObject("player");
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
-  transformPlayer->SetScale(Vector2(1.0, 1.0));
+  transformPlayer->SetScale(Vector2(3, 3));
   player->AddComponent(CT_Transform, transformPlayer);
 
   Body * bodyPlayer = new Body();

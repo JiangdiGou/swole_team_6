@@ -70,7 +70,7 @@ void Body::Integrate(float dt)
 	//Clear the force
 	AccumulatedForce = Vec2D(0, 0);
 
-	debugDrawSquare(ownerTrans->GetPosition(), debugbody->Extents.x, debugbody->Extents.y, Vector3(0, 0, 0));
+	debugDrawSquare(ownerTrans->GetPosition(), 2*debugbody->Extents.x, 2*debugbody->Extents.y, Vector3(0, 0, 0));
 	
 }
 

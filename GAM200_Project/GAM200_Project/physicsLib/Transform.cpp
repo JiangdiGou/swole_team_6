@@ -167,7 +167,7 @@ glm::mat4 Transform::calculateTransformMatrix()
   //Can be changed later if you want different types of rotation
   //transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
 
-  transform = scaleMat * translateMat;
+  transform = translateMat * scaleMat;
 
   return transform;
 }
