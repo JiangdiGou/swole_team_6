@@ -72,8 +72,8 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   engine->Initialize();/* this is the fucking problem */
 
-  graphics->setDeviceContext(windows->deviceContext);
-  graphics->setRenderingContext(windows->renderingContext);
+  GRAPHICS->setDeviceContext(windows->deviceContext);
+  GRAPHICS->setRenderingContext(windows->renderingContext);
 
   windows->ActivateWindow();
 

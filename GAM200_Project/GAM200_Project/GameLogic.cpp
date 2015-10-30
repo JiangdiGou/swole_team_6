@@ -35,7 +35,7 @@ void GameLogic::Initialize()
 
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
-  Camera *mainCamera = new Camera((graphics->coreShader));
+  Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
   mouseVector *vectTest = new mouseVector();
   camera->AddComponent(CT_MouseVector, vectTest);
   camera->AddComponent(CT_Camera, mainCamera);
@@ -65,7 +65,7 @@ void GameLogic::Initialize()
   player->AddComponent(CT_PlayerState, controller);
 
   Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = graphics->spriteAtlas.textures[std::string("sliceTest-14")];
+  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["sliceTest-14"];
   spritePlayer->color = glm::vec4(0.25, 1, 0, 1);
   player->AddComponent(CT_Sprite, spritePlayer);
 
@@ -95,7 +95,7 @@ void GameLogic::Initialize()
   //transform6->SetPosition(4, 1, 0);
 
   Sprite * sprite5 = new Sprite();
-  sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+  sprite5->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
   sprite5->color = glm::vec4(0, 0, 1, 1);
   blackObj2->AddComponent(CT_Sprite, sprite5);
   blackObj2->AddComponent(CT_ShapeAAB, box);
@@ -150,7 +150,7 @@ void GameLogic::Initialize()
   //transform6->SetPosition(4, 1, 0);
 
   Sprite * sprite6 = new Sprite();
-  sprite6->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+  sprite6->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
   sprite6->color = glm::vec4(0, 0, 1, 1);
   blackObj3->AddComponent(CT_Sprite, sprite6);
   blackObj3->AddComponent(CT_ShapeAAB, box1);

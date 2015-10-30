@@ -8,6 +8,7 @@ class UIBarScaling : ZilchComponent
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
+    
     function OnLogicUpdate(event : UpdateEvent)
     {
         if(this.BIsHealth)
