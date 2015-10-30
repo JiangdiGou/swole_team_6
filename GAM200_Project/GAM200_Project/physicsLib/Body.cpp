@@ -12,7 +12,7 @@ float Random(float low, float high)
   return a;
 }
 
-// SAMPLE ENGINE!!!!!!!!!!!!!!!!!!!!!
+
 Body::Body()
 {
 	Position = Vec2D(0, 0);
