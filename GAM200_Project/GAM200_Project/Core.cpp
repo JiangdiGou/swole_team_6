@@ -48,6 +48,7 @@ void CoreEngine::GameLoop()
   // loop the sound
   sound.playSound(soundSample, true);
   std::cin >> garbage;
+  sound.releaseSound(soundSample);
 #endif
 
   while (GameActive)
