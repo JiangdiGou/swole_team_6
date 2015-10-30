@@ -52,7 +52,7 @@ void GameLogic::Initialize()
   GOC * player = FACTORY->makeObject("player");
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
-  //transformPlayer->SetScale(Vector2(1.25, 1.25));
+  //transformPlayer->SetScale(Vector2(1.0, 1.0));
   player->AddComponent(CT_Transform, transformPlayer);
   Body * bodyPlayer = new Body();
   bodyPlayer->Mass = 3.0f;
@@ -154,7 +154,7 @@ void GameLogic::Initialize()
 
   Sprite * sprite6 = new Sprite();
   sprite6->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
-  sprite6->color = glm::vec4(0, 0, 1, 1);
+  sprite6->color = glm::vec4(1, 1, 0, 1);
   blackObj3->AddComponent(CT_Sprite, sprite6);
   blackObj3->AddComponent(CT_ShapeAAB, box1);
 
