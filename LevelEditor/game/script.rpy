@@ -1,4 +1,5 @@
 ﻿label start:
+    $ renpy.reset_physical_size()
     if(persistent.scripts == "" or persistent.scripts is None):
         "Returning to Main Menu. You must have a valid Scripts folder selected."
         return
