@@ -16,6 +16,7 @@ init python:
     class View:
         x = -1
         y = -1
+        preset = 1
         def __init__(self):
             return
 
@@ -107,9 +108,34 @@ init python:
             return int(self.ArrayHeight)
         def width(self):
             return int(self.ArrayWidth)
+
         def tileChange(self, x, y, new):
             self.TileMap[y] = (self.TileMap[y])[:x] + new + (self.TileMap[y])[(x+1):]
             return True
+        def insert(self, typeloc, where):
+            count = 0
+            if(typeloc == "left"):
+                self.ArrayWidth = str(self.width() + 1)
+                for line in self.TileMap:
+                    self.TileMap[count] = line[:where] + '0' + line[where:]
+                    count += 1
+                return
+            if(typeloc == "right"):
+                self.ArrayWidth = str(self.width() + 1)
+                where += 1
+                for line in self.TileMap:
+                    self.TileMap[count] = line[:where] + '0' + line[where:]
+                    count += 1
+                return
+            if(typeloc == "up"):
+                self.ArrayHeight = str(self.height() + 1)
+                self.TileMap.insert(where + 1, "0"*(int(self.ArrayWidth)))
+                return
+            if(typeloc == "down"):
+                self.ArrayHeight = str(self.height() + 1)
+                self.TileMap.insert(where, "0"*(int(self.ArrayWidth)))
+                return
+
         def saveState(self):
             self.UndoState = copy.deepcopy(self)
             self.UndoState.TileMap = copy.deepcopy(self.TileMap)

@@ -96,7 +96,7 @@ screen gui_menu(lo, vi):
         vbox:
             ypos 400
             text "Tile Selection"
-            text "[vi.x], [vi.y]"
+            textbutton "[vi.x], [vi.y]" action NullAction()
     #always show this leftside preset
     frame:
         xpos 0
@@ -107,7 +107,8 @@ screen gui_menu(lo, vi):
             xsize 260
             text "View Presets"
             hbox:
-                textbutton "1" action NullAction()
+                textbutton "1" action Function(renpy.call, "modPreset", 1)
+                textbutton "2" action Function(renpy.call, "modPreset", 2)
     frame:#righside
         xpos 1660
         xsize 260
@@ -122,6 +123,13 @@ screen gui_menu(lo, vi):
 
             text "Toolbox:"
             textbutton "Undo" xalign 0.5 action Jump("doUndo")
+            if(vi.preset == 1):
+                textbutton "Add Row Above" xalign 0.5 action Jump("insUp")
+                textbutton "Add Row Below" xalign 0.5 action Jump("insDown")
+                textbutton "Add Column Left" xalign 0.5 action Jump("insLeft")
+                textbutton "Add Column Right" xalign 0.5 action Jump("insRight")
+            if(vi.preset == 2):
+                text "This is the second preset, but it doesn't have any shiny features :("
     window:
         xsize 1400
         ysize (config.screen_height - 250)
