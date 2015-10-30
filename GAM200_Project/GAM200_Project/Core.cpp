@@ -10,6 +10,8 @@
 #include "engineGraphics/Graphics.h"
 #include "Message.h"
 #include "mousePos.h"
+#include "_EntryPoint.h"
+#include "engineAudio/Audio.h"
 
 
 CoreEngine* CORE = NULL;
@@ -34,6 +36,19 @@ void CoreEngine::Initialize()
 void CoreEngine::GameLoop()
 {
   LastTime = timeGetTime();
+
+#ifdef AUDIO_AT_PRESENTATION
+  std::string garbage;
+  FMSoundSys sound = *new FMSoundSys();
+  //sound.Initialize(); <-- deprecated
+
+  FMSound soundSample;
+  sound.createSound(&soundSample, "resources//audio//menutheme.wav");
+
+  // loop the sound
+  sound.playSound(soundSample, true);
+  std::cin >> garbage;
+#endif
 
   while (GameActive)
   {
