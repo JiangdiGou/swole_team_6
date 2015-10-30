@@ -14,6 +14,7 @@ public:
   int clientWidth;
   int clientHeight;
   int FPSlimit;
+  bool showConsole;
 
   std::string atlasPNG;
   std::string atlasINFO;

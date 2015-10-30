@@ -11,11 +11,12 @@
 #include "Sprite.h"
 #include "textureAtlas.h"
 #include "../logger/logger.h"
+#include "Camera.h"
+#include "../GameLogic.h"
 
 class GraphicsManager : public ISystem
 {
   friend class Shader;
-  friend class DebugDraw;
 
 public:
   GraphicsManager(const Shader& coreShader);
@@ -25,20 +26,27 @@ public:
   void Update(float dt) override;
   void Draw() override;
 
-  TextureAtlas spriteAtlas;
-
   void setDeviceContext(HDC& newDeviceContext);
   HDC getDeviceContext();
   void setRenderingContext(HGLRC& renderingContext);
   HGLRC getRenderingContext();
-  Shader coreShader;
+
+  void setMainCamera(Camera* camera){ mainCamera = *camera; }
+  Camera* getCamera(){ return &mainCamera; }
+  void setCoreShader(const Shader& shader) { coreShader = shader; }
+  Shader* getCoreShader() { return &coreShader; }
+  void setSpriteAtlas(const TextureAtlas& atlas) { spriteAtlas = atlas; }
+  TextureAtlas* getSpriteAtlas() { return &spriteAtlas; }
 
 private:
   HDC deviceContext;
   HGLRC renderingContext;
+  Camera mainCamera;
+  TextureAtlas spriteAtlas;
+  Shader coreShader;
 
 };
 
-extern GraphicsManager *graphics;
+extern GraphicsManager *GRAPHICS;
 
 #endif 

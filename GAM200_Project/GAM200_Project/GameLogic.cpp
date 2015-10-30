@@ -35,13 +35,15 @@ void GameLogic::Initialize()
 
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
-  Camera *mainCamera = new Camera((graphics->coreShader));
+  Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
   mouseVector *vectTest = new mouseVector();
   camera->AddComponent(CT_MouseVector, vectTest);
   camera->AddComponent(CT_Camera, mainCamera);
   camera->Initialize();
   //This move is so that the bottom left corner is 0,0
   mainCamera->move(glm::vec3(4.5, 2.25, 0));
+
+  GRAPHICS->setMainCamera(mainCamera);
 
   FACTORY->createTiles();
 
@@ -50,6 +52,7 @@ void GameLogic::Initialize()
   GOC * player = FACTORY->makeObject("player");
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
+  //transformPlayer->SetScale(Vector2(1.25, 1.25));
   player->AddComponent(CT_Transform, transformPlayer);
   Body * bodyPlayer = new Body();
   bodyPlayer->Mass = 3.0f;
@@ -65,8 +68,8 @@ void GameLogic::Initialize()
   player->AddComponent(CT_PlayerState, controller);
 
   Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = graphics->spriteAtlas.textures[std::string("sliceTest-14")];
-  spritePlayer->color = glm::vec4(0.25, 1, 0, 1);
+  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+  spritePlayer->flipSprite = false;
   player->AddComponent(CT_Sprite, spritePlayer);
 
   LOGIC->player = player;
@@ -95,7 +98,7 @@ void GameLogic::Initialize()
   //transform6->SetPosition(4, 1, 0);
 
   Sprite * sprite5 = new Sprite();
-  sprite5->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+  sprite5->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
   sprite5->color = glm::vec4(0, 0, 1, 1);
   blackObj2->AddComponent(CT_Sprite, sprite5);
   blackObj2->AddComponent(CT_ShapeAAB, box);
@@ -150,7 +153,7 @@ void GameLogic::Initialize()
   //transform6->SetPosition(4, 1, 0);
 
   Sprite * sprite6 = new Sprite();
-  sprite6->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+  sprite6->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
   sprite6->color = glm::vec4(0, 0, 1, 1);
   blackObj3->AddComponent(CT_Sprite, sprite6);
   blackObj3->AddComponent(CT_ShapeAAB, box1);
@@ -215,7 +218,23 @@ void GameLogic::SendMessages(Message * m)
   case Mid::CharacterKey:
   {
 	  MessageCharacterKey* CharacterMessage = (MessageCharacterKey*)m;
-	  switch (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+    if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+      switch (CharacterMessage->character)
+    {
+      std::cout << "char msg char is " << CharacterMessage->character;
+      case 'a':
+      {
+
+      }
+      case 'd':
+      {
+        std::cout << "ddd" << std::endl;
+        Sprite* playerSprite = LOGIC->player->has(Sprite);
+
+        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
+        break;
+      }
+    }
     break;
   }
   case Mid::MouseMove:
@@ -284,5 +303,5 @@ GameLogic::~GameLogic()
 
 void GameLogic::Update(float dt)
 {
-
+  
 }

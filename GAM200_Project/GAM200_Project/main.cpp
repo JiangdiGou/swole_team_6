@@ -39,12 +39,19 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 #endif
 {
 
-  //Opens a console for debugging and testing 
-  AllocConsole();
-  freopen("CONOUT$", "w", stdout);
+
 
   luaInitFile();
   baseInitRoutine();
+  //Opens a console for debugging and testing 
+  if (INITINFO->showConsole)
+  {
+	  AllocConsole();
+	  AttachConsole(GetCurrentProcessId());
+	  freopen("CONIN$", "r", stdin);
+	  freopen("CONOUT$", "w", stdout);
+	  freopen("CONOUT$", "w", stderr);
+  }
   //Stores the window being created
   //HWND window;
   ////Stores windows messages 
@@ -70,10 +77,10 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
 
-  engine->Initialize();/* this is the fucking problem */
+  engine->Initialize();
 
-  graphics->setDeviceContext(windows->deviceContext);
-  graphics->setRenderingContext(windows->renderingContext);
+  GRAPHICS->setDeviceContext(windows->deviceContext);
+  GRAPHICS->setRenderingContext(windows->renderingContext);
 
   windows->ActivateWindow();
 

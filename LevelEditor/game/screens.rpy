@@ -537,9 +537,6 @@ screen quick_menu():
         yalign 1.0
 
         textbutton _("Back") action Rollback()
-        textbutton _("Save") action ShowMenu('save')
-        textbutton _("Q.Save") action QuickSave()
-        textbutton _("Q.Load") action QuickLoad()
         textbutton _("Skip") action Skip()
         textbutton _("F.Skip") action Skip(fast=True, confirm=True)
         textbutton _("Auto") action Preference("auto-forward", "toggle")

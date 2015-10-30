@@ -87,16 +87,16 @@ screen gui_menu(lo, vi):
             ysize 400
             $ tempWidth = lo.width()
             $ tempHeight = lo.height()
-            text "Name:"
+            text "Name:" color "#000"
             textbutton "[lo.LevelName]" xalign 0.5 action Jump("newName")
-            text "Width:"
+            text "Width:" color "#000"
             textbutton "[tempWidth]" xalign 0.5 action NullAction()
-            text "Height:"
+            text "Height:" color "#000"
             textbutton "[tempHeight]" xalign 0.5 action NullAction()
         vbox:
             ypos 400
-            text "Tile Selection"
-            text "[vi.x], [vi.y]"
+            text "Tile Selection" color "#000"
+            textbutton "[vi.x], [vi.y]" action NullAction()
     #always show this leftside preset
     frame:
         xpos 0
@@ -107,21 +107,29 @@ screen gui_menu(lo, vi):
             xsize 260
             text "View Presets"
             hbox:
-                textbutton "1" action NullAction()
+                textbutton "1" action Function(renpy.call, "modPreset", 1)
+                textbutton "2" action Function(renpy.call, "modPreset", 2)
     frame:#righside
         xpos 1660
         xsize 260
         vbox:
             xsize 200
-            text "Character:"
+            text "Character:" color "#000"
             if(vi.x == -1 or vi.y == -1):
                 textbutton "Bad Tile"
             else:
                 $ tile = (lo.TileMap[vi.y])[vi.x]
                 textbutton "[tile]" xalign 0.5 action Jump("changeTile")
 
-            text "Toolbox:"
+            text "Toolbox:" color "#000"
             textbutton "Undo" xalign 0.5 action Jump("doUndo")
+            if(vi.preset == 1):
+                textbutton "Add Row Above" xalign 0.5 action Jump("insUp")
+                textbutton "Add Row Below" xalign 0.5 action Jump("insDown")
+                textbutton "Add Column Left" xalign 0.5 action Jump("insLeft")
+                textbutton "Add Column Right" xalign 0.5 action Jump("insRight")
+            if(vi.preset == 2):
+                text "This is the second preset, but it doesn't have any shiny features :("
     window:
         xsize 1400
         ysize (config.screen_height - 250)

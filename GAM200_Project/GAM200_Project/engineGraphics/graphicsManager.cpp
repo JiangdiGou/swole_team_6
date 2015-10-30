@@ -1,7 +1,7 @@
 #include "graphicsManager.h"
 #include "../initInfo.h"
 
-GraphicsManager *graphics;
+GraphicsManager *GRAPHICS;
 
 GraphicsManager::GraphicsManager(const Shader& shader)
 {
@@ -41,7 +41,7 @@ GraphicsManager::GraphicsManager(const Shader& shader)
   logGfxError("SPRITETEXT:: Error in initialization. ");
 #endif
 
-  graphics = this;
+  GRAPHICS = this;
   coreShader = shader;
   shader.Use();
 }
@@ -50,14 +50,23 @@ void GraphicsManager::Update(float dt)
 {
   coreShader.Use();
 
-  glClearColor(0.2f, 0.7f, 0.5f, 1.0f);
+  glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 
   wglMakeCurrent(deviceContext, renderingContext);
 
   std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
+  /*
+  debugDrawLine(Vector3(), Vector3(3, 3, 0), Vector3());
+  debugDrawLine(Vector3(0, 1, 0), Vector3(5, 4, 0), Vector3());
+  debugDrawLine(Vector3(0, -1, 0), Vector3(5, -4, 0), Vector3());
 
+  Vector3 cameraPos = Vector3(mainCamera.getPosition().x, 
+    mainCamera.getPosition().y, 0);
+    */
+
+  //debugDrawLine(
   debugDrawFrame();
 #ifdef GFXLOG
   logGfxError("DEBUGDRAW:: Error in drawing. ");
