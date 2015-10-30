@@ -2,7 +2,6 @@
 #define PLAYERSTATE_H
 
 #include "../Composition.h"
-#include "Trigger.h"
 #include "math_utility.h"
 #include "Body.h"
 #include "BinaryMap.h"

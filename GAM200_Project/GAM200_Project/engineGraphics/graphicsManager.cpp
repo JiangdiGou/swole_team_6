@@ -67,6 +67,9 @@ void GraphicsManager::Update(float dt)
     */
 
   //debugDrawLine(
+  Transform* playerTransform = LOGIC->player->has(Transform)
+	  debugDrawCircle(playerTransform->GetPosition(), 1, Vector3(), 100);
+
   debugDrawFrame();
 #ifdef GFXLOG
   logGfxError("DEBUGDRAW:: Error in drawing. ");

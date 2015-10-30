@@ -3,7 +3,6 @@
 //#include "primitive.h"
 //#include "Resolution.h"
 //#include "Body.h"
-//#include "CollisionCheck.h"
 #include "math_utility.h"
 #include "../Composition.h"
 

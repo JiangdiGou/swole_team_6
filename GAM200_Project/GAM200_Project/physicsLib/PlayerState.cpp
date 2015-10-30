@@ -161,8 +161,8 @@ void PlayerState::SendMessages(Message * message)
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				// we can change the player sprite to dashing or sth here?
-        Sprite* playerSprite = LOGIC->player->has(Sprite);
-        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
+				Sprite* playerSprite = LOGIC->player->has(Sprite);
+				playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
 
 				if (playerBody->Velocity.x <= -0.2f)
 					break;
@@ -171,12 +171,13 @@ void PlayerState::SendMessages(Message * message)
 				printf("lalal: %f", playerBody->Velocity.x);
 				//playerBody->AddForce(Vec2D(50, 0));
 
-
-				//if (PlayerTransform->GetScale().x < 0)
-				//{
-				//	//Face the player right
-				//	PlayerTransform->GetScale().x *= -1.0f;
-				//}
+				/*
+				if (playerBody->tx->etScale().x < 0)
+				{
+					//Face the player right
+					playerBody->tx->SetScale().x *
+				}
+				*/
 			}
 
 			// revert changes when the key is released
@@ -279,6 +280,7 @@ void PlayerState::Update(float dt)
 
 
 	 //On the ground
+	/*
 	if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
 	{
 		jumpCount = 0;
@@ -286,7 +288,7 @@ void PlayerState::Update(float dt)
 		MyPlayerState = Grounded;
 		jumpButtonReleased = false;
 		return;
-	}
+	}*/
 
 	////Keep our variable-height jump going up to the max height
 	//if (MyPlayerState == StartJump)

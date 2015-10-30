@@ -13,7 +13,6 @@
 #include "GameLogic.h"
 #include "./physicsLib//Transform.h"
 #include "./physicsLib/Body.h"
-#include "./physicsLib/primitive.h"
 #include "./engineGraphics/Sprite.h"
 #include "./engineGraphics/Camera.h"
 #include "./gameComponents/objFactory.h"
@@ -52,14 +51,15 @@ void GameLogic::Initialize()
   GOC * player = FACTORY->makeObject("player");
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
-  //transformPlayer->SetScale(Vector2(1.0, 1.0));
+  transformPlayer->SetScale(Vector2(1.0, 1.0));
   player->AddComponent(CT_Transform, transformPlayer);
+
   Body * bodyPlayer = new Body();
   bodyPlayer->Mass = 3.0f;
   bodyPlayer->Restitution = 0.3f;
   bodyPlayer->Friction = 0.0f;
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
-  boxColliderPlayer->Extents = Vec2D(.25, .5);
+  boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
   bodyPlayer->BodyShape = boxColliderPlayer;
 
   player->AddComponent(CT_Body, bodyPlayer);
@@ -68,7 +68,7 @@ void GameLogic::Initialize()
   player->AddComponent(CT_PlayerState, controller);
 
   Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["sliceTest-127"];
   spritePlayer->flipSprite = false;
   player->AddComponent(CT_Sprite, spritePlayer);
 
