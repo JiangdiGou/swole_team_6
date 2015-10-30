@@ -59,7 +59,7 @@ void GameLogic::Initialize()
   bodyPlayer->Restitution = 0.3f;
   bodyPlayer->Friction = 0.0f;
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
-  boxColliderPlayer->Extents = Vec2D(.5, .5);
+  boxColliderPlayer->Extents = Vec2D(.25, .5);
   bodyPlayer->BodyShape = boxColliderPlayer;
 
   player->AddComponent(CT_Body, bodyPlayer);
