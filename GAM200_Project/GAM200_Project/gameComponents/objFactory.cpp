@@ -198,7 +198,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   Transform * tileTransform = new Transform();
   tileTransform->SetPosition(positionX, positionY, 0);
   Sprite * tileSprite = new Sprite();
-  tileSprite->texture = graphics->spriteAtlas.textures[textureName];//TileAtlas
+  tileSprite->texture = GRAPHICS->getSpriteAtlas()->textures[textureName];//TileAtlas
   newTile->AddComponent(CT_Transform, tileTransform);
   newTile->AddComponent(CT_Sprite, tileSprite);
   Body * tileBody = new Body();

@@ -15,7 +15,6 @@
 class GraphicsManager : public ISystem
 {
   friend class Shader;
-  friend class DebugDraw;
 
 public:
   GraphicsManager(const Shader& coreShader);
@@ -25,20 +24,27 @@ public:
   void Update(float dt) override;
   void Draw() override;
 
-  TextureAtlas spriteAtlas;
-
   void setDeviceContext(HDC& newDeviceContext);
   HDC getDeviceContext();
   void setRenderingContext(HGLRC& renderingContext);
   HGLRC getRenderingContext();
-  Shader coreShader;
+
+  void setMainCamera(const Camera& camera);
+  Camera* getCamera();
+  void setCoreShader(const Shader& shader);
+  Shader* getCoreShader();
+  void setSpriteAtlas(const TextureAtlas& atlas);
+  TextureAtlas* getSpriteAtlas();
 
 private:
   HDC deviceContext;
   HGLRC renderingContext;
+  Camera mainCamera;
+  TextureAtlas spriteAtlas;
+  Shader coreShader;
 
 };
 
-extern GraphicsManager *graphics;
+extern GraphicsManager *GRAPHICS;
 
 #endif 

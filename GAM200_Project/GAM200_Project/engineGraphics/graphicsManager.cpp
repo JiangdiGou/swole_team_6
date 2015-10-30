@@ -1,7 +1,7 @@
 #include "graphicsManager.h"
 #include "../initInfo.h"
 
-GraphicsManager *graphics;
+GraphicsManager *GRAPHICS;
 
 GraphicsManager::GraphicsManager(const Shader& shader)
 {
@@ -41,7 +41,7 @@ GraphicsManager::GraphicsManager(const Shader& shader)
   logGfxError("SPRITETEXT:: Error in initialization. ");
 #endif
 
-  graphics = this;
+  GRAPHICS = this;
   coreShader = shader;
   shader.Use();
 }
@@ -129,4 +129,19 @@ void GraphicsManager::Initialize()
 GraphicsManager::~GraphicsManager()
 {
   //wgldeletecontext of context
+}
+
+Camera* GraphicsManager::getCamera()
+{
+  return &mainCamera;
+}
+
+Shader* GraphicsManager::getCoreShader()
+{
+  return &coreShader;
+}
+
+TextureAtlas* GraphicsManager::getSpriteAtlas()
+{
+  return &spriteAtlas;
 }
