@@ -3,6 +3,11 @@
 #include <math.h>
 #include <algorithm>
 
+#define USINGGRAPHCS
+#ifdef USINGGRAPHICS
+#include "../engineGraphics/Graphics.h"
+#endif
+
 #define FLOAT_PI 3.14159265358979323846f
 
 //const float MathF::eps = 100 * FLT_EPSILON;
@@ -205,8 +210,16 @@ private:
 public:
 	Vector3D() : x(0), y(0), z(0) {} // constructor to zero out
 
+  Vector3D(const Vector2& vec) : x(vec.x), y(vec.y), z(0) {}
+
 	Vector3D(const float x, const float y, const float z)
 		: x(x), y(y), z(z) {}
+  
+  //I dont know why this doesn't work
+#ifdef USINGGRAPHICS
+  Vector3D(glm::vec3 vec)
+    : x(vec.x), y(vec.y), z(vec.z) {}
+#endif
 
 	void Set(float newX, float newY, float newZ);
 
@@ -379,6 +392,9 @@ public:
 		return min;
 	}
 };
+
+
+
 typedef Vector3D Vector3;
 
 #endif

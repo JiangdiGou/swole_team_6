@@ -111,6 +111,9 @@ void PlayerState::SendMessages(Message * message)
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				// change player sprite state here 
+        Sprite* playerSprite = LOGIC->player->has(Sprite);
+        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
+        
 
 				if (playerBody->Velocity.x >= 0.2f)
 					break;
@@ -155,6 +158,8 @@ void PlayerState::SendMessages(Message * message)
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				// we can change the player sprite to dashing or sth here?
+        Sprite* playerSprite = LOGIC->player->has(Sprite);
+        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
 
 				if (playerBody->Velocity.x <= -0.2f)
 					break;

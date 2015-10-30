@@ -7,14 +7,19 @@
 #include "engineGraphics\Graphics.h"
 #include "WindowsSystem.h"
 #include "initInfo.h"
+#include "GameLogic.h"
+#include "physicsLib\Transform.h"
+#include "engineGraphics\debugDraw.h"
 
 class mouseVector : public GameComponent
 {
-  glm::vec2 mouseDownPos;
-  glm::vec2 mouseUpPos;
+  Vector2 mouseDownPos;
+  Vector2 mouseUpPos;
+
+  bool mouseDown;
 
   void SendMessages(Message*) override;
-  void Update(float dt) override {};
+  void Update(float dt) override;
 };
 
 

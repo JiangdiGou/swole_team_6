@@ -7,25 +7,47 @@ void mouseVector::SendMessages(Message * message)
   case Mid::MouseButton:
   {
     MouseButton* mouseEvent = (MouseButton*)message;
+    Transform* playerTransform = LOGIC->player->has(Transform);
+
     if (mouseEvent->MouseButtonIndex == 0)
     {
-      std::cout << "HAPPENED" << std::endl;
-      mouseUpPos = glm::vec2(
-        mouseEvent->MousePosition.x, mouseEvent->MousePosition.y);
+      if (mouseEvent->ButtonIsPressed)
+      {
+        //std::cout << "Pressed " << std::endl;
+        mouseDown = true;
 
-      glm::mat4 cameraMat = glm::ortho(
-        (float)((float)-INITINFO->clientWidth / (1000.0f*0.25)),
-        (float)((float)INITINFO->clientWidth / (1000.0f*0.25)),
-        (float)((float)-INITINFO->clientHeight / (1000.0f*0.25)),
-        (float)((float)INITINFO->clientHeight / (1000.0f*0.25)),
-        0.1f, 5.0f);
+        Vector2 mousePos = mouseEvent->MousePosition;
+        //Magic af
+        mousePos.x = mousePos.x / 200.0f;
+        mousePos.y = mousePos.y / 200.0f;
 
-      glm::vec4 transformedPos = cameraMat * glm::vec4(mouseUpPos, 0, 0);
+        mouseDownPos = mousePos + playerTransform->GetPositionXY();
+      }
+      else if (mouseDown && !(mouseEvent->ButtonIsPressed))
+      {
+        mouseDown = false;
+        //std::cout << "unpressed " << std::endl;
+        Vector2 mousePos = mouseEvent->MousePosition;
+        //Magic af
+        mousePos.x = mousePos.x / 200.0f;
+        mousePos.y = mousePos.y / 200.0f;
 
-      mouseUpPos = glm::vec2(transformedPos.x, transformedPos.y);
-      std::cout << mouseUpPos.x << ", " << mouseUpPos.y << std::endl;
+        mouseUpPos = mousePos + playerTransform->GetPositionXY();
+
+      }
     }
   }
+  }
+}
+
+void mouseVector::Update(float dt)
+{
+  if (!mouseDown)
+  {
+    //std::cout << mouseDownPos.x << " " << mouseDownPos.y << " " << std::endl;
+    //std::cout << mouseUpPos.x << " " << mouseUpPos.y << " " << std::endl;
+
+    //debugDrawLine(Vector3(mouseDownPos), Vector3(mouseUpPos), Vector3());
   }
 }
 

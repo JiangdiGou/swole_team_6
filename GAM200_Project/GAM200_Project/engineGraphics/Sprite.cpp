@@ -192,3 +192,38 @@ void Sprite::drawAllSprites()
   vertices.clear();
   texCoords.clear();
 }
+
+void Sprite::SendMessages(Message * message)
+{
+  if (flipSprite)
+  {
+    switch (message->MessageId)
+    {
+    case Mid::CharacterKey:
+    {
+      MessageCharacterKey* keyMsg = (MessageCharacterKey*)message;
+      Transform* tform = GetOwner()->has(Transform);
+      switch (keyMsg->character)
+      {
+      case 'a':
+      {
+        if (!facingRight)
+        {
+          facingRight = true;
+          tform->SetScaleX(tform->GetScale().x * -1.0f);
+        }
+      }
+      case 'd':
+      {
+        if (facingRight)
+        {
+          facingRight = false;
+          tform->SetScaleX(tform->GetScale().x * -1.0f);
+        }
+      }
+
+      }
+    }
+    }
+  }
+}
