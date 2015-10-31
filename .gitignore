@@ -7,6 +7,7 @@ GAM200_Project/GAM200_Project/build/Debug/*
 GAM200_Project/GAM200_Project/build/Release/*
 GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*
 GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*/*/*/*
+extraConsoleHelper/Release/*
 LevelEditor/game/cache/*
 LevelEditor/errors.txt
 LevelEditor/tmp/

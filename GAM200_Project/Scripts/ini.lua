@@ -18,7 +18,10 @@ init = {
 
   --[debugMode]
   debugMode = true,
-  showConsole = false,
+  showConsole = true,
+  
+  --[BS]
+  playTheme = true,
   
   --[assetConfig]
   atlasPNG = "resources/Textures/Atlas/testAtlas.png",

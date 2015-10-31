@@ -16,6 +16,8 @@ public:
   int FPSlimit;
   bool showConsole;
 
+  bool playTheme;
+
   std::string atlasPNG;
   std::string atlasINFO;
 };
