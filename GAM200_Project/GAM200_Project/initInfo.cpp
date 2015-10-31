@@ -9,6 +9,7 @@ void luaInitFile()
   INITINFO->clientWidth = iniFile.get<int>("init.clientWidth");
   INITINFO->clientHeight = iniFile.get<int>("init.clientHeight");
   INITINFO->FPSlimit = iniFile.get<int>("init.FPSlimit");
+  INITINFO->showConsole = iniFile.get<bool>("init.showConsole");
   INITINFO->atlasPNG = iniFile.get<std::string>("init.atlasPNG");
   INITINFO->atlasINFO = iniFile.get<std::string>("init.atlasINFO");
   iniFile.stop();

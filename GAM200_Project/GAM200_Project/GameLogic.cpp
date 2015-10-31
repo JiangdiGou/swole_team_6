@@ -13,7 +13,6 @@
 #include "GameLogic.h"
 #include "./physicsLib//Transform.h"
 #include "./physicsLib/Body.h"
-#include "./physicsLib/primitive.h"
 #include "./engineGraphics/Sprite.h"
 #include "./engineGraphics/Camera.h"
 #include "./gameComponents/objFactory.h"
@@ -43,6 +42,8 @@ void GameLogic::Initialize()
   //This move is so that the bottom left corner is 0,0
   mainCamera->move(glm::vec3(4.5, 2.25, 0));
 
+  GRAPHICS->setMainCamera(mainCamera);
+
   FACTORY->createTiles();
 
 
@@ -50,13 +51,15 @@ void GameLogic::Initialize()
   GOC * player = FACTORY->makeObject("player");
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
+  transformPlayer->SetScale(Vector2(3, 3));
   player->AddComponent(CT_Transform, transformPlayer);
+
   Body * bodyPlayer = new Body();
   bodyPlayer->Mass = 3.0f;
   bodyPlayer->Restitution = 0.3f;
   bodyPlayer->Friction = 0.0f;
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
-  boxColliderPlayer->Extents = Vec2D(.5, .5);
+  boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
   bodyPlayer->BodyShape = boxColliderPlayer;
 
   player->AddComponent(CT_Body, bodyPlayer);
@@ -65,8 +68,8 @@ void GameLogic::Initialize()
   player->AddComponent(CT_PlayerState, controller);
 
   Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["sliceTest-14"];
-  spritePlayer->color = glm::vec4(0.25, 1, 0, 1);
+  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["sliceTest-127"];
+  spritePlayer->flipSprite = false;
   player->AddComponent(CT_Sprite, spritePlayer);
 
   LOGIC->player = player;
@@ -151,7 +154,7 @@ void GameLogic::Initialize()
 
   Sprite * sprite6 = new Sprite();
   sprite6->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
-  sprite6->color = glm::vec4(0, 0, 1, 1);
+  sprite6->color = glm::vec4(1, 1, 0, 1);
   blackObj3->AddComponent(CT_Sprite, sprite6);
   blackObj3->AddComponent(CT_ShapeAAB, box1);
 
@@ -215,7 +218,23 @@ void GameLogic::SendMessages(Message * m)
   case Mid::CharacterKey:
   {
 	  MessageCharacterKey* CharacterMessage = (MessageCharacterKey*)m;
-	  switch (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+    if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+      switch (CharacterMessage->character)
+    {
+      std::cout << "char msg char is " << CharacterMessage->character;
+      case 'a':
+      {
+
+      }
+      case 'd':
+      {
+        std::cout << "ddd" << std::endl;
+        Sprite* playerSprite = LOGIC->player->has(Sprite);
+
+        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
+        break;
+      }
+    }
     break;
   }
   case Mid::MouseMove:
@@ -284,5 +303,5 @@ GameLogic::~GameLogic()
 
 void GameLogic::Update(float dt)
 {
-
+  
 }

@@ -206,6 +206,8 @@ private:
 public:
 	Vector3D() : x(0), y(0), z(0) {} // constructor to zero out
 
+  Vector3D(const Vector2& vec) : x(vec.x), y(vec.y), z(0) {}
+
   Vector3D(glm::vec3 &attemptCopy);
 
 	Vector3D(const float x, const float y, const float z)

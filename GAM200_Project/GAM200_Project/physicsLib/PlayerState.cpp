@@ -66,31 +66,34 @@ void PlayerState::SendMessages(Message * message)
 		switch (CharacterMessage->character)
 		{
 		case 'W':
-			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
-			{
-				// we can do anything here also sounds
+			//if (StateList::Grounded)
+			//{
+				if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+				{
+					// we can do anything here also sounds
 
-				//variableJumpHeightEnabled = true;
-				PressJump();
-				//playerBody->AddForce(Vec2D(0, 1000));
-				printf("my jumping v: %f", playerBody->Velocity.y);
-			}
+					//variableJumpHeightEnabled = true;
+					PressJump();
+					//playerBody->AddForce(Vec2D(0, 1000));
+					printf("my jumping v: %f", playerBody->Velocity.y);
+				}
 
-			else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
-			{
-				//change player sprite state here
+				else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
+				{
+					//change player sprite state here
 
-				//variableJumpHeightEnabled = false;
-				ReleaseJump();
-			}
-			else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
-			{
-				// do nothing
+					//variableJumpHeightEnabled = false;
+					ReleaseJump();
+				}
+				else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
+				{
+					// do nothing
 
-			}
+				}
 
 
-			break;
+				break;
+			//}
 
 		case 'S':
 			// we don't need to down key anyway so do shit 
@@ -111,6 +114,9 @@ void PlayerState::SendMessages(Message * message)
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				// change player sprite state here 
+        Sprite* playerSprite = LOGIC->player->has(Sprite);
+        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
+        
 
 				if (playerBody->Velocity.x >= 0.2f)
 					break;
@@ -155,6 +161,8 @@ void PlayerState::SendMessages(Message * message)
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				// we can change the player sprite to dashing or sth here?
+				Sprite* playerSprite = LOGIC->player->has(Sprite);
+				playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
 
 				if (playerBody->Velocity.x <= -0.2f)
 					break;
@@ -163,12 +171,13 @@ void PlayerState::SendMessages(Message * message)
 				printf("lalal: %f", playerBody->Velocity.x);
 				//playerBody->AddForce(Vec2D(50, 0));
 
-
-				//if (PlayerTransform->GetScale().x < 0)
-				//{
-				//	//Face the player right
-				//	PlayerTransform->GetScale().x *= -1.0f;
-				//}
+				/*
+				if (playerBody->tx->etScale().x < 0)
+				{
+					//Face the player right
+					playerBody->tx->SetScale().x *
+				}
+				*/
 			}
 
 			// revert changes when the key is released
@@ -270,15 +279,16 @@ void PlayerState::Update(float dt)
 	//}
 
 
-	// On the ground
-	//if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
-	//{
-	//	jumpCount = 0;
-	//	JumpTimer = 0;
-	//	MyPlayerState = Grounded;
-	//	jumpButtonReleased = false;
-	//	return;
-	//}
+	 //On the ground
+	/*
+	if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
+	{
+		jumpCount = 0;
+		JumpTimer = 0;
+		MyPlayerState = Grounded;
+		jumpButtonReleased = false;
+		return;
+	}*/
 
 	////Keep our variable-height jump going up to the max height
 	//if (MyPlayerState == StartJump)

@@ -6,7 +6,7 @@
 #include "../Utilities.h"
 #include "../physicsLib/Transform.h"
 #include "../physicsLib/Body.h"
-#include "../physicsLib/primitive.h"
+
 #include "../engineGraphics/Sprite.h"
 #include "../engineGraphics/Camera.h"
 #include "../engineGraphics/graphicsManager.h"

@@ -52,8 +52,8 @@ private:
 
   //Helper functions:
   int CheckBinaryMapCollision(float posX, float posY); //returns our collision flags
-  void SnapToCellX(float &transfcoord, float &rigidcoord); //Given a float value, snaps left 1/4 tile away from a wall
-  void SnapToCellY(float &transfcoord, float &rigidcoord); //Given a float value, snaps to nearest int (i.e. border of tile)
+  void SnapToCellX(float transfcoord, float rigidcoord); //Given a float value, snaps left 1/4 tile away from a wall
+  void SnapToCellY(float transfcoord, float rigidcoord); //Given a float value, snaps to nearest int (i.e. border of tile)
   int GetCellValue(int fx, int fy);
 
 };

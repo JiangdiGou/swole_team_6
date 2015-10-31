@@ -319,16 +319,10 @@
     <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Collision.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
@@ -377,9 +371,6 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\initInfo.cpp">
       <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
-      <Filter>Universal</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\Swole.cpp">
       <Filter>Universal</Filter>

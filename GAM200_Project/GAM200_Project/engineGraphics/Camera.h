@@ -23,6 +23,8 @@ public:
 
   void SendMessages(Message*) override {};
 
+  glm::vec3 getPosition() { return cameraPosition; };
+
 private:
   glm::vec3 worldUp;
   glm::vec3 cameraPosition;
@@ -32,6 +34,5 @@ private:
   GLuint viewLocation;
   GLuint projectionLocation;
 };
-
 
 #endif

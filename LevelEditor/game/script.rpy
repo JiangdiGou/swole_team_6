@@ -22,6 +22,10 @@ label folderWarning:
     "Returning to Main Menu. You must have a valid folder selected."
     return
 
+label fileWarning:
+    "Returning to Main Menu. You must have a valid file selected."
+    return
+
 label existing:
     $ state = scriptsToRegistrar(persistent.scripts)
     if (not state):
@@ -32,6 +36,8 @@ label existing:
     "Loading [loadLevel]...{nw}"
     $ levelStruct = Level()
     $ levelStruct.loadFrom(loadLevel)
+    if(not levelStruct.UsableState):
+        jump fileWarning
     show screen gui_menu(levelStruct, guiView)
     jump loop1
 
@@ -51,6 +57,8 @@ label new:
     $ baselineFile = renpy.input("Name the file")
     $ levelStruct.FileLoc += ("/" + baselineFile)
     $ levelStruct.initFile()
+    if(not levelStruct.UsableState):
+        jump fileWarning
     show screen gui_menu(levelStruct, guiView)
     jump loop1
 
