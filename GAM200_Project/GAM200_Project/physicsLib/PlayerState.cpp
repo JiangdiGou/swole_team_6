@@ -35,8 +35,14 @@ void PlayerState::Initialize()
  // we need to initialize the messaging system here!!
 
   //InitializeCollisionCallback();
+  playerTransform = reinterpret_cast<Transform *>(parent->GetComponent(CT_Transform));
+  playerSprite = reinterpret_cast<Sprite *>(parent->GetComponent(CT_Sprite));
+  //Getting actual ptr here on purpose. No one should ever fuck w/ player sprite
+  //Except this script. 
+  idleAnimation = &(GRAPHICS->getSpriteAtlas()->textures["Character"]);
+  runAnimation = &(GRAPHICS->getSpriteAtlas()->textures["CharacterRun"]);
   
-  
+
 }
 
 PlayerState::~PlayerState()
@@ -81,6 +87,7 @@ void PlayerState::SendMessages(Message * message)
 				else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
 				{
 					//change player sprite state here
+          //There is no jump animation yet 
 
 					//variableJumpHeightEnabled = false;
 					ReleaseJump();
@@ -90,13 +97,9 @@ void PlayerState::SendMessages(Message * message)
 					// do nothing
 
 				}
-
-
-				break;
 			//}
-
+      break;
 		case 'S':
-			// we don't need to down key anyway so do shit 
 			break;
 
 		case 'A':
@@ -114,15 +117,21 @@ void PlayerState::SendMessages(Message * message)
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				// change player sprite state here 
-        Sprite* playerSprite = LOGIC->player->has(Sprite);
-        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
-        
+        if (playerSprite->texture != *runAnimation)
+          playerSprite->texture = *runAnimation;
+
+        if (playerTransform->GetScale().x > 0)
+        {
+          playerTransform->SetScale(Vector2(-1 * playerTransform->GetScale().x,
+            playerTransform->GetScale().y));
+        }
+
 
 				if (playerBody->Velocity.x >= 0.2f)
 					break;
 
 				playerBody->Velocity.x = -(playerRunSpeed);
-				printf("vel while moving right: %f", playerBody->Velocity.x);
+				//printf("vel while moving right: %f", playerBody->Velocity.x);
 				//playerBody->AddForce(Vec2D(-50, 0));
 				
 				
@@ -133,12 +142,15 @@ void PlayerState::SendMessages(Message * message)
 						}*/
 			}
 
-			if (CharacterMessage->keyStatus == KEY_RELEASED)
+			else if (CharacterMessage->keyStatus == KEY_RELEASED)
 			{
 				playerBody->AddForce(Vec2D(0,0));
 				//PlayerSprite->ChangeState("idle");
 				playerBody->Velocity.x = 0.0f;
 				//playerBody->Friction = 0.0f; 
+
+        if (playerSprite->texture != *idleAnimation)
+          playerSprite->texture = *idleAnimation;
 			}
 
 			break;
@@ -161,14 +173,20 @@ void PlayerState::SendMessages(Message * message)
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				// we can change the player sprite to dashing or sth here?
-				Sprite* playerSprite = LOGIC->player->has(Sprite);
-				playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
+        if (playerSprite->texture != *runAnimation)
+          playerSprite->texture = *runAnimation;
+
+        if (playerTransform->GetScale().x < 0)
+        {
+          playerTransform->SetScale(Vector2(-1 * playerTransform->GetScale().x,
+            playerTransform->GetScale().y));
+        }
 
 				if (playerBody->Velocity.x <= -0.2f)
 					break;
 				playerBody->Velocity.x = (playerRunSpeed);
 			
-				printf("lalal: %f", playerBody->Velocity.x);
+				//printf("lalal: %f", playerBody->Velocity.x);
 				//playerBody->AddForce(Vec2D(50, 0));
 
 				/*
@@ -181,13 +199,16 @@ void PlayerState::SendMessages(Message * message)
 			}
 
 			// revert changes when the key is released
-			if (CharacterMessage->keyStatus == KEY_RELEASED)
+			else if (CharacterMessage->keyStatus == KEY_RELEASED)
 			{
 				//player should be idle here?
 
 				playerBody->AddForce(Vec2D(0, 0));
 				playerBody->Velocity.x = 0.0f;
 				//playerBody->Friction = 0.0f;
+
+        if (playerSprite->texture != *idleAnimation)
+          playerSprite->texture = *idleAnimation;
 			}
 
 			break;

@@ -6,12 +6,17 @@
 class AtlasTexture
 {
 public:
+  friend class Sprite;
+  friend class TextureAtlas;
+
   AtlasTexture(int aWidth, int aHeight, int numberOfFrames,
     int frameTime, int xOffset, int yOffset, int textureWidth, int textureHeight);
   AtlasTexture();
 
+  bool operator==(const AtlasTexture& rhs) const;
+  bool operator!=(const AtlasTexture& rhs) const;
+
   void updateAnimation(void);
-  GLfloat textureCoordinates[12];
 private:
   //Literally every private member here is used for animation 
   int currentFrame;
@@ -27,6 +32,8 @@ private:
   //ms
   int frameStartTime;
   int frameDuration;
+
+  GLfloat textureCoordinates[12];
 
   //Helper functions used by update animation
   GLfloat getLeftX();
