@@ -68,7 +68,7 @@ void GameLogic::Initialize()
   player->AddComponent(CT_PlayerState, controller);
 
   Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["sliceTest-127"];
+  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
   spritePlayer->flipSprite = false;
   player->AddComponent(CT_Sprite, spritePlayer);
 
