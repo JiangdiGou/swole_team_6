@@ -124,8 +124,10 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStateCurr = gGameStateNext;
   }*/
   CConsoleLoggerEx coloured_console;
-  coloured_console.Create("console");
-  coloured_console.printf("RIP C++ Piping.");
+  coloured_console.Create("Debug Console");
+  coloured_console.printf("LOL C++.\n");
+  coloured_console << 213213 << "\n";
+  coloured_console << "candy" << "\n";
   engine->GameLoop();
   //engine->LastTime = timeGetTime();
 /*  while (engine->GameActive)

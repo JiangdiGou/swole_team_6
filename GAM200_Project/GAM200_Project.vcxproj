@@ -35,6 +35,7 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\textureAtlas.h" />
     <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h" />
+    <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h" />
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h" />
     <ClInclude Include="GAM200_Project\gameLevel.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

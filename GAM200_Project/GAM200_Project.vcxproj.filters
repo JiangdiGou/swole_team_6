@@ -257,6 +257,9 @@
     <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h">
       <Filter>loggerConsole</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h">
+      <Filter>loggerConsole</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">

@@ -16,8 +16,9 @@
 #include <fcntl.h>
 #include "io.h"
 #include "direct.h"
-
-
+#include <string>
+#include <ostream>
+#include <sstream>
 #include "ntverp.h"
 #if !defined(VER_PRODUCTBUILD) ||  VER_PRODUCTBUILD<3790
 #pragma message ("********************************************************************************************")
@@ -32,6 +33,7 @@
 // If no "helper_executable" location was specify -
 // search for the DEFAULT_HELPER_EXE 
 #define DEFAULT_HELPER_EXE	"extraConsoleHelper.exe"
+
 
 
 class CConsoleLogger
@@ -54,6 +56,9 @@ public:
 	// output functions
 	inline int print(const char *lpszText,int iSize=-1);
 	int printf(const char *format,...);
+
+  template<typename T>
+  void operator<<(T arg);
 	
 	// play with the CRT output functions
 	int SetAsDefaultOutput(void);
@@ -128,7 +133,6 @@ protected:
 	}
 
 };
-
 
 ///////////////////////////////////////////////////////////////////////////
 // CConsoleLoggerEx: same as CConsoleLogger,
@@ -225,5 +229,7 @@ protected:
 
 
 };
+
+#include "extraLoggerInline.h"
 
 #endif
