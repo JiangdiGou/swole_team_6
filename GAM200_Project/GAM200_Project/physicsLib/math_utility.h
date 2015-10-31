@@ -2,6 +2,7 @@
 #define MATH_UTILITY_H
 #include <math.h>
 #include <algorithm>
+#include "../engineGraphics/glm/vec3.hpp"
 
 #define FLOAT_PI 3.14159265358979323846f
 
@@ -205,6 +206,8 @@ private:
 public:
 	Vector3D() : x(0), y(0), z(0) {} // constructor to zero out
 
+  Vector3D(glm::vec3 &attemptCopy);
+
 	Vector3D(const float x, const float y, const float z)
 		: x(x), y(y), z(z) {}
 
@@ -380,5 +383,7 @@ public:
 	}
 };
 typedef Vector3D Vector3;
+
+#include "../Utilities.h"
 
 #endif
