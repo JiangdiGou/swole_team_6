@@ -5,6 +5,7 @@
 #include <utility>
 #include <iostream>
 #include "engineGraphics\Graphics.h"
+#include "engineGraphics\graphicsManager.h"
 #include "WindowsSystem.h"
 #include "initInfo.h"
 #include "GameLogic.h"

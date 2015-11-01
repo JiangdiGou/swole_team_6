@@ -40,7 +40,6 @@ void GameLogic::Initialize()
   camera->AddComponent(CT_Camera, mainCamera);
   camera->Initialize();
   //This move is so that the bottom left corner is 0,0
-  mainCamera->move(glm::vec3(4.5, 2.25, 0));
 
   GRAPHICS->setMainCamera(mainCamera);
 

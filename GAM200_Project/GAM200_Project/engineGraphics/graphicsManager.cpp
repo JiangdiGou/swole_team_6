@@ -75,6 +75,7 @@ void GraphicsManager::Update(float dt)
   logGfxError("DEBUGDRAW:: Error in drawing. ");
 #endif
 
+
   Sprite::drawAllSprites();
 #ifdef GFXLOG
   logGfxError("SPRITE:: Error in drawing. ");
@@ -84,6 +85,7 @@ void GraphicsManager::Update(float dt)
 #ifdef GFXLOG
   logGfxError("SPRITETEXT:: Error in drawing. ");
 #endif
+
 
   //Cleanup 
   glBindVertexArray(0);
@@ -141,4 +143,22 @@ void GraphicsManager::Initialize()
 GraphicsManager::~GraphicsManager()
 {
   //wgldeletecontext of context
+}
+
+Vector2 GraphicsManager::screenToWorld(Vector2 screenCoords)
+{
+  Vector2 worldCoords;
+
+  screenCoords.x = screenCoords.x - 0.5*INITINFO->clientWidth;
+  screenCoords.y = 0.5*INITINFO->clientHeight - screenCoords.y;
+
+  //x2 here because the camera is -initInfo to initInfo, so its really like 2 initInfo
+  screenCoords.x = screenCoords.x * (mainCamera.getWidth() / INITINFO->clientWidth);
+  screenCoords.y = screenCoords.y * (mainCamera.getHeight() / INITINFO->clientHeight);
+
+  //Player transform cause thats where the camera is centered
+  Transform *playerTransform = LOGIC->player->has(Transform);
+  return screenCoords + playerTransform->GetPositionXY();
+
+  return Vector2();
 }

@@ -3,6 +3,10 @@
 
 #include "Graphics.h"
 
+//Image Loading 
+#include "SOIL/SOIL.h"
+
+
 class Texture
 {
   friend class SpriteText;

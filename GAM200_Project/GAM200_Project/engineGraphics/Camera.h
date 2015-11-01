@@ -14,7 +14,7 @@ public:
   Camera(const Shader& shader);
   ~Camera();
 
-  float zoom;
+  float zoom = 0.25f;
   void move(glm::vec3 translation);
 
   void Update(float dt) override;
@@ -23,9 +23,25 @@ public:
 
   void SendMessages(Message*) override {};
 
-  glm::vec3 getPosition() { return cameraPosition; };
+  glm::vec3 getPosition() { return cameraPosition; }
+
+  float getSize() { return size; }
+
+  void setCameraSize(float newSize)
+  {
+    size = newSize;
+    Update(0.0f);
+  }
+
+  float getWidth() { return width; }
+  float getHeight() { return height; }
 
 private:
+  float size = 1000.0f;
+
+  float width;
+  float height;
+
   glm::vec3 worldUp;
   glm::vec3 cameraPosition;
   glm::vec3 cameraTarget;

@@ -1,6 +1,6 @@
 #include "WindowsSystem.h"
 #include "initInfo.h"
-#include "engineGraphics\Graphics.h"
+#include "engineGraphics\GraphicsManager.h"
 #include "Core.h"
 
 //A global pointer to the windows system
@@ -47,32 +47,42 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 	}
 	case WM_LBUTTONDOWN:
 	{
-		MouseButton m(MouseButton::LeftMouse, true, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x, 
+                                          WINDOWSSYSTEM->MousePosition.y));
+		MouseButton m(MouseButton::LeftMouse, true, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_RBUTTONDOWN:
 	{
-		MouseButton m(MouseButton::RightMouse, true, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x, 
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseButton m(MouseButton::RightMouse, true, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_LBUTTONUP:
 	{
-		MouseButton m(MouseButton::LeftMouse, false, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseButton m(MouseButton::LeftMouse, false, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_RBUTTONUP:
 	{
-		MouseButton m(MouseButton::RightMouse, false, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseButton m(MouseButton::RightMouse, false, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_MOUSEMOVE:
 	{
 		WINDOWSSYSTEM->MousePosition = MAKEPOINTS(lParam);
-		MouseMove m(Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseMove m(worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
