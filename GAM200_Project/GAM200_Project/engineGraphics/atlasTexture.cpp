@@ -115,3 +115,22 @@ AtlasTexture::AtlasTexture()
 
 }
 
+bool AtlasTexture::operator==(const AtlasTexture& rhs) const
+{
+  //Offset should be unique for each texture in atlas
+  //Also, if tex coords like W and H are used to crop, 
+  //then those might vary. So offset is fine and sufficent anyway.
+  if (offsetX == rhs.offsetX && offsetY == rhs.offsetY)
+    return true;
+}
+
+bool AtlasTexture::operator!=(const AtlasTexture& rhs) const
+{
+  //Offset should be unique for each texture in atlas
+  //Also, if tex coords like W and H are used to crop, 
+  //then those might vary. So offset is fine and sufficent anyway.
+  if (offsetX != rhs.offsetX || offsetY != rhs.offsetY)
+    return true;
+}
+
+

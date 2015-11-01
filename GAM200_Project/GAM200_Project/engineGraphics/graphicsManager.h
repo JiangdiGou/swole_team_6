@@ -13,6 +13,7 @@
 #include "../logger/logger.h"
 #include "Camera.h"
 #include "../GameLogic.h"
+#include "../initInfo.h"
 
 class GraphicsManager : public ISystem
 {
@@ -37,6 +38,8 @@ public:
   Shader* getCoreShader() { return &coreShader; }
   void setSpriteAtlas(const TextureAtlas& atlas) { spriteAtlas = atlas; }
   TextureAtlas* getSpriteAtlas() { return &spriteAtlas; }
+
+  Vector2 screenToWorld(Vector2 screenCoords);
 
 private:
   HDC deviceContext;

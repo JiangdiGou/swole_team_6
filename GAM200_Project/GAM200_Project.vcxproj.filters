@@ -61,6 +61,9 @@
     <Filter Include="Systems\engineGraphics">
       <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="loggerConsole">
+      <UniqueIdentifier>{9ca3870f-2015-418c-88a4-ef0bef261a1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -251,6 +254,12 @@
     <ClInclude Include="GAM200_Project\mouseVector.h">
       <Filter>Universal</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h">
+      <Filter>loggerConsole</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h">
+      <Filter>loggerConsole</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -319,16 +328,10 @@
     <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Collision.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
@@ -378,14 +381,14 @@
     <ClCompile Include="GAM200_Project\initInfo.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
-      <Filter>Universal</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\Swole.cpp">
       <Filter>Universal</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\mouseVector.cpp">
       <Filter>Universal</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp">
+      <Filter>loggerConsole</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

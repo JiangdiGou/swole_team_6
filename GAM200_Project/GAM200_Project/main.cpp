@@ -10,6 +10,7 @@ main loop
 #define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
 #include "_EntryPoint.h"
+#include "extraLogger/extraLogger.h"
 #include "engineGraphics/graphicsManager.h"
 #include "GameLogic.h"
 #include "Core.h"
@@ -39,15 +40,23 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 #endif
 {
 
-  //Opens a console for debugging and testing 
-  AllocConsole();
-  AttachConsole(GetCurrentProcessId());
-  freopen("CONIN$", "r", stdin);
-  freopen("CONOUT$", "w", stdout);
-  freopen("CONOUT$", "w", stderr);
+
 
   luaInitFile();
   baseInitRoutine();
+
+  //coloured_console.cprintf(CConsoleLoggerEx::COLOR_RED | CConsoleLoggerEx::COLOR_BACKGROUND_BLACK, "Another console");
+  //coloured_console.printf("Rip C++ piping.");
+  //Opens a console for debugging and testing 
+  if (INITINFO->showConsole)
+  {
+	  AllocConsole();
+	  AttachConsole(GetCurrentProcessId());
+	  freopen("CONIN$", "r", stdin);
+	  freopen("CONOUT$", "w", stdout);
+	  freopen("CONOUT$", "w", stderr);
+  }
+
   //Stores the window being created
   //HWND window;
   ////Stores windows messages 
@@ -114,6 +123,11 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
   }*/
+  CConsoleLoggerEx coloured_console;
+  coloured_console.Create("Debug Console");
+  coloured_console.printf("LOL C++.\n");
+  coloured_console << 213213 << "\n";
+  coloured_console << "candy" << "\n";
   engine->GameLoop();
   //engine->LastTime = timeGetTime();
 /*  while (engine->GameActive)

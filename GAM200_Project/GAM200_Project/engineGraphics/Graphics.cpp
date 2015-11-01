@@ -35,6 +35,8 @@ void setupPixelFormatDescriptor(HDC deviceContext)
     std::cout << "Pixel Format Descriptor Creation Successful." << std::endl;
 }
 
+
+
 #ifdef GFXLOG
 void logGfxError(std::string precedingMessage)
 {

@@ -31,9 +31,13 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h" />
-    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\textureAtlas.h" />
+    <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h" />
+    <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h" />
     <ClInclude Include="GAM200_Project\gameComponents\objFactory.h" />
     <ClInclude Include="GAM200_Project\gameLevel.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -154,9 +158,12 @@
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp" />
-    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\textureAtlas.cpp" />
+    <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp" />
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp" />
     <ClCompile Include="GAM200_Project\gameLevel.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -188,9 +195,6 @@
     <ClCompile Include="GAM200_Project\physicsLib\Collision.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\math_utility.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -201,16 +205,10 @@
     <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp">
@@ -249,7 +247,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

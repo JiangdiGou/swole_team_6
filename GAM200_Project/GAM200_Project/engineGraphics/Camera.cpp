@@ -1,9 +1,8 @@
 #include "Camera.h"
 
-//It was bitching at me for no default
+//DO NOT USE. It was bitching at me for no default
 Camera::Camera()
 {
-
 }
 
 //**********************
@@ -14,8 +13,6 @@ Camera::Camera()
 //**********************
 Camera::Camera(const Shader& shader)
 {
-  zoom = 0.25;
-
   cameraPosition = glm::vec3(0.0f, 0.0f, 2.0);
   cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
   worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -26,6 +23,9 @@ Camera::Camera(const Shader& shader)
 
   //Gets the location of the view matrix uniform and sends it to the shader. 
   viewLocation = glGetUniformLocation(shaderID, "uniformView");
+
+  width = (2.0f * INITINFO->clientWidth) / (size * zoom);
+  height = (2.0f * INITINFO->clientHeight) / (size * zoom);
 }
 
 //**********************
@@ -67,10 +67,10 @@ void Camera::Update(float dt)
   glm::mat4 projectionMatrix;
   //Left, Right, Bottom, Top, Near, Far
   //This random magic 1000.0f is just to make everything have a reasonable value
-  projectionMatrix = glm::ortho((float)-INITINFO->clientWidth / (1000.0f*zoom), 
-                                (float)INITINFO->clientWidth / (1000.0f*zoom),
-                                (float)-INITINFO->clientHeight / (1000.0f*zoom), 
-                                (float)INITINFO->clientHeight / (1000.0f*zoom),
+  projectionMatrix = glm::ortho((float)-INITINFO->clientWidth / (size * zoom),
+                                (float)INITINFO->clientWidth / (size * zoom),
+                                (float)-INITINFO->clientHeight / (size * zoom),
+                                (float)INITINFO->clientHeight / (size * zoom),
                                 0.1f, 5.0f);
 
   //Gets the view matrix 

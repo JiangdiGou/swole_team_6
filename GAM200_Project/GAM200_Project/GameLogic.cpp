@@ -13,7 +13,6 @@
 #include "GameLogic.h"
 #include "./physicsLib//Transform.h"
 #include "./physicsLib/Body.h"
-#include "./physicsLib/primitive.h"
 #include "./engineGraphics/Sprite.h"
 #include "./engineGraphics/Camera.h"
 #include "./gameComponents/objFactory.h"
@@ -41,7 +40,6 @@ void GameLogic::Initialize()
   camera->AddComponent(CT_Camera, mainCamera);
   camera->Initialize();
   //This move is so that the bottom left corner is 0,0
-  mainCamera->move(glm::vec3(4.5, 2.25, 0));
 
   GRAPHICS->setMainCamera(mainCamera);
 
@@ -52,14 +50,15 @@ void GameLogic::Initialize()
   GOC * player = FACTORY->makeObject("player");
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
-  //transformPlayer->SetScale(Vector2(1.25, 1.25));
+  transformPlayer->SetScale(Vector2(1.25, 1.25));
   player->AddComponent(CT_Transform, transformPlayer);
+
   Body * bodyPlayer = new Body();
   bodyPlayer->Mass = 3.0f;
   bodyPlayer->Restitution = 0.3f;
   bodyPlayer->Friction = 0.0f;
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
-  boxColliderPlayer->Extents = Vec2D(.5, .5);
+  boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
   bodyPlayer->BodyShape = boxColliderPlayer;
 
   player->AddComponent(CT_Body, bodyPlayer);
@@ -154,7 +153,7 @@ void GameLogic::Initialize()
 
   Sprite * sprite6 = new Sprite();
   sprite6->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
-  sprite6->color = glm::vec4(0, 0, 1, 1);
+  sprite6->color = glm::vec4(1, 1, 0, 1);
   blackObj3->AddComponent(CT_Sprite, sprite6);
   blackObj3->AddComponent(CT_ShapeAAB, box1);
 

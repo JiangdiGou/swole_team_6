@@ -17,6 +17,8 @@
 #include <string>
 #include <iterator>
 #include <vector>
+#include "engineGraphics/glm/vec3.hpp"
+#include "physicsLib/math_utility.h"
 
 #ifdef _WIN32
   #include <direct.h>

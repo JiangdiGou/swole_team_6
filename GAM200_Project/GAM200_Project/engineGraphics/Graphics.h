@@ -12,12 +12,6 @@
 #include "glew/glew.h"
 #include "glew/wglew.h"
 
-//Window Creation
-#include <Windows.h>
-
-//Image Loading 
-#include "SOIL/SOIL.h"
-
 //Math
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -28,6 +22,7 @@
 #include "../logger/logger.h"
 #include <vector>
 #include <string>
+#include "../physicsLib/math_utility.h"
 
 void setupPixelFormatDescriptor(HDC handleDeviceContext);
 
