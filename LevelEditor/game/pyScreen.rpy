@@ -76,6 +76,8 @@ screen vpkm(obj):
     key "input_up" action [[Function(modup, local)]]
     key "input_down" action [[Function(moddown, local)]]
 
+# MITCH, LOOK FOR THIS LINE################################################################################################################
+
 screen gui_menu(lo, vi):
     #leftside
     frame:
@@ -98,7 +100,7 @@ screen gui_menu(lo, vi):
             text "Tile Selection" color "#000"
             textbutton "[vi.x], [vi.y]" action NullAction()
     #always show this leftside preset
-    frame:
+    frame:#NO!
         xpos 0
         xsize 260
         ypos (config.screen_height - 450)
