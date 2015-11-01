@@ -59,6 +59,18 @@ class PlayerMovement : ZilchComponent
             }
             
             
+            if(Zero.Keyboard.KeyIsPressed(Keys.A) || Zero.Keyboard.KeyIsPressed(Keys.D))
+            {
+                this.Owner.Sprite.SpriteSource = SpriteSource.CharacterRun_8;
+                this.Owner.Sprite.AnimationActive = true;
+            }
+            
+            if(Zero.Keyboard.KeyIsUp(Keys.A) && Zero.Keyboard.KeyIsUp(Keys.D))
+            {
+                this.Owner.Sprite.SpriteSource = SpriteSource.Character_4;
+                this.Owner.Sprite.AnimationActive = false;
+            }
+            
             if(this.LeftCollision || this.RightCollision && this.Owner.RigidBody.Velocity.Y < 0)
             {
                 this.Owner.RigidBody.Velocity = Real3(this.Owner.RigidBody.Velocity.X, this.Owner.RigidBody.Velocity.Y * 0.8, this.Owner.RigidBody.Velocity.Z);
