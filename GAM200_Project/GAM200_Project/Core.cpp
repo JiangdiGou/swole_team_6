@@ -9,7 +9,7 @@
 #include "Core.h"
 #include "engineGraphics/Graphics.h"
 #include "Message.h"
-#include "mousePos.h"
+#include "mouseVector.h"
 #include "_EntryPoint.h"
 #include "initinfo.h"
 #include "engineAudio/Audio.h"
@@ -66,7 +66,7 @@ void CoreEngine::GameLoop()
 
   while (GameActive)
   {
-    updateMousePos();
+    //updateMousePos();
 
     unsigned currenttime = timeGetTime();
     //Convert it to the time passed since the last frame (in seconds)

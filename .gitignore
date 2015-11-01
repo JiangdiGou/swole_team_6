@@ -20,3 +20,4 @@ LevelEditor/game/*.rpyb
 LevelEditor/game/saves/
 LevelEditor/debuglog.txt
 LevelEditor/*.autosave
+GAM200_Project/log.txt

@@ -31,7 +31,9 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h" />
-    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h" />
+    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\textureAtlas.h" />
     <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h" />
@@ -156,7 +158,9 @@
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp" />
-    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp" />
+    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\textureAtlas.cpp" />
     <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp" />
