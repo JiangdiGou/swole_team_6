@@ -24,6 +24,12 @@ Vector3D::Vector3D(glm::vec3 &attemptCopy):
   */
 }
 
+std::ostream& operator<<(std::ostream &out, const Vector3D &v)
+{
+  out << '(' << v.x << ", " << v.y << ", " << v.z << ')';
+  return out;
+}
+
 std::string whereExec()
 {
   char cCurrentPath[FILENAME_MAX];

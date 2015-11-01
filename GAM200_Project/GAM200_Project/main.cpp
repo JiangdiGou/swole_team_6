@@ -18,6 +18,7 @@ main loop
 #include "WindowsSystem.h"
 #include "runLua/luaTranslate.h"
 #include "runLua/luaRunner.h"
+#include "Utilities.h"
 
 #include "initInfo.h"
 
@@ -123,11 +124,13 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
   }*/
+  Vector3D dumbVector(1.2, 1.2, 1.2);
   CConsoleLoggerEx coloured_console;
   coloured_console.Create("Debug Console");
   coloured_console.printf("LOL C++.\n");
   coloured_console << 213213 << "\n";
   coloured_console << "candy" << "\n";
+  coloured_console << "la di da vector: " << dumbVector << "\n";
   engine->GameLoop();
   //engine->LastTime = timeGetTime();
 /*  while (engine->GameActive)
