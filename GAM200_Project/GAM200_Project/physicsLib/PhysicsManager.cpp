@@ -63,19 +63,19 @@ void Physics::DetectContacts(float dt)
 
 
 
-void Physics::PublishResults()
+void Physics::solveMessage()
 {
 	//Commit all physics updates
 	for (BodyIterator it = Bodies.begin(); it != Bodies.end(); ++it)
 	{
-		(it)->PublishResults();
+		(it)->solveMessage();
 	}
 
 	//Broadcast physics collision messages AFTER physics
 	//has update the bodies
-	for (unsigned i = 0; i<Contacts.NumberOfContacts; ++i)
+	for (unsigned i = 0; i<Contacts.TotalContacts; ++i)
 	{
-		BodyContact* contact = &Contacts.contactArray[i];
+		ManifoldSet* contact = &Contacts.contactSet[i];
 		MessageCollide messageCollide;
 		messageCollide.ContactNormal = contact->ContactNormal;
 		messageCollide.Impulse = contact->ContactImpulse;
@@ -102,7 +102,7 @@ void Physics::Step(float dt)
 
 	Contacts.ResolveContacts(dt);
 
-	PublishResults();
+	solveMessage();
 
 }
 

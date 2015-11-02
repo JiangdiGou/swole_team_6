@@ -74,9 +74,9 @@ void Body::Integrate(float dt)
 	
 }
 
-void Body::PublishResults()
+void Body::solveMessage()
 {
-	tx->GetPositionXY() = Position;
+	bodyTrans->GetPositionXY() = Position;
 }
 
 bool Body::CheckDetectsCollision()
@@ -87,40 +87,15 @@ bool Body::CheckDetectsCollision()
 void Body::DebugDraw()
 {
 
-
-	//if (IsStatic)
-	//{
-	//	//White
-	//	Drawer::Instance.SetColor(Vec4(1, 1, 1, 1));
-
-	//	//Draw the shape of the object
-	//	BodyShape->Draw();
-	//}
-	//else
-	//{
-	//	//Red
-	//	Drawer::Instance.SetColor(Vec4(1, 0, 0, 1));
-
-	//	//Draw the shape of the object
-	//	BodyShape->Draw();
-
-	//	//Draw the velocity of the object
-	//	Drawer::Instance.SetColor(Vec4(1, 1, 1, 1));
-	//	Drawer::Instance.MoveTo(Position);
-	//	Drawer::Instance.LineTo(Position + Velocity * 0.25f);
-
-
-	//}
-
 }
 
 void Body::Initialize()
 {
 	//Get the transform to write results to
-	tx = GetOwner()->has(Transform);
+	bodyTrans = GetOwner()->has(Transform);
 
 	//Get the starting position
-	Position = tx->GetPositionXY();
+	Position = bodyTrans->GetPositionXY();
 
 	//Add this body to the body list
 	PHYSICS->Bodies.push_back(this);
@@ -149,7 +124,7 @@ void Body::AddForce(Vec2D force)
 void Body::SetPosition(Vec2D p)
 {
 	Position = p;
-	tx->SetPosition(p);
+	bodyTrans->SetPosition(p);
 }
 
 void Body::SetVelocity(Vec2D v)

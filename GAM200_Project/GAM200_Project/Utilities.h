@@ -35,6 +35,8 @@ extern "C"//import as c libraries specifically
   #include "luaLib/lauxlib.h"
 }
 
+std::ostream& operator<<(std::ostream &out, const Vector3D &v);
+
 std::string whereExec();
 
 //meh, hopefully the client remembered to use the "setter" for closing the fstream

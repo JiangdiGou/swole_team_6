@@ -9,18 +9,18 @@
 #include "PhysicsManager.h"
 
 
-BodyContact * ContactSet::GetNextContact()
+ManifoldSet * contactList::GetNewContact()
 {
 	
-	return &contactArray[NumberOfContacts++];
+	return &contactSet[TotalContacts++];
 }
 
-void ContactSet::Reset()
+void contactList::Reset()
 {
-	NumberOfContacts = 0;
+	TotalContacts = 0;
 }
 
-float BodyContact::CalculateSeparatingVelocity()
+float ManifoldSet::GetSeparateVelocity()
 {
 	
 	Vec2D relativeVelocity = Bodies[0]->Velocity - Bodies[1]->Velocity;
@@ -31,11 +31,11 @@ float BodyContact::CalculateSeparatingVelocity()
 	return SeperatingVelocity;
 }
 
-void ResloveContactVelocity(BodyContact& c, float dt)
+void SolveVelocity(ManifoldSet& c, float dt)
 {
 	
 	//Find the velocity of the two object along the contact normal
-	float separatingVelocity = c.CalculateSeparatingVelocity();
+	float separatingVelocity = c.GetSeparateVelocity();
 
 	if (separatingVelocity > 0)
 	{
@@ -46,29 +46,23 @@ void ResloveContactVelocity(BodyContact& c, float dt)
 	}
 
 	//This velocity of this collision has to be resolved.
-
-	//To model inelastic collision the kinetic energy of the bodies 
-	//needs to be reduced.
-	//This technique uses the combined restitution to determine what percentage
-	//of the energy along the collision normal is conserved
 	float newSepVelocity = -separatingVelocity * c.Restitution;
 
-	const bool AccelerationBuildUp = true;
+	const bool accelerationFlag = true;
 	//When an object is resting on the ground it is constantly falling
-	//due to gravity. This acceleration need be removed or objects will
-	//jitter on the ground.
+	//due to gravity. This acceleration need be removed 
 
-	if (AccelerationBuildUp)
+	if (accelerationFlag)
 	{
 		// Check the velocity build-up due to acceleration only
-		Vec2D accCausedVelocity = c.Bodies[0]->Acceleration - c.Bodies[1]->Acceleration;
-		float accCausedSepVelocity = Vec2D::DotProduct(accCausedVelocity, c.ContactNormal) * dt;
+		Vec2D VelocityViaAcceleration = c.Bodies[0]->Acceleration - c.Bodies[1]->Acceleration;
+		float NewVelocity = Vec2D::DotProduct(VelocityViaAcceleration, c.ContactNormal) * dt;
 
 		// If we've got a closing velocity due to acceleration build-up,
 		// remove it from the new separating velocity
-		if (accCausedSepVelocity < 0)
+		if (NewVelocity < 0)
 		{
-			newSepVelocity += c.Restitution * accCausedSepVelocity;
+			newSepVelocity += c.Restitution * NewVelocity;
 
 			// Make sure we haven't removed more than was
 			// there to remove.
@@ -80,8 +74,7 @@ void ResloveContactVelocity(BodyContact& c, float dt)
 	float deltaVelocity = newSepVelocity - separatingVelocity;
 
 	//The delta velocity is applied to each object proportional to inverse
-	//mass. So the more massive an object is the less of the change
-	//in velocity it will receive.
+	//mass. 
 	float totalInverseMass = c.Bodies[0]->InvMass + c.Bodies[1]->InvMass;
 
 	// Calculate the impulse to apply
@@ -92,14 +85,12 @@ void ResloveContactVelocity(BodyContact& c, float dt)
 	// Find the amount of impulse per unit of inverse mass
 	Vec2D impulsePerIMass = c.ContactNormal * impulse;
 
-	// Apply impulses: they are applied in the direction of the contact,
-	// and in proportion to inverse mass.
 	c.Bodies[0]->Velocity = c.Bodies[0]->Velocity + impulsePerIMass * c.Bodies[0]->InvMass;
 	// The other body goes in the opposite direction
 	c.Bodies[1]->Velocity = c.Bodies[1]->Velocity + impulsePerIMass * -c.Bodies[1]->InvMass;
 }
 
-void ResolvePenetration(BodyContact& c, float dt)
+void SolvePenetration(ManifoldSet& c, float dt)
 {
 	
 	// The movement of each object is based on their inverse mass, so
@@ -123,70 +114,63 @@ void ResolvePenetration(BodyContact& c, float dt)
 }
 
 
-//Resolve Positions
-void ContactSet::ResolvePositions(float dt)
+void contactList::CorrectPosition(float dt)
 {
-	//Resolving penetrations is a tricky problem with large stacks. The only real way to get 
-	//good results is by considering all contacts at once at solving them together. This method basically 
-	//just keeps poking the bodies until the penetrations are below the penetration slop epsilon. 
-	//Better solutions involve building contact graphs, shock propagation and constraint based
-	//solvers.
-	unsigned iterationsRun = 0;
-	unsigned maxIterations = NumberOfContacts * 5;
+	unsigned k = 0;
+	unsigned maxIterations = TotalContacts * 5;
 	const float positionEpsilon = PHYSICS->PenetrationEpsilon;
 
-	while (iterationsRun < maxIterations)
+	while (k < maxIterations)
 	{
-		// Find biggest penetration greater than
-		//the correction epsilon
+		// Find biggest penetration 
 		float maxPenetration = positionEpsilon;
-		unsigned contactIndex = NumberOfContacts;
-		for (unsigned i = 0; i<NumberOfContacts; i++)
+		unsigned contactIndex = TotalContacts;
+		for (unsigned i = 0; i < TotalContacts; i++)
 		{
-			if (contactArray[i].Penetration > maxPenetration)
+			if (contactSet[i].Penetration > maxPenetration)
 			{
-				maxPenetration = contactArray[i].Penetration;
+				maxPenetration = contactSet[i].Penetration;
 				contactIndex = i;
 			}
 		}
-		if (contactIndex == NumberOfContacts) break;
+		if (contactIndex == TotalContacts) break;
 
-		//Resolve the penetration
-		ResolvePenetration(contactArray[contactIndex], dt);
+		//solve the penetration
+		SolvePenetration(contactSet[contactIndex], dt);
 
 		// Update the penetrations for all related contacts
-		Vec2D * movement = contactArray[contactIndex].Movement;
-		for (unsigned i = 0; i < NumberOfContacts; i++)
+		Vec2D * movement = contactSet[contactIndex].Movement;
+		for (unsigned i = 0; i < TotalContacts; i++)
 		{
-			if (contactArray[i].Bodies[0] == contactArray[contactIndex].Bodies[0])
-				contactArray[i].Penetration -= Vec2D::DotProduct(movement[0], contactArray[i].ContactNormal);
-			else if (contactArray[i].Bodies[0] == contactArray[contactIndex].Bodies[1])
-				contactArray[i].Penetration -= Vec2D::DotProduct(movement[1], contactArray[i].ContactNormal);
-			if (contactArray[i].Bodies[1])
+			if (contactSet[i].Bodies[0] == contactSet[contactIndex].Bodies[0])
+				contactSet[i].Penetration -= Vec2D::DotProduct(movement[0], contactSet[i].ContactNormal);
+			else if (contactSet[i].Bodies[0] == contactSet[contactIndex].Bodies[1])
+				contactSet[i].Penetration -= Vec2D::DotProduct(movement[1], contactSet[i].ContactNormal);
+			if (contactSet[i].Bodies[1])
 			{
-				if (contactArray[i].Bodies[1] == contactArray[contactIndex].Bodies[0])
-					contactArray[i].Penetration += Vec2D::DotProduct(movement[0], contactArray[i].ContactNormal);
-				else if (contactArray[i].Bodies[1] == contactArray[contactIndex].Bodies[1])
-					contactArray[i].Penetration += Vec2D::DotProduct(movement[1], contactArray[i].ContactNormal);
+				if (contactSet[i].Bodies[1] == contactSet[contactIndex].Bodies[0])
+					contactSet[i].Penetration += Vec2D::DotProduct(movement[0], contactSet[i].ContactNormal);
+				else if (contactSet[i].Bodies[1] == contactSet[contactIndex].Bodies[1])
+					contactSet[i].Penetration += Vec2D::DotProduct(movement[1], contactSet[i].ContactNormal);
 			}
 		}
-		++iterationsRun;
+		++k;
 	}
 }
 
-//Resolve Velocities of all contacts
-void ContactSet::ResolveVelocities(float dt)
+
+void contactList::CorrectVelocity(float dt)
 {
-	unsigned iterationsRun = 0;
-	unsigned maxIterations = NumberOfContacts * 5;
-	while (iterationsRun < maxIterations)
+	unsigned k = 0;
+	unsigned maxIterations = TotalContacts * 5;
+	while (k < maxIterations)
 	{
 		// Find the contact with the largest closing velocity;
 		float maxVelocity = FLT_MAX;
-		unsigned contactIndex = NumberOfContacts;
-		for (unsigned i = 0; i < NumberOfContacts; i++)
+		unsigned contactIndex = TotalContacts;
+		for (unsigned i = 0; i < TotalContacts; i++)
 		{
-			float sepVel = contactArray[i].CalculateSeparatingVelocity();
+			float sepVel = contactSet[i].GetSeparateVelocity();
 			if (sepVel < 0 && sepVel < maxVelocity)
 			{
 				maxVelocity = sepVel;
@@ -195,23 +179,23 @@ void ContactSet::ResolveVelocities(float dt)
 		}
 
 		// Do we have anything worth resolving?
-		if (contactIndex == NumberOfContacts) break;
+		if (contactIndex == TotalContacts) break;
 
 		// Resolve this contact velocity
-		ResloveContactVelocity(contactArray[contactIndex], dt);
+		SolveVelocity(contactSet[contactIndex], dt);
 
-		++iterationsRun;
+		++k;
 	}
 }
 
-void ContactSet::ResolveContacts(float dt)
+void contactList::ResolveContacts(float dt)
 {
 	//if (myshape->body->IsGhost == true)
 	//{	
 	//	return;
 	//} 
 
-	this->ResolvePositions(dt);
-	this->ResolveVelocities(dt);
+	this->CorrectPosition(dt);
+	this->CorrectVelocity(dt);
 }
 

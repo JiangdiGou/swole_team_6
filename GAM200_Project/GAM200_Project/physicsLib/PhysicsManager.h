@@ -29,18 +29,17 @@ public:
 	virtual void Update(float dt);
 	virtual std::string GetName(){ return "Physics"; }
 	void SendMessage(Message * m);
-	GOC * TestPoint(Vec2D testPosition);
 	void Initialize();
 private:
 	void IntegrateBodies(float dt);
 	void DetectContacts(float dt);
-	void PublishResults();
+	void solveMessage();
 	void DebugDraw();
 	void Step(float dt);
 	bool DebugDrawingActive;
 	float TimeAccumulation;
 	CollsionDatabase Collsion;
-	ContactSet Contacts;
+	contactList Contacts;
 
 public:
 	bool AdvanceStep;
