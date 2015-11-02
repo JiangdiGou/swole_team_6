@@ -121,7 +121,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-1.58002687, 4.33439159, 50],
+			Vec3 Translation = [-8.54453754, 16.8453484, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -133,7 +133,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 27.2532406,
+			float Size = 54.8812752,
 		},
 		EditorCameraController = 
 		{
@@ -141,7 +141,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-1.58002687, 4.33439159, -4.1759094e-007],
+			Vec3 LookTarget = [-8.54453754, 16.8453484, -7.22019479e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -589,7 +589,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [21.6106472, 11.5969372, 0],
+			Vec3 Translation = [-2.07579231, 12.0634489, 0],
 			Vec3 Scale = [1.60000002, 1.60000002, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -687,7 +687,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [26.2752571, 8.31359482, 0],
+			Vec3 Translation = [6.60304832, 15.5103636, 0],
 			Vec3 Scale = [1.60000002, 1.60000002, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -785,7 +785,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-9.82595444, 1.10828686, 0],
+			Vec3 Translation = [40.0258102, 4.55409718, 0],
 			Vec3 Scale = [1.60000002, 1.60000002, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -875,6 +875,398 @@ Level =
 		},
 		Named = 
 		{
+			string Name = "Enemy",
+		},
+		Archetyped = 
+		{
+			string Name = "5531cb7e57613da2:TestEnemy",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-34.0828629, 12.186552, 0],
+			Vec3 Scale = [1.60000002, 1.60000002, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "560ce42681e9c4d2:UlnaLantern000",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 15,
+			string Text = "",
+			TextAlign Align = Left,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		RigidBody = 
+		{
+			bool Static = false,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = true,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		EnemyHitReaction = 
+		{
+			int IHealth = 100,
+			int IOverkillHealth = 150,
+			int IDespawnTime = 200,
+			int IStunCD = 60,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = false,
+		},
+		EnemySlashTest = 
+		{
+		},
+		EnemyPatrol = 
+		{
+		},
+		CapsuleCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+			Vec3 Offset = [0, -0.629999995, 0],
+			float Radius = 0.61656338,
+			float Height = 9.99999975e-005,
+			uint Direction = 1,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 14,
+		},
+		Named = 
+		{
+			string Name = "Enemy",
+		},
+		Archetyped = 
+		{
+			string Name = "5531cb7e57613da2:TestEnemy",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [21.6106472, 11.5969372, 0],
+			Vec3 Scale = [1.60000002, 1.60000002, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "560ce42681e9c4d2:UlnaLantern000",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 15,
+			string Text = "",
+			TextAlign Align = Left,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		RigidBody = 
+		{
+			bool Static = false,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = true,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		EnemyHitReaction = 
+		{
+			int IHealth = 100,
+			int IOverkillHealth = 150,
+			int IDespawnTime = 200,
+			int IStunCD = 60,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = false,
+		},
+		EnemySlashTest = 
+		{
+		},
+		EnemyPatrol = 
+		{
+		},
+		CapsuleCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+			Vec3 Offset = [0, -0.629999995, 0],
+			float Radius = 0.61656338,
+			float Height = 9.99999975e-005,
+			uint Direction = 1,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 15,
+		},
+		Named = 
+		{
+			string Name = "Enemy",
+		},
+		Archetyped = 
+		{
+			string Name = "5531cb7e57613da2:TestEnemy",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [26.2752571, 8.31359482, 0],
+			Vec3 Scale = [1.60000002, 1.60000002, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "560ce42681e9c4d2:UlnaLantern000",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 15,
+			string Text = "",
+			TextAlign Align = Left,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		RigidBody = 
+		{
+			bool Static = false,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = true,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		EnemyHitReaction = 
+		{
+			int IHealth = 100,
+			int IOverkillHealth = 150,
+			int IDespawnTime = 200,
+			int IStunCD = 60,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = false,
+		},
+		EnemySlashTest = 
+		{
+		},
+		EnemyPatrol = 
+		{
+		},
+		CapsuleCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+			Vec3 Offset = [0, -0.629999995, 0],
+			float Radius = 0.61656338,
+			float Height = 9.99999975e-005,
+			uint Direction = 1,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 16,
+		},
+		Named = 
+		{
+			string Name = "Enemy",
+		},
+		Archetyped = 
+		{
+			string Name = "5531cb7e57613da2:TestEnemy",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-9.82595444, 1.10828686, 0],
+			Vec3 Scale = [1.60000002, 1.60000002, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "560ce42681e9c4d2:UlnaLantern000",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = false,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "4e7bac697bec55c5:Verdana",
+			uint FontSize = 15,
+			string Text = "",
+			TextAlign Align = Left,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+		},
+		RigidBody = 
+		{
+			bool Static = false,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = true,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		EnemyHitReaction = 
+		{
+			int IHealth = 100,
+			int IOverkillHealth = 150,
+			int IDespawnTime = 200,
+			int IStunCD = 60,
+		},
+		Reactive = 
+		{
+			bool Active = true,
+			bool CaptureMouse = false,
+		},
+		EnemySlashTest = 
+		{
+		},
+		EnemyPatrol = 
+		{
+		},
+		CapsuleCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+			Vec3 Offset = [0, -0.629999995, 0],
+			float Radius = 0.61656338,
+			float Height = 9.99999975e-005,
+			uint Direction = 1,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 17,
+		},
+		Named = 
+		{
 			string Name = "EnemyPathPoint1",
 		},
 		Archetyped = 
@@ -910,566 +1302,6 @@ Level =
 			CogPath Path1 = 
 			{
 				string Path = ":/EnemyPathPoint2",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 14,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path2 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path3 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path4 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-		},
-		BoxCollider = 
-		{
-			bool Ghost = true,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 14,
-		},
-		Named = 
-		{
-			string Name = "EnemyPathPoint2",
-		},
-		Archetyped = 
-		{
-			string Name = "561752e93a30785d:EnemyPathPoint",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [3.5, 14.5, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
-		},
-		Sprite = 
-		{
-			bool Visible = false,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		EnemyPathPoint = 
-		{
-			CogPath Path1 = 
-			{
-				string Path = ":/EnemyPathPoint1",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 13,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path2 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path3 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path4 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-		},
-		BoxCollider = 
-		{
-			bool Ghost = true,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 15,
-		},
-		Named = 
-		{
-			string Name = "EnemyPathPoint3",
-		},
-		Archetyped = 
-		{
-			string Name = "561752e93a30785d:EnemyPathPoint",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-4.5, 11, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
-		},
-		Sprite = 
-		{
-			bool Visible = false,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		EnemyPathPoint = 
-		{
-			CogPath Path1 = 
-			{
-				string Path = ":/EnemyPathPoint4",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 16,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path2 = 
-			{
-				string Path = ":/EnemyPathPoint6",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 17,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path3 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path4 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-		},
-		BoxCollider = 
-		{
-			bool Ghost = true,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 16,
-		},
-		Named = 
-		{
-			string Name = "EnemyPathPoint4",
-		},
-		Archetyped = 
-		{
-			string Name = "561752e93a30785d:EnemyPathPoint",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-7.5, 16, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
-		},
-		Sprite = 
-		{
-			bool Visible = false,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		EnemyPathPoint = 
-		{
-			CogPath Path1 = 
-			{
-				string Path = ":/EnemyPathPoint3",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 15,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path2 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path3 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path4 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-		},
-		BoxCollider = 
-		{
-			bool Ghost = true,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 18,
-		},
-		Named = 
-		{
-			string Name = "EnemyPathPoint5",
-		},
-		Archetyped = 
-		{
-			string Name = "561752e93a30785d:EnemyPathPoint",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-12.5, 5.5, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
-		},
-		Sprite = 
-		{
-			bool Visible = false,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		EnemyPathPoint = 
-		{
-			CogPath Path1 = 
-			{
-				string Path = ":/EnemyPathPoint6",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 17,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path2 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path3 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path4 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-		},
-		BoxCollider = 
-		{
-			bool Ghost = true,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 17,
-		},
-		Named = 
-		{
-			string Name = "EnemyPathPoint6",
-		},
-		Archetyped = 
-		{
-			string Name = "561752e93a30785d:EnemyPathPoint",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-9, 0, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
-		},
-		Sprite = 
-		{
-			bool Visible = false,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		EnemyPathPoint = 
-		{
-			CogPath Path1 = 
-			{
-				string Path = ":/EnemyPathPoint5",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -1543,11 +1375,11 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 19,
+			uint Id = 18,
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint7",
+			string Name = "EnemyPathPoint2",
 		},
 		Archetyped = 
 		{
@@ -1555,7 +1387,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-20.5, 11, 0],
+			Vec3 Translation = [3.5, 14.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -1581,7 +1413,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint8",
+				string Path = ":/EnemyPathPoint1",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -1589,7 +1421,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 20,
+				uint ResolvedCog = 17,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -1655,11 +1487,11 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 20,
+			uint Id = 19,
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint8",
+			string Name = "EnemyPathPoint3",
 		},
 		Archetyped = 
 		{
@@ -1667,7 +1499,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-17.5, 5, 0],
+			Vec3 Translation = [-4.5, 11, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -1693,7 +1525,119 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint7",
+				string Path = ":/EnemyPathPoint4",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 20,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path2 = 
+			{
+				string Path = ":/EnemyPathPoint6",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 21,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path3 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path4 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+		},
+		BoxCollider = 
+		{
+			bool Ghost = true,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 20,
+		},
+		Named = 
+		{
+			string Name = "EnemyPathPoint4",
+		},
+		Archetyped = 
+		{
+			string Name = "561752e93a30785d:EnemyPathPoint",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-7.5, 16, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
+		},
+		Sprite = 
+		{
+			bool Visible = false,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		EnemyPathPoint = 
+		{
+			CogPath Path1 = 
+			{
+				string Path = ":/EnemyPathPoint3",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -1763,24 +1707,6 @@ Level =
 			Vec3 Size = [0.5, 0.5, 0.5],
 		},
 	},
-	ArchetypeInstance = 
-	{
-		string Name = "561752e93a30785d:EnemyPathPoint",
-		LinkId = 
-		{
-			uint Id = 21,
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-32, 11, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
-		},
-		Named = 
-		{
-			string Name = "EnemyPathPoint9",
-		},
-	},
 	Cog = 
 	{
 		LinkId = 
@@ -1789,7 +1715,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint10",
+			string Name = "EnemyPathPoint5",
 		},
 		Archetyped = 
 		{
@@ -1797,7 +1723,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-25, 9, 0],
+			Vec3 Translation = [-12.5, 5.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -1823,22 +1749,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint11",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 23,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path2 = 
-			{
-				string Path = ":/EnemyPathPoint9",
+				string Path = ":/EnemyPathPoint6",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -1847,6 +1758,21 @@ Level =
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
 				uint ResolvedCog = 21,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path2 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -1897,11 +1823,11 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 23,
+			uint Id = 21,
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint11",
+			string Name = "EnemyPathPoint6",
 		},
 		Archetyped = 
 		{
@@ -1909,7 +1835,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-28, 5, 0],
+			Vec3 Translation = [-9, 0, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -1935,7 +1861,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint10",
+				string Path = ":/EnemyPathPoint5",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2009,11 +1935,11 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 24,
+			uint Id = 23,
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint12",
+			string Name = "EnemyPathPoint7",
 		},
 		Archetyped = 
 		{
@@ -2021,7 +1947,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-31.5, 5, 0],
+			Vec3 Translation = [-20.5, 11, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2047,119 +1973,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint13",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 25,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path2 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path3 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath Path4 = 
-			{
-				string Path = "",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-		},
-		BoxCollider = 
-		{
-			bool Ghost = true,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 25,
-		},
-		Named = 
-		{
-			string Name = "EnemyPathPoint13",
-		},
-		Archetyped = 
-		{
-			string Name = "561752e93a30785d:EnemyPathPoint",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-34, 0, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
-		},
-		Sprite = 
-		{
-			bool Visible = false,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		EnemyPathPoint = 
-		{
-			CogPath Path1 = 
-			{
-				string Path = ":/EnemyPathPoint12",
+				string Path = ":/EnemyPathPoint8",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2233,11 +2047,11 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 26,
+			uint Id = 24,
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint14",
+			string Name = "EnemyPathPoint8",
 		},
 		Archetyped = 
 		{
@@ -2245,7 +2059,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-12.5, 17, 0],
+			Vec3 Translation = [-17.5, 5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2271,7 +2085,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint15",
+				string Path = ":/EnemyPathPoint7",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2279,7 +2093,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 27,
+				uint ResolvedCog = 23,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -2295,6 +2109,136 @@ Level =
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
 				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path3 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path4 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+		},
+		BoxCollider = 
+		{
+			bool Ghost = true,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+	},
+	ArchetypeInstance = 
+	{
+		string Name = "561752e93a30785d:EnemyPathPoint",
+		LinkId = 
+		{
+			uint Id = 25,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-32, 11, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
+		},
+		Named = 
+		{
+			string Name = "EnemyPathPoint9",
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 26,
+		},
+		Named = 
+		{
+			string Name = "EnemyPathPoint10",
+		},
+		Archetyped = 
+		{
+			string Name = "561752e93a30785d:EnemyPathPoint",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-25, 9, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
+		},
+		Sprite = 
+		{
+			bool Visible = false,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		EnemyPathPoint = 
+		{
+			CogPath Path1 = 
+			{
+				string Path = ":/EnemyPathPoint11",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 27,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path2 = 
+			{
+				string Path = ":/EnemyPathPoint9",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 25,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -2349,7 +2293,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint15",
+			string Name = "EnemyPathPoint11",
 		},
 		Archetyped = 
 		{
@@ -2357,7 +2301,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-16.5, 20, 0],
+			Vec3 Translation = [-28, 5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2383,7 +2327,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint14",
+				string Path = ":/EnemyPathPoint10",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2398,7 +2342,7 @@ Level =
 			},
 			CogPath Path2 = 
 			{
-				string Path = ":/EnemyPathPoint16",
+				string Path = "",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2406,7 +2350,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 28,
+				uint ResolvedCog = 4294967293,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -2461,7 +2405,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint16",
+			string Name = "EnemyPathPoint12",
 		},
 		Archetyped = 
 		{
@@ -2469,7 +2413,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-21, 20, 0],
+			Vec3 Translation = [-31.5, 5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2495,7 +2439,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint15",
+				string Path = ":/EnemyPathPoint13",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2503,7 +2447,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 27,
+				uint ResolvedCog = 29,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -2573,7 +2517,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint17",
+			string Name = "EnemyPathPoint13",
 		},
 		Archetyped = 
 		{
@@ -2581,7 +2525,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-25.5, 20, 0],
+			Vec3 Translation = [-34, 0, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2607,7 +2551,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint16",
+				string Path = ":/EnemyPathPoint12",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2622,7 +2566,7 @@ Level =
 			},
 			CogPath Path2 = 
 			{
-				string Path = ":/EnemyPathPoint9",
+				string Path = "",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2630,7 +2574,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 21,
+				uint ResolvedCog = 4294967293,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -2685,7 +2629,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint18",
+			string Name = "EnemyPathPoint14",
 		},
 		Archetyped = 
 		{
@@ -2693,7 +2637,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [8.5, 14.5, 0],
+			Vec3 Translation = [-12.5, 17, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2719,7 +2663,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint19",
+				string Path = ":/EnemyPathPoint15",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2797,7 +2741,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint19",
+			string Name = "EnemyPathPoint15",
 		},
 		Archetyped = 
 		{
@@ -2805,7 +2749,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [12, 20.5, 0],
+			Vec3 Translation = [-16.5, 20, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2831,7 +2775,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint18",
+				string Path = ":/EnemyPathPoint14",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2846,7 +2790,7 @@ Level =
 			},
 			CogPath Path2 = 
 			{
-				string Path = "",
+				string Path = ":/EnemyPathPoint16",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2854,7 +2798,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
+				uint ResolvedCog = 32,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -2909,7 +2853,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint20",
+			string Name = "EnemyPathPoint16",
 		},
 		Archetyped = 
 		{
@@ -2917,7 +2861,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [28.5, 7, 0],
+			Vec3 Translation = [-21, 20, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -2943,7 +2887,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint21",
+				string Path = ":/EnemyPathPoint15",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2951,14 +2895,14 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 33,
+				uint ResolvedCog = 31,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
 			},
 			CogPath Path2 = 
 			{
-				string Path = ":/EnemyPathPoint22",
+				string Path = "",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -2966,7 +2910,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 34,
+				uint ResolvedCog = 4294967293,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -3021,7 +2965,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint21",
+			string Name = "EnemyPathPoint17",
 		},
 		Archetyped = 
 		{
@@ -3029,7 +2973,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [26.5, 10.5, 0],
+			Vec3 Translation = [-25.5, 20, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -3055,7 +2999,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint20",
+				string Path = ":/EnemyPathPoint16",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -3070,7 +3014,7 @@ Level =
 			},
 			CogPath Path2 = 
 			{
-				string Path = "",
+				string Path = ":/EnemyPathPoint9",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -3078,7 +3022,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
+				uint ResolvedCog = 25,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -3133,7 +3077,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "EnemyPathPoint22",
+			string Name = "EnemyPathPoint18",
 		},
 		Archetyped = 
 		{
@@ -3141,7 +3085,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [30.5, 10.5, 0],
+			Vec3 Translation = [8.5, 14.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
 		},
@@ -3167,7 +3111,7 @@ Level =
 		{
 			CogPath Path1 = 
 			{
-				string Path = ":/EnemyPathPoint20",
+				string Path = ":/EnemyPathPoint19",
 				bool ErrorOnResolveToNull = false,
 				bool ErrorOnPathCantCompute = false,
 				bool ErrorOnDirectLinkFail = false,
@@ -3175,7 +3119,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 32,
+				uint ResolvedCog = 35,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -3245,6 +3189,454 @@ Level =
 		},
 		Named = 
 		{
+			string Name = "EnemyPathPoint19",
+		},
+		Archetyped = 
+		{
+			string Name = "561752e93a30785d:EnemyPathPoint",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [12, 20.5, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
+		},
+		Sprite = 
+		{
+			bool Visible = false,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		EnemyPathPoint = 
+		{
+			CogPath Path1 = 
+			{
+				string Path = ":/EnemyPathPoint18",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 34,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path2 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path3 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path4 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+		},
+		BoxCollider = 
+		{
+			bool Ghost = true,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 36,
+		},
+		Named = 
+		{
+			string Name = "EnemyPathPoint20",
+		},
+		Archetyped = 
+		{
+			string Name = "561752e93a30785d:EnemyPathPoint",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [28.5, 7, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
+		},
+		Sprite = 
+		{
+			bool Visible = false,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		EnemyPathPoint = 
+		{
+			CogPath Path1 = 
+			{
+				string Path = ":/EnemyPathPoint21",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 37,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path2 = 
+			{
+				string Path = ":/EnemyPathPoint22",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 38,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path3 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path4 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+		},
+		BoxCollider = 
+		{
+			bool Ghost = true,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 37,
+		},
+		Named = 
+		{
+			string Name = "EnemyPathPoint21",
+		},
+		Archetyped = 
+		{
+			string Name = "561752e93a30785d:EnemyPathPoint",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [26.5, 10.5, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
+		},
+		Sprite = 
+		{
+			bool Visible = false,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		EnemyPathPoint = 
+		{
+			CogPath Path1 = 
+			{
+				string Path = ":/EnemyPathPoint20",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 36,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path2 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path3 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path4 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+		},
+		BoxCollider = 
+		{
+			bool Ghost = true,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 38,
+		},
+		Named = 
+		{
+			string Name = "EnemyPathPoint22",
+		},
+		Archetyped = 
+		{
+			string Name = "561752e93a30785d:EnemyPathPoint",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [30.5, 10.5, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0.382683456, 0.923879504],
+		},
+		Sprite = 
+		{
+			bool Visible = false,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		EnemyPathPoint = 
+		{
+			CogPath Path1 = 
+			{
+				string Path = ":/EnemyPathPoint20",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 36,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path2 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path3 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath Path4 = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+		},
+		BoxCollider = 
+		{
+			bool Ghost = true,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 39,
+		},
+		Named = 
+		{
 			string Name = "LevelManager",
 		},
 		Archetyped = 
@@ -3304,7 +3696,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 36,
+			uint Id = 40,
 		},
 		Named = 
 		{
