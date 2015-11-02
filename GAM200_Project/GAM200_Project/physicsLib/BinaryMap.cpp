@@ -49,7 +49,7 @@ void TileMapCollision::Update(float dt)
   //rigid_->tx = GetOwner()->has(Transform);
   if (gridCollisionflag_ & COLLISION_TOP) //too tired to think about why this is happening, split into four if-statements and adjusted
   {
-	  SnapToCellY(pos_.y, rigid_->tx->GetPositionXY().y);
+	  SnapToCellY(pos_.y, rigid_->bodyTrans->GetPositionXY().y);
     pos_.y -= HALF_TILE_WIDTH;
 	rigid_->Position.y = pos_.y;
     if (vel_.y > 0)
@@ -60,7 +60,7 @@ void TileMapCollision::Update(float dt)
   }
   if (gridCollisionflag_ & COLLISION_BOTTOM )
   {
-	  SnapToCellY(pos_.y, rigid_->tx->GetPositionXY().y);
+	  SnapToCellY(pos_.y, rigid_->bodyTrans->GetPositionXY().y);
     if (vel_.y < 0)
       vel_.y = 0;
 	  if (acc_.y < 0)
@@ -68,7 +68,7 @@ void TileMapCollision::Update(float dt)
   }
   if (gridCollisionflag_ & COLLISION_LEFT)
   {
-	  SnapToCellX(pos_.x, rigid_->tx->GetPositionXY().x);
+	  SnapToCellX(pos_.x, rigid_->bodyTrans->GetPositionXY().x);
     if (vel_.x < 0)
       vel_.x = 0;
     if (acc_.x < 0)
@@ -76,7 +76,7 @@ void TileMapCollision::Update(float dt)
   }
   if (gridCollisionflag_ & COLLISION_RIGHT)
   {
-	  SnapToCellX(pos_.x, rigid_->tx->GetPositionXY().x);
+	  SnapToCellX(pos_.x, rigid_->bodyTrans->GetPositionXY().x);
     if (vel_.x > 0)
       vel_.x = 0;
     if (acc_.x > 0)
@@ -222,8 +222,8 @@ int TileMapCollision::CheckBinaryMapCollision(float PosX, float PosY)
 		if (rigid_->Velocity.y < 0)
       {
         //If our "feet" are touching the top half of the tile, and if they're touching it JUST BARELY
-			if (static_cast<int>(rigid_->tx->GetPositionXY().y) % 2 == 1)
-				if (rigid_->tx->GetPositionXY().y - static_cast<float>(static_cast<int>(rigid_->tx->GetPositionXY().y)) > .95f)
+			if (static_cast<int>(rigid_->bodyTrans->GetPositionXY().y) % 2 == 1)
+				if (rigid_->bodyTrans->GetPositionXY().y - static_cast<float>(static_cast<int>(rigid_->bodyTrans->GetPositionXY().y)) > .95f)
             flag_ = flag_ | COLLISION_BOTTOM;
       }
 

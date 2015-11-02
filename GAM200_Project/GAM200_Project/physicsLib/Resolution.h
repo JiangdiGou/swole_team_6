@@ -59,10 +59,10 @@ struct Manifold
 };
 
 
-class ContactSet
+class contactList
 {
 public:
-	BodyContact * GetNextContact();
+	ManifoldSet * GetNewContact();
 	void ResolveContacts(float dt);
 	void Reset();
 	Shape * myshape;
@@ -71,9 +71,9 @@ public:
 private:
 	friend class Physics;
 	static const int MaxContacts = 1024;
-	BodyContact contactArray[MaxContacts];
-	unsigned NumberOfContacts;
-	void ResolveVelocities(float dt);
-	void ResolvePositions(float dt);
+	ManifoldSet contactSet[MaxContacts];
+	unsigned TotalContacts;
+	void CorrectVelocity(float dt);
+	void CorrectPosition(float dt);
 };
 #endif 

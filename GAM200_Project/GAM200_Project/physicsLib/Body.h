@@ -24,7 +24,7 @@ public:
 	void Integrate(float dt);
 	void SetPosition(Vec2D);
 	void SetVelocity(Vec2D);
-	void PublishResults();
+	void solveMessage();
 
 	//Draw the object using the debug drawer
 	void DebugDraw();
@@ -47,7 +47,7 @@ public:
 	Vec2D AccumulatedForce;
 
 	//Transform for this body
-	Transform * tx;
+	Transform * bodyTrans;
 	//Shape used for collision with this body
 	Shape * BodyShape;
 	//Static object are immovable fixed objects

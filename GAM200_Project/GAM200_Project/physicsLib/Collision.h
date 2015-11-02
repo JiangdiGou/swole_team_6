@@ -11,7 +11,7 @@ class Body;
 
 ///Data for a contact between two bodies.
 ///Used to resolve world collisions.
-struct BodyContact
+struct ManifoldSet
 {
 	
 	
@@ -24,7 +24,7 @@ struct BodyContact
 
 	float SeperatingVelocity;
 	float ContactImpulse;
-	float CalculateSeparatingVelocity();
+	float GetSeparateVelocity();
 };
 
 ///Base Shape class
@@ -66,8 +66,8 @@ public:
 	virtual bool TestPoint(Vec2D);
 };
 
-class ContactSet;
-typedef bool(*CollisionTest)(Shape*a, Vec2D at, Shape*b, Vec2D bt, ContactSet*c);
+class contactList;
+typedef bool(*CollisionTest)(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactList*c);
 
 ///The collision database provides collision detection between shape types.
 class CollsionDatabase
@@ -75,7 +75,7 @@ class CollsionDatabase
 public:
 	CollsionDatabase();
 	CollisionTest CollsionRegistry[Shape::SidNumberOfShapes][Shape::SidNumberOfShapes];
-	bool GenerateContacts(Shape* shapeA, Vec2D poistionA, Shape* shapeB, Vec2D poistionB, ContactSet*c);
+	bool GenerateContacts(Shape* shapeA, Vec2D poistionA, Shape* shapeB, Vec2D poistionB, contactList*c);
 	void RegisterCollsionTest(Shape::ShapeId a, Shape::ShapeId b, CollisionTest test);
 };
 
@@ -94,7 +94,7 @@ float Clamp(float, float, float);
 //
 /////Data for a contact between two bodies.
 /////Used to resolve world collisions.
-//struct BodyContact
+//struct ManifoldSet
 //{
 //	RigidBody* Bodies[2];
 //	Vec2D Movement[2];
@@ -105,7 +105,7 @@ float Clamp(float, float, float);
 //
 //	float SeperatingVelocity;
 //	float ContactImpulse;
-//	float CalculateSeparatingVelocity();
+//	float GetSeparateVelocity();
 //};
 
 #endif
