@@ -14,8 +14,8 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [0, 0, 0],
-		Vec3 Scale = [100, 100, 1],
+		Vec3 Translation = [5.32155848, 23.5231285, -3.77037338e-007],
+		Vec3 Scale = [1000, 1000, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
@@ -35,9 +35,5 @@ Cog =
 		bool AnimationActive = true,
 		float AnimationSpeed = 1,
 		uint StartFrame = 0,
-	},
-	TimedDeath = 
-	{
-		float RTimeTilDead = 5,
 	},
 },

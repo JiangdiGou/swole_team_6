@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PlayerJump",
+		uint64 ResourceId = 56fa23f879627357,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"PlayerStuff",
+		],
+	},
+},

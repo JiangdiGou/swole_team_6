@@ -20,6 +20,9 @@ public:
   void Initialize();
   unsigned LastTime;
   bool GameActive;
+
+  std::vector<ISystem*> getSystems() const { return Systems; };
+
 private:
   //System Container
   std::vector<ISystem*> Systems;

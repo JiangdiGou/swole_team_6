@@ -5,4 +5,11 @@ TextContent =
 		string Name = "PlayerAttack",
 		uint64 ResourceId = 551f7a227678d6dc,
 	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"PlayerStuff",
+		],
+	},
 },

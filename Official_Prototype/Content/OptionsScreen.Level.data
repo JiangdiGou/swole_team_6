@@ -268,17 +268,16 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		GoToLevel = 
-		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "",
-			string Level_Name = "563704b0383d5798:MainMenu",
-		},
 		Reactive = 
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
+		},
+		ButtonHilight = 
+		{
+		},
+		DestroySpaceButton = 
+		{
 		},
 	},
 },

@@ -1,0 +1,40 @@
+class PowerSelectDescriptionButton : ZilchComponent
+{
+    [Property]
+    var Name:String;
+    [Property]
+    var EnergyCost:String;
+    [Property]
+    var PassiveActivate:String;
+    
+    [Property]
+    var Line1:String;
+    [Property]
+    var Line2:String;
+    [Property]
+    var Line3:String;
+    [Property]
+    var Line4:String;
+    [Property]
+    var Line5:String;
+    [Property]
+    var Line6:String;
+    [Property]
+    var Line7:String;
+    [Property]
+    var Line8:String;
+    [Property]
+    var Line9:String;
+    [Property]
+    var Line10:String;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.LeftMouseUp, this.OnMouseUp);
+    }
+    
+    function OnMouseUp(event : MouseEvent)
+    {
+        this.Space.FindObjectByName("Descriptions").PowerDescription.DisplayText(this.Name, this.EnergyCost, this.PassiveActivate, this.Line1, this.Line2, this.Line3, this.Line4, this.Line5, this.Line6, this.Line7, this.Line8, this.Line9, this.Line10);
+    }
+}

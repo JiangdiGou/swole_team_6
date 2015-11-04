@@ -1,6 +1,7 @@
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
 
+
 #include "../Engine.h"
 #include "Shader.h"
 #include "debugDraw.h"
@@ -9,12 +10,14 @@
 #include "FramerateController.h"
 #include "Sprite.h"
 #include "textureAtlas.h"
-
+#include "../logger/logger.h"
+#include "Camera.h"
+#include "../GameLogic.h"
+#include "../initInfo.h"
 
 class GraphicsManager : public ISystem
 {
   friend class Shader;
-  friend class DebugDraw;
 
 public:
   GraphicsManager(const Shader& coreShader);
@@ -28,14 +31,25 @@ public:
   HDC getDeviceContext();
   void setRenderingContext(HGLRC& renderingContext);
   HGLRC getRenderingContext();
-  Shader coreShader;
+
+  void setMainCamera(Camera* camera){ mainCamera = *camera; }
+  Camera* getCamera(){ return &mainCamera; }
+  void setCoreShader(const Shader& shader) { coreShader = shader; }
+  Shader* getCoreShader() { return &coreShader; }
+  void setSpriteAtlas(const TextureAtlas& atlas) { spriteAtlas = atlas; }
+  TextureAtlas* getSpriteAtlas() { return &spriteAtlas; }
+
+  Vector2 screenToWorld(Vector2 screenCoords);
 
 private:
   HDC deviceContext;
   HGLRC renderingContext;
+  Camera mainCamera;
+  TextureAtlas spriteAtlas;
+  Shader coreShader;
 
 };
 
-extern GraphicsManager *graphics;
+extern GraphicsManager *GRAPHICS;
 
 #endif 

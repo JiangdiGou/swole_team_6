@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ButtonHilight",
+		uint64 ResourceId = 5621aeeb40a0ea64,
+	},
+},

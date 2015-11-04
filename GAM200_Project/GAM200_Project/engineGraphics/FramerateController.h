@@ -1,9 +1,6 @@
 #ifndef FRAMERATECONTROLLER_H
 #define FRAMERATECONTROLLER_H
 
-#define FRAMERATE 60.0
-#define FRWARNINGPERCENT 25.0
-
 #include "Graphics.h"
 
 //I think it's bad coding practice to have a static class but why 

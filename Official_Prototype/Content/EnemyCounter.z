@@ -1,0 +1,25 @@
+class EnemyCounter : ZilchComponent
+{
+    var EnemiesAlive : Integer;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.CountEnemies();
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function CountEnemies()
+    {
+        
+        foreach (var i in this.Space.FindAllObjectsByName("Enemy").All)
+        {
+            this.EnemiesAlive += 1;
+        }
+        
+        Console.WriteLine(this.EnemiesAlive);
+    }
+}

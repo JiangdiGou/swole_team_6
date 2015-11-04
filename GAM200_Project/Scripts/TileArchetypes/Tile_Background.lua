@@ -1,3 +1,8 @@
+--Editor Info
+aType = {
+	name = "Background"	
+}
+
 --Sides
 SideTypes = 
 {

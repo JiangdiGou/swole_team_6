@@ -43,4 +43,6 @@ class GameData : ZilchComponent
     var BDMadSlasher:Boolean = false;//less damage, increases w/combo <lvl5>
     var BDDarkBeam:Boolean = false;//energy blast cost hp <lvl6>
     var BDNotToday:Boolean = false;//invulnerable <lvl7>
+    
+    var CanQuit:Boolean = false;// we use this to let the game know if it should quit when it receives a RequestQuit event.
 }

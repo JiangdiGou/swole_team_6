@@ -17,6 +17,8 @@
 #include <string>
 #include <iterator>
 #include <vector>
+#include "engineGraphics/glm/vec3.hpp"
+#include "physicsLib/math_utility.h"
 
 #ifdef _WIN32
   #include <direct.h>
@@ -32,6 +34,8 @@ extern "C"//import as c libraries specifically
   #include "luaLib/lualib.h"
   #include "luaLib/lauxlib.h"
 }
+
+std::ostream& operator<<(std::ostream &out, const Vector3D &v);
 
 std::string whereExec();
 

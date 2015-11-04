@@ -11,6 +11,25 @@
 
 #include "Utilities.h"
 
+//random crap indeed...
+Vector3D::Vector3D(glm::vec3 &attemptCopy):
+  x(float(attemptCopy.x)),
+  y(float(attemptCopy.y)),
+  z(float(attemptCopy.z))
+{
+  /*
+  this->x = float(attemptCopy.x);
+  this->y = float(attemptCopy.y);
+  this->z = float(attemptCopy.z);
+  */
+}
+
+std::ostream& operator<<(std::ostream &out, const Vector3D &v)
+{
+  out << '(' << v.x << ", " << v.y << ", " << v.z << ')';
+  return out;
+}
+
 std::string whereExec()
 {
   char cCurrentPath[FILENAME_MAX];

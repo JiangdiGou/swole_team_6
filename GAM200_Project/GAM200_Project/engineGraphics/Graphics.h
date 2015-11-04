@@ -12,12 +12,6 @@
 #include "glew/glew.h"
 #include "glew/wglew.h"
 
-//Window Creation
-#include <Windows.h>
-
-//Image Loading 
-#include "SOIL/SOIL.h"
-
 //Math
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -25,16 +19,21 @@
 
 //Printing out stuff
 #include<iostream>
-
+#include "../logger/logger.h"
 #include <vector>
-
-#define WINDOWWIDTH 960
-#define WINDOWHEIGHT 540
+#include <string>
+#include "../physicsLib/math_utility.h"
 
 void setupPixelFormatDescriptor(HDC handleDeviceContext);
-HWND createWindow(HINSTANCE instance);
 
-//This function prototype is in here so createwindow can see it 
-LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
+//#define GFXLOG
+
+#ifdef GFXLOG
+#define WARNINGFRAMETIME 33
+#define STARTUPFRAMES 60
+extern int frameNumber;
+extern txtlog *gfxErrorLog;
+void logGfxError(std::string precedingMessage);
+#endif
 
 #endif

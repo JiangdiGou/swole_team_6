@@ -31,7 +31,7 @@
     virtual GameComponent * Create()
     {
       return new type();
-    }8
+    }
   };
 
 //Register component macro

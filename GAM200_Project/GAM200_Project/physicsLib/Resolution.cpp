@@ -1,165 +1,201 @@
 
 #include "Resolution.h"
+#include "Body.h"
 //#include <algorithm>
 //#include <math.h>
 //#include "math_utility.h"
-#include "Precompiled.h"
+//#include "Precompiled.h"
+//#include "Collision.h"
+#include "PhysicsManager.h"
 
-PhysicsMaterial::PhysicsMaterial()
-{
-	staticFriction = 0.5f;
-	staticFriction2 = 0.5f;
-	dynamicFriction = 0.3f;
-	dynamicFriction2 = 0.3f;
-	frictionCombine = 0.0f;
-	//friction = 0.2f;
-}
 
-void Manifold::Solve(void)
+ManifoldSet * contactList::GetNewContact()
 {
-	// Give the current data
 	
-	CollisionRegistry[A->GetID()][B->GetID()](A, B, this);
+	return &contactSet[TotalContacts++];
 }
 
-void Manifold::PreStep(float dt)
+void contactList::Reset()
 {
+	TotalContacts = 0;
+}
 
-	const float EPSILON = 0.0001f;
-
-	// Calculate the average restitution
-	if (A->body && B->body)
-		e = std::min(A->body->restitution, B->body->restitution);
-
-	// Calculate the static and dynamic friction
+float ManifoldSet::GetSeparateVelocity()
+{
 	
-	//staticFriction = std::sqrt( A->stFric * B->stFric );
-	//dynamicFriction = std::sqrt( A->dynFric * B->dynFric );
+	Vec2D relativeVelocity = Bodies[0]->Velocity - Bodies[1]->Velocity;
 
-	staticFriction = std::sqrt(A->material.staticFriction *
-		B->material.staticFriction);
+	//Get the separating velocity by projecting along the contact normal
+	SeperatingVelocity = Vec2D::DotProduct(relativeVelocity, ContactNormal);
 
-	dynamicFriction = std::sqrt(A->material.dynamicFriction *
-		B->material.dynamicFriction);
-
-	for (unsigned int i = 0; i < contactCount; ++i)
-	{
-		// Calculate the radii
-		Vector2 radii_A = contact[i] - A->pTrans->GetPositionXY();
-		Vector2 radii_B = contact[i] - B->pTrans->GetPositionXY();
-		if (A->body && B->body)
-		{
-			Vector2 relativeVel = B->body->getVelocity() + Vector2::CrossProduct(B->body->angularVelocity, radii_B) -
-				A->body->getVelocity() - Vector2::CrossProduct(A->body->angularVelocity, radii_A);
-
-			if (relativeVel.Magnitude() < ((1.0f / 60.0f) * (Vec2D(0, physics->GRAVITY))).Magnitude() + EPSILON)
-				e = 0.0f;
-		}
-	}
-
-
+	return SeperatingVelocity;
 }
 
-void Manifold::AppyImpulse(void)
+void SolveVelocity(ManifoldSet& c, float dt)
 {
-	// If static
-	//RigidBody* 
-	if (A->body->isStatic && B->body->isStatic)
+	
+	//Find the velocity of the two object along the contact normal
+	float separatingVelocity = c.GetSeparateVelocity();
+
+	if (separatingVelocity > 0)
 	{
-		A->body->getVelocity().Clear();
-		B->body->getVelocity().Clear();
+		//The objects are no longer moving towards each other
+		//or the contact they are stationary
+		c.ContactImpulse = 0;
 		return;
 	}
 
-	if (A->body->isGhost == true || B->body->isGhost == true)
+	//This velocity of this collision has to be resolved.
+	float newSepVelocity = -separatingVelocity * c.Restitution;
+
+	const bool accelerationFlag = true;
+	//When an object is resting on the ground it is constantly falling
+	//due to gravity. This acceleration need be removed 
+
+	if (accelerationFlag)
 	{
-		return;
+		// Check the velocity build-up due to acceleration only
+		Vec2D VelocityViaAcceleration = c.Bodies[0]->Acceleration - c.Bodies[1]->Acceleration;
+		float NewVelocity = Vec2D::DotProduct(VelocityViaAcceleration, c.ContactNormal) * dt;
+
+		// If we've got a closing velocity due to acceleration build-up,
+		// remove it from the new separating velocity
+		if (NewVelocity < 0)
+		{
+			newSepVelocity += c.Restitution * NewVelocity;
+
+			// Make sure we haven't removed more than was
+			// there to remove.
+			if (newSepVelocity < 0) newSepVelocity = 0;
+		}
 	}
 
-	for (unsigned int i = 0; i < contactCount; ++i)
-	{
-		// Calculate radii from center of mass to contact
-		Vector2 radii_a = contact[i] - A->body->pTrans->GetPositionXY();
-		Vector2 radii_b = contact[i] - B->body->pTrans->GetPositionXY();
+	//What is the total change in velocity for the contact?
+	float deltaVelocity = newSepVelocity - separatingVelocity;
 
-		// Relative velocity at contact
-		Vector2 relativeVel = B->body->getVelocity() + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
-			A->body->getVelocity() - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
+	//The delta velocity is applied to each object proportional to inverse
+	//mass. 
+	float totalInverseMass = c.Bodies[0]->InvMass + c.Bodies[1]->InvMass;
 
-		// Relative velocity along normal
-		float contactVel = Vec2D::DotProduct(relativeVel, normal);
+	// Calculate the impulse to apply
+	float impulse = deltaVelocity / totalInverseMass;
 
-		// If velocities are separating do not resolve
-		if (contactVel > 0)
-		{
-			return;
-		}
+	c.ContactImpulse = impulse;
 
-		float crossA = Vec2D::CrossProduct(radii_a, normal);
-		float crossB = Vec2D::CrossProduct(radii_b, normal);
-		float invMassSum = A->body->invMass + B->body->invMass + (crossA * crossA) * A->body->invInertia + (crossB * crossB) * B->body->invInertia;
-		e = 0.2003f; //epsilon value
-		// Calculate the impulse scalar
-		float j = -(1.0f + e) * contactVel;
-		j /= invMassSum;
-		j /= (float)contactCount;
+	// Find the amount of impulse per unit of inverse mass
+	Vec2D impulsePerIMass = c.ContactNormal * impulse;
 
-		// Apply the impulse
-		Vector2 impulse = normal * (j /2);
-		A->body->ApplyImpulse(-impulse, radii_a);
-		B->body->ApplyImpulse(impulse, radii_b);
-
-		// Friction impulse
-		relativeVel = B->body->getVelocity() + Vec2D::CrossProduct(B->body->angularVelocity, radii_b) -
-			A->body->getVelocity() - Vec2D::CrossProduct(A->body->angularVelocity, radii_a);
-
-		Vector2 tangentVec = relativeVel - (normal * Vec2D::DotProduct(relativeVel, normal));
-		tangentVec.Normalize();
-
-		// Solve magnitude to apply along friction vector
-		float jt = -Vector2::DotProduct(relativeVel, tangentVec);
-		jt /= invMassSum;
-		jt /= (float)contactCount;
-
-		// Not applying tiny friction impulses
-		if (jt == 0.0f)
-		{
-			return;
-		}
-
-		// Clamp magnitude of friction and create impulse vector
-		Vector2 tangentImpulse;
-		tangentImpulse = tangentVec * jt;
-		if (std::abs(jt) < j * staticFriction)
-			tangentImpulse = tangentVec *jt;
-		else
-			tangentImpulse = tangentVec * -j * dynamicFriction;
-
-
-	
-	}
-
-
+	c.Bodies[0]->Velocity = c.Bodies[0]->Velocity + impulsePerIMass * c.Bodies[0]->InvMass;
+	// The other body goes in the opposite direction
+	c.Bodies[1]->Velocity = c.Bodies[1]->Velocity + impulsePerIMass * -c.Bodies[1]->InvMass;
 }
 
-void Manifold::CorrectPosition(void)
+void SolvePenetration(ManifoldSet& c, float dt)
 {
-	if (A->body->isGhost == true || B->body->isGhost == true || A->body->isStatic == true)
-	{
-		return;
-	}
+	
+	// The movement of each object is based on their inverse mass, so
+	// total that.
+	float totalInverseMass = c.Bodies[0]->InvMass + c.Bodies[1]->InvMass;
 
+	// Find the amount of penetration resolution per unit of inverse mass
+	Vec2D movePerIMass = c.ContactNormal * (c.Penetration / totalInverseMass);
 
-	const float slop = 0.05f;//0.01
-	const float percent = 0.8f;//0.4f; // 40% //0.2
+	//If stack stability can be increased by not resolving all the penetrations
+	//in one step
+	movePerIMass *= PHYSICS->PenetrationResolvePercentage;
 
-	// Allows object to penetrate slightly without position correction from occurring 
-	 //change std max to mim so we can pull things! max for push things
-	Vector2 correction = (std::max(penetration - slop, 0.0f) / (A->body->invMass + B->body->invMass)) * normal * percent /2.0f;
+	// Calculate the the movement amounts
+	c.Movement[0] = movePerIMass * c.Bodies[0]->InvMass;
+	c.Movement[1] = movePerIMass * -c.Bodies[1]->InvMass;
 
-	Vector2 Apos = A->body->pTrans->GetPositionXY();
-	//Vector2 Bpos = B->body->pTrans->GetPositionXY();
-	A->body->pTrans->SetPosition(Apos - correction * A->body->invMass);
-	//B->body->pTrans->SetPosition(Bpos + correction * B->body->invMass) ;
-
+	// Apply the penetration resolution
+	c.Bodies[0]->Position = c.Bodies[0]->Position +c.Movement[0];
+	c.Bodies[1]->Position = c.Bodies[1]->Position +c.Movement[1];
 }
+
+
+void contactList::CorrectPosition(float dt)
+{
+	unsigned k = 0;
+	unsigned maxIterations = TotalContacts * 5;
+	const float positionEpsilon = PHYSICS->PenetrationEpsilon;
+
+	while (k < maxIterations)
+	{
+		// Find biggest penetration 
+		float maxPenetration = positionEpsilon;
+		unsigned contactIndex = TotalContacts;
+		for (unsigned i = 0; i < TotalContacts; i++)
+		{
+			if (contactSet[i].Penetration > maxPenetration)
+			{
+				maxPenetration = contactSet[i].Penetration;
+				contactIndex = i;
+			}
+		}
+		if (contactIndex == TotalContacts) break;
+
+		//solve the penetration
+		SolvePenetration(contactSet[contactIndex], dt);
+
+		// Update the penetrations for all related contacts
+		Vec2D * movement = contactSet[contactIndex].Movement;
+		for (unsigned i = 0; i < TotalContacts; i++)
+		{
+			if (contactSet[i].Bodies[0] == contactSet[contactIndex].Bodies[0])
+				contactSet[i].Penetration -= Vec2D::DotProduct(movement[0], contactSet[i].ContactNormal);
+			else if (contactSet[i].Bodies[0] == contactSet[contactIndex].Bodies[1])
+				contactSet[i].Penetration -= Vec2D::DotProduct(movement[1], contactSet[i].ContactNormal);
+			if (contactSet[i].Bodies[1])
+			{
+				if (contactSet[i].Bodies[1] == contactSet[contactIndex].Bodies[0])
+					contactSet[i].Penetration += Vec2D::DotProduct(movement[0], contactSet[i].ContactNormal);
+				else if (contactSet[i].Bodies[1] == contactSet[contactIndex].Bodies[1])
+					contactSet[i].Penetration += Vec2D::DotProduct(movement[1], contactSet[i].ContactNormal);
+			}
+		}
+		++k;
+	}
+}
+
+
+void contactList::CorrectVelocity(float dt)
+{
+	unsigned k = 0;
+	unsigned maxIterations = TotalContacts * 5;
+	while (k < maxIterations)
+	{
+		// Find the contact with the largest closing velocity;
+		float maxVelocity = FLT_MAX;
+		unsigned contactIndex = TotalContacts;
+		for (unsigned i = 0; i < TotalContacts; i++)
+		{
+			float sepVel = contactSet[i].GetSeparateVelocity();
+			if (sepVel < 0 && sepVel < maxVelocity)
+			{
+				maxVelocity = sepVel;
+				contactIndex = i;
+			}
+		}
+
+		// Do we have anything worth resolving?
+		if (contactIndex == TotalContacts) break;
+
+		// Resolve this contact velocity
+		SolveVelocity(contactSet[contactIndex], dt);
+
+		++k;
+	}
+}
+
+void contactList::ResolveContacts(float dt)
+{
+	//if (myshape->body->IsGhost == true)
+	//{	
+	//	return;
+	//} 
+
+	this->CorrectPosition(dt);
+	this->CorrectVelocity(dt);
+}
+

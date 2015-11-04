@@ -5,21 +5,22 @@
 //	is to walk through all the code in game logic and follow the execution through
 //	the rest of the engine.
 //	
-//	Authors: Chris Peters, Benjamin Ellinger
+//	Authors: Chris Peters, Benjamin Ellinger <- did they author this lol? 
 //	Copyright 2010, Digipen Institute of Technology
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 
-
 #include "GameLogic.h"
 #include "./physicsLib//Transform.h"
 #include "./physicsLib/Body.h"
-#include "./physicsLib/primitive.h"
 #include "./engineGraphics/Sprite.h"
 #include "./engineGraphics/Camera.h"
 #include "./gameComponents/objFactory.h"
 #include "./engineGraphics/graphicsManager.h"
 #include "./WindowsSystem.h"
+#include "physicsLib/BinaryMap.h"
+#include "physicsLib/PlayerState.h"
+#include "mouseVector.h"
 
 #include <ctime>
 
@@ -28,121 +29,183 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  Texture textureBackground = Texture("resources/background.png");
-  Texture textureSmiley = Texture("resources/Smiley1.png");
-  Texture textureIdleGreen = Texture("resources/courier.png", 26, 43, 83, 100, 0, 0);
-  Texture textureRunGreen = Texture("resources/courier.png", 26, 43, 83, 100, 0, 0);
-  textureIdleBlue = new Texture("resources/NewRunStuff.png", 4, 64, 64, 100, 0, 128);
-  textureRunBlue = new Texture("resources/NewRunStuff.png", 8, 64, 64, 100, 0, 192);
-  
+  FACTORY->loadLevelFrom("BetaLevel.txt");
+
 
   GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
-  camera->AddComponent(CT_Camera, new Camera((graphics->coreShader)));
+  Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
+  mouseVector *vectTest = new mouseVector();
+  camera->AddComponent(CT_MouseVector, vectTest);
+  camera->AddComponent(CT_Camera, mainCamera);
   camera->Initialize();
+  //This move is so that the bottom left corner is 0,0
 
-  //GOC * background = FACTORY->makeObject("background");
-  //Transform * transform = new Transform();
-  //transform->SetPosition(0, 0, 1);
-  //transform->SetScale(6, 4, 0);
-  //background->AddComponent(CT_Transform, transform);
-  //Sprite * sprite = new Sprite(*(graphics->coreShader));
-  //sprite->texture = textureBackground;
-  //background->AddComponent(CT_Sprite, sprite);
+  GRAPHICS->setMainCamera(mainCamera);
 
-  GOC * greenObj = FACTORY->makeObject("greenGuy");
-  Transform * transform2 = new Transform();
-  transform2->SetPosition(0, 3, 0);
-  Sprite * sprite2 = new Sprite();
-  sprite2->texture = textureIdleGreen;
-  greenObj->AddComponent(CT_Transform, transform2);
-  greenObj->AddComponent(CT_Sprite, sprite2);
-  RigidBody* dudeBody = new RigidBody();
-  dudeBody->isGhost = false;
-  dudeBody->useGravity = true;
-  greenObj->AddComponent(CT_RigidBody, dudeBody);
-  Circle *dudeCollision = new Circle();
-  //dudeCollision->SetHalfSize(1, 1);
-  greenObj->AddComponent(CT_Circle, dudeCollision);
-
-  //GOC * lalalaObj = FACTORY->makeObject("laGuy");
-  //Transform * transformla = new Transform();
-  //transformla->SetPosition(-3,1.5, 0);
-  //Sprite * spritela = new Sprite(*(graphics->coreShader));
-  //spritela->texture = textureIdleGreen;
-  //lalalaObj->AddComponent(CT_Transform, transformla);
-  //lalalaObj->AddComponent(CT_Sprite, spritela);
-  //RigidBody* laBody = new RigidBody();
-  ////dudeBody->isGhost = false;
-  //laBody->useGravity = false;
-  //lalalaObj->AddComponent(CT_RigidBody, laBody);
-  //Circle *laCollision = new Circle();
-  ////dudeCollision->SetHalfSize(1, 1);
-  //lalalaObj->AddComponent(CT_Circle, laCollision);
+  FACTORY->createTiles();
 
 
-  GOC * boObj = FACTORY->makeObject("boGuy");
-  Transform * transformbo = new Transform();
-  transformbo->SetPosition(3, 0, 0);
-  Sprite * spritebo = new Sprite();
-  spritebo->texture = *textureIdleBlue;
-  boObj->AddComponent(CT_Transform, transformbo);
-  boObj->AddComponent(CT_Sprite, spritebo);
-  RigidBody* boObjBody = new RigidBody();
-  dudeBody->isGhost = false;
-  boObjBody->useGravity = true;
-  boObj->AddComponent(CT_RigidBody, boObjBody);
-  AABB* boCollision = new AABB();
-  boCollision->SetHalfSize(1, 1);
-  boObj->AddComponent(CT_AABB, boCollision);
+  //PLAYER
+  GOC * player = FACTORY->makeObject("player");
+  Transform * transformPlayer = new Transform();
+  transformPlayer->SetPosition(2, 6, 0);
+  transformPlayer->SetScale(Vector2(1.25, 1.25));
+  player->AddComponent(CT_Transform, transformPlayer);
+
+  Body * bodyPlayer = new Body();
+  bodyPlayer->Mass = 3.0f;
+  bodyPlayer->Restitution = 0.3f;
+  bodyPlayer->Friction = 0.0f;
+  ShapeAAB * boxColliderPlayer = new ShapeAAB();
+  boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
+  bodyPlayer->BodyShape = boxColliderPlayer;
+
+  player->AddComponent(CT_Body, bodyPlayer);
+  player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
+  PlayerState * controller = new PlayerState();
+  player->AddComponent(CT_PlayerState, controller);
+
+  Sprite * spritePlayer = new Sprite();
+  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+  spritePlayer->flipSprite = false;
+  player->AddComponent(CT_Sprite, spritePlayer);
+
+  LOGIC->player = player;
 
 
-  GOC * text1 = FACTORY->makeObject("blueGuy");
-  Transform * transform3 = new Transform();
-  transform3->SetPosition(-3.25, 1.5, 0);
-  transform3->SetScale(0.25, 0.5, 1);
-  text1->AddComponent(CT_Transform, transform3);
-  SpriteText * testText = new SpriteText("hi there\nI handle\nnew Lines\nand can have long lines too");
-  text1->AddComponent(CT_SpriteText, testText);
+  // ground
+  GOC * blackObj2 = FACTORY->makeObject("");
+  Transform * transform = new Transform();
+  transform->SetPosition(8, 7, 0);
+  blackObj2->AddComponent(CT_Transform, transform);
+  Body * body = new Body();
+  body->Mass = 6.0f;
+  body->Restitution = 0.3f;
+  body->Friction = 0.0f;
+  ShapeAAB * box = new ShapeAAB();
+  box->Extents = Vec2D(0.5, 0.5);
+  body->BodyShape = box;
+  blackObj2->AddComponent(CT_Body, body);
+  if (blackObj2 && box && body && body->IsStatic == false)
+  {
+    std::cout << "I exist" << std::endl;
+  }
+  //  blackObj2->InitPosition = (whatever, whatever, whatever);
+  //Transform * transform6 = new Transform();
+  //
+  //transform6->SetPosition(4, 1, 0);
 
-  GOC * text2 = FACTORY->makeObject("blueGuy");
-  Transform * transform4 = new Transform();
-  transform4->SetPosition(0.25, 1.5, 0);
-  transform4->SetScale(0.25, 0.5, 1);
-  text2->AddComponent(CT_Transform, transform4);
-  SpriteText * testText2 = new SpriteText("this is also\ntext");
-  text2->AddComponent(CT_SpriteText, testText2);
+  Sprite * sprite5 = new Sprite();
+  sprite5->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
+  sprite5->color = glm::vec4(0, 0, 1, 1);
+  blackObj2->AddComponent(CT_Sprite, sprite5);
+  blackObj2->AddComponent(CT_ShapeAAB, box);
 
-  GOC * blackObj = FACTORY->makeObject("");
-  Transform * transform5 = new Transform();
-  transform5->SetPosition(0, -2, 0);
-  Sprite * sprite4 = new Sprite();
-  sprite4->texture = *textureIdleBlue;
-  blackObj->AddComponent(CT_Transform, transform5);
-  blackObj->AddComponent(CT_Sprite, sprite4);
-  RigidBody* blackObjBody = new RigidBody();
-  blackObjBody->isGhost = false;
-  blackObjBody->isStatic = true;
-  blackObjBody->useGravity = false;
+
+  //down 1
+  //GOC * bo1 = FACTORY->makeObject("");
+  //Transform * transformbo = new Transform();
+  //transformbo->SetPosition(12, 1, 0);
+  //bo1->AddComponent(CT_Transform, transformbo);
+  //Body * bodybo = new Body();
+  //bodybo->Mass = 6.0f;
+  //bodybo->Restitution = 0.3f;
+  //bodybo->Friction = 0.3f;
+  //ShapeAAB * boxbo = new ShapeAAB();
+  //boxbo->Extents = Vec2D(0.5, 0.5);
+  //bodybo->BodyShape = boxbo;
+  //bo1->AddComponent(CT_Body, bodybo);
+  //
+  ////  blackObj2->InitPosition = (whatever, whatever, whatever);
+  ////Transform * transform6 = new Transform();
+  ////
+  ////transform6->SetPosition(4, 1, 0);
+  //
+  //Sprite * spritebo = new Sprite();
+  //spritebo->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+  //spritebo->color = glm::vec4(0, 0, 1, 1);
+  //bo1->AddComponent(CT_Sprite, spritebo);
+  //bo1->AddComponent(CT_ShapeAAB, boxbo);
+
+
+  // 1
+  GOC * blackObj3 = FACTORY->makeObject("");
+  Transform * transform1 = new Transform();
+  transform1->SetPosition(4, 1, 0);
+  blackObj3->AddComponent(CT_Transform, transform1);
+  Body * body1 = new Body();
+  body1->Mass = 0.0f;
+  body1->Restitution = 0.3f;
+  body1->Friction = 0.3f;
+  ShapeAAB * box1 = new ShapeAAB();
+  box1->Extents = Vec2D(0.5, 0.5);
+  body1->BodyShape = box1;
+  blackObj3->AddComponent(CT_Body, body1);
+  if (blackObj3 && box1 && body1 && body1->IsStatic == false)
+  {
+    std::cout << "I exist 1" << std::endl;
+  }
+  //  blackObj3->InitPosition = (whatever, whatever, whatever);
+  //Transform * transform6 = new Transform();
+  //
+  //transform6->SetPosition(4, 1, 0);
+
+  Sprite * sprite6 = new Sprite();
+  sprite6->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
+  sprite6->color = glm::vec4(1, 1, 0, 1);
+  blackObj3->AddComponent(CT_Sprite, sprite6);
+  blackObj3->AddComponent(CT_ShapeAAB, box1);
+
+
+  // 2
+  //GOC * blackObj4 = FACTORY->makeObject("");
+  //Transform * transform2 = new Transform();
+  //transform2->SetPosition(13, 2, 0);
+  //blackObj4->AddComponent(CT_Transform, transform2);
+  //Body * body2 = new Body();
+  //body2->Mass = 0.0f;
+  //body2->Restitution = 0.3f;
+  //body2->Friction = 0.3f;
+  //ShapeAAB * box2 = new ShapeAAB();
+  //box2->Extents = Vec2D(0.5, 0.5);
+  //body2->BodyShape = box2;
+  //blackObj4->AddComponent(CT_Body, body2);
+  //if (blackObj4 && box2 && body2 && body2->IsStatic == false)
+  //{
+  //	std::cout << "I exist 1" << std::endl;
+  //}
+  ////  blackObj3->InitPosition = (whatever, whatever, whatever);
+  ////Transform * transform6 = new Transform();
+  ////
+  ////transform6->SetPosition(4, 1, 0);
+  //
+  //Sprite * sprite7 = new Sprite();
+  //sprite7->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
+  //sprite7->color = glm::vec4(0, 0, 1, 1);
+  //blackObj4->AddComponent(CT_Sprite, sprite7);
+  //blackObj4->AddComponent(CT_ShapeAAB, box2);
+
+
+  //blackObj2->AddComponent(CT_Transform, transform6);
+  //blackObj2->AddComponent(CT_Sprite, sprite5);
+  //RigidBody* blackObjBody2 = new RigidBody();
+  //blackObjBody2->isGhost = false;
+  //blackObjBody2->SetStatic();
+  //blackObjBody2->useGravity = false;
+  //if (blackObjBody2->isStatic)
+  //{
+  //	transform6->SetPosition(4, 1, 0);
+  //}
   //blackObjBody->isKinematic = true;
-  blackObj->AddComponent(CT_RigidBody, blackObjBody);
-  AABB* blackCollision = new AABB();
-  blackCollision->SetHalfSize(6, 0.5);
-  blackObj->AddComponent(CT_AABB, blackCollision);
-  
-  player = boObj;
-  //player2 = boObj;
+  //blackObj2->AddComponent(CT_RigidBody, blackObjBody2);
+  //AABB* blackCollision2 = new AABB();
+  //blackCollision2->SetHalfSize(1.0f, 1.0f);
+  //blackObj2->AddComponent(CT_AABB, blackCollision2);
 
-  //blueObj->Initialize();
-  text1->Initialize();
-  text2->Initialize();
-  greenObj->Initialize();
-  blackObj->Initialize(); 
-  camera->Initialize();
-  //lalalaObj-> Initialize();
-  boObj->Initialize();
+  //player = Fbox;
 
-  //background->Initialize();
+  FACTORY->intializeObjects();
 }
 
 void GameLogic::SendMessages(Message * m)
@@ -153,6 +216,24 @@ void GameLogic::SendMessages(Message * m)
     // a specific object based on the key pressed.
   case Mid::CharacterKey:
   {
+	  MessageCharacterKey* CharacterMessage = (MessageCharacterKey*)m;
+    if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+      switch (CharacterMessage->character)
+    {
+      std::cout << "char msg char is " << CharacterMessage->character;
+      case 'a':
+      {
+
+      }
+      case 'd':
+      {
+        std::cout << "ddd" << std::endl;
+        Sprite* playerSprite = LOGIC->player->has(Sprite);
+
+        playerSprite->texture = GRAPHICS->getSpriteAtlas()->textures["CharacterRun"];
+        break;
+      }
+    }
     break;
   }
   case Mid::MouseMove:
@@ -185,6 +266,31 @@ void GameLogic::SendMessages(Message * m)
   }
 
 };
+
+
+//void GameLogic::SendMessages(Message * message)
+//{
+//  switch (message->MessageId)
+//  {
+//    // The user has pressed a (letter/number) key, we may respond by creating
+//    // a specific object based on the key pressed.
+//  case Mid::CharacterKey:
+//  {
+//    MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
+//    switch (messageChar->character)
+//    {
+//    case 'd':
+//    {
+//       setVelocity(0.5, 0);
+//    }
+//	case 'a':
+//	{
+//		setVelocity(-0.5, 0);
+//	}
+//    }
+//  }
+//  }
+//}
 GameLogic::GameLogic()
 {
   LOGIC = this;
@@ -196,5 +302,5 @@ GameLogic::~GameLogic()
 
 void GameLogic::Update(float dt)
 {
-
+  
 }

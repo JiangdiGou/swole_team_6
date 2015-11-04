@@ -1,0 +1,51 @@
+class LevelOverEffects : ZilchComponent
+{
+    [Property]
+    var WinScreen:Boolean;
+    [Property]
+    var DeathScreen:Boolean;
+    [Property]
+    var TimeUpScreen:Boolean;
+    
+    [Property]
+    var StartDelay:Real = 0.0;
+    
+    [Property]
+    var FadeIn:Boolean;
+    [Property]
+    var FadeTime:Real;
+    
+    var DefaultColor:Real4 = Real4.Zero;
+    var DefaultSize:Real3 = Real3(1,1,1);
+    
+    [Property]
+    var MoveIn:Boolean;
+    [Property]
+    var MoveTime:Boolean;
+    
+    function Initialize(init : CogInitializer)
+    {
+        if(this.FadeIn)
+        {
+            this.DefaultColor = this.Owner.SpriteText.Color;
+            this.Owner.SpriteText.Color = Real4(0,0,0,0);
+            this.DefaultSize = this.Owner.Transform.Scale;
+        }
+        
+        var seqOver = Action.Sequence(this.Owner.Actions);
+        Action.Delay(seqOver, this.StartDelay);
+        
+        if(this.FadeIn)
+        {
+            Action.Property(seqOver, @this.Owner.SpriteText.Color, this.DefaultColor, this.FadeTime, Ease.Linear);
+            Action.Property(seqOver, @this.Owner.Transform.Scale, (this.Owner.Transform.Scale * 1.5), this.FadeTime, Ease.Linear);
+            Action.Delay(seqOver, this.FadeTime - 0.2);
+            Action.Property(seqOver, @this.Owner.Transform.Scale, this.DefaultSize, 0.05, Ease.Linear);
+        }
+        
+        if(this.MoveIn)
+        {
+            
+        }
+    }
+}

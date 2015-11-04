@@ -1,10 +1,10 @@
 #include "WindowsSystem.h"
-#include "engineGraphics\Graphics.h"
+#include "initInfo.h"
+#include "engineGraphics\GraphicsManager.h"
 #include "Core.h"
 
 //A global pointer to the windows system
 WindowsSystem* WINDOWSSYSTEM = NULL;
-
 
 
 const char windowsClassName[] = "FrameworkEngineWindowClass";
@@ -47,57 +47,65 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 	}
 	case WM_LBUTTONDOWN:
 	{
-		MouseButton m(MouseButton::LeftMouse, true, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x, 
+                                          WINDOWSSYSTEM->MousePosition.y));
+		MouseButton m(MouseButton::LeftMouse, true, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_RBUTTONDOWN:
 	{
-		MouseButton m(MouseButton::RightMouse, true, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x, 
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseButton m(MouseButton::RightMouse, true, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_LBUTTONUP:
 	{
-		MouseButton m(MouseButton::LeftMouse, false, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseButton m(MouseButton::LeftMouse, false, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_RBUTTONUP:
 	{
-		MouseButton m(MouseButton::RightMouse, false, Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseButton m(MouseButton::RightMouse, false, worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_MOUSEMOVE:
 	{
 		WINDOWSSYSTEM->MousePosition = MAKEPOINTS(lParam);
-		MouseMove m(Vec2D(WINDOWSSYSTEM->MousePosition.x, WINDOWSSYSTEM->MousePosition.y));
+    Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
+                                          WINDOWSSYSTEM->MousePosition.y));
+    MouseMove m(worldPos);
 		CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_KEYDOWN:
-	{
-		switch (wParam)
-		{
-		case 0x41:
-		{
-			MessageCharacterKey m;
-			m.character = 'a';
-			CORE->BroadcastMessage(&m);
-		}
-		case 0x44:
-		{
-			MessageCharacterKey m;
-			m.character = 'd';
-			CORE->BroadcastMessage(&m);
-		}
-		}
+  {
+    MessageCharacterKey m;
+    if (lParam & 0x40000000)
+      m.keyStatus = KEY_DOWN;
+    else
+      m.keyStatus = KEY_PRESSED;
+    m.character = (char)wParam;
+    CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_KEYUP:
-		break;
-	case WM_CREATE:
+  {
+    MessageCharacterKey m;
+    m.keyStatus = KEY_RELEASED;
+    m.character = (char)wParam;
+    CORE->BroadcastMessage(&m);
+    break;
+  }
+  case WM_CREATE:
 	{
 		WINDOWSSYSTEM->deviceContext = GetDC(hWnd);
 		setupPixelFormatDescriptor(WINDOWSSYSTEM->deviceContext);
@@ -134,24 +142,19 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 
 		break;
 	}
+  case WM_SIZE:
+  {
+     int width = LOWORD(lParam);
+     int height = HIWORD(lParam);
+     INITINFO->clientWidth = width;
+     INITINFO->clientHeight = height;
+     glViewport(0, 0, width, height); 
+
+     break;
+  }
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
-	case WM_DROPFILES:
-	{
-		unsigned int itemCount = DragQueryFile((HDROP)wParam, 0xFFFFFFFF, 0, 0);
-		if (itemCount)
-		{
-			char  buffer[512] = { 0 };
-			DragQueryFile((HDROP)wParam, 0, buffer, 512);
-			DragFinish((HDROP)wParam);
-
-
-			FileDrop drop(buffer);
-			CORE->BroadcastMessage(&drop);
-		}
-		return 0;
-	}
 	case WM_SYSKEYDOWN:
 	{
 		//Eat the WM_SYSKEYDOWN message to prevent freezing the game when
@@ -223,6 +226,10 @@ WindowsSystem::WindowsSystem(const char* windowTitle, int ClientWidth, int Clien
 
   DragAcceptFiles(hWnd, true);
   ShowWindow(hWnd, show);
+}
+
+void WindowsSystem::SendMessages(Message* m)
+{
 }
 
 WindowsSystem::~WindowsSystem()

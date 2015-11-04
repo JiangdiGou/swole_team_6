@@ -1,0 +1,168 @@
+/*
+Script Author: Nolan T Yoo
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+
+Comment: Automatically keeps track of paused/unpaused/paused-inside-of-paused levels in addition
+to doing pausing itself.
+*/
+
+
+//reminder - LevelSettings.CaneraViewport.Background must be false
+class LevelListener : ZilchComponent
+{
+    /*
+    USED KEYS:
+    Escape
+    Tilde
+    */
+    
+    //Pausing variables
+    [Property]
+    var PauseKind : String = "InterruptSpace";
+    [Property]
+    var Pausable : Boolean = true;
+    [Property]
+    var InterruptLevel: Level = null;
+    var InterruptSpace: Space = null;
+    var ButtonCheck : Boolean = false;
+
+    var PausingKey : Keys = Keys.Escape;
+    var UnpausingKey : Keys = Keys.Escape;
+    var UsingInterrupt : Boolean = false;
+    
+    var KeyJustProcessed : Boolean = false;
+    
+    var IsThePauseLevel : Boolean = false;
+    var IgnoreKeyOnce : Boolean = false;
+    var IgnoreKey : Boolean = false;
+    
+    var LocalSpace : String = null;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.GameSession, Events.GameRequestQuit, this.OnEscapeDown);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(Zero.Keyboard, Events.KeyDown, this.OnKeyDown);
+       
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.ButtonCheck)
+        {
+            this.ButtonCheck = false;
+            this.PauseThisGame();
+        }
+    }
+    
+    function OnEscapeDown(event : GameEvent)
+    {
+        if(!this.GameSession.GameData.CanQuit)
+        {
+            event.Handled = true;
+        }
+    }
+    
+    function OnKeyDown(event : KeyboardEvent)
+    {
+        if(!this.Pausable)
+        {
+            return;
+        }
+        
+        if(this.IgnoreKey || this.IgnoreKeyOnce)
+        {
+            if(!this.IgnoreKey)
+            {
+                this.IgnoreKeyOnce = false;
+            }
+            return;
+        }
+        if(this.IsThePauseLevel && event.Keyboard.KeyIsDown(this.UnpausingKey))
+        {
+            Console.WriteLine("Unpausing...");
+            this.UnpauseThisGame();
+            return;
+        }
+        //========================
+        
+        if(event.Keyboard.KeyIsDown(this.PausingKey))
+        {
+            if(!this.UsingInterrupt)
+            {
+                this.PauseThisGame();
+                this.KeyJustProcessed = true;
+            }
+        }
+        if(event.Keyboard.KeyIsDown(this.UnpausingKey))
+        {
+            if(this.InterruptSpace != null && !this.KeyJustProcessed)
+            {
+                this.UnpauseThisGame();
+            }
+        }
+        this.KeyJustProcessed = false;
+    }
+    
+    function PauseThisGame()
+    {
+        if(!this.Pausable)
+        {
+            return;
+        }
+        if(this.InterruptSpace == null && !this.Owner.Space.TimeSpace.GloballyPaused)
+        {
+            if(this.Owner.SoundGlobal != null)
+            {
+                this.Owner.SoundGlobal.MuffleBGM();
+            }
+            
+            var copySpace : StringBuilder = new StringBuilder();
+            copySpace.Write((this.Owner.Space.Name));
+            this.LocalSpace = copySpace.ToString();
+            Console.WriteLine(this.LocalSpace);
+            this.Owner.Space.TimeSpace.TogglePause();
+            
+            if(this.GameSession.FindSpaceByName("HUDSpace") != null)
+            {
+                this.GameSession.FindSpaceByName("HUDSpace").Space.TimeSpace.TogglePause();
+            }
+            
+            this.InterruptSpace = 
+                this.GameSession.CreateNamedSpace(this.PauseKind, Archetype.Find("Space"));
+            this.InterruptSpace.LoadLevel(this.InterruptLevel);
+            this.InterruptSpace.LevelSettings.LevelListener.IsThePauseLevel = true;
+            this.InterruptSpace.LevelSettings.LevelListener.LocalSpace = this.Owner.Space.Name;
+        }
+    }
+    
+    function UnpauseThisGame()
+    {
+        if(!this.Pausable)
+        {
+            return;
+        }
+        //Zero.Mouse.Cursor = Cursor.Invisible;
+        this.InterruptSpace = this.GameSession.FindSpaceByName(this.PauseKind);
+        if(this.InterruptSpace != null && this.IsThePauseLevel)
+        {
+            if(this.Owner.SoundGlobal != null)
+            {
+                Console.WriteLine("having fun?");
+                this.Owner.SoundGlobal.UnmuffleBGM();
+            }
+            var mainSpace = this.GameSession.FindSpaceByName(this.LocalSpace);
+            Console.WriteLine(this.LocalSpace);
+            mainSpace.LevelSettings.LevelListener.UnpauseThisGame();
+            mainSpace.TimeSpace.TogglePause();
+            
+            if(this.GameSession.FindSpaceByName("HUDSpace") != null)
+            {
+                this.GameSession.FindSpaceByName("HUDSpace").Space.TimeSpace.TogglePause();
+            }
+            this.InterruptSpace.Destroy();
+        }
+    }
+    
+}

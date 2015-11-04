@@ -12,10 +12,10 @@ class ScrollSelectButtons : ZilchComponent
     
     function Initialize(init : CogInitializer)
     {
-        Zero.Connect(this.Owner, Events.MouseDown, this.OnMouseDown);
+        Zero.Connect(this.Owner, Events.LeftMouseUp, this.OnMouseUp);
     }
 
-    function OnMouseDown(event : MouseEvent)
+    function OnMouseUp(event : MouseEvent)
     {
         var seq1 = Action.Sequence(this.Owner.Actions);
         

@@ -1,26 +1,13 @@
 #ifndef RESOLUTION_H
 #define RESOLUTION_H
 //#pragma once
-#include "Body.h"
-//#include "Collision.h"
+//#include "Body.h"
+#include "Collision.h"
 //#include "primitive.h"
+#include "math_utility.h"
 
 
-struct Contact
-{
-	Contact() : Pn(0.0f), Pt(0.0f), Pnb(0.0f), massNormal(0.0f), massTangent(0.0f), bias(0.0f) {}
-	Vector2 position;
-	Vector2 normal;
-	Vector2 r1, r2;
-	float seperation;
-	float Pn; // accumulated normal impulse
-	float Pt; // accumulated tangent impulse
-	float Pnb; // accumulated normal impulse for position bias
-	float  massNormal, massTangent;
-	float bias;
-
-};
-
+//
 struct PhysicsMaterial
 {
 	float staticFriction;
@@ -37,12 +24,13 @@ struct Manifold
 	Manifold() {}
 
 	//Manifold(RigidBody *a, RigidBody *b) : A(a), B(b) {}
-	Manifold(Primitive *a, Primitive *b) : A(a), B(b) {}
+	Manifold(Body *a, Body *b) : A(a), B(b) {}
 	//RigidBody *A;
-	Primitive *A;
+	Body *A;
 		//RigidBody *B;
-	Primitive *B;
+	Body *B;
 	float penetration;
+	//Vector2 position;
 
 	float restitution;
 
@@ -59,7 +47,6 @@ struct Manifold
 
 	float e; // epsilon
 
-	Contact contacts[2];
 
 	unsigned contactCount; // The number of contacts found so far
 
@@ -68,6 +55,25 @@ struct Manifold
 	void AppyImpulse(void);
 	void CorrectPosition(void);
 
+
 };
 
+
+class contactList
+{
+public:
+	ManifoldSet * GetNewContact();
+	void ResolveContacts(float dt);
+	void Reset();
+	Shape * myshape;
+
+
+private:
+	friend class Physics;
+	static const int MaxContacts = 1024;
+	ManifoldSet contactSet[MaxContacts];
+	unsigned TotalContacts;
+	void CorrectVelocity(float dt);
+	void CorrectPosition(float dt);
+};
 #endif 

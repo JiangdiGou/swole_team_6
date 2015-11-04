@@ -18,6 +18,8 @@ bool equal_floats(float a, float b)
 }
 
 
+
+
 float degrees_to_radian(float degrees)
 {
 	return degrees * FLOAT_PI / 180.0f;
@@ -141,6 +143,11 @@ Vec2D operator/(const float scale, const Vec2D& vec)
 	else
 		return Vec2D(vec.x / scale, vec.y / scale);
 }
+
+//inline float Vec2D::operator[](const int i)
+//{
+//	return (float) *this)[i]);
+//}
 
 // Returns true if the vectors are equal.
 bool  Vec2D::operator==(const Vec2D& rhs)

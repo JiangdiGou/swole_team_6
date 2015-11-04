@@ -2,10 +2,13 @@ GAM200_Project/GAM200_Project.sdf
 GAM200_Project/GAM200_Project.opensdf
 GAM200_Project/DerivedData/*
 GAM200_Project/Debug/*
+GAM200_Project/Release/*
 GAM200_Project/GAM200_Project/build/Debug/*
 GAM200_Project/GAM200_Project/build/Release/*
 GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*
 GAM200_Project/GAM200_Project.xcodeproj/project.xcworkspace/*/*/*/*
+extraConsoleHelper/Release/*
+LevelEditor/game/cache/*
 LevelEditor/errors.txt
 LevelEditor/tmp/
 LevelEditor/log.txt
@@ -17,3 +20,4 @@ LevelEditor/game/*.rpyb
 LevelEditor/game/saves/
 LevelEditor/debuglog.txt
 LevelEditor/*.autosave
+GAM200_Project/log.txt

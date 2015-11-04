@@ -113,7 +113,7 @@ SpriteText::SpriteText(std::string initialMessage)
   message = initialMessage;
 }
 
-void SpriteText::Update()
+void SpriteText::Update(float dt)
 {
   std::string::const_iterator characterIt;
   glm::vec3 initialTranslation, initialScale;

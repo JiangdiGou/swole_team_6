@@ -93,10 +93,41 @@ Level =
 		ScrollReaction = 
 		{
 			int IDNumber = 1,
-			int ITimeLimit = 200,
-			int IGoldTime = 190,
+			float TimeLimit = 2.5,
+			float GoldTime = 2.20000005,
 			float IEnergyCost = 20,
 			float IFailCost = 10,
+			CogPath LeftChargeBar = 
+			{
+				string Path = ":/LeftCharge",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 3,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			CogPath RightChargeBar = 
+			{
+				string Path = ":/RightCharge",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			string SuccessParticle = "56ffef82ec0898b4:CraneParticle",
 		},
 		ScrollCompleteActions = 
 		{
@@ -106,7 +137,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 3,
+			uint Id = 5,
 		},
 		Named = 
 		{
@@ -114,7 +145,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [1.60154116, -0.440004647, 50],
+			Vec3 Translation = [0.216329068, 0.947657406, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -126,7 +157,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 13.4064064,
+			float Size = 16.3746376,
 		},
 		EditorCameraController = 
 		{
@@ -134,7 +165,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [1.60154116, -0.440004647, 7.00056262e-008],
+			Vec3 LookTarget = [0.216329068, 0.947657406, 9.45604128e-009],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -181,42 +212,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 4,
-		},
-		Named = 
-		{
-			string Name = "ScrollPath2",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-3.57705927, 1.00555849, -0.0977477878],
-			Vec3 Scale = [5.50770044, 0.230713516, 1.4279213],
-			Quat Rotation = [0, 0, 0.838105917, 0.545507491],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0, 0, 0, 0.5],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 5,
+			uint Id = 6,
 		},
 		Named = 
 		{
@@ -224,7 +220,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [7.17026186, -2.49060392, 0.0450443476],
+			Vec3 Translation = [-6.68785286, -3.8350482, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -265,21 +261,6 @@ Level =
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
 			},
-			CogPath PathSprite = 
-			{
-				string Path = ":/ScrollPath5",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4294967293,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
 			string Circle = "5274db4c2e7c11f9:Circle",
 		},
 		Reactive = 
@@ -287,12 +268,23 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = true,
+			bool Fade = false,
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 6,
+			uint Id = 7,
 		},
 		Named = 
 		{
@@ -300,7 +292,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-7.38512182, -3.11531115, 0.0450443476],
+			Vec3 Translation = [-4.28255844, 3.46901703, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -336,21 +328,6 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 7,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath PathSprite = 
-			{
-				string Path = ":/ScrollPath1",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
 				uint ResolvedCog = 8,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
@@ -363,6 +340,17 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = true,
+			bool Fade = false,
+		},
 	},
 	Cog = 
 	{
@@ -372,81 +360,11 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "ScrollPath4",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [4.36703444, -2.33564353, -0.0977477878],
-			Vec3 Scale = [5.21272993, 0.230713516, 1.4279213],
-			Quat Rotation = [0, 0, -0.0353369713, 0.999375463],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0, 0, 0, 0.5],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 10,
-		},
-		Named = 
-		{
-			string Name = "ScrollPath3",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-1.45184994, 0.70072794, -0.0977477878],
-			Vec3 Scale = [8.52102852, 0.230713516, 1.4279213],
-			Quat Rotation = [0, 0, -0.350983888, 0.936381459],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0, 0, 0, 0.5],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 11,
-		},
-		Named = 
-		{
 			string Name = "ScrollBack",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.0157999061, 0.247734725, -1.38287687],
+			Vec3 Translation = [0.0157999061, 33.0820084, -1.38287687],
 			Vec3 Scale = [21.4188194, 11.4233704, 1.4279213],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -473,42 +391,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 8,
-		},
-		Named = 
-		{
-			string Name = "ScrollPath1",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-4.89154291, -2.25022125, -0.0977477878],
-			Vec3 Scale = [4.92298698, 0.230713516, 1.4279213],
-			Quat Rotation = [0, 0, 0.154490069, 0.987994373],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0, 0, 0, 0.5],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 12,
+			uint Id = 10,
 		},
 		Named = 
 		{
@@ -516,7 +399,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [1.68002546, -2.1633842, 0.0450443476],
+			Vec3 Translation = [1.14569569, -3.23204517, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -552,22 +435,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 5,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath PathSprite = 
-			{
-				string Path = ":/ScrollPath4",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 9,
+				uint ResolvedCog = 6,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -579,12 +447,23 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = true,
+			bool Fade = false,
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 7,
+			uint Id = 8,
 		},
 		Named = 
 		{
@@ -592,7 +471,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-2.44032955, -1.53174567, 0.0450443476],
+			Vec3 Translation = [2.71337247, 4.34588718, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -628,22 +507,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 13,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath PathSprite = 
-			{
-				string Path = ":/ScrollPath2",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4,
+				uint ResolvedCog = 11,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -655,12 +519,23 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = true,
+			bool Fade = false,
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 11,
 		},
 		Named = 
 		{
@@ -668,7 +543,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-4.7056179, 3.54903698, 0.0450443476],
+			Vec3 Translation = [5.79138756, -1.25993538, 0.0450443476],
 			Vec3 Scale = [0.571168542, 0.571168542, 1.4279213],
 			Quat Rotation = [0, 0, 0.382683009, 0.923879981],
 		},
@@ -704,21 +579,6 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 12,
-				CogPathPreference PathPreference0 = CogRelative,
-				CogPathPreference PathPreference1 = SpaceRelative,
-				CogPathPreference PathPreference2 = Absolute,
-			},
-			CogPath PathSprite = 
-			{
-				string Path = ":/ScrollPath3",
-				bool ErrorOnResolveToNull = false,
-				bool ErrorOnPathCantCompute = false,
-				bool ErrorOnDirectLinkFail = false,
-				bool UpdateCogOnPathChange = true,
-				bool UpdatePathOnCogChange = true,
-				bool UpdateCogOnInitialize = true,
-				bool ResolvedNullErrorOccurred = false,
 				uint ResolvedCog = 10,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
@@ -731,12 +591,23 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = true,
+			bool Fade = false,
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 14,
+			uint Id = 12,
 		},
 		Named = 
 		{
@@ -744,7 +615,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, -1],
+			Vec3 Translation = [0, 32.8342743, -1],
 			Vec3 Scale = [1.79452085, 1.79452085, 1.79452085],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -765,6 +636,282 @@ Level =
 			bool AnimationActive = true,
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 13,
+		},
+		Named = 
+		{
+			string Name = "LeftRoll",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-9.5, 0.239999995, 0.100000001],
+			Vec3 Scale = [2.31818151, 12.5479498, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.741176486, 0.643137276, 0.400000036, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5586f579ca73ecc2:SquareBordered",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = true,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = false,
+			bool Fade = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 14,
+		},
+		Named = 
+		{
+			string Name = "RightRoll",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [9.5, 0.239999995, 0.100000001],
+			Vec3 Scale = [2.31818151, 12.5479498, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.741176486, 0.643137276, 0.400000036, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5586f579ca73ecc2:SquareBordered",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = true,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = false,
+			bool Fade = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 3,
+		},
+		Named = 
+		{
+			string Name = "LeftCharge",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-9.5, 0.239999995, 0.200000003],
+			Vec3 Scale = [1, 11, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.78039223, 0.78039223, 0.78039223, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = true,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = false,
+			bool Fade = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 4,
+		},
+		Named = 
+		{
+			string Name = "RightCharge",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [9.5, 0.239999995, 0.200000003],
+			Vec3 Scale = [1, 11, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.78039223, 0.78039223, 0.78039223, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = true,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = false,
+			bool Fade = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 15,
+		},
+		Named = 
+		{
+			string Name = "Sprite",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0, -2],
+			Vec3 Scale = [60, 50, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = false,
+			bool ScrollPoint = false,
+			bool Fade = true,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 16,
+		},
+		Named = 
+		{
+			string Name = "Crane_Scroll",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0.239999995, 0],
+			Vec3 Scale = [0.37862587, 0.37862587, 0.37862587],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "560d3b1f59de5804:Crane_Scroll",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ScrollFlare = 
+		{
+			bool LeftScroll = false,
+			bool RightScroll = false,
+			bool LeftCharge = false,
+			bool RightCharge = false,
+			bool Paper = false,
+			bool Picture = true,
+			bool ScrollPoint = false,
+			bool Fade = false,
 		},
 	},
 },

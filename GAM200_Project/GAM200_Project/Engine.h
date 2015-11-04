@@ -26,6 +26,6 @@ Header for libraries and engine includes
 #include "./gameComponents/objFactory.h"
 #include "System.h"
 #include "Core.h"
-#include "../physicsLib/PhysicsManager.h"
+#include "./physicsLib/PhysicsManager.h"
 
 #endif

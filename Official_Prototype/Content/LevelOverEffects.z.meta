@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "LevelOverEffects",
+		uint64 ResourceId = 56fcf725a5e931e6,
+	},
+},

@@ -92,10 +92,16 @@ Level =
 		},
 		LevelSelect = 
 		{
-			string SLevel0Name = "",
-			string SLevel1Name = "",
+			string SLevel0Name = "Level",
+			string SLevel1Name = "Level2",
 			string SLevel2Name = "",
 			string SLevel3Name = "",
+		},
+		LevelListener = 
+		{
+			string PauseKind = "InterruptSpace",
+			bool Pausable = false,
+			string InterruptLevel = "",
 		},
 	},
 	Cog = 
@@ -110,7 +116,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [1.6279124, -0.302871495, 50],
+			Vec3 Translation = [4.08928633, 3.17954993, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -122,7 +128,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 26.997221,
+			float Size = 24.4280987,
 		},
 		EditorCameraController = 
 		{
@@ -130,7 +136,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [1.6279124, -0.302871495, 7.1158901e-008],
+			Vec3 LookTarget = [4.08928633, 3.17954993, 1.78748962e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -263,18 +269,22 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 0,
+			string LevelToLoad = "551f871f885a5f4b:Level",
 		},
 		Reactive = 
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
-		GoToLevel = 
+		ButtonHilight = 
 		{
-			bool IsExternal = true,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "551f871f885a5f4b:Level",
-			string Level_Name = "553552b3f7cd2d35:PowerSelect",
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		GenericButton = 
+		{
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553552b3f7cd2d35:PowerSelect",
 		},
 	},
 	Cog = 
@@ -332,18 +342,22 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 1,
+			string LevelToLoad = "551f871f885a5f4b:Level",
 		},
 		Reactive = 
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
-		GoToLevel = 
+		ButtonHilight = 
 		{
-			bool IsExternal = true,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "551f871f885a5f4b:Level",
-			string Level_Name = "553552b3f7cd2d35:PowerSelect",
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		GenericButton = 
+		{
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553552b3f7cd2d35:PowerSelect",
 		},
 	},
 	Cog = 
@@ -401,18 +415,22 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 2,
+			string LevelToLoad = "551f871f885a5f4b:Level",
 		},
 		Reactive = 
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
-		GoToLevel = 
+		ButtonHilight = 
 		{
-			bool IsExternal = true,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "551f871f885a5f4b:Level",
-			string Level_Name = "553552b3f7cd2d35:PowerSelect",
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		GenericButton = 
+		{
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553552b3f7cd2d35:PowerSelect",
 		},
 	},
 	Cog = 
@@ -497,7 +515,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [13.2084999, 7.61456013, 1.30868997e-007],
+			Vec3 Translation = [11.1337843, 7.61456013, 1.30868997e-007],
 			Vec3 Scale = [6.67507982, 2.34746003, 2.34746003],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -519,17 +537,20 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
-		GoToLevel = 
-		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "",
-			string Level_Name = "563704b0383d5798:MainMenu",
-		},
 		Reactive = 
 		{
 			bool Active = true,
 			bool CaptureMouse = true,
+		},
+		ButtonHilight = 
+		{
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		GenericButton = 
+		{
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "563704b0383d5798:MainMenu",
 		},
 	},
 	Cog = 
@@ -544,7 +565,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [13.2084999, 8.39696026, 1.30868997e-007],
+			Vec3 Translation = [11.1337843, 8.39696026, 1.30868997e-007],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},

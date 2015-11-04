@@ -12,12 +12,21 @@ enum ComponentTypeId
 	CT_Sprite,
   CT_SpriteText,
 	//Physics
-	CT_RigidBody,
+	CT_Body,
 	CT_AABB,
 	CT_Circle,
 	//Max
 	CT_MaxComponents,
 	CT_CircleCollider,
 	CT_BoxCollider,
+	CT_TileMapCollision,
+	CT_PlayerState,
+	CT_MOVEPLATFORM,
+	CT_DESTROY,
+	CT_SPAWNBLOCK,
+	CT_PLAYERDEATH,
+	CT_ShapeAAB,
+  CT_MouseVector
+	
 };
 #endif

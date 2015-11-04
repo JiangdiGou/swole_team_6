@@ -4,24 +4,35 @@
 \author Gabriel Neumann
 \par    email: g.neumann\@digipen.edu
 \brief
-  main loop
+main loop
 */
 /******************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
 #include "_EntryPoint.h"
-#include "graphicsManager.h"
+#include "extraLogger/extraLogger.h"
+#include "engineGraphics/graphicsManager.h"
 #include "GameLogic.h"
 #include "Core.h"
-#include "engineGraphics\Graphics.h"
+#include "engineGraphics/Graphics.h"
 #include "WindowsSystem.h"
+#include "runLua/luaTranslate.h"
+#include "runLua/luaRunner.h"
+#include "Utilities.h"
 
+#include "initInfo.h"
+
+initInfo * INITINFO;
 //HDC deviceContext;
 //HGLRC renderingContext;
 
-const char windowTitle[] = "Swag";
-const int ClientWidth = 800;
-const int ClientHeight = 600;
+/* we can no longer promise to not change these */
+std::string windowTitle = "Swag";
+
+void baseInitRoutine()
+{
+  windowTitle = INITINFO->windowTitle;
+}
 
 #ifdef GAMELOOP_RUN
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
@@ -29,9 +40,23 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR comman
 int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
 {
+
+
+
+  luaInitFile();
+  baseInitRoutine();
+
+  //coloured_console.cprintf(CConsoleLoggerEx::COLOR_RED | CConsoleLoggerEx::COLOR_BACKGROUND_BLACK, "Another console");
+  //coloured_console.printf("Rip C++ piping.");
   //Opens a console for debugging and testing 
-  AllocConsole();
-  freopen("CONOUT$", "w", stdout);
+  if (INITINFO->showConsole)
+  {
+	  AllocConsole();
+	  AttachConsole(GetCurrentProcessId());
+	  freopen("CONIN$", "r", stdin);
+	  freopen("CONOUT$", "w", stdout);
+	  freopen("CONOUT$", "w", stderr);
+  }
 
   //Stores the window being created
   //HWND window;
@@ -46,21 +71,22 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   CoreEngine* engine = new CoreEngine();
 
-  WindowsSystem* windows = new WindowsSystem(windowTitle, ClientWidth, ClientHeight, show);
+  WindowsSystem* windows = new WindowsSystem(windowTitle.c_str(), INITINFO->clientWidth, INITINFO->clientHeight, show);
   engine->AddSystem(windows);
 
-  engine->AddSystem(new PhysicsManager());
-
-  Shader* pBasicShader = new Shader("resources/VertexShader.txt", "resources/FragmentShader.txt");
+  engine->AddSystem(new Physics());
+  Shader* pBasicShader = new Shader("resources/shaders/VertexShader.txt", "resources/shaders/FragmentShader.txt");
   const Shader &basicShader = *pBasicShader;
   engine->AddSystem(new GraphicsManager(basicShader));
 
   engine->AddSystem(new GameLogic());
-  engine->AddSystem(new objFactory());
+  objFactory* factory = new objFactory();
+  engine->AddSystem(factory);
+
   engine->Initialize();
 
-  graphics->setDeviceContext(windows->deviceContext);
-  graphics->setRenderingContext(windows->renderingContext);
+  GRAPHICS->setDeviceContext(windows->deviceContext);
+  GRAPHICS->setRenderingContext(windows->renderingContext);
 
   windows->ActivateWindow();
 
@@ -98,6 +124,13 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
   }*/
+  Vector3D dumbVector(1.2, 1.2, 1.2);
+  CConsoleLoggerEx coloured_console;
+  coloured_console.Create("Debug Console");
+  coloured_console.printf("LOL C++.\n");
+  coloured_console << 213213 << "\n";
+  coloured_console << "candy" << "\n";
+  coloured_console << "la di da vector: " << dumbVector << "\n";
   engine->GameLoop();
   //engine->LastTime = timeGetTime();
 /*  while (engine->GameActive)

@@ -9,15 +9,16 @@
 class Transform : public GameComponent
 {
 public:
-	friend class RigidBody;
+	friend class Body;
 	Transform( Vector3 pos = Vector3(), Vector3 rot = Vector3(),
 		Vector3 scal = Vector3());
 	~Transform() override;
 
 	//Inherited Methods
 	void Initialize() override;
-	void Update() override;
+	void Update(float dt) override;
 	void Release() override;
+	//Vector2 Position;
 
 	//Getters
 	Vector3& GetPosition();
@@ -52,9 +53,14 @@ public:
   glm::mat4 calculateTransformMatrix();
 
 private:
+	
 	Vector3 position;
 	Vector3 scale;
 	Vector3 rotation;
+	bool dontRotate;
+
+public:
+	Vector2 pos2d;//...
 };
 
 #endif TRANSFORM_H

@@ -90,6 +90,12 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
+		LevelListener = 
+		{
+			string PauseKind = "InterruptSpace",
+			bool Pausable = true,
+			string InterruptLevel = "",
+		},
 	},
 	Cog = 
 	{
@@ -205,12 +211,16 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = false,
 		},
-		GoToLevel = 
+		ButtonHilight = 
 		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "",
-			string Level_Name = "5637063944d8f04a:Credits",
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		CreateOverlayedSpace = 
+		{
+			bool MouseClick = true,
+			bool Automatic = false,
+			string OverlayedLevel = "5637063944d8f04a:Credits",
 		},
 	},
 	Cog = 
@@ -252,12 +262,16 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
-		GoToLevel = 
+		ButtonHilight = 
 		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "",
-			string Level_Name = "56373f8c4ab6300c:HowToPlay",
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		CreateOverlayedSpace = 
+		{
+			bool MouseClick = true,
+			bool Automatic = false,
+			string OverlayedLevel = "56373f8c4ab6300c:HowToPlay",
 		},
 	},
 	Cog = 
@@ -299,12 +313,16 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
-		GoToLevel = 
+		ButtonHilight = 
 		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "",
-			string Level_Name = "56373fcb789cf268:OptionsScreen",
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		CreateOverlayedSpace = 
+		{
+			bool MouseClick = true,
+			bool Automatic = false,
+			string OverlayedLevel = "56373fcb789cf268:OptionsScreen",
 		},
 	},
 	Cog = 
@@ -346,8 +364,16 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
-		Quit = 
+		ButtonHilight = 
 		{
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		CreateOverlayedSpace = 
+		{
+			bool MouseClick = true,
+			bool Automatic = false,
+			string OverlayedLevel = "56c5027fa4851517:AreYouSure",
 		},
 	},
 	Cog = 
@@ -525,12 +551,15 @@ Level =
 			bool Active = true,
 			bool CaptureMouse = true,
 		},
-		GoToLevel = 
+		ButtonHilight = 
 		{
-			bool IsExternal = false,
-			bool GoToGameDataLevel = false,
-			string GameData_Level = "",
-			string Level_Name = "553573c03722f285:LevelSelect",
+			bool ScaleUp = true,
+			bool Glow = true,
+		},
+		GenericButton = 
+		{
+			Enum ButtonType = LoadLevel,
+			string LoadThisLevel = "553573c03722f285:LevelSelect",
 		},
 	},
 	Cog = 

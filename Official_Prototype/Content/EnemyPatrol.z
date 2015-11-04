@@ -1,0 +1,118 @@
+class EnemyPatrol : ZilchComponent
+{
+    var PlayerPos:Real3;
+    var YDifference:Real;
+    var MoveSpeed:Real = 10;
+    var IgnorePathPointTime:Real = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionPersisted);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.IgnorePathPointTime > 0)
+        {
+            this.IgnorePathPointTime -= event.Dt;
+        }
+        
+        this.PlayerPos = this.Space.FindObjectByName("Player").Transform.Translation;
+        
+        this.YDifference = Math.Abs(this.PlayerPos.Y - this.Owner.Transform.Translation.Y);
+        
+        //Moves the enemy in the direction of the player. 
+        if(this.PlayerPos.X > this.Owner.Transform.Translation.X && this.YDifference <= 7)
+        {
+            //Checks collision to the right
+            if(!this.CheckCollision(Real3.XAxis, 1.0))
+            {
+                if(Math.Abs(this.Owner.Transform.Translation.X - this.PlayerPos.X) < 1.5)
+                {
+                    this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                }
+                else
+                {
+                    this.Owner.RigidBody.Velocity = Real3(this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                    this.Owner.Sprite.FlipX = true;
+                }
+            }
+        }
+        else if(this.PlayerPos.X < this.Owner.Transform.Translation.X && this.YDifference <= 7)
+        {
+            //Checks collision to the left
+            if(!this.CheckCollision(-Real3.XAxis, 1.0))
+            {
+                if(Math.Abs(this.Owner.Transform.Translation.X - this.PlayerPos.X) < 1.5)
+                {
+                    this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+                }
+                else
+                {
+                    this.Owner.RigidBody.Velocity = Real3(-this.MoveSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+                    this.Owner.Sprite.FlipX = false;
+                }
+            }
+        }
+        else
+        {
+            this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+        }
+    }
+    
+    //Casts a ray and checks if the object hit is close enough to this enemy
+    function CheckCollision(direction_:Real3, checkDistance_:Real):Boolean
+    {
+        var ray = Ray();
+        ray.Start = this.Owner.Transform.Translation;
+        ray.Direction = direction_;
+        var filter = CastFilter();
+        filter.IgnoreDynamic = true;
+        var results = this.Space.PhysicsSpace.CastRayFirstFiltered(ray, filter);
+        var difference:Real = 0.0;
+        
+        if(results.ObjectHit == null)
+        {
+            return false;
+        }
+        
+        //If checking right
+        if(direction_.X > 0)
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        //If checking left
+        else
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        
+        if(difference <= checkDistance_)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    
+    function OnCollisionPersisted(event : CollisionEvent)
+    {
+        if(event.OtherObject.EnemyPathPoint != null && this.IgnorePathPointTime <= 0.0)
+        {
+            var seqJump = Action.Sequence(this.Owner.Actions);
+            
+            var jumpPoint:Real3 = event.OtherObject.EnemyPathPoint.ClosestPointToPlayer();
+            
+            if(jumpPoint.Z <= 2)
+            {
+                Action.Property(seqJump, @this.Owner.Transform.Translation, jumpPoint, 0.2, Ease.Linear);
+                
+                this.IgnorePathPointTime = 0.8;
+            }
+        }
+    }
+}

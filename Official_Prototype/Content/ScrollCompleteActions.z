@@ -32,6 +32,8 @@ class ScrollCompleteActions : ZilchComponent
         {
             this.Dragon(gold_);
         }
+        
+        this.Space.Destroy();
     }
     
     //If the Crane scroll was completed

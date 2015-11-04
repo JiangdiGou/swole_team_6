@@ -11,7 +11,7 @@ public:
 friend class GameObjectComposition;
 
 virtual void Initialize() {};
-virtual void Update() {};
+virtual void Update(float dt) {};
 virtual void Release() {};
 virtual void SendMessages(Message *) {};
 

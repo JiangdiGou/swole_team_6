@@ -5,4 +5,11 @@ TextContent =
 		string Name = "PlayerCollision",
 		uint64 ResourceId = 5511977b5a4e9913,
 	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"PlayerStuff",
+		],
+	},
 },

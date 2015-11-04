@@ -1,0 +1,56 @@
+class PlayerStats : ZilchComponent
+{
+    var Health:Integer = 0;
+    var Energy:Integer = 0;
+    
+    var CanMove:Boolean = false;
+    var Stunned:Real = 0.0;
+    var Knocked:Real = 0.0;
+    var Dead:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //If the player is stunned or knocked into the air, they can't take any movement actions
+        if(this.Knocked > 0.0 || this.Stunned > 0.0)
+        {
+            this.CanMove = false;
+            
+            if(this.Stunned > 0.0)
+            {
+                this.Stunned -= event.Dt;
+            }
+            
+            if(this.Knocked > 0.0)
+            {
+                this.Knocked -= event.Dt;
+            }
+        }
+        //Otherwise, they can move normally
+        else
+        {
+            this.CanMove = true;
+        }
+    }
+    
+    function HitReaction(damage_:Integer, stunTime_:Real, knockTime_:Real)
+    {
+        this.Health -= damage_;
+        this.Stunned += stunTime_;
+        this.Knocked += knockTime_;
+        
+        if(this.Health <= 0)
+        {
+            this.OnDeath();
+        }
+    }
+    
+    function OnDeath()
+    {
+        
+    }
+}

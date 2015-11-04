@@ -1,0 +1,128 @@
+class ButtonHilight : ZilchComponent
+{
+    [Property]
+    var ScaleUp:Boolean = true;
+    [Property]
+    var Glow:Boolean = true;
+    
+    var BaseColor:Real4;
+    var BaseSize:Real3;
+    
+    function Initialize(init : CogInitializer)//##########################################################################################
+    {
+        //Makes the button slightly more dull colored so it pops when clicked
+        if(this.Glow)
+        {
+            this.BaseColor = this.Owner.Sprite.Color;
+            
+            var rColor:Real = this.BaseColor.X * 0.75;
+            var gColor:Real = this.BaseColor.Y * 0.75;
+            var bColor:Real = this.BaseColor.Z * 0.75;
+            
+            this.Owner.Sprite.Color = Real4(rColor, gColor, bColor, 1);
+        }
+        
+        if(this.ScaleUp)
+        {
+            this.BaseSize = this.Owner.Transform.Scale;
+        }
+        
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+        Zero.Connect(this.Owner, Events.LeftMouseDown, this.OnMouseDown);
+        Zero.Connect(this.Owner, Events.LeftMouseUp, this.OnMouseUp);
+    }
+    
+    function OnMouseEnter(event : MouseEvent)//##########################################################################################
+    {
+        //Variables for action sequences
+        var seqEnter = Action.Sequence(this.Owner.Actions);
+        var xScale:Real = this.BaseSize.X * 1.1;
+        var yScale:Real = this.BaseSize.Y * 1.1;
+        
+        var rColor:Real = this.BaseColor.X;
+        var gColor:Real = this.BaseColor.Y;
+        var bColor:Real = this.BaseColor.Z;
+        
+        //Increase button size and brighter color
+        if(this.Glow)
+        {
+            Action.Property(seqEnter, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.03, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqEnter, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.03, Ease.Linear);
+        }
+    }
+    
+    function OnMouseExit(event : MouseEvent)//##########################################################################################
+    {
+        //Variables for action sequences
+        var seqExit = Action.Sequence(this.Owner.Actions);
+        var xScale:Real = this.BaseSize.X;
+        var yScale:Real = this.BaseSize.Y;
+        
+        var rColor:Real = this.BaseColor.X * 0.75;
+        var gColor:Real = this.BaseColor.Y * 0.75;
+        var bColor:Real = this.BaseColor.Z * 0.75;
+        
+        //Sets size and color back to normal
+        if(this.Glow)
+        {
+            Action.Property(seqExit, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.12, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqExit, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.12, Ease.Linear);
+        }
+    }
+    
+    function OnMouseDown(event : MouseEvent)//##########################################################################################
+    {
+        //Variables for action sequences
+        var seqDown = Action.Sequence(this.Owner.Actions);
+        var xScale:Real = this.BaseSize.X * 1.05;
+        var yScale:Real = this.BaseSize.Y * 1.05;
+        
+        var rColor:Real = this.BaseColor.X * 0.55;
+        var gColor:Real = this.BaseColor.Y * 0.55;
+        var bColor:Real = this.BaseColor.Z * 0.55;
+        
+        //Slightly decreases the size and dims the button
+        if(this.Glow)
+        {
+            Action.Property(seqDown, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.02, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqDown, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.08, Ease.Linear);
+        }
+    }
+    
+    function OnMouseUp(event : MouseEvent)///##########################################################################################
+    {
+        //Variables for action sequences
+        var seqUp = Action.Sequence(this.Owner.Actions);
+        var xScale:Real = this.BaseSize.X * 1.1;
+        var yScale:Real = this.BaseSize.Y * 1.1;
+        
+        var rColor:Real = this.BaseColor.X * 0.85;
+        var gColor:Real = this.BaseColor.Y * 0.85;
+        var bColor:Real = this.BaseColor.Z * 0.85;
+        
+        //Makes the button brighter and bigger again to indicate the click
+        if(this.Glow)
+        {
+            Action.Property(seqUp, @this.Owner.Sprite.Color, Real4(rColor, gColor, bColor, 1), 0.06, Ease.Linear);
+        }
+        
+        if(this.ScaleUp)
+        {
+            Action.Property(seqUp, @this.Owner.Transform.Scale, Real3(xScale, yScale, 1), 0.12, Ease.Linear);
+        }
+    }
+}
+

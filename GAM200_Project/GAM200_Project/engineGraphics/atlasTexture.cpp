@@ -1,19 +1,25 @@
 #include "atlasTexture.h"
 
-AtlasTexture::AtlasTexture(int atlasWidth, int atlasHeight, int numberOfFrames,
+AtlasTexture::AtlasTexture(int aWidth, int aHeight, int numberOfFrames,
   int frameTime, int xOffset, int yOffset, int textureWidth, int textureHeight)
 {
+  //All this does is set members in obvious ways that dont warrant explaining
   numFrames = numberOfFrames;
 
-  numRows = atlasHeight / textureHeight;
-  numColumns = atlasWidth / (textureWidth*numFrames);
+  atlasWidth = aWidth;
+  atlasHeight = aHeight;
+
+  frameWidth = textureWidth / numberOfFrames;
+  frameHeight = textureHeight; 
 
   currentFrame = 0;
   frameDuration = frameTime;
 
   offsetX = xOffset;
   offsetY = yOffset;
-  /*
+
+  frameStartTime = GetTickCount();
+
   textureCoordinates[0] = getRightX();
   textureCoordinates[1] = getBottomY();
   textureCoordinates[2] = getLeftX();
@@ -26,9 +32,7 @@ AtlasTexture::AtlasTexture(int atlasWidth, int atlasHeight, int numberOfFrames,
   textureCoordinates[9] = getTopY();
   textureCoordinates[10] = getLeftX();
   textureCoordinates[11] = getTopY();
-  */
 }
-
 
 //**********************
 //Function    : AtlasTexture.getBottomY
@@ -38,7 +42,7 @@ AtlasTexture::AtlasTexture(int atlasWidth, int atlasHeight, int numberOfFrames,
 //**********************
 GLfloat AtlasTexture::getBottomY()
 {
-  return (((currentFrame / numColumns) + 1) * (1.0 / (float)numRows)) + ((float)offsetY / atlasHeight);
+  return ((float)offsetY + (float)frameHeight) / (float)atlasHeight;
 }
 
 //**********************
@@ -49,7 +53,7 @@ GLfloat AtlasTexture::getBottomY()
 //**********************
 GLfloat AtlasTexture::getTopY()
 {
-  return ((currentFrame / numColumns) * (1.0 / (float)numRows)) + ((float)offsetY / atlasHeight);
+  return (float)offsetY / (float)atlasHeight;
 }
 
 //**********************
@@ -60,7 +64,7 @@ GLfloat AtlasTexture::getTopY()
 //**********************
 GLfloat AtlasTexture::getLeftX()
 {
-  return ((currentFrame % numColumns) * (1.0 / (float)numColumns)) + ((float)offsetX / atlasWidth);
+  return ((float)(currentFrame * frameWidth) + offsetX) / ((float)atlasWidth);
 }
 
 //**********************
@@ -71,7 +75,7 @@ GLfloat AtlasTexture::getLeftX()
 //**********************
 GLfloat AtlasTexture::getRightX()
 {
-  return (((currentFrame % numColumns) + 1) * (1.0 / (float)numColumns)) + ((float)offsetX / atlasWidth);
+  return ((float)(currentFrame * frameWidth) + offsetX + frameWidth) / ((float)atlasWidth);
 }
 
 void AtlasTexture::updateAnimation()
@@ -105,4 +109,28 @@ void AtlasTexture::updateAnimation()
   textureCoordinates[10] = getLeftX();
   textureCoordinates[11] = getTopY();
 }
+
+AtlasTexture::AtlasTexture()
+{
+
+}
+
+bool AtlasTexture::operator==(const AtlasTexture& rhs) const
+{
+  //Offset should be unique for each texture in atlas
+  //Also, if tex coords like W and H are used to crop, 
+  //then those might vary. So offset is fine and sufficent anyway.
+  if (offsetX == rhs.offsetX && offsetY == rhs.offsetY)
+    return true;
+}
+
+bool AtlasTexture::operator!=(const AtlasTexture& rhs) const
+{
+  //Offset should be unique for each texture in atlas
+  //Also, if tex coords like W and H are used to crop, 
+  //then those might vary. So offset is fine and sufficent anyway.
+  if (offsetX != rhs.offsetX || offsetY != rhs.offsetY)
+    return true;
+}
+
 

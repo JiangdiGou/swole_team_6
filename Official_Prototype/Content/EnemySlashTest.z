@@ -26,30 +26,54 @@ class EnemySlashTest : ZilchComponent
     
     function OnMouseEnter(event : ViewportMouseEvent)
     {
-        //sets the timer to 0 so it can count up
-        this.SlashTime = 0;
-        //tells this script to start timing the slash
-        this.SlashStarted = true;
-        //gets the location of the beginning of the slash
-        this.StartPoint = event.HitPosition;
+        if(event.Mouse.IsButtonDown(MouseButtons.Left))
+        {
+            //sets the timer to 0 so it can count up
+            this.SlashTime = 0;
+            //tells this script to start timing the slash
+            this.SlashStarted = true;
+            //gets the location of the beginning of the slash
+            this.StartPoint = event.HitPosition;
+        }
     }
     
     function OnMouseExit(event : ViewportMouseEvent)
     {
-        //tells the script to stop timing the slash
-        this.SlashStarted = false;
-        //gets the location of the end of the slash
-        this.EndPoint = event.HitPosition;
-        
-        if(this.SlashTime < 0.08)
+        if(event.Mouse.IsButtonDown(MouseButtons.Left))
         {
-            this.Slash();
+            //tells the script to stop timing the slash
+            this.SlashStarted = false;
+            //gets the location of the end of the slash
+            this.EndPoint = event.HitPosition;
+            
+            //Only counts as a slash if the mouse movement was fast enough
+            if(this.SlashTime < 0.08)
+            {
+                //Only slashes if this enemy is close enough to the player
+                if(this.GetDistanceFromPlayer() <= 3)
+                {
+                    this.Slash();
+                }
+            }
         }
     }
     
+    //Finds the overall distance this enemy is away from the player
+    function GetDistanceFromPlayer():Real
+    {
+        var ownerX:Real = this.Owner.Transform.Translation.X;
+        var ownerY:Real = this.Owner.Transform.Translation.Y;
+        var playerX:Real = this.Space.FindObjectByName("Player").Transform.Translation.X;
+        var playerY:Real = this.Space.FindObjectByName("Player").Transform.Translation.Y;
+        var distance:Real = Math.Distance(Real2(ownerX, ownerY), Real2(playerX, playerY));
+        
+        return distance;
+    }
+    
+    //Draws a slash line across this enemy and deals damage
     function Slash()
     {
-        Console.WriteLine("EnemySlashTest.Slash, Start: `this.StartPoint`, End: `this.EndPoint`");
+        //Draws a line over the enemy that indicates the direction of the slash
         var slashLine = DebugLine();
         slashLine.Start(this.StartPoint);
         slashLine.End(this.EndPoint);
@@ -57,5 +81,17 @@ class EnemySlashTest : ZilchComponent
         slashLine.Width(5.0);
         slashLine.Duration(0.5);
         slashLine.Draw();
+        
+        if(this.Owner.Transform.Translation.X < this.Space.FindObjectByName("Player").Transform.Translation.X)
+        {
+            this.Space.FindObjectByName("Player").Sprite.FlipX = true;
+        }
+        else
+        {
+            this.Space.FindObjectByName("Player").Sprite.FlipX = true;
+        }
+        
+        //Tells this owner to take damage
+        this.Owner.EnemyHitReaction.OnHit(10, false, false);
     }
 }

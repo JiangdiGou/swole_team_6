@@ -48,11 +48,11 @@ void GameObjectComposition::Initialize()
 	}
 }
 
-void GameObjectComposition::Update()
+void GameObjectComposition::Update(float dt)
 {
   for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
   {
-    (*it)->Update();
+	  (*it)->Update(dt);
   }
 }
 GameObjectComposition::GameObjectComposition()
@@ -64,8 +64,11 @@ GameObjectComposition::~GameObjectComposition()
 {
 	//Delete each component using the component's virtual destructor
 	//takes care of all resources and memory.
-	for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
-		delete *it;
+  for (ComponentIt it = Components.begin(); Components.size() > 0; it = Components.begin())
+  {
+    //(*it)->~GameComponent();
+    Components.erase(it);
+  }
 }
 
 void GameObjectComposition::AddComponent(ComponentTypeId typeId, GameComponent* component)

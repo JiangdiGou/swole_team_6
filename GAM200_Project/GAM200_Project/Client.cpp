@@ -1,13 +1,15 @@
-/******************************************************************************/
 /*!
- \file   Client.cpp
- \author Nolan Yoo
- \par    email: n.yoo\@digipen.edu
- \par    Component: LevelDataManager
+ ********************************************************************************
+ \file    Client.cpp
+ \author  Nolan Taeksang Yoo
+ \par     Contact: nolan\@projectexist.net
+ \par     Classes: LevelDataManager, <Others>
  \brief
- This is a client for the LevelDataManager, which is a big mess.
- */
-/******************************************************************************/
+ This is a client for the LevelDataManager and other things, which is a big mess.
+ \remarks
+ Only runs with LDM_RUN.
+ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+ *******************************************************************************/
 
 #define NO_SDK 1
 #define ILLEGAL_DEMO 0
@@ -43,6 +45,7 @@ void luaRoutine(std::string arg)
   
   printstr("(Lua Test 1)");
   testLua.runFile("Scripts/hello.lua");
+  testLua.stop();
   std::cout<<'\n';
 
   printstr("(Lua Test 2)");
@@ -54,7 +57,8 @@ void luaRoutine(std::string arg)
   std::cout<<'\n';
 
   printstr("(Lua Test 3)");
-  testLua.runFile<std::string>("Scripts/paramTest.lua", "Lua argument test");
+  testLua.runFile("Scripts/paramTest.lua", "%f %s %f %f", -1.0f, "rocket-powered candy cane", -2.0f, -0.25f);
+  testLua.stop();
   std::cout<<'\n';
 
   printstr("(Lua Test 4)");

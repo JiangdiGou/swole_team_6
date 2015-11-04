@@ -1,0 +1,40 @@
+class DynamicHUD : ZilchComponent
+{
+    [Property]
+    var XPercent:Real;
+    [Property]
+    var YPercent:Real;
+    
+    var FirstRun : Boolean = true;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //Makes this loop only happen once on the first update, because that's the only way it will happen.
+        if(this.FirstRun)
+        {
+            this.FirstRun = false;
+            
+            var xPos:Real = (this.XPercent / 100) * this.LevelSettings.CameraViewport.ResolutionOrAspect.X;
+            var yPos:Real = (this.YPercent / 100) * this.LevelSettings.CameraViewport.ResolutionOrAspect.Y;
+            //var xPos:Real = (this.XPercent / 100) * this.GameSession.Resolution.X;
+            //var yPos:Real = (this.YPercent / 100) * this.GameSession.Resolution.Y;
+            var zPos:Real = this.Owner.Transform.Translation.Z;
+            
+            var tempBlarg:Real2 = Real2(xPos,yPos);
+            this.Owner.Transform.WorldTranslation = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(tempBlarg, 0);
+            //this.Owner.Transform.WorldTranslation = Real3(xPos, yPos, zPos);
+            //var tempReal2:Real2 = this.LevelSettings.CameraViewport.WorldToScreen(this.Owner.Transform.Translation);
+            
+            //Console.WriteLine("`this.Owner.Name` translation: `this.Owner.Transform.Translation`");
+            //Console.WriteLine("`this.Owner.Name` WorldToScreen: `tempReal2`");
+            //Console.WriteLine("`this.Owner.Name` correct resolution %: X = `tempReal2.X / this.LevelSettings.CameraViewport.ResolutionOrAspect.X`, Y = `tempReal2.Y / this.LevelSettings.CameraViewport.ResolutionOrAspect.Y`");
+            
+            this.Space.FindObjectByName("HUDTrack").SpriteText.Text = "`this.Owner.Name`,\n X: `xPos`,\n Y: `yPos`\n Translation: `this.Owner.Transform.WorldTranslation`";
+        }
+    }
+}

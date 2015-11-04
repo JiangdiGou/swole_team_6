@@ -119,7 +119,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.511000514, 41.4596252, 50],
+			Vec3 Translation = [8.61139679, 23.6937466, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -131,7 +131,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 22.3130646,
+			float Size = 81.8731766,
 		},
 		EditorCameraController = 
 		{
@@ -139,7 +139,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0.511000514, 41.4596252, -3.26193856e-007],
+			Vec3 LookTarget = [8.61139679, 23.6937466, 2.78855623e-008],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -163,7 +163,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 40.8272705, 40],
+			Vec3 Translation = [-0.332346439, 13.0763798, 40],
 			Vec3 Scale = [3, 1.11193204, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -200,7 +200,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 40.8272705, 0],
+			Vec3 Translation = [0, 13.2110615, 0],
 			Vec3 Scale = [3, 3, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -247,8 +247,6 @@ Level =
 		PlayerMovement = 
 		{
 			float RSpeed = 10,
-			float RJumpHeight = 14,
-			float RDashSpeedX = 100,
 		},
 		PlayerAttack = 
 		{
@@ -582,6 +580,24 @@ Level =
 		{
 			string SwordSlash = "56331dd3dd7f12ce:SwordSlashSound",
 			string Music = "56331390746a650d:OFDPMusic",
+		},
+	},
+	ArchetypeInstance = 
+	{
+		string Name = "56175132ce1d6ef5:LevelManager",
+		LinkId = 
+		{
+			uint Id = 15,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [35.9311829, 44.8084106, 0],
+			Vec3 Scale = [4.58702707, 4.10941362, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Named = 
+		{
+			string Name = "LevelManager",
 		},
 	},
 },

@@ -18,21 +18,26 @@ class EnemyHitReaction : ZilchComponent
     //The counter to see how long the enemy has until they're not stunned
     var IStunCounter:Integer = 0;
     
-    
+    var RegSize:Real3 = Real3(0,0,0);
+    var HitSize:Real3 = Real3(0,0,0);
     
     function Initialize(init : CogInitializer)
     {
+        this.RegSize = this.Owner.Transform.Scale;
+        this.HitSize = Real3(this.Owner.Transform.Scale.X * 0.8, this.Owner.Transform.Scale.Y, 1);
+        
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
     
     
     function OnLogicUpdate(event: UpdateEvent)
     {
-        //this.Owner.SpriteText.Text = "`this.IHealth`";
-        
         //If the player has been juggling the enemy corpse too long, destroys this enemy
         if(this.IOverkillHealth <= 0)
         {
+            //subtract 1 from amount of enemies alive
+            this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
+            Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
             this.Owner.Destroy();
         }
         
@@ -45,6 +50,9 @@ class EnemyHitReaction : ZilchComponent
         //Destroys this enemy if their hp is below 0 too long
         if(this.IDespawnTime <= 0)
         {
+            //subtract 1 from amount of enemies alive
+            this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
+            Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
             this.Owner.Destroy();
         }
     }
@@ -64,5 +72,16 @@ class EnemyHitReaction : ZilchComponent
         
         //Increases the player's combo by calling the AttackHit function in the ComboManager
         this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
+        
+        
+        var seqHit = Action.Sequence(this.Owner.Actions);
+        //Turn red and squish slightly
+        Action.Property(seqHit, @this.Owner.Sprite.Color, Real4(1, 0, 0, 1), 0.02, Ease.Linear);
+        Action.Property(seqHit, @this.Owner.Transform.Scale, this.HitSize, 0.02, Ease.Linear);
+        
+        Action.Delay(seqHit, 0.05);
+        //Return to regular look
+        Action.Property(seqHit, @this.Owner.Sprite.Color, Real4(1, 1, 1, 1), 0.05, Ease.Linear);
+        Action.Property(seqHit, @this.Owner.Transform.Scale, this.RegSize, 0.05, Ease.Linear);
     }
 }

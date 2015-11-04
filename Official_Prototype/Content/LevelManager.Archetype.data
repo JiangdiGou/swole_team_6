@@ -1,0 +1,63 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "LevelManager",
+	},
+	Archetyped = 
+	{
+		string Name = "56175132ce1d6ef5:LevelManager",
+	},
+	Transform = 
+	{
+		Vec3 Translation = [37.8083572, 35.4044876, -3.77037338e-007],
+		Vec3 Scale = [4.58702707, 4.10941362, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	Sprite = 
+	{
+		bool Visible = true,
+		bool VisibilityCulling = true,
+		bool VisibilityEvents = true,
+		bool CastShadows = false,
+		Vec4 Color = [0, 0.109850101, 0.845000029, 1],
+		BlendMode BlendMode = Alpha,
+		SpriteGeometryMode GeometryMode = ZPlane,
+		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+		string SpriteSource = "5275aa4d802dd6dc:Square",
+		bool RenderMask = false,
+		bool FlipX = false,
+		bool FlipY = false,
+		bool AnimationActive = true,
+		float AnimationSpeed = 1,
+		uint StartFrame = 0,
+	},
+	SpriteText = 
+	{
+		bool Visible = true,
+		bool VisibilityCulling = true,
+		bool VisibilityEvents = true,
+		bool CastShadows = false,
+		Vec4 Color = [1, 1, 1, 1],
+		BlendMode BlendMode = Alpha,
+		SpriteGeometryMode GeometryMode = ZPlane,
+		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+		string FontName = "4e7bac697bec55c5:Verdana",
+		uint FontSize = 10,
+		string Text = "LevelManager",
+		TextAlign Align = Center,
+		float PixelsPerUnit = 64,
+		bool Smoothing = true,
+	},
+	EnemyCounter = 
+	{
+	},
+	LevelManager = 
+	{
+		string LevelToLoad = "5637989e125c6505:Level2",
+	},
+},

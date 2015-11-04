@@ -6,6 +6,9 @@ class LevelSelectButton : ZilchComponent
     [Property]
     var ISelected:Integer = 0;
     
+    [Property]
+    var LevelToLoad:Level;
+    
     function Initialize(init : CogInitializer)
     {
         //If this is the first level, moves hilight to it
@@ -19,21 +22,23 @@ class LevelSelectButton : ZilchComponent
     
     function MouseDown(event : ViewportMouseEvent)
     {
-        var iHilightX:Real = this.Space.FindObjectByName("LevelHilight").Transform.Translation.X;
+        /*var iHilightX:Real = this.Space.FindObjectByName("LevelHilight").Transform.Translation.X;
         var iHilightY:Real = this.Space.FindObjectByName("LevelHilight").Transform.Translation.Y;
         var iOwnerX:Real = this.Owner.Transform.Translation.X;
-        var iOwnerY:Real = this.Owner.Transform.Translation.Y;
+        var iOwnerY:Real = this.Owner.Transform.Translation.Y;*/
         
         //Checks if this button has the hilighter behind it, indicating that it's selected
-        if(iOwnerX == iHilightX && iOwnerY == iHilightY)
-        {
-            this.Owner.GoToLevel.ExternalGoTo();
-        }
-        //If it isn't selected, moves the hilighter to it
-        else
-        {
-            this.MoveHilight();
-        }
+        //if(iOwnerX == iHilightX && iOwnerY == iHilightY)
+        //{
+        //    this.Owner.GoToLevel.ExternalGoTo();
+        //}
+        ////If it isn't selected, moves the hilighter to it
+        //else
+        //{
+        //    this.MoveHilight();
+        //}
+        
+        this.GameSession.GameData.NextLevel = this.LevelToLoad;
     }
     
     //Moves the level hilighter to this button

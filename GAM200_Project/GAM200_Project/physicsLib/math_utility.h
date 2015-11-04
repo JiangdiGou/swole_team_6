@@ -2,6 +2,7 @@
 #define MATH_UTILITY_H
 #include <math.h>
 #include <algorithm>
+#include "../engineGraphics/glm/vec3.hpp"
 
 #define FLOAT_PI 3.14159265358979323846f
 
@@ -25,6 +26,9 @@ float radian_to_degrees(float radian);
 
 //MathFunctions
 
+
+
+
 class Vec2D
 {
 public:
@@ -33,6 +37,25 @@ public:
 private:
 
 public:
+
+
+	inline float LengthSquared(const Vec2D& a)
+	{
+		return a.x * a.x + a.y * a.y;
+	}
+
+	inline float NormalizeNew(Vec2D& a)
+	{
+		float len = sqrt(LengthSquared(a));
+		a.x /= len;
+		a.y /= len;
+		return len;
+	}
+
+	inline float DotNew(const Vec2D& a, const Vec2D& b)
+	{
+		return a.x * b.x + a.y * b.y;
+	}
 	Vec2D() : x(0), y(0) {}
 
 	Vec2D(const float x, const float y) : x(x), y(y) {}
@@ -48,6 +71,9 @@ public:
 	void Invert();
 
 	float SqrMagnitude();
+
+	//Vec2D operator[](const Vec2D &vec)const;
+	//inline float operator[](int i) ;
 	// Add
 	void operator+=(const Vec2D &vec);
 
@@ -179,6 +205,11 @@ private:
 
 public:
 	Vector3D() : x(0), y(0), z(0) {} // constructor to zero out
+
+  Vector3D(const Vector2& vec) : x(vec.x), y(vec.y), z(0) {}
+  Vector3D(const Vector2& vec, float z) : x(vec.x), y(vec.y), z(z) {}
+
+  Vector3D(glm::vec3 &attemptCopy);
 
 	Vector3D(const float x, const float y, const float z)
 		: x(x), y(y), z(z) {}
@@ -355,5 +386,7 @@ public:
 	}
 };
 typedef Vector3D Vector3;
+
+#include "../Utilities.h"
 
 #endif

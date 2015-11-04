@@ -1,0 +1,36 @@
+Intro : 30sec
+-- Team Name
+-- Team members/positions
+
+Risks: 2 minutes
+-- 20 seconds engine is still in an awful spot
+	- Nolan is partially moved to engine (rather than engine tools) after milestone
+-- 30 seconds Game/Level design is not set in stone
+	- la di da di da
+-- 20 seconds Lua implementation is not as variadic as we would like
+	- two team members instead of one
+-- 20 seconds LevelEditor is not quite feature complete
+	- cutting some of the safety features (like visible transform changes)
+-- 30 seconds Sound design: we don't have a sound designer, so Nolan is
+	- going to work on it when he has time.
+
+Engine : 2.5 minutes
+-- 10 seconds Nolan (by the way, we have sound)
+	- the sound is just gonna play when the game starts, so someone needs to be ready to kill the audio.
+-- 50 seconds Conor
+-- 1 minute Gabe
+-- 30 second Jiangdi
+
+Level Editor : 1.5 minutes
+-- 30 seconds lua integration
+-- 30 seconds for usage demo
+-- 30 seconds for "what we will have"
+
+Prototype : 2 minutes
+-- 30 seconds main mechanic
+-- 30 seconds scrolls (the one most flashy/artsy: crane <3)
+-- 30 seconds AI/enemy pathing
+-- 30 seconds testing/player feedback
+
+Outro: 30 seconds
+-- "Please observe the hand-out, thank you for your time" (insert more BS here)

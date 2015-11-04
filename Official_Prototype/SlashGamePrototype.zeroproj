@@ -6,8 +6,8 @@ Cog =
 		string ProjectOwner = "",
 		string DefaultLevel = "Level",
 		string ProjectSpace = "Space",
-		string ProjectFolder = "C:\Users\joshx_000\Documents\swole_team_6\Official_Prototype",
-		uint ProjectEngineRevision = 12259,
+		string ProjectFolder = "C:\Users\mitchell.regan\Documents\swole_team_6\Official_Prototype",
+		uint ProjectEngineRevision = 12385,
 		bool AutoTakeProjectScreenshot = true,
 	},
 	EditorSettings = 
