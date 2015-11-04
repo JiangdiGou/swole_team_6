@@ -1,0 +1,38 @@
+
+class Projectile : ZilchComponent
+{
+    [Property]
+    var Speed : Real = 5.0;
+    [Property]
+    var Timer : Real = 3.0;
+    [Property]
+    var Direction: Real3 = Real3();
+    function Initialize(init : CogInitializer)
+    {
+        // We need to update the projectile's movement every logic update
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        // Apply movement
+        this.Owner.Transform.Translation += this.Direction * event.Dt * this.Speed;
+        this.Timer -= event.Dt;
+        
+        if(this.Timer <= 0)
+        {
+            this.Owner.Destroy();
+        }
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        if(otherObject.Name != "Player" && otherObject.Name != "projectil")
+        {
+            this.Owner.Destroy();
+        }
+    }
+}
+

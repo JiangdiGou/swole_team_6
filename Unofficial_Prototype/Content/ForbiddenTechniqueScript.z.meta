@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ForbiddenTechniqueScript",
+		uint64 ResourceId = 55c86f78713af8f0,
+	},
+},

@@ -1,0 +1,64 @@
+class ForbiddenTechniqueScript : ZilchComponent
+{
+    var Counter : Integer = 0;
+    var OldCount : Integer;
+    [Property]
+    var HS1 : SpriteSource = null;
+    [Property]
+    var HS2 : SpriteSource = null;
+    [Property]
+    var HS3 : SpriteSource = null;
+    [Property]
+    var HS4 : SpriteSource = null;
+    [Property]
+    var HS5 : SpriteSource = null;
+    [Property]
+    var HS6 : SpriteSource = null;
+    
+    
+    [Property]
+    var NewPlayerCog : CogPath = null;
+    function Initialize(init : CogInitializer)
+    {
+        this.OldCount = this.Counter;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Counter != this.OldCount)
+        {
+            if(this.Counter == 1)
+            {
+                this.NewPlayerCog.Cog.Sprite.SpriteSource = this.HS1;
+                this.OldCount = this.Counter;
+            }
+            else if(this.Counter == 3)
+            {
+                this.NewPlayerCog.Cog.Sprite.SpriteSource = this.HS2;
+                this.OldCount = this.Counter;
+            }
+            else if(this.Counter == 5)
+            {
+                this.NewPlayerCog.Cog.Sprite.SpriteSource = this.HS3;
+                this.OldCount = this.Counter;
+            }
+            else if(this.Counter == 7)
+            {
+                this.NewPlayerCog.Cog.Sprite.SpriteSource = this.HS4;
+                this.OldCount = this.Counter;
+            }
+            else if(this.Counter == 10)
+            {
+                this.NewPlayerCog.Cog.Sprite.SpriteSource = this.HS5;
+                this.OldCount = this.Counter;
+            }
+            else if(this.Counter == 12)
+            {
+                this.NewPlayerCog.Cog.Sprite.SpriteSource = this.HS6;
+                this.OldCount = this.Counter;
+            }
+        }
+        
+    }
+}

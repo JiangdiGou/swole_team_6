@@ -1,0 +1,117 @@
+class ScrollPickUp : ZilchComponent
+{
+    [Property]
+    var Scroll : Boolean = false;
+    [Property]
+    var Individual : Boolean = false;
+    
+    var PreventRepeat : Boolean = false;
+    
+    // This holds the location of our data
+    var DataCog: Cog = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        this.DataCog = Zero.ObjectStore.RestoreOrArchetype("Data", "SavedData", this.Space);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var seq = Action.Sequence(this.Owner.Actions);
+        var otherObject= event.OtherObject;
+       
+        if(otherObject.Name == "Player" && !(this.PreventRepeat) && this.Scroll)
+        {
+            this.PreventRepeat = true;
+
+            this.DataCog.DataSaver.DarkPulse = true;
+            Zero.ObjectStore.Store("Data", this.DataCog);
+           
+            //move camera toward scroll
+            this.Space.FindObjectByName("Camera").CameraScript.CameraLock = true;
+            this.Space.FindObjectByName("Camera").CameraScript.ScrollFound = true;
+            
+            this.Space.FindObjectByName("Doc").Destroy();
+            
+            Action.Call(seq, this.ToggleInput);
+            Action.Delay(seq, 2.5);
+            Action.Call(seq, this.DyingParticle);
+            Action.Call(seq, this.CreatePortal);
+            Action.Delay(seq, 1);
+            Action.Call(seq, this.ToggleInput);
+            Action.Call(seq, this.DestroySelf);
+        }
+        else if(otherObject.Name == "Player" && !(this.PreventRepeat) && this.Individual)
+        {
+            this.PreventRepeat = true;
+           
+            //move camera toward scroll
+            this.Space.FindObjectByName("Camera").CameraScript.CameraLock = true;
+            this.Space.FindObjectByName("Camera").CameraScript.IndividualFound = true;
+            
+            Action.Call(seq, this.ToggleInput);
+            Action.Call(seq, this.SaveIndividual);
+        }
+       
+   }
+   
+   function SaveIndividual()
+   {
+       var seq = Action.Sequence(this.Owner.Actions);
+       
+       //this.Space.FindObjectByName("Player").TestController.LightWave = true;
+       
+       this.Space.FindObjectByName("scroll").Destroy();
+    
+       Action.Property(seq, @this.Owner.Transform.Rotation, Quaternion(0,0,0,-1), 0.75, Ease.QuadOut);
+       Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(0,1,0), 0.5, Ease.QuadOut);
+       Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation - Real3(0,1,0), 0.25, Ease.QuadOut);
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(0,1,0), 0.5, Ease.QuadOut);
+       Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation - Real3(0,1,0), 0.25, Ease.QuadOut); 
+       Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(0,1,0), 0.5, Ease.QuadOut);
+       Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation - Real3(0,1,0), 0.25, Ease.QuadOut);
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(0,1,0), 0.5, Ease.QuadOut);
+       Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation - Real3(0,1,0), 0.25, Ease.QuadOut);
+       Action.Delay(seq, 1.5);
+       Action.Call(seq, this.CreatePortal);
+       Action.Call(seq, this.ToggleInput);
+       Action.Call(seq, this.DestroySelf);
+       
+       
+       
+   }
+   
+   function ToggleInput()
+   {
+       if(this.Space.FindObjectByName("Player").TestController.AllowInput == true)
+       {
+           this.Space.FindObjectByName("Player").TestController.AllowInput = false;
+       }
+       else if(this.Space.FindObjectByName("Player").TestController.AllowInput == false)
+       {
+           this.Space.FindObjectByName("Player").TestController.AllowInput = true;
+       }
+   }
+   
+   function CreatePortal()
+   {
+       this.Space.FindObjectByName("Portal").PortalScript.Open = true;
+   }
+   
+   function DyingParticle()
+   {
+        var particle = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), this.Owner.Transform.Translation + Real3(0,0,1));
+   }
+   
+   function DestroySelf()
+   {
+        Zero.ObjectStore.Store("Data", this.DataCog);
+       this.Owner.Destroy();
+   }
+}

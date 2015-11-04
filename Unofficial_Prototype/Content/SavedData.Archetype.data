@@ -1,0 +1,15 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "Data",
+	},
+	DataSaver = 
+	{
+		int Score = 0,
+	},
+},

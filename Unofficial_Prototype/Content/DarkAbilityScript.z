@@ -1,0 +1,59 @@
+class DarkAbilityScript : ZilchComponent
+{
+    var FireRight : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        
+        Console.WriteLine("spawned");
+        
+        if(this.Space.FindObjectByName("Player").Sprite.FlipX != true)
+        {
+            this.FireRight = true;
+        }
+        
+        this.Direction();
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Owner.RigidBody.Velocity.X < 7 && this.Owner.RigidBody.Velocity.X > -7)
+        {
+            this.Owner.Destroy();
+        }
+    }
+    
+    function Direction()
+    {
+        if(this.FireRight)
+        {
+            this.Owner.RigidBody.Velocity = Real3(20,0,0);
+        }
+        else if(!this.FireRight)
+        {
+            this.Owner.RigidBody.Velocity = Real3(-20,0,0);
+        }
+    }
+    
+     function OnCollisionStarted(event : CollisionEvent)
+    {
+       var otherObject= event.OtherObject;
+        Console.WriteLine(otherObject);
+       
+       if(otherObject.Name == "Enemy" )
+       {
+           otherObject.Destroy();
+           
+           if(this.Space.LevelSettings.Level1Script != null)
+            {
+                this.Space.LevelSettings.Level1Script.KillCounter += 1;
+            }
+            else if(this.Space.LevelSettings.AbilityChoiceScript != null)
+            {
+                this.Space.LevelSettings.AbilityChoiceScript.KillCounter += 1;
+            }
+       }
+   }
+}

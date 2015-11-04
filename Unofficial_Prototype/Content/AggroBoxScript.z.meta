@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "AggroBoxScript",
+		uint64 ResourceId = 5568df99fa2ac844,
+	},
+},

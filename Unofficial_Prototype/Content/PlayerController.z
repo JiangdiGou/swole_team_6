@@ -1,0 +1,439 @@
+class PlayerController : ZilchComponent
+{
+    var DieNow : Boolean = false; 
+    var AllowInput : Boolean = true;
+    var GunsEquipped : Boolean = false;
+    var SwordEquipped : Boolean = true;
+    var PreventRepeat : Boolean = false;
+    var PreventSlice : Boolean = false;
+    var JustClicked : Boolean = false;
+    var StartChargeDelay : Boolean = false;
+    var PreventStealth: Boolean = false;
+    
+    var Timer: Real = 2;
+    var ChargeDelay : Real = 1.5;
+    var JumpDelay : Real = 0;
+    var EnergyTimer1 : Real = 3.0;
+    var EnergyTimer2 : Real = 4.0;
+    
+    var WorldMousePosition : Real3 = Real3(0,0,0);
+    var FinMousePos : Real3 = Real3(0,0,0);
+    var InitMousePos : Real3 = Real3(0,0,0);
+    var PosDiff : Real3 = Real3(0,0,0);
+    
+    var SliceDirection : Real3 = Real3(0,0,0);
+    [Property]
+    var DeadSprite : SpriteSource = null;
+    [Property]
+    var CrouchedGun : SpriteSource = null;
+    [Property]
+    var CrouchedSword : SpriteSource = null;
+    [Property]
+    var SwordStance : SpriteSource = null;
+    [Property]
+    var GunStance : SpriteSource = null;
+    [Property]
+    var SliceSprite : SpriteSource = null;
+    [Property]
+    var StealthSprite : SpriteSource = null;
+    [Property]
+    var EnergyLevel : Real = 100;
+    
+    function Initialize(init : CogInitializer)
+    {
+         var gameCamera = this.Space.FindObjectByName("Camera");
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+       // Zero.Connect(this.LevelSettings, Events.MouseDown, this.OnMouseDown);
+        Zero.Connect(gameCamera, Events.LeftMouseDown, this.OnLeftMouseDown);
+        //Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        //Zero.Connect(this.Owner, Events.GroundSnapCollision, this.OnCollisionGround);
+    }
+ 
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var mouseScreenPosition = Zero.Mouse.ScreenPosition;
+        var mouseMovement = Real3(Zero.Mouse.RawMovement , 0);
+        var movement = Real3(0.0, 0.0, 0.0);
+        
+        this.WorldMousePosition = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(mouseScreenPosition, 0);
+
+        //sets the slice direction
+        this.SliceDirection = this.Owner.Transform.Translation + mouseMovement;
+
+        //prevents crouching in midair
+        this.JumpDelay -= event.Dt;
+        
+        //delay to prevent attacking and recharging energy
+        this.EnergyTimer2 -= event.Dt;
+        
+        //prevents movement when  sword charge is activated
+        if((this.StartChargeDelay) && (this.SwordEquipped) && Zero.Mouse.IsButtonDown(MouseButtons.Left) == true)
+        {
+            this.ChargeDelay -= event.Dt;
+        }
+        
+        //recharges energy 
+        if((this.EnergyLevel < 100) && (this.EnergyTimer2 <= 0))
+        {
+            this.EnergyTimer1 -= event.Dt;
+            if(this.EnergyTimer1 <= 0)
+            {
+                this.EnergyLevel += 25;
+                this.EnergyTimer1 = 3;
+                Console.WriteLine("Energy++");
+            }
+        }
+        //keeps energy level at 100
+        else if(this.EnergyLevel > 100)
+        {
+            this.EnergyLevel = 100;
+        }
+                    
+        if((this.ChargeDelay <= 0) && (this.StartChargeDelay) && (this.SwordEquipped))
+        {
+            //resets charge delay
+            this.ChargeDelay = 1.5;
+            this.StartChargeDelay = false;
+        }
+         
+        // control left, right, and up
+        if(this.AllowInput && (this.Owner.Sprite.Visible == true))
+        {
+            if(Zero.Keyboard.KeyIsDown(Keys.A))
+            {
+                movement.X -= 1.0;
+                this.Owner.Sprite.FlipX = true;
+            }
+
+            if(Zero.Keyboard.KeyIsDown(Keys.D))
+            {
+                movement.X += 1.0;
+                this.Owner.Sprite.FlipX = false;
+            }
+                //player stealth activation
+            if((Zero.Keyboard.KeyIsPressed(Keys.E)) && !(this.PreventStealth))
+            {
+                //prevents repeated stealth
+                this.PreventStealth = true;
+                //calls the stealth function
+                this.StealthActivated();
+                //resets the stealth prevention
+                this.PreventStealth = false;
+            }
+                //change to sword
+            if(Zero.Keyboard.KeyIsPressed(Keys.One))
+            {
+                this.SwordEquipped = true;
+                this.GunsEquipped = false;
+            }
+            
+                //change to guns
+            if(Zero.Keyboard.KeyIsPressed(Keys.Two))
+            {
+                this.SwordEquipped = false;
+                this.GunsEquipped = true;
+            }
+            
+                //change to crouching
+            if(
+            Zero.Keyboard.KeyIsDown(Keys.S) && 
+            (this.Owner.SweptController.Jumping == false) &&
+            (this.JumpDelay <= 0)
+              )
+            {
+                if(this.SwordEquipped)
+                {                        
+                    this.Owner.Sprite.SpriteSource = this.CrouchedSword;
+                    //this.Owner.BoxCollider.Size = Real3( 1 , 0.5 , 1 );
+                    this.Owner.BoxCollider.Offset = Real3( 0 , -0.25 , 0 );
+                }
+                else if(this.GunsEquipped)
+                {                        
+                    this.Owner.Sprite.SpriteSource = this.CrouchedGun;
+                    //this.Owner.BoxCollider.Size = Real3( 1 , 0.5 , 1 );
+                    this.Owner.BoxCollider.Offset = Real3( 0 , -0.25 , 0 );
+                }
+            }
+                //change back to normal standing
+            else 
+            {
+                if(this.SwordEquipped)
+                {
+                    this.Owner.Sprite.SpriteSource = this.SwordStance;
+                }
+                else if(this.GunsEquipped)
+                {
+                    this.Owner.Sprite.SpriteSource = this.GunStance;
+                }
+                this.Owner.BoxCollider.Size = Real3(2.5 , 7 , 1);
+                this.Owner.BoxCollider.Offset = Real3( 0 , 0 , 0 );
+            }
+
+            if(Zero.Keyboard.KeyIsPressed(Keys.Space))
+            {
+                this.Owner.SweptController.Jump();
+                this.JumpDelay = 1.3;
+            }
+    
+            // if the jump key is not pressed, find the point of release and stop jumping
+            if(Zero.Keyboard.KeyIsDown(Keys.Space) == false)
+            {
+                if(this.Owner.SweptController.Jumping)
+                {
+                    this.Owner.SweptController.JumpCancel();
+                }
+            }
+            
+            if(this.JustClicked && !Zero.Mouse.IsButtonDown(MouseButtons.Left))
+            {
+                //sets the temp variable to the mouse position once the mouse is released
+                this.FinMousePos = this.WorldMousePosition;
+                
+                //stops preventing a repeated slice
+                this.PreventRepeat = false;
+                
+                //calls slice
+                this.Slice();
+                
+                //resets the delay for energy recharge
+                this.EnergyTimer2 = 4;
+            
+                this.JustClicked = false;
+                
+                this.AllowInput = true;
+                
+                //resets slice prevention after the slice is done
+                this.PreventSlice = false;
+            }
+       
+            if((this.FinMousePos.X > this.Owner.Transform.Translation.X) && (this.JustClicked))
+            {
+                this.Owner.Sprite.FlipX = false;
+            }
+            else if((this.FinMousePos.X < this.Owner.Transform.Translation.X) && (this.JustClicked))
+            {
+                this.Owner.Sprite.FlipX = true;
+            }
+        // at the end, update
+        this.Owner.SweptController.Update(movement, event.Dt);
+        if(this.DieNow)
+        {
+            this.AllowInput = false;
+            this.Timer -= event.Dt;
+            //Debug(this.Timer);
+            if(this.Timer <= 0)
+            {
+                //this.Space.LoadLevel(Level.Find("fail"));
+            }
+        }
+    }
+}
+    
+function Slice()
+{
+    var seq = Action.Sequence(this.Owner.Actions);
+    var tempVar = Real3(0,0,0); 
+    var modVar = Real3(0,0,0);
+
+    this.PosDiff = this.FinMousePos - this.InitMousePos;
+    tempVar = this.Owner.Transform.Translation + this.PosDiff; //difference + position
+    modVar = Real3((tempVar.X / 2),(tempVar.Y / 2), 0) ; //(difference + position) / 2
+    
+    if(this.SwordEquipped && !(this.PreventRepeat) && (this.EnergyLevel >= 10))
+    {
+        this.AllowInput = false;
+        this.PreventRepeat = true;
+        this.EnergyLevel -= 10; 
+        
+        //changes to slicing animation
+       this.Owner.Sprite.SpriteSource = this.SliceSprite;
+
+        
+
+            if(!(tempVar.X > 10) && !(tempVar.Y > 10))
+            {
+                //Holds the player still during charging
+                Action.Property(seq, @this.Owner.Transform.Translation,
+                this.Owner.Transform.Translation, 0.8, Ease.QuadOut);
+                //moves the player toward the mouse 
+                Action.Property(seq, @this.Owner.Transform.Translation,
+                tempVar, 0.75, Ease.QuadOut);
+            }
+            else
+            {
+                //Holds the player still during charging
+                Action.Property(seq, @this.Owner.Transform.Translation,
+                this.Owner.Transform.Translation, 0.8, Ease.QuadOut);
+                //moves the player toward the mouse the max distance
+                Action.Property(seq, @this.Owner.Transform.Translation,
+                tempVar, 0.75, Ease.QuadOut);
+            }
+    }
+}
+
+function StealthActivated()
+{
+    this.Owner.Sprite.SpriteSource = this.StealthSprite;
+}
+
+    function OnLeftMouseDown(event : MouseEvent)
+    {
+        this.JustClicked = true;
+        //sets the temp variable to the mouse position once the mouse is pressed
+        this.InitMousePos = this.WorldMousePosition;
+        
+        if(this.SwordEquipped && !(this.PreventSlice))
+        {
+            //changes sprite
+            this.Owner.Sprite.SpriteSource = this.SliceSprite;
+            //starts the stance charge timer
+            this.StartChargeDelay = true;
+            
+            //prevents a repeated slice
+            this.PreventSlice = true;
+        }
+        
+        if(this.GunsEquipped && (this.EnergyLevel >= 2))
+        {
+            this.EnergyLevel -= 2;
+            
+            //if the player is crouched
+            if(Zero.Keyboard.KeyIsDown(Keys.S))
+            {
+                //if facing right
+                if(this.Owner.Sprite.FlipX == false)
+                {
+                    //Create 2 projectiles
+                    var projectileObject = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation + Real3(3.5 , 0 , 0));
+                    var projectileObject2 = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation + Real3(2 , -0.4 , 0));
+                    
+                        // Shoot right
+                    if (projectileObject != null && projectileObject2 != null)
+                    {
+                        projectileObject.Projectile.Direction = Real3(1,0,0);
+                        projectileObject2.Projectile.Direction = Real3(1,0,0);
+                    }
+                }
+                    //if facing left
+                else if(this.Owner.Sprite.FlipX == true)
+                {
+                    //Create 2 projectiles
+                    var projectileObject3 = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation - Real3(3.5 , 0.4 , 0));
+                    var projectileObject4 = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation - Real3(2 , 0 , 0));
+                    
+                    // Shoot left
+                    if (projectileObject3 != null && projectileObject4 != null)
+                    {
+                        projectileObject3.Projectile.Direction = Real3(-1,0,0);
+                        projectileObject4.Projectile.Direction = Real3(-1,0,0);
+                    }
+                }
+            }
+                else
+                {
+                    //if facing right
+                    if(this.Owner.Sprite.FlipX == false)
+                    {
+                        //Create 2 projectiles
+                        var projectileObject = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation + Real3(3.5 , 0.4 , 0));
+                        var projectileObject2 = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation + Real3(2 , 0 , 0));
+                        
+                            // Shoot right
+                        if (projectileObject != null && projectileObject2 != null)
+                        {
+                            projectileObject.Projectile.Direction = Real3(1,0,0);
+                            projectileObject2.Projectile.Direction = Real3(1,0,0);
+                        }
+                    }
+                        //if facing left
+                    else if(this.Owner.Sprite.FlipX == true)
+                    {
+                        //Create 2 projectiles
+                        var projectileObject3 = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation - Real3(2 , -0.4 , 0));
+                        var projectileObject4 = this.Space.CreateAtPosition(Archetype.Find("projectile"), this.Owner.Transform.Translation - Real3(3.5 , 0 , 0));
+                        
+                        // Shoot left
+                        if (projectileObject3 != null && projectileObject4 != null)
+                        {
+                            projectileObject3.Projectile.Direction = Real3(-1,0,0);
+                            projectileObject4.Projectile.Direction = Real3(-1,0,0);
+                        }
+                    }
+
+                }
+                
+                
+            // Make sure projectile moves faster than the enemy
+            //projectileObject.Projectile.Speed = 15.0;
+            }
+        }
+    }
+   /* function OnCollisionStarted(event : CollisionEvent)
+    {
+        //Debug(event.OtherObject);
+            var otherObject = event.OtherObject;
+            if(otherObject.Name == "enemy")
+            {
+            if(!this.Owner.IsStealthed.Stealthed)
+            {
+                otherObject.Enemy.HitPlayer = true;
+                this.Owner.SweptController.CastFilter.IgnoreDynamic = true;
+                this.Owner.BoxCollider.Ghost = true;
+                this.Owner.Sprite.SpriteSource = this.DeadSprite;
+                this.DieNow = true;
+            }
+        }
+        if(otherObject.Name == "enemypig")
+        {
+            if(!this.Owner.IsStealthed.Stealthed)
+            {
+                otherObject.EnemyPig.HitPlayer = true;
+                this.Owner.SweptController.CastFilter.IgnoreDynamic = true;
+                this.Owner.BoxCollider.Ghost = true;
+                this.Owner.Sprite.SpriteSource = this.DeadSprite;
+                this.DieNow = true;
+            }
+        }
+        if(otherObject.Name == "Fire")
+        {
+            this.Owner.SweptController.CastFilter.IgnoreDynamic = true;
+            this.Owner.BoxCollider.Ghost = true;
+            this.Owner.Sprite.SpriteSource = this.DeadSprite;
+            this.DieNow = true;
+        }
+    }
+    function OnCollisionGround(event : SweptControllerEvent)
+    {
+        var timer = 4;
+        var otherObject = event.Result.OtherObject;
+        if(otherObject.Name == "enemy")
+        {
+            if(!this.Owner.IsStealthed.Stealthed)
+            {
+                otherObject.Enemy.HitPlayer = true;
+                this.Owner.SweptController.CastFilter.IgnoreDynamic = true;
+                this.Owner.BoxCollider.Ghost = true;
+                this.Owner.Sprite.SpriteSource = this.DeadSprite;
+                this.DieNow = true;
+            }
+        }
+        if(otherObject.Name == "enemypig")
+        {
+            if(!this.Owner.IsStealthed.Stealthed)
+            {
+                otherObject.EnemyPig.HitPlayer = true;
+                this.Owner.SweptController.CastFilter.IgnoreDynamic = true;
+                this.Owner.BoxCollider.Ghost = true;
+                this.Owner.Sprite.SpriteSource = this.DeadSprite;
+                this.DieNow = true;
+            }
+        }
+        if(otherObject.Name == "fire")
+        {
+            this.Owner.SweptController.CastFilter.IgnoreDynamic = true;
+            this.Owner.BoxCollider.Ghost = true;
+            this.Owner.Sprite.SpriteSource = this.DeadSprite;
+            this.DieNow = true;
+        }
+    }*/
+

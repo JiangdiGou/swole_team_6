@@ -1,0 +1,92 @@
+class BasicEnemy : ZilchComponent
+{
+    [Property]
+    var AttackingSprite : SpriteSource = null;
+    var StartAttacking : Boolean = false;
+    var AllowMovement : Boolean = true;
+    
+    var Player : Cog = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.Player = this.Space.FindObjectByName("Player");
+        this.PaceLeft();
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.StartAttacking)
+        {
+            this.Owner.Actions.Cancel;
+            
+            this.StartAttacking = false;
+            this.AllowMovement = false;
+            this.Owner.Sprite.SpriteSource = this.AttackingSprite;
+            
+            var seq = Action.Sequence(this.Owner.Actions);
+        
+            Action.Delay(seq, 1);
+            //charge laser
+            Action.Call(seq, this.ChargeLaser);
+            Action.Delay(seq, 2);
+            //fire laser
+            Action.Call(seq, this.FireLaser);
+        }
+        
+        if(this.AllowMovement == false)
+        {
+            if(this.Player.Transform.Translation.X > this.Owner.Transform.Translation.X)
+            {
+                this.Owner.Sprite.FlipX = false;
+            }
+            else
+            {
+                this.Owner.Sprite.FlipX = true;
+            }
+        }
+    }
+    
+    function ChargeLaser()
+    {
+         var particle = this.Space.CreateAtPosition(Archetype.Find("ChargeLaser"), this.Owner.Transform.Translation + Real3(0,0,1));
+    }
+    
+    function FireLaser()
+    {
+        if(this.Owner.Sprite.FlipX)
+        {
+            var particle = this.Space.CreateAtPosition(Archetype.Find("TestLaserR"), this.Owner.Transform.Translation + Real3(0,0,1));
+        }
+        else
+        {
+            var particle = this.Space.CreateAtPosition(Archetype.Find("TestLaserL"), this.Owner.Transform.Translation + Real3(0,0,1));
+        }
+    }
+    
+    function PaceRight()
+    {
+        var seq = Action.Sequence(this.Owner.Actions);
+        
+        if(this.AllowMovement)
+        {
+            this.Owner.Sprite.FlipX = false;
+            Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(10,0,0), 3, Ease.QuadOut);
+            Action.Call(seq, this.PaceLeft);
+        }
+    }
+    
+    function PaceLeft()
+    {
+        var seq = Action.Sequence(this.Owner.Actions);
+        
+        if(this.AllowMovement)
+        {
+            this.Owner.Sprite.FlipX = true;
+            Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation - Real3(10,0,0), 3, Ease.QuadOut);
+            Action.Call(seq, this.PaceRight);
+        }
+    }
+    
+    
+}

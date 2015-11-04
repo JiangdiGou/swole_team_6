@@ -1,0 +1,6 @@
+class DataSaver : ZilchComponent
+{
+     [Serialized]
+    var DarkPulse : Boolean = false;
+}
+

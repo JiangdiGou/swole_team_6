@@ -1,0 +1,164 @@
+class DotScript : ZilchComponent
+{
+    /*************Color Palette**************/
+    var Red : Real4 = Real4(1,0,0,1);
+    var Blue : Real4 = Real4(0,1,0,1);
+    var Green : Real4 = Real4(0,1,0,1);
+    var DarkGreen : Real4 = Real4(0,0.8,0.10,1);
+    var Black : Real4 = Real4(0,0,0,1);
+    var White : Real4 = Real4(1,1,1,1);
+    var Gold : Real4 = Real4(1,0.876,0,1);
+    var Cyan : Real4 = Real4(0,1,1,1);
+    var Pink : Real4 = Real4(1,0,1,1);
+    
+    /****************************************/
+    var OriginalSize : Real3;
+    [Property]
+    var SizeChange : Real;
+    [Property]
+    var IsFirstDot : Boolean;
+    [Property]
+    var IsLastDot : Boolean;
+    var SizeScale : Real3 = Real3(2,2,1);
+    var ActiveDot : Boolean = false;
+    
+    [Property]
+    var NextDot : CogPath = null;
+    [Property]
+    var PreviousDot : CogPath = null;
+    
+    /****************Particles*********************/
+    var Particle1 : Cog;
+    var Particle2 : Cog;
+    var Particle3 : Cog;
+    var Particle4 : Cog;
+    var Particle5 : Cog;
+    var Particle6 : Cog;
+    var Particle7 : Cog;
+    var Particle8 : Cog;
+    var Particle9 : Cog;
+    var Particle10 : Cog;
+    var Particle11 : Cog;
+    var Particle12 : Cog;
+    var Particle13 : Cog;
+    var Particle14 : Cog;
+    
+    var Done : Boolean;
+    
+    function Initialize(init : CogInitializer)
+    {
+        
+        if(this.IsFirstDot)
+        {
+            this.Owner.Transform.Scale = Real3(1.5,1.5,1);
+            this.Owner.Sprite.Color = this.Green;
+            this.ActiveDot = true;
+            this.NextDot.Cog.Sprite.Visible = true;
+        }
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnMouseEnter(event : ViewportMouseEvent)
+    {
+        this.OriginalSize = this.Owner.Transform.Scale;
+        
+        if(Zero.Mouse.IsButtonDown(MouseButtons.Left) && (this.ActiveDot) && !(this.IsLastDot))
+        {   
+            this.Owner.Transform.Scale = this.Owner.Transform.Scale * this.SizeChange;
+            this.Owner.Sprite.Color = this.Cyan;
+            this.NextDot.Cog.Sprite.Visible = true;
+            this.NextDot.Cog.Sprite.Color = this.Green;
+        }
+        else if(Zero.Mouse.IsButtonDown(MouseButtons.Left) && (this.ActiveDot) && (this.IsLastDot))
+        {
+            this.Owner.Sprite.Color = this.Cyan;
+            this.Owner.Transform.Scale = this.Owner.Transform.Scale * this.SizeChange;
+        }
+    }
+    
+    function OnMouseExit(event : ViewportMouseEvent)
+    {
+                    
+        if(this.IsLastDot && (this.ActiveDot))
+        {
+            this.ActiveDot = false;
+            this.Owner.Sprite.Color = this.Gold;
+            
+                //change the previous dot to show it was locked into the scroll
+            this.PreviousDot.Cog.Sprite.Color = this.Black;
+            this.PreviousDot.Cog.Transform.Scale = Real3(0.3,0.3,1);
+            
+            //change animation of player
+            this.Space.FindObjectByName("scroll").ForbiddenTechniqueScript.Counter += 1;
+            
+            Console.WriteLine(this.Space.FindObjectByName("scroll").ForbiddenTechniqueScript.Counter);
+            
+            this.Particle1 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), this.Owner.Transform.Translation + Real3(0,0,0));
+            
+            this.Particle2 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(-14,7.8,0));
+            
+            this.Particle3 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(-7,4,0));
+            
+            this.Particle4 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(2,6,0));
+            
+            this.Particle5 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(-10,-0.6,0));
+            
+            this.Particle6 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(3.3,0.8,0));
+            
+            this.Particle7 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(2,6,0));
+            
+            this.Particle8 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(11.7,-4,0));
+            
+            this.Particle9 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(-11,5.5,0));
+            
+            this.Particle10 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(-3,6.5,0));
+            
+            this.Particle11 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(3.3,0.8,0));
+            
+            this.Particle12 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(-3,1.3,0));
+            
+            this.Particle13 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(-6.6,-4.8,0));
+            
+            this.Particle14 = this.Space.CreateAtPosition(Archetype.Find("ScrollDeathParticle"), Real3(2.7,-3,0));
+            
+            
+            this.Done = true;
+            
+            //start scroll animation + attack animation
+            this.StartAbility();
+        }
+            
+        if(Zero.Mouse.IsButtonDown(MouseButtons.Left) && (this.ActiveDot))
+        {
+            //player feedback on current dot
+            this.Owner.Transform.Scale = this.OriginalSize * 0.5;
+            
+            this.Owner.Sprite.Color = this.Pink;
+            //change the next dot to indicate path
+            this.NextDot.Cog.Transform.Scale = Real3(1.5,1.5,1);
+            this.NextDot.Cog.DotScript.ActiveDot = true;
+            this.ActiveDot = false;
+            
+            if(!this.IsFirstDot)
+            {
+                //change the previous dot to show it was locked into the scroll
+                this.PreviousDot.Cog.Sprite.Color = this.Black;
+                this.PreviousDot.Cog.Transform.Scale = Real3(0.3,0.3,1);
+            }
+            
+            //change animation of player
+            this.Space.FindObjectByName("scroll").ForbiddenTechniqueScript.Counter += 1;
+        }
+    }
+    
+    function StartAbility()
+    {
+        Console.WriteLine("We did it :)");
+    }
+}

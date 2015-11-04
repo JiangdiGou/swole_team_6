@@ -1,0 +1,33 @@
+class Level1Script : ZilchComponent
+{
+    [Property]
+    var MaxEnemies : Integer = 5;
+    var KillCounter : Integer = 0;
+    
+    sends PlayerStats: PlayerStatsEvent;
+    
+    function Initialize(init : CogInitializer)
+    {
+        var saveData = Zero.ObjectStore.RestoreOrArchetype("Player", "Player", this.Space);
+        var playermade = PlayerStatsEvent();
+
+        playermade.Player = saveData;
+        this.GameSession.DispatchEvent(Events.PlayerStats, playermade);
+        
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.KillCounter == this.MaxEnemies)
+        {
+            this.Space.FindObjectByName("Player").Destroy();
+             this.Space.LoadLevel(Level.Find("ChoiceLevel"));
+        }
+    }
+}
+
+class PlayerStatsEvent : ZilchEvent
+{
+    var Player: Cog; 
+}

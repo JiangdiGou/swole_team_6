@@ -1,0 +1,24 @@
+class CameraChoiceStart : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.StartCamera();
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function StartCamera()
+    {
+         var seq = Action.Sequence(this.Owner.Actions);
+        
+        //move camera toward scroll
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(-60,5,0), 0.3, Ease.QuadOut);
+        //move camera toward alternate objective
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(40,-35,50), 0.5, Ease.QuadOut);
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(40,-35,50), 0.2, Ease.QuadOut);
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(-20,0,0), 0.2, Ease.QuadOut);
+    }
+}

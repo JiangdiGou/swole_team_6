@@ -1,0 +1,54 @@
+class MenuSelect : ZilchComponent
+{
+    [Property]
+    var Continue : Boolean = false;
+    [Property]
+    var Settings : Boolean = false;
+    [Property]
+    var MainMenu: Boolean = false;
+    [Property]
+    var Denied : Boolean = false;
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        
+        Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+        
+        Zero.Connect(this.Owner, Events.MouseDown, this.OnMouseDown);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnMouseExit(event : ViewportMouseEvent)
+    {
+        this.Owner.Sprite.Visible = false;
+    } 
+    
+    function OnMouseEnter(event : ViewportMouseEvent)
+    {
+        this.Owner.Sprite.Visible = true;
+    }
+    
+    function OnMouseDown(event : ViewportMouseEvent)
+    {
+        if(this.Continue)
+        {
+            this.Space.LoadLevel(Level.Find("Level"));
+        }
+        else if(this.Settings)
+        {
+            this.Space.LoadLevel(Level.Find("SettingsLevel"));
+        }
+        else if(this.MainMenu)
+        {
+            this.Space.LoadLevel(Level.Find("MainMenu"));
+        }
+        else if(this.Denied)
+        {
+            this.Space.LoadLevel(Level.Find("MenuExample"));
+        }
+    }
+}
