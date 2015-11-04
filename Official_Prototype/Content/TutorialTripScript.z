@@ -1,0 +1,32 @@
+enum Trip {Trip_1, Trip_2, Trip_3, Trip4, Trip_5}
+
+class TutorialTripScript : ZilchComponent
+{
+    [Property]
+    var TripNum : Trip;
+
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        
+        if(otherObject.Name == "Player")
+        {
+            this.CreateScript(this.TripNum);
+        }
+    }
+    
+    function CreateScript(tripNum : Trip)
+    {
+        this.Space.CreateAtPosition(Archetype.Find("TutorialBubble"), Real3(1,1,1));
+    }
+}

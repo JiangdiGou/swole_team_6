@@ -1,0 +1,110 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "TutorialBubble",
+	},
+	Transform = 
+	{
+		Vec3 Translation = [8.57198524, 4.98861265, 5.08741948e-007],
+		Vec3 Scale = [7.82790375, 3.26518798, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	Sprite = 
+	{
+		bool Visible = true,
+		bool VisibilityCulling = true,
+		bool VisibilityEvents = true,
+		bool CastShadows = false,
+		Vec4 Color = [1, 1, 1, 1],
+		BlendMode BlendMode = Alpha,
+		SpriteGeometryMode GeometryMode = ZPlane,
+		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+		string SpriteSource = "5274db4c2e7c11f9:Circle",
+		bool RenderMask = false,
+		bool FlipX = false,
+		bool FlipY = false,
+		bool AnimationActive = true,
+		float AnimationSpeed = 1,
+		uint StartFrame = 0,
+	},
+	TimedDeath = 
+	{
+		float RTimeTilDead = 2,
+	},
+	Hierarchy = 
+	{
+		Cog = 
+		{
+			LinkId = 
+			{
+				uint Id = 2,
+			},
+			Named = 
+			{
+				string Name = "SpriteText",
+			},
+			Transform = 
+			{
+				Vec3 Translation = [-0.35100922, 0.243100643, 0],
+				Vec3 Scale = [0.127748117, 0.306261063, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			SpriteText = 
+			{
+				bool Visible = true,
+				bool VisibilityCulling = true,
+				bool VisibilityEvents = true,
+				bool CastShadows = false,
+				Vec4 Color = [0, 0, 0, 1],
+				BlendMode BlendMode = Alpha,
+				SpriteGeometryMode GeometryMode = ZPlane,
+				string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+				string FontName = "4e7bac697bec55c5:Verdana",
+				uint FontSize = 30,
+				string Text = "Come here young one,",
+				TextAlign Align = Left,
+				float PixelsPerUnit = 64,
+				bool Smoothing = true,
+			},
+		},
+		Cog = 
+		{
+			LinkId = 
+			{
+				uint Id = 3,
+			},
+			Named = 
+			{
+				string Name = "SpriteText",
+			},
+			Transform = 
+			{
+				Vec3 Translation = [-0.34710899, 1.1920929e-007, 0],
+				Vec3 Scale = [0.127748117, 0.306261063, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			SpriteText = 
+			{
+				bool Visible = true,
+				bool VisibilityCulling = true,
+				bool VisibilityEvents = true,
+				bool CastShadows = false,
+				Vec4 Color = [0, 0, 0, 1],
+				BlendMode BlendMode = Alpha,
+				SpriteGeometryMode GeometryMode = ZPlane,
+				string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+				string FontName = "4e7bac697bec55c5:Verdana",
+				uint FontSize = 30,
+				string Text = "today is the big day...",
+				TextAlign Align = Left,
+				float PixelsPerUnit = 64,
+				bool Smoothing = true,
+			},
+		},
+	},
+},
