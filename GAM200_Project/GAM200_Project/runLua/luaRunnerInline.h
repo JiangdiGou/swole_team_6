@@ -3,7 +3,7 @@
 #include <cstdarg>
 
 
-//a single string argument
+//variadically take some arguments
 inline void luaRunner::runFile(const std::string& fileName, const char* format,...)
 {
   va_list args;
@@ -16,16 +16,6 @@ inline void luaRunner::runFile(const std::string& fileName, const char* format,.
   float num;
   std::vector<char> argTypes = {};
 
-
-
-  /*
-  std::cout << "----------------" << std::endl;
-
-  std::cout << args << std::endl;
-  std::cout << (&args) << std::endl;
-  std::cout << (*args) << std::endl;
-
-  std::cout << "----------------" << std::endl;*/
 #ifndef _WIN32
   trueName += macAppend;
 #endif
@@ -50,14 +40,9 @@ inline void luaRunner::runFile(const std::string& fileName, const char* format,.
     }
 
     int count = argTypes.size();
-    std::cout << count << std::endl;
+    //std::cout << count << std::endl;
 
-
-    // RESEARCH va_arg(args, int);
-    //va_arg(args, char);
-    //va_arg(args, char);
-
-    // start arg structure
+    // start arg table structure
     lua_createtable(local, count, 0);
 
     for (std::vector<char>::iterator it = argTypes.begin(); it != argTypes.end(); ++it)

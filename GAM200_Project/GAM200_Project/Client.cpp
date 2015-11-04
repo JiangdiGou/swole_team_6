@@ -1,13 +1,15 @@
-/******************************************************************************/
 /*!
- \file   Client.cpp
- \author Nolan Yoo
- \par    email: n.yoo\@digipen.edu
- \par    Component: LevelDataManager
+ ********************************************************************************
+ \file    Client.cpp
+ \author  Nolan Taeksang Yoo
+ \par     Contact: nolan\@projectexist.net
+ \par     Classes: LevelDataManager, <Others>
  \brief
- This is a client for the LevelDataManager, which is a big mess.
- */
-/******************************************************************************/
+ This is a client for the LevelDataManager and other things, which is a big mess.
+ \remarks
+ Only runs with LDM_RUN.
+ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+ *******************************************************************************/
 
 #define NO_SDK 1
 #define ILLEGAL_DEMO 0

@@ -3,7 +3,7 @@ SoundCue =
 	SoundPlayMode PlayMode = Single,
 	float Volume = 1,
 	float VolumeVariation = 0,
-	float Pitch = 0,
+	float Pitch = -1,
 	float PitchVariation = 0,
 	float MinDistance = 10,
 	float MaxDistance = 1000,
@@ -14,7 +14,7 @@ SoundCue =
 	[
 		{
 			string SoundName = "56331dfba1121c92:sword-noises",
-			string GeneratedSoundName = "",
+			string GeneratedSoundName = "55017c595ef88bf0:DefaultGeneratedSound",
 			WhichSoundType WhichToUse = FromFile,
 			float Weight = 1,
 			float LoopEndTime = 0,

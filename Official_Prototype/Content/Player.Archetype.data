@@ -1,0 +1,83 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "Player",
+	},
+	Transform = 
+	{
+		Vec3 Translation = [-0.141119942, 0.608055115, 0],
+		Vec3 Scale = [1, 1, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	Sprite = 
+	{
+		bool Visible = true,
+		bool VisibilityCulling = true,
+		bool VisibilityEvents = false,
+		bool CastShadows = false,
+		Vec4 Color = [1, 1, 1, 1],
+		BlendMode BlendMode = Alpha,
+		SpriteGeometryMode GeometryMode = ZPlane,
+		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+		string SpriteSource = "560ce1f18d6eb9d1:Character_4",
+		bool RenderMask = false,
+		bool FlipX = false,
+		bool FlipY = false,
+		bool AnimationActive = true,
+		float AnimationSpeed = 1,
+		uint StartFrame = 0,
+	},
+	RigidBody = 
+	{
+		bool Static = false,
+		bool Asleep = false,
+		bool Kinematic = false,
+		bool RotationLocked = true,
+		bool Mode2D = true,
+		bool AllowSleep = true,
+		bool Inherit2DMode = true,
+		Vec3 Velocity = [0, 0, 0],
+		Vec3 AngularVelocity = [0, 0, 0],
+	},
+	BoxCollider = 
+	{
+		bool Ghost = false,
+		bool SendsMessages = true,
+		bool Seamless = true,
+		string MaterialName = "56fa1b8880d45da0:PlayerMaterial",
+		string SerializedGroupName = "55344c3e53a95305:CollisionGroup_Player",
+		Vec3 Offset = [-0.100000001, 0, 0],
+		Vec3 Size = [0.5, 1.25, 0.5],
+	},
+	PlayerStats = 
+	{
+	},
+	PlayerMovement = 
+	{
+		float RSpeed = 13,
+	},
+	PlayerJump = 
+	{
+		float RJumpHeight = 15,
+	},
+	PlayerAttack = 
+	{
+	},
+	PlayerCollision = 
+	{
+	},
+	PlayerPowers = 
+	{
+	},
+	PlayerSlashAttack = 
+	{
+	},
+	Hierarchy = 
+	{
+	},
+},

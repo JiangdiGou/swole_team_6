@@ -21,12 +21,19 @@ class EnemyHitReaction : ZilchComponent
     var RegSize:Real3 = Real3(0,0,0);
     var HitSize:Real3 = Real3(0,0,0);
     
+    //Sound Manager object
+    var SoundPlayer : Cog;
+    
     function Initialize(init : CogInitializer)
     {
         this.RegSize = this.Owner.Transform.Scale;
         this.HitSize = Real3(this.Owner.Transform.Scale.X * 0.8, this.Owner.Transform.Scale.Y, 1);
+            
+        //Find the music manager
+        this.SoundPlayer = this.Space.FindObjectByName("BackgroundMusic");
         
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
     }
     
     
@@ -72,6 +79,9 @@ class EnemyHitReaction : ZilchComponent
         
         //Increases the player's combo by calling the AttackHit function in the ComboManager
         this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
+        
+        //Play hit sound effect
+        this.SoundPlayer.BackgroundMusic.PlaySword();
         
         
         var seqHit = Action.Sequence(this.Owner.Actions);
