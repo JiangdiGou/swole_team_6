@@ -35,7 +35,8 @@ public:
 	{
 		SidCircle,
 		SidBox,
-		SidNumberOfShapes
+		SidNumberOfShapes,
+		SidLine
 	};
 	ShapeId Id;
 	Body * body;
@@ -44,6 +45,17 @@ public:
 	virtual void Draw() = 0;
 	virtual bool TestPoint(Vec2D) = 0;
 };
+
+//Line shape??
+class ShapeLine : public Shape
+{
+	public:
+		ShapeLine() : Shape(SidLine){};
+		Vec2D base;
+		Vec2D direction;
+		
+};
+
 
 ///Circle shape.
 class ShapeCircle : public Shape
@@ -62,6 +74,7 @@ public:
 	ShapeAAB() : Shape(SidBox){};
   void Initialize() override;
 	Vec2D Extents;
+	Vec2D origin = Vec2D(0.0f,0.0f);
 	virtual void Draw();
 	virtual bool TestPoint(Vec2D);
 };

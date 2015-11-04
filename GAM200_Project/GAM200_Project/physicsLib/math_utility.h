@@ -37,6 +37,24 @@ public:
 private:
 
 public:
+	static Vec2D add_vector(const Vec2D* a, const Vec2D* b)
+	{
+		const Vec2D r = { a->x + b->x, a->y + b->y };
+		return r;
+	}
+
+	static Vec2D rotate_vector_90(const Vec2D* v)
+	{
+		const Vec2D r = { -(v->y), v->x };
+		return r;
+	}
+
+	static Vec2D subtract_vector(const Vec2D* a, const Vec2D* b)
+	{
+		const Vec2D r = { a->x - b->x, a->y - b->y };
+		return r;
+	}
+
 
 
 	inline float LengthSquared(const Vec2D& a)

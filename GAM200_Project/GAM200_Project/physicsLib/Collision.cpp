@@ -69,6 +69,58 @@ float Clamp(float min, float max, float x)
 }
 /////////////////////Collsion Detection Functions////////////////////
 
+bool line_rectangle_collide( Shape* l, Vec2D at, Shape* r, Vec2D bt, contactList*c)
+{
+	ShapeLine * Line = (ShapeLine*)l;
+	ShapeAAB * Box = (ShapeAAB*)r;
+
+	GOC* bowner = r->GetOwner();
+	Transform* aTrans = l->GetOwner()->has(Transform);
+	Transform* bTrans = r->GetOwner()->has(Transform);
+	at = aTrans->GetPositionXY();
+	bt = bTrans->GetPositionXY();
+	//Check X
+	Vec2D positionDelta = at - bt;
+
+
+    Vec2D n = Vec2D::rotate_vector_90(&Line->direction);
+
+	float dp1, dp2, dp3, dp4;
+
+	Vec2D c1 = Box->origin;
+	Vec2D c2 = Vec2D::add_vector(&c1, &Box->Extents);
+	Vec2D c3 = { c2.x, c1.y };
+	Vec2D c4 = { c1.x, c2.y };
+
+	c1 = Vec2D::subtract_vector(&c1, &Line->base);
+	c2 = Vec2D::subtract_vector(&c2, &Line->base);
+	c3 = Vec2D::subtract_vector(&c3, &Line->base);
+	c4 = Vec2D::subtract_vector(&c4, &Line->base);
+
+	dp1 = Vec2D::DotProduct(n, c1);
+	dp2 = Vec2D::DotProduct(n, c2);
+	dp3 = Vec2D::DotProduct(n, c3);
+	dp4 = Vec2D::DotProduct(n, c4);
+
+	//return (dp1 * dp2 <= 0) || (dp2 * dp3 <= 0) || (dp3 * dp4 <= 0);
+	if ((dp1 * dp2 <= 0) || (dp2 * dp3 <= 0) || (dp3 * dp4 <= 0))
+	{
+		ManifoldSet * contact = c->GetNewContact();
+		contact->Bodies[0] = Line->body;
+		contact->Bodies[1] = Box->body;
+		contact->ContactNormal = positionDelta;//A to B
+		contact->Penetration = 0.0f;
+		contact->Restitution = DetermineRestitution(l->body, r->body);
+		contact->FrictionCof = DetermineFriction(l->body, r->body);
+
+		return true;
+	}
+	else
+		return false;
+
+
+}
+
 bool DetectCollisionCircleCircle(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactList*c)
 {
 	ShapeCircle * spA = (ShapeCircle*)a;
@@ -254,6 +306,7 @@ CollsionDatabase::CollsionDatabase()
 	RegisterCollsionTest(Shape::SidBox, Shape::SidBox, DetectCollisionAABoxAABox);
 	RegisterCollsionTest(Shape::SidCircle, Shape::SidBox, DetectCollisionCircleAABox);
 	RegisterCollsionTest(Shape::SidBox, Shape::SidCircle, DetectCollisionBoxCircle);
+	RegisterCollsionTest(Shape::SidLine, Shape::SidBox, line_rectangle_collide);
 }
 
 void CollsionDatabase::RegisterCollsionTest(Shape::ShapeId a, Shape::ShapeId b, CollisionTest test)
