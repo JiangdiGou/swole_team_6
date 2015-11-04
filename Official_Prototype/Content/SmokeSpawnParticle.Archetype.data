@@ -6,11 +6,7 @@ Cog =
 	},
 	Named = 
 	{
-		string Name = "PlayerSpawnParticle",
-	},
-	Archetyped = 
-	{
-		string Name = "560534adf7cba92e:PlayerSpawnParticle",
+		string Name = "SmokeSpawnParticle",
 	},
 	Transform = 
 	{

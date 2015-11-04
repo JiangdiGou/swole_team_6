@@ -8,6 +8,10 @@ Cog =
 	{
 		string Name = "TutorialBubble",
 	},
+	Archetyped = 
+	{
+		string Name = "560012b30decbc76:TutorialBubble",
+	},
 	Transform = 
 	{
 		Vec3 Translation = [8.57198524, 4.98861265, 5.08741948e-007],
@@ -34,7 +38,7 @@ Cog =
 	},
 	TimedDeath = 
 	{
-		float RTimeTilDead = 2,
+		float RTimeTilDead = 4,
 	},
 	Hierarchy = 
 	{
@@ -46,7 +50,7 @@ Cog =
 			},
 			Named = 
 			{
-				string Name = "SpriteText",
+				string Name = "Text1",
 			},
 			Transform = 
 			{
@@ -80,7 +84,7 @@ Cog =
 			},
 			Named = 
 			{
-				string Name = "SpriteText",
+				string Name = "Text2",
 			},
 			Transform = 
 			{
