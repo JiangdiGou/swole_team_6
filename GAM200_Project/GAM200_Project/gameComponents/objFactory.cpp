@@ -1,4 +1,16 @@
-//author Nolan Yoo
+/*!
+ ********************************************************************************
+ \file    objFactory.cpp
+ \author  Nolan Taeksang Yoo
+ \author  Gabriel Neumann
+ \par     Contact: nolan\@projectexist.net
+ \par     Classes: objFactory
+ \brief
+ This implements an object factory.
+ \remarks
+ "Generator" may be a better word. Object IDs are randomly generated.
+ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+ *******************************************************************************/
 
 #include "objFactory.h"
 #include <random>
@@ -37,7 +49,8 @@ void objFactory::destroyObject(int killID)
 {
   if (gameObjs[killID] == NULL)
   {
-    //already using gen
+    /* assert that we should never try to destroy an object
+       that doesn't exist */
     throw AssertionError(std::string("Object ID " + std::to_string(killID)
                                      +" is not destroyable."
                                      ));

@@ -1,4 +1,13 @@
-//author Nolan Yoo
+/*!
+ ********************************************************************************
+ \file    objFactory.h
+ \author  Nolan Taeksang Yoo
+ \author  Gabriel Neumann
+ \par     Contact: nolan\@projectexist.net
+ \par     Classes: objFactory
+ \remarks
+ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+ *******************************************************************************/
 
 #include "../Composition.h"
 #include <map>

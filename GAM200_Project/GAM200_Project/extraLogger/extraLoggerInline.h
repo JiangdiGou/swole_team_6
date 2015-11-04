@@ -1,3 +1,15 @@
+/*!
+ ********************************************************************************
+ \file    extraLoggerInline.h
+ \author  Nolan Taeksang Yoo
+ \par     Contact: nolan\@projectexist.net
+ \par     Classes: CConsoleLogger
+ \brief
+ Allows use of operator<< with a CConsoleLogger.
+ \remarks
+ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+ *******************************************************************************/
+
 #ifndef EXTRALOGGERINLINE_H
 #define EXTRALOGGERINLINE_H
 
