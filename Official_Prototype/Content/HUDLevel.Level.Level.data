@@ -96,7 +96,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [4.71473312, 2.73783922, 50],
+			Vec3 Translation = [-12.322505, 6.89870691, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -108,7 +108,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 73.3860931,
+			float Size = 9.93175125,
 		},
 		EditorCameraController = 
 		{
@@ -116,7 +116,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [4.71473312, 2.73783922, 2.06086668e-007],
+			Vec3 LookTarget = [-12.322505, 6.89870691, 2.06086668e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -140,7 +140,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-14.2743998, 8.3071804, 1.07105002e-007],
+			Vec3 Translation = [-20.1031494, 8.3071804, 1.07105002e-007],
 			Vec3 Scale = [3, 3, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -401,7 +401,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-9.48573971, 9.32831955, 1],
+			Vec3 Translation = [-15.3144903, 9.32831955, 1],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -439,7 +439,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-10.3746996, 7.38167, 1],
+			Vec3 Translation = [-16.2034492, 7.38167, 1],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -477,8 +477,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-12.8361998, 9.35941029, 0],
-			Vec3 Scale = [1.08000004, 1.04999995, 0.999999881],
+			Vec3 Translation = [-19.445652, 8.91598701, -1],
+			Vec3 Scale = [0.150000006, 0.150000006, 0.999999881],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -487,11 +487,11 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [0, 1, 0.0700002015, 1],
+			Vec4 Color = [1, 1, 1, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "553557818f50fcaa:UI_Bar",
+			string SpriteSource = "56003e4de7d63bf7:HealthBarClean",
 			bool RenderMask = false,
 			bool FlipX = false,
 			bool FlipY = false,
@@ -516,8 +516,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-12.8297997, 8.26832008, 0],
-			Vec3 Scale = [0.795000017, 0.873126984, 0.854503989],
+			Vec3 Translation = [-19.4217091, 9.2469101, -0.5],
+			Vec3 Scale = [0.150000006, 0.150000006, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -526,11 +526,11 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [1, 0, 0, 1],
+			Vec4 Color = [0.511200011, 0.544608057, 0.720000029, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "553557818f50fcaa:UI_Bar",
+			string SpriteSource = "560005a7fbd2bead:EnergyBarClean",
 			bool RenderMask = false,
 			bool FlipX = false,
 			bool FlipY = false,
@@ -548,44 +548,6 @@ Level =
 		LinkId = 
 		{
 			uint Id = 15,
-		},
-		Named = 
-		{
-			string Name = "UI_Stuff",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-12.8606005, 9.39721012, 0],
-			Vec3 Scale = [1.13915002, 1.28509998, 1.28509998],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "56fca2487fd93da6:UI_Stuff2",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		Hierarchy = 
-		{
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 16,
 		},
 		Named = 
 		{
@@ -633,7 +595,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 17,
+			uint Id = 16,
 		},
 		Named = 
 		{
@@ -681,7 +643,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 18,
+			uint Id = 17,
 		},
 		Named = 
 		{
@@ -760,7 +722,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 19,
+			uint Id = 18,
 		},
 		Named = 
 		{
@@ -797,7 +759,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 20,
+			uint Id = 19,
 		},
 		Named = 
 		{
@@ -832,7 +794,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 21,
+			uint Id = 20,
 		},
 		Named = 
 		{
