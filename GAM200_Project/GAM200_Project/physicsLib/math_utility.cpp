@@ -83,8 +83,16 @@ Vec2D  Vec2D::operator+(const Vec2D& vec) const
 	return Vec2D(x + vec.x, y + vec.y);
 }
 
+static Vec2D add_vector(const Vec2D* a, const Vec2D* b)
+{
+	const Vec2D r = { a->x + b->x, a->y + b->y };
+	return r;
+}
+
 
 // Subtract
+
+
 void  Vec2D::operator-=(const Vec2D &vec)
 {
 	x -= vec.x;
