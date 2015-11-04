@@ -5,6 +5,9 @@ class BackgroundMusic : ZilchComponent
     var SwordSlash : SoundCue;
     
     [Property]
+    var SwordSwipe : SoundCue;
+    
+    [Property]
     var Music : SoundCue;
     
     function Initialize(init : CogInitializer)
@@ -33,6 +36,11 @@ class BackgroundMusic : ZilchComponent
     }
     
     function SwordSound()
+    {
+        this.BackgroundMusicObject.SoundEmitter.PlayCue(this.SwordSwipe);
+    }
+    
+    function PlaySword()
     {
         this.BackgroundMusicObject.SoundEmitter.PlayCue(this.SwordSlash);
     }
