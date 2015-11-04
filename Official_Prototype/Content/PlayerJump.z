@@ -15,6 +15,12 @@ class PlayerJump : ZilchComponent
     {
         this.Grounded = this.CheckGrounded(-Real3.YAxis);
         
+        //resets the air slash count for the player when they're grounded
+        if(this.Grounded)
+        {
+            this.Owner.PlayerSlashAttack.AirSlashCount = 0;
+        }
+        
         if(this.Owner.PlayerStats.CanMove)
         {
             //Jump when Space is pressed

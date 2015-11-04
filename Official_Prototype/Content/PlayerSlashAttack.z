@@ -19,6 +19,9 @@ class PlayerSlashAttack : ZilchComponent
     //Particle Emitter for slashing things n stuff
     var SlashParticle:Cog;
     
+    //Tracks the number of times the player can slash in mid air
+    var AirSlashCount:Integer = 0;
+    
     //*******************************************************************************************************************************************
     function Initialize(init : CogInitializer)
     {
@@ -212,6 +215,8 @@ class PlayerSlashAttack : ZilchComponent
         this.Owner.PlayerMovement.BCanMove = false;
         //Sends the slash's attack ID to the combo manager
         this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,iSlashID);
+        
+        ++this.AirSlashCount;
     }
     
     //*******************************************************************************************************************************************
