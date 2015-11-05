@@ -1,0 +1,189 @@
+/*Array Table
+0 = Normal Attack
+1 = Heavy Attack
+2 = Normal Slash [horizontal]
+3 = Normal Slash [angled]
+4 = Normal Slash [vertical]
+*/
+
+class ComboManagerScript : ZilchComponent
+{
+    var MouseDown : Boolean = false;
+    var MouseTimer : Real = 0.0;
+    var TimerTrack : Real = 0.0;
+    var ComboInput : Array[Integer] = new Array[Integer](5);
+    var AttackMarker : Integer;
+    [Property]
+    var ComboResetValue : Real;
+    var ComboTimer : Real = 0.0;
+    var CurrentAttack : Integer = 0;
+    var CheckForCombo : Boolean = false;
+    
+    var ReadInCombo : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        var gameCamera = this.Space.FindObjectByName("Camera");
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(gameCamera, Events.LeftMouseDown, this.OnLeftMouseDown);
+        Zero.Connect(gameCamera, Events.LeftMouseUp, this.OnLeftMouseUp);
+        Zero.Connect(gameCamera, Events.RightMouseDown, this.OnRightMouseDown);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.MouseDown == true)
+        {
+            this.MouseTimer += event.Dt;
+            this.TimerTrack = this.MouseTimer;
+            this.ComboTimer = 0.0;
+        }
+        else
+        {
+            this.MouseTimer = 0.0;
+            this.ComboTimer += event.Dt;
+        }
+        
+        /****************************** Types of Available Attacks *****************************/
+        
+        if(this.Owner.TestController.CurrentAttack == 0) // basic attack
+        {
+            this.AttackMarker = 0;
+        }
+        else if(this.Owner.TestController.CurrentAttack == 1) // heavy attack
+        {
+            this.AttackMarker = 1;
+        }
+        else if(this.Owner.TestController.CurrentAttack == 2) // horizontal slice
+        {
+            this.AttackMarker = 2;
+        }
+        else if(this.Owner.TestController.CurrentAttack == 3) //diagonal slice
+        {
+            this.AttackMarker = 3;
+        }
+        if(this.Owner.TestController.CurrentAttack == 4) //vertical slice
+        {
+            this.AttackMarker = 4;
+        }
+        
+        
+        /******** Check to See if Combo Ends ************/
+        if(this.ComboTimer >= this.ComboResetValue && this.CheckForCombo == true)
+        {
+            this.ReadInCombo = true;
+            this.CheckForCombo = false;
+            Console.WriteLine("End of Combo");
+            Console.WriteLine(this.ComboInput);
+            this.ComboTimer = 0.0;
+        }
+    }
+    
+    function OnLeftMouseDown(event : MouseEvent)
+    {
+        this.MouseDown = true;
+        
+        this.CheckForCombo = true;
+    }
+    
+    function OnLeftMouseUp(event : MouseEvent)
+    {
+        //maximum combo cap
+        if(this.CurrentAttack >= 5)
+        {
+            this.CurrentAttack = 0;
+        }
+        
+        this.MouseDown = false;
+        
+        this.ComboInput[this.CurrentAttack] = this.AttackMarker;
+        
+        //Console.WriteLine(this.TimerTrack);
+        Console.WriteLine("this is the current attack number:" , this.CurrentAttack);
+        
+        //increase the CurrentAttack pointer
+        this.CurrentAttack += 1;
+    }
+    
+    function OnRightMouseDown(event : MouseEvent)
+    {
+        //maximum combo cap
+        if(this.CurrentAttack > 4)
+        {
+            this.CurrentAttack = 0;
+        }
+        
+        this.CheckForCombo = true;
+        
+        this.ComboInput[this.CurrentAttack] = this.AttackMarker;
+        
+        //Console.WriteLine(this.TimerTrack);
+        Console.WriteLine("this is the current attack number:" , this.CurrentAttack);
+        
+        //increase the CurrentAttack pointer
+        this.CurrentAttack += 1;
+    }
+}
+
+
+/************************************************************* Combos Get Submitted Here *********************************************************************/
+
+/*Array Table
+0 = Normal Attack
+1 = Heavy Attack
+2 = Normal Slash [horizontal]
+3 = Normal Slash [angled]
+4 = Normal Slash [vertical]
+*/
+
+class ComboTranslater : ZilchComponent
+{
+    var ComboStorage : Array[Integer] = new Array[Integer](5);
+    
+    //Attacking Sprites
+    
+  
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //if a combo is allowed to be submitted
+        if(this.Owner.ComboManagerScript.ReadInCombo == true)
+        {
+            //store the array for local use
+            this.ComboStorage = this.Owner.ComboManagerScript.ComboInput;
+            
+            //Read in each individual element of the combo
+            for(var i = 0; i <= 4; i += 1)
+            {
+                //Relay combo numbers into actual sprites/animations
+                if(this.ComboStorage[i] == 0)
+                {
+                    // normal attack
+                    //this.Owner.Sprite.SpriteSource = ;
+                    
+                }
+                else if(this.ComboStorage[i] == 1)
+                {
+                    
+                }
+                else if(this.ComboStorage[i] == 2)
+                {
+                    
+                }
+                else if(this.ComboStorage[i] == 3)
+                {
+                    
+                }
+                else if(this.ComboStorage[i] == 4)
+                {
+                    
+                }
+            }
+        }
+    }
+    
+}

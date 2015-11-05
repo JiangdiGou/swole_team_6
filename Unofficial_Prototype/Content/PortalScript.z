@@ -1,0 +1,39 @@
+class PortalScript : ZilchComponent
+{
+    [Property]
+    var LevelToLoad : String;
+    var Open : Boolean = false;
+    var BeamMeUp : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Open)
+        {
+            this.OpenPortal();
+            this.BeamMeUp = true;
+            this.Open = false;
+        }
+    }
+    
+    function OpenPortal()
+    {
+        var particle = this.Space.CreateAtPosition(Archetype.Find("PortalEffect"), 
+        this.Owner.Transform.Translation + Real3(0,0,1));
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObject= event.OtherObject;
+        if(this.BeamMeUp && (otherObject.Name == "Player"))
+        {
+            var loader = Level.Find(this.LevelToLoad);
+            this.Space.LoadLevel(loader);
+        }
+    }   
+}

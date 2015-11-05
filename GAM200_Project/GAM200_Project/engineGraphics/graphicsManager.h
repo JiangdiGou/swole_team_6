@@ -11,6 +11,9 @@
 #include "Sprite.h"
 #include "textureAtlas.h"
 #include "../logger/logger.h"
+#include "Camera.h"
+#include "../GameLogic.h"
+#include "../initInfo.h"
 
 class GraphicsManager : public ISystem
 {
@@ -29,12 +32,14 @@ public:
   void setRenderingContext(HGLRC& renderingContext);
   HGLRC getRenderingContext();
 
-  void setMainCamera(const Camera& camera);
-  Camera* getCamera();
-  void setCoreShader(const Shader& shader);
-  Shader* getCoreShader();
-  void setSpriteAtlas(const TextureAtlas& atlas);
-  TextureAtlas* getSpriteAtlas();
+  void setMainCamera(Camera* camera){ mainCamera = *camera; }
+  Camera* getCamera(){ return &mainCamera; }
+  void setCoreShader(const Shader& shader) { coreShader = shader; }
+  Shader* getCoreShader() { return &coreShader; }
+  void setSpriteAtlas(const TextureAtlas& atlas) { spriteAtlas = atlas; }
+  TextureAtlas* getSpriteAtlas() { return &spriteAtlas; }
+
+  Vector2 screenToWorld(Vector2 screenCoords);
 
 private:
   HDC deviceContext;

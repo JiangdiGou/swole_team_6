@@ -7,3 +7,6 @@
 //#define LDM_RUN
 //#define FACTORY_TEST_RUN
 //#define AUDIOTEST_RUN
+
+/* as needed */
+//#define AUDIO_AT_PRESENTATION

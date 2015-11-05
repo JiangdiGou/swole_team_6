@@ -1,0 +1,20 @@
+class DeleteTimer : ZilchComponent
+{
+    [Property]
+    var DeleteTimer : Real = 2.0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.DeleteTimer -= event.Dt;
+        
+        if(this.DeleteTimer <= 0)
+        {
+            this.Owner.Destroy();
+        }
+    }
+}

@@ -1,4 +1,15 @@
-//author Nolan Yoo
+/*!
+ ********************************************************************************
+ \file    AssertionError.h
+ \author  Nolan Taeksang Yoo
+ \par     Contact: nolan\@projectexist.net
+ \par     Classes: AssertionError, AssertionWarning
+ \brief
+ Fulfills the Assert requirement. Logs to text file when something goes wrong.
+ \remarks
+ Nothing should ever catch an AssertionError.
+ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+ *******************************************************************************/
 
 #ifndef ASSERTIONERROR_H
 #define ASSERTIONERROR_H

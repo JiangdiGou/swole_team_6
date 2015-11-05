@@ -7,6 +7,8 @@
 #include "textureAtlas.h"
 #include "../physicsLib/Transform.h"
 #include "../Composition.h"
+#include "../Message.h"
+#include "../WindowsSystem.h"
 
 class Sprite : public GameComponent
 {
@@ -23,6 +25,8 @@ public:
   static void initSprites(const Shader& shader, const TextureAtlas& atlas);
   void static drawAllSprites();
 
+  bool flipSprite = false;
+
 private:
   static GLuint vertexArray;
   static GLuint vertexBuffer;
@@ -35,8 +39,12 @@ private:
   static std::vector<GLfloat> texCoords;
   static std::vector<GLfloat> colors;
 
+  void SendMessages(Message * message) override;
+
   //Helper Function, pushes xyz to vertices
   void pushVertices(const glm::vec4 &verts);
+
+  bool facingRight = true;
 };
 
 #endif 

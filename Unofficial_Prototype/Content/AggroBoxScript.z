@@ -1,0 +1,26 @@
+class AggroBoxScript : ZilchComponent
+{
+    var PreventRepeat: Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+         Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+       var otherObject= event.OtherObject;
+       
+       if(otherObject.Name == "Player" && !(this.PreventRepeat))
+       {
+           this.PreventRepeat = true;
+           this.Owner.Parent.BasicEnemy.StartAttacking = true;
+       }
+       
+   }
+}

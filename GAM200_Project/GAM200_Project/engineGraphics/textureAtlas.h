@@ -5,6 +5,10 @@
 #include "AtlasTexture.h"
 #include <map>
 
+//Image Loading 
+#include "SOIL/SOIL.h"
+
+
 
 class TextureAtlas
 {

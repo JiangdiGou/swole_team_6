@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "Embrace_the_Shadow",
+	uint64 LibraryId = 54aaec381e3808d6,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},

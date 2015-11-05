@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScrollPickUp",
+		uint64 ResourceId = 556da36aa2fa45a3,
+	},
+},

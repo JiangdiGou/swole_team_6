@@ -1,0 +1,84 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "ScrollDeathParticle",
+	},
+	Archetyped = 
+	{
+		string Name = "556d91f29c371b32:ScrollDeathParticle",
+	},
+	Transform = 
+	{
+		Vec3 Translation = [0, 0, 0],
+		Vec3 Scale = [1, 1, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	SpriteParticleSystem = 
+	{
+		bool Visible = true,
+		bool VisibilityCulling = true,
+		bool VisibilityEvents = true,
+		bool CastShadows = false,
+		SystemChildMode ChildMode = Independent,
+		SystemSpace SystemSpace = WorldSpace,
+		uint DrawOrder = 0,
+		float WarmUpTime = 0,
+		ParticleGeometry GeometryMode = Billboarded,
+		ParticleRenderMode RenderMode = Additive,
+		ParticleSortMode SortMode = Youngest,
+		ParticleAnimation ParticleAnimation = Single,
+		string Texture = "5310e87a46e703cc:ShockWave",
+		Vec4 Tint = [0.120862, 0.01375, 0.275, 1],
+		float VelocityScale = 1,
+		float LengthScale = 1,
+		float MaxParticleSize = 100,
+		Vec3 SystemSize = [4, 4, 4],
+	},
+	SphericalParticleEmitter = 
+	{
+		bool Active = true,
+		uint EmitCount = 200,
+		float EmitRate = 100,
+		float EmitVariance = 0,
+		float Size = 1,
+		float SizeVariance = 1,
+		float Lifetime = 0.7,
+		float LifetimeVariance = 0.2,
+		float Spin = 10,
+		float SpinVariance = 100,
+		bool RandomSpin = true,
+		float Fill = 1,
+		float EmitterVelocityPercent = 0,
+		Vec3 StartVelocity = [0, 0, 0],
+		Vec3 RandomVelocity = [3, 3, 3],
+		Vec3 TangentVelocity = [0, 0, 0],
+		Vec3 EmitterSize = [0, 0, 0],
+		bool FastMovingEmitter = false,
+	},
+	LinearParticleAnimator = 
+	{
+		Vec3 Force = [0, 0, 0],
+		Vec3 RandomForce = [5, 5, 5],
+		float Torque = 0,
+		float Growth = 2,
+		float Dampening = 1,
+		Vec3 Twist = [0, 0, 0],
+	},
+	ParticleColorAnimator = 
+	{
+		Vec4 Color0 = [0.355, 0.015975, 0.015975, 1],
+		Vec4 Color1 = [1, 0.16, 0.16, 1],
+		Vec4 Color2 = [0.342959, 0.056625, 0.755, 1],
+		Vec4 Color3 = [1, 0.16, 0.16, 1],
+		Vec4 Color4 = [0.355, 0.015975, 0.015975, 1],
+	},
+	DeleteTimer = 
+	{
+		float DeleteTimer = 3,
+	},
+},

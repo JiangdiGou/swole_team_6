@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "DataSaver",
+		uint64 ResourceId = 55a656862c9a3566,
+	},
+},

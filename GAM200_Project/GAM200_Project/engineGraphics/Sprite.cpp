@@ -62,44 +62,44 @@ void Sprite::Update(float dt)
 
   //Vertex 1
   transformedPosition = glm::vec4(transformMatrix * glm::vec4(
-    initialPosition.x + 0.5 * scale.x,
-    initialPosition.y - 0.5 * scale.y,
-    initialPosition.z, 0));
+     0.5, //* scale.x,
+    - 0.5, //* scale.y,
+    0, 1));
   pushVertices(transformedPosition);
 
   //Vertex 2
   transformedPosition = glm::vec4(transformMatrix * glm::vec4(
-    initialPosition.x - 0.5 * scale.x,
-    initialPosition.y + 0.5 * scale.y,
-    initialPosition.z, 0));
+    - 0.5,// * scale.x,
+     0.5,// * scale.y,
+    0, 1));
   pushVertices(transformedPosition);
 
   //Vertex 3
   transformedPosition = glm::vec4(transformMatrix * glm::vec4(
-    initialPosition.x - 0.5 * scale.x,
-    initialPosition.y - 0.5 * scale.y,
-    initialPosition.z, 0));
+    - 0.5, //* scale.x,
+    - 0.5, // * scale.y,
+    0, 1));
   pushVertices(transformedPosition);
 
   //Vertex 4
   transformedPosition = glm::vec4(transformMatrix * glm::vec4(
-    initialPosition.x + 0.5 * scale.x,
-    initialPosition.y - 0.5 * scale.y,
-    initialPosition.z, 0));
+     0.5, // * scale.x,
+    - 0.5, // * scale.y,
+    0, 1));
   pushVertices(transformedPosition);
 
   //Vertex 5
   transformedPosition = glm::vec4(transformMatrix * glm::vec4(
-    initialPosition.x + 0.5 * scale.x,
-    initialPosition.y + 0.5 * scale.y,
-    initialPosition.z, 0));
+     0.5, // * scale.x,
+     0.5, // * scale.y,
+    0, 1));
   pushVertices(transformedPosition);
 
   //Vertex 6
   transformedPosition = glm::vec4(transformMatrix * glm::vec4(
-    initialPosition.x - 0.5 * scale.x,
-    initialPosition.y + 0.5 * scale.y,
-    initialPosition.z, 0));
+    - 0.5, // * scale.x,
+     0.5, //* scale.y,
+    0, 1));
   pushVertices(transformedPosition);
 
   //Pushes tex coords 
@@ -191,4 +191,40 @@ void Sprite::drawAllSprites()
 
   vertices.clear();
   texCoords.clear();
+  colors.clear();
+}
+
+void Sprite::SendMessages(Message * message)
+{
+  if (flipSprite)
+  {
+    switch (message->MessageId)
+    {
+    case Mid::CharacterKey:
+    {
+      MessageCharacterKey* keyMsg = (MessageCharacterKey*)message;
+      Transform* tform = GetOwner()->has(Transform);
+      switch (keyMsg->character)
+      {
+      case 'a':
+      {
+        if (!facingRight)
+        {
+          facingRight = true;
+          tform->SetScaleX(tform->GetScale().x * -1.0f);
+        }
+      }
+      case 'd':
+      {
+        if (facingRight)
+        {
+          facingRight = false;
+          tform->SetScaleX(tform->GetScale().x * -1.0f);
+        }
+      }
+
+      }
+    }
+    }
+  }
 }

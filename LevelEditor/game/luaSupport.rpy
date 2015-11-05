@@ -7,6 +7,8 @@ init python:
     import os
     def scriptsToRegistrar(folder):
         try:
+            store.luaChars = ['0']
+            store.luaTiles = []
             abspathTiles = os.path.abspath(os.path.join(folder, "TileArchetypes"))
             for filename in os.listdir(abspathTiles):
                 if not filename.endswith(".lua"):

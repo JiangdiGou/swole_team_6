@@ -10,6 +10,7 @@ main loop
 #define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
 #include "_EntryPoint.h"
+#include "extraLogger/extraLogger.h"
 #include "engineGraphics/graphicsManager.h"
 #include "GameLogic.h"
 #include "Core.h"
@@ -17,6 +18,7 @@ main loop
 #include "WindowsSystem.h"
 #include "runLua/luaTranslate.h"
 #include "runLua/luaRunner.h"
+#include "Utilities.h"
 
 #include "initInfo.h"
 
@@ -39,12 +41,23 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 #endif
 {
 
-  //Opens a console for debugging and testing 
-  AllocConsole();
-  freopen("CONOUT$", "w", stdout);
+
 
   luaInitFile();
   baseInitRoutine();
+
+  //coloured_console.cprintf(CConsoleLoggerEx::COLOR_RED | CConsoleLoggerEx::COLOR_BACKGROUND_BLACK, "Another console");
+  //coloured_console.printf("Rip C++ piping.");
+  //Opens a console for debugging and testing 
+  if (INITINFO->showConsole)
+  {
+	  AllocConsole();
+	  AttachConsole(GetCurrentProcessId());
+	  freopen("CONIN$", "r", stdin);
+	  freopen("CONOUT$", "w", stdout);
+	  freopen("CONOUT$", "w", stderr);
+  }
+
   //Stores the window being created
   //HWND window;
   ////Stores windows messages 
@@ -70,7 +83,7 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
 
-  engine->Initialize();/* this is the fucking problem */
+  engine->Initialize();
 
   GRAPHICS->setDeviceContext(windows->deviceContext);
   GRAPHICS->setRenderingContext(windows->renderingContext);
@@ -111,6 +124,13 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
     gGameStatePrev = gGameStateCurr;
     gGameStateCurr = gGameStateNext;
   }*/
+  Vector3D dumbVector(1.2, 1.2, 1.2);
+  CConsoleLoggerEx coloured_console;
+  coloured_console.Create("Debug Console");
+  coloured_console.printf("LOL C++.\n");
+  coloured_console << 213213 << "\n";
+  coloured_console << "candy" << "\n";
+  coloured_console << "la di da vector: " << dumbVector << "\n";
   engine->GameLoop();
   //engine->LastTime = timeGetTime();
 /*  while (engine->GameActive)

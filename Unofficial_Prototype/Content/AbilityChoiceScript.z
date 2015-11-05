@@ -1,0 +1,20 @@
+class AbilityChoiceScript : ZilchComponent
+{
+    var KillCounter : Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.KillCounter == 6)
+        {
+            this.Space.CreateAtPosition(Archetype.Find("PortalEffect"), Real3(35,-20,1));
+            
+            this.KillCounter = 0;
+            
+        }
+    }
+}

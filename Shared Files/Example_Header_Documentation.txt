@@ -1,0 +1,16 @@
+/*!
+********************************************************************************
+\file    objFactory.cpp
+\author  Nolan Taeksang Yoo
+\author  Gabriel Neumann
+\par     Contact: nolan\@projectexist.net
+\par     Classes: objFactory
+\brief
+This implements an object factory.
+\remarks
+"Generator" may be a better word. Object IDs are randomly generated.
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
+
+nolanlemahn [12:22 AM]
+file name, primary author, any secondary/ternary/??? authors, email, affected classes, quick note, anything unusual, copyright

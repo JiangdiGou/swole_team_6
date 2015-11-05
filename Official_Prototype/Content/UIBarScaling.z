@@ -3,8 +3,12 @@ class UIBarScaling : ZilchComponent
     [Property]
     var BIsHealth:Boolean = true;
     
+    var OriginalX : Real;
+    
     function Initialize(init : CogInitializer)
     {
+        this.OriginalX = this.Owner.Transform.Scale.X;
+        
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
@@ -13,12 +17,12 @@ class UIBarScaling : ZilchComponent
     {
         if(this.BIsHealth)
         {
-            var rXScale:Real = (this.LevelSettings.LevelData.RPlayerHealth / 100) * 1.08;
+            var rXScale:Real = (this.LevelSettings.LevelData.RPlayerHealth / 100) * this.OriginalX;
             this.Owner.Transform.Scale = Real3(rXScale, this.Owner.Transform.Scale.Y, 0);
         }
         else
         {
-            var rXScale:Real = (this.LevelSettings.LevelData.RPlayerEnergy / 100) * 0.795;
+            var rXScale:Real = (this.LevelSettings.LevelData.RPlayerEnergy / 100) * this.OriginalX;
             this.Owner.Transform.Scale = Real3(rXScale, this.Owner.Transform.Scale.Y, 0);
         }
     }

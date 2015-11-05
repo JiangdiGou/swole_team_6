@@ -1,0 +1,78 @@
+class CameraScript : ZilchComponent
+{
+    var CameraLock : Boolean = false;
+    var ScrollFound : Boolean = false;
+    var IndividualFound : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(!this.CameraLock)
+        {
+            var x = this.Space.FindObjectByName("Player").Transform.Translation.X;
+            var y = this.Space.FindObjectByName("Player").Transform.Translation.Y;
+            var z = this.Owner.Transform.Translation.Z;
+            this.Owner.Transform.Translation = local Real3(x,y + 2,z);
+        }
+        
+        if(this.ScrollFound)
+        {
+            this.ScrollFound = false;
+            var seq = Action.Sequence(this.Owner.Actions);
+            
+            //move camera toward scroll
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-58,4, 1), 1, Ease.QuadOut);
+            //shaek camera
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-57,5, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-58,4, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-59,3, 1), 0.03, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-57,5, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-58,4, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-59,3, 1), 0.02, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-59,3, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-57,5, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-58,4, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-59,3, 1), 0.03, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-57,5, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-57,5, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-58,4, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-59,3, 1), 0.02, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-57,5, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-58,4, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-59,3, 1), 0.03, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-59,3, 1), 0.01, Ease.QuadOut);
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(-57,5, 1), 0.01, Ease.QuadOut);
+            //go back
+            Action.Call(seq, this.CameraReset);
+        }
+        
+        if(this.IndividualFound)
+        {
+            this.IndividualFound = false;
+
+            var seq = Action.Sequence(this.Owner.Actions);
+            
+            //move camera toward individual
+            Action.Property(seq, @this.Owner.Transform.Translation, Real3(43.0, -37.2668, 1), 1, Ease.QuadOut);
+            Action.Delay(seq, 7.0);
+            Action.Call(seq, this.CameraReset);
+        }
+    }
+    
+    function CameraReset()
+    {
+        var seq = Action.Sequence(this.Owner.Actions);
+        
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Space.FindObjectByName("Player").Transform.Translation + Real3(0,2,1), 2, Ease.QuadOut);
+        Action.Call(seq, this.FreeCamera);
+    }
+    
+    function FreeCamera()
+    {
+        this.CameraLock = false;
+    }
+}

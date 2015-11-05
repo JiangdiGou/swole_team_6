@@ -9,7 +9,10 @@
 #include "Core.h"
 #include "engineGraphics/Graphics.h"
 #include "Message.h"
-#include "mousePos.h"
+#include "mouseVector.h"
+#include "_EntryPoint.h"
+#include "initinfo.h"
+#include "engineAudio/Audio.h"
 
 
 CoreEngine* CORE = NULL;
@@ -35,9 +38,35 @@ void CoreEngine::GameLoop()
 {
   LastTime = timeGetTime();
 
+#ifdef AUDIO_AT_PRESENTATION
+  std::string garbage;
+  FMSoundSys sound = *new FMSoundSys();
+  //sound.Initialize(); <-- deprecated
+
+  FMSound soundSample;
+  sound.createSound(&soundSample, "resources//audio//menutheme.wav");
+
+  // loop the sound
+  sound.playSound(soundSample, true);
+  std::cin >> garbage;
+  sound.releaseSound(soundSample);
+#else
+  if (INITINFO->playTheme)
+  {
+    FMSoundSys sound = *new FMSoundSys();
+    //sound.Initialize(); <-- deprecated
+
+    FMSound soundSample;
+    sound.createSound(&soundSample, "resources//audio//menutheme.wav");
+
+    // loop the sound
+    sound.playSound(soundSample, true);
+  }
+#endif
+
   while (GameActive)
   {
-    updateMousePos();
+    //updateMousePos();
 
     unsigned currenttime = timeGetTime();
     //Convert it to the time passed since the last frame (in seconds)

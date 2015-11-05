@@ -50,18 +50,31 @@ void GraphicsManager::Update(float dt)
 {
   coreShader.Use();
 
-  glClearColor(0.2f, 0.7f, 0.5f, 1.0f);
+  glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 
   wglMakeCurrent(deviceContext, renderingContext);
 
   std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
+  /*
+  debugDrawLine(Vector3(), Vector3(3, 3, 0), Vector3());
+  debugDrawLine(Vector3(0, 1, 0), Vector3(5, 4, 0), Vector3());
+  debugDrawLine(Vector3(0, -1, 0), Vector3(5, -4, 0), Vector3());
+
+  Vector3 cameraPos = Vector3(mainCamera.getPosition().x, 
+    mainCamera.getPosition().y, 0);
+    */
+
+  //debugDrawLine(
+  Transform* playerTransform = LOGIC->player->has(Transform)
+	  debugDrawCircle(playerTransform->GetPosition(), 1, Vector3(), 100);
 
   debugDrawFrame();
 #ifdef GFXLOG
   logGfxError("DEBUGDRAW:: Error in drawing. ");
 #endif
+
 
   Sprite::drawAllSprites();
 #ifdef GFXLOG
@@ -72,6 +85,7 @@ void GraphicsManager::Update(float dt)
 #ifdef GFXLOG
   logGfxError("SPRITETEXT:: Error in drawing. ");
 #endif
+
 
   //Cleanup 
   glBindVertexArray(0);
@@ -131,17 +145,20 @@ GraphicsManager::~GraphicsManager()
   //wgldeletecontext of context
 }
 
-Camera* GraphicsManager::getCamera()
+Vector2 GraphicsManager::screenToWorld(Vector2 screenCoords)
 {
-  return &mainCamera;
-}
+  Vector2 worldCoords;
 
-Shader* GraphicsManager::getCoreShader()
-{
-  return &coreShader;
-}
+  screenCoords.x = screenCoords.x - 0.5*INITINFO->clientWidth;
+  screenCoords.y = 0.5*INITINFO->clientHeight - screenCoords.y;
 
-TextureAtlas* GraphicsManager::getSpriteAtlas()
-{
-  return &spriteAtlas;
+  //x2 here because the camera is -initInfo to initInfo, so its really like 2 initInfo
+  screenCoords.x = screenCoords.x * (mainCamera.getWidth() / INITINFO->clientWidth);
+  screenCoords.y = screenCoords.y * (mainCamera.getHeight() / INITINFO->clientHeight);
+
+  //Player transform cause thats where the camera is centered
+  Transform *playerTransform = LOGIC->player->has(Transform);
+  return screenCoords + playerTransform->GetPositionXY();
+
+  return Vector2();
 }

@@ -1,3 +1,15 @@
+/*!
+ ********************************************************************************
+ \file    Audio.cpp
+ \author  Nolan Taeksang Yoo
+ \par     Contact: nolan\@projectexist.net
+ \par     Classes: FMSoundSys, FMSound
+ \brief
+ This implements an FMOD sound system (FMSoundSys).
+ \remarks
+ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+ *******************************************************************************/
+
 #include "../_EntryPoint.h"
 #include "Audio.h"
 
@@ -9,6 +21,7 @@ FMSoundSys::FMSoundSys()
 	}
 
 	int drivers = 0;
+  // Check the bloody hardware.
 	fmodsys->getNumDrivers(&drivers);
 
 	if (drivers == 0)
@@ -28,7 +41,9 @@ void FMSoundSys::createSound(FMSound *sound, const char* pFile)
 void FMSoundSys::playSound(FMSound sound, bool loop)
 {
 	if (!loop)
+  {
 		sound->setMode(FMOD_LOOP_OFF);
+  }
 	else
 	{
 		sound->setMode(FMOD_LOOP_NORMAL);

@@ -1,0 +1,345 @@
+class TestController : ZilchComponent
+{
+    var AllowInput : Boolean = true;
+    var SliceDirection : Real3 = Real3(0,0,0);
+    var PosDiff : Real3 = Real3();
+    var PreventRepeat : Boolean = false;
+
+    [Property]
+    var CrouchedSword : SpriteSource = null;
+    [Property]
+    var StandSprite : SpriteSource = null;
+    [Property]
+    var SliceSprite : SpriteSource = null;
+    [Property]
+    var StealthSprite : SpriteSource = null;
+    [Property]
+    var EnergyLevel : Real = 100;
+    
+    var Slashing : Boolean = false;
+    
+    //Combo Manager
+    var CurrentAttack : Integer;
+    
+    //Attack checks
+    var FirstAttack : Boolean = true;
+     var SecondAttack : Boolean = false;
+      var ThirdAttack : Boolean = false;
+    [Property]
+    var SliceCD : Real = Real();
+    var CDTemp : Real = Real();
+    var StartSCD : Boolean = false;
+      
+    //Click Checks
+    var LeftClickCheck : Boolean = false;
+    var RightClickCheck : Boolean = false;
+    var LeftClickTimer : Real = 0.0;
+    var RightClickTimer : Real = 0.0;
+    var FinMousePos : Real3 = Real3();
+    var InitMousePos : Real3 = Real3();
+    
+    //Mouse
+    var WorldMousePosition : Real3 = Real3(0,0,0);
+    
+    //Ability check
+    [Property]
+    var DarkAbility : Boolean = false;
+    var DarkAbilityUsed : Boolean = false;
+    [Property]
+    var DarkAbilityCD : Real = 0.0;
+    var DarkAbilityTimer : Real = 0.0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        var gameCamera = this.Space.FindObjectByName("Camera");
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(gameCamera, Events.RightMouseDown, this.OnRightMouseDown);
+        Zero.Connect(gameCamera, Events.LeftMouseDown, this.OnLeftMouseDown);
+        Zero.Connect(gameCamera, Events.RightMouseUp, this.OnRightMouseUp);
+        Zero.Connect(gameCamera, Events.LeftMouseUp, this.OnLeftMouseUp);
+        
+        this.DarkAbilityTimer = this.DarkAbilityCD;
+        
+        this.CDTemp = this.SliceCD;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var mouseScreenPosition = Zero.Mouse.ScreenPosition;
+        var mouseMovement = Real3(Zero.Mouse.RawMovement , 0);
+        var movement = Real3(0.0, 0.0, 0.0);
+        
+        this.WorldMousePosition = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(mouseScreenPosition, 0);
+        
+        //Movement
+        //left, right, and up
+        if(this.AllowInput)
+        {
+            if(Zero.Keyboard.KeyIsDown(Keys.A))
+            {
+                movement.X -= 1.0;
+                this.Owner.Sprite.FlipX = true;
+            }
+
+            if(Zero.Keyboard.KeyIsDown(Keys.D))
+            {
+                movement.X += 1.0;
+                this.Owner.Sprite.FlipX = false;
+            }
+            
+            if(Zero.Keyboard.KeyIsPressed(Keys.Space))
+            {
+                this.Owner.SweptController.Jump();
+            }
+        }
+        
+        if(Zero.Keyboard.KeyIsPressed(Keys.F))
+        {
+            if(this.DarkAbility && !this.DarkAbilityUsed)
+            {
+                this.Space.CreateAtPosition(Archetype.Find("DarkAbilityMissile"), this.Owner.Transform.Translation);
+                
+                this.DarkAbilityUsed = true;
+            }
+        }
+        
+        //Cooldown check for slicing
+        if(this.StartSCD)
+        {
+            this.SliceCD -= event.Dt;
+            
+            if(this.SliceCD <= 0)
+            {
+                this.StartSCD = false;
+                this.SliceCD = this.CDTemp;
+            }
+        }
+        
+        //check for left click and/or slash
+        if(this.LeftClickCheck)
+        {
+            this.LeftClickTimer += event.Dt;
+            
+            if((this.LeftClickTimer >= 0.15) && (!this.PreventRepeat) && (this.SliceCD >= this.CDTemp))
+            {
+                //stop checking for input and prevent slicing multiple times
+                this.Slashing = true;
+                this.AllowInput = false;
+                //stop checking for mouse up
+                this.LeftClickCheck = false;
+            }
+            else 
+            {
+                this.CurrentAttack = 0;
+            }
+        }
+        
+        //check for right click
+        if(this.RightClickCheck)
+        {
+            this.RightClickTimer += event.Dt;
+        }
+        
+        if(this.Slashing && !Zero.Mouse.IsButtonDown(MouseButtons.Left))
+        {
+            //calls slice
+            if(!this.PreventRepeat)
+            {
+                this.PreventRepeat = true;
+                this.Slice();
+            }
+        }
+        
+        if(this.DarkAbilityUsed)
+        {
+            this.DarkAbilityTimer -= event.Dt;
+            
+            if(this.DarkAbilityTimer <= 0.0)
+            {
+                this.DarkAbilityTimer = this.DarkAbilityCD;
+                this.DarkAbilityUsed = false;
+            }
+        }
+        
+        this.Owner.SweptController.Update(movement, event.Dt);
+    }
+    
+    
+    function OnRightMouseDown(event : MouseEvent)
+    {
+        this.RightClickCheck = true;
+        this.RightClickTimer = 0.0;
+        
+        this.CurrentAttack = 1;
+                
+        if(!this.Slashing && !this.Owner.Sprite.FlipX)
+        {
+            if(this.FirstAttack)
+            {
+                //change to second attack 
+                this.FirstAttack = false;
+                this.SecondAttack = true;
+                
+                var attack1 = this.Space.CreateAtPosition(Archetype.Find("Attack1Box"), this.Owner.Transform.Translation + Real3(1,0,0));
+            }
+            else if(this.SecondAttack)
+            {
+                //change to third attack
+                this.SecondAttack = false;
+                this.ThirdAttack = true;
+                
+                var attack1 = this.Space.CreateAtPosition(Archetype.Find("Attack2Box"), this.Owner.Transform.Translation + Real3(1,0,0));
+            }
+            else if(this.ThirdAttack)
+            {
+                this.ThirdAttack = false;
+                this.FirstAttack = true;
+                
+                var attack1 = this.Space.CreateAtPosition(Archetype.Find("Attack3Box"), this.Owner.Transform.Translation + Real3(1,0,0));
+            }
+        }
+    }
+        
+        
+    function OnLeftMouseDown(event : MouseEvent)
+    {
+        this.LeftClickCheck = true;
+        this.LeftClickTimer = 0.0;
+        
+               
+        //sets the temp variable to the mouse position once the mouse is pressed
+        this.InitMousePos = this.WorldMousePosition;
+    }
+    
+    function OnRightMouseUp(event : MouseEvent)
+    {
+        this.Owner.Sprite.SpriteSource = this.CrouchedSword;
+    }
+        
+    function OnLeftMouseUp(event : MouseEvent)
+    {
+        this.LeftClickCheck = false;
+        this.LeftClickTimer = 0.0;
+        
+        //sets the temp variable to the mouse position once the mouse is released
+        this.FinMousePos = this.WorldMousePosition;
+        
+    }
+    
+    function Slice()
+    {
+        var seq = Action.Sequence(this.Owner.Actions);
+        var group = Action.Group(seq);
+        var tempVar = Real3(0,0,0); 
+        var modVar = Real3(0,0,0);
+        var groundVec = Real3(1,0,0);
+        
+        //get the vector between mouse down and mouse up
+        this.PosDiff = this.FinMousePos - this.InitMousePos;
+        
+        /************************Vector Playground*******************************************/
+        //normalize the vector between mouse down and mouse up
+        var normVec = Math.Normalize(this.PosDiff);
+        //dotProduct of the horizontal ground vector and the mouse movement vector
+        var vecDP = Math.Dot(normVec, groundVec);
+        //find the product of the lengths of each vector
+        var denom = Math.Length(normVec) * Math.Length(groundVec);
+        
+        var angle = Real();
+        
+        if(denom != 0)
+        {
+            angle = Math.ACos(vecDP/denom);
+            //Console.WriteLine(angle, "angle");
+        }
+        
+        /************************Vector Playground End*******************************************/
+            
+        if((angle > 0) && (angle <= 0.3))
+        {
+            this.CurrentAttack = 2;
+            //change face
+            this.Owner.Sprite.FlipX = false;
+            //moves the player to the right
+            Action.Property(seq, @this.Owner.Transform.Translation,
+            this.Owner.Transform.Translation + Real3(10,0,0), 0.5, Ease.QuadOut);
+            //make particle
+            this.CreateParticle(1);
+            Action.Call(seq, this.StopSlashing);
+        }
+        else if((angle > 0.3) && (angle <= 2.8))
+        {
+            //if the player starts a downward spike
+            if((this.FinMousePos.Y < this.InitMousePos.Y) && ((angle > 1.3) && (angle <= 1.7)))
+            {
+                this.CurrentAttack = 4; //vertical attack//
+                //moves the player to straight down
+                Action.Property(seq, @this.Owner.Transform.Translation,
+                this.Owner.Transform.Translation + Real3(0,-10,0), 0.5, Ease.QuadOut);
+            }
+            else
+            {
+                if(this.PosDiff.X > 0)
+                {
+                    //change face
+                    this.Owner.Sprite.FlipX = false;
+                }
+                else
+                {
+                    //change face
+                    this.Owner.Sprite.FlipX = true;
+                }
+                //moves the player toward the mouse 
+                Action.Property(seq, @this.Owner.Transform.Translation,
+                this.Owner.Transform.Translation + Real3(this.PosDiff.X / 1.5,this.PosDiff.Y / 1.5,0), 0.5, Ease.QuadOut);
+                this.CurrentAttack = 3; // diagonal attack [left]
+            }
+                
+            Action.Call(seq, this.StopSlashing);
+        }
+        else if((angle > 2.8) && (angle <= 3.7))
+        {
+            this.CurrentAttack = 2; // horizontal attack [left]
+            //change face
+            this.Owner.Sprite.FlipX = true;
+            //moves the player to the left 
+            Action.Property(seq, @this.Owner.Transform.Translation,
+            this.Owner.Transform.Translation + Real3(-10,0,0), 0.5, Ease.QuadOut);
+            //make particle
+            this.CreateParticle(2);
+            Action.Call(seq, this.StopSlashing);
+        }
+        else
+        {
+            Action.Call(seq, this.StopSlashing);
+        }
+        
+    }
+    
+    function CreateParticle(param : Real)
+    {
+        if(param == 1)
+        {
+            Console.WriteLine("1");
+            //create Particle Effect for slicing
+            var sliceParticle = this.Space.CreateAtPosition(Archetype.Find("HorizontalSliceR"), this.Owner.Transform.Translation + Real3(2,0,0));
+        }
+        else if(param == 2)
+        {
+            Console.WriteLine("2");
+            //create Particle Effect for slicing
+            var sliceParticle = this.Space.CreateAtPosition(Archetype.Find("HorizontalSliceL"), this.Owner.Transform.Translation + Real3(-2,0,0));
+        }
+    }
+    
+    function StopSlashing()
+    {
+        this.PreventRepeat = false;
+        this.Slashing = false;
+        this.LeftClickTimer = 0.0;
+        this.AllowInput = true;
+        this.Slashing = false;
+        //start slice CD
+        this.StartSCD = true;
+    }
+}

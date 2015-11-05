@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "DarkAbilityScript",
+		uint64 ResourceId = 5594d40799448343,
+	},
+},
