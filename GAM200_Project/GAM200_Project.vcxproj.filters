@@ -260,6 +260,9 @@
     <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h">
       <Filter>loggerConsole</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\RayLineBoxCollision.h">
+      <Filter>Systems\physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -389,6 +392,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp">
       <Filter>loggerConsole</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\RayLineBoxCollision.cpp">
+      <Filter>Systems\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

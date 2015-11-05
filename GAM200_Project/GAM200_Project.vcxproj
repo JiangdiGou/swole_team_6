@@ -101,6 +101,7 @@
     <ClInclude Include="GAM200_Project\physicsLib\range.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\physicsLib\RayLineBoxCollision.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Resolution.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -205,6 +206,7 @@
     <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\physicsLib\RayLineBoxCollision.cpp" />
     <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>

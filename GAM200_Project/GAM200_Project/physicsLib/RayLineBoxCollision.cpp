@@ -5,7 +5,7 @@
 #include "RayLineBoxCollision.h"
 
 
-bool line_rectangle_collide( Vec2D startBase, Vec2D endDirection)
+bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection)
 {
 	Shape* a;
 	Shape* b;

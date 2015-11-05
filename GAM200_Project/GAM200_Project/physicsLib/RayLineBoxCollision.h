@@ -8,6 +8,6 @@
 #include "../Composition.h"
 #include "Collision.h"
 
-bool line_rectangle_collide();
+bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection);
 
 #endif
