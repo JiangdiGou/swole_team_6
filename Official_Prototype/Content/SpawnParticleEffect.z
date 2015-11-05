@@ -1,0 +1,45 @@
+class SpawnParticleEffect : ZilchComponent
+{
+    //Depends if you want this particle effect to happen immediately
+    [Property]
+    var OnSpawn:Boolean = false;
+    //Amount of time that the particles will emit before stopping
+    [Property]
+    var SpawnEmitTime:Real = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //If this bool is true, the particles should be spawning
+        if(this.OnSpawn)
+        {
+            //As long as the emit time is above 0, the particles will be spawning
+            if(this.SpawnEmitTime > 0)
+            {
+                //reduce the spawn time
+                this.SpawnEmitTime -= event.Dt;
+                
+                //makes sure the emitter is on
+                this.Owner.SphericalParticleEmitter.Active = true;
+                
+                //if the timer is below 0, stop spawning
+                if(this.SpawnEmitTime <= 0)
+                {
+                    this.Owner.SphericalParticleEmitter.Active = false;
+                    this.OnSpawn = false;
+                }
+            }
+        }
+    }
+    
+    
+    //function to be called externally to start spawning the particles
+    function ActivateDespawnParticle()
+    {
+        this.OnSpawn = true;
+    }
+}

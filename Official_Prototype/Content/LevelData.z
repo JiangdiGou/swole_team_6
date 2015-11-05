@@ -87,13 +87,15 @@ class LevelData : ZilchComponent
     //Called whenever the player attacks or takes damage. Increases energy up to a max of 100
     function AddEnergy(iEnergyValue_:Integer)
     {
-        if(iEnergyValue_ + this.RPlayerEnergy > 100)
+        var energyToAdd:Integer = (iEnergyValue_ / 10) + 1;
+        
+        if(energyToAdd + this.RPlayerEnergy > 100)
         {
             this.RPlayerEnergy = 100;
         }
         else
         {
-            this.RPlayerEnergy += iEnergyValue_;
+            this.RPlayerEnergy += energyToAdd;
         }
     }
 }

@@ -20,7 +20,7 @@ class GameData : ZilchComponent
     var BPDoubleJump:Boolean = false;
     var BPHealthBoost:Boolean = false;
     var BPDamageBoost:Boolean = false;
-    var MaxAirSlash:Integer = 1;//Number of times the player is allowed to slash in air before needing to be grounded
+    var MaxAirSlash:Integer = 2;//Number of times the player is allowed to slash in air before needing to be grounded
     
     //Scrolls active in each level (used by ScrollSelectButtons and ScrollSelect)
     var IScroll0:Integer = 0;
