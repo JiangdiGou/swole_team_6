@@ -69,33 +69,45 @@ float Clamp(float min, float max, float x)
 }
 /////////////////////Collsion Detection Functions////////////////////
 
-bool line_rectangle_collide( Shape* l, Vec2D at, Shape* r, Vec2D bt, contactList*c)
+bool line_rectangle_collide( Vec2D startBase, Vec2D endDirection)
 {
-	ShapeLine * Line = (ShapeLine*)l;
-	ShapeAAB * Box = (ShapeAAB*)r;
+	Shape* a;
+	Shape* b;
+	ShapeLine * LineA = (ShapeLine*)a;
+	ShapeAAB * boxB = (ShapeAAB*)b;
 
-	GOC* bowner = r->GetOwner();
-	Transform* aTrans = l->GetOwner()->has(Transform);
-	Transform* bTrans = r->GetOwner()->has(Transform);
-	at = aTrans->GetPositionXY();
-	bt = bTrans->GetPositionXY();
-	//Check X
-	Vec2D positionDelta = at - bt;
+	GOC* bowner = b->GetOwner();
+	Transform* aTrans = a->GetOwner()->has(Transform);
+	Transform* bTrans = b->GetOwner()->has(Transform);
+	startBase = aTrans->GetPositionXY();
+	endDirection = bTrans->GetPositionXY();
+
+	//ShapeAAB * Box = (ShapeAAB*)endDirection;
+
+	//GOC* bowner = r->GetOwner();
+	//Transform* aTrans = l->GetOwner()->has(Transform);
+	//Transform* bTrans = r->GetOwner()->has(Transform);
+	//at = aTrans->GetPositionXY();
+	//bt = bTrans->GetPositionXY();
+	////Check X
+	//Vec2D positionDelta = at - bt;
 
 
-    Vec2D n = Vec2D::rotate_vector_90(&Line->direction);
+
+
+    Vec2D n = Vec2D::rotate_vector_90(&endDirection);
 
 	float dp1, dp2, dp3, dp4;
 
-	Vec2D c1 = Box->origin;
-	Vec2D c2 = Vec2D::add_vector(&c1, &Box->Extents);
+	Vec2D c1 = boxB->origin;
+	Vec2D c2 = Vec2D::add_vector(&c1, &boxB->Extents);
 	Vec2D c3 = { c2.x, c1.y };
 	Vec2D c4 = { c1.x, c2.y };
 
-	c1 = Vec2D::subtract_vector(&c1, &Line->base);
-	c2 = Vec2D::subtract_vector(&c2, &Line->base);
-	c3 = Vec2D::subtract_vector(&c3, &Line->base);
-	c4 = Vec2D::subtract_vector(&c4, &Line->base);
+	c1 = Vec2D::subtract_vector(&c1, &startBase);
+	c2 = Vec2D::subtract_vector(&c2, &startBase);
+	c3 = Vec2D::subtract_vector(&c3, &startBase);
+	c4 = Vec2D::subtract_vector(&c4, &startBase);
 
 	dp1 = Vec2D::DotProduct(n, c1);
 	dp2 = Vec2D::DotProduct(n, c2);
@@ -105,14 +117,14 @@ bool line_rectangle_collide( Shape* l, Vec2D at, Shape* r, Vec2D bt, contactList
 	//return (dp1 * dp2 <= 0) || (dp2 * dp3 <= 0) || (dp3 * dp4 <= 0);
 	if ((dp1 * dp2 <= 0) || (dp2 * dp3 <= 0) || (dp3 * dp4 <= 0))
 	{
-		ManifoldSet * contact = c->GetNewContact();
-		contact->Bodies[0] = Line->body;
-		contact->Bodies[1] = Box->body;
-		contact->ContactNormal = positionDelta;//A to B
-		contact->Penetration = 0.0f;
-		contact->Restitution = DetermineRestitution(l->body, r->body);
-		contact->FrictionCof = DetermineFriction(l->body, r->body);
-
+		//ManifoldSet * contact = c->GetNewContact();
+		//contact->Bodies[0] = Line->body;
+		//contact->Bodies[1] = Box->body;
+		//contact->ContactNormal = positionDelta;//A to B
+		//contact->Penetration = 0.0f;
+		//contact->Restitution = DetermineRestitution(l->body, r->body);
+		//contact->FrictionCof = DetermineFriction(l->body, r->body);
+		printf("Slash Slash Slash !!!!");
 		return true;
 	}
 	else
@@ -306,7 +318,7 @@ CollsionDatabase::CollsionDatabase()
 	RegisterCollsionTest(Shape::SidBox, Shape::SidBox, DetectCollisionAABoxAABox);
 	RegisterCollsionTest(Shape::SidCircle, Shape::SidBox, DetectCollisionCircleAABox);
 	RegisterCollsionTest(Shape::SidBox, Shape::SidCircle, DetectCollisionBoxCircle);
-	RegisterCollsionTest(Shape::SidLine, Shape::SidBox, line_rectangle_collide);
+	//RegisterCollsionTest(Shape::SidLine, Shape::SidBox, line_rectangle_collide);
 }
 
 void CollsionDatabase::RegisterCollsionTest(Shape::ShapeId a, Shape::ShapeId b, CollisionTest test)
