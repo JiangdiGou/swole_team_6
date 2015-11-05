@@ -148,46 +148,46 @@ std::pair<bool, float> Box::Intersect(Ray const& ray) const {
 
 ////////////////////////////////////////////////////////////////////////////////
 //Rhombus class implementation
-Rhombus::Rhombus(float c_x, float c_y, float dia_x, float dia_y) : center_x(c_x), center_y(c_y), diag_x(dia_x), diag_y(dia_y) {}
-
-//BoundingCircle Rhombus::GetBoundingCircle() const {
-//	return BoundingCircle(center_x, center_y, std::max(diag_x, diag_y) / 2);
+//Rhombus::Rhombus(float c_x, float c_y, float dia_x, float dia_y) : center_x(c_x), center_y(c_y), diag_x(dia_x), diag_y(dia_y) {}
+//
+////BoundingCircle Rhombus::GetBoundingCircle() const {
+////	return BoundingCircle(center_x, center_y, std::max(diag_x, diag_y) / 2);
+////}
+//
+//std::pair<bool, float> Rhombus::Intersect(Ray const& ray) const {
+//	//for each side (segment) solve segment-ray intersection and find minimum
+//	/*           X
+//	//          / \     may be 2 intersection points.
+//	//     ----+---+---<--------ray
+//	//        /     \
+//	//       X       X
+//	//        \     /
+//	//         \   /
+//	//          \ /
+//	//           X
+//	*/
+//	bool intersect = false;
+//	float t = std::numeric_limits<float>::max();
+//	std::pair<bool, float> t1 = ray.IntersectSegment(
+//		center_x - diag_x / 2, center_y,
+//		center_x, center_y - diag_y / 2);
+//	if (t1.first) { t = ((t1.second<t) ? t1.second : t); intersect = true; }
+//	std::pair<bool, float>  t2 = ray.IntersectSegment(
+//		center_x - diag_x / 2, center_y,
+//		center_x, center_y + diag_y / 2);
+//	if (t2.first) { t = ((t2.second<t) ? t2.second : t); intersect = true; }
+//	std::pair<bool, float>  t3 = ray.IntersectSegment(
+//		center_x + diag_x / 2, center_y,
+//		center_x, center_y + diag_y / 2);
+//	if (t3.first) { t = ((t3.second<t) ? t3.second : t); intersect = true; }
+//	std::pair<bool, float>  t4 = ray.IntersectSegment(
+//		center_x + diag_x / 2, center_y,
+//		center_x, center_y - diag_y / 2);
+//	if (t4.first) { t = ((t4.second<t) ? t4.second : t); intersect = true; }
+//
+//	return std::make_pair(intersect, t);
+//
 //}
-
-std::pair<bool, float> Rhombus::Intersect(Ray const& ray) const {
-	//for each side (segment) solve segment-ray intersection and find minimum
-	/*           X
-	//          / \     may be 2 intersection points.
-	//     ----+---+---<--------ray
-	//        /     \
-	//       X       X
-	//        \     /
-	//         \   /
-	//          \ /
-	//           X
-	*/
-	bool intersect = false;
-	float t = std::numeric_limits<float>::max();
-	std::pair<bool, float> t1 = ray.IntersectSegment(
-		center_x - diag_x / 2, center_y,
-		center_x, center_y - diag_y / 2);
-	if (t1.first) { t = ((t1.second<t) ? t1.second : t); intersect = true; }
-	std::pair<bool, float>  t2 = ray.IntersectSegment(
-		center_x - diag_x / 2, center_y,
-		center_x, center_y + diag_y / 2);
-	if (t2.first) { t = ((t2.second<t) ? t2.second : t); intersect = true; }
-	std::pair<bool, float>  t3 = ray.IntersectSegment(
-		center_x + diag_x / 2, center_y,
-		center_x, center_y + diag_y / 2);
-	if (t3.first) { t = ((t3.second<t) ? t3.second : t); intersect = true; }
-	std::pair<bool, float>  t4 = ray.IntersectSegment(
-		center_x + diag_x / 2, center_y,
-		center_x, center_y - diag_y / 2);
-	if (t4.first) { t = ((t4.second<t) ? t4.second : t); intersect = true; }
-
-	return std::make_pair(intersect, t);
-
-}
 
 //std::ostream & operator<< (std::ostream & os, Rhombus const& rhombus) {
 //	os << "Rhombus( center (" << rhombus.center_x << "," << rhombus.center_y << "), diagonals ("

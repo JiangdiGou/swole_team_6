@@ -7,7 +7,7 @@
 #include "math_utility.h"
 #include "../Composition.h"
 #include "Collision.h"
-
+ShapeAAB * Mybox;
 class Ray {
 private:
 	float  origin_x;
@@ -46,10 +46,10 @@ public:
 
 class Box : public CastShape {
 private:
-	float center_x;
-	float center_y;
-	float side_x;
-	float side_y;
+	float center_x;// = Mybox->origin.x;
+	float center_y;// = Mybox->origin.y;
+	float side_x;// = Mybox->Extents.x;
+	float side_y;// = Mybox->Extents.y;
 public:
 	Box(float c_x, float c_y, float s_x, float s_y);
 	// compiler generated copy, assignment, destructor are OK
@@ -66,10 +66,10 @@ private:
 	float diag_x;
 	float diag_y;
 public:
-	Rhombus(float c_x, float c_y, float dia_x, float dia_y);
+	//Rhombus(float c_x, float c_y, float dia_x, float dia_y);
 	// compiler generated copy, assignment, destructor are OK
 	/*BoundingCircle GetBoundingCircle() const;*/
-	std::pair<bool, float> Intersect(Ray const& ray) const;
+	//std::pair<bool, float> Intersect(Ray const& ray) const;
 	/*void Print() const;
 	friend std::ostream & operator<< (std::ostream & os, Rhombus const& rhombus);*/
 };
