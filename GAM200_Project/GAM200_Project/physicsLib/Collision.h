@@ -44,6 +44,10 @@ public:
   //void Initialize() override;
 	virtual void Draw() = 0;
 	virtual bool TestPoint(Vec2D) = 0;
+	//virtual BoundingCircle GetBoundingCircle() const = 0;
+	//virtual std::pair<bool, float> Intersect(Ray const& ray) const = 0;
+	//virtual void Print() const = 0;
+	//virtual ~Shape();
 };
 
 //Line shape??
