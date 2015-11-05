@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "BobEffectScript",
+		uint64 ResourceId = 561170eccd3b074a,
+	},
+},

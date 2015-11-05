@@ -26,6 +26,10 @@ class EnemyHitReaction : ZilchComponent
     //Sound Manager object
     var SoundPlayer : Cog;
     
+    //Tutorial Level exception
+    [Property]
+    var Box : Boolean;
+    
     function Initialize(init : CogInitializer)
     {
         this.RegSize = this.Owner.Transform.Scale;
@@ -47,7 +51,18 @@ class EnemyHitReaction : ZilchComponent
             //subtract 1 from amount of enemies alive
             this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
             Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
-            this.Owner.Destroy();
+            
+            if(this.Box)
+            {
+                this.Space.FindObjectByName("Trip4").TutorialTripScript.CreateScript(Trip.Trip_4);
+                
+                this.Owner.Destroy();
+            }
+            else
+            {
+                this.Owner.Destroy();
+            }
+            
         }
         
         //Starts despawning the enemy once their hp is below 0

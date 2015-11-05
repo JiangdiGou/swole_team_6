@@ -1,4 +1,4 @@
-enum Trip {Trip_1, Trip_2, Trip_3, Trip4, Trip_5}
+enum Trip {Trip_1, Trip_2, Trip_3, Trip_4, Trip_5, Trip_6}
 
 class TutorialTripScript : ZilchComponent
 {
@@ -9,6 +9,7 @@ class TutorialTripScript : ZilchComponent
     
     var Sensei : Cog;
     
+    [Property]
     var NodeActive : Boolean = true;
     
     function Initialize(init : CogInitializer)
@@ -56,10 +57,66 @@ class TutorialTripScript : ZilchComponent
             bubble.FindChildByName("Text1").SpriteText.Text = "Could you fetch me my blade?";
             bubble.FindChildByName("Text2").SpriteText.Text = "It's just upstairs...";
             
-            var seq = Actions.Sequence(this.Owner.Actions);
             
             this.StopPlayer(3.4);
             this.Player.Sprite.SpriteSource = SpriteSource.Character_4;
+        }
+        else if(tripNum == Trip.Trip_3)
+        {
+            this.NodeActive = false;
+            
+            var bubble = this.Space.CreateAtPosition(Archetype.Find("TutorialBubble"), this.Sensei.Transform.Translation + Real3(0,4,0));
+            bubble.FindChildByName("Text1").SpriteText.Text = "Feel free to clear those boxes;";
+            bubble.FindChildByName("Text2").SpriteText.Text = "I've been meaning to throw them out.";
+            
+            
+            this.StopPlayer(3.4);
+            this.Player.Sprite.SpriteSource = SpriteSource.Character_4;
+        }
+        else if(tripNum == Trip.Trip_4)
+        {
+            this.NodeActive = false;
+            
+            var bubble = this.Space.CreateAtPosition(Archetype.Find("TutorialBubble"), this.Sensei.Transform.Translation + Real3(0,4,0));
+            bubble.FindChildByName("Text1").SpriteText.Text = "Well someone's eager today...";
+            bubble.FindChildByName("Text2").SpriteText.Text = "Just show more care with my blade, will you?";
+            
+            
+            this.StopPlayer(3.4);
+            this.Player.Sprite.SpriteSource = SpriteSource.Character_4;
+        }
+        else if(tripNum == Trip.Trip_5)
+        {
+            this.NodeActive = false;
+            
+            var bubble = this.Space.CreateAtPosition(Archetype.Find("TutorialBubble"), this.Sensei.Transform.Translation + Real3(-2,4,0));
+            bubble.FindChildByName("Text1").SpriteText.Text = "Ahhh, that's the one...";
+            bubble.FindChildByName("Text2").SpriteText.Text = "Bring her here.";
+            
+            this.Space.FindObjectByName("Trip6").TutorialTripScript.NodeActive = true;
+            
+            this.StopPlayer(3.4);
+            this.Player.Sprite.SpriteSource = SpriteSource.Character_4;
+            
+            var seq = Actions.Sequence(this.Owner.Actions);
+            
+            Action.Delay(seq, 3.4);
+        }
+        else if(tripNum == Trip.Trip_6)
+        {
+            this.NodeActive = false;
+            
+            var bubble = this.Space.CreateAtPosition(Archetype.Find("TutorialBubble"), this.Sensei.Transform.Translation + Real3(0,4,0));
+            bubble.FindChildByName("Text1").SpriteText.Text = "Perfect! Now we can";
+            bubble.FindChildByName("Text2").SpriteText.Text = "perform the ceremony";
+            
+            this.StopPlayer(3.4);
+            this.Player.Sprite.SpriteSource = SpriteSource.Character_4;
+            
+            var seq = Actions.Sequence(this.Owner.Actions);
+            
+            Action.Delay(seq, 3.4);
+            Action.Call(seq, this.Space.FindObjectByName("sword").Destroy);
         }
     }
     
