@@ -191,6 +191,7 @@ void Sprite::drawAllSprites()
 
   vertices.clear();
   texCoords.clear();
+  colors.clear();
 }
 
 void Sprite::SendMessages(Message * message)
