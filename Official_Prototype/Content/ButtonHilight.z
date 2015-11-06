@@ -1,3 +1,12 @@
+/********************************************************************************
+file    ButtonHilight.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Makes buttons have color and size changes when interacting with the mouse
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ButtonHilight : ZilchComponent
 {
     [Property]

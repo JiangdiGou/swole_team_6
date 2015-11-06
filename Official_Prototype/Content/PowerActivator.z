@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PowerActivator.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Sets what powers the player has based on their load-out from the Power Select Screen.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PowerActivator : ZilchComponent
 {
     var ILvl1:Integer = 0;

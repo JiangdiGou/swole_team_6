@@ -1,3 +1,13 @@
+/********************************************************************************
+file    TutorialTripScript.z
+author  Josh Painter
+par     Contact: j.painter@digipen.edu
+brief
+    Controls what text prompts and objectives show up whiel the player is going through 
+    the tutorial level.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 enum Trip {Trip_1, Trip_2, Trip_3, Trip_4, Trip_5, Trip_6}
 
 class TutorialTripScript : ZilchComponent

@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PauseResume.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Destroys the pause space and tells the main space to become unpaused.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PauseResume : ZilchComponent
 {
     //bool to stop the game from being unpaused on the same frame it was paused

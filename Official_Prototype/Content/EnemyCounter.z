@@ -1,3 +1,12 @@
+/********************************************************************************
+file    EnemyCounter.z
+author  Josh Painter
+par     Contact: j.painter@digipen.edu
+brief
+    Sees how many enemies are on this level at any given time.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class EnemyCounter : ZilchComponent
 {
     var EnemiesAlive : Integer;

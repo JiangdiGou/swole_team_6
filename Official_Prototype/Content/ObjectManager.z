@@ -1,3 +1,13 @@
+/********************************************************************************
+file    ObjectManager.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Useless attempt at creating an object manager in zero. This isn't used and 
+    can be scrapped.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ObjectManager : ZilchComponent
 {
     var OM_STATICOBJECT:Integer = 1;

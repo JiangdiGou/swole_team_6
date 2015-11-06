@@ -1,4 +1,12 @@
-//Implimented by Josh Painter
+/********************************************************************************
+file    ScrollLoader.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Determines what scroll level to load when a scroll is used.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ScrollLoader : ZilchComponent
 {
     //Levels to load based on the active scroll in ScrollSelect

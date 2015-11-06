@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PauseGameplay.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Pauses the level this is on and creates a new, overlayed space for the pause screen.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PauseGameplay : ZilchComponent
 {
     [Property]

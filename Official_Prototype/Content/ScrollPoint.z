@@ -1,3 +1,12 @@
+/********************************************************************************
+file    ScrollPoint.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    A point that the player needs to mouse over to complete in sequence for a scroll.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ScrollPoint : ZilchComponent
 {
     //Boolean that determines if this point is active. True if this is the first point
