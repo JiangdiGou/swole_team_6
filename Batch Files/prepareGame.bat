@@ -31,3 +31,13 @@ PAUSE
 REM copies scripts folder with xcopy
 XCOPY /S /Y /I ..\GAM200_Project\Scripts ..\GAM200_Project\Debug\Scripts
 XCOPY /S /Y /I ..\GAM200_Project\Scripts ..\GAM200_Project\Release\Scripts
+
+ECHO .
+ECHO -----
+ECHO WILL DELETE OBJET FILES UPON INPUT
+ECHO -----
+
+DEL ..\GAM200_Project\Debug\*.obj
+DEL ..\GAM200_Project\Release\*.obj
+
+PAUSE 
