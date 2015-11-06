@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PlayerStats.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Tracks the player's current stats and conditions (stunned, knocked in the air, etc)
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PlayerStats : ZilchComponent
 {
     var Health:Integer = 0;

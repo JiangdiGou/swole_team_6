@@ -1,3 +1,13 @@
+/********************************************************************************
+file    ScrollScript.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    I'm fairly certain that this script is outdated and unused, but keep it just 
+    in case.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ScrollScript : ZilchComponent
 {
     //Determines which scroll this is

@@ -1,3 +1,12 @@
+/********************************************************************************
+file    ScrollReaction.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    What stats and requirements any given scroll has in order to use.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ScrollReaction : ZilchComponent
 {
     //Time delay so that the scroll can animate in

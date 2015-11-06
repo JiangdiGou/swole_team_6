@@ -1,3 +1,12 @@
+/********************************************************************************
+file    GameData.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Script to store global variables, specifically what powers the player has unlocked.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class GameData : ZilchComponent
 {
     //Default Player Values DON'T MESS WITH THEM

@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PowerTest.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Script for us to test hypothetical powers. I don't think it's used.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PowerTest : ZilchComponent
 {
     [Property]

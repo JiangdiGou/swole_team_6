@@ -1,3 +1,14 @@
+/********************************************************************************
+file    PlayerDash.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Lets the player dash horizontally around enemies when Q or E is pressed. This 
+    is probably going to be scrapped since our slash does the same thing, but keep 
+    it just in case.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PlayerDash : ZilchComponent
 {
     //X velocity of the player during a dash

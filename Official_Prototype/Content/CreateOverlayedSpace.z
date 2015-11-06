@@ -1,3 +1,13 @@
+/********************************************************************************
+file    CreateOverlayedSpace.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Makes a new space cover the existing space. This is used for notifications and
+    menu screens during gameplay.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class CreateOverlayedSpace : ZilchComponent
 {
     [Property]

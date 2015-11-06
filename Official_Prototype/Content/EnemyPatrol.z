@@ -1,3 +1,12 @@
+/********************************************************************************
+file    EnemyPatrol.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Controls how enemies move back and forth and move when guided by a path point.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class EnemyPatrol : ZilchComponent
 {
     var PlayerPos:Real3;

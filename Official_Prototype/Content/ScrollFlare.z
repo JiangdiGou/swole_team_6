@@ -1,3 +1,13 @@
+/********************************************************************************
+file    ScrollFlare.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Makes the Scroll levels look a lot cooler, has effects, and unwravles in front 
+    of the player. Gives it ~~*F L A R E*~~
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ScrollFlare : ZilchComponent
 {
     //Left roll of the scroll

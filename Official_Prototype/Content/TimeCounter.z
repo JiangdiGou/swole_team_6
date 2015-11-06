@@ -1,3 +1,12 @@
+/********************************************************************************
+file    TimeCounter.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Counts down the time remaining for a gameplay level
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class TimeCounter : ZilchComponent
 {
     function Initialize(init : CogInitializer)

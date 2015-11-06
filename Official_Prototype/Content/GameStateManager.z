@@ -1,3 +1,13 @@
+/********************************************************************************
+file    GameStateManager.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Failed attempt at a GSM in zero. This script isn't used at all, but can't be 
+    removed because it will cause a problem with the repo
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class GameStateManager : ZilchComponent
 {
     var IGSMStep:Integer;

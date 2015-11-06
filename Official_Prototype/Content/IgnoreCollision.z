@@ -1,3 +1,12 @@
+/********************************************************************************
+file    IgnoreCollision.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Useless script that I tried to get working when we didn't know how to do collision groups.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class IgnoreCollision : ZilchComponent
 {
     //Name of objects that this object shouldn't collide with

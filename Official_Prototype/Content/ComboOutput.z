@@ -1,3 +1,12 @@
+/********************************************************************************
+file    ComboOutput.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Updates the list showing the player's past few actions for developer purposes.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ComboOutput : ZilchComponent
 {
     function Initialize(init : CogInitializer)
