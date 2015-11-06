@@ -21,7 +21,7 @@ public:
 	float const& Direction_x() const;
 	float const& Direction_y() const;
 	std::pair<bool, float> IntersectSegment(float p1_x, float p1_y, float p2_x, float p2_y) const;
-	friend std::ostream & operator<< (std::ostream & os, Ray const& ray);
+	/*friend std::ostream & operator<< (std::ostream & os, Ray const& ray);*/
 };
 
 class BoundingCircle {
@@ -40,7 +40,7 @@ class CastShape {
 public:
 	/*virtual BoundingCircle GetBoundingCircle() const = 0;*/
 	virtual std::pair<bool, float> Intersect(Ray const& ray) const = 0;
-	virtual void Print() const = 0;
+	/*virtual void Print() const = 0;*/
 	virtual ~CastShape();
 };
 
