@@ -40,6 +40,7 @@ GameObjectComposition* objFactory::makeObject(std::string Name)
     gen = idgen(init_generator);
   }
 
+  toReturn->ObjectName = Name;
   toReturn->ObjectId = gen;
   gameObjs[gen] = toReturn;
   return toReturn;

@@ -1,3 +1,13 @@
+/********************************************************************************
+file    EnemySlashTest.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Test script to quickly try out a new way of attacking. Lets you hit enemies by 
+    just having the L-Mouse down and moving back and forth over enemies whithin range.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class EnemySlashTest : ZilchComponent
 {
     //Amount of time between mouse over and mouse exit. If fast enough, registers as a slash

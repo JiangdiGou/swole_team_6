@@ -1,4 +1,14 @@
-//Put this on each gameplay level
+/********************************************************************************
+file    ComboManager.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Tracks what kind of attacks/actions the player is taking and sees if it should do a special
+    action based on the order and timing of previous actions.
+    Needs to be put on each level's LevelSettings.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ComboManager : ZilchComponent
 {
     var IPlayerCombo:Integer;//Player's current combo

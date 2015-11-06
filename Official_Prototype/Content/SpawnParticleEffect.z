@@ -1,3 +1,12 @@
+/********************************************************************************
+file    SpawnParticleEffect.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Creates a particle effect to cover up entity spawning and despawning.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class SpawnParticleEffect : ZilchComponent
 {
     //Depends if you want this particle effect to happen immediately

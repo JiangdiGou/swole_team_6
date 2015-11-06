@@ -1,3 +1,13 @@
+/********************************************************************************
+file    LevelSelectButton.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Hilights the selected level on the Level Select Screen. I'm fairly certain this 
+    script is out of date and can be removed.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class LevelSelectButton : ZilchComponent
 {
     //boolean that determines if this is the first level active

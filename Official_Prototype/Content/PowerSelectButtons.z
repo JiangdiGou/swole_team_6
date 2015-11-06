@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PowerSelectButtons.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Gives feedback to show which node is selected on the Power Select screen.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PowerSelectButtons : ZilchComponent
 {
     //The object that hilights this button

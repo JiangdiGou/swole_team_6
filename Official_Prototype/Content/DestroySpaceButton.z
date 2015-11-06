@@ -1,3 +1,13 @@
+/********************************************************************************
+file    DestroySpaceButton.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Destroys the current space this component is on. Used for prompts and menus 
+    during gameplay and other spaces we don't really care about.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class DestroySpaceButton : ZilchComponent
 {
     function Initialize(init : CogInitializer)

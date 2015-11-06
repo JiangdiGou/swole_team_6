@@ -1,3 +1,12 @@
+/********************************************************************************
+file    ComboCounter.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Sets the text of the Combo Counter on the HUD
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ComboCounter : ZilchComponent
 {
     //Determines if this counter displays the current combo or the highest combo

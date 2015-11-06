@@ -1,3 +1,14 @@
+/********************************************************************************
+file    PlayerAttack.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Basic player attack that shoots out in a straight line toward the mouse.
+    This is probably not going to be used in the final game, but keep it anyways 
+    just in case.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PlayerAttack : ZilchComponent
 {
     //Determines if the left mouse is currently held down

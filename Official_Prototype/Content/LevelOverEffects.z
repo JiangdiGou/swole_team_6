@@ -1,3 +1,12 @@
+/********************************************************************************
+file    LevelOverEffects.z
+author  Josh Painter
+par     Contact: j.painter@digipen.edu
+brief
+    Controls what happens when a gameplay level is over and it's time to transition.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class LevelOverEffects : ZilchComponent
 {
     [Property]

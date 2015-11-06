@@ -1,3 +1,12 @@
+/********************************************************************************
+file    Quit.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Lets us quit the game in a safe way.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class Quit : ZilchComponent
 {
     function Initialize(init : CogInitializer)

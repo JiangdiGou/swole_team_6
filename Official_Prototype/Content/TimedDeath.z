@@ -1,3 +1,12 @@
+/********************************************************************************
+file    TimedDeath.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Destroys this object after a given time is up
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class TimedDeath : ZilchComponent
 {
     [Property]

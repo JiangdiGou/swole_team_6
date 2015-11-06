@@ -1,3 +1,13 @@
+/********************************************************************************
+file    DynamicHUD.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Makes it so that this HUD element will always be positioned in the correct spot 
+    even when the game resolution is changed.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class DynamicHUD : ZilchComponent
 {
     [Property]

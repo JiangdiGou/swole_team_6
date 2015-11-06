@@ -1,3 +1,13 @@
+/********************************************************************************
+file    PlayerSlashAttack.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Lets the player do a dash attack in the direction of their mouse when clicked 
+    and dragged.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PlayerSlashAttack : ZilchComponent
 {
     //Determines if the left mouse is currently held down

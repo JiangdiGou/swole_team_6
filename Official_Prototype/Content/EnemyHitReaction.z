@@ -1,3 +1,13 @@
+/********************************************************************************
+file    EnemyHitReaction.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    How an enemy responds to a given attack, how much damage they take, and what 
+    sound to play when hit.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class EnemyHitReaction : ZilchComponent
 {
     //Enemy's Health (Damage they can take until they die)

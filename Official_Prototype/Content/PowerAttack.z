@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PowerAttack.z
+author  Josh Painter
+par     Contact: j.painter@digipen.edu
+brief
+    A more powerful basic attack that the player needs to charge up before using.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PowerAttack : ZilchComponent
 {
     var PreventRepeat : Boolean = false;

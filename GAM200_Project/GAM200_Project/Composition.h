@@ -36,6 +36,9 @@ void AddComponent(ComponentTypeId typeId, GameComponent* component);
 
 //Game Obj's Id
 GOCId GetId() { return ObjectId; }
+
+//Game Obj's Name
+std::string GetName() { return ObjectName; }
 private:
 
 //Sorted array of components.
@@ -45,6 +48,9 @@ typedef ComponentArray::iterator ComponentIt;
 //A unique id for each object used to safely reference 
 //GOCs.
 GOCId ObjectId;
+
+//We need to do some things by name eventually.
+std::string ObjectName;
 
 //The constructor and destructor are private to prevent a user
 //from creating or deleting an object directly they must use the Destroy function

@@ -1,3 +1,12 @@
+/********************************************************************************
+file    LevelSelect.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Lets the player select what level they want to go to from the Level Select screen.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class LevelSelect : ZilchComponent
 {
     var ALevelNames:Array[String];

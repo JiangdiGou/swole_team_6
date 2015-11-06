@@ -1,3 +1,12 @@
+/********************************************************************************
+file    LevelData.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Tracks data for the current gameplay level, like player HP, energy, combo, time, etc
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class LevelData : ZilchComponent
 {
     //Player HP 0-100 but will change the max in GameData
