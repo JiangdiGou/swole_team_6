@@ -7,10 +7,10 @@
 //Ray class implementation
 Ray::Ray(float o_x, float o_y, float d_x, float d_y) : origin_x(o_x), origin_y(o_y), dir_x(d_x), dir_y(d_y) {}
 
-std::ostream& operator<<(std::ostream& os, Ray const& ray) {
-	os << " origin(" << ray.origin_x << "," << ray.origin_y << "), direction ( " << ray.dir_x << "," << ray.dir_y << ")";
-	return os;
-}
+//std::ostream& operator<<(std::ostream& os, Ray const& ray) {
+//	os << " origin(" << ray.origin_x << "," << ray.origin_y << "), direction ( " << ray.dir_x << "," << ray.dir_y << ")";
+//	return os;
+//}
 
 float const& Ray::Origin_x()    const { return origin_x; }
 float const& Ray::Origin_y()    const { return origin_y; }
@@ -210,8 +210,8 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection)
 	GOC* bowner = b->GetOwner();
 	Transform* aTrans = a->GetOwner()->has(Transform);
 	Transform* bTrans = b->GetOwner()->has(Transform);
-	startBase = aTrans->GetPositionXY();
-	endDirection = bTrans->GetPositionXY();
+	startBase = LineA->base;
+	endDirection = LineA->direction;
 
 	//ShapeAAB * Box = (ShapeAAB*)endDirection;
 
