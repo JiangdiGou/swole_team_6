@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       ParticleSystem.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Unfinished interface for particle systems
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 //Visibility
 //Texture
 //Warm up time 

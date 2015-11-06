@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       textureAtlas.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Implementation of textureAtlas, which manages a collection of textures in a single image
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS //strcopy is unsafe
 #include "textureAtlas.h"
 #include <fstream>

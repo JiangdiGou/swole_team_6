@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       GFXMain.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     UNUSED SHOULD BE DELETED
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 //Conor Lavelle
 //Gam 200 Graphics Prototype
 //Swole Team 6

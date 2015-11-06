@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       Sprite.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Implementation of Sprite, which is the core graphcis class
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #include "Sprite.h"
 
 GLuint Sprite::shaderID = 0;

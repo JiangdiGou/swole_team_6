@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       graphicsManager.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Implementation of Graphics Manager, which is in change of coordinating all graphics components and systems
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #include "graphicsManager.h"
 #include "../initInfo.h"
 

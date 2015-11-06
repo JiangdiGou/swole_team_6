@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       SpriteText.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Interface of SpriteText, which is responsible for displaying text as a 2d sprite
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef SPRITETEXT_H
 #define SPRITETEXT_H
 

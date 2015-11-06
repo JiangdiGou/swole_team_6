@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       Graphics.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     [A[BStores information that almost all graphics systems need
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 

@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       textureAtlas.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Interface of textureAtlas, which manages a collection of textures in a single image
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef TEXTUREATLAS_H
 #define TEXTUREATLAS_H
 

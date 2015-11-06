@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       instancedSprite.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     UNUSED SHOULD DELETE
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef  ISPRITE_H
 #define ISPRITE_H
 

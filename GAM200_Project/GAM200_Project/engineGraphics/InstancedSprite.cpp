@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       InstancedSprite.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     UNUSED SHOULD DELETE
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #include "InstancedSprite.h"
 
 //Initalize Static Member of Class

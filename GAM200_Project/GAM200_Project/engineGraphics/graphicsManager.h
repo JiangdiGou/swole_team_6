@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       graphicsManager.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Interface of Graphics Manager, which is in charge of coordinating all graphics components and systems
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
 

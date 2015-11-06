@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       Graphics.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Stores information that almost all graphics systems need
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #include "Graphics.h"
 
 #ifdef GFXLOG

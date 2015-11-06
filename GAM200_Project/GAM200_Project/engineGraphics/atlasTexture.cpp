@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       atlasTexture.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Implementation of atlasTexture, which stores information about textures inside atlas
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #include "atlasTexture.h"
 
 AtlasTexture::AtlasTexture(int aWidth, int aHeight, int numberOfFrames,

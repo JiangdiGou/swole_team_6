@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       Texture.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     OLD, SHOULD BE DELETED WHEN SPRITETEXT DEPEND REMOVED
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef TEXTURE_H
 #define TEXTURE_H
 

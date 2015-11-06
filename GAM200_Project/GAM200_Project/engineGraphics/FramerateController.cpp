@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       FramerateController.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Implementation of our game's frame rate controller
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #include "FramerateController.h"
 #include "Graphics.h"
 #include "../initInfo.h"
