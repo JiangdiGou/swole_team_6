@@ -35,6 +35,7 @@ private:
   void insertCol(int x, int count);
   void insertRow(int y, int count);
 public:
+  std::map<const int,  const GameObjectComposition*> GetgameObjs();
   void printLevel();
   objFactory();
   GameObjectComposition* makeObject(std::string Name);

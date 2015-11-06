@@ -7,6 +7,8 @@
 #include "math_utility.h"
 #include "../Composition.h"
 #include "Collision.h"
+#include "../gameComponents/objFactory.h"
+#include "../mouseVector.h"
 ShapeAAB * Mybox;
 class Ray {
 private:
@@ -73,6 +75,9 @@ public:
 	/*void Print() const;
 	friend std::ostream & operator<< (std::ostream & os, Rhombus const& rhombus);*/
 };
+
+GameObjectComposition* LoopAll(Vec2D start, Vec2D end);
+
 bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection);
 
 #endif

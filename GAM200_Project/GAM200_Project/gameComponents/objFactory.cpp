@@ -72,6 +72,19 @@ void objFactory::destroyAllObjects()
 
   gameObjs.clear();
 }
+
+std::map<const int, const GameObjectComposition*> objFactory::GetgameObjs()
+{
+	std::map<const int, const GameObjectComposition*> constObjs;
+	std::map<int, GameObjectComposition*>::iterator umr;
+	for (umr = gameObjs.begin(); gameObjs.size() > 0; umr = gameObjs.begin())
+	{
+		constObjs[umr->first] = umr->second;
+	}
+
+	return constObjs;
+	
+}
 // Overloaded methods
 void objFactory::Initialize()
 {

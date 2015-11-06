@@ -200,18 +200,20 @@ std::pair<bool, float> Box::Intersect(Ray const& ray) const {
 //}
 
 
-bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection)
+
+
+bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection, GOC* object)
 {
+
 	Shape* a;
 	Shape* b;
 	ShapeLine * LineA = (ShapeLine*)a;
 	ShapeAAB * boxB = (ShapeAAB*)b;
 
-	GOC* bowner = b->GetOwner();
-	Transform* aTrans = a->GetOwner()->has(Transform);
-	Transform* bTrans = b->GetOwner()->has(Transform);
-	startBase = LineA->base;
-	endDirection = LineA->direction;
+
+	LineA->base = startBase;
+	LineA->direction = endDirection;
+	boxB = object->has(ShapeAAB);
 
 	//ShapeAAB * Box = (ShapeAAB*)endDirection;
 
@@ -226,7 +228,7 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection)
 
 
 
-    Vec2D n = Vec2D::rotate_vector_90(&endDirection);
+    Vec2D n = Vec2D::rotate_vector_90(&LineA->direction);
 
 	float dp1, dp2, dp3, dp4;
 
@@ -235,10 +237,10 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection)
 	Vec2D c3 = { c2.x, c1.y };
 	Vec2D c4 = { c1.x, c2.y };
 
-	c1 = Vec2D::subtract_vector(&c1, &startBase);
-	c2 = Vec2D::subtract_vector(&c2, &startBase);
-	c3 = Vec2D::subtract_vector(&c3, &startBase);
-	c4 = Vec2D::subtract_vector(&c4, &startBase);
+	c1 = Vec2D::subtract_vector(&c1, &LineA->base);
+	c2 = Vec2D::subtract_vector(&c2, &LineA->base);
+	c3 = Vec2D::subtract_vector(&c3, &LineA->base);
+	c4 = Vec2D::subtract_vector(&c4, &LineA->base);
 
 	dp1 = Vec2D::DotProduct(n, c1);
 	dp2 = Vec2D::DotProduct(n, c2);
@@ -248,6 +250,7 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection)
 	//return (dp1 * dp2 <= 0) || (dp2 * dp3 <= 0) || (dp3 * dp4 <= 0);
 	if ((dp1 * dp2 <= 0) || (dp2 * dp3 <= 0) || (dp3 * dp4 <= 0))
 	{
+		
 		//ManifoldSet * contact = c->GetNewContact();
 		//contact->Bodies[0] = Line->body;
 		//contact->Bodies[1] = Box->body;
@@ -262,4 +265,26 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection)
 		return false;
 
 
+}
+
+GameObjectComposition* LoopAll(Vec2D start, Vec2D end)
+{
+	
+
+	std::vector<const GameObjectComposition*> collidingobj;
+	objFactory *gameObjects;
+	mouseVector * mouseP;
+
+	std::map<const int, const GameObjectComposition*>::iterator it;
+	
+	//for (it = FACTORY->GetgameObjs().begin(); it != FACTORY->GetgameObjs.end(); ++it)
+	//{
+	//	if (line_rectangle_collide(start, end))
+	//	{
+	//		
+	//	}
+	//}
+
+
+	//return collidingobj;
 }
