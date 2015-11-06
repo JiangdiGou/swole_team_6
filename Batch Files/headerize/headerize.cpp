@@ -4,48 +4,83 @@
 #include <list>
 #include <string>
 #include <fstream>
+#include <stdio.h>
+#include <string.h>
 
 int main(int argc,  char** argv)
 {
-  if(argc < 2)
+  if(argc < 4)
   {
-    std::cout << "Please specify input directory" << std::endl;
+    std::cout << "ERROR: Insufficient parameters!" << std::endl;
+	std::cout << "USAGE: headerize.exe [-d and/or -r] FIRSTNAME LASTNAME EMAIL" << std::endl;
+	std::cout << "-D: I want to be prompted to set the description for each file" << std::endl;
+	std::cout << "-R: I want to be prompted to set the remarks for each file" << std::endl;
+	std::cout << "WARNING: I've done very little stupid input checking" << std::endl;
+	std::cout << "Behavior undefined (and pos dangerous) for any form except given above" << std::endl;
   }
   else
   {
-    std::cout << "Headerizing files in " << argv[1] << std::endl;
-  
-    DIR* dir;
     dirent* pDir;
-    char* author = NULL, *email = NULL;
+    DIR* dir = opendir("input");
+    char* authorFirstname = NULL, *authorLastname = NULL, *email = NULL;
     std::list<std::string> files = std::list<std::string>();
-  
-    dir = opendir(argv[1]); 
-    author = argv[2];
-    email = argv[3];
+	int i;
+	bool setDescription = false, setRemarks = false;
+	
+	//Checks for switches 
+	for(i = 1; i < argc - 3; ++i)
+    {
+     if(strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "-D") == 0)
+	   setDescription = true;
+	 else if(strcmp(argv[i], "-r") == 0 || strcmp(argv[i], "-R") == 0)
+	   setRemarks = true;
+    }   
+   
+    //Saves in necessary command line params
+    authorFirstname = argv[i];
+	authorLastname = argv[i+1];
+    email = argv[i+2];
 
+	//Reads through input dir and 
     while((pDir = readdir(dir)))
       files.push_back(pDir->d_name);
     
+	//The first two thigns i grab are junk idc about. So pop em off here
     files.pop_front();
     files.pop_front();
   
-    std::cout << "Ok, I will headerize the following files... " << std::endl;
-    for(std::list<std::string>::iterator it = files.begin(); it != files.end(); ++it)
-      std::cout << *it << std::endl;
-    
+  
+    std::cout << "Headerizing files in Input " << std::endl;
     for(std::list<std::string>::iterator it = files.begin(); it != files.end(); ++it)
     {
+	  //Reads the entire contents of a file. It wont let me insert at beginning so, I'll make a new 
+	  //file with header at beginning and rest at end. This reads all actual code in the file
+	  std::ifstream headerlessFile (("input/" + (*it)).c_str());
+	  std::string line, allText;
+	  if(headerlessFile.is_open())
+	  {
+	    while(getline(headerlessFile, line))
+		{
+		   allText.append(line);
+		   allText.append("\n");
+		}
+	  }
+	  else
+	  {
+        std::cout << "Failed to open input file " << ("input/" + (*it)).c_str() << std::endl;
+	  }
+	  
+	  //Puts the header in
       std::ofstream currentFile;
-      currentFile.open( ("input/" + (*it)).c_str() );
-      std::cout << ("input/" + (*it)).c_str() << std::endl;
-      
+      currentFile.open( ("output/" + (*it)).c_str() );
+      std::cout << ("output/" + (*it)).c_str() << std::endl;
+		
       currentFile << "/*****************************************************************************/" << std::endl;
       currentFile << "/*!" << std::endl;
       currentFile << "\\file       " << *it << std::endl;
       
-      if(author)
-        currentFile << "\\author  " << author << std::endl;
+      if(authorFirstname && authorLastname)
+        currentFile << "\\author  " << authorFirstname << " " << authorLastname << std::endl;
       else
         currentFile << "\\author  " << std::endl;
       
@@ -54,11 +89,38 @@ int main(int argc,  char** argv)
       else
         currentFile << "\\par        Contact: " << std::endl;
       
-      currentFile << "\\brief " << std::endl << std::endl;
-      currentFile <<"\\remarks " << std::endl << std::endl;
+      currentFile << "\\brief "<< std::endl;
+	  
+	  //If you want to manually set the description
+	  if(setDescription)
+	  {
+	    char* description;
+	    std::cout << "Enter description for file " << *it << std::endl;
+		std::cin.getline(description, 256);
+		currentFile << "     " << description << std::endl;
+	  }
+	  else
+	    std::cout << std::endl;
+	  
+      currentFile <<"\\remarks " << std::endl;
+	  
+	  //If you want to manually set the remarks
+	  if(setRemarks)
+	  {
+	  	std::string remarks = std::string();
+	    std::cout << "Enter remarks for file " << *it << std::endl;
+		std::cin >> remarks;
+		currentFile << "     " << remarks << std::endl;
+	  }
+	  else
+	    std::cout << std::endl;
+	 
       currentFile << "All content © 2015 DigiPen (USA) Corporation, all rights reserved." << std::endl;
       currentFile << "/*****************************************************************************/" << std::endl;
 
+	  //Puts all the code in
+	  currentFile << allText;
+	  
       currentFile.close();
     }
   }
