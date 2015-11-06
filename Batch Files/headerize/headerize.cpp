@@ -96,7 +96,7 @@ int main(int argc,  char** argv)
 	  {
 	    char* description;
 	    std::cout << "Enter description for file " << *it << std::endl;
-		std::cin.getline(description, 256);
+		std::cin.getline(description, 512);
 		currentFile << "     " << description << std::endl;
 	  }
 	  else
@@ -107,9 +107,10 @@ int main(int argc,  char** argv)
 	  //If you want to manually set the remarks
 	  if(setRemarks)
 	  {
-	  	std::string remarks = std::string();
+	    char* remarks;
 	    std::cout << "Enter remarks for file " << *it << std::endl;
 		std::cin >> remarks;
+		std::cin.getline(remarks, 512);
 		currentFile << "     " << remarks << std::endl;
 	  }
 	  else
