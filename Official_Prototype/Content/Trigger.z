@@ -1,0 +1,93 @@
+class Trigger : ZilchComponent
+{
+    //If it receives a trigger, this object won't send triggers until it receives one
+    [Property]
+    var ReceiveTrigger:Boolean = false;
+    
+    var IsTriggered:Boolean = false;
+    
+    //Waits this many seconds before sending a trigger.
+    [Property]
+    var TimedTrigger:Real = 0;
+    
+    //What object to send a trigger to. Leave empty if global
+    [Property]
+    var ObjectToTrigger:CogPath = null;
+    
+    //Sends trigger when the player collides with this object
+    [Property]
+    var PlayerCollision:Boolean = false;
+    
+    //Sends trigger when an enemy collides with this object
+    [Property]
+    var EnemyCollision:Boolean = false;
+    
+    //Sends trigger when a specific object collides with this object
+    [Property]
+    var CustomCollision:Boolean = false;
+    //The name of what object causes custom collision trigger
+    [Property]
+    var CustomCollisionObjectName:String = null;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        if(this.ReceiveTrigger)
+        {
+            this.IsTriggered = false;
+        }
+        
+        //Only needs to use logic updates if it needs to count down the timer
+        if(this.TimedTrigger > 0)
+        {
+            Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        }
+        
+        //Only needs the collision event if it reacts to 
+        if(this.PlayerCollision || this.EnemyCollision || this.CustomCollision)
+        {
+            Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollision);
+        }
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.ReceiveTrigger)
+        {
+            
+        }
+    }
+    
+    //If this object has a collision body, it will send out the correct event
+    function OnCollision(event : CollisionEvent)
+    {
+        //If this object is triggered by the player object, sends a trigger
+        if(this.PlayerCollision && event.OtherObject.Name == "Player")
+        {
+            
+        }
+        
+        //If this object is triggered by enemies, sends a trigger
+        if(this.EnemyCollision && event.OtherObject.Name == "Enemy")
+        {
+            
+        }
+        
+        //If this object is triggered by a specific object, sends a trigger
+        if(this.CustomCollision && event.OtherObject.Name == this.CustomCollisionObjectName)
+        {
+            
+        }
+    }
+    
+    //Only sends an event to the specific object
+    function TriggerObject()
+    {
+        
+    }
+    
+    function GlobalTrigger()
+    {
+        
+    }
+}
