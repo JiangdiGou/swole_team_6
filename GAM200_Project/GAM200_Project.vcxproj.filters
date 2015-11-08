@@ -64,6 +64,9 @@
     <Filter Include="loggerConsole">
       <UniqueIdentifier>{9ca3870f-2015-418c-88a4-ef0bef261a1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\ActionSystem">
+      <UniqueIdentifier>{61146ca7-7434-45cd-9a2c-a48cbd0526a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -263,6 +266,36 @@
     <ClInclude Include="GAM200_Project\physicsLib\RayLineBoxCollision.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\SampleCurve.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
@@ -395,6 +428,21 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\RayLineBoxCollision.cpp">
       <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp">
+      <Filter>Systems\ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp">
+      <Filter>Systems\ActionSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
