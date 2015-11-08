@@ -1,13 +1,17 @@
 /*****************************************************************************/
 /*!
-\file       Camera.cpp
+\file    Camera.cpp
 \author  Conor Lavelle
-\par        Contact: c.lavelle@digipen.edu
+\par     Contact: c.lavelle@digipen.edu
 \brief 
-     Implemetnation of our game's camera
+  Implementation of our game's camera
 \remarks 
+
+
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
 /*****************************************************************************/
+//~EndHeader~
 #include "Camera.h"
 
 //DO NOT USE. It was bitching at me for no default
