@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Graphics.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Contains information that nearly all graphics modules need access to 
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 

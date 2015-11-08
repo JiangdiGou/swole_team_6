@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       debugDraw.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Interface of our game's debug drawing system
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef DEBUGDRAW_H
 #define DEBUGDRAW_H
 

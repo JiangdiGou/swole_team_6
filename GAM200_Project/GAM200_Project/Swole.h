@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Swole.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Interface of Swole, which is just a wrapper for core engine functioanlity
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef SWOLE_H
 #define SWOLE_H
 
