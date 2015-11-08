@@ -69,9 +69,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
@@ -263,11 +260,11 @@
     <ClInclude Include="GAM200_Project\physicsLib\RayLineBoxCollision.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\reactive.h">
+      <Filter>Universal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
       <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
@@ -309,9 +306,6 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\logger\logger.cpp">
       <Filter>logger</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp">
-      <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp">
       <Filter>BaseEngine\Factory</Filter>
@@ -395,6 +389,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\RayLineBoxCollision.cpp">
       <Filter>Systems\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\reactive.cpp">
+      <Filter>Universal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

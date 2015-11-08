@@ -1,13 +1,17 @@
 /*****************************************************************************/
 /*!
-\file       Texture.h
+\file    Texture.h
 \author  Conor Lavelle
-\par        Contact: c.lavelle@digipen.edu
+\par     Contact: c.lavelle@digipen.edu
 \brief 
-     OLD, SHOULD BE DELETED WHEN SPRITETEXT DEPEND REMOVED
+  See texture.cpp
 \remarks 
+  
+
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
 /*****************************************************************************/
+//~EndHeader~
 #ifndef TEXTURE_H
 #define TEXTURE_H
 

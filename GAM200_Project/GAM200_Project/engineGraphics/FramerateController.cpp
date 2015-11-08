@@ -1,13 +1,18 @@
 /*****************************************************************************/
 /*!
-\file       FramerateController.cpp
+\file    FramerateController.cpp
 \author  Conor Lavelle
-\par        Contact: c.lavelle@digipen.edu
+\par     Contact: c.lavelle@digipen.edu
 \brief 
-     Implementation of our game's frame rate controller
+  Implementation of the game's framerate controller, which locks the game's
+  framerate at a particular value, found in init info
 \remarks 
+  
+
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
 /*****************************************************************************/
+//~EndHeader~
 #include "FramerateController.h"
 #include "Graphics.h"
 #include "../initInfo.h"
