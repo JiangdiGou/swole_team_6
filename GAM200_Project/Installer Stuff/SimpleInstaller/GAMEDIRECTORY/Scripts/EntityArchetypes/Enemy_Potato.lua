@@ -1,0 +1,3 @@
+aType = {
+	name = "PotatoEnemy"	
+}
