@@ -1,13 +1,17 @@
 /*****************************************************************************/
 /*!
-\file       SpriteText.cpp
+\file    SpriteText.cpp
 \author  Conor Lavelle
-\par        Contact: c.lavelle@digipen.edu
+\par     Contact: c.lavelle@digipen.edu
 \brief 
-     Implementation of SpriteText, which is responsible for displaying text as a 2d sprite
+  Im[2~plementation of Sprite Text, which allows text to be displayed
 \remarks 
+  
+
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
 /*****************************************************************************/
+//~EndHeader~
 #include "SpriteText.h"
 
 GLuint SpriteText::shaderID = 0;

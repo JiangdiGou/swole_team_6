@@ -1,13 +1,17 @@
 /*****************************************************************************/
 /*!
-\file       Sprite.h
+\file    Sprite.h
 \author  Conor Lavelle
-\par        Contact: c.lavelle@digipen.edu
+\par     Contact: c.lavelle@digipen.edu
 \brief 
-     Interface of Sprite, which is the core graphics class
+  Interface of Sprite, which is the core graphical component of our game
 \remarks 
+  
+
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
 /*****************************************************************************/
+//~EndHeader~
 #ifndef  SPRITE_H
 #define SPRITE_H
 

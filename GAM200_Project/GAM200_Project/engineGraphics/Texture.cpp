@@ -1,13 +1,19 @@
 /*****************************************************************************/
 /*!
-\file       Texture.cpp
+\file    Texture.cpp
 \author  Conor Lavelle
-\par        Contact: c.lavelle@digipen.edu
+\par     Contact: c.lavelle@digipen.edu
 \brief 
-     OLD, SHOULD BE DELETED WHEN SPRITETEXT DEPEND REMOVED
+  Old, and should be deleted eventually, but sprite text is still dependent
+  on it unfortunately. I hopefully will get around to removing it
+  eventually
 \remarks 
+  
+
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
 /*****************************************************************************/
+//~EndHeader~
 #include "Texture.h"
 
 //**********************

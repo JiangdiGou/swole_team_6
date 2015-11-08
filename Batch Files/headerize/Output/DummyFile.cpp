@@ -1,17 +1,27 @@
 /*****************************************************************************/
 /*!
-\file    Camera.cpp
+\file    DummyFile.cpp
 \author  Conor Lavelle
 \par     Contact: c.lavelle@digipen.edu
 \brief 
-  Implementation of our game's camera
+  The quick brown fox jumped over the lazy dog. The quick brown fox jumped
+  over the lazy dog. The quick brown fox jumped over the lazy dog. The
+  quick brown fox jumped over the lazy dog. The quick brown fox jumped
+  over the lazy dog. The quick brown fox jumped over the lazy dog. The
+  quick brown fox jumped over the lazy dog. 
 \remarks 
-
+  I'm gonna throw in some extra words here to offset the remarks section from
+  the other section to test more The quick brown fox jumped over the lazy
+  dog. The quick brown fox jumped over the lazy dog. The quick brown fox
+  jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
+  The quick brown fox jumped over the lazy dog. The quick brown fox jumped
+  over the lazy dog. The quick brown fox jumped over the lazy dog. 
 
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 //~EndHeader~
+
 #include "Camera.h"
 
 //DO NOT USE. It was bitching at me for no default
