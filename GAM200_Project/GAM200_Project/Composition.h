@@ -16,7 +16,7 @@ class GameObjectComposition
 public:
 friend class objFactory;
 
-GameComponent* GetComponent(ComponentTypeId typeId);
+GameComponent* GetComponent(ComponentTypeId typeId) const;
 
 ///Message interface See Message.h
 ///Message will be sent to each component on this composition.

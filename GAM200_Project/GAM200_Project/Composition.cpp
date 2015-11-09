@@ -14,7 +14,7 @@ struct ComponentSorter
 };
 
 //Binary search a sorted array of components.
-GameComponent* BinaryComponentSearch(ComponentArray& components, ComponentTypeId name)
+GameComponent* BinaryComponentSearch(const ComponentArray& components, ComponentTypeId name)
 {
 	size_t begin = 0;
 	size_t end = components.size();
@@ -81,7 +81,7 @@ void GameObjectComposition::AddComponent(ComponentTypeId typeId, GameComponent* 
 	std::sort(Components.begin(), Components.end(), ComponentSorter());
 }
 
-GameComponent * GameObjectComposition::GetComponent(ComponentTypeId typeId)
+GameComponent * GameObjectComposition::GetComponent(ComponentTypeId typeId) const
 {
 	return BinaryComponentSearch(Components, typeId);
 }

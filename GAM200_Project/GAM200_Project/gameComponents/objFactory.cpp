@@ -13,11 +13,12 @@
  *******************************************************************************/
 
 #include "objFactory.h"
-#include <random>
 
 #include "../AssertionError/AssertionError.h"
 #include "../WindowsSystem.h"
 bool FACTORY_EXISTS;
+int nextID = 0;
+int tileNumber = 0;
 objFactory::objFactory()
 {
   FACTORY = this;
@@ -28,21 +29,11 @@ GameObjectComposition* objFactory::makeObject(std::string Name)
 {
   GameObjectComposition *toReturn = new GameObjectComposition();
 
-  std::mt19937 init_generator;//Mersenne Twister 19937 generator
-  init_generator.seed(std::random_device()());
-  std::uniform_int_distribution<std::mt19937::result_type> idgen(1, 2147483647);
-
-  int gen = idgen(init_generator);
-
-  while (gameObjs[gen] != NULL)
-  {
-    //already using gen
-    gen = idgen(init_generator);
-  }
 
   toReturn->ObjectName = Name;
-  toReturn->ObjectId = gen;
-  gameObjs[gen] = toReturn;
+  toReturn->ObjectId = nextID;
+  gameObjs[nextID] = toReturn;
+  nextID++;
   return toReturn;
 }
 
@@ -73,22 +64,21 @@ void objFactory::destroyAllObjects()
   gameObjs.clear();
 }
 
-std::map<const int, const GameObjectComposition*> objFactory::GetgameObjs()
+/*std::vector<const GameObjectComposition*> objFactory::GetgameObjs()
 {
-	std::map<const int, const GameObjectComposition*> constObjs;
+	std::vector<const GameObjectComposition*> constObjs;
 	std::map<int, GameObjectComposition*>::iterator umr;
-	for (umr = gameObjs.begin(); gameObjs.size() > 0; umr = gameObjs.begin())
+	for (umr = gameObjs.begin(); umr != gameObjs.end(); umr++)
 	{
 		constObjs[umr->first] = umr->second;
 	}
 
 	return constObjs;
 	
-}
+}*/
 // Overloaded methods
 void objFactory::Initialize()
 {
-
 }
 void objFactory::Update(float dt)
 {
@@ -109,6 +99,9 @@ void objFactory::SendMessages(Message * message)
     // The user has pressed a (letter/number) key, we may respond by creating
     // a specific object based on the key pressed.
   case Mid::CharacterKey:
+  {
+  }
+  case Mid::MouseMove:
   {
   }
   case Mid::MouseButton:
@@ -221,7 +214,7 @@ void objFactory::createTiles()
 
 GOC * objFactory::createTile(int positionX, int positionY, std::string textureName)
 {
-  GOC * newTile = FACTORY->makeObject("newTile");
+  GOC * newTile = FACTORY->makeObject("newTile" + tileNumber++);
   Transform * tileTransform = new Transform();
   tileTransform->SetPosition(positionX, positionY, 0);
   Sprite * tileSprite = new Sprite();

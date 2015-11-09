@@ -248,7 +248,7 @@ bool  DetectCollisionCircleAABox(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactLi
 	return false;
 }
 
-bool  DetectCollisionAABoxAABox(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactList*c)
+bool  DetectCollisionAABoxAABox(Shape *a, Vec2D at, Shape *b, Vec2D bt, contactList*c)
 {
 	ShapeAAB * boxA = (ShapeAAB*)a;
   ShapeAAB * boxB = (ShapeAAB*)b;
