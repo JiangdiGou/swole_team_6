@@ -149,12 +149,23 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
      INITINFO->clientWidth = width;
      INITINFO->clientHeight = height;
      glViewport(0, 0, width, height); 
-
      break;
   }
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 0;
+  case WM_DESTROY:
+  {
+    PostQuitMessage(0);
+    return 0;
+  }
+  case WM_CLOSE:
+  {
+    int  result = MessageBox(hWnd, "Are you sure you want to quit Ninjacade?", "Quit Confirmation", MB_YESNO);
+    std::cout << result << std::endl;
+    if (result == 6)
+    {
+      PostQuitMessage(0);
+      return 0;
+    }
+  }
 	case WM_SYSKEYDOWN:
 	{
 		//Eat the WM_SYSKEYDOWN message to prevent freezing the game when

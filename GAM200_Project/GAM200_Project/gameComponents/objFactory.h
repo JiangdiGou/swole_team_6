@@ -27,15 +27,14 @@
 class objFactory : public ISystem
 {
 private:
-  std::map<int, GameObjectComposition*> gameObjs;//id, Game object
-
   GOC * createTile(int positionX, int positionY, std::string textureName);
   bool changeTile(char tile, int x, int y);
   bool changeEntity(char entity, int x, int y);
   void insertCol(int x, int count);
   void insertRow(int y, int count);
 public:
-  std::map<const int,  const GameObjectComposition*> GetgameObjs();
+  std::map<int, GameObjectComposition*> gameObjs;//id, Game object
+  //std::vector< const GameObjectComposition*> GetgameObjs();
   void printLevel();
   objFactory();
   GameObjectComposition* makeObject(std::string Name);
