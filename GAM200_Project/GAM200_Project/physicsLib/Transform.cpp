@@ -52,7 +52,7 @@ float Transform::GetPositionX()
 }
 float Transform::GetPositionY()
 {
-  return position.x;
+  return position.y;
 }
 
 void Transform::SetPosition(const Vector2 pos)

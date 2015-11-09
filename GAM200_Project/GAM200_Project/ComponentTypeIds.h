@@ -27,7 +27,7 @@ enum ComponentTypeId
 	CT_PLAYERDEATH,
 	CT_ShapeAAB,
 	CT_ShapeLine,
-    CT_MouseVector
-	
+  CT_MouseVector,
+  CT_Reactive  
 };
 #endif
