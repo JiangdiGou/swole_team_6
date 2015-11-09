@@ -66,9 +66,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
@@ -236,11 +233,30 @@
     <ClInclude Include="GAM200_Project\engineGraphics\ParticleSystem.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\SampleCurve.h" />
+    <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h" />
+    <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h" />
+    <ClInclude Include="GAM200_Project\initInfo.h" />
+    <ClInclude Include="GAM200_Project\mouseVector.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\ObjectLinkedList.h" />
+    <ClInclude Include="GAM200_Project\physicsLib\RayLineBoxCollision.h" />
+    <ClInclude Include="GAM200_Project\reactive.h" />
+    <ClInclude Include="GAM200_Project\runLua\luaTranslate.h" />
+    <ClInclude Include="GAM200_Project\Swole.h" />
+    <ClInclude Include="GAM200_Project\engineAudio\Sound.h">
+      <Filter>Systems\audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
       <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
@@ -283,9 +299,6 @@
     <ClCompile Include="GAM200_Project\logger\logger.cpp">
       <Filter>logger</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\Composition.cpp">
       <Filter>BaseEngine\Composition</Filter>
     </ClCompile>
@@ -301,19 +314,10 @@
     <ClCompile Include="GAM200_Project\physicsLib\Resolution.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\primitive.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Collision.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\CollisionCheck.cpp">
-      <Filter>Systems\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="GAM200_Project\physicsLib\Trigger.cpp">
       <Filter>Systems\physics</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\physicsLib\Precompiled.cpp">
@@ -359,6 +363,21 @@
     <ClCompile Include="GAM200_Project\physicsLib\PlayerState.cpp" />
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp">
       <Filter>BaseEngine\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp" />
+    <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp" />
+    <ClCompile Include="GAM200_Project\initInfo.cpp" />
+    <ClCompile Include="GAM200_Project\mouseVector.cpp" />
+    <ClCompile Include="GAM200_Project\physicsLib\RayLineBoxCollision.cpp" />
+    <ClCompile Include="GAM200_Project\reactive.cpp" />
+    <ClCompile Include="GAM200_Project\runLua\luaTranslate.cpp" />
+    <ClCompile Include="GAM200_Project\Swole.cpp" />
+    <ClCompile Include="GAM200_Project\engineAudio\Sound.cpp">
+      <Filter>Systems\audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
