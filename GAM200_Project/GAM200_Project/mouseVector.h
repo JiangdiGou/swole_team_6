@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    mouseVector.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Interface of mousevector, which stores mouse up and down event information.
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef MOUSEVECTOR_H
 #define MOUSEVECTOR_H
 

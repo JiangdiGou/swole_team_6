@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    Shader.cpp
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Implementation of the shader class, which is responsible for compiling and
+  linking shaders, as well as storing shader information
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #include "Shader.h"
 
 std::vector<Shader*> Shader::shaders = {};

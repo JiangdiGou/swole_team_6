@@ -11,6 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\SampleCurve.h" />
     <ClInclude Include="GAM200_Project\AssertionError\AssertionError.h" />
     <ClInclude Include="GAM200_Project\Component.h" />
     <ClInclude Include="GAM200_Project\ComponentCreator.h" />
@@ -31,9 +41,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Shader.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h" />
-    <ClInclude Include="GAM200_Project\engineGraphics\Testing.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\Texture.h" />
     <ClInclude Include="GAM200_Project\engineGraphics\textureAtlas.h" />
     <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h" />
@@ -117,6 +124,7 @@
     <ClInclude Include="GAM200_Project\physicsLib\swag.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\reactive.h" />
     <ClInclude Include="GAM200_Project\runLua\luaRunner.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -138,6 +146,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp" />
     <ClCompile Include="GAM200_Project\Client.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -151,17 +164,10 @@
     <ClCompile Include="GAM200_Project\engineGraphics\debugDraw.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\FramerateController.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Graphics.cpp" />
-    <ClCompile Include="GAM200_Project\engineGraphics\GFXMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\graphicsManager.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Shader.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\Sprite.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp" />
-    <ClCompile Include="GAM200_Project\engineGraphics\Testing.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp" />
     <ClCompile Include="GAM200_Project\engineGraphics\textureAtlas.cpp" />
     <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp" />
@@ -213,6 +219,7 @@
     <ClCompile Include="GAM200_Project\physicsLib\Transform.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\reactive.cpp" />
     <ClCompile Include="GAM200_Project\runLua\luaRunner.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

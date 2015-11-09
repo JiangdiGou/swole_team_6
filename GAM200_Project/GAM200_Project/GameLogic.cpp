@@ -21,6 +21,7 @@
 #include "physicsLib/BinaryMap.h"
 #include "physicsLib/PlayerState.h"
 #include "mouseVector.h"
+#include "reactive.h"
 
 #include <ctime>
 
@@ -29,7 +30,7 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  FACTORY->loadLevelFrom("BetaLevel.txt");
+  FACTORY->loadLevelFrom("resources/Levels/BetaLevel.txt");
 
 
   GOC * camera = FACTORY->makeObject("Camera");
@@ -98,9 +99,11 @@ void GameLogic::Initialize()
 
   Sprite * sprite5 = new Sprite();
   sprite5->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
-  sprite5->color = glm::vec4(0, 0, 1, 1);
+  //sprite5->color = glm::vec4(0, 0, 1, 1);
+  Reactive * reactive = new Reactive();
   blackObj2->AddComponent(CT_Sprite, sprite5);
   blackObj2->AddComponent(CT_ShapeAAB, box);
+  blackObj2->AddComponent(CT_Reactive, reactive);
 
 
   //down 1

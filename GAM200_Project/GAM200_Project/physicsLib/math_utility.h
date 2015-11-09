@@ -176,7 +176,7 @@ public:
 		if (pVec0.y > pVec1.y)
 		{
 			max.y = pVec0.y;
-		}
+		} 
 		else
 		{
 			max.y = pVec1.y;

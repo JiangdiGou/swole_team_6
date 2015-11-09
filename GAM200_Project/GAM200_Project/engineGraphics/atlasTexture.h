@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       atlasTexture.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Interface of atlasTexture, which stores information about textures inside atlas
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef ATLASTEXTURE_H
 #define ATLASTEXTURE_H
 

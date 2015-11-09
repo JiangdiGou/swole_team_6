@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    Graphics.cpp
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Contains the implementation of very fundamental low level core graphical
+  functions
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #include "Graphics.h"
 
 #ifdef GFXLOG

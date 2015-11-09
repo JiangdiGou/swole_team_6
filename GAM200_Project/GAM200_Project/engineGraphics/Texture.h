@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Texture.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  See texture.cpp
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
