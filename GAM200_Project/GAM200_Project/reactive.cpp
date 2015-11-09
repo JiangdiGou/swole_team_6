@@ -17,24 +17,27 @@ void Reactive::SendMessages(Message * message)
 
     MouseMove* moveEvent = (MouseMove*)message;
 
-    if (moveEvent->MousePosition.x <
-      ownerTransform->GetPositionX() + 0.5 * ownerTransform->GetScale().x
-      && moveEvent->MousePosition.x >
-      ownerTransform->GetPositionX() - 0.5 * ownerTransform->GetScale().x
-      && moveEvent->MousePosition.y <
-      ownerTransform->GetPositionY() + 0.5 * ownerTransform->GetScale().y
-      && moveEvent->MousePosition.y >
-      ownerTransform->GetPositionY() - 0.5 * ownerTransform->GetScale().y)
-    {
+    float leftEdge = ownerTransform->GetPositionX() - 0.5 * ownerTransform->GetScale().x;
+    float rightEdge = ownerTransform->GetPositionX() + 0.5 * ownerTransform->GetScale().x;
+    float topEdge = ownerTransform->GetPositionY() + 0.5 * ownerTransform->GetScale().y;
+    float bottomEdge = ownerTransform->GetPositionY() - 0.5 * ownerTransform->GetScale().y;
+
+    if (moveEvent->MousePosition.x < rightEdge && moveEvent->MousePosition.x > leftEdge
+      && moveEvent->MousePosition.y > bottomEdge && moveEvent->MousePosition.y < topEdge)
       mouseIsOver = true;
-      std::cout << moveEvent->MousePosition << " is within box." << std::endl;
-      std::cout << "box has pos " << ownerTransform->GetPosition() << " and scale " << ownerTransform->GetScale() << std::endl;
-    }
     else
-    {
-      std::cout << moveEvent->MousePosition << " is not within box." << std::endl;
-      std::cout << "box has pos " << ownerTransform->GetPosition() << " and scale " << ownerTransform->GetScale() << std::endl;
       mouseIsOver = false;
+  }
+  case Mid::MouseButton:
+  {
+    MouseButton* mouseEvent = (MouseButton*)message;
+
+    if (mouseEvent->MouseButtonIndex == 0)
+    {
+      if (mouseEvent->ButtonIsPressed)
+        mouseDown = true;
+      else
+        mouseDown = false;
     }
   }
   }
@@ -52,9 +55,11 @@ void Reactive::Update(float dt)
 
   if (ownerSprite)
   {
-    if (mouseIsOver)
+    if (mouseIsOver && mouseDown)
+      ownerSprite->color = glm::vec4(0.0, 1.0, 0.0, 1.0);
+    else if (mouseIsOver)
       ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0);
     else
-      ownerSprite->color = glm::vec4(1.0, 0.0, 1.0, 1.0);
+      ownerSprite->color = glm::vec4(1.0, 0.0, 0.0, 1.0);
   }
 }
