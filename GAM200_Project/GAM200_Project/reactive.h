@@ -15,6 +15,7 @@ public:
   bool mouseOver();
 
 private:
+  bool mouseDown = false;
   bool mouseIsOver = false;
   Transform* ownerTransform;
 };
