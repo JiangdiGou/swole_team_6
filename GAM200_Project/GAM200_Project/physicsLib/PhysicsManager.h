@@ -20,6 +20,12 @@ public:
 	float Impulse;
 	GOC * CollidedWith;
 };
+class Collision : public Message
+{
+public:
+  Collision(ShapeAAB* otherObj) : Message(Mid::Collision), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
+};
 
 /// Provides the Body Component.
 class Physics : public ISystem

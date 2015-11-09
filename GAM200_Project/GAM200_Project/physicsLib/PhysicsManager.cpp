@@ -54,7 +54,14 @@ void Physics::DetectContacts(float dt)
 			{
 				if (Collsion.GenerateContacts((bodyA)->BodyShape, (bodyA)->Position, (bodyB)->BodyShape, (bodyB)->Position, &Contacts))
 				{
-
+          ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
+          ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
+          Collision ACollisionWith(BShape);
+          Collision BCollisionWith(AShape);
+          if (!bodyA->IsStatic)
+            AShape->SendMessages(&ACollisionWith);
+          if (!bodyB->IsStatic)
+            BShape->SendMessages(&BCollisionWith);
 				}
 			}
 		}

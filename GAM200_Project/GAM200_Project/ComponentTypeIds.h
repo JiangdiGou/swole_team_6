@@ -16,7 +16,6 @@ enum ComponentTypeId
 	CT_AABB,
 	CT_Circle,
 	//Max
-	CT_MaxComponents,
 	CT_CircleCollider,
 	CT_BoxCollider,
 	CT_TileMapCollision,
@@ -27,7 +26,9 @@ enum ComponentTypeId
 	CT_PLAYERDEATH,
 	CT_ShapeAAB,
 	CT_ShapeLine,
-    CT_MouseVector
+  CT_MouseVector,
+  CT_Reactive,
+  CT_MaxComponents
 	
 };
 #endif

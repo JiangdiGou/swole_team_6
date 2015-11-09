@@ -32,10 +32,66 @@ bool ShapeCircle::TestPoint(Vec2D testPoint)
 
 void ShapeAAB::Initialize()
 {
+  PrevCollidingObjects.clear();
+  CurCollidingObjects.clear();
   /*body = GetOwner()->has(Body);
   if (body == NULL)
     return;
   body->BodyShape = this;*/
+}
+
+void ShapeAAB::Update(float dt)
+{
+  int i, j;
+  bool persist;
+  for (i = 0; i < CurCollidingObjects.size(); i++)
+  {
+    persist = false;
+    for (j = 0; j < PrevCollidingObjects.size(); j++)
+    {
+      if (CurCollidingObjects.at(i) == PrevCollidingObjects.at(j))
+      {
+        persist = true;
+        CollisionPersisted collision(CurCollidingObjects.at(i));
+        GetOwner()->SendMessages(&collision);
+        PrevCollidingObjects.erase(PrevCollidingObjects.begin() + j);
+      }
+    }
+    if (persist == false)
+    {
+      std::cout << "start" << std::endl;
+      CollisionStarted collision(CurCollidingObjects.at(i));
+      GetOwner()->SendMessages(&collision);
+    }
+  }
+  int prevsize = PrevCollidingObjects.size();
+  for (i = 0; i < prevsize; i++)
+  {
+    CollisionEnded collision(PrevCollidingObjects.at(i));
+    GetOwner()->SendMessages(&collision);
+    PrevCollidingObjects.erase(PrevCollidingObjects.begin());
+  }
+  PrevCollidingObjects.clear();
+  int cursize = CurCollidingObjects.size();
+  for (i = 0; i < cursize; i++)
+  {
+    ShapeAAB* otherShape = CurCollidingObjects.at(i);
+    PrevCollidingObjects.push_back(otherShape);
+  }
+  CurCollidingObjects.clear();
+  return;
+}
+
+void ShapeAAB::SendMessages(Message* m)
+{
+  switch (m->MessageId)
+  {
+  case Mid::Collision:
+  {
+    Collision* CollisionEvent = (Collision*)m;
+    //CurCollidingObjects.push_back(CollisionEvent->otherObj);
+  }
+  }
 }
 
 void ShapeAAB::Draw()
