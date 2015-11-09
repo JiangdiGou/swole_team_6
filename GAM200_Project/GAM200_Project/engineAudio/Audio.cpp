@@ -35,6 +35,7 @@ FMSoundSys::FMSoundSys()
 
 void FMSoundSys::createSound(FMSound *sound, const char* pFile)
 {
+	FMOD_RESULT ia;
 	fmodsys->createSound(pFile, FMOD_CREATESAMPLE, 0, sound);
 }
 
