@@ -19,6 +19,7 @@ main loop
 #include "runLua/luaTranslate.h"
 #include "runLua/luaRunner.h"
 #include "Utilities.h"
+#include "ActionSystem\ActionSequence.h"
 
 #include "initInfo.h"
 
@@ -78,8 +79,8 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   Shader* pBasicShader = new Shader("resources/shaders/VertexShader.txt", "resources/shaders/FragmentShader.txt");
   const Shader &basicShader = *pBasicShader;
   engine->AddSystem(new GraphicsManager(basicShader));
-
   engine->AddSystem(new GameLogic());
+  engine->AddSystem(new ActionSystem::ActionSequence());
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
 

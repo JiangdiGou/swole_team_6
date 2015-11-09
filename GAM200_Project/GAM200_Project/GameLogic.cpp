@@ -30,7 +30,7 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  FACTORY->loadLevelFrom("BetaLevel.txt");
+  FACTORY->loadLevelFrom("resources/Levels/BetaLevel.txt");
 
 
   GOC * camera = FACTORY->makeObject("Camera");
