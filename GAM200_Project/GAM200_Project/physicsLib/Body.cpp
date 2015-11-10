@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Body.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the base rigidbody for the physics to do all the effects
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 //#include "our header files"
 //#include "Precompiled.h"
 #include "Transform.h"

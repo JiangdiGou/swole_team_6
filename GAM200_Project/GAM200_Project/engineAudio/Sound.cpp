@@ -22,14 +22,14 @@ SoundManager::~SoundManager()
 //    return false;
 //  }
 
-bool SoundManager::Initialize()
+void SoundManager::Initialize()
 {
 	FMOD_RESULT result;
 	// here we create our sound system
 	char text[200];
 	if (FMOD::Studio::System::create(&m_Sys))
 	{
-		return false;
+		return;
 	}
 
 
@@ -38,33 +38,33 @@ bool SoundManager::Initialize()
 
 	if (m_Sys->initialize(1024, FMOD_STUDIO_INIT_LIVEUPDATE, FMOD_INIT_NORMAL, 0))
 	{
-		return false;
+		return;
 	}
 
 	result = m_Sys->loadBankFile("resources/Audio/Master Bank.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MasterBank);
 	if (result != FMOD_OK)
 	{
-		return false;
+		return;
 	}
 
 	result = m_Sys->loadBankFile("resources/Audio/Ambience.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_AmbienceBank);
 	if (result != FMOD_OK)
 	{
-		return false;
+		return;
 	}
 
 	result = m_Sys->loadBankFile("resources/Audio/Music.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MusicBank);
 	if (result != FMOD_OK)
 	{
-		return false;
+		return;
 	}
 
 	result = m_Sys->loadBankFile("resources/Audio/Master Bank.strings.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_StringBank);
 	if (result != FMOD_OK)
 	{
-		return false;
+		return;
 	}
-	  return true;
+	  
 }
 
 

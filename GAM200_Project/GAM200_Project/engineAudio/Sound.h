@@ -18,14 +18,14 @@ typedef FMOD::Studio::Bank * SoundBank;
 typedef std::unordered_map<std::string, FMOD::Studio::EventInstance *> SoundCollection;
 typedef std::unordered_map<std::string, FMOD::Studio::EventInstance *>::iterator Soundit;
 
-class SoundManager //: public ISystem
+class SoundManager : public ISystem
 {
 	public:
 		SoundManager();
 		~SoundManager();
 
 
-		bool Initialize() ;
+		void Initialize();
 		void Update(float dt);
 		void ShutDown();
 

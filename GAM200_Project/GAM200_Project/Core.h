@@ -20,7 +20,7 @@ public:
   void Initialize();
   unsigned LastTime;
   bool GameActive;
-
+//  SoundManager * m_Sound;
   std::vector<ISystem*> getSystems() const { return Systems; };
 
 private:

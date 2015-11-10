@@ -29,7 +29,8 @@ enum ComponentTypeId
 	CT_MouseVector,
 	CT_Reactive,
 	CT_MaxComponents,
-	CT_Sound
+	CT_Sound,
+	CT_SoundEmitter
 	
 };
 #endif
