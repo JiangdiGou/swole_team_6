@@ -51,6 +51,16 @@ void CoreEngine::GameLoop()
   //std::cin >> garbage;
   //sound.releaseSound(soundSample);
 #else
+
+
+  SoundManager bgm = *new SoundManager();
+  bgm.Volume(10.0f, "player_footsteps");
+  bgm.PlayEvent("player_footsteps");
+
+  
+ 
+ 
+
   if (INITINFO->playTheme)
   {
     //FMSoundSys sound = *new FMSoundSys();

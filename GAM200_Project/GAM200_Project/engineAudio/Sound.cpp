@@ -76,12 +76,15 @@ void SoundManager::Update(float dt)
 
 void SoundManager::ShutDown()
 {
+	// we loop through the sounds list and call the built in release function
 	for (Soundit iter = m_LoopSounds.begin(); iter != m_LoopSounds.end(); iter++)
 	{
 		iter->second->release();
 	}
-	m_StringBank->unload();
+	// release the string bank;
+	m_StringBank->unload();	
 	m_MasterBank->unload();
+	//
 	m_Sys->unloadAll();
 	m_Sys->release();
 }
@@ -89,7 +92,7 @@ void SoundManager::ShutDown()
 bool SoundManager::PlayEvent(std::string name)
 {
 	FMOD::Studio::EventDescription * SoundDescription = NULL;
-	FMOD::Studio::EventInstance * SoundInstance = NULL;
+	FMOD::Studio::EventInstance * SoundInstance = nullptr;
 
 	std::string temptext = "event:/" + name;
 
@@ -105,11 +108,13 @@ bool SoundManager::PlayEvent(std::string name)
 	//properties access
 	SoundDescription->isOneshot(&OneShot);
 
+	//if we cant find the music file in the list
 	if (!OneShot && m_LoopSounds.find(name) != m_LoopSounds.end())
 	{
 		return false;
 	}
 
+	// start the sound
 	SoundInstance->start();
 
 	if (OneShot)

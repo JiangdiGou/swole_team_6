@@ -3,7 +3,7 @@
 #include "SoundEmitter.h"
 #include "../Engine.h"
 
-SoundEmitter::SoundEmitter(GameObjectComposition* Owner) :playSoundOnStart(false)
+SoundEmitter::SoundEmitter(GameObjectComposition* Owner) : playSoundOnStart(false)
 {
 
 }
@@ -36,7 +36,8 @@ void SoundEmitter::PlayEvent(std::string name)
 
 void SoundEmitter::StopEvent(std::string name)
 {
-	m_manager->StopSound(name);
+	if (playSoundOnStart)
+		StopEvent(startSound);
 }
 void SoundEmitter::SetPause(bool pause, std::string name)
 {

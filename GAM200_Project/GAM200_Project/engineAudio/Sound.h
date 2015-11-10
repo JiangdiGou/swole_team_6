@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include "../Composition.h"
 #include "../System.h"
+//#include "SoundEmitter.h"
 
 
 #pragma  comment (lib, "fmodWin/fmodstudio_vc")

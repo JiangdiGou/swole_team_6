@@ -7,6 +7,7 @@
 #include "BinaryMap.h"
 #include "../WindowsSystem.h"
 #include "../GameState/GameStateManager.h"
+#include "../engineAudio/SoundEmitter.h"
 
 enum StateList
 {
@@ -70,6 +71,8 @@ class PlayerState : public GameComponent//, public CollisionDelegate
         AtlasTexture* runAnimation;
 
         Transform* playerTransform;
+
+		SoundEmitter* playerSound;
 
         bool variableJumpHeightEnabled = true;
         unsigned jumpCount;

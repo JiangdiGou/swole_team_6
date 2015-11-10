@@ -33,7 +33,7 @@ void PlayerState::Initialize()
   playerBody = reinterpret_cast<Body *>(parent->GetComponent(CT_Body));
   //playerSpriteRend = reinterpret_cast<SpriteRenderer *>(parent->GetComponent(CT_SpriteRenderer));
  // we need to initialize the messaging system here!!
-
+  playerSound = reinterpret_cast<SoundEmitter *>(parent->GetComponent(CT_SoundEmitter));
   //InitializeCollisionCallback();
   playerTransform = reinterpret_cast<Transform *>(parent->GetComponent(CT_Transform));
   playerSprite = reinterpret_cast<Sprite *>(parent->GetComponent(CT_Sprite));
@@ -64,6 +64,8 @@ void PlayerState::SendMessages(Message * message)
 {
 	switch (message->MessageId)
 	{
+
+
 		// The user has pressed a (letter/number) key, we may respond by creating
 		// a specific object based on the key pressed.
 	case Mid::CharacterKey:
@@ -116,6 +118,8 @@ void PlayerState::SendMessages(Message * message)
 
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
+				//playerSound->PlayEvent("player_footsteps");
+				printf("reach sound");
 				// change player sprite state here 
         if (playerSprite->texture != *runAnimation)
           playerSprite->texture = *runAnimation;
