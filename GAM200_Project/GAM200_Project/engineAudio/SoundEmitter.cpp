@@ -1,4 +1,16 @@
+/*****************************************************************************/
+/*!
+\file    SoundEmitter.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+Gettors/Settors for the sound 
+\remarks
 
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 
 #include "SoundEmitter.h"
 #include "../Engine.h"

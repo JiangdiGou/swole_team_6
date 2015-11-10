@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Collision.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+2D collision for AABB and AABB, cricle and circle.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #include "Collision.h"
 //#include "Precompiled.h"
 #include "PhysicsManager.h"

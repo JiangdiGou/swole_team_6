@@ -1,6 +1,6 @@
 /*****************************************************************************/
 /*!
-\file    Body.cpp
+\file    Body.h
 \author  Jiangdi Gou
 \par     contact: jiangdi.g@digipen.edu
 \brief

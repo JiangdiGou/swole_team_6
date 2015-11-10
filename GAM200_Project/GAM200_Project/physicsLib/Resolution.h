@@ -1,3 +1,16 @@
+/*****************************************************************************/
+/*!
+\file    Resolution.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for solving the contacts/collision.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #ifndef RESOLUTION_H
 #define RESOLUTION_H
 //#pragma once

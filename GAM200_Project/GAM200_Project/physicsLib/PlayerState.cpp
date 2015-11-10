@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    PlayerState.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+The implementation for the player controller. 
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #include "PlayerState.h"
 
 #define MORE_FRAME 0.02f

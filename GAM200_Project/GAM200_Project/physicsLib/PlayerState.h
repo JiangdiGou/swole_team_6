@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    PlayerState.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for the player controller
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #ifndef PLAYERSTATE_H
 #define PLAYERSTATE_H
 

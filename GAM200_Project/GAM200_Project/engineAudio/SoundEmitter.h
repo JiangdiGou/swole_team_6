@@ -1,3 +1,16 @@
+/*****************************************************************************/
+/*!
+\file    SoundEmitter.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for the sound emitter class.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #ifndef SOUNDEMITTER_H
 #define SOUNDEMITTER_H
 

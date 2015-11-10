@@ -1,3 +1,16 @@
+/*****************************************************************************/
+/*!
+\file    Collision.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the base rigidbody for the physics to do all the effects
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #ifndef COLLISION_H
 #define COLLISION_H
 //#include "primitive.h"

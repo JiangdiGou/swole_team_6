@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Sound.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for the base sound manager class.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #ifndef SOUND_H
 #define SOUND_H
 

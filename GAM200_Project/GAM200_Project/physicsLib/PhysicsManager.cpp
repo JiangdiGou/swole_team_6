@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    PhysicsManager.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+Main part for driving the physics engine works. Integrate with forces, 
+velocity, gravity as well as solving the contacts.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 //#include "other stuff"
 #include "PhysicsManager.h"
 #include "Precompiled.h"

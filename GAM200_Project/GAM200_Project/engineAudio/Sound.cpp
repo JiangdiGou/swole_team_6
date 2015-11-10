@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Sound.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the implementation for the base sound load/play functions using FMOD studio
+with bank file supported.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 //#include "Precompiled.h"
 #include "Sound.h"
 
