@@ -54,8 +54,8 @@ void CoreEngine::GameLoop()
 
 
   SoundManager bgm = *new SoundManager();
-  bgm.Volume(10.0f, "player_footsteps");
-  bgm.PlayEvent("player_footsteps");
+  //bgm.Volume(10.0f, "music_theme");
+  bgm.PlayEvent("music_theme");
 
   
  

@@ -14,14 +14,13 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 /*****************************************************************************/
 //#include "Precompiled.h"
 #include "Sound.h"
-
-
+#include <iostream>
 SoundManager * sound = nullptr;
 
 
-SoundManager::SoundManager() : m_Sys(0), m_MasterBank(0), m_StringBank(0)
+SoundManager::SoundManager() : ISystem(), m_Sys(nullptr), m_MasterBank(nullptr), m_StringsBank(nullptr)
 {
-
+	sound = this;
 }
 
 SoundManager::~SoundManager()
@@ -38,47 +37,54 @@ SoundManager::~SoundManager()
 
 void SoundManager::Initialize()
 {
-	FMOD_RESULT result;
+	FMOD_RESULT result_;
 	// here we create our sound system
 	char text[200];
-	if (FMOD::Studio::System::create(&m_Sys))
+	
+	result_ = FMOD::Studio::System::create(&m_Sys);
+	if (result_ != FMOD_OK)
 	{
-		return;
+		std::cout << result_ << std::endl;
+		printf("sound created?");
+		//return;
 	}
-
-
   //For later... check for errors
 
 
 	if (m_Sys->initialize(1024, FMOD_STUDIO_INIT_LIVEUPDATE, FMOD_INIT_NORMAL, 0))
 	{
-		return;
+		printf("Bank creation initialized\n");
+		//return;
+	}
+	
+	result_ = m_Sys->loadBankFile("resources/Audio/Master Bank.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MasterBank);
+	if (result_ != FMOD_OK)
+	{
+		std::cout << result_ << std::endl;
+		printf("shit happenes1\n");
 	}
 
-	result = m_Sys->loadBankFile("resources/Audio/Master Bank.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MasterBank);
-	if (result != FMOD_OK)
+	result_ = m_Sys->loadBankFile("resources/Audio/Ambience.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_AmbienceBank);
+	if (result_ != FMOD_OK)
 	{
-		return;
+		std::cout << result_ << std::endl;
+		printf("shit happenes2\n");
 	}
 
-	result = m_Sys->loadBankFile("resources/Audio/Ambience.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_AmbienceBank);
-	if (result != FMOD_OK)
+	result_ = m_Sys->loadBankFile("resources/Audio/Music.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MusicBank);
+	if (result_ != FMOD_OK)
 	{
-		return;
+		std::cout << result_ << std::endl;
+		printf("shit happenes3\n");
 	}
 
-	result = m_Sys->loadBankFile("resources/Audio/Music.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MusicBank);
-	if (result != FMOD_OK)
+	result_ = m_Sys->loadBankFile("resources/Audio/Master Bank.strings.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_StringsBank);
+	if (result_ != FMOD_OK)
 	{
-		return;
+		std::cout << result_ << std::endl;
+		printf("shit happenes4\n");
 	}
-
-	result = m_Sys->loadBankFile("resources/Audio/Master Bank.strings.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_StringBank);
-	if (result != FMOD_OK)
-	{
-		return;
-	}
-	  
+	return;
 }
 
 
@@ -96,7 +102,7 @@ void SoundManager::ShutDown()
 		iter->second->release();
 	}
 	// release the string bank;
-	m_StringBank->unload();	
+	m_StringsBank->unload();	
 	m_MasterBank->unload();
 	//
 	m_Sys->unloadAll();

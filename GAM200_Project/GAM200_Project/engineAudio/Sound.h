@@ -40,8 +40,8 @@ class SoundManager : public ISystem
 		~SoundManager();
 
 
-		void Initialize();
-		void Update(float dt);
+		void Initialize() override;
+		void Update(float dt)override;
 		void ShutDown();
 
 		bool PlayEvent(std::string name);
@@ -50,16 +50,15 @@ class SoundManager : public ISystem
 		void PauseAll();
 		void StopAll(void);
 		void ResumeAll(void);
-		void Resume();
+		void Resume(void);
 		void Volume(float vol, std::string name);
 
 	private:
 		SoundSys m_Sys;
 		SoundBank m_AmbienceBank;
 		SoundBank m_MusicBank;
-		SoundBank m_Mainmenu;
 		SoundBank m_MasterBank;
-		SoundBank m_StringBank;
+		SoundBank m_StringsBank;
 		SoundCollection m_LoopSounds;
 };
 

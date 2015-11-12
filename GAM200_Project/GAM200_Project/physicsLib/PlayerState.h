@@ -61,6 +61,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
       int getJumpState(void);
       float WalkTimer;
       float getJumpTimer(void);
+	  
 		  //"Player Run Speed": 9.250000
 		  //	"Player Jump Velocity" : 8.510000
 		  //	"Variable Jump Height Enabled" : true
@@ -71,6 +72,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 	  	//	"Max Upwards Velocity" : 20.000000
 
     private:
+		SoundEmitter* playerSound;
         Vector3 PreviousPlatformPosition;
         GameObjectComposition* Platform;
         Body *playerBody;
@@ -86,7 +88,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 
         Transform* playerTransform;
 
-		SoundEmitter* playerSound;
+		
 
         bool variableJumpHeightEnabled = true;
         unsigned jumpCount;

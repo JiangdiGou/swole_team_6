@@ -10,9 +10,9 @@
  All content © 2015 DigiPen (USA) Corporation, all rights reserved.
  *******************************************************************************/
 
-#include "../_EntryPoint.h"
-#include "Audio.h"
-
+//#include "../_EntryPoint.h"
+//#include "Audio.h"
+//
 //FMSoundSys::FMSoundSys()
 //{
 //	if (FMOD::System_Create(&fmodsys) != FMOD_OK)

@@ -15,31 +15,26 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "SoundEmitter.h"
 #include "../Engine.h"
 
-SoundEmitter::SoundEmitter(GameObjectComposition* Owner) : playSoundOnStart(false)
-{
-
-}
-
-SoundEmitter::~SoundEmitter()
+SoundEmitter::SoundEmitter(GameObjectComposition* Owner) : playSoundOnStart(true)
 {
 
 }
 
 void SoundEmitter::Initialize()
 {
-	//CoreEngine * engine;
-	//m_manager = engine->m_Sound;
+	// * engine;
+	m_manager = sound;
 	if (playSoundOnStart)
 		PlayEvent(startSound);
-}
-void SoundEmitter::Update(float dt)
-{
-
-}
-void SoundEmitter::Release()
-{
 	
 }
+
+SoundEmitter::~SoundEmitter()
+{
+	//if (playSoundOnStart)
+		//PlayEvent(startSound);
+}
+
 
 void SoundEmitter::PlayEvent(std::string name)
 {
@@ -48,8 +43,7 @@ void SoundEmitter::PlayEvent(std::string name)
 
 void SoundEmitter::StopEvent(std::string name)
 {
-	if (playSoundOnStart)
-		StopEvent(startSound);
+	m_manager->StopSound(name);
 }
 void SoundEmitter::SetPause(bool pause, std::string name)
 {
@@ -64,3 +58,11 @@ void SoundEmitter::SetVolume(float vol, std::string name)
 	m_manager->Volume(vol, name);
 }
 
+void SoundEmitter::Update(float dt)
+{
+
+}
+void SoundEmitter::Release()
+{
+
+}

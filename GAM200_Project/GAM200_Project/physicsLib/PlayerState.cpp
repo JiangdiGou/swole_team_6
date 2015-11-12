@@ -106,7 +106,8 @@ void PlayerState::SendMessages(Message * message)
           //There is no jump animation yet 
 
 					//variableJumpHeightEnabled = false;
-					ReleaseJump();
+					//ReleaseJump();
+					
 				}
 				else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
 				{
@@ -132,7 +133,12 @@ void PlayerState::SendMessages(Message * message)
 
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
-				//playerSound->PlayEvent("player_footsteps");
+				
+				//playerSound->StopEvent("player_footsteps");
+				playerSound->SetVolume(1.0f, "player_footsteps");
+				playerSound->PlayEvent("player_footsteps");
+				
+
 				printf("reach sound");
 				// change player sprite state here 
         if (playerSprite->texture != *runAnimation)
@@ -165,6 +171,7 @@ void PlayerState::SendMessages(Message * message)
 				playerBody->AddForce(Vec2D(0,0));
 				//PlayerSprite->ChangeState("idle");
 				playerBody->Velocity.x = 0.0f;
+				
 				//playerBody->Friction = 0.0f; 
 
         if (playerSprite->texture != *idleAnimation)
@@ -369,7 +376,7 @@ void PlayerState::PressJump()
 			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, (playerJumpVelocity * (variableJumpPower))));//playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
 		else
 			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + playerJumpVelocity));
-
+			
 
 			
 		JumpTimer = 0.0f;

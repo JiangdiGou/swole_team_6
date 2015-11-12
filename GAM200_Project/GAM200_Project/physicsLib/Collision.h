@@ -4,7 +4,7 @@
 \author  Jiangdi Gou
 \par     contact: jiangdi.g@digipen.edu
 \brief
-the base rigidbody for the physics to do all the effects
+the header file of the 
 \remarks
 
 
