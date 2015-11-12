@@ -18,6 +18,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 //~EndHeader~
 #include "mouseVector.h"
 #include "physicsLib/RayLineBoxCollision.h"
+#include "physicsLib/PlayerState.h"
 
 void mouseVector::SendMessages(Message * message)
 {
@@ -31,6 +32,7 @@ void mouseVector::SendMessages(Message * message)
     {
       if (mouseEvent->ButtonIsPressed)
       {
+
         mouseDown = true;
         mouseDownPos = mouseEvent->MousePosition;
 		//LoopAll(Vector2(mouseDownPos), Vector2(mouseUpPos));
