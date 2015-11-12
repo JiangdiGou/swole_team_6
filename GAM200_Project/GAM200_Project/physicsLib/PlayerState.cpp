@@ -92,6 +92,8 @@ void PlayerState::SendMessages(Message * message)
 			//{
 				if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
 				{
+					playerSound->SetVolume(1.0f, "player_jump");
+					playerSound->PlayEvent("player_jump");
 					// we can do anything here also sounds
 
 					//variableJumpHeightEnabled = true;
@@ -197,6 +199,8 @@ void PlayerState::SendMessages(Message * message)
 			// change sprite and flip sprite if necessary
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
+				playerSound->SetVolume(1.0f, "player_footsteps");
+				playerSound->PlayEvent("player_footsteps");
 				// we can change the player sprite to dashing or sth here?
         if (playerSprite->texture != *runAnimation)
           playerSprite->texture = *runAnimation;
