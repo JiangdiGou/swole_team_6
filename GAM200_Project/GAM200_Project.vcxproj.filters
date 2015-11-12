@@ -61,6 +61,9 @@
     <Filter Include="Systems\engineGraphics">
       <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lvlTools\imGUI">
+      <UniqueIdentifier>{770c3488-775d-4f7f-ac94-db74327d6c70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -255,6 +258,27 @@
     <ClInclude Include="GAM200_Project\engineAudio\SoundEmitter.h">
       <Filter>Systems\audio</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\imGUI\imconfig.h">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\imGUI\imgui.h">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\imGUI\imgui_internal.h">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\imGuiBind.h">
+      <Filter>lvlTools</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\imGUI\stb_rect_pack.h">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\imGUI\stb_textedit.h">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\lvlTools\imGUI\stb_truetype.h">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -381,6 +405,18 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineAudio\SoundEmitter.cpp">
       <Filter>Systems\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\imGUI\imgui.cpp">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\imGUI\imgui_demo.cpp">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\imGUI\imgui_draw.cpp">
+      <Filter>lvlTools\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\imGuiBind.cpp">
+      <Filter>lvlTools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
