@@ -152,7 +152,6 @@ void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int 
 {
 	//Create a key message
 	MessageCharacterKey keyMsg;
-	//Set the character pressed (the wParam is the ascii value
 	//Lazy conversion to char
 	keyMsg.character = key + '0' - '0';
 
@@ -173,17 +172,37 @@ void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int 
 	CORE->BroadcastMessage(&keyMsg);
 }
 
-
-/*
 void glfwMouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
 {
-	int cursorPosX, cursorPosY;
+	double cursorPosX, cursorPosY;
+	bool buttonState;
+	Vec2D worldPos;
 
-	if (button == GLFW)
+	if (action == GLFW_PRESS)
+		buttonState = true;
+	else if (action == GLFW_RELEASE)
+		buttonState = false;
+
+	glfwGetCursorPos(window, &cursorPosX, &cursorPosY);
+	worldPos = GRAPHICS->screenToWorld(Vec2D(cursorPosX, cursorPosY));
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT)
 	{
-		Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D());
-		MouseButton m(MouseButton::LeftMouse, true, worldPos);
+		MouseButton m(MouseButton::LeftMouse, buttonState, worldPos);
+		CORE->BroadcastMessage(&m);
+	}
+	else if (button == GLFW_MOUSE_BUTTON_RIGHT)
+	{
+		MouseButton m(MouseButton::RightMouse, buttonState, worldPos);
 		CORE->BroadcastMessage(&m);
 	}
 }
-*/
+
+void glfwMousePosCallback(GLFWwindow *window, double x, double y)
+{
+	Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(x, y));
+	MouseMove m(worldPos);
+	CORE->BroadcastMessage(&m);
+}
+
+
