@@ -60,6 +60,7 @@
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
+    <ClInclude Include="GAM200_Project\glfwMessages.h" />
     <ClInclude Include="GAM200_Project\initInfo.h" />
     <ClInclude Include="GAM200_Project\logger\logger.h" />
     <ClInclude Include="GAM200_Project\lvlTools\imGuiBind.h" />

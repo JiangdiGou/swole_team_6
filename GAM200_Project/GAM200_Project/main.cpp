@@ -20,7 +20,7 @@ main loop
 #include "runLua/luaRunner.h"
 #include "Utilities.h"
 #include "ActionSystem\ActionSequence.h"
-
+#include "glfwMessages.h"
 #include "initInfo.h"
 
 initInfo * INITINFO;
@@ -97,6 +97,8 @@ int main(void)
 		std::cout << "Failed to initialize GLEW. Error: " << error << std::endl;
 		return -1;
 	}
+
+	glfwSetKeyCallback(window, glfwKeyCallback);
 
   engine->AddSystem(new Physics());
   engine->AddSystem(new SoundManager());
