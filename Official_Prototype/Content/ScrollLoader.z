@@ -20,9 +20,24 @@ class ScrollLoader : ZilchComponent
     var TigerScroll: Level = null;
     [Property]
     var DragonScroll: Level = null;
+    [Property]
+    var TestScroll: Level = null;
     
     var ScrollToLoad : Level = null;
     var ScrollSpace: Space = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(Zero.Keyboard.KeyIsDown(Keys.Shift) && Zero.Keyboard.KeyIsPressed(Keys.R))
+        {
+            this.ScrollActivate(6);
+        }
+    }
     
     //Function Called by ScrollSelect
     function ScrollActivate(iScrollNum_:Integer)
@@ -92,6 +107,18 @@ class ScrollLoader : ZilchComponent
             if(this.DragonScroll != null)
             {
                 this.ScrollToLoad = this.DragonScroll;
+            }
+            else
+            {
+                Console.WriteLine("ScrollLoader.ScrollActivate Dragon Scroll = Null");
+            }
+        }
+        else if(iScrollNum_ == 6)
+        {
+            //Makes sure the dragon scroll level is loaded
+            if(this.DragonScroll != null)
+            {
+                this.ScrollToLoad = this.TestScroll;
             }
             else
             {

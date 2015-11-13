@@ -1,6 +1,6 @@
 /********************************************************************************
 file    ScrollFlare.z
-author  Mitchell Regan
+author  Mitchell Regan, Josh Painter
 par     Contact: mitchell.regan@digipen.edu
 brief
     Makes the Scroll levels look a lot cooler, has effects, and unwravles in front 
@@ -8,7 +8,7 @@ brief
 
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 *******************************************************************************/
-class ScrollFlare : ZilchComponent
+class ScrollWrap : ZilchComponent
 {
     //Left roll of the scroll
     [Property]
@@ -38,32 +38,30 @@ class ScrollFlare : ZilchComponent
     [Property]
     var NewScroll:Boolean = false;
     
-    var Done : Boolean = false;
-    
     function Initialize(init : CogInitializer)
     {
-        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
-        Zero.Connect(Zero.Keyboard, Events.KeyDown, this.OnKeyDown);
-        Zero.Connect(this.Space, Events.MouseDown, this.OnMouseDown);
-        
+    }
+    
+    function ScrollWrap()
+    {
         if(this.LeftScroll)
         {
-            this.Owner.Transform.Translation = Real3(-1.17, 0.24, 0.1);
-            this.ScrollMovement(true, true);
+            //this.Owner.Transform.Translation = Real3(-1.17, 0.24, 0.1);
+            this.ScrollMovement(false, true);
         }
         else if(this.RightScroll)
         {
-            this.Owner.Transform.Translation = Real3(1.17, 0.24, 0.1);
-            this.ScrollMovement(true, false);
+            //this.Owner.Transform.Translation = Real3(1.17, 0.24, 0.1);
+            this.ScrollMovement(false, false);
         }
         else if(this.LeftCharge)
         {
-            this.Owner.Transform.Translation = Real3(-1.17, 0.24, 0.1);
+            this.Owner.Transform.Translation = Real3(-9.5, 0.24, 0.1);
             this.ChargeBar(this.Owner.Sprite.Color, true);
         }
         else if(this.RightCharge)
         {
-            this.Owner.Transform.Translation = Real3(1.17, 0.24, 0.1);
+            this.Owner.Transform.Translation = Real3(9.5, 0.24, 0.1);
             this.ChargeBar(this.Owner.Sprite.Color, false);
         }
         else if(this.Paper)
@@ -90,9 +88,11 @@ class ScrollFlare : ZilchComponent
     function ScrollMovement(start_:Boolean, left_:Boolean)//########################################################################
     {
         var seqScroll = Action.Sequence(this.Owner.Actions);
+        var seqScroll2 = Action.Sequence(this.Owner.Actions);
         var endPos:Real3 = Real3(0,0,0);
+        var endScale:Real3 = Real3(0.6,2,1);
+        var endRotation:Real3 = Real3(0,0,45);
         var startColor:Real4 = this.Owner.Sprite.Color;
-        this.Owner.Sprite.Color = Real4.Zero;
         
         //Move to the open position
         if(start_)
@@ -108,7 +108,7 @@ class ScrollFlare : ZilchComponent
             
             Action.Delay(seqScroll, 0.1);
             Action.Property(seqScroll, @this.Owner.Sprite.Color, startColor, 0.05, Ease.Linear);
-            Action.Property(seqScroll, @this.Owner.Transform.Translation, endPos, 0.35, Ease.Linear);
+            Action.Property(seqScroll, @this.Owner.Transform.Translation, endPos, 0.45, Ease.Linear);
         }
         //Move back to the close position
         else
@@ -122,13 +122,21 @@ class ScrollFlare : ZilchComponent
                 endPos = Real3(1.17, 0.24, 0.1);
             }
             
-            Action.Property(seqScroll, @this.Owner.Transform.Translation, endPos, 0.5, Ease.Linear);
-        }
-        
-        if(this.NewScroll)
-        {
+            Action.Delay(seqScroll2, 1);
+            Action.Property(seqScroll2, @this.Owner.Transform.Scale, endScale, 0.45, Ease.Linear);
+            
+            
+            
+            Action.Property(seqScroll, @this.Owner.Transform.Translation, endPos, 0.45, Ease.Linear);
+            Action.Delay(seqScroll, 0.5);
+            Action.Property(seqScroll, @this.Owner.Transform.Translation, Real3(1, 0, 0), 0.45, Ease.Linear);
+            Action.Property(seqScroll, @this.Owner.Transform.EulerAngles, Real3(0.0, 0.0, Math.ToRadians(-90.0)), 0.5, Ease.Linear);
+            Action.Delay(seqScroll, 0.5);
+            Action.Property(seqScroll, @this.Owner.Transform.Translation, Real3(17,10,1), 0.6, Ease.Linear);
             Action.Delay(seqScroll, 1);
-            Action.Property(seqScroll, @this.Done, true, 0.01, Ease.Linear);
+            Action.Property(seqScroll, @this.Owner.Sprite.Visible, false, 0.01, Ease.Linear);
+            Action.Call(seqScroll, this.Space.Destroy);
+            
         }
     }
     
@@ -142,11 +150,11 @@ class ScrollFlare : ZilchComponent
         //Move to the open position
         if(left_)
         {
-            endPos = Real3(-9.5, 0.24, 0.1);
+            endPos = Real3(1.17, 0.24, 0.1);
         }
         else
         {
-            endPos = Real3(9.5, 0.24, 0.1);
+            endPos = Real3(1.17, 0.24, 0.1);
         }
         
         this.Owner.Transform.Translation = endPos;
@@ -154,7 +162,7 @@ class ScrollFlare : ZilchComponent
         
         Action.Delay(seqCharge, 0.65);
         Action.Property(seqCharge, @this.Owner.Sprite.Color, baseColor_, 0.05, Ease.Linear);
-                
+        
     }
     
     //Controls the scale of the main sheet of paper
@@ -163,7 +171,7 @@ class ScrollFlare : ZilchComponent
         var seqPaper = Action.Sequence(this.Owner.Actions);
         var endScale:Real3 = Real3(1,1,1);
         var startColor = this.Owner.Sprite.Color;
-        this.Owner.Sprite.Color = Real4.Zero;
+
         
         if(start_)
         {
@@ -177,37 +185,21 @@ class ScrollFlare : ZilchComponent
         Action.Delay(seqPaper, 0.11);
         Action.Property(seqPaper, @this.Owner.Sprite.Color, startColor, 0.02, Ease.Linear);
         Action.Property(seqPaper, @this.Owner.Transform.Scale, endScale, 0.35, Ease.Linear);
-        
-                
-        if(this.NewScroll)
-        {
-            Action.Delay(seqPaper, 1);
-            Action.Property(seqPaper, @this.Done, true, 0.01, Ease.Linear);
-        }
     }
     
     //Controls the scale of the scroll picture
     function PictureScale()//####################################################################################################
     {
         var seqPic = Action.Sequence(this.Owner.Actions);
-        var endScale:Real3 = this.Owner.Transform.Scale;
-        this.Owner.Transform.Scale = Real3(0.05, this.Owner.Transform.Scale.Y, 1);
+        var endScale:Real3 = Real3(0.1,this.Owner.Transform.Scale.Y,this.Owner.Transform.Scale.Z);
+        //this.Owner.Transform.Scale = Real3(0.05, this.Owner.Transform.Scale.Y, 1);
         var startColor = this.Owner.Sprite.Color;
-        this.Owner.Sprite.Color = Real4.Zero;
         
-        Action.Delay(seqPic, 0.11);
-        Action.Property(seqPic, @this.Owner.Sprite.Color, startColor, 0.02, Ease.Linear);
-        Action.Property(seqPic, @this.Owner.Transform.Scale, endScale, 0.35, Ease.Linear);
-        
-        if(this.NewScroll)
-        {
-            Action.Call(seqPic, this.ChangeScroll);
-            Action.Delay(seqPic, 1);
-            Action.Property(seqPic, @this.Done, true, 0.01, Ease.Linear);
-        }
+        Action.Delay(seqPic, 0.10);
+        Action.Property(seqPic, @this.Owner.Transform.Scale, endScale, 0.30, Ease.Linear);
+        Action.Property(seqPic, @this.Owner.Sprite.Visible, false, 0.01, Ease.Linear);
     }
     
-    //Helper function for scroll animation
     function ChangeScroll()
     {
         this.Owner.Sprite.AnimationActive = true;
@@ -218,7 +210,7 @@ class ScrollFlare : ZilchComponent
     {
         var seqPoint = Action.Sequence(this.Owner.Actions);
         var startColor = this.Owner.Sprite.Color;
-        this.Owner.Sprite.Color = Real4(0,0,0,0);
+        this.Owner.Sprite.Color = Real4(0,0,0,0.5);
         
         Action.Delay(seqPoint, 0.65);
         Action.Property(seqPoint, @this.Owner.Sprite.Color, startColor, 0.05, Ease.Linear);
@@ -228,35 +220,10 @@ class ScrollFlare : ZilchComponent
     function FadeFade()//##############################################################################################################
     {
         var seqFade = Action.Sequence(this.Owner.Actions);
-        var endColor:Real4 = Real4(0,0,0,0.5);
+        var endColor:Real4 = Real4(0,0,0,0.0);
         
         Action.Property(seqFade, @this.Owner.Sprite.Color, endColor, 0.1, Ease.Linear);
     }
     
-    function StartWrap()
-    {
-        var seq = Action.Sequence(this.Owner.Actions);
-        
-        Action.Delay(seq, 1);
-        Action.Call(seq, this.Owner.ScrollWrap.ScrollWrap);
-    }
-    
-    function OnKeyDown(event : KeyboardEvent)
-    {
-        if(this.Done)
-        {
-            this.Done = false;
-            this.StartWrap();
-        }
-    }
-    
-    function OnMouseDown(event : MouseEvent)
-    {
-        if(this.Done)
-        {
-            this.Done = false;
-            this.StartWrap();
-        }
-    }
     
 }
