@@ -27,6 +27,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 
 //Core Graphics Functionality 
 #define GLEW_STATIC
+#define GLEW_EXPERIMENTAL
 #include "glew/glew.h"
 #include "glew/wglew.h"
 #include "GLFW/glfw3.h"

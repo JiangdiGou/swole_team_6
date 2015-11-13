@@ -34,20 +34,15 @@ void baseInitRoutine()
 {
   windowTitle = INITINFO->windowTitle;
 }
-
+/*
 #ifdef GAMELOOP_RUN
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #else
 int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_line, int show)
 #endif
+*/
+int main(void)
 {
-  glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-
   luaInitFile();
   baseInitRoutine();
 
@@ -75,9 +70,33 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
   //ShowWindow(window, show); 
 
   CoreEngine* engine = new CoreEngine();
-
+	/*
   WindowsSystem* windows = new WindowsSystem(windowTitle.c_str(), INITINFO->clientWidth, INITINFO->clientHeight, show);
   engine->AddSystem(windows);
+	*/
+
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+	if (window == nullptr)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
+
+	glfwMakeContextCurrent(window);
+
+	glewExperimental = GL_TRUE;
+	if (int error = glewInit())
+	{
+		std::cout << "Failed to initialize GLEW. Error: " << error << std::endl;
+		return -1;
+	}
 
   engine->AddSystem(new Physics());
   engine->AddSystem(new SoundManager());
@@ -91,10 +110,13 @@ int falseMain2(HINSTANCE instance, HINSTANCE hPreviousInstance, LPSTR command_li
 
   engine->Initialize();
 
+	/*
   GRAPHICS->setDeviceContext(windows->deviceContext);
   GRAPHICS->setRenderingContext(windows->renderingContext);
+	*/
+	//windows->ActivateWindow();
 
-  windows->ActivateWindow();
+	GRAPHICS->setWindow(window);
 
   //Camera basicCamera = Camera();
   /******************/

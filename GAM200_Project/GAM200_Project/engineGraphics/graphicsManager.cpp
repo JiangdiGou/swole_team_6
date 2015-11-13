@@ -68,7 +68,8 @@ void GraphicsManager::Update(float dt)
   glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  wglMakeCurrent(deviceContext, renderingContext);
+  //wglMakeCurrent(deviceContext, renderingContext);
+	glfwMakeContextCurrent(pWindow);
 
   std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
@@ -109,7 +110,7 @@ void GraphicsManager::Update(float dt)
 
 void GraphicsManager::Draw()
 {
-  SwapBuffers(deviceContext);
+  glfwSwapBuffers(pWindow);
   FramerateController::frameEnd();
 
 #ifdef GFXLOG
