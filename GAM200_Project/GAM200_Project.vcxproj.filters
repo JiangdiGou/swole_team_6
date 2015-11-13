@@ -423,19 +423,13 @@
     <Text Include="resources\FragmentShader.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\fragmentShader2.txt">
-      <Filter>resources</Filter>
-    </Text>
-    <Text Include="resources\FragmentShaderDebug.txt">
-      <Filter>resources</Filter>
-    </Text>
     <Text Include="resources\VertexShader.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\vertexShader2.txt">
+    <Text Include="resources\Shaders\imGuiFragment.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\VertexShaderDebug.txt">
+    <Text Include="resources\Shaders\imGuiVertex.txt">
       <Filter>resources</Filter>
     </Text>
   </ItemGroup>
