@@ -72,6 +72,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 	  	//	"Max Upwards Velocity" : 20.000000
 
     private:
+		SoundManager * Sysptr;
 		SoundEmitter* playerSound;
         Vector3 PreviousPlatformPosition;
         GameObjectComposition* Platform;

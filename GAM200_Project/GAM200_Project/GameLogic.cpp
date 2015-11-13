@@ -72,6 +72,9 @@ void GameLogic::Initialize()
   SoundEmitter* playerSound = new SoundEmitter();
   player->AddComponent(CT_SoundEmitter, playerSound);
 
+  //TileMapCollision * tileplayer = new TileMapCollision();
+  //player->AddComponent(CT_TileMapCollision, tileplayer);
+
 
   Sprite * spritePlayer = new Sprite();
   spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
