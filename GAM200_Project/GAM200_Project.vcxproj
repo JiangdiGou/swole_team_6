@@ -254,11 +254,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt" />
-    <Text Include="resources\fragmentShader2.txt" />
-    <Text Include="resources\FragmentShaderDebug.txt" />
+    <Text Include="resources\Shaders\imGuiFragment.txt" />
+    <Text Include="resources\Shaders\imGuiVertex.txt" />
     <Text Include="resources\VertexShader.txt" />
-    <Text Include="resources\vertexShader2.txt" />
-    <Text Include="resources\VertexShaderDebug.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{73E2DFFE-92FF-4977-B8FE-68E8ED2EA2F6}</ProjectGuid>

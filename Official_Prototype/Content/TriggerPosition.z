@@ -1,0 +1,147 @@
+class TriggerPosition : ZilchComponent
+{
+    //Position where this object will be when triggered
+    [Property]
+    var TriggeredPos:Real3;
+    //Position where this object will be when not triggered
+    [Property]
+    var UnTriggeredPos:Real3;
+    //If this object should have its visibility toggled
+    [Property]
+    var ToggleVisible:Boolean = false;
+    //If this object should have its collision toggled
+    [Property]
+    var ToggleCollision:Boolean = false;
+    
+    var TriggerOn:Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //this.TriggerOn = this.Owner.Trigger.IsTriggered;
+        
+        ////Sets this object's default state
+        //this.SetPos(this.TriggerOn);
+        //this.SetVisible(this.TriggerOn);
+        //this.SetCollision(this.TriggerOn);
+        
+        Zero.Connect(this.Space, Events.TriggerEvent, this.OnTrigger);
+    }
+    
+    //Trigger event sent out by the Trigger.z class
+    function OnTrigger(event : TriggerEvent)
+    {
+        //If this is one of the object's that's supposed to be triggered, sets the position, visibility, and collision
+        if(event.CogToTrigger == this.Owner || event.NameToTrigger == this.Owner.Name)
+        {
+            this.TriggerOn = true;
+            this.SetPos(this.TriggerOn);
+            this.SetVisible(this.TriggerOn);
+            this.SetCollision(this.TriggerOn);
+        }
+        //Otherwise, sets them to false
+        else
+        {
+            this.TriggerOn = false;
+            this.SetPos(this.TriggerOn);
+            this.SetVisible(this.TriggerOn);
+            this.SetCollision(this.TriggerOn);
+        }
+    }
+    
+    //Moves this object to the correct position in space based on if it's triggered or not
+    function SetPos(triggerOn_:Boolean)
+    {
+        if(triggerOn_)
+        {
+            this.Owner.Transform.Translation = this.TriggeredPos;
+        }
+        else
+        {
+            this.Owner.Transform.Translation = this.UnTriggeredPos;
+        }
+    }
+    
+    //Sets this object's visibility based on if it's triggered or not
+    function SetVisible(triggerOn_:Boolean)
+    {
+        if(this.ToggleVisible)
+        {
+            if(triggerOn_)
+            {
+                //If this owner has a sprite, make it visible
+                if(this.Owner.Sprite != null)
+                {
+                    this.Owner.Sprite.Visible = true;
+                }
+                //If this owner has a particle system, turn it on
+                if(this.Owner.SphericalParticleEmitter != null)
+                {
+                    this.Owner.SphericalParticleEmitter.Active = true;
+                }
+            }
+            else
+            {
+                //If this owner has a sprite, make it invisible
+                if(this.Owner.Sprite != null)
+                {
+                    this.Owner.Sprite.Visible = false;
+                }
+                //If this owner has a particle system, turn it off
+                if(this.Owner.SphericalParticleEmitter != null)
+                {
+                    this.Owner.SphericalParticleEmitter.Active = false;
+                }
+            }
+        }
+    }
+    
+    //Sets the object's collision based on if it's triggered or not
+    function SetCollision(triggerOn_:Boolean)
+    {
+        if(this.ToggleCollision)
+        {
+            //Makes this object's collider send collision events
+            if(triggerOn_)
+            {
+                if(this.Owner.BoxCollider != null)
+                {
+                    this.Owner.BoxCollider.Ghost = false;
+                    this.Owner.BoxCollider.SendsEvents = true;
+                }
+                
+                if(this.Owner.SphereCollider != null)
+                {
+                    this.Owner.SphereCollider.Ghost = false;
+                    this.Owner.SphereCollider.SendsEvents = true;
+                }
+                
+                if(this.Owner.CapsuleCollider != null)
+                {
+                    this.Owner.CapsuleCollider.Ghost = false;
+                    this.Owner.CapsuleCollider.SendsEvents = true;
+                }
+            }
+            //Makes this object's collider NOT send collision events
+            else
+            {
+                if(this.Owner.BoxCollider != null)
+                {
+                    this.Owner.BoxCollider.Ghost = true;
+                    this.Owner.BoxCollider.SendsEvents = false;
+                }
+                
+                if(this.Owner.SphereCollider != null)
+                {
+                    this.Owner.SphereCollider.Ghost = true;
+                    this.Owner.SphereCollider.SendsEvents = false;
+                }
+                
+                if(this.Owner.CapsuleCollider != null)
+                {
+                    this.Owner.CapsuleCollider.Ghost = true;
+                    this.Owner.CapsuleCollider.SendsEvents = false;
+                }
+            }
+        }
+    }
+}
