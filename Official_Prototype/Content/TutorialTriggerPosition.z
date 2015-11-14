@@ -1,0 +1,70 @@
+class TutorialTriggerPosition : ZilchComponent
+{
+    //Position of the object when not seen
+    [Property]
+    var NotActivePos:Real3;
+    //Position of the object when seen
+    var ActivePos:Real3;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.ActivePos = this.Owner.Transform.Translation;
+        
+        //Moves this owner out of the way
+        this.Owner.Transform.Translation = this.NotActivePos;
+        
+        //Makes this owner invisible
+        if(this.Owner.Sprite != null)
+        {
+            this.Owner.Sprite.Visible = false;
+        }
+        
+        //Makes this owner not take collision
+        if(this.Owner.BoxCollider != null)
+        {
+            this.Owner.BoxCollider.Ghost = true;
+        }
+        
+        Zero.Connect(this.Space, Events.TriggerEvent, this.OnTrigger);
+    }
+    
+    
+    //Puts this object in the correct position when triggered specifically by a trigger event
+    function OnTrigger(event : TriggerEvent)
+    {
+        if(this.Owner == event.CogToTrigger || this.Owner.Name == event.NameToTrigger)
+        {
+            //Moves this owner to the correct position
+            this.Owner.Transform.Translation = this.ActivePos;
+            
+            //Makes this owner visible
+            if(this.Owner.Sprite != null)
+            {
+                this.Owner.Sprite.Visible = true;
+            }
+            
+            //Makes this owner receive collision (if applicable)
+            if(this.Owner.BoxCollider != null)
+            {
+                this.Owner.BoxCollider.Ghost = false;
+            }
+        }
+        else
+        {
+            //Moves this owner out of the way
+            this.Owner.Transform.Translation = this.NotActivePos;
+            
+            //Makes this owner invisible
+            if(this.Owner.Sprite != null)
+            {
+                this.Owner.Sprite.Visible = false;
+            }
+            
+            //Makes this owner not take collision
+            if(this.Owner.BoxCollider != null)
+            {
+                this.Owner.BoxCollider.Ghost = true;
+            }
+        }
+    }
+}

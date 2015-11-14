@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "TutorialTriggerPosition",
+		uint64 ResourceId = 569a3f97b88166b9,
+	},
+},
