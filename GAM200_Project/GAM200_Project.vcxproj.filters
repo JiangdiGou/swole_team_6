@@ -280,6 +280,9 @@
       <Filter>lvlTools\imGUI</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\glfwMessages.h" />
+    <ClInclude Include="GAM200_Project\lvlTools\imgui_impl_glfw_gl3.h">
+      <Filter>lvlTools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -417,6 +420,9 @@
       <Filter>lvlTools\imGUI</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\lvlTools\imGuiBind.cpp">
+      <Filter>lvlTools</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\lvlTools\imgui_impl_glfw_gl3.cpp">
       <Filter>lvlTools</Filter>
     </ClCompile>
   </ItemGroup>

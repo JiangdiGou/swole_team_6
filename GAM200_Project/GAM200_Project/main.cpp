@@ -22,6 +22,7 @@ main loop
 #include "ActionSystem\ActionSequence.h"
 #include "glfwMessages.h"
 #include "initInfo.h"
+#include "lvlTools\imgui_impl_glfw_gl3.h"
 
 initInfo * INITINFO;
 //HDC deviceContext;
@@ -101,6 +102,8 @@ int main(void)
 	glfwSetKeyCallback(window, glfwKeyCallback);
 	glfwSetMouseButtonCallback(window, glfwMouseButtonCallback);
 	glfwSetCursorPosCallback(window, glfwMousePosCallback);
+
+  ImGui_ImplGlfwGL3_Init(window, true);
 
   engine->AddSystem(new Physics());
   engine->AddSystem(new SoundManager());

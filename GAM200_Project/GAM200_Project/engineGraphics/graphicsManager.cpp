@@ -59,6 +59,7 @@ GraphicsManager::GraphicsManager(const Shader& shader)
   GRAPHICS = this;
   coreShader = shader;
   shader.Use();
+
 }
 
 void GraphicsManager::Update(float dt)
@@ -111,6 +112,15 @@ void GraphicsManager::Update(float dt)
 
 void GraphicsManager::Draw()
 {
+  ImGui_ImplGlfwGL3_NewFrame();
+
+  float f;
+
+  ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_FirstUseEver);
+  ImGui::Text("Hello World!"); 
+  ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+  ImGui::Render();
+
   glfwSwapBuffers(pWindow);
   FramerateController::frameEnd();
 

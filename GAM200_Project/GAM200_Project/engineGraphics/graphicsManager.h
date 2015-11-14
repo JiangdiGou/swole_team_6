@@ -29,6 +29,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "Camera.h"
 #include "../GameLogic.h"
 #include "../initInfo.h"
+#include "../lvlTools/imgui_impl_glfw_gl3.h"
 
 class GraphicsManager : public ISystem
 {

@@ -70,6 +70,7 @@
     <ClInclude Include="GAM200_Project\lvlTools\imGUI\stb_rect_pack.h" />
     <ClInclude Include="GAM200_Project\lvlTools\imGUI\stb_textedit.h" />
     <ClInclude Include="GAM200_Project\lvlTools\imGUI\stb_truetype.h" />
+    <ClInclude Include="GAM200_Project\lvlTools\imgui_impl_glfw_gl3.h" />
     <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -206,6 +207,7 @@
     <ClCompile Include="GAM200_Project\lvlTools\imGUI\imgui.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\imGUI\imgui_demo.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\imGUI\imgui_draw.cpp" />
+    <ClCompile Include="GAM200_Project\lvlTools\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
