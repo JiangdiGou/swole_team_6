@@ -1,4 +1,16 @@
-//#include "our precompiled header"
+/*****************************************************************************/
+/*!
+\file    Transform.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+The functions for general usage of transform in the game.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #include"Transform.h"
 
 
@@ -52,7 +64,7 @@ float Transform::GetPositionX()
 }
 float Transform::GetPositionY()
 {
-  return position.x;
+  return position.y;
 }
 
 void Transform::SetPosition(const Vector2 pos)

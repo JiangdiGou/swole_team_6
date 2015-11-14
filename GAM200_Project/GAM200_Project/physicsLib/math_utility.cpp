@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    math_utility.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+base 2D/3D vector struct with its related math functions.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #include "Precompiled.h"
 #include "math_utility.h"
 

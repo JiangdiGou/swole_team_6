@@ -1,3 +1,16 @@
+/*****************************************************************************/
+/*!
+\file    Collision.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file of the 
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #ifndef COLLISION_H
 #define COLLISION_H
 //#include "primitive.h"
@@ -77,10 +90,34 @@ class ShapeAAB : public Shape
 public:
 	ShapeAAB() : Shape(SidBox){};
   void Initialize() override;
+  void Update(float dt) override;
+  void SendMessages(Message* m) override;
 	Vec2D Extents;
 	Vec2D origin = Vec2D(0.0f,0.0f);
 	virtual void Draw();
 	virtual bool TestPoint(Vec2D);
+  std::vector<ShapeAAB*> PrevCollidingObjects;
+  std::vector<ShapeAAB*> CurCollidingObjects;
+};
+class CollisionStarted : public Message
+{
+public:
+  CollisionStarted(ShapeAAB* otherObj) : Message(Mid::CollisionStarted), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
+};
+
+class CollisionPersisted : public Message
+{
+public:
+  CollisionPersisted(ShapeAAB* otherObj) : Message(Mid::CollisionPersisted), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
+};
+
+class CollisionEnded : public Message
+{
+public:
+  CollisionEnded(ShapeAAB* otherObj) : Message(Mid::CollisionEnded), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
 };
 
 class contactList;

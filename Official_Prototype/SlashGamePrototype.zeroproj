@@ -6,7 +6,7 @@ Cog =
 		string ProjectOwner = "",
 		string DefaultLevel = "Level",
 		string ProjectSpace = "Space",
-		string ProjectFolder = "C:\Users\Mitch\Desktop\GAM200 Project\Official_Prototype",
+		string ProjectFolder = "C:\Users\j.painter\Desktop\swole_team_6\Official_Prototype",
 		uint ProjectEngineRevision = 12385,
 		bool AutoTakeProjectScreenshot = true,
 	},

@@ -61,11 +61,20 @@ void GameLogic::Initialize()
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
   boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
   bodyPlayer->BodyShape = boxColliderPlayer;
+ 
+
 
   player->AddComponent(CT_Body, bodyPlayer);
   player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
   PlayerState * controller = new PlayerState();
   player->AddComponent(CT_PlayerState, controller);
+
+  SoundEmitter* playerSound = new SoundEmitter();
+  player->AddComponent(CT_SoundEmitter, playerSound);
+
+  //TileMapCollision * tileplayer = new TileMapCollision();
+  //player->AddComponent(CT_TileMapCollision, tileplayer);
+
 
   Sprite * spritePlayer = new Sprite();
   spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];

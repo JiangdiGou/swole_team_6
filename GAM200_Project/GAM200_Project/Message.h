@@ -13,7 +13,11 @@ namespace Mid // Message id
     CharacterKey,
     MouseButton,
     MouseMove,
-    FileDrop
+    FileDrop,
+    CollisionStarted,
+    CollisionPersisted,
+    CollisionEnded,
+    Collision
   };
 }
 

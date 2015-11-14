@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Body.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for the rigidbody file.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #ifndef BODY_H
 #define BODY_H
 

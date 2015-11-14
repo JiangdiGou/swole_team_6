@@ -10,13 +10,12 @@ enum ComponentTypeId
 	//Graphics
 	CT_Camera,
 	CT_Sprite,
-  CT_SpriteText,
+	CT_SpriteText,
 	//Physics
 	CT_Body,
 	CT_AABB,
 	CT_Circle,
 	//Max
-	CT_MaxComponents,
 	CT_CircleCollider,
 	CT_BoxCollider,
 	CT_TileMapCollision,
@@ -27,7 +26,11 @@ enum ComponentTypeId
 	CT_PLAYERDEATH,
 	CT_ShapeAAB,
 	CT_ShapeLine,
-    CT_MouseVector
+	CT_MouseVector,
+	CT_Reactive,
+	CT_MaxComponents,
+	CT_Sound,
+	CT_SoundEmitter
 	
 };
 #endif
