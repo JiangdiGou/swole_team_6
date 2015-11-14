@@ -75,16 +75,7 @@ void GraphicsManager::Update(float dt)
 
   std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
-  /*
-  debugDrawLine(Vector3(), Vector3(3, 3, 0), Vector3());
-  debugDrawLine(Vector3(0, 1, 0), Vector3(5, 4, 0), Vector3());
-  debugDrawLine(Vector3(0, -1, 0), Vector3(5, -4, 0), Vector3());
 
-  Vector3 cameraPos = Vector3(mainCamera.getPosition().x, 
-    mainCamera.getPosition().y, 0);
-    */
-
-  //debugDrawLine(
   Transform* playerTransform = LOGIC->player->has(Transform)
 	  debugDrawCircle(playerTransform->GetPosition(), 1, Vector3(), 100);
 
@@ -112,15 +103,6 @@ void GraphicsManager::Update(float dt)
 
 void GraphicsManager::Draw()
 {
-  ImGui_ImplGlfwGL3_NewFrame();
-
-  float f;
-
-  ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_FirstUseEver);
-  ImGui::Text("Hello World!"); 
-  ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-  ImGui::Render();
-
   glfwSwapBuffers(pWindow);
   FramerateController::frameEnd();
 
