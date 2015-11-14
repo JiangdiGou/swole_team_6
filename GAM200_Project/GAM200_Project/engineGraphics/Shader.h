@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    Shader.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Interface of the shader class, which is responsible for compiling and
+  linking shaders, as well as storing shader information
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef SHADER_H
 #define SHADER_H
 

@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    graphicsManager.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Interface of the graphics manager, which is in charge of handling most main
+  graphical systems
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
 
@@ -38,12 +53,14 @@ public:
   Shader* getCoreShader() { return &coreShader; }
   void setSpriteAtlas(const TextureAtlas& atlas) { spriteAtlas = atlas; }
   TextureAtlas* getSpriteAtlas() { return &spriteAtlas; }
+	void setWindow(GLFWwindow* inputWindow) { pWindow = inputWindow; }
 
   Vector2 screenToWorld(Vector2 screenCoords);
 
 private:
   HDC deviceContext;
   HGLRC renderingContext;
+	GLFWwindow* pWindow;
   Camera mainCamera;
   TextureAtlas spriteAtlas;
   Shader coreShader;

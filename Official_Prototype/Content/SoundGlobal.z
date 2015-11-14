@@ -5,6 +5,15 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 Comment: Allows access to the global SoundSpace.
 */
 
+/********************************************************************************
+file    SoundGlobal.z
+author  Nolan T Yoo
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Unused script imported from one of Nolan's GAT240 assignments.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class SoundGlobal : ZilchComponent
 {
     

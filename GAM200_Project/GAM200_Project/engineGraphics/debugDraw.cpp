@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       debugDraw.cpp
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Implementation of our game's debug drawing system
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #include "debugDraw.h"
 
 std::vector<GLfloat> debugVertices = {};

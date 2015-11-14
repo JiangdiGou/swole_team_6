@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Graphics.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Contains information that nearly all graphics modules need access to 
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
@@ -5,12 +19,18 @@
 	#pragma comment(lib, "graphicsLibsWin/glew32s.lib")
 	#pragma comment(lib, "graphicsLibsWin/SOIL.lib")
 	#pragma comment(lib, "./OpenGL32.Lib" )
+  #pragma comment(lib, "graphicsLibsWin/glfw3.lib")
+  #pragma comment(lib, "graphicsLibsWin/glfw3dll.lib")
+
+
 #endif
 
 //Core Graphics Functionality 
 #define GLEW_STATIC
+#define GLEW_EXPERIMENTAL
 #include "glew/glew.h"
 #include "glew/wglew.h"
+#include "GLFW/glfw3.h"
 
 //Math
 #include "glm/glm.hpp"

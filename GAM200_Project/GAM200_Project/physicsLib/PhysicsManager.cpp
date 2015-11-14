@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    PhysicsManager.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+Main part for driving the physics engine works. Integrate with forces, 
+velocity, gravity as well as solving the contacts.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 //#include "other stuff"
 #include "PhysicsManager.h"
 #include "Precompiled.h"
@@ -54,7 +69,14 @@ void Physics::DetectContacts(float dt)
 			{
 				if (Collsion.GenerateContacts((bodyA)->BodyShape, (bodyA)->Position, (bodyB)->BodyShape, (bodyB)->Position, &Contacts))
 				{
-
+          ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
+          ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
+          Collision ACollisionWith(BShape);
+          Collision BCollisionWith(AShape);
+          if (!bodyA->IsStatic)
+            AShape->SendMessages(&ACollisionWith);
+          if (!bodyB->IsStatic)
+            BShape->SendMessages(&BCollisionWith);
 				}
 			}
 		}

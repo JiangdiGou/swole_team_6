@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    FramerateController.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Interface of the game's framerate controller, which locks the game's
+  framerate at particular value, found in init info
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef FRAMERATECONTROLLER_H
 #define FRAMERATECONTROLLER_H
 

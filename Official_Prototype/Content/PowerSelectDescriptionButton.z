@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PowerSelectDescriptionButton.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    What text should be displayed for a given power on the Power Select screen.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PowerSelectDescriptionButton : ZilchComponent
 {
     [Property]

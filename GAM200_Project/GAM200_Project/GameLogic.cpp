@@ -21,6 +21,7 @@
 #include "physicsLib/BinaryMap.h"
 #include "physicsLib/PlayerState.h"
 #include "mouseVector.h"
+#include "reactive.h"
 
 #include <ctime>
 
@@ -29,7 +30,7 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  FACTORY->loadLevelFrom("BetaLevel.txt");
+  FACTORY->loadLevelFrom("resources/Levels/BetaLevel.txt");
 
 
   GOC * camera = FACTORY->makeObject("Camera");
@@ -60,11 +61,20 @@ void GameLogic::Initialize()
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
   boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
   bodyPlayer->BodyShape = boxColliderPlayer;
+ 
+
 
   player->AddComponent(CT_Body, bodyPlayer);
   player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
   PlayerState * controller = new PlayerState();
   player->AddComponent(CT_PlayerState, controller);
+
+  SoundEmitter* playerSound = new SoundEmitter();
+  player->AddComponent(CT_SoundEmitter, playerSound);
+
+  //TileMapCollision * tileplayer = new TileMapCollision();
+  //player->AddComponent(CT_TileMapCollision, tileplayer);
+
 
   Sprite * spritePlayer = new Sprite();
   spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
@@ -98,9 +108,11 @@ void GameLogic::Initialize()
 
   Sprite * sprite5 = new Sprite();
   sprite5->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
-  sprite5->color = glm::vec4(0, 0, 1, 1);
+  //sprite5->color = glm::vec4(0, 0, 1, 1);
+  Reactive * reactive = new Reactive();
   blackObj2->AddComponent(CT_Sprite, sprite5);
   blackObj2->AddComponent(CT_ShapeAAB, box);
+  blackObj2->AddComponent(CT_Reactive, reactive);
 
 
   //down 1

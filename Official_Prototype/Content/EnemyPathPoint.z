@@ -1,3 +1,12 @@
+/********************************************************************************
+file    EnemyPathPoint.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Points that connect to other points across each level and tell enemies where to go.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class EnemyPathPoint : ZilchComponent
 {
     [Property]

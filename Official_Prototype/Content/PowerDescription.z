@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PowerDescription.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Gives text feedback about what each of our powers do on the Power Select screen.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PowerDescription : ZilchComponent
 {
     [Property]

@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    math_utility.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file the vector math implementation
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #ifndef MATH_UTILITY_H
 #define MATH_UTILITY_H
 #include <math.h>
@@ -176,7 +190,7 @@ public:
 		if (pVec0.y > pVec1.y)
 		{
 			max.y = pVec0.y;
-		}
+		} 
 		else
 		{
 			max.y = pVec1.y;

@@ -53,6 +53,8 @@ init python:
                 file.write("%s\n" % "[EntityList]")
                 for entity in self.EntityList:
                     if entity == []:
+                        file.close()
+                        self.UsableState = True
                         return
                     file.write("%s " % entity.name)
                     file.write("at (%f, %f)\n" % x, y)

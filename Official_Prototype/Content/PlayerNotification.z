@@ -1,3 +1,14 @@
+/********************************************************************************
+file    PlayerNotification.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Sends up a notification text over the player to tell them something. Right now, 
+    I'm fairly certain it only tells when the player can't use a scroll due to lack 
+    of energy.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PlayerNotification : ZilchComponent
 {
     //Timer to keep track of the number of frames for the notification to be on screen

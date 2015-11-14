@@ -57,7 +57,7 @@ label new:
     $ baselineFile = renpy.input("Name the file")
     $ levelStruct.FileLoc += ("/" + baselineFile)
     $ levelStruct.initFile()
-    if(not levelStruct.UsableState):
+    if(levelStruct.UsableState == False):
         jump fileWarning
     show screen gui_menu(levelStruct, guiView)
     jump loop1

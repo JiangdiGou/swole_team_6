@@ -1,3 +1,12 @@
+/********************************************************************************
+file    ScrollCompleteActions.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Activates the power that a given scroll gives upon completion.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ScrollCompleteActions : ZilchComponent
 {
     var MainSpace:Space;

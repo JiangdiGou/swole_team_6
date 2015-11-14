@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    ParticleSystem.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Interface of not yet implemented particle systems
+\remarks 
+  one day
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
+
 //Visibility
 //Texture
 //Warm up time 

@@ -96,11 +96,12 @@ Level =
 		},
 		ScrollLoader = 
 		{
-			string CraneScroll = "",
+			string CraneScroll = "567973c613eaf8da:NewScrollTest",
 			string BoarScroll = "",
 			string SerpentScroll = "",
 			string TigerScroll = "55c16e8a571aa798:TigerScroll",
 			string DragonScroll = "55c00e1150af24f1:DragonScroll",
+			string TestScroll = "567973c613eaf8da:NewScrollTest",
 		},
 		LevelListener = 
 		{
@@ -133,7 +134,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 18.2683964,
+			float Size = 33.287178,
 		},
 		EditorCameraController = 
 		{
@@ -441,6 +442,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 	},
 	Cog = 
@@ -564,6 +566,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{
@@ -662,6 +665,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{
@@ -760,6 +764,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{
@@ -858,6 +863,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{
@@ -956,6 +962,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{
@@ -1054,6 +1061,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{
@@ -1152,6 +1160,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{
@@ -1250,6 +1259,7 @@ Level =
 			int IOverkillHealth = 150,
 			int IDespawnTime = 200,
 			int IStunCD = 60,
+			bool Box = false,
 		},
 		Reactive = 
 		{

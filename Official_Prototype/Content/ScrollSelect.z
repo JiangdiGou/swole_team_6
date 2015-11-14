@@ -1,3 +1,12 @@
+/********************************************************************************
+file    ScrollSelect.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Lets the player mouse wheel through their selected scrolls during gameplay.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class ScrollSelect : ZilchComponent
 {
     //Integer that determines what this scroll's ID number is (0,1,2)

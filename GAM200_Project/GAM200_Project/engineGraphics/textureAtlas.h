@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    textureAtlas.h
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Interface of textureAtlas, which stores a group of atlasTextures in a map.
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #ifndef TEXTUREATLAS_H
 #define TEXTUREATLAS_H
 

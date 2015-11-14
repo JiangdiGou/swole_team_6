@@ -1,3 +1,13 @@
+/********************************************************************************
+file    GoToLevel.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Test script to try out hypothetical powers we could include. Right now it does 
+    a circular attack outward. Rename it when translating over to Lua.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PlayerPowers : ZilchComponent
 {
     function Initialize(init : CogInitializer)

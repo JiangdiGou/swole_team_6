@@ -1,0 +1,165 @@
+/********************************************************************************
+file    Trigger.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+par     Classes: objFactory
+brief
+    Lets objects send events to activate other objects
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
+class Trigger : ZilchComponent
+{
+    sends TriggerEvent:TriggerEvent;
+    
+    //If it receives a trigger, this object won't send triggers until it receives one
+    [Property]
+    var ReceiveTrigger:Boolean = false;
+    
+    var IsTriggered:Boolean = false;
+    
+    //############################################################################################################## How to trigger
+    
+    //Waits this many seconds before sending a trigger.
+    [Property]
+    var TimedTrigger:Real = 0;
+    
+    //Sends trigger when the player collides with this object
+    [Property]
+    var PlayerCollision:Boolean = false;
+    
+    //Sends trigger when an enemy collides with this object
+    [Property]
+    var EnemyCollision:Boolean = false;
+    
+    //Sends trigger when a specific object collides with this object
+    [Property]
+    var CustomCollision:Boolean = false;
+    //The name of what object causes custom collision trigger
+    [Property]
+    var CustomCollisionObjectName:String = null;
+    
+    //############################################################################################################## How to trigger
+    
+    //What object to send a trigger to
+    [Property]
+    var ObjectToTrigger:CogPath = null;
+    
+    //What name triggered objects should have
+    [Property]
+    var NameOfTriggerObjects:String = null;
+    
+    //If the object trigger should be turned on or off
+    [Property]
+    var TurnOnTrigger:Boolean = true;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Only needs to use logic updates if it needs to count down the timer
+        if(this.TimedTrigger > 0)
+        {
+            Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        }
+        
+        //Only needs the collision event if it needs to
+        if(this.PlayerCollision || this.EnemyCollision || this.CustomCollision)
+        {
+            Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollision);
+        }
+        
+        //doesn't let this object send triggers until it receives one first
+        if(this.ReceiveTrigger)
+        {
+            Zero.Connect(this.GameSession, Events.TriggerEvent, this.OnTrigger);
+            this.IsTriggered = false;
+        }
+    }
+    
+    //Counts down timed triggers and sends events 
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //When this is triggered, start counting down the timer
+        if(this.TimedTrigger > 0 && this.IsTriggered)
+        {
+            this.TimedTrigger -= event.Dt;
+            
+            //when the count down is over, sends the trigger
+            if(this.TimedTrigger <= 0)
+            {
+                this.SendTrigger();
+            }
+        }
+    }
+    
+    
+    //If this object has a collision body, it will send out the correct event
+    function OnCollision(event : CollisionEvent)
+    {
+        //If this object is triggered by the player object, sends a trigger
+        if(this.PlayerCollision && event.OtherObject.Name == "Player")
+        {
+            this.SendTrigger();
+        }
+        
+        //If this object is triggered by enemies, sends a trigger
+        if(this.EnemyCollision && event.OtherObject.Name == "Enemy")
+        {
+            this.SendTrigger();
+        }
+        
+        //If this object is triggered by a specific object, sends a trigger
+        if(this.CustomCollision && event.OtherObject.Name == this.CustomCollisionObjectName)
+        {
+            this.SendTrigger();
+        }
+    }
+    
+    //Sends out the trigger to whatever needs it
+    function SendTrigger()
+    {
+        //new TriggerEvent variable
+        var evtTrigger = TriggerEvent();
+        
+        //sets the state that the receiving objects should be in (triggered/not triggered)
+        evtTrigger.StartTrigger = this.TurnOnTrigger;
+        
+        //designates the specific object to trigger
+        if(this.ObjectToTrigger != null)
+        {
+            evtTrigger.CogToTrigger = this.ObjectToTrigger.Cog;
+        }
+        
+        //designates the specific object names to trigger
+        if(this.NameOfTriggerObjects != null)
+        {
+            evtTrigger.NameToTrigger = this.NameOfTriggerObjects;
+        }
+    }
+    
+    //Function called when this becomes triggered
+    function OnTrigger(event : TriggerEvent)
+    {
+        if(this.Owner == event.CogToTrigger)
+        {
+            this.IsTriggered = event.StartTrigger;
+        }
+        
+        if(this.Owner.Name == event.NameToTrigger)
+        {
+            this.IsTriggered = event.StartTrigger;
+        }
+    }
+}
+
+
+//Trigger event sent out by this script to activate various things
+class TriggerEvent : ZilchEvent
+{
+    //If the object receiving this should be turned on or off
+    var StartTrigger:Boolean = true;
+    
+    //What cogs and object names should receive this trigger event
+    var CogToTrigger:Cog = null;
+    var NameToTrigger:String = null;
+}

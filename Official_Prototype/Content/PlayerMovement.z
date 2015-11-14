@@ -1,3 +1,12 @@
+/********************************************************************************
+file    PlayerMovement.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Controls how the player does basic movements with WASD.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class PlayerMovement : ZilchComponent
 {
     //How fast the player can move

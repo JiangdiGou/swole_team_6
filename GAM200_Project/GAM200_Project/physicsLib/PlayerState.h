@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    PlayerState.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for the player controller
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #ifndef PLAYERSTATE_H
 #define PLAYERSTATE_H
 
@@ -7,6 +21,7 @@
 #include "BinaryMap.h"
 #include "../WindowsSystem.h"
 #include "../GameState/GameStateManager.h"
+#include "../engineAudio/SoundEmitter.h"
 
 enum StateList
 {
@@ -46,6 +61,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
       int getJumpState(void);
       float WalkTimer;
       float getJumpTimer(void);
+	  
 		  //"Player Run Speed": 9.250000
 		  //	"Player Jump Velocity" : 8.510000
 		  //	"Variable Jump Height Enabled" : true
@@ -56,6 +72,8 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 	  	//	"Max Upwards Velocity" : 20.000000
 
     private:
+		SoundManager * Sysptr;
+		SoundEmitter* playerSound;
         Vector3 PreviousPlatformPosition;
         GameObjectComposition* Platform;
         Body *playerBody;
@@ -70,6 +88,8 @@ class PlayerState : public GameComponent//, public CollisionDelegate
         AtlasTexture* runAnimation;
 
         Transform* playerTransform;
+
+		
 
         bool variableJumpHeightEnabled = true;
         unsigned jumpCount;

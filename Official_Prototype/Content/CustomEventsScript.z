@@ -1,0 +1,57 @@
+/********************************************************************************
+file    CustomEventsScript.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Holds all of the custom events we can send out and connect to. 
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
+class CustomEventsScript : ZilchComponent
+{
+}
+
+
+//Event sent out when the player dies
+class PlayerDeathEvent:ZilchEvent
+{
+    //If we need to send variables, put them here. I don't think we do yet.
+}
+
+
+
+//Event sent out when the player pauses gameplay
+class PauseEvent:ZilchEvent
+{
+    //Pauses the space if true, Unpauses if false
+    var Pause:Boolean = true;
+    
+    //What space to pause
+    var SpaceToPause:Space = null;
+}
+
+
+
+//Event sent out when the player switches 
+class TransitionEvent:ZilchEvent
+{
+    
+}
+
+
+
+//Event sent out to our Sound Space to play sound cues
+class SendSoundEvent:ZilchEvent
+{
+    var SoundToSend:SoundCue = null;
+    var FadeOutTime:Real = 0;
+    //Amount of time that 
+    var FadeInTime:Real = 0;
+    
+    //Tells the sound space to stop playing all music and sound effects.
+    var StopAllSound:Boolean = false;
+    //Tells the sound space not to play music. Sound effects still play.
+    var StopMusic:Boolean = false;
+    //Tells the sound space to not play sound effects. Music still plays.
+    var StopSoundEffects:Boolean = false;
+}

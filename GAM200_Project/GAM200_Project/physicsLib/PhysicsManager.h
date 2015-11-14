@@ -1,3 +1,16 @@
+/*****************************************************************************/
+/*!
+\file    PhysicsManager.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for physics engine implementation
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #ifndef PHYSICSMANAGER_H
 #define PHYSICSMANAGER_H
 #pragma once
@@ -19,6 +32,12 @@ public:
 	Vec2D ContactNormal;
 	float Impulse;
 	GOC * CollidedWith;
+};
+class Collision : public Message
+{
+public:
+  Collision(ShapeAAB* otherObj) : Message(Mid::Collision), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
 };
 
 /// Provides the Body Component.

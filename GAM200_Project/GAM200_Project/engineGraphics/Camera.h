@@ -1,3 +1,13 @@
+/*****************************************************************************/
+/*!
+\file       Camera.h
+\author  Conor Lavelle
+\par        Contact: c.lavelle@digipen.edu
+\brief 
+     Interface of our game's camera
+\remarks 
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+/*****************************************************************************/
 #ifndef CAMERA_H
 #define CAMERA_H
 

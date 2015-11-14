@@ -1,0 +1,44 @@
+/********************************************************************************
+file    BobEffectScript.z
+author  Josh Painter
+par     Contact: j.painter@digipen.edu
+brief
+    Makes an object on the screen move up and down
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
+class BobEffectScript : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        this.BobUp();
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function BobUp()
+    {
+        var seq = Actions.Sequence(this.Owner.Actions);
+        
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation + Real3(0, 0.2, 0), 0.7, Ease.Linear);
+        
+        Action.Delay(seq, 0.2);
+        
+        Action.Call(seq, this.BobDown);
+    }
+    
+    function BobDown()
+    {
+         var seq = Actions.Sequence(this.Owner.Actions);
+        
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation - Real3(0, 0.2, 0), 0.7, Ease.Linear);
+        
+        Action.Delay(seq, 0.2);
+        
+        Action.Call(seq, this.BobUp);
+    }
+}

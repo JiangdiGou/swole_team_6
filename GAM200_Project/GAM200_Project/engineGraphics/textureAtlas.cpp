@@ -1,3 +1,18 @@
+/*****************************************************************************/
+/*!
+\file    textureAtlas.cpp
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Implementation of textureAtlas, which stores a group of atlasTextures in a
+  map. 
+\remarks 
+ 
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #define _CRT_SECURE_NO_WARNINGS //strcopy is unsafe
 #include "textureAtlas.h"
 #include <fstream>

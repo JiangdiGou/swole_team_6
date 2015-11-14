@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Sprite.cpp
+\author  Conor Lavelle
+\par     Contact: c.lavelle@digipen.edu
+\brief 
+  Implementation of Sprite, which is the core graphical component of our game
+\remarks 
+  
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+//~EndHeader~
 #include "Sprite.h"
 
 GLuint Sprite::shaderID = 0;
@@ -191,6 +205,7 @@ void Sprite::drawAllSprites()
 
   vertices.clear();
   texCoords.clear();
+  colors.clear();
 }
 
 void Sprite::SendMessages(Message * message)

@@ -1,3 +1,12 @@
+/********************************************************************************
+file    TrainingDummyScript.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Script to attach to a dummy for our player to practice attacks on.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
 class TrainingDummyScript : ZilchComponent
 {
     [Property]
