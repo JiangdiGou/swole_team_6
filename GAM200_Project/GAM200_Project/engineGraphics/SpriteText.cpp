@@ -260,6 +260,15 @@ void SpriteText::Update(float dt)
   pFont->offsetYBytes = 0;
 }
 
+void SpriteText::SerializeRead(Serializer& str)
+{
+  StreamRead(str, message);
+}
+void SpriteText::SerializeWrite(Serializer& str) 
+{
+  StreamWrite(str, message);
+  StreamWrite(str);
+}
 void SpriteText::renderText(std::string message, Vector3 position, Vector3 scale)
 {
   std::string::const_iterator characterIt;

@@ -2,6 +2,8 @@
 #define COMPONENT_H
 #include "Message.h"
 #include "ComponentTypeIds.h"
+#include "Serialization\Serialization.h"
+
 class GameObjectComposition;
 typedef GameObjectComposition GOC;
 
@@ -14,6 +16,8 @@ virtual void Initialize() {};
 virtual void Update(float dt) {};
 virtual void Release() {};
 virtual void SendMessages(Message *) {};
+virtual void SerializeRead(Serializer& str) {};
+virtual void SerializeWrite(Serializer& str) {};
 
 GOC* GetOwner() { return Base; }
 

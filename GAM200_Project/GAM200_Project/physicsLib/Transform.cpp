@@ -35,6 +35,26 @@ void Transform::Update(float dt)
 	pos2d.y = position.y;
 }
 
+void Transform::SerializeRead(Serializer& str)
+{
+  StreamRead(str, position);
+  StreamRead(str, scale);
+  StreamRead(str, rotation);
+  StreamRead(str, dontRotate);
+}
+
+void Transform::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, position);
+  StreamWrite(str);
+  StreamWrite(str, scale);
+  StreamWrite(str);
+  StreamWrite(str, rotation);
+  StreamWrite(str);
+  StreamWrite(str, dontRotate);
+  StreamWrite(str);
+}
+
 void Transform::Release()
 {
 }

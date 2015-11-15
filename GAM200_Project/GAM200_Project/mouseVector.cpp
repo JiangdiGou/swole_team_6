@@ -61,4 +61,13 @@ void mouseVector::Update(float dt)
   }
 }
 
- 
+void mouseVector::SerializeRead(Serializer& str)
+{
+
+
+}
+void mouseVector::SerializeWrite(Serializer& str)
+{
+
+
+}

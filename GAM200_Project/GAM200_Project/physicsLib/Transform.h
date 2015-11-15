@@ -30,6 +30,8 @@ public:
 	//Inherited Methods
 	void Initialize() override;
 	void Update(float dt) override;
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
 	void Release() override;
 	//Vector2 Position;
 

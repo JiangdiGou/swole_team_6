@@ -38,7 +38,10 @@ public:
   bool mouseDown;
 
   void SendMessages(Message*) override;
-  void Update(float dt) override;  
+  void Update(float dt) override;
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
+
  private:
   SoundEmitter * mouseSound;
   GameObjectComposition* parent;

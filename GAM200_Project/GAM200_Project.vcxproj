@@ -125,9 +125,6 @@
     <ClInclude Include="GAM200_Project\physicsLib\Resolution.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\shapes.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\Transform.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -147,6 +144,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="GAM200_Project\runLua\luaTranslate.h" />
+    <ClInclude Include="GAM200_Project\Serialization\Serialization.h" />
+    <ClInclude Include="GAM200_Project\Serialization\TextSerialization.h" />
     <ClInclude Include="GAM200_Project\Swole.h" />
     <ClInclude Include="GAM200_Project\System.h" />
     <ClInclude Include="GAM200_Project\Utilities.h">
@@ -250,6 +249,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\runLua\luaTranslate.cpp" />
+    <ClCompile Include="GAM200_Project\Serialization\TextSerialization.cpp" />
     <ClCompile Include="GAM200_Project\Swole.cpp" />
     <ClCompile Include="GAM200_Project\Utilities.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

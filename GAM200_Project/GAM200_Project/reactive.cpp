@@ -42,6 +42,14 @@ void Reactive::SendMessages(Message * message)
   }
   }
 }
+void Reactive::SerializeRead(Serializer& str)
+{
+
+}
+void Reactive::SerializeWrite(Serializer& str) 
+{
+
+}
 
 bool Reactive::mouseOver()
 {

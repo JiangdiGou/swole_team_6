@@ -12,6 +12,8 @@ public:
   void Initialize(); 
   void Update(float dt);
   void SendMessages(Message*) override;
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
   bool mouseOver();
 
 private:

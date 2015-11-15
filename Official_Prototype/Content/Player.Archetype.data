@@ -8,9 +8,13 @@ Cog =
 	{
 		string Name = "Player",
 	},
+	Archetyped = 
+	{
+		string Name = "561316fb20c0c15e:Player",
+	},
 	Transform = 
 	{
-		Vec3 Translation = [-0.141119942, 0.608055115, 0],
+		Vec3 Translation = [-3.5, 23.5, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -64,9 +68,6 @@ Cog =
 	PlayerJump = 
 	{
 		float RJumpHeight = 15,
-	},
-	PlayerAttack = 
-	{
 	},
 	PlayerCollision = 
 	{

@@ -29,6 +29,10 @@ public:
 
   void Update(float dt) override;
 
+  void SerializeRead(Serializer& str) override;
+
+  void SerializeWrite(Serializer& str) override;
+
   bool followingPlayer = true;
 
   void SendMessages(Message*) override {};

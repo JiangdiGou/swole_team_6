@@ -107,7 +107,14 @@ void Body::Initialize()
 {
 	//Get the transform to write results to
 	bodyTrans = GetOwner()->has(Transform);
-
+  if (BodyShape == NULL)
+  {
+    ShapeAAB* ownerAAB = GetOwner()->has(ShapeAAB);
+    if (ownerAAB != NULL)
+    {
+      BodyShape = ownerAAB;
+    }
+  }
 	//Get the starting position
 	Position = bodyTrans->GetPositionXY();
 
@@ -128,6 +135,53 @@ void Body::Initialize()
 	}
 
 	BodyShape->body = this;
+}
+
+void Body::SerializeRead(Serializer& str)
+{
+  StreamRead(str, Position);
+  StreamRead(str, PrevPosition);
+  StreamRead(str, Velocity);
+  StreamRead(str, Mass);
+  StreamRead(str, InvMass);
+  StreamRead(str, Damping);
+  StreamRead(str, Acceleration);
+  //StreamRead(str, BodyShape);
+  StreamRead(str, Friction);
+  StreamRead(str, Restitution);
+  StreamRead(str, IsStatic);
+  StreamRead(str, IsGhost);
+  StreamRead(str, AccumulatedForce);
+  
+}
+void Body::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, Position);
+  StreamWrite(str);
+  StreamWrite(str, PrevPosition);
+  StreamWrite(str);
+  StreamWrite(str, Velocity);
+  StreamWrite(str);
+  StreamWrite(str, Mass);
+  StreamWrite(str);
+  StreamWrite(str, InvMass);
+  StreamWrite(str);
+  StreamWrite(str, Damping);
+  StreamWrite(str);
+  StreamWrite(str, Acceleration);
+  StreamWrite(str);
+  //StreamWrite(str, BodyShape);
+  //StreamWrite(str);
+  StreamWrite(str, Friction);
+  StreamWrite(str);
+  StreamWrite(str, Restitution);
+  StreamWrite(str);
+  StreamWrite(str, IsStatic);
+  StreamWrite(str);
+  StreamWrite(str, IsGhost);
+  StreamWrite(str);
+  StreamWrite(str, AccumulatedForce);
+  StreamWrite(str);
 }
 
 void Body::AddForce(Vec2D force)

@@ -1,0 +1,42 @@
+class Script_Player
+{
+  var Health : Real = 100;
+
+  function Test()
+  {
+    // class defined in c++!
+    var p : Player = Player("bob", 10);
+    // member function defined in c++!
+    p.Speak();
+
+    // member variable defined in c++!
+    Console.WriteLine("the player has health: `p.Health`");
+    p.Health-= 20;
+    Console.WriteLine("the player has health: `p.Health`");
+
+    Events.Connect(this, "TestEvent", this.OnTestEvent);
+  }
+
+  function OnTestEvent(event : EventData)
+  {
+    Console.WriteLine("Test Event Received!");
+  }
+
+
+  [Static]
+  function SayHello()
+  {
+    Console.WriteLine("Hello world!");
+  }
+
+  function TakeDamage(amount : Real)
+  {
+    this.Health -= amount;
+    Console.WriteLine("Ouch! I've got `this.Health` health left!");
+  }
+
+  function ReturnReal() : Real
+  {
+    return 123.456;
+  }
+}

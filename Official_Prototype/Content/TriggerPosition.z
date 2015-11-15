@@ -24,14 +24,14 @@ class TriggerPosition : ZilchComponent
         //this.SetVisible(this.TriggerOn);
         //this.SetCollision(this.TriggerOn);
         
-        Zero.Connect(this.Space, Events.TriggerEvent, this.OnTrigger);
+        //Zero.Connect(this.Space, Events.TriggerEvent, this.OnTrigger);
     }
     
     //Trigger event sent out by the Trigger.z class
     function OnTrigger(event : TriggerEvent)
     {
         //If this is one of the object's that's supposed to be triggered, sets the position, visibility, and collision
-        if(event.CogToTrigger == this.Owner || event.NameToTrigger == this.Owner.Name)
+        if(event.CogToTrigger1 == this.Owner || event.CogToTrigger2 == this.Owner || event.NameToTrigger == this.Owner.Name)
         {
             this.TriggerOn = true;
             this.SetPos(this.TriggerOn);

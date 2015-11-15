@@ -1,0 +1,15 @@
+
+{
+  "Root": 
+  {
+    "DemoTweakable": 
+    {
+      "name": "myGoodName", 
+      "aTweakableVar": 20
+    }, 
+    "someOtherChild": 
+    {
+      "happy": true
+    }
+  }
+}
