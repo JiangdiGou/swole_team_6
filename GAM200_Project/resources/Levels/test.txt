@@ -1,0 +1,11 @@
+[LevelName]
+test
+[ArraySpecs]
+5
+5
+[TileMap]
+0 0 0 0 0 
+0 0 0 0 0 
+0 0 0 0 0 
+0 0 0 0 0 
+0 0 0 0 0 

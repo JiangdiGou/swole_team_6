@@ -168,18 +168,7 @@ void ImGuiManager::createEmptyLevelFile(std::string levelName, int width, int he
   {
     for (int i = 0; i < width; ++i)
     {
-      ofs << '0';
-    }
-    ofs << std::endl;
-  }
-
-  //Unsure if needed with new system, just matching old file for now.
-  ofs << "[EntityMap]" << std::endl;
-  for (int j = 0; j < height; ++j)
-  {
-    for (int i = 0; i < width; ++i)
-    {
-      ofs << '0';
+      ofs << "0 ";
     }
     ofs << std::endl;
   }
