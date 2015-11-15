@@ -4,14 +4,24 @@ class TutorialTriggerPosition : ZilchComponent
     [Property]
     var NotActivePos:Real3;
     //Position of the object when seen
+    [Property]
     var ActivePos:Real3;
+    //Sets the correct position on initialize
+    [Property]
+    var StartActive:Boolean = false;
     
     function Initialize(init : CogInitializer)
     {
-        this.ActivePos = this.Owner.Transform.Translation;
-        
-        //Moves this owner out of the way
-        this.Owner.Transform.Translation = this.NotActivePos;
+        if(this.StartActive)
+        {
+            //Moves this owner to the correct spot
+            this.Owner.Transform.Translation = this.ActivePos;
+        }
+        else
+        {
+            //Moves this owner out of the way
+            this.Owner.Transform.Translation = this.NotActivePos;
+        }
         
         //Makes this owner invisible
         if(this.Owner.Sprite != null)
@@ -32,39 +42,66 @@ class TutorialTriggerPosition : ZilchComponent
     //Puts this object in the correct position when triggered specifically by a trigger event
     function OnTrigger(event : TriggerEvent)
     {
-        if(this.Owner == event.CogToTrigger || this.Owner.Name == event.NameToTrigger)
+        if(this.Owner == event.CogToTrigger1 || this.Owner.Name == event.NameToTrigger)
         {
-            //Moves this owner to the correct position
-            this.Owner.Transform.Translation = this.ActivePos;
-            
-            //Makes this owner visible
-            if(this.Owner.Sprite != null)
+            //Sets the location based on the trigger 1
+            if(event.StartTrigger1)
             {
-                this.Owner.Sprite.Visible = true;
+                this.SetToStart();
             }
-            
-            //Makes this owner receive collision (if applicable)
-            if(this.Owner.BoxCollider != null)
+            else
             {
-                this.Owner.BoxCollider.Ghost = false;
+                this.SetToEnd();
             }
         }
-        else
+        else if(this.Owner == event.CogToTrigger2)
         {
-            //Moves this owner out of the way
-            this.Owner.Transform.Translation = this.NotActivePos;
-            
-            //Makes this owner invisible
-            if(this.Owner.Sprite != null)
+            //Sets the location based on the trigger 2
+            if(event.StartTrigger2)
             {
-                this.Owner.Sprite.Visible = false;
+                this.SetToStart();
             }
-            
-            //Makes this owner not take collision
-            if(this.Owner.BoxCollider != null)
+            else
             {
-                this.Owner.BoxCollider.Ghost = true;
+                this.SetToEnd();
             }
+        }
+    }
+    
+    //Sets the object to the start position and visible
+    function SetToStart()
+    {
+        this.Owner.Transform.Translation = this.ActivePos;
+        
+        if(this.Owner.Sprite != null)
+        {
+            this.Owner.Sprite.Visible = true;
+        }
+        
+        if(this.Owner.SphericalParticleEmitter != null)
+        {
+            this.Owner.SphericalParticleEmitter.Active = true;
+        }
+        
+        if(this.Owner.BoxCollider != null)
+        {
+            
+        }
+    }
+    
+    //Sets the object to the end position and not visible
+    function SetToEnd()
+    {
+        this.Owner.Transform.Translation = this.NotActivePos;
+        
+        if(this.Owner.Sprite != null)
+        {
+            this.Owner.Sprite.Visible = false;
+        }
+        
+        if(this.Owner.SphericalParticleEmitter != null)
+        {
+            this.Owner.SphericalParticleEmitter.Active = false;
         }
     }
 }
