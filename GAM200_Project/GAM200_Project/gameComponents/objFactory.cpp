@@ -190,24 +190,33 @@ void objFactory::createTiles()
   {
     for (j = 0; j < levelWidth; j++)
     {
-      switch (tileMap[i][j])
-      {
-      case '1':
-        createTile(j, i, std::string("sliceTest-207"));
-        break;
-      case '2':
-        createTile(j, i, std::string("sliceTest-72"));
-		break;
-	  case '3':
-		  createTile(j, i, std::string("sliceTest-246"));
-		  break;
-	  case '4':
-		  createTile(j, i, std::string("sliceTest-181"));
-		  break;
-	  case '5':
-		  createTile(j, i, std::string("sliceTest-165"));
-        break;
-      }
+      int value = (int)(tileMap[i][j] - '0');
+#ifdef EDITOR
+      if (value == 0)
+        createTile(j, i, textureKey[value]);
+#endif
+
+      if (value > 0)
+        createTile(j, i, textureKey[value]);
+
+      /*
+    case '1':
+    createTile(j, i, std::string("sliceTest-207"));
+    break;
+    case '2':
+    createTile(j, i, std::string("sliceTest-72"));
+    break;
+    case '3':
+    createTile(j, i, std::string("sliceTest-246"));
+    break;
+    case '4':
+    createTile(j, i, std::string("sliceTest-181"));
+    break;
+    case '5':
+    createTile(j, i, std::string("sliceTest-165"));
+    break;
+    }
+    */
     }
   }
 }
@@ -221,16 +230,28 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   tileSprite->texture = GRAPHICS->getSpriteAtlas()->textures[textureName];//TileAtlas
   newTile->AddComponent(CT_Transform, tileTransform);
   newTile->AddComponent(CT_Sprite, tileSprite);
-  Body * tileBody = new Body();
-  tileBody->Mass = 0;
-  tileBody->Restitution = 0.3f;
-  tileBody->Friction = 0.0f;
-  ShapeAAB * boxCollider = new ShapeAAB();
-  boxCollider->Extents = Vec2D(.5, .5);
-  tileBody->BodyShape = boxCollider;
-  newTile->AddComponent(CT_Body, tileBody);
-  newTile->AddComponent(CT_ShapeAAB, boxCollider);
 
+  //Don't want the empty tile to have collision
+  if (!(textureName == "EmptyTile"))
+  {
+    Body * tileBody = new Body();
+    tileBody->Mass = 0;
+    tileBody->Restitution = 0.3f;
+    tileBody->Friction = 0.0f;
+    ShapeAAB * boxCollider = new ShapeAAB();
+    boxCollider->Extents = Vec2D(.5, .5);
+    tileBody->BodyShape = boxCollider;
+    newTile->AddComponent(CT_Body, tileBody);
+    newTile->AddComponent(CT_ShapeAAB, boxCollider);
+  }
+
+//Adds reactive b/c its a depend of editable.
+#ifdef EDITOR
+  Reactive* reactive = new Reactive();
+  newTile->AddComponent(CT_Reactive, reactive);
+  Editable* editable = new Editable();
+  newTile->AddComponent(CT_Editable, editable);
+#endif
   return newTile;
 }
 
@@ -418,4 +439,85 @@ void objFactory::insertRow(int y, int count)
 
   this->tileMap = newTileMap;
   this->entityMap = newEntityMap;
+}
+
+std::vector<std::string> objFactory::readTextureKey(std::string keyPath)
+{
+  std::vector<std::string> textures;
+  std::string line; 
+  std::ifstream is;
+  is.open(keyPath);
+
+  if (!is.is_open())
+  {
+    std::cout << "Failed to open texture key" << std::endl;
+    return textures;
+  }
+  
+  //Reads textures from the key file
+  textures.clear();
+  textures.push_back(std::string("EmptyTile"));
+  while (!is.eof())
+  {
+    std::getline(is, line);
+    textures.push_back(line);
+  }
+
+  is.close();
+  return textures;
+}
+
+//This FX is for eventually modifying the current level file's tilemap
+void objFactory::modifyLevelTilemap(int newTexture, int x, int y)
+{
+  std::vector<std::string> lines; 
+  std::string line;
+  std::ifstream is;
+  std::ofstream os;
+
+  is.open("resources/Levels/" + levelName + ".txt");
+
+  if (!is.is_open())
+  {
+    std::cout << "Failed to open " << "resources/Levels/" + levelName + ".txt" << std::endl;
+    return;
+  }
+
+  //Loops through the junk
+  for (int i = 0; i < 5; ++i)
+  {
+    std::getline(is, line);
+    lines.push_back(line);
+  }
+
+  //Loops through the rows we dont care about
+  for (int j = 0; j < levelHeight - y; ++j)
+  {
+    std::getline(is, line);
+    lines.push_back(line);
+  }
+
+  //Gets the line we care about
+  std::getline(is, line);
+  //modifies the character
+  line[x] = (char)(newTexture + '0');
+  lines.push_back(line);
+
+  while (!is.eof())
+  {
+    std::getline(is, line);
+    lines.push_back(line);
+  }
+
+  is.close();
+
+  os.open("resources/Levels/" + levelName + ".txt");
+
+  for (std::vector<std::string>::iterator it = lines.begin();
+    it != lines.end(); ++it)
+  {
+    os << *it << std::endl;
+  }
+
+  os.close();
 }

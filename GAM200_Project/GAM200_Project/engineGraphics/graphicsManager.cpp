@@ -27,10 +27,8 @@ GraphicsManager::GraphicsManager(const Shader& shader)
 
   //Flush out the error
   glGetError();
-  spriteAtlas = *(new TextureAtlas(
-                                  (INITINFO->atlasPNG).c_str(),
-                                  (INITINFO->atlasINFO).c_str()
-                                   ));
+  spriteAtlas = new TextureAtlas((INITINFO->atlasPNG).c_str(),
+                                  (INITINFO->atlasINFO).c_str());
 #ifdef GFXLOG
   logGfxError("TEXTUREATLAS:: Error in texture Atlas construction. ");
 #endif
@@ -59,10 +57,15 @@ GraphicsManager::GraphicsManager(const Shader& shader)
   GRAPHICS = this;
   coreShader = shader;
   shader.Use();
+
 }
 
 void GraphicsManager::Update(float dt)
 {
+#ifndef EDITOR
+  glfwPollEvents();
+#endif
+
   coreShader.Use();
 
   glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
@@ -73,17 +76,9 @@ void GraphicsManager::Update(float dt)
 
   std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
-  /*
-  debugDrawLine(Vector3(), Vector3(3, 3, 0), Vector3());
-  debugDrawLine(Vector3(0, 1, 0), Vector3(5, 4, 0), Vector3());
-  debugDrawLine(Vector3(0, -1, 0), Vector3(5, -4, 0), Vector3());
 
-  Vector3 cameraPos = Vector3(mainCamera.getPosition().x, 
-    mainCamera.getPosition().y, 0);
-    */
-
-  //debugDrawLine(
   Transform* playerTransform = LOGIC->player->has(Transform)
+  if (playerTransform)
 	  debugDrawCircle(playerTransform->GetPosition(), 1, Vector3(), 100);
 
   debugDrawFrame();

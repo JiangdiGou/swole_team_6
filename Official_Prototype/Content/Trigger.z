@@ -53,6 +53,10 @@ class Trigger : ZilchComponent
     [Property]
     var TurnOnTrigger:Boolean = true;
     
+    //If the trigger object should be destroyed once activated
+    [Property]
+    var DestroySelf:Boolean = false;
+    
     
     function Initialize(init : CogInitializer)
     {
@@ -134,6 +138,20 @@ class Trigger : ZilchComponent
         if(this.NameOfTriggerObjects != null)
         {
             evtTrigger.NameToTrigger = this.NameOfTriggerObjects;
+        }
+        
+        this.Space.DispatchEvent(Events.TriggerEvent, evtTrigger);
+        
+        if(this.DestroySelf)
+        {
+            if(this.Owner.SphericalParticleEmitter != null)
+            {
+                this.Owner.SphericalParticleEmitter.Active = false;
+            }
+            
+            var seqDestroy = Action.Sequence(this.Owner.Actions);
+            Action.Delay(seqDestroy, 1.0);
+            Action.Call(seqDestroy, this.Owner.Destroy);
         }
     }
     
