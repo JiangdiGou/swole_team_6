@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Dependencies">
+      <UniqueIdentifier>{ac266370-e92b-4b2e-9892-9225d5aef816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependencies\ZILCH">
+      <UniqueIdentifier>{a06b9a96-4433-45a4-a771-cc4284a2c49c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{a6023fcf-83df-4666-b557-2ccd744a83a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Samples">
+      <UniqueIdentifier>{370edd30-1654-4129-9146-fb1949bc089e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dependencies\ZILCH\Zilch.hpp">
+      <Filter>Dependencies\ZILCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Samples\DemoTweakable.hpp">
+      <Filter>Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\logger.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\JSONObject.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\JSONParser.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\JSONWriter.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SerializeSupport.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Dependencies\ZILCH\Zilch.cpp">
+      <Filter>Dependencies\ZILCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Client.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Samples\DemoTweakable.cpp">
+      <Filter>Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\logger.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\JSONParser.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\JSONWriter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\JSONObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

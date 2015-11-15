@@ -3,6 +3,7 @@
  \file    objFactory.h
  \author  Nolan Taeksang Yoo
  \author  Gabriel Neumann
+ \author  Conor Lavelle
  \par     Contact: nolan\@projectexist.net
  \par     Classes: objFactory
  \remarks
@@ -61,8 +62,7 @@ public:
   std::string levelName;
   int levelWidth;
   int levelHeight;
-  char ** tileMap;
-  char ** entityMap;
+  int ** tileMap;
 
   bool validPoint(int x, int y);
 

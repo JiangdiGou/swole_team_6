@@ -18,8 +18,8 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  FACTORY->textureKey = FACTORY->readTextureKey("resources/Levels/InGameEditor-KEY.txt");
-  FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
+  FACTORY->textureKey = FACTORY->readTextureKey("resources/Levels/TestLevel-KEY.txt");
+  FACTORY->loadLevelFrom("resources/Levels/TestLevel.txt");
 
 
   GOC * camera = FACTORY->makeObject("Camera");

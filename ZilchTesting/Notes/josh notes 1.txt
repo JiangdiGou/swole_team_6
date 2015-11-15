@@ -1,0 +1,8 @@
+- Inheret from iZilchObject? why not eventhandler?
+- in tutorial, why not derived type?
+-
+
+- For base game object type
+  - We allocate it outside of zilch, so tell it:
+    in ZilchDefineType(...) do:
+        type->HandleManager = ZilchManagerId(Zilch::PointerManager);

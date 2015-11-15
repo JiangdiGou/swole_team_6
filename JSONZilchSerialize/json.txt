@@ -1,0 +1,28 @@
+
+{
+  "Root": 
+  {
+    "PLAYER": 
+    {
+      "__comments": "I've got a lovely bunch of coconuts.", 
+      "Health": 10.000000, 
+      "Health Recharge": 0.000000, 
+      "Stamina": 10.000000, 
+      "Stamina Recharge": 1.300000, 
+      "Movement Speed": 4.000000, 
+      "Lives": 3, 
+      "Infinite Lives": false, 
+      "Ability GCD": 1.000000, 
+      "Post-Spawn Invulnerability": 1.000000, 
+      "Respawn Time": 2.500000, 
+      "Spawn Position 1": [0.300000, 3.000000, 0.000000], 
+      "Spawn Position 2": [0.000000, 0.000000, 0.000000], 
+      "Spawn Position 3": [0.000000, 0.000000, 0.000000], 
+      "Spawn Position 4": [0.000000, 0.000000, 0.000000]
+    }, 
+    "BASIC ATTACK": 
+    {
+      "happy": true
+    }
+  }
+}
