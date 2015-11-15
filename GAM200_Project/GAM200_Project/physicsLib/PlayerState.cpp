@@ -385,6 +385,8 @@ void PlayerState::SerializeRead(Serializer& str)
 }
 void PlayerState::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, PreviousPlatformPosition);
   StreamWrite(str);
   StreamWrite(str, variableJumpHeightEnabled);

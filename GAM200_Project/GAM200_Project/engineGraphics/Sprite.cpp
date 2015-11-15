@@ -58,6 +58,8 @@ void Sprite::SerializeRead(Serializer& str)
 }
 void Sprite::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, color.x);
   StreamWrite(str, color.y);
   StreamWrite(str, color.z);

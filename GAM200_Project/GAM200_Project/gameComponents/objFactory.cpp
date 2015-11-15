@@ -17,6 +17,7 @@
 
 #include "../AssertionError/AssertionError.h"
 #include "../WindowsSystem.h"
+#include "../Serialization/Serialization.h"
 
 
 bool FACTORY_EXISTS;
@@ -66,7 +67,14 @@ void objFactory::destroyAllObjects()
 
   gameObjs.clear();
 }
-
+void objFactory::SerializeAllObjects(Serializer& str)
+{
+  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    it->second->SerializeWrite(str);
+  }
+}
 /*std::vector<const GameObjectComposition*> objFactory::GetgameObjs()
 {
 	std::vector<const GameObjectComposition*> constObjs;
