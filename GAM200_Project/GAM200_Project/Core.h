@@ -2,6 +2,7 @@
 #define CORE_H
 #include <vector>
 #include "System.h"
+#include "./GameState/GameStateList.h"
 
 class CoreEngine
 {
@@ -20,6 +21,10 @@ public:
   void Initialize();
   unsigned LastTime;
   bool GameActive;
+  bool Pause;
+  std::string LevelName = "InGameEditor-KEY.txt";
+  unsigned int PrevGameState = GS_RUN;
+  unsigned int GameState = GS_RUN;
 //  SoundManager * m_Sound;
   std::vector<ISystem*> getSystems() const { return Systems; };
 

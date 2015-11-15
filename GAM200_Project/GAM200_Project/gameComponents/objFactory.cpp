@@ -255,7 +255,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   return newTile;
 }
 
-void objFactory::intializeObjects()
+void objFactory::initializeObjects()
 {
   std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
   for (; it != gameObjs.end(); ++it)

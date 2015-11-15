@@ -49,7 +49,7 @@ public:
   void Initialize();// override;
   void Update(float dt);//override;
   void Shutdown();// override;
-  void intializeObjects();
+  void initializeObjects();
   void loadLevelFrom(std::string fileName);
   void createTiles();
   void SendMessages(Message * message);

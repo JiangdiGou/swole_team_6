@@ -102,6 +102,8 @@ void ImGuiManager::Update(float dt)
           createEmptyLevelFile(std::string(activeLevelName), activeLevelDimensions[0], activeLevelDimensions[1]);
           generateTextureKey(std::string(activeLevelName));
           tempMessage = "Sorry, " + std::string(activeLevelName) + " was created but loading isn't functional yet.";
+          CORE->GameState = GS_LOAD;
+          CORE->LevelName = std::string(activeLevelName);
           //FACTORY->readTextureKey("resources/levels/" + std::string(activeLevelName) + "-KEY.txt");
           //FACTORY->loadLevelFrom("resources/levels/" + std::string(activeLevelName) + ".txt");
         }

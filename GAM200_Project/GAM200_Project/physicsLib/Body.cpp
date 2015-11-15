@@ -46,7 +46,7 @@ Body::Body()
 
 Body::~Body()
 {
-	delete BodyShape;
+	//delete BodyShape;
 	PHYSICS->Bodies.erase(this);
 }
 
