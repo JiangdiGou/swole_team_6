@@ -50,12 +50,13 @@ void CoreEngine::GameLoop()
   //sound.playSound(soundSample, true);
   //std::cin >> garbage;
   //sound.releaseSound(soundSample);
+  SoundEmiiter bgm = *new SoundEmitter();
+  bgm.SetVolume(1.0f, "Combat_Music");
+  bgm.PlayEvent("Combat_Music");
 #else
 
 
-  SoundManager bgm = *new SoundManager();
-  //bgm.Volume(10.0f, "music_theme");
-  bgm.PlayEvent("music_theme");
+
 
   
  
@@ -71,6 +72,11 @@ void CoreEngine::GameLoop()
 
     //// loop the sound
     //sound.playSound(soundSample, true);
+	  SoundEmitter bgm = *new SoundEmitter();
+	  bgm.Initialize();
+
+	  bgm.SetVolume(1.0f, "Combat_Music");
+	  bgm.PlayEvent("Combat_Music");
   }
 #endif
 
