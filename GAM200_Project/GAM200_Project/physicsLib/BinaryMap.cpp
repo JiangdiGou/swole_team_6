@@ -30,7 +30,7 @@ void TileMapCollision::Initialize()
 {
 	transform_ = reinterpret_cast<Transform *>(GetOwner()->GetComponent(CT_Transform));
 	rigid_ = reinterpret_cast<Body *>(GetOwner()->GetComponent(CT_Body));
-	tileMap = FACTORY->tileMap;
+	//tileMap = FACTORY->tileMap;
 	mapWidth = &FACTORY->levelWidth;
 	mapHeight = &FACTORY->levelHeight;
 	int* mapHeight;

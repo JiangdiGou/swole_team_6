@@ -17,6 +17,8 @@ enum
 {
   //list of all game states 
   GS_GAME = 0,
+  GS_LOAD,
+  GS_RUN,
   GS_RESTART,
   GS_QUIT,
   GS_NUM

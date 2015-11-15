@@ -77,19 +77,34 @@ void CoreEngine::GameLoop()
   while (GameActive)
   {
     //updateMousePos();
+    if (GameState == GS_LOAD)
+    {
+      if (PrevGameState == GS_RUN)
+      {
+        FACTORY->destroyAllObjects();
+        FACTORY->textureKey = FACTORY->readTextureKey("resources/Levels/InGameEditor-KEY.txt");
+        FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
+        //FACTORY->loadLevelFrom("resources/Levels/" + LevelName);
+        FACTORY->initializeObjects();
+        //LOGIC->Initialize();
+        GameState = GS_RUN;
+      }
+    }
+    else if(GameState == GS_RUN)
+    {
+      unsigned currenttime = timeGetTime();
+      //Convert it to the time passed since the last frame (in seconds)
+      float dt = (currenttime - LastTime) / 1000.0f;
+      //Update the when the last update started
+      LastTime = currenttime;
 
-    unsigned currenttime = timeGetTime();
-    //Convert it to the time passed since the last frame (in seconds)
-    float dt = (currenttime - LastTime) / 1000.0f;
-    //Update the when the last update started
-    LastTime = currenttime;
+      //Update every system
+      for (unsigned i = 0; i < Systems.size(); ++i)
+        Systems[i]->Update(dt);
 
-    //Update every system
-    for (unsigned i = 0; i < Systems.size(); ++i)
-      Systems[i]->Update(dt);
-
-    for (unsigned i = 0; i < Systems.size(); ++i)
-      Systems[i]->Draw();
+      for (unsigned i = 0; i < Systems.size(); ++i)
+        Systems[i]->Draw();
+    }
   }
 
 }

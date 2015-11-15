@@ -1,15 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////////
-//
-//	Game Logic
-//	Simple game logic for demo. A good way to approach understand the game sample
-//	is to walk through all the code in game logic and follow the execution through
-//	the rest of the engine.
-//	
-//	Authors: Chris Peters, Benjamin Ellinger <- did they author this lol? 
-//	Copyright 2010, Digipen Institute of Technology
-//
-///////////////////////////////////////////////////////////////////////////////////////
-
 #include "GameLogic.h"
 #include "./physicsLib//Transform.h"
 #include "./physicsLib/Body.h"
@@ -30,8 +18,8 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  FACTORY->textureKey = FACTORY->readTextureKey("resources/Levels/InGameEditor-KEY.txt");
-  FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
+  FACTORY->textureKey = FACTORY->readTextureKey("resources/Levels/TestLevel-KEY.txt");
+  FACTORY->loadLevelFrom("resources/Levels/TestLevel.txt");
 
 
   GOC * camera = FACTORY->makeObject("Camera");
@@ -218,7 +206,7 @@ void GameLogic::Initialize()
 
   //player = Fbox;
 
-  FACTORY->intializeObjects();
+  FACTORY->initializeObjects();
 }
 
 void GameLogic::SendMessages(Message * m)

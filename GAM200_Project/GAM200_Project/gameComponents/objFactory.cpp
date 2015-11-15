@@ -3,6 +3,7 @@
  \file    objFactory.cpp
  \author  Nolan Taeksang Yoo
  \author  Gabriel Neumann
+ \author  Conor Lavelle
  \par     Contact: nolan\@projectexist.net
  \par     Classes: objFactory
  \brief
@@ -16,6 +17,8 @@
 
 #include "../AssertionError/AssertionError.h"
 #include "../WindowsSystem.h"
+
+
 bool FACTORY_EXISTS;
 int nextID = 0;
 int tileNumber = 0;
@@ -130,12 +133,12 @@ bool objFactory::validPoint(int x, int y)
 
 void objFactory::loadLevelFrom(std::string fileName)
 {
+  //std::vector<std::string> tokens;
   std::string garbage;
   std::string levelName;//at line 2
   int arrayX;      //        4
   int arrayY;      //        5
-  char**  tileMap;
-  char**  entityMap;
+  int**  tileMap;
 
   //get line count
   int lineCount;
@@ -158,27 +161,39 @@ void objFactory::loadLevelFrom(std::string fileName)
   arrayY = std::stoi(garbage);
 
   //load arrays
-  tileMap = new char*[arrayY];
+  tileMap = new int*[arrayY];
   for (int i = 0; i < arrayY; i++)
   {
-    tileMap[i] = new char[arrayX];
-    garbage = getLineFromFile(5 + arrayY-1-i + 2, fileName);
-    std::copy(garbage.begin(), garbage.end(), tileMap[i]);
-  }
+    tileMap[i] = new int[arrayX];
 
-  entityMap = new char*[arrayY];
-  for (int i = 0; i < arrayY; i++)
-  {
-    entityMap[i] = new char[arrayX];
-    garbage = getLineFromFile(5 + arrayY-1-i + 1 + 2 + arrayY, fileName);
-    std::copy(garbage.begin(), garbage.end(), entityMap[i]);
-  }
+    garbage = getLineFromFile(5 + arrayY-1-i + 2, fileName);   
+    //Gets all ints from level file, fills up tilemap array
+    int j = 0;
+    for (std::string::iterator it1 = garbage.begin(), it2 = it1 + 1;
+      it2 != garbage.end(); ++it1, ++it2)
+    {
+      if (*it2 == ' ')
+      {
+        tileMap[i][j] = *it1 - '0';
+        ++j;
+      }
+      else
+      {
+        while (*it2 != ' ')
+          ++it2;
 
+        std::string substring = std::string(it1, it2);
+        tileMap[i][j] = std::stoi(substring);
+
+        it1 = it2 - 1;
+        ++j;
+      }
+    }
+  }
   this->levelName = levelName;
   this->levelWidth = arrayX;
   this->levelHeight = arrayY;
   this->tileMap = tileMap;
-  this->entityMap = entityMap;
   this->printLevel();
 }
 
@@ -190,7 +205,7 @@ void objFactory::createTiles()
   {
     for (j = 0; j < levelWidth; j++)
     {
-      int value = (int)(tileMap[i][j] - '0');
+      int value = (tileMap[i][j]);
 #ifdef EDITOR
       if (value == 0)
         createTile(j, i, textureKey[value]);
@@ -255,7 +270,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   return newTile;
 }
 
-void objFactory::intializeObjects()
+void objFactory::initializeObjects()
 {
   std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
   for (; it != gameObjs.end(); ++it)
@@ -278,16 +293,8 @@ void objFactory::printLevel()
     }
     std::cout << std::endl;
   }
-  std::cout << "Entity Map:" << std::endl;
-  for (int i = 0; i < levelHeight; i++)
-  {
-    for (int j = 0; j < levelWidth; j++)
-    {
-      std::cout << entityMap[i][j];
-    }
-    std::cout << std::endl;
-  }
 }
+
 //return false if tile couldn't be changed, true + change tile otherwise
 bool objFactory::changeTile(char tile, int x, int y)
 {
@@ -298,147 +305,6 @@ bool objFactory::changeTile(char tile, int x, int y)
   }
   this->tileMap[y][x] = tile;
   return true;
-}
-
-//return false if tile couldn't be changed, true + change tile otherwise
-bool objFactory::changeEntity(char entity, int x, int y)
-{
-  //invalid check + reversal
-  y = this->levelHeight - y - 1;
-  if (!this->validPoint(x, y))
-  {
-    return false;
-  }
-  this->entityMap[y][x] = entity;
-  return true;
-}
-
-void objFactory::insertCol(int x, int count)
-{
-  char ** newTileMap;
-  char ** newEntityMap;
-  int oldHeight = this->levelHeight;
-  int oldWidth = this->levelWidth;
-
-  //re-alloc memory
-  this->levelWidth = this->levelWidth + count;
-  int newWidth = this->levelWidth;
-
-  newTileMap = new char*[oldHeight];
-  for (int i = 0; i < oldHeight; i++)
-  {
-    newTileMap[i] = new char[newWidth];
-  }
-  newEntityMap = new char*[oldHeight];
-  for (int i = 0; i < oldHeight; i++)
-  {
-    newEntityMap[i] = new char[newWidth];
-  }
-
-  //set memory part 0 (give everything a 0)
-  for (int i = 0; i < oldHeight; i++)
-  {
-    for (int j = 0; j < newWidth; j++)
-    {
-      newTileMap[i][j] = '0';
-      newEntityMap[i][j] = '0';
-    }
-  }
-
-  //set memory part 1 (before new columns)
-  for (int i = 0; i < oldHeight; i++)
-  {
-    for (int j = 0; j < x; j++)
-    {
-      newTileMap[i][j] = tileMap[i][j];
-      newEntityMap[i][j] = entityMap[i][j];
-    }
-  }
-  //set memory part 2 (after new columns)
-  for (int i = 0; i < oldHeight; i++)
-  {
-    for (int j = x; j < oldWidth; j++)
-    {
-      newTileMap[i][j + count] = tileMap[i][j];
-      newEntityMap[i][j + count] = entityMap[i][j];
-    }
-  }
-
-  for (int i = 0; i < oldHeight; i++)
-  {
-    delete this->tileMap[i];
-    delete this->entityMap[i];
-  }
-
-  delete[] this->tileMap;
-  delete[] this->entityMap;
-
-  this->tileMap = newTileMap;
-  this->entityMap = newEntityMap;
-}
-
-void objFactory::insertRow(int y, int count)
-{
-  char ** newTileMap;
-  char ** newEntityMap;
-  int oldHeight = this->levelHeight;
-  int oldWidth = this->levelWidth;
-
-  //re-alloc memory
-  this->levelHeight = this->levelHeight + count;
-  int newHeight = this->levelHeight;
-
-  newTileMap = new char*[newHeight];
-  for (int i = 0; i < newHeight; i++)
-  {
-    newTileMap[i] = new char[oldWidth];
-  }
-  newEntityMap = new char*[newHeight];
-  for (int i = 0; i < newHeight; i++)
-  {
-    newEntityMap[i] = new char[oldWidth];
-  }
-
-  //set memory part 0 (give everything a 0)
-  for (int i = 0; i < newHeight; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      newTileMap[i][j] = '0';
-      newEntityMap[i][j] = '0';
-    }
-  }
-
-  //set memory part 1 (before new columns)
-  for (int i = 0; i < y; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      newTileMap[i][j] = tileMap[i][j];
-      newEntityMap[i][j] = entityMap[i][j];
-    }
-  }
-  //set memory part 2 (after new columns)
-  for (int i = y; i < oldHeight; i++)
-  {
-    for (int j = 0; j < oldWidth; j++)
-    {
-      newTileMap[i + count][j] = tileMap[i][j];
-      newEntityMap[i + count][j] = entityMap[i][j];
-    }
-  }
-
-  for (int i = 0; i < oldHeight; i++)
-  {
-    delete this->tileMap[i];
-    delete this->entityMap[i];
-  }
-
-  delete[] this->tileMap;
-  delete[] this->entityMap;
-
-  this->tileMap = newTileMap;
-  this->entityMap = newEntityMap;
 }
 
 std::vector<std::string> objFactory::readTextureKey(std::string keyPath)
@@ -500,7 +366,7 @@ void objFactory::modifyLevelTilemap(int newTexture, int x, int y)
   //Gets the line we care about
   std::getline(is, line);
   //modifies the character
-  line[x] = (char)(newTexture + '0');
+  line[2*x] = (char)(newTexture + '0');
   lines.push_back(line);
 
   while (!is.eof())

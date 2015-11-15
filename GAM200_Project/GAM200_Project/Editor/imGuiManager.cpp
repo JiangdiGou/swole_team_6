@@ -102,6 +102,8 @@ void ImGuiManager::Update(float dt)
           createEmptyLevelFile(std::string(activeLevelName), activeLevelDimensions[0], activeLevelDimensions[1]);
           generateTextureKey(std::string(activeLevelName));
           tempMessage = "Sorry, " + std::string(activeLevelName) + " was created but loading isn't functional yet.";
+          CORE->GameState = GS_LOAD;
+          CORE->LevelName = std::string(activeLevelName);
           //FACTORY->readTextureKey("resources/levels/" + std::string(activeLevelName) + "-KEY.txt");
           //FACTORY->loadLevelFrom("resources/levels/" + std::string(activeLevelName) + ".txt");
         }
@@ -168,18 +170,7 @@ void ImGuiManager::createEmptyLevelFile(std::string levelName, int width, int he
   {
     for (int i = 0; i < width; ++i)
     {
-      ofs << '0';
-    }
-    ofs << std::endl;
-  }
-
-  //Unsure if needed with new system, just matching old file for now.
-  ofs << "[EntityMap]" << std::endl;
-  for (int j = 0; j < height; ++j)
-  {
-    for (int i = 0; i < width; ++i)
-    {
-      ofs << '0';
+      ofs << "0 ";
     }
     ofs << std::endl;
   }
