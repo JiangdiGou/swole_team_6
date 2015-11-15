@@ -27,8 +27,23 @@
     <ClInclude Include="GAM200_Project\ComponentTypeIds.h" />
     <ClInclude Include="GAM200_Project\Composition.h" />
     <ClInclude Include="GAM200_Project\Core.h" />
+    <ClInclude Include="GAM200_Project\Editor\editable.h" />
+    <ClInclude Include="GAM200_Project\Editor\imGuiManager.h" />
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imconfig.h" />
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui.h" />
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui_internal.h" />
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_rect_pack.h" />
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_textedit.h" />
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_truetype.h" />
+    <ClInclude Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.h" />
     <ClInclude Include="GAM200_Project\Engine.h" />
     <ClInclude Include="GAM200_Project\engineAudio\Audio.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineAudio\Sound.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineAudio\SoundEmitter.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\atlasTexture.h" />
@@ -54,6 +69,7 @@
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
+    <ClInclude Include="GAM200_Project\glfwMessages.h" />
     <ClInclude Include="GAM200_Project\initInfo.h" />
     <ClInclude Include="GAM200_Project\logger\logger.h" />
     <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h">
@@ -68,9 +84,6 @@
     <ClInclude Include="GAM200_Project\mouseVector.h" />
     <ClInclude Include="GAM200_Project\physicsLib\BinaryMap.h" />
     <ClInclude Include="GAM200_Project\physicsLib\Body.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\boolean.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h">
@@ -158,7 +171,19 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\Core.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\editable.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\imGuiManager.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_demo.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_draw.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="GAM200_Project\engineAudio\Audio.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineAudio\Sound.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\engineAudio\SoundEmitter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\atlasTexture.cpp" />
@@ -237,11 +262,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt" />
-    <Text Include="resources\fragmentShader2.txt" />
-    <Text Include="resources\FragmentShaderDebug.txt" />
+    <Text Include="resources\Shaders\imGuiFragment.txt" />
+    <Text Include="resources\Shaders\imGuiVertex.txt" />
     <Text Include="resources\VertexShader.txt" />
-    <Text Include="resources\vertexShader2.txt" />
-    <Text Include="resources\VertexShaderDebug.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{73E2DFFE-92FF-4977-B8FE-68E8ED2EA2F6}</ProjectGuid>
@@ -272,7 +295,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\GAM200_Project;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Gam200_Project\lvlTools\imGUI;$(ProjectDir)\GAM200_Project;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\graphicsLibsWin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

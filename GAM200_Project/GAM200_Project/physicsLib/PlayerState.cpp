@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    PlayerState.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+The implementation for the player controller. 
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #include "PlayerState.h"
 
 #define MORE_FRAME 0.02f
@@ -33,7 +47,7 @@ void PlayerState::Initialize()
   playerBody = reinterpret_cast<Body *>(parent->GetComponent(CT_Body));
   //playerSpriteRend = reinterpret_cast<SpriteRenderer *>(parent->GetComponent(CT_SpriteRenderer));
  // we need to initialize the messaging system here!!
-
+  playerSound = reinterpret_cast<SoundEmitter *>(parent->GetComponent(CT_SoundEmitter));
   //InitializeCollisionCallback();
   playerTransform = reinterpret_cast<Transform *>(parent->GetComponent(CT_Transform));
   playerSprite = reinterpret_cast<Sprite *>(parent->GetComponent(CT_Sprite));
@@ -41,7 +55,118 @@ void PlayerState::Initialize()
   //Except this script. 
   idleAnimation = &(GRAPHICS->getSpriteAtlas()->textures["Character"]);
   runAnimation = &(GRAPHICS->getSpriteAtlas()->textures["CharacterRun"]);
+
   
+
+}
+
+void PlayerState::Update(float dt)
+{
+	LastframeDT = dt;
+	JumpTimer += dt;
+	WalkTimer += dt;
+
+	//When player dies, stop for 2 seconds and then reload
+	if (!IsAlive)
+	{
+		DeathCount += dt;
+		if (DeathCount > DEATH_FRAME)
+		{
+			gGameStateCurr = GS_RESTART;
+		}
+		return;
+	}
+
+	//if (playerBody->Velocity.y < -(maxDownwardsVelocity))
+	//	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y +  */-(maxDownwardsVelocity)));
+	//if (playerBody->Velocity.y > maxUpwardsVelocity)
+	//playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y + */ 0));
+
+
+	//if (MyPlayerState == Gwrounded)
+	//{
+	//	if (playerTileCollision->BottomIsColliding())
+	//		JumpTimer = 0;
+	//	//playerBody->setVelocity(playerBody->getVelocity().x, 0);
+	//	return;
+	//}
+
+	//if (MyPlayerState == OnGround)
+	//{
+	//	
+
+	//	if (Platform != NULL)
+	//	{
+	//		
+	//		Transform* Trans = GetOwner()->has(Transform);
+	//		Transform* TransPlat = Platform->has(Transform);
+	//		// apparently we need to use Gethas or whatever that is, GM help!
+	//		float CheckXpos = abs(Trans->GetPosition().x - TransPlat->GetPosition().x);
+	//		float CheckYpos = abs(Trans->GetPosition().y - TransPlat->GetPosition().y);
+
+
+	//		if (CheckXpos < 1.0 && CheckYpos < 2.0)
+	//		{
+	//			// calculate how far the platform has moved
+	//			float XDis = TransPlat->GetPosition().x - PreviousPlatformPosition.x;
+	//			float YDis = TransPlat->GetPosition().y - PreviousPlatformPosition.y;
+
+
+	//			playerBody->pTrans->GetPositionXY().x += XDis;
+	//			Trans->GetPosition().x += XDis;
+
+	//			float PlatformYVelocity = ((RigidBody*)Platform->GetComponent(CT_RigidBody))->getVelocity().y;
+	//			float PlatformXVelocity = ((RigidBody*)Platform->GetComponent(CT_RigidBody))->getVelocity().x;
+
+	//			playerBody->setVelocity(playerBody->getVelocity().x, playerBody->getVelocity().y + PlatformYVelocity);
+
+	//			if (YDis <= 0)
+	//			{
+	//				playerBody->pTrans->GetPositionXY().y += YDis;
+	//				Trans->GetPosition().y += YDis;
+	//			}
+	//			// move the player with the platform
+	//			PreviousPlatformPosition = TransPlat->GetPosition();
+
+	//		}
+
+	//		else
+	//		{
+	//			Platform = NULL;
+
+	//		
+	//		}
+
+	//	}
+	//}
+
+
+	//On the ground
+
+	//if (playerTileCollision->BottomIsColliding() )//&& JumpTimer > PER_FRAME)
+	//{
+	//jumpCount = 0;
+	//JumpTimer = 0;
+	//MyPlayerState = Grounded;
+	//jumpButtonReleased = false;
+	//return;
+	//}
+
+	////Keep our variable-height jump going up to the max height
+	//if (MyPlayerState == StartJump)
+	//{
+	//	playerBody->setVelocity(playerBody->getVelocity().x, playerBody->getVelocity().y + (playerJumpVelocity * (variableJumpPower)));
+
+	//	//At max height, stop our variable jump.
+	//	if (JumpTimer > variableJumpTime)
+	//	{
+	//		JumpTimer = 0;
+	//		MyPlayerState = Jumping;
+	//	}
+
+	//}
+
+
 
 }
 
@@ -64,6 +189,8 @@ void PlayerState::SendMessages(Message * message)
 {
 	switch (message->MessageId)
 	{
+
+
 		// The user has pressed a (letter/number) key, we may respond by creating
 		// a specific object based on the key pressed.
 	case Mid::CharacterKey:
@@ -76,6 +203,10 @@ void PlayerState::SendMessages(Message * message)
 			//{
 				if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
 				{
+					playerSound->SetVolume(1.0f, "player_jump");
+					playerSound->PlayEvent("player_jump");
+					playerSound->StopEvent("player_jump");
+			
 					// we can do anything here also sounds
 
 					//variableJumpHeightEnabled = true;
@@ -90,12 +221,14 @@ void PlayerState::SendMessages(Message * message)
           //There is no jump animation yet 
 
 					//variableJumpHeightEnabled = false;
-					ReleaseJump();
+					//ReleaseJump();
+					playerSound->SetPause(true, "player_jump");
+					
 				}
 				else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
 				{
 					// do nothing
-
+					
 				}
 			//}
       break;
@@ -116,6 +249,15 @@ void PlayerState::SendMessages(Message * message)
 
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
+				
+				//playerSound->StopEvent("player_footsteps");
+				playerSound->SetVolume(1.0f, "player_footsteps");
+				playerSound->StopEvent("player_footsteps");
+				playerSound->PlayEvent("player_footsteps");
+				
+				
+
+				printf("reach sound");
 				// change player sprite state here 
         if (playerSprite->texture != *runAnimation)
           playerSprite->texture = *runAnimation;
@@ -144,9 +286,13 @@ void PlayerState::SendMessages(Message * message)
 
 			else if (CharacterMessage->keyStatus == KEY_RELEASED)
 			{
+
+
+				
 				playerBody->AddForce(Vec2D(0,0));
 				//PlayerSprite->ChangeState("idle");
 				playerBody->Velocity.x = 0.0f;
+				
 				//playerBody->Friction = 0.0f; 
 
         if (playerSprite->texture != *idleAnimation)
@@ -164,7 +310,7 @@ void PlayerState::SendMessages(Message * message)
 
 			if (WalkTimer > 0.4 && getJumpTimer() < MORE_FRAME)
 			{
-
+				
 				WalkTimer = 0.0f;
 			}
 			//}
@@ -172,6 +318,8 @@ void PlayerState::SendMessages(Message * message)
 			// change sprite and flip sprite if necessary
 			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
+				playerSound->SetVolume(1.0f, "player_footsteps");
+				playerSound->PlayEvent("player_footsteps");
 				// we can change the player sprite to dashing or sth here?
         if (playerSprite->texture != *runAnimation)
           playerSprite->texture = *runAnimation;
@@ -202,7 +350,7 @@ void PlayerState::SendMessages(Message * message)
 			else if (CharacterMessage->keyStatus == KEY_RELEASED)
 			{
 				//player should be idle here?
-
+				playerSound->SetPause(true, "player_footsteps");
 				playerBody->AddForce(Vec2D(0, 0));
 				playerBody->Velocity.x = 0.0f;
 				//playerBody->Friction = 0.0f;
@@ -266,115 +414,7 @@ void PlayerState::SerializeWrite(Serializer& str)
 
 
 
-void PlayerState::Update(float dt)
-{
-    LastframeDT = dt;
-    JumpTimer += dt;
-	WalkTimer += dt;
 
-	//When player dies, stop for 2 seconds and then reload
-	if (!IsAlive)
-	{
-		DeathCount += dt;
-		if (DeathCount > DEATH_FRAME)
-		{
-			gGameStateCurr = GS_RESTART;
-		}
-		return;
-	}
-
-	//if (playerBody->Velocity.y < -(maxDownwardsVelocity))
-	//	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y +  */-(maxDownwardsVelocity)));
-	//if (playerBody->Velocity.y > maxUpwardsVelocity)
-		//playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y + */ 0));
-	    
-
-	//if (MyPlayerState == Gwrounded)
-	//{
-	//	if (playerTileCollision->BottomIsColliding())
-	//		JumpTimer = 0;
-	//	//playerBody->setVelocity(playerBody->getVelocity().x, 0);
-	//	return;
-	//}
-
-	//if (MyPlayerState == OnGround)
-	//{
-	//	
-
-	//	if (Platform != NULL)
-	//	{
-	//		
-	//		Transform* Trans = GetOwner()->has(Transform);
-	//		Transform* TransPlat = Platform->has(Transform);
-	//		// apparently we need to use Gethas or whatever that is, GM help!
-	//		float CheckXpos = abs(Trans->GetPosition().x - TransPlat->GetPosition().x);
-	//		float CheckYpos = abs(Trans->GetPosition().y - TransPlat->GetPosition().y);
-
-
-	//		if (CheckXpos < 1.0 && CheckYpos < 2.0)
-	//		{
-	//			// calculate how far the platform has moved
-	//			float XDis = TransPlat->GetPosition().x - PreviousPlatformPosition.x;
-	//			float YDis = TransPlat->GetPosition().y - PreviousPlatformPosition.y;
-
-
-	//			playerBody->pTrans->GetPositionXY().x += XDis;
-	//			Trans->GetPosition().x += XDis;
-
-	//			float PlatformYVelocity = ((RigidBody*)Platform->GetComponent(CT_RigidBody))->getVelocity().y;
-	//			float PlatformXVelocity = ((RigidBody*)Platform->GetComponent(CT_RigidBody))->getVelocity().x;
-
-	//			playerBody->setVelocity(playerBody->getVelocity().x, playerBody->getVelocity().y + PlatformYVelocity);
-
-	//			if (YDis <= 0)
-	//			{
-	//				playerBody->pTrans->GetPositionXY().y += YDis;
-	//				Trans->GetPosition().y += YDis;
-	//			}
-	//			// move the player with the platform
-	//			PreviousPlatformPosition = TransPlat->GetPosition();
-
-	//		}
-
-	//		else
-	//		{
-	//			Platform = NULL;
-
-	//		
-	//		}
-
-	//	}
-	//}
-
-
-	 //On the ground
-	/*
-	if (playerTileCollision->BottomIsColliding() && JumpTimer > PER_FRAME)
-	{
-		jumpCount = 0;
-		JumpTimer = 0;
-		MyPlayerState = Grounded;
-		jumpButtonReleased = false;
-		return;
-	}*/
-
-	////Keep our variable-height jump going up to the max height
-	//if (MyPlayerState == StartJump)
-	//{
-	//	playerBody->setVelocity(playerBody->getVelocity().x, playerBody->getVelocity().y + (playerJumpVelocity * (variableJumpPower)));
-
-	//	//At max height, stop our variable jump.
-	//	if (JumpTimer > variableJumpTime)
-	//	{
-	//		JumpTimer = 0;
-	//		MyPlayerState = Jumping;
-	//	}
-
-	//}
-
-
-
-}
 
 void PlayerState::Release()
 {
@@ -398,7 +438,7 @@ void PlayerState::PressJump()
 			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, (playerJumpVelocity * (variableJumpPower))));//playerBody->Velocity.y + (playerJumpVelocity * (variableJumpPower))));
 		else
 			playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, playerBody->Velocity.y + playerJumpVelocity));
-
+			
 
 			
 		JumpTimer = 0.0f;

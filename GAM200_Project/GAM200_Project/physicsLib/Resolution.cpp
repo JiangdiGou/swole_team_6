@@ -1,4 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    Resolution.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+Solving for when two objects get into contact, prevent it from penetrate
+through the ground and correct the position to have it stay stable.
+\remarks
 
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #include "Resolution.h"
 #include "Body.h"
 //#include <algorithm>

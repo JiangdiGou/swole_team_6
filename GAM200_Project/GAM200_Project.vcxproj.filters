@@ -52,20 +52,20 @@
     <Filter Include="Systems\Windows">
       <UniqueIdentifier>{46b15852-26d0-4827-9c98-2f1d900c96f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\physics">
+      <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Systems\audio">
       <UniqueIdentifier>{b215da04-2435-4798-82c0-f2988868dd84}</UniqueIdentifier>
     </Filter>
     <Filter Include="Systems\engineGraphics">
       <UniqueIdentifier>{75150fc8-709e-41db-b7a4-5ee59f27049e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\ActionSystem">
-      <UniqueIdentifier>{0f17fcef-b0e1-41b8-a208-03f31a2af004}</UniqueIdentifier>
+    <Filter Include="Systems\Editor">
+      <UniqueIdentifier>{8a027181-09c7-43cc-95af-db9e20a6a05c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BaseEngine\Serialization">
-      <UniqueIdentifier>{f6c8cfe3-1188-420a-8b8f-796ae1f669db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Systems\physics">
-      <UniqueIdentifier>{aea003a7-a2bf-4f0f-a86f-7fe4b000bf35}</UniqueIdentifier>
+    <Filter Include="Systems\Editor\imGUI">
+      <UniqueIdentifier>{770c3488-775d-4f7f-ac94-db74327d6c70}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +115,6 @@
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\shapes.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\boolean.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h">
@@ -239,6 +236,15 @@
     <ClInclude Include="GAM200_Project\engineGraphics\ParticleSystem.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h" />
     <ClInclude Include="GAM200_Project\ActionSystem\SampleCurve.h" />
     <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h" />
     <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h" />
@@ -249,38 +255,39 @@
     <ClInclude Include="GAM200_Project\reactive.h" />
     <ClInclude Include="GAM200_Project\runLua\luaTranslate.h" />
     <ClInclude Include="GAM200_Project\Swole.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\engineAudio\Sound.h">
+      <Filter>Systems\audio</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\engineAudio\SoundEmitter.h">
+      <Filter>Systems\audio</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\glfwMessages.h" />
+    <ClInclude Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.h">
+      <Filter>Systems\Editor</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\Editor\imGuiManager.h">
+      <Filter>Systems\Editor</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imconfig.h">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui.h">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui_internal.h">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_rect_pack.h">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_textedit.h">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\Serialization\Serialization.h">
-      <Filter>BaseEngine\Serialization</Filter>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_truetype.h">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\Serialization\TextSerialization.h">
-      <Filter>BaseEngine\Serialization</Filter>
+    <ClInclude Include="GAM200_Project\Editor\editable.h">
+      <Filter>Systems\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +398,11 @@
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp">
       <Filter>BaseEngine\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp" />
     <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp" />
     <ClCompile Include="GAM200_Project\initInfo.cpp" />
     <ClCompile Include="GAM200_Project\mouseVector.cpp" />
@@ -398,42 +410,42 @@
     <ClCompile Include="GAM200_Project\reactive.cpp" />
     <ClCompile Include="GAM200_Project\runLua\luaTranslate.cpp" />
     <ClCompile Include="GAM200_Project\Swole.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClCompile Include="GAM200_Project\engineAudio\Sound.cpp">
+      <Filter>Systems\audio</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClCompile Include="GAM200_Project\engineAudio\SoundEmitter.cpp">
+      <Filter>Systems\audio</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClCompile Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.cpp">
+      <Filter>Systems\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClCompile Include="GAM200_Project\Editor\imGuiManager.cpp">
+      <Filter>Systems\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp">
-      <Filter>Systems\ActionSystem</Filter>
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui.cpp">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\Serialization\TextSerialization.cpp">
-      <Filter>BaseEngine\Serialization</Filter>
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_demo.cpp">
+      <Filter>Systems\Editor\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_draw.cpp">
+      <Filter>Systems\Editor\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editable.cpp">
+      <Filter>Systems\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\fragmentShader2.txt">
-      <Filter>resources</Filter>
-    </Text>
-    <Text Include="resources\FragmentShaderDebug.txt">
-      <Filter>resources</Filter>
-    </Text>
     <Text Include="resources\VertexShader.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\vertexShader2.txt">
+    <Text Include="resources\Shaders\imGuiFragment.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\VertexShaderDebug.txt">
+    <Text Include="resources\Shaders\imGuiVertex.txt">
       <Filter>resources</Filter>
     </Text>
   </ItemGroup>

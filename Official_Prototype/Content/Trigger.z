@@ -39,19 +39,30 @@ class Trigger : ZilchComponent
     [Property]
     var CustomCollisionObjectName:String = null;
     
-    //############################################################################################################## How to trigger
+    //############################################################################################################## What to trigger
     
-    //What object to send a trigger to
+    //First object to send a trigger to
     [Property]
-    var ObjectToTrigger:CogPath = null;
+    var ObjectToTrigger1:CogPath = null;
+    //Second object to send a trigger to
+    [Property]
+    var ObjectToTrigger2:CogPath = null;
     
     //What name triggered objects should have
     [Property]
     var NameOfTriggerObjects:String = null;
     
-    //If the object trigger should be turned on or off
+    //If object1 trigger should be turned on or off
     [Property]
-    var TurnOnTrigger:Boolean = true;
+    var TurnOnTrigger1:Boolean = true;
+    
+    //If object2 trigger should be turned on or off
+    [Property]
+    var TurnOnTrigger2:Boolean = true;
+    
+    //If the trigger object should be destroyed once activated
+    [Property]
+    var DestroySelf:Boolean = false;
     
     
     function Initialize(init : CogInitializer)
@@ -122,12 +133,18 @@ class Trigger : ZilchComponent
         var evtTrigger = TriggerEvent();
         
         //sets the state that the receiving objects should be in (triggered/not triggered)
-        evtTrigger.StartTrigger = this.TurnOnTrigger;
+        evtTrigger.StartTrigger1 = this.TurnOnTrigger1;
+        evtTrigger.StartTrigger2 = this.TurnOnTrigger2;
         
         //designates the specific object to trigger
-        if(this.ObjectToTrigger != null)
+        if(this.ObjectToTrigger1 != null)
         {
-            evtTrigger.CogToTrigger = this.ObjectToTrigger.Cog;
+            evtTrigger.CogToTrigger1 = this.ObjectToTrigger1.Cog;
+        }
+        
+        if(this.ObjectToTrigger2 != null)
+        {
+            evtTrigger.CogToTrigger2 = this.ObjectToTrigger2.Cog;
         }
         
         //designates the specific object names to trigger
@@ -135,19 +152,38 @@ class Trigger : ZilchComponent
         {
             evtTrigger.NameToTrigger = this.NameOfTriggerObjects;
         }
+        
+        this.Space.DispatchEvent(Events.TriggerEvent, evtTrigger);
+        
+        if(this.DestroySelf)
+        {
+            if(this.Owner.SphericalParticleEmitter != null)
+            {
+                this.Owner.SphericalParticleEmitter.Active = false;
+            }
+            
+            var seqDestroy = Action.Sequence(this.Owner.Actions);
+            Action.Delay(seqDestroy, 1.0);
+            Action.Call(seqDestroy, this.Owner.Destroy);
+        }
     }
     
     //Function called when this becomes triggered
     function OnTrigger(event : TriggerEvent)
     {
-        if(this.Owner == event.CogToTrigger)
+        if(this.Owner == event.CogToTrigger1)
         {
-            this.IsTriggered = event.StartTrigger;
+            this.IsTriggered = event.StartTrigger1;
+        }
+        
+        if(this.Owner == event.CogToTrigger2)
+        {
+            this.IsTriggered = event.StartTrigger2;
         }
         
         if(this.Owner.Name == event.NameToTrigger)
         {
-            this.IsTriggered = event.StartTrigger;
+            this.IsTriggered = event.StartTrigger1;
         }
     }
 }
@@ -156,10 +192,12 @@ class Trigger : ZilchComponent
 //Trigger event sent out by this script to activate various things
 class TriggerEvent : ZilchEvent
 {
-    //If the object receiving this should be turned on or off
-    var StartTrigger:Boolean = true;
+    //If object1 receiving this should be turned on or off
+    var StartTrigger1:Boolean = true;
+    var StartTrigger2:Boolean = true;
     
     //What cogs and object names should receive this trigger event
-    var CogToTrigger:Cog = null;
+    var CogToTrigger1:Cog = null;
+    var CogToTrigger2:Cog = null;
     var NameToTrigger:String = null;
 }

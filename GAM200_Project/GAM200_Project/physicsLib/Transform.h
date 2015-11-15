@@ -1,3 +1,16 @@
+/*****************************************************************************/
+/*!
+\file    Transform.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+the header file for the transform functions.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 //#include "all the header" //Math/Vec3.h

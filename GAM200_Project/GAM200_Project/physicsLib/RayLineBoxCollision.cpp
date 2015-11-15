@@ -1,3 +1,5 @@
+
+
 #include "Collision.h"
 //#include "Precompiled.h"
 #include "PhysicsManager.h"
@@ -290,7 +292,7 @@ std::vector <const GameObjectComposition*> LoopAll(Vec2D start, Vec2D end)
 
 	for (; it != FACTORY->gameObjs.end(); ++it)
 	{
-		std::cout << it->second->GetId() << std::endl;
+		//std::cout << it->second->GetId() << std::endl;
 		ShapeAAB* shape = (ShapeAAB*)it->second->GetComponent(CT_ShapeAAB);
 		if (shape != NULL)
 			if (line_rectangle_collide(start, end, shape))

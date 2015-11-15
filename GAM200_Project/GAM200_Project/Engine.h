@@ -24,6 +24,8 @@ Header for libraries and engine includes
 #include "Composition.h"
 #include "./physicsLib/Transform.h"
 #include "./gameComponents/objFactory.h"
+#include "./engineAudio/Sound.h"
+#include "./engineAudio/SoundEmitter.h"
 #include "System.h"
 #include "Core.h"
 #include "./physicsLib/PhysicsManager.h"

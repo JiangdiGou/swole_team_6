@@ -39,28 +39,38 @@ void CoreEngine::GameLoop()
   LastTime = timeGetTime();
 
 #ifdef AUDIO_AT_PRESENTATION
-  std::string garbage;
-  FMSoundSys sound = *new FMSoundSys();
-  //sound.Initialize(); <-- deprecated
+  //std::string garbage;
+  //FMSoundSys sound = *new FMSoundSys();
+  ////sound.Initialize(); <-- deprecated
 
-  FMSound soundSample;
-  sound.createSound(&soundSample, "resources//audio//menutheme.wav");
+  //FMSound soundSample;
+  //sound.createSound(&soundSample, "resources//audio//menutheme.wav");
 
-  // loop the sound
-  sound.playSound(soundSample, true);
-  std::cin >> garbage;
-  sound.releaseSound(soundSample);
+  //// loop the sound
+  //sound.playSound(soundSample, true);
+  //std::cin >> garbage;
+  //sound.releaseSound(soundSample);
 #else
+
+
+  SoundManager bgm = *new SoundManager();
+  //bgm.Volume(10.0f, "music_theme");
+  bgm.PlayEvent("music_theme");
+
+  
+ 
+ 
+
   if (INITINFO->playTheme)
   {
-    FMSoundSys sound = *new FMSoundSys();
-    //sound.Initialize(); <-- deprecated
+    //FMSoundSys sound = *new FMSoundSys();
+    ////sound.Initialize(); <-- deprecated
 
-    FMSound soundSample;
-    sound.createSound(&soundSample, "resources//audio//menutheme.wav");
+    //FMSound soundSample;
+    //sound.createSound(&soundSample, "resources//audio//menutheme.wav");
 
-    // loop the sound
-    sound.playSound(soundSample, true);
+    //// loop the sound
+    //sound.playSound(soundSample, true);
   }
 #endif
 

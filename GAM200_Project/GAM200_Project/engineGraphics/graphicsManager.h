@@ -51,16 +51,18 @@ public:
   Camera* getCamera(){ return &mainCamera; }
   void setCoreShader(const Shader& shader) { coreShader = shader; }
   Shader* getCoreShader() { return &coreShader; }
-  void setSpriteAtlas(const TextureAtlas& atlas) { spriteAtlas = atlas; }
-  TextureAtlas* getSpriteAtlas() { return &spriteAtlas; }
+  void setSpriteAtlas(TextureAtlas* atlas) { spriteAtlas = atlas; }
+  TextureAtlas* getSpriteAtlas() { return spriteAtlas; }
+	void setWindow(GLFWwindow* inputWindow) { pWindow = inputWindow; }
 
   Vector2 screenToWorld(Vector2 screenCoords);
 
 private:
   HDC deviceContext;
   HGLRC renderingContext;
+	GLFWwindow* pWindow;
   Camera mainCamera;
-  TextureAtlas spriteAtlas;
+  TextureAtlas* spriteAtlas;
   Shader coreShader;
 
 };

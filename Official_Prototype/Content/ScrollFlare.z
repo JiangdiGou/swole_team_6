@@ -34,9 +34,18 @@ class ScrollFlare : ZilchComponent
     //Background image fade
     [Property]
     var Fade:Boolean = false;
+    //New Scroll Animation
+    [Property]
+    var NewScroll:Boolean = false;
+    
+    var Done : Boolean = false;
     
     function Initialize(init : CogInitializer)
     {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(Zero.Keyboard, Events.KeyDown, this.OnKeyDown);
+        Zero.Connect(this.Space, Events.MouseDown, this.OnMouseDown);
+        
         if(this.LeftScroll)
         {
             this.Owner.Transform.Translation = Real3(-1.17, 0.24, 0.1);
@@ -115,6 +124,12 @@ class ScrollFlare : ZilchComponent
             
             Action.Property(seqScroll, @this.Owner.Transform.Translation, endPos, 0.5, Ease.Linear);
         }
+        
+        if(this.NewScroll)
+        {
+            Action.Delay(seqScroll, 1);
+            Action.Property(seqScroll, @this.Done, true, 0.01, Ease.Linear);
+        }
     }
     
     //Controls the movement of the charge bars on the rolls
@@ -139,6 +154,7 @@ class ScrollFlare : ZilchComponent
         
         Action.Delay(seqCharge, 0.65);
         Action.Property(seqCharge, @this.Owner.Sprite.Color, baseColor_, 0.05, Ease.Linear);
+                
     }
     
     //Controls the scale of the main sheet of paper
@@ -161,6 +177,13 @@ class ScrollFlare : ZilchComponent
         Action.Delay(seqPaper, 0.11);
         Action.Property(seqPaper, @this.Owner.Sprite.Color, startColor, 0.02, Ease.Linear);
         Action.Property(seqPaper, @this.Owner.Transform.Scale, endScale, 0.35, Ease.Linear);
+        
+                
+        if(this.NewScroll)
+        {
+            Action.Delay(seqPaper, 1);
+            Action.Property(seqPaper, @this.Done, true, 0.01, Ease.Linear);
+        }
     }
     
     //Controls the scale of the scroll picture
@@ -175,6 +198,19 @@ class ScrollFlare : ZilchComponent
         Action.Delay(seqPic, 0.11);
         Action.Property(seqPic, @this.Owner.Sprite.Color, startColor, 0.02, Ease.Linear);
         Action.Property(seqPic, @this.Owner.Transform.Scale, endScale, 0.35, Ease.Linear);
+        
+        if(this.NewScroll)
+        {
+            Action.Call(seqPic, this.ChangeScroll);
+            Action.Delay(seqPic, 1);
+            Action.Property(seqPic, @this.Done, true, 0.01, Ease.Linear);
+        }
+    }
+    
+    //Helper function for scroll animation
+    function ChangeScroll()
+    {
+        this.Owner.Sprite.AnimationActive = true;
     }
     
     //Controls the trasparency of the Scroll points
@@ -196,4 +232,31 @@ class ScrollFlare : ZilchComponent
         
         Action.Property(seqFade, @this.Owner.Sprite.Color, endColor, 0.1, Ease.Linear);
     }
+    
+    function StartWrap()
+    {
+        var seq = Action.Sequence(this.Owner.Actions);
+        
+        Action.Delay(seq, 1);
+        Action.Call(seq, this.Owner.ScrollWrap.ScrollWrap);
+    }
+    
+    function OnKeyDown(event : KeyboardEvent)
+    {
+        if(this.Done)
+        {
+            this.Done = false;
+            this.StartWrap();
+        }
+    }
+    
+    function OnMouseDown(event : MouseEvent)
+    {
+        if(this.Done)
+        {
+            this.Done = false;
+            this.StartWrap();
+        }
+    }
+    
 }
