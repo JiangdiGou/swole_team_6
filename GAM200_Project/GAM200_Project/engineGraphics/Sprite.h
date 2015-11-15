@@ -32,9 +32,13 @@ public:
   ~Sprite();
 
 	glm::vec4 color;
+  std::string textureName;
 	AtlasTexture texture;
 
   void Update(float dt) override;
+
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
 
   static void initSprites(const Shader& shader, const TextureAtlas& atlas);
   void static drawAllSprites();

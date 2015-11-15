@@ -36,6 +36,8 @@ class mouseVector : public GameComponent
 
   void SendMessages(Message*) override;
   void Update(float dt) override;
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
 };
 
 

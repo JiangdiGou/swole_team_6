@@ -15,6 +15,22 @@ float DetermineFriction(Body * a, Body * b)
 	return sqrt(a->Friction*b->Friction);
 }
 
+void ShapeLine::SerializeRead(Serializer& str)
+{
+  StreamRead(str, Id);
+  StreamRead(str, base);
+  StreamRead(str, direction);
+
+}
+void ShapeLine::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, Id);
+  StreamWrite(str);
+  StreamWrite(str, base);
+  StreamWrite(str);
+  StreamWrite(str, direction);
+  StreamWrite(str);
+}
 void ShapeCircle::Draw()
 {
 	/*Drawer::Instance.DrawCircle(body->Position, Radius);*/
@@ -28,6 +44,20 @@ bool ShapeCircle::TestPoint(Vec2D testPoint)
 	//	return true;
 	//else
 	return false;
+}
+
+void ShapeCircle::SerializeRead(Serializer& str)
+{
+  StreamRead(str, Id);
+  StreamRead(str, Radius);
+
+}
+void ShapeCircle::SerializeWrite(Serializer& str) 
+{
+  StreamWrite(str, Id);
+  StreamWrite(str);
+  StreamWrite(str, Radius);
+  StreamWrite(str);
 }
 
 void ShapeAAB::Initialize()
@@ -80,6 +110,19 @@ void ShapeAAB::Update(float dt)
   }
   CurCollidingObjects.clear();
   return;
+}
+
+void ShapeAAB::SerializeRead(Serializer& str)
+{
+  StreamRead(str, Id);
+  StreamRead(str, Extents);
+}
+void ShapeAAB::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, Id);
+  StreamWrite(str);
+  StreamWrite(str, Extents);
+  StreamWrite(str);
 }
 
 void ShapeAAB::SendMessages(Message* m)

@@ -30,6 +30,9 @@ public:
 	void DebugDraw();
 
 	virtual void Initialize();
+
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
 	//virtual void Serialize(ISerializer& stream);
 
 	Body * Next;

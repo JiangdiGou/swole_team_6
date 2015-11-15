@@ -41,6 +41,21 @@ Camera::Camera(const Shader& shader)
   width = (2.0f * INITINFO->clientWidth) / (size * zoom);
   height = (2.0f * INITINFO->clientHeight) / (size * zoom);
 }
+void Camera::SerializeRead(Serializer& str)
+{
+  StreamRead(str, size);
+  StreamRead(str, width);
+  StreamRead(str, height);
+}
+void Camera::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, size);
+  StreamWrite(str);
+  StreamWrite(str, width);
+  StreamWrite(str);
+  StreamWrite(str, height);
+  StreamWrite(str);
+}
 
 //**********************
 //Function    : ~Camera

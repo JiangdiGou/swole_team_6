@@ -29,6 +29,8 @@ class PlayerState : public GameComponent//, public CollisionDelegate
       void Update(float dt);
       void Release();
 		  void SendMessages(Message *)override;
+      void SerializeRead(Serializer& str) override;
+      void SerializeWrite(Serializer& str) override;
         
       void PressJump();
         

@@ -216,6 +216,53 @@ void PlayerState::SendMessages(Message * message)
 	}
 	}
 }
+void PlayerState::SerializeRead(Serializer& str)
+{
+  StreamRead(str,PreviousPlatformPosition);
+  StreamRead(str, variableJumpHeightEnabled);
+  StreamRead(str, jumpCount);
+  StreamRead(str, JumpTimer);
+  StreamRead(str, variableJumpTime);
+  StreamRead(str, variableJumpPower);
+  StreamRead(str, maxDownwardsVelocity);
+  StreamRead(str, maxUpwardsVelocity);
+  StreamRead(str, jumpButtonReleased); 
+
+  StreamRead(str, LastframeDT);
+  StreamRead(str, IsAlive);
+  StreamRead(str, DeathCount);
+  StreamRead(str, timeToJumpAfterLeftGround);
+}
+void PlayerState::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, PreviousPlatformPosition);
+  StreamWrite(str);
+  StreamWrite(str, variableJumpHeightEnabled);
+  StreamWrite(str);
+  StreamWrite(str, jumpCount);
+  StreamWrite(str);
+  StreamWrite(str, JumpTimer);
+  StreamWrite(str);
+  StreamWrite(str, variableJumpTime);
+  StreamWrite(str);
+  StreamWrite(str, variableJumpPower);
+  StreamWrite(str);
+  StreamWrite(str, maxDownwardsVelocity);
+  StreamWrite(str);
+  StreamWrite(str, maxUpwardsVelocity);
+  StreamWrite(str);
+  StreamWrite(str, jumpButtonReleased);
+  StreamWrite(str);
+
+  StreamWrite(str, LastframeDT);
+  StreamWrite(str);
+  StreamWrite(str, IsAlive);
+  StreamWrite(str);
+  StreamWrite(str, DeathCount);
+  StreamWrite(str);
+  StreamWrite(str, timeToJumpAfterLeftGround);
+  StreamWrite(str);
+}
 
 
 

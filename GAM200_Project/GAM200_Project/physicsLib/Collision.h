@@ -55,6 +55,8 @@ class ShapeLine : public Shape
 {
 	public:
 		ShapeLine() : Shape(SidLine){};
+    void SerializeRead(Serializer& str) override;
+    void SerializeWrite(Serializer& str) override;
 		Vec2D base;
 		Vec2D direction;
 		
@@ -69,6 +71,8 @@ public:
 	float Radius;
 	virtual void Draw();
 	virtual bool TestPoint(Vec2D);
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
 };
 
 ///Axis Aligned Box Shape
@@ -78,6 +82,8 @@ public:
 	ShapeAAB() : Shape(SidBox){};
   void Initialize() override;
   void Update(float dt) override;
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
   void SendMessages(Message* m) override;
 	Vec2D Extents;
 	Vec2D origin = Vec2D(0.0f,0.0f);

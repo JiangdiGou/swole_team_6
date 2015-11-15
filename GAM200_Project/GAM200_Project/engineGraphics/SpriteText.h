@@ -28,6 +28,8 @@ public:
   SpriteText(std::string initialMessage);
 
   void Update(float dt) override;
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
 
   std::string message;
 
