@@ -21,6 +21,10 @@
 #include "../engineGraphics/graphicsManager.h"
 #include "../WindowsSystem.h"
 
+#include "../reactive.h"
+#include "../Editor/editable.h"
+#include "../Editor/imGuiManager.h"
+
 #ifndef OBJFACTORY_H
 #define OBJFACTORY_H
 
@@ -32,6 +36,7 @@ private:
   bool changeEntity(char entity, int x, int y);
   void insertCol(int x, int count);
   void insertRow(int y, int count);
+
 public:
   std::map<int, GameObjectComposition*> gameObjs;//id, Game object
   //std::vector< const GameObjectComposition*> GetgameObjs();
@@ -49,7 +54,10 @@ public:
   void createTiles();
   void SendMessages(Message * message);
 
-  std::string fileName;
+  std::vector<std::string> textureKey;
+  std::vector<std::string> readTextureKey(std::string levelName);
+  void modifyLevelTilemap(int newTexture, int x, int y);
+
   std::string levelName;
   int levelWidth;
   int levelHeight;

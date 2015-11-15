@@ -27,10 +27,8 @@ GraphicsManager::GraphicsManager(const Shader& shader)
 
   //Flush out the error
   glGetError();
-  spriteAtlas = *(new TextureAtlas(
-                                  (INITINFO->atlasPNG).c_str(),
-                                  (INITINFO->atlasINFO).c_str()
-                                   ));
+  spriteAtlas = new TextureAtlas((INITINFO->atlasPNG).c_str(),
+                                  (INITINFO->atlasINFO).c_str());
 #ifdef GFXLOG
   logGfxError("TEXTUREATLAS:: Error in texture Atlas construction. ");
 #endif
@@ -64,8 +62,11 @@ GraphicsManager::GraphicsManager(const Shader& shader)
 
 void GraphicsManager::Update(float dt)
 {
+#ifndef EDITOR
+  glfwPollEvents();
+#endif
+
   coreShader.Use();
-	glfwPollEvents();
 
   glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
@@ -77,6 +78,7 @@ void GraphicsManager::Update(float dt)
   SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
 
   Transform* playerTransform = LOGIC->player->has(Transform)
+  if (playerTransform)
 	  debugDrawCircle(playerTransform->GetPosition(), 1, Vector3(), 100);
 
   debugDrawFrame();

@@ -286,6 +286,9 @@
     <ClInclude Include="GAM200_Project\Editor\imGUI\stb_truetype.h">
       <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editable.h">
+      <Filter>Systems\Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -427,6 +430,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_draw.cpp">
       <Filter>Systems\Editor\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editable.cpp">
+      <Filter>Systems\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

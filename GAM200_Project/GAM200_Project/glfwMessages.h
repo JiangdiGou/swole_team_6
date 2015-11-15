@@ -151,6 +151,18 @@
 
 void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+
+  ImGuiIO& io = ImGui::GetIO();
+  if (action == GLFW_PRESS)
+    io.KeysDown[key] = true;
+  if (action == GLFW_RELEASE)
+    io.KeysDown[key] = false;
+
+  (void)mods; // Modifiers are not reliable across systems
+  io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+  io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+  io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+
 	//Create a key message
 	MessageCharacterKey keyMsg;
 	//Lazy conversion to char
@@ -172,16 +184,6 @@ void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int 
 	//Broadcast the message to all systems
 	CORE->BroadcastMessage(&keyMsg);
 
-  ImGuiIO& io = ImGui::GetIO();
-  if (action == GLFW_PRESS)
-    io.KeysDown[key] = true;
-  if (action == GLFW_RELEASE)
-    io.KeysDown[key] = false;
-
-  (void)mods; // Modifiers are not reliable across systems
-  io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
-  io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
-  io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
 }
 
 void glfwMouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
@@ -215,12 +217,4 @@ void glfwMousePosCallback(GLFWwindow *window, double x, double y)
 	Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(x, y));
 	MouseMove m(worldPos);
 	CORE->BroadcastMessage(&m);
-}
-
-//The remaining functions are from imgui binding, i just put here for consistency
-void glfwCharCallback(GLFWwindow*, unsigned int c)
-{
-  ImGuiIO& io = ImGui::GetIO();
-  if (c > 0 && c < 0x10000)
-    io.AddInputCharacter((unsigned short)c);
 }

@@ -30,7 +30,8 @@ enum ComponentTypeId
 	CT_Reactive,
 	CT_MaxComponents,
 	CT_Sound,
-	CT_SoundEmitter
+	CT_SoundEmitter,
+  CT_Editable
 	
 };
 #endif

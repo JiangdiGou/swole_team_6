@@ -138,7 +138,7 @@ void Sprite::Update(float dt)
   
 }
 
-void Sprite::initSprites(const Shader& shader, const TextureAtlas& atlas)
+void Sprite::initSprites(const Shader& shader, TextureAtlas* atlas)
 {
   //Generates Static Members
   glGenVertexArrays(1, &vertexArray);
@@ -165,7 +165,7 @@ void Sprite::initSprites(const Shader& shader, const TextureAtlas& atlas)
   glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 
   shaderID = shader.Program;
-  atlasID = atlas.ID;
+  atlasID = atlas->ID;
 
   //Unbind stuff
   glBindBuffer(GL_ARRAY_BUFFER, 0);

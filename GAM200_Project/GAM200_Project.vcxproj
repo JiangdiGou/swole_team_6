@@ -27,6 +27,7 @@
     <ClInclude Include="GAM200_Project\ComponentTypeIds.h" />
     <ClInclude Include="GAM200_Project\Composition.h" />
     <ClInclude Include="GAM200_Project\Core.h" />
+    <ClInclude Include="GAM200_Project\Editor\editable.h" />
     <ClInclude Include="GAM200_Project\Editor\imGuiManager.h" />
     <ClInclude Include="GAM200_Project\Editor\imGUI\imconfig.h" />
     <ClInclude Include="GAM200_Project\Editor\imGUI\imgui.h" />
@@ -168,6 +169,7 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\Core.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\editable.cpp" />
     <ClCompile Include="GAM200_Project\Editor\imGuiManager.cpp" />
     <ClCompile Include="GAM200_Project\Editor\imGUI\imgui.cpp" />
     <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_demo.cpp" />

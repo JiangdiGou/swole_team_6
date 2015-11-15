@@ -308,13 +308,13 @@ bool ImGui_ImplGlfwGL3_Init(GLFWwindow* window, bool install_callbacks)
     io.RenderDrawListsFn = ImGui_ImplGlfwGL3_RenderDrawLists;       // Alternatively you can set this to NULL and call ImGui::GetDrawData() after ImGui::Render() to get the same ImDrawData pointer.
     io.SetClipboardTextFn = ImGui_ImplGlfwGL3_SetClipboardText;
     io.GetClipboardTextFn = ImGui_ImplGlfwGL3_GetClipboardText;
+    glfwSetCharCallback(window, ImGui_ImplGlfwGL3_CharCallback);
+    glfwSetScrollCallback(window, ImGui_ImplGlfwGL3_ScrollCallback);
 
     if (install_callbacks)
     {
-        //glfwSetMouseButtonCallback(window, ImGui_ImplGlfwGL3_MouseButtonCallback);
-        glfwSetScrollCallback(window, ImGui_ImplGlfwGL3_ScrollCallback);
-        //glfwSetKeyCallback(window, ImGui_ImplGlfwGL3_KeyCallback);
-        //glfwSetCharCallback(window, ImGui_ImplGlfwGL3_CharCallback);
+        glfwSetMouseButtonCallback(window, ImGui_ImplGlfwGL3_MouseButtonCallback);
+        glfwSetKeyCallback(window, ImGui_ImplGlfwGL3_KeyCallback);
     }
 
     return true;
