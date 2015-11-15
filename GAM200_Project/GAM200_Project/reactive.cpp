@@ -53,6 +53,7 @@ void Reactive::Update(float dt)
   GameObjectComposition* parent = GetOwner();
   Sprite* ownerSprite = reinterpret_cast<Sprite *>(parent->GetComponent(CT_Sprite));
 
+  /*
   if (ownerSprite)
   {
     if (mouseIsOver && mouseDown)
@@ -61,5 +62,5 @@ void Reactive::Update(float dt)
       ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0);
     else
       ownerSprite->color = glm::vec4(1.0, 0.0, 0.0, 1.0);
-  }
+  }*/
 }

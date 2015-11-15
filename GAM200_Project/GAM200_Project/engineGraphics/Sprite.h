@@ -36,7 +36,7 @@ public:
 
   void Update(float dt) override;
 
-  static void initSprites(const Shader& shader, const TextureAtlas& atlas);
+  static void initSprites(const Shader& shader, TextureAtlas* atlas);
   void static drawAllSprites();
 
   bool flipSprite = false;

@@ -9,7 +9,7 @@ main loop
 /******************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
 
-#define EDITOR
+
 
 #include "main.h"
 #include "_EntryPoint.h"
