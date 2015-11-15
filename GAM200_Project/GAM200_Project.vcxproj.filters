@@ -114,9 +114,6 @@
     <ClInclude Include="GAM200_Project\physicsLib\range.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\shapes.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\bounding_shapes.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
@@ -289,6 +286,8 @@
     <ClInclude Include="GAM200_Project\Editor\editable.h">
       <Filter>Systems\Editor</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\Serialization\Serialization.h" />
+    <ClInclude Include="GAM200_Project\Serialization\TextSerialization.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -434,6 +433,7 @@
     <ClCompile Include="GAM200_Project\Editor\editable.cpp">
       <Filter>Systems\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\Serialization\TextSerialization.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">

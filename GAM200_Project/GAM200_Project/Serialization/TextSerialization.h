@@ -15,6 +15,9 @@ namespace Framework
 		virtual void ReadInt(int& i);
 		virtual void ReadFloat(float& f);
 		virtual void ReadString(std::string& str);
+    virtual void ReadVec2(float& f, float& f2);
+    virtual void ReadVec3(float& f, float& f2, float& f3);
+
     virtual void WriteInt(int& i);
     virtual void WriteVec2(float& f, float& f2);
     virtual void WriteVec3(float& f, float& f2, float& f3);

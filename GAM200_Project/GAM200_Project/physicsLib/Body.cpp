@@ -107,7 +107,14 @@ void Body::Initialize()
 {
 	//Get the transform to write results to
 	bodyTrans = GetOwner()->has(Transform);
-
+  if (BodyShape == NULL)
+  {
+    ShapeAAB* ownerAAB = GetOwner()->has(ShapeAAB);
+    if (ownerAAB != NULL)
+    {
+      BodyShape = ownerAAB;
+    }
+  }
 	//Get the starting position
 	Position = bodyTrans->GetPositionXY();
 
@@ -139,7 +146,7 @@ void Body::SerializeRead(Serializer& str)
   StreamRead(str, InvMass);
   StreamRead(str, Damping);
   StreamRead(str, Acceleration);
-  StreamRead(str, BodyShape);
+  //StreamRead(str, BodyShape);
   StreamRead(str, Friction);
   StreamRead(str, Restitution);
   StreamRead(str, IsStatic);
@@ -163,8 +170,8 @@ void Body::SerializeWrite(Serializer& str)
   StreamWrite(str);
   StreamWrite(str, Acceleration);
   StreamWrite(str);
-  StreamWrite(str, BodyShape);
-  StreamWrite(str);
+  //StreamWrite(str, BodyShape);
+  //StreamWrite(str);
   StreamWrite(str, Friction);
   StreamWrite(str);
   StreamWrite(str, Restitution);

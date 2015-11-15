@@ -31,14 +31,14 @@ float DetermineFriction(Body * a, Body * b)
 
 void ShapeLine::SerializeRead(Serializer& str)
 {
-  StreamRead(str, Id);
+  StreamRead(str, (int&)Id);
   StreamRead(str, base);
   StreamRead(str, direction);
 
 }
 void ShapeLine::SerializeWrite(Serializer& str)
 {
-  StreamWrite(str, Id);
+  StreamWrite(str, (int&)Id);
   StreamWrite(str);
   StreamWrite(str, base);
   StreamWrite(str);
@@ -62,13 +62,13 @@ bool ShapeCircle::TestPoint(Vec2D testPoint)
 
 void ShapeCircle::SerializeRead(Serializer& str)
 {
-  StreamRead(str, Id);
+  StreamRead(str, (int&)Id);
   StreamRead(str, Radius);
 
 }
 void ShapeCircle::SerializeWrite(Serializer& str) 
 {
-  StreamWrite(str, Id);
+  StreamWrite(str, (int&)Id);
   StreamWrite(str);
   StreamWrite(str, Radius);
   StreamWrite(str);
@@ -76,6 +76,14 @@ void ShapeCircle::SerializeWrite(Serializer& str)
 
 void ShapeAAB::Initialize()
 {
+  if (body == NULL)
+  {
+    Body* ownerBody = GetOwner()->has(Body);
+    if (ownerBody != NULL)
+    {
+      body = ownerBody;
+    }
+  }
   PrevCollidingObjects.clear();
   CurCollidingObjects.clear();
   /*body = GetOwner()->has(Body);
@@ -128,12 +136,12 @@ void ShapeAAB::Update(float dt)
 
 void ShapeAAB::SerializeRead(Serializer& str)
 {
-  StreamRead(str, Id);
+  StreamRead(str, (int&)Id);
   StreamRead(str, Extents);
 }
 void ShapeAAB::SerializeWrite(Serializer& str)
 {
-  StreamWrite(str, Id);
+  StreamWrite(str, (int&)Id);
   StreamWrite(str);
   StreamWrite(str, Extents);
   StreamWrite(str);

@@ -368,7 +368,7 @@ void PlayerState::SerializeRead(Serializer& str)
 {
   StreamRead(str,PreviousPlatformPosition);
   StreamRead(str, variableJumpHeightEnabled);
-  StreamRead(str, jumpCount);
+  StreamRead(str, (int&)jumpCount);
   StreamRead(str, JumpTimer);
   StreamRead(str, variableJumpTime);
   StreamRead(str, variableJumpPower);
@@ -387,7 +387,7 @@ void PlayerState::SerializeWrite(Serializer& str)
   StreamWrite(str);
   StreamWrite(str, variableJumpHeightEnabled);
   StreamWrite(str);
-  StreamWrite(str, jumpCount);
+  StreamWrite(str, (int&)jumpCount);
   StreamWrite(str);
   StreamWrite(str, JumpTimer);
   StreamWrite(str);

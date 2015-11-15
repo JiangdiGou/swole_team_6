@@ -28,6 +28,17 @@ namespace Framework
 	{
 		stream >> str;
 	}
+  void TextSerializer::ReadVec2(float& f, float& f2)
+  {
+    ReadFloat(f);
+    ReadFloat(f2);
+  }
+  void TextSerializer::ReadVec3(float& f, float& f2, float& f3)
+  {
+    ReadFloat(f);
+    ReadFloat(f2);
+    ReadFloat(f3);
+  }
 
   void TextSerializer::WriteVec2(float& f, float& f2)
   {
