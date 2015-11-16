@@ -191,6 +191,7 @@ void objFactory::loadLevelFrom(std::string fileName)
     }
   }
   this->levelName = levelName;
+  CORE->LevelName = fileName;
   this->levelWidth = arrayX;
   this->levelHeight = arrayY;
   this->tileMap = tileMap;
@@ -296,14 +297,14 @@ void objFactory::printLevel()
 }
 
 //return false if tile couldn't be changed, true + change tile otherwise
-bool objFactory::changeTile(char tile, int x, int y)
+bool objFactory::changeTile(int tile, int x, int y)
 {
   y = this->levelHeight - y - 1;
   if (!this->validPoint(x, y))
   {
     return false;
   }
-  this->tileMap[y][x] = tile;
+  this->tileMap[x][y] = tile;
   return true;
 }
 

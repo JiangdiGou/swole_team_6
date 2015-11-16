@@ -12,6 +12,7 @@
 #include "mouseVector.h"
 #include "_EntryPoint.h"
 #include "initinfo.h"
+#include "physicsLib\PlayerState.h"
 #include "engineAudio/Audio.h"
 
 
@@ -82,9 +83,61 @@ void CoreEngine::GameLoop()
       if (PrevGameState == GS_RUN)
       {
         FACTORY->destroyAllObjects();
-        FACTORY->textureKey = FACTORY->readTextureKey("resources/Levels/InGameEditor-KEY.txt");
-        FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
-        //FACTORY->loadLevelFrom("resources/Levels/" + LevelName);
+        FACTORY->textureKey = FACTORY->readTextureKey("resources/levels/" + LevelName + "-KEY.txt");
+        //FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
+        FACTORY->loadLevelFrom("resources/Levels/" + LevelName + ".txt");
+
+        FACTORY->createTiles();
+
+        GOC * camera = FACTORY->makeObject("Camera");
+        camera->AddComponent(CT_Transform, new Transform());
+        Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
+        mouseVector *vectTest = new mouseVector();
+        camera->AddComponent(CT_MouseVector, vectTest);
+        camera->AddComponent(CT_Camera, mainCamera);
+        camera->Initialize();
+
+
+        //PLAYER
+        GOC * player = FACTORY->makeObject("player");
+        Transform * transformPlayer = new Transform();
+        transformPlayer->SetPosition(2, 6, 0);
+        transformPlayer->SetScale(Vector2(1.25, 1.25));
+        player->AddComponent(CT_Transform, transformPlayer);
+
+        Body * bodyPlayer = new Body();
+        bodyPlayer->Mass = 3.0f;
+        bodyPlayer->Restitution = 0.3f;
+        bodyPlayer->Friction = 0.0f;
+        ShapeAAB * boxColliderPlayer = new ShapeAAB();
+        boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
+        bodyPlayer->BodyShape = boxColliderPlayer;
+
+
+
+        player->AddComponent(CT_Body, bodyPlayer);
+        player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
+        PlayerState * controller = new PlayerState();
+        player->AddComponent(CT_PlayerState, controller);
+
+        SoundEmitter* playerSound = new SoundEmitter();
+        player->AddComponent(CT_SoundEmitter, playerSound);
+
+        //TileMapCollision * tileplayer = new TileMapCollision();
+        //player->AddComponent(CT_TileMapCollision, tileplayer);
+
+
+        Sprite * spritePlayer = new Sprite();
+        spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+        spritePlayer->flipSprite = false;
+        player->AddComponent(CT_Sprite, spritePlayer);
+
+        LOGIC->player = player;
+
+
+        //This move is so that the bottom left corner is 0,0
+
+        GRAPHICS->setMainCamera(mainCamera);
         FACTORY->initializeObjects();
         //LOGIC->Initialize();
         GameState = GS_RUN;

@@ -113,6 +113,7 @@ void Body::Initialize()
     if (ownerAAB != NULL)
     {
       BodyShape = ownerAAB;
+      ownerAAB->body = this;
     }
   }
 	//Get the starting position

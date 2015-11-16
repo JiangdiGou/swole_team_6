@@ -1,10 +1,13 @@
 #ifndef IMGUIMANAGER_H
 #define IMGUIMANAGER_H
 
+
+
 #define EDITOR
 
 enum EditorState { IDLE, CREATINGLEVEL, LOADINGLEVEL, INLEVEL };
 
+#include <vector>
 #include "imGUI\imgui.h"
 #include "imgui_impl_glfw_gl3.h"
 #include "../Engine.h"
@@ -37,6 +40,7 @@ private:
   char desiredTextureName[256];
 
   void createEmptyLevelFile(std::string levelName, int width, int height);
+  void createLevelFileFromArray(std::string levelName, int width, int height);
   void generateTextureKey(std::string levelName);
 
   void fetchTextures();

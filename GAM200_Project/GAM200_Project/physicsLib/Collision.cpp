@@ -82,6 +82,7 @@ void ShapeAAB::Initialize()
     if (ownerBody != NULL)
     {
       body = ownerBody;
+      body->BodyShape = this;
     }
   }
   PrevCollidingObjects.clear();
