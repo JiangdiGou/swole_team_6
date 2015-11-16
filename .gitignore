@@ -21,3 +21,5 @@ LevelEditor/game/saves/
 LevelEditor/debuglog.txt
 LevelEditor/*.autosave
 GAM200_Project/log.txt
+ZilchTesting/ZilchTesting.sdf
+JSONZilchSerialize/JSONZilchSerialize.sdf

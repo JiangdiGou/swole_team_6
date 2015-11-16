@@ -47,6 +47,7 @@ public:
   GameObjectComposition* makeObject(std::string Name);
   void destroyObject(int killID);
   void destroyAllObjects();
+  void objFactory::SerializeAllObjects(Serializer& str);
   // Overloaded methods
   void Initialize();// override;
   void Update(float dt);//override;

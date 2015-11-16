@@ -157,6 +157,8 @@ void Body::SerializeRead(Serializer& str)
 }
 void Body::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, Position);
   StreamWrite(str);
   StreamWrite(str, PrevPosition);
