@@ -266,6 +266,8 @@ void SpriteText::SerializeRead(Serializer& str)
 }
 void SpriteText::SerializeWrite(Serializer& str) 
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, message);
   StreamWrite(str);
 }

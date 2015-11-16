@@ -33,7 +33,7 @@ class objFactory : public ISystem
 {
 private:
   GOC * createTile(int positionX, int positionY, std::string textureName);
-  bool changeTile(char tile, int x, int y);
+
   bool changeEntity(char entity, int x, int y);
   void insertCol(int x, int count);
   void insertRow(int y, int count);
@@ -43,9 +43,11 @@ public:
   //std::vector< const GameObjectComposition*> GetgameObjs();
   void printLevel();
   objFactory();
+
   GameObjectComposition* makeObject(std::string Name);
   void destroyObject(int killID);
   void destroyAllObjects();
+  void objFactory::SerializeAllObjects(Serializer& str);
   // Overloaded methods
   void Initialize();// override;
   void Update(float dt);//override;
@@ -54,6 +56,8 @@ public:
   void loadLevelFrom(std::string fileName);
   void createTiles();
   void SendMessages(Message * message);
+
+  bool changeTile(int tile, int x, int y);
 
   std::vector<std::string> textureKey;
   std::vector<std::string> readTextureKey(std::string levelName);

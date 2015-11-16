@@ -45,6 +45,8 @@ void Transform::SerializeRead(Serializer& str)
 
 void Transform::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, position);
   StreamWrite(str);
   StreamWrite(str, scale);
