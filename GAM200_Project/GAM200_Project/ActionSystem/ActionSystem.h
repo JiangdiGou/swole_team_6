@@ -103,7 +103,7 @@ namespace ActionSystem
 			inline void Property(ActionGroup& grp, const T* startVal, const T& endVal, const long double& duration, SampleCurve<T> ease)
 			{
 				grp.AddAction(new ActionProperty<T>(startVal, endVal, duration, ease));
-			}
+			};//WTF IS THIS?
 		}
 	}
 }
