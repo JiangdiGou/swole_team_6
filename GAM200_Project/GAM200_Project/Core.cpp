@@ -101,6 +101,10 @@ void CoreEngine::GameLoop()
         mouseVector *vectTest = new mouseVector();
         camera->AddComponent(CT_MouseVector, vectTest);
         camera->AddComponent(CT_Camera, mainCamera);
+#ifdef EDITOR
+        mainCamera->followingPlayer = false;
+        mainCamera->editorMode = true;
+#endif
         camera->Initialize();
 
 

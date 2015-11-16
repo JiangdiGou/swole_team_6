@@ -15,7 +15,8 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../GameLogic.h"
 #include "../Composition.h"
 #include "../physicsLib/Transform.h"
-#include "../initInfo.h"
+#include "../initInfo.h" //W and H
+#include "../WindowsSystem.h" //Messages 
 
 class Camera : public GameComponent 
 {
@@ -33,9 +34,10 @@ public:
 
   void SerializeWrite(Serializer& str) override;
 
-  bool followingPlayer = true;
+  void SendMessages(Message* message) override;
 
-  void SendMessages(Message*) override {};
+  bool followingPlayer = true;
+  bool editorMode = false;
 
   glm::vec3 getPosition() { return cameraPosition; }
 
@@ -52,6 +54,7 @@ public:
 
 private:
   float size = 1000.0f;
+  float editorMoveSpeed = 0.15;
 
   float width;
   float height;

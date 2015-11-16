@@ -47,8 +47,8 @@ public:
   void setRenderingContext(HGLRC& renderingContext);
   HGLRC getRenderingContext();
 
-  void setMainCamera(Camera* camera){ mainCamera = *camera; }
-  Camera* getCamera(){ return &mainCamera; }
+  void setMainCamera(Camera* camera){ mainCamera = camera; }
+  Camera* getCamera(){ return mainCamera; }
   void setCoreShader(const Shader& shader) { coreShader = shader; }
   Shader* getCoreShader() { return &coreShader; }
   void setSpriteAtlas(TextureAtlas* atlas) { spriteAtlas = atlas; }
@@ -61,7 +61,7 @@ private:
   HDC deviceContext;
   HGLRC renderingContext;
 	GLFWwindow* pWindow;
-  Camera mainCamera;
+  Camera* mainCamera;
   TextureAtlas* spriteAtlas;
   Shader coreShader;
 

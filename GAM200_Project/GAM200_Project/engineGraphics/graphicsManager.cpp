@@ -158,18 +158,16 @@ GraphicsManager::~GraphicsManager()
 
 Vector2 GraphicsManager::screenToWorld(Vector2 screenCoords)
 {
-  Vector2 worldCoords;
+  Vector2 worldCoords = screenCoords;
 
-  screenCoords.x = screenCoords.x - 0.5*INITINFO->clientWidth;
-  screenCoords.y = 0.5*INITINFO->clientHeight - screenCoords.y;
+  worldCoords.x = worldCoords.x - 0.5*INITINFO->clientWidth;
+  worldCoords.y = 0.5*INITINFO->clientHeight - worldCoords.y;
 
   //x2 here because the camera is -initInfo to initInfo, so its really like 2 initInfo
-  screenCoords.x = screenCoords.x * (mainCamera.getWidth() / INITINFO->clientWidth);
-  screenCoords.y = screenCoords.y * (mainCamera.getHeight() / INITINFO->clientHeight);
+  worldCoords.x = worldCoords.x * (mainCamera->getWidth() / INITINFO->clientWidth);
+  worldCoords.y = worldCoords.y * (mainCamera->getHeight() / INITINFO->clientHeight);
 
   //Player transform cause thats where the camera is centered
-  Transform *playerTransform = LOGIC->player->has(Transform);
-  return screenCoords + playerTransform->GetPositionXY();
-
-  return Vector2();
+  Vector2 cameraXY = Vector2(mainCamera->getPosition().x, mainCamera->getPosition().y);
+  return worldCoords + cameraXY;
 }

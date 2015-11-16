@@ -214,7 +214,7 @@ void glfwMouseButtonCallback(GLFWwindow *window, int button, int action, int mod
 
 void glfwMousePosCallback(GLFWwindow *window, double x, double y)
 {
-	Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(x, y));
+	Vec2D worldPos = (GRAPHICS->screenToWorld(Vec2D(x, y)));
 	MouseMove m(worldPos);
 	CORE->BroadcastMessage(&m);
 }

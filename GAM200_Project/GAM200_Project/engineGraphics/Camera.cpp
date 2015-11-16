@@ -124,3 +124,46 @@ void Camera::move(glm::vec3 translation)
   cameraPosition += translation;
   cameraTarget += translation;
 }
+
+void Camera::SendMessages(Message* message)
+{
+  if (editorMode)
+  {
+    switch (message->MessageId)
+    {
+    case Mid::CharacterKey:
+    {
+
+      MessageCharacterKey* keyEvent = (MessageCharacterKey*)message;
+
+      switch (keyEvent->character)
+      {
+      case 'W' :
+      {
+        cameraPosition += glm::vec3(0, editorMoveSpeed, 0);
+        cameraTarget += glm::vec3(0, editorMoveSpeed, 0);
+        break;
+      }
+      case 'A':
+      {
+        cameraPosition -= glm::vec3(editorMoveSpeed, 0, 0);
+        cameraTarget -= glm::vec3(editorMoveSpeed, 0, 0);
+        break;
+      }
+      case 'S':
+      {
+        cameraPosition -= glm::vec3(0, editorMoveSpeed, 0);
+        cameraTarget -= glm::vec3(0, editorMoveSpeed, 0);
+        break;
+      }
+      case 'D':
+      {
+        cameraPosition += glm::vec3(editorMoveSpeed, 0, 0);
+        cameraTarget += glm::vec3(editorMoveSpeed, 0, 0);
+        break;
+      }
+      }
+    }
+    }
+  }
+}
