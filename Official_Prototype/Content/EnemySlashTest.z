@@ -71,10 +71,10 @@ class EnemySlashTest : ZilchComponent
     //Finds the overall distance this enemy is away from the player
     function GetDistanceFromPlayer():Real
     {
-        var ownerX:Real = this.Owner.Transform.Translation.X;
-        var ownerY:Real = this.Owner.Transform.Translation.Y;
-        var playerX:Real = this.Space.FindObjectByName("Player").Transform.Translation.X;
-        var playerY:Real = this.Space.FindObjectByName("Player").Transform.Translation.Y;
+        var ownerX:Real = this.Owner.Transform.WorldTranslation.X;
+        var ownerY:Real = this.Owner.Transform.WorldTranslation.Y;
+        var playerX:Real = this.Space.FindObjectByName("Player").Transform.WorldTranslation.X;
+        var playerY:Real = this.Space.FindObjectByName("Player").Transform.WorldTranslation.Y;
         var distance:Real = Math.Distance(Real2(ownerX, ownerY), Real2(playerX, playerY));
         
         return distance;
@@ -92,7 +92,7 @@ class EnemySlashTest : ZilchComponent
         slashLine.Duration(0.5);
         slashLine.Draw();
         
-        if(this.Owner.Transform.Translation.X < this.Space.FindObjectByName("Player").Transform.Translation.X)
+        if(this.Owner.Transform.WorldTranslation.X < this.Space.FindObjectByName("Player").Transform.WorldTranslation.X)
         {
             this.Space.FindObjectByName("Player").Sprite.FlipX = true;
         }
@@ -102,6 +102,6 @@ class EnemySlashTest : ZilchComponent
         }
         
         //Tells this owner to take damage
-        this.Owner.EnemyHitReaction.OnHit(10, false, false);
+        this.Owner.EnemyHitReaction.OnHit(10, false, false, 20);//20 is basic attack in ComboManager
     }
 }

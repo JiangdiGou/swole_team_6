@@ -15,24 +15,12 @@ class TutorialTriggerPosition : ZilchComponent
         if(this.StartActive)
         {
             //Moves this owner to the correct spot
-            this.Owner.Transform.Translation = this.ActivePos;
+            this.SetToStart();
         }
         else
         {
             //Moves this owner out of the way
-            this.Owner.Transform.Translation = this.NotActivePos;
-        }
-        
-        //Makes this owner invisible
-        if(this.Owner.Sprite != null)
-        {
-            this.Owner.Sprite.Visible = false;
-        }
-        
-        //Makes this owner not take collision
-        if(this.Owner.BoxCollider != null)
-        {
-            this.Owner.BoxCollider.Ghost = true;
+            this.SetToEnd();
         }
         
         Zero.Connect(this.Space, Events.TriggerEvent, this.OnTrigger);
@@ -85,7 +73,7 @@ class TutorialTriggerPosition : ZilchComponent
         
         if(this.Owner.BoxCollider != null)
         {
-            
+            this.Owner.BoxCollider.SendsEvents = true;
         }
     }
     
@@ -102,6 +90,11 @@ class TutorialTriggerPosition : ZilchComponent
         if(this.Owner.SphericalParticleEmitter != null)
         {
             this.Owner.SphericalParticleEmitter.Active = false;
+        }
+        
+        if(this.Owner.BoxCollider != null)
+        {
+            this.Owner.BoxCollider.SendsEvents = false;
         }
     }
 }

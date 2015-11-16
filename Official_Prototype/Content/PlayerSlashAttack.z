@@ -201,7 +201,7 @@ class PlayerSlashAttack : ZilchComponent
             //If the current object checked is an enemy, calls its hit reaction
             if(segSlashSegment.Front().ObjectHit.Name == "Enemy")
             {
-                segSlashSegment.Front().ObjectHit.EnemyHitReaction.OnHit(15,false, true);
+                segSlashSegment.Front().ObjectHit.EnemyHitReaction.OnHit(15,false, true, iSlashID);
             }
             //If the current object hit is the tile map, stops the player where they hit the tile
             else if(segSlashSegment.Front().ObjectHit.Name == "DefaultTile")

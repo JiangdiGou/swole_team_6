@@ -16,15 +16,15 @@ class ComboManager : ZilchComponent
     var IComboChainTime:Integer;//Time that the next attack is able to chain off of the previous
     var APrevActionIDs: Array[Integer];//Holds the previous 10 action ID numbers that the player made
     /*Action ID Code References
-    0-9     :General Actions        10-19   :Standard Attacks           20-29   :Short Slash            30-39   :Medium Slash           40-49   :Long Slash 
-            0 - Nothing                     10 - Up                             20 - Up                         30 - Up                         40 - Up 
-            1 - Jump                        11 - Up Right                       21 - Up Right                   31 - Up Right                   41 - Up Right 
-            2 - Double Jump                 12 - Right                          22 - Right                      32 - Right                      42 - Right 
-            3 - Dash Right                  13 - Down Right                     23 - Down Right                 33 - Down Right                 43 - Down Right 
-            4 - Dash Left                   14 - Down                           24 - Down                       34 - Down                       44 - Down 
-                                            15 - Down Left                      25 - Down Left                  35 - Down Left                  45 - Down Left 
-                                            16 - Left                           26 - Left                       36 - Left                       46 - Left 
-                                            17 - Up Left                        27 - Up Left                    37 - Up Left                    47 - Up Left 
+    0-9     :General Actions        10-19   :Standard Attacks           20-29   :Short Slash            30-39   :Medium Slash           40-49   :Long Slash             50-59   :Powers
+            0 - Nothing                     10 - Up                             20 - Up                         30 - Up                         40 - Up                         50 - Crane
+            1 - Jump                        11 - Up Right                       21 - Up Right                   31 - Up Right                   41 - Up Right                   51 - Ox
+            2 - Double Jump                 12 - Right                          22 - Right                      32 - Right                      42 - Right                      52 - Serpent
+            3 - Dash Right                  13 - Down Right                     23 - Down Right                 33 - Down Right                 43 - Down Right                 53 - Tiger
+            4 - Dash Left                   14 - Down                           24 - Down                       34 - Down                       44 - Down                       54 - Dragon
+                                            15 - Down Left                      25 - Down Left                  35 - Down Left                  45 - Down Left                  55 - Radial
+                                            16 - Left                           26 - Left                       36 - Left                       46 - Left                       
+                                            17 - Up Left                        27 - Up Left                    37 - Up Left                    47 - Up Left                    
                                             18 - 3 Hit Combo Right 
                                             19 - 3 Hit Combo Left 
     */

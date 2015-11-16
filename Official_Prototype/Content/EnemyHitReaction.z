@@ -10,6 +10,8 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 *******************************************************************************/
 class EnemyHitReaction : ZilchComponent
 {
+    sends TriggerEvent:TriggerEvent;
+    
     //Enemy's Health (Damage they can take until they die)
     [Property]
     var IHealth:Integer = 100;
@@ -40,6 +42,36 @@ class EnemyHitReaction : ZilchComponent
     [Property]
     var Box : Boolean;
     
+    //Makes this enemy immune to taking damage from basic attacks
+    [Property]
+    var IgnoreBasicAttack:Boolean = false;
+    //Makes this enemy immune to taking damage from slash attacks
+    [Property]
+    var IgnoreSlashAttack:Boolean = false;
+    //Makes this enemy immune to taking damage from scroll attacks
+    [Property]
+    var IgnoreScrollAttack:Boolean = false;
+    
+    //If this enemy's death should send a trigger event and what objects to send to
+    //First object to send a trigger to
+    [Property]
+    var ObjectToTrigger1:CogPath = null;
+    //Second object to send a trigger to
+    [Property]
+    var ObjectToTrigger2:CogPath = null;
+    
+    //What name triggered objects should have
+    [Property]
+    var NameOfTriggerObjects:String = null;
+    
+    //If object1 trigger should be turned on or off
+    [Property]
+    var TurnOnTrigger1:Boolean = true;
+    
+    //If object2 trigger should be turned on or off
+    [Property]
+    var TurnOnTrigger2:Boolean = true;
+    
     function Initialize(init : CogInitializer)
     {
         this.RegSize = this.Owner.Transform.Scale;
@@ -61,6 +93,20 @@ class EnemyHitReaction : ZilchComponent
             //subtract 1 from amount of enemies alive
             this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
             Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
+            
+            //If we need to send a trigger to any objects that needs it
+            if(this.ObjectToTrigger1 != null || this.ObjectToTrigger2 != null || this.NameOfTriggerObjects != null)
+            {
+                //Creating a new Trigger event and storing the info needed
+                var evtTrigger = TriggerEvent();
+                evtTrigger.CogToTrigger1 = this.ObjectToTrigger1.Cog;
+                evtTrigger.CogToTrigger2 = this.ObjectToTrigger2.Cog;
+                evtTrigger.NameToTrigger = this.NameOfTriggerObjects;
+                evtTrigger.StartTrigger1 = this.TurnOnTrigger1;
+                evtTrigger.StartTrigger2 = this.TurnOnTrigger2;
+                
+                this.Space.DispatchEvent(Events.TriggerEvent, evtTrigger);
+            }
             
             if(this.Box)
             {
@@ -92,36 +138,55 @@ class EnemyHitReaction : ZilchComponent
     }
     
     //Takes the amount of damage this enemy takes, if the attack stuns, and if the attack knocks up.
-    function OnHit(iDamageTaken_:Integer, bIsStunned_:Boolean, bKnockedUp_:Boolean)
+    function OnHit(iDamageTaken_:Integer, bIsStunned_:Boolean, bKnockedUp_:Boolean, iAttackID_:Integer)
     {
         if(!this.Invulnerable)
         {
-            //Reduces the object's hp by the damage taken
-            this.IHealth -= iDamageTaken_;
-            this.IOverkillHealth -= iDamageTaken_;
-            
-            //Knocks this object up into the air if the attack knocks up
-            if(bKnockedUp_)
+            //If the attack was a basic attack
+            if(iAttackID_ >= 20 && iAttackID_ <= 29 && !this.IgnoreBasicAttack)
             {
-                this.Owner.RigidBody.Velocity += Real3(0.0, 10.0, 0.0);
+                this.TakeDamage(iDamageTaken_, bIsStunned_, bKnockedUp_);
             }
-            
-            //Increases the player's combo by calling the AttackHit function in the ComboManager
-            this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
-            
-            //Play hit sound effect
-            this.SoundPlayer.BackgroundMusic.PlaySword();
-            
-            
-            var seqHit = Action.Sequence(this.Owner.Actions);
-            //Turn red and squish slightly
-            Action.Property(seqHit, @this.Owner.Sprite.Color, Real4(1, 0, 0, 1), 0.02, Ease.Linear);
-            Action.Property(seqHit, @this.Owner.Transform.Scale, this.HitSize, 0.02, Ease.Linear);
-            
-            Action.Delay(seqHit, 0.05);
-            //Return to regular look
-            Action.Property(seqHit, @this.Owner.Sprite.Color, Real4(1, 1, 1, 1), 0.05, Ease.Linear);
-            Action.Property(seqHit, @this.Owner.Transform.Scale, this.RegSize, 0.05, Ease.Linear);
+            //If the attack was a slash attack
+            else if(iAttackID_ >= 30 && iAttackID_ <= 49 && !this.IgnoreSlashAttack)
+            {
+                this.TakeDamage(iDamageTaken_, bIsStunned_, bKnockedUp_);
+            }
+            //If the attack was from a scroll
+            else if(iAttackID_ >= 50 && iAttackID_ <= 54 && !this.IgnoreScrollAttack)
+            {
+                this.TakeDamage(iDamageTaken_, bIsStunned_, bKnockedUp_);
+            }
         }
+    }
+    
+    function TakeDamage(iDamageTaken_:Integer, bIsStunned_:Boolean, bKnockedUp_:Boolean)
+    {
+        //Reduces the object's hp by the damage taken
+        this.IHealth -= iDamageTaken_;
+        this.IOverkillHealth -= iDamageTaken_;
+        
+        //Knocks this object up into the air if the attack knocks up
+        if(bKnockedUp_)
+        {
+            this.Owner.RigidBody.Velocity += Real3(0.0, 10.0, 0.0);
+        }
+        
+        //Increases the player's combo by calling the AttackHit function in the ComboManager
+        this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.AttackHit();
+        
+        //Play hit sound effect
+        this.SoundPlayer.BackgroundMusic.PlaySword();
+        
+        
+        var seqHit = Action.Sequence(this.Owner.Actions);
+        //Turn red and squish slightly
+        Action.Property(seqHit, @this.Owner.Sprite.Color, Real4(1, 0, 0, 1), 0.02, Ease.Linear);
+        Action.Property(seqHit, @this.Owner.Transform.Scale, this.HitSize, 0.02, Ease.Linear);
+        
+        Action.Delay(seqHit, 0.05);
+        //Return to regular look
+        Action.Property(seqHit, @this.Owner.Sprite.Color, Real4(1, 1, 1, 1), 0.05, Ease.Linear);
+        Action.Property(seqHit, @this.Owner.Transform.Scale, this.RegSize, 0.05, Ease.Linear);
     }
 }

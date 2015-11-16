@@ -184,7 +184,7 @@ class PlayerAttack : ZilchComponent
                 var rHypot:Real = Math.DistanceSq(this.Owner.Transform.Translation, segAttackSegment.Front().ObjectHit.Transform.Translation);
                 if(rHypot <= 20)
                 {
-                    segAttackSegment.Front().ObjectHit.EnemyHitReaction.OnHit(iDamage,false, bStun);
+                    segAttackSegment.Front().ObjectHit.EnemyHitReaction.OnHit(iDamage,false, bStun, iAttackID);
                 }
             }
             segAttackSegment.PopFront();
