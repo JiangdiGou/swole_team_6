@@ -47,6 +47,9 @@ void Common_Draw(const char *format, ...);
 
 void ERRCHECK_fn(FMOD_RESULT result, const char *file, int line);
 #define ERRCHECK(_result) ERRCHECK_fn(_result, __FILE__, __LINE__)
+#define Common_Max(_a, _b) ((_a) > (_b) ? (_a) : (_b))
+#define Common_Min(_a, _b) ((_a) < (_b) ? (_a) : (_b))
+#define Common_Clamp(_min, _val, _max) ((_val) < (_min) ? (_min) : ((_val) > (_max) ? (_max) : (_val)))
 
 /* Functions with platform specific implementation (common_platform) */
 void Common_Init(void **extraDriverData);

@@ -47,6 +47,20 @@ void GameObjectComposition::Initialize()
 		(*it)->Initialize();
 	}
 }
+void GameObjectComposition::SerializeRead(Serializer& str)
+{
+  for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
+  {
+    (*it)->SerializeRead(str);
+  }
+}
+void GameObjectComposition::SerializeWrite(Serializer& str)
+{
+  for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
+  {
+    (*it)->SerializeWrite(str);
+  }
+}
 
 void GameObjectComposition::Update(float dt)
 {
@@ -66,7 +80,7 @@ GameObjectComposition::~GameObjectComposition()
 	//takes care of all resources and memory.
   for (ComponentIt it = Components.begin(); Components.size() > 0; it = Components.begin())
   {
-    //(*it)->~GameComponent();
+    (*it)->~GameComponent();
     Components.erase(it);
   }
 }

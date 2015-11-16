@@ -17,6 +17,8 @@ namespace ActionSystem
 
 		void Update(const long double& dt) override;
 
+		void Update(float dt) override;//stupid
+
 		bool IsEmpty()const { return ActionQueue.empty(); };
 		const bool& Looping()const { return LoopingSequence; };
 		bool& Looping() { return LoopingSequence; };

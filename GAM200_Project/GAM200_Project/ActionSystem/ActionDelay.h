@@ -12,6 +12,8 @@ namespace ActionSystem
 
 		void Update(const long double& dt) override;
 
+		void Update(float dt) override;//stupid
+
 		const long double& Duration() const { return EndTime; }
 
 		long double& Duration() { return EndTime; }

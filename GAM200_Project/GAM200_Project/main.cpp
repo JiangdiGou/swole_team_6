@@ -111,7 +111,7 @@ int main(void)
   coloured_console << "candy" << "\n";
   coloured_console << "la di da vector: " << dumbVector << "\n";
   engine->GameLoop();
-
+  
   FACTORY->destroyAllObjects();
   engine->DestroySystems();
 

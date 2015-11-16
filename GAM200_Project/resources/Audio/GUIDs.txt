@@ -1,22 +1,11 @@
-{e4859a03-102f-49ab-8bf6-99c97e3be278} event:/environment_alarm
-{6e13e6f9-6200-4793-a2e7-0e7c7491d44e} event:/environment_ambience_01
-{d69c11ed-7ee4-48e5-84b7-97d4f6e1a8cc} event:/environment_door_crash
-{73fba097-0253-408d-823f-61b6148752b4} event:/environment_largedoor
-{5f79cd7b-512f-46a9-96be-c8add2e79758} event:/environment_smalldoor
-{6af2946f-8e57-4aa5-9ab0-d42dfee2ef46} event:/missile_explosion
-{a2902e9c-242d-49f3-bc89-c4932301a9dd} event:/missile_launch
-{82530115-b217-43f6-b8e0-1432320150af} event:/music_escape
-{7f0c375e-69d5-448d-8b6a-88627b723366} event:/music_explore
-{4c31f0ca-9764-48ab-80b4-d952e135ffe2} event:/music_theme
-{19c66c27-d196-426e-ab5e-3bc73d6b4524} event:/music_wall_encounter
-{ea02e421-683d-4d25-9c7e-d32ee86cc934} event:/platform_moving
-{5483f7ea-5205-4811-9358-30f3b78ad1a3} event:/player_death
-{36ae23ca-523f-434f-904f-38986bc1967d} event:/player_footsteps
-{c0633441-492f-48b0-ac19-c1d18199bc18} event:/player_jump
-{36738fd7-cf69-43d8-8e22-f2593dfb8697} event:/wall_attack
-{eac344e3-131f-42d2-b72e-8f1ed5c5e7c9} event:/wall_startup
-{3972bc41-11a1-4df7-886e-9fc817b249d2} bus:/
-{f9a32112-212c-459b-8caa-931221e33478} bus:/Reverb
-{15e9bbbe-9a32-4b73-b527-d2b393fecdfe} bank:/Ambience
-{6ffa748e-1732-40c7-a300-1209929feeaf} bank:/Master Bank
-{3815aebd-7ae8-413e-87e7-bdc9a5785f46} bank:/Music
+{3346adf5-8d36-41a9-a816-4e109599d1b0} event:/sword-noises
+{de6a5560-b5ff-4bcf-9207-f47687334449} event:/SwordSelectSound
+{ef627771-3008-4c7d-bcf3-06a66bf1c294} event:/swipe_sound
+{0f2f83c4-1154-4c6e-ab06-ff6c67afb58e} event:/SuccessSound
+{256f5375-75d7-4ade-8d72-23e3212ba5b5} event:/Combat_Music
+{3a35166f-f310-4917-b0de-6836a690bedd} event:/Contra-Level_1
+{a6ab0567-7138-43d4-874d-643d79ba3142} event:/VictoryMusic
+{617280ad-cf09-497a-b338-29464d3e6cf5} bus:/
+{05600e41-7ad1-47fa-9fd4-c0f9582b5f38} bus:/Reverb
+{d065b8d3-3b94-4877-b3a7-1e83bed5665d} bank:/Master Bank
+{c580b0a5-a10c-4ee5-b299-4003ecf2a519} bank:/Ambience

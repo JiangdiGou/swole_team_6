@@ -1,5 +1,5 @@
 /* ======================================================================================================== */
-/* FMOD Studio - output development header file. Copyright (c), Firelight Technologies Pty, Ltd. 2004-2014. */
+/* FMOD Studio - output development header file. Copyright (c), Firelight Technologies Pty, Ltd. 2004-2015. */
 /*                                                                                                          */
 /* Use this header if you are wanting to develop your own output plugin to use with                         */
 /* FMOD's output system.  With this header you can make your own output plugin that FMOD                    */
@@ -10,16 +10,13 @@
 #ifndef _FMOD_OUTPUT_H
 #define _FMOD_OUTPUT_H
 
-#include "fmod.h"
-
 typedef struct FMOD_OUTPUT_STATE FMOD_OUTPUT_STATE;
 
 /*
     Output callbacks
 */ 
 typedef FMOD_RESULT (F_CALLBACK *FMOD_OUTPUT_GETNUMDRIVERS_CALLBACK) (FMOD_OUTPUT_STATE *output_state, int *numdrivers);
-typedef FMOD_RESULT (F_CALLBACK *FMOD_OUTPUT_GETDRIVERINFO_CALLBACK) (FMOD_OUTPUT_STATE *output, int id, char *name, int namelen, FMOD_
-	*guid, int *systemrate, FMOD_SPEAKERMODE *speakermode, int *speakermodechannels);
+typedef FMOD_RESULT (F_CALLBACK *FMOD_OUTPUT_GETDRIVERINFO_CALLBACK) (FMOD_OUTPUT_STATE *output, int id, char *name, int namelen, FMOD_GUID *guid, int *systemrate, FMOD_SPEAKERMODE *speakermode, int *speakermodechannels);
 typedef FMOD_RESULT (F_CALLBACK *FMOD_OUTPUT_INIT_CALLBACK)          (FMOD_OUTPUT_STATE *output_state, int selecteddriver, FMOD_INITFLAGS flags, int *outputrate, FMOD_SPEAKERMODE *speakermode, int *speakermodechannels, FMOD_SOUND_FORMAT *outputformat, int dspbufferlength, int dspnumbuffers, void *extradriverdata);
 typedef FMOD_RESULT (F_CALLBACK *FMOD_OUTPUT_START_CALLBACK)         (FMOD_OUTPUT_STATE *output_state);
 typedef FMOD_RESULT (F_CALLBACK *FMOD_OUTPUT_STOP_CALLBACK)          (FMOD_OUTPUT_STATE *output_state);

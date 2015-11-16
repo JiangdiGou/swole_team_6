@@ -2,6 +2,12 @@
 
 namespace ActionSystem
 {
+	void ActionGroup::Update(float dt)
+	{
+		float* doubDt = &dt;
+		Update((const long double&)doubDt);
+	}
+
 	void ActionGroup::Update(const long double& dt)
 	{
 		if (IsPaused() || IsCompleted())

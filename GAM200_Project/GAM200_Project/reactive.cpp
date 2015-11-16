@@ -48,7 +48,8 @@ void Reactive::SerializeRead(Serializer& str)
 }
 void Reactive::SerializeWrite(Serializer& str) 
 {
-
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
 }
 
 bool Reactive::mouseOver()

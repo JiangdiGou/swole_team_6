@@ -30,6 +30,9 @@ void Initialize();
 
 void Update(float dt);
 
+void SerializeRead(Serializer& str);
+void SerializeWrite(Serializer& str);
+
 void Destroy();
 
 void AddComponent(ComponentTypeId typeId, GameComponent* component);

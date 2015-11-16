@@ -37,35 +37,17 @@ void ImGuiManager::Update(float dt)
         tempMessage = "Creating Level";
         state = CREATINGLEVEL;
       }
-      ImGui::End();
-      //We can't load levels right now 
-      /*
       else if (ImGui::Button("Load Level"))
         state = LOADINGLEVEL;
-        */
-      if (focus)
+      else if (ImGui::Button("Save Level"))
       {
-        //Allows changing a tile's texture
-        bool result;
-        ImGui::Begin("Change Tile Texture", &result);
-        ImGui::InputText("New Filename: ", desiredTextureName, 256);
-        if (ImGui::Button("Change Texture: "))
-        {
-          if (std::string(desiredTextureName).size() > 2)
-            changeTile(desiredTextureName);
-          else
-            tempMessage = "Invalid name. too short. ";
-        }
-        ImGui::End();
 
-        //Probably add more to this one later
-        ImGui::Begin("utils", &result);
-        if (ImGui::Button("ClearFocus"))
-          focus = NULL;
-        ImGui::End();
-        
+        createLevelFileFromArray(CORE->LevelName, FACTORY->levelWidth, FACTORY->levelHeight);
+        std::string substring((CORE->LevelName).begin(), (CORE->LevelName).end() - 5);
+        substring.append("-KEY.txt");
+        generateTextureKey(substring);
       }
-
+      ImGui::End();
       break;
     }
     case CREATINGLEVEL:
@@ -101,7 +83,9 @@ void ImGuiManager::Update(float dt)
         {
           createEmptyLevelFile(std::string(activeLevelName), activeLevelDimensions[0], activeLevelDimensions[1]);
           generateTextureKey(std::string(activeLevelName));
-          tempMessage = "Sorry, " + std::string(activeLevelName) + " was created but loading isn't functional yet.";
+          CORE->GameState = GS_LOAD;
+          CORE->LevelName = std::string(activeLevelName);
+          //FACTORY->destroyAllObjects();
           //FACTORY->readTextureKey("resources/levels/" + std::string(activeLevelName) + "-KEY.txt");
           //FACTORY->loadLevelFrom("resources/levels/" + std::string(activeLevelName) + ".txt");
         }
@@ -117,6 +101,27 @@ void ImGuiManager::Update(float dt)
     {
       break;
     }
+  }
+  if (focus)
+  {
+    //Allows changing a tile's texture
+    bool result;
+    ImGui::Begin("Change Tile Texture", &result);
+    ImGui::InputText("New Filename: ", desiredTextureName, 256);
+    if (ImGui::Button("Change Texture: "))
+    {
+      if (std::string(desiredTextureName).size() > 2)
+        changeTile(desiredTextureName);
+      else
+        tempMessage = "Invalid name. too short. ";
+    }
+    ImGui::End();
+
+    //Probably add more to this one later
+    ImGui::Begin("utils", &result);
+    if (ImGui::Button("ClearFocus"))
+      focus = NULL;
+    ImGui::End();
   }
 }
 
@@ -176,6 +181,36 @@ void ImGuiManager::createEmptyLevelFile(std::string levelName, int width, int he
   ofs.close();
 }
 
+void ImGuiManager::createLevelFileFromArray(std::string levelName, int width, int height)
+{
+  std::ofstream ofs;
+  ofs.open(levelName);
+
+  if (!ofs.is_open())
+    std::cout << "Faied to create file " << std::endl;
+
+  ofs << "[LevelName]" << std::endl;
+  ofs << levelName << std::endl;
+
+  ofs << "[ArraySpecs]" << std::endl;
+  ofs << width << std::endl;
+  ofs << height << std::endl;
+
+  ofs << "[TileMap]" << std::endl;
+  //Loop through tile map, fill with 0's
+  for (int j = height - 1; j >= 0; --j)
+  {
+    for (int i = 0; i < width ; ++i)
+    {
+      ofs << FACTORY->tileMap[j][i] << " ";
+    }
+    ofs << std::endl;
+  }
+
+  ofs.close();
+}
+
+
 void ImGuiManager::generateTextureKey(std::string levelName)
 {
 
@@ -209,8 +244,22 @@ void ImGuiManager::changeTile(std::string newTexture)
 
     TextureAtlas* pAtlas = GRAPHICS->getSpriteAtlas();
     tSprite->texture = pAtlas->textures[desiredTextureName];
+
+    int index = 0; 
+    for (std::vector<std::string>::iterator it = FACTORY->textureKey.begin();
+      it != FACTORY->textureKey.end(); ++it)
+    {
+      index = it - FACTORY->textureKey.begin();
+      if (*it == newTexture)
+        break;
+    }
+
+    Transform* pTransform = focus->has(Transform);
+    FACTORY->tileMap[(int)pTransform->GetPositionY()][(int)pTransform->GetPositionX()] = index;
+
     //I wanted to have it so that if you make it a tile it has collision
     //but something about how im doing it below is wrong. 
+    
     /*
     if (newTexture != "emptyTile" && wasEmpty)
     {
@@ -226,8 +275,10 @@ void ImGuiManager::changeTile(std::string newTexture)
 
       tileBody->Initialize();
       boxCollider->Initialize();
-    }
-    */
+    }*/
+
+
+    
   }
   focus = NULL;
 }

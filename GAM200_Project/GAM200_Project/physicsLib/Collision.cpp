@@ -38,6 +38,8 @@ void ShapeLine::SerializeRead(Serializer& str)
 }
 void ShapeLine::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, (int&)Id);
   StreamWrite(str);
   StreamWrite(str, base);
@@ -68,6 +70,8 @@ void ShapeCircle::SerializeRead(Serializer& str)
 }
 void ShapeCircle::SerializeWrite(Serializer& str) 
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, (int&)Id);
   StreamWrite(str);
   StreamWrite(str, Radius);
@@ -82,6 +86,7 @@ void ShapeAAB::Initialize()
     if (ownerBody != NULL)
     {
       body = ownerBody;
+      body->BodyShape = this;
     }
   }
   PrevCollidingObjects.clear();
@@ -141,6 +146,8 @@ void ShapeAAB::SerializeRead(Serializer& str)
 }
 void ShapeAAB::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, (int&)Id);
   StreamWrite(str);
   StreamWrite(str, Extents);

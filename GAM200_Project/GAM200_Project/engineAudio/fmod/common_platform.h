@@ -1,7 +1,9 @@
-//#define _CRT_SECURE_NO_WARNINGS Uncommented because this was already defined somewhere
+#define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
 
 int FMOD_Main();
+
+#define COMMON_PLATFORM_SUPPORTS_FOPEN
 
 #define Common_snprintf _snprintf
 #define Common_vsnprintf _vsnprintf

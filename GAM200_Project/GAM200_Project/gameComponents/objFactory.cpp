@@ -17,6 +17,7 @@
 
 #include "../AssertionError/AssertionError.h"
 #include "../WindowsSystem.h"
+#include "../Serialization/Serialization.h"
 
 
 bool FACTORY_EXISTS;
@@ -66,7 +67,14 @@ void objFactory::destroyAllObjects()
 
   gameObjs.clear();
 }
-
+void objFactory::SerializeAllObjects(Serializer& str)
+{
+  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    it->second->SerializeWrite(str);
+  }
+}
 /*std::vector<const GameObjectComposition*> objFactory::GetgameObjs()
 {
 	std::vector<const GameObjectComposition*> constObjs;
@@ -191,6 +199,7 @@ void objFactory::loadLevelFrom(std::string fileName)
     }
   }
   this->levelName = levelName;
+  CORE->LevelName = fileName;
   this->levelWidth = arrayX;
   this->levelHeight = arrayY;
   this->tileMap = tileMap;
@@ -270,7 +279,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   return newTile;
 }
 
-void objFactory::intializeObjects()
+void objFactory::initializeObjects()
 {
   std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
   for (; it != gameObjs.end(); ++it)
@@ -296,14 +305,14 @@ void objFactory::printLevel()
 }
 
 //return false if tile couldn't be changed, true + change tile otherwise
-bool objFactory::changeTile(char tile, int x, int y)
+bool objFactory::changeTile(int tile, int x, int y)
 {
   y = this->levelHeight - y - 1;
   if (!this->validPoint(x, y))
   {
     return false;
   }
-  this->tileMap[y][x] = tile;
+  this->tileMap[x][y] = tile;
   return true;
 }
 

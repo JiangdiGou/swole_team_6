@@ -68,6 +68,7 @@ void mouseVector::SerializeRead(Serializer& str)
 }
 void mouseVector::SerializeWrite(Serializer& str)
 {
-
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
 
 }

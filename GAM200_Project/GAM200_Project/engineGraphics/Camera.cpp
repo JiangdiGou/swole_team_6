@@ -49,6 +49,8 @@ void Camera::SerializeRead(Serializer& str)
 }
 void Camera::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, size);
   StreamWrite(str);
   StreamWrite(str, width);

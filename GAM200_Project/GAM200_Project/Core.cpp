@@ -12,6 +12,7 @@
 #include "mouseVector.h"
 #include "_EntryPoint.h"
 #include "initinfo.h"
+#include "physicsLib\PlayerState.h"
 #include "engineAudio/Audio.h"
 
 
@@ -50,12 +51,13 @@ void CoreEngine::GameLoop()
   //sound.playSound(soundSample, true);
   //std::cin >> garbage;
   //sound.releaseSound(soundSample);
+  SoundEmiiter bgm = *new SoundEmitter();
+  bgm.SetVolume(1.0f, "Combat_Music");
+  bgm.PlayEvent("Combat_Music");
 #else
 
 
-  SoundManager bgm = *new SoundManager();
-  //bgm.Volume(10.0f, "music_theme");
-  bgm.PlayEvent("music_theme");
+
 
   
  
@@ -71,25 +73,97 @@ void CoreEngine::GameLoop()
 
     //// loop the sound
     //sound.playSound(soundSample, true);
+	  SoundEmitter bgm = *new SoundEmitter();
+	  bgm.Initialize();
+
+	  bgm.SetVolume(1.0f, "Combat_Music");
+	  bgm.PlayEvent("Combat_Music");
   }
 #endif
 
   while (GameActive)
   {
     //updateMousePos();
+    if (GameState == GS_LOAD)
+    {
+      if (PrevGameState == GS_RUN)
+      {
+        FACTORY->destroyAllObjects();
+        FACTORY->textureKey = FACTORY->readTextureKey("resources/levels/" + LevelName + "-KEY.txt");
+        //FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
+        FACTORY->loadLevelFrom("resources/Levels/" + LevelName + ".txt");
 
-    unsigned currenttime = timeGetTime();
-    //Convert it to the time passed since the last frame (in seconds)
-    float dt = (currenttime - LastTime) / 1000.0f;
-    //Update the when the last update started
-    LastTime = currenttime;
+        FACTORY->createTiles();
 
-    //Update every system
-    for (unsigned i = 0; i < Systems.size(); ++i)
-      Systems[i]->Update(dt);
+        GOC * camera = FACTORY->makeObject("Camera");
+        camera->AddComponent(CT_Transform, new Transform());
+        Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
+        mouseVector *vectTest = new mouseVector();
+        camera->AddComponent(CT_MouseVector, vectTest);
+        camera->AddComponent(CT_Camera, mainCamera);
+        camera->Initialize();
 
-    for (unsigned i = 0; i < Systems.size(); ++i)
-      Systems[i]->Draw();
+
+        //PLAYER
+        GOC * player = FACTORY->makeObject("player");
+        Transform * transformPlayer = new Transform();
+        transformPlayer->SetPosition(2, 6, 0);
+        transformPlayer->SetScale(Vector2(1.25, 1.25));
+        player->AddComponent(CT_Transform, transformPlayer);
+
+        Body * bodyPlayer = new Body();
+        bodyPlayer->Mass = 3.0f;
+        bodyPlayer->Restitution = 0.3f;
+        bodyPlayer->Friction = 0.0f;
+        ShapeAAB * boxColliderPlayer = new ShapeAAB();
+        boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
+        bodyPlayer->BodyShape = boxColliderPlayer;
+
+
+
+        player->AddComponent(CT_Body, bodyPlayer);
+        player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
+        PlayerState * controller = new PlayerState();
+        player->AddComponent(CT_PlayerState, controller);
+
+        SoundEmitter* playerSound = new SoundEmitter();
+        player->AddComponent(CT_SoundEmitter, playerSound);
+
+        //TileMapCollision * tileplayer = new TileMapCollision();
+        //player->AddComponent(CT_TileMapCollision, tileplayer);
+
+
+        Sprite * spritePlayer = new Sprite();
+        spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+        spritePlayer->flipSprite = false;
+        player->AddComponent(CT_Sprite, spritePlayer);
+
+        LOGIC->player = player;
+
+
+        //This move is so that the bottom left corner is 0,0
+
+        GRAPHICS->setMainCamera(mainCamera);
+        FACTORY->initializeObjects();
+        //LOGIC->Initialize();
+        GameState = GS_RUN;
+      }
+    }
+    else if(GameState == GS_RUN)
+    {
+      unsigned currenttime = timeGetTime();
+      //Convert it to the time passed since the last frame (in seconds)
+      float dt = (currenttime - LastTime) / 1000.0f;
+      //Update the when the last update started
+      LastTime = currenttime;
+
+      //Update every system
+      for (unsigned i = 0; i < Systems.size(); ++i)
+        Systems[i]->Update(dt);
+
+      for (unsigned i = 0; i < Systems.size(); ++i)
+        Systems[i]->Draw();
+    }
   }
 
 }

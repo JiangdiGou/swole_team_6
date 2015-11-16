@@ -4,8 +4,10 @@ namespace ActionSystem
 {
 	void ActionSequence::Update(float dt)
 	{
-		Update((const long double&)dt);
+		float* doubDt = &dt;
+		Update((const long double&)doubDt);
 	}
+
 	void ActionSequence::Update(const long double& dt)
 	{
 		if (IsPaused() || IsCompleted())
