@@ -16,6 +16,8 @@ namespace ActionSystem
 
 			virtual void Update(const long double& dt) = 0;
 
+			virtual void Update(float dt) override;//stupid
+
 			virtual void Restart() { Completed = false; }
 
 			virtual ~ActionBase(){};

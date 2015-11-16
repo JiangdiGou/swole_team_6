@@ -14,6 +14,7 @@ namespace ActionSystem
 
 		void Update(const long double& dt) override;
 
+		void Update(float dt) override;//stupid
 
 	private:
 		const std::function<void()> Function;
