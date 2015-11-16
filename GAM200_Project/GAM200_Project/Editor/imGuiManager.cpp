@@ -47,6 +47,10 @@ void ImGuiManager::Update(float dt)
         substring.append("-KEY.txt");
         generateTextureKey(substring);
       }
+      else if (ImGui::Button("Reload Level"))
+      {
+        CORE->GameState = GS_LOAD;
+      }
       ImGui::End();
       break;
     }

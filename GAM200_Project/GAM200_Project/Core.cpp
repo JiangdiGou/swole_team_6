@@ -89,9 +89,9 @@ void CoreEngine::GameLoop()
       if (PrevGameState == GS_RUN)
       {
         FACTORY->destroyAllObjects();
-        FACTORY->textureKey = FACTORY->readTextureKey("resources/levels/" + LevelName + "-KEY.txt");
+        FACTORY->textureKey = FACTORY->readTextureKey(this->textureKeyFile);
         //FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
-        FACTORY->loadLevelFrom("resources/Levels/" + LevelName + ".txt");
+        FACTORY->loadLevelFrom(LevelName);
 
         FACTORY->createTiles();
 

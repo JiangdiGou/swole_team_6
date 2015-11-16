@@ -198,8 +198,12 @@ void objFactory::loadLevelFrom(std::string fileName)
       }
     }
   }
+  std::string substring(fileName.begin(), fileName.end() - 4);
+  substring.append("-KEY.txt");
+
   this->levelName = levelName;
   CORE->LevelName = fileName;
+  CORE->textureKeyFile = substring;
   this->levelWidth = arrayX;
   this->levelHeight = arrayY;
   this->tileMap = tileMap;
