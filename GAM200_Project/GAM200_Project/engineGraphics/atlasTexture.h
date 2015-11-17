@@ -18,6 +18,7 @@ class AtlasTexture
 public:
   friend class Sprite;
   friend class TextureAtlas;
+  friend class EditorTilemapTools;
 
   AtlasTexture(int aWidth, int aHeight, int numberOfFrames,
     int frameTime, int xOffset, int yOffset, int textureWidth, int textureHeight);

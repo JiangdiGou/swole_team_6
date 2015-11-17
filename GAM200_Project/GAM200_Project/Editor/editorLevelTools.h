@@ -18,14 +18,30 @@ class EditorLevelTools
 public:
   EditorLevelTools();
   void handleLevelTools();
+  void levelNameUpdate();
 
 private:
+  std::string message;
+  ImVec4 messageColor;
+  float messageDuration = 5.0f;
+  float messageStart;
+  bool messageActive = false;
+
+  //Heavy lifting functions
   void generateTextureKey(std::string levelName);
-  void EditorLevelTools::createLevelFileFromArray(std::string levelName, int width, int height);
-  void EditorLevelTools::createEmptyLevelFile(std::string levelName, int width, int height);
+  void createLevelFileFromArray(std::string levelName, int width, int height);
+  void createEmptyLevelFile(std::string levelName, int width, int height);
+
+  //Helpers 
+  std::string appendKEY(const std::string input) const;
+  void setupMessage(std::string inputMessage, ImVec4 color);
+  bool checkFilename(std::string filename, bool checkContentsAndKey = false);
+  bool EditorLevelTools::checkLevelDimensions();
   
   std::string currentMessage;
-  EditorLevelState state;
+
+  char levelPathInput[256];
+  int levelDimensionInput[2];
 
   void fetchTextures();
   std::vector<std::string> textureNames;

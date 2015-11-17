@@ -4,9 +4,6 @@ ImGuiManager *GUIMGR;
 
 ImGuiManager::ImGuiManager(GLFWwindow* window) : pWindow(window)
 {
-  activeLevelDimensions[0] = 0;
-  activeLevelDimensions[1] = 0;
-
   GUIMGR = this;
 }
 
@@ -19,6 +16,7 @@ void ImGuiManager::Initialize()
 {
   ImGui_ImplGlfwGL3_Init(pWindow, false);
   levelTools = new EditorLevelTools();
+  tilemapTools = new EditorTilemapTools();
 }
 
 void ImGuiManager::Update(float dt)
@@ -27,18 +25,22 @@ void ImGuiManager::Update(float dt)
   ImGui_ImplGlfwGL3_NewFrame();
   ImGui::ShowTestWindow();
 
+  //Main editor window starts here
   ImGui::Begin("Swole Editor");
+
   if (ImGui::CollapsingHeader("Level Tools"))
-  {
     levelTools->handleLevelTools();
-  }
+  
+  if (ImGui::CollapsingHeader("Tilemap Tools"))
+    tilemapTools->handleTilemapTools();
+
+  //Main editor window ends here
   ImGui::End();
 
   if (focus)
   {
     //Allows changing a tile's texture
-    bool result;
-    ImGui::Begin("Change Tile Texture", &result);
+    ImGui::Begin("Change Tile Texture");
     ImGui::InputText("New Filename: ", desiredTextureName, 256);
     if (ImGui::Button("Change Texture: "))
     {
@@ -47,12 +49,6 @@ void ImGuiManager::Update(float dt)
       else
         tempMessage = "Invalid name. too short. ";
     }
-    ImGui::End();
-
-    //Probably add more to this one later
-    ImGui::Begin("utils", &result);
-    if (ImGui::Button("ClearFocus"))
-      focus = NULL;
     ImGui::End();
   }
 }
@@ -65,37 +61,6 @@ void ImGuiManager::Draw()
 void ImGuiManager::setFocus(GameObjectComposition* newFocus)
 {
   focus = newFocus;
-}
-
-
-
-void ImGuiManager::createEmptyLevelFile(std::string levelName, int width, int height)
-{
-  std::ofstream ofs;
-  ofs.open("resources/levels/" + levelName + ".txt");
-
-  if (!ofs.is_open())
-    std::cout << "Faied to create file " << std::endl;
-
-  ofs << "[LevelName]" << std::endl;
-  ofs << levelName << std::endl;
-
-  ofs << "[ArraySpecs]" << std::endl;
-  ofs << width << std::endl;
-  ofs << height << std::endl;
-
-  ofs << "[TileMap]" << std::endl;
-  //Loop through tile map, fill with 0's
-  for (int j = 0; j < height; ++j)
-  {
-    for (int i = 0; i < width; ++i)
-    {
-      ofs << "0 ";
-    }
-    ofs << std::endl;
-  }
-
-  ofs.close();
 }
 
 void ImGuiManager::changeTile(std::string newTexture)
@@ -153,9 +118,6 @@ void ImGuiManager::changeTile(std::string newTexture)
 
 void ImGuiManager::SendMessages(Message* message)
 {
-  //I was gonna do something here but i changed my mind
-  //I probably will do something here later
-  /*
   switch (message->MessageId)
   {
   case Mid::MouseButton:
@@ -165,9 +127,13 @@ void ImGuiManager::SendMessages(Message* message)
     if (mouseEvent->MouseButtonIndex == 1
       && mouseEvent->ButtonIsPressed)
     {
-      rightClickMenuOpen = true;
+      focus = NULL;
     }
   }
-  }
-  */
+  } 
+}
+
+void ImGuiManager::updateModules()
+{
+  levelTools->levelNameUpdate();
 }

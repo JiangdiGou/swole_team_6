@@ -208,6 +208,8 @@ void objFactory::loadLevelFrom(std::string fileName)
   this->levelHeight = arrayY;
   this->tileMap = tileMap;
   this->printLevel();
+
+  GUIMGR->updateModules();
 }
 
 void objFactory::createTiles()
@@ -329,7 +331,7 @@ std::vector<std::string> objFactory::readTextureKey(std::string keyPath)
 
   if (!is.is_open())
   {
-    std::cout << "Failed to open texture key" << std::endl;
+    std::cout << "Failed to open texture key " << keyPath << std::endl;
     return textures;
   }
   
@@ -347,6 +349,7 @@ std::vector<std::string> objFactory::readTextureKey(std::string keyPath)
 }
 
 //This FX is for eventually modifying the current level file's tilemap
+//This isnt how the current system works and should never be called. 
 void objFactory::modifyLevelTilemap(int newTexture, int x, int y)
 {
   std::vector<std::string> lines; 
