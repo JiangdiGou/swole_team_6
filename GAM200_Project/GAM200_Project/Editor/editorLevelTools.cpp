@@ -277,9 +277,11 @@ bool EditorLevelTools::checkFilename(std::string filename, bool checkContentsAnd
       std::getline(is, testLine);
       if (testLine.size() < 2)
       {
-        setupMessage("Level file exists, but appears corrupt: " + filename, ImVec4(1, 0, 0, 1));
+        setupMessage("KEY file exists, but appears corrupt: " + filename, ImVec4(1, 0, 0, 1));
         return false;
       }
+
+      is.close(); 
     }
     return true;
   }
