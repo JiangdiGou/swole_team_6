@@ -13,9 +13,6 @@ enum EditorLevelState { IDLE, CREATINGLEVEL, LOADINGLEVEL, INLEVEL };
 #include "../engineGraphics/textureAtlas.h"
 #include "../engineGraphics/graphicsManager.h"
 
-//Helper fx prototypes. might put in cl
-
-
 class EditorLevelTools
 {
 public:

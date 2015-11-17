@@ -288,6 +288,9 @@
     <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h">
       <Filter>Systems\Editor</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h">
+      <Filter>Systems\Editor\imGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -436,6 +439,9 @@
     <ClCompile Include="GAM200_Project\Serialization\TextSerialization.cpp" />
     <ClCompile Include="GAM200_Project\Editor\editorLevelTools.cpp">
       <Filter>Systems\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editorTilemapTools.cpp">
+      <Filter>Systems\Editor\imGUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

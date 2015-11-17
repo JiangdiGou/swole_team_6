@@ -16,6 +16,7 @@ void ImGuiManager::Initialize()
 {
   ImGui_ImplGlfwGL3_Init(pWindow, false);
   levelTools = new EditorLevelTools();
+  tilemapTools = new EditorTilemapTools();
 }
 
 void ImGuiManager::Update(float dt)
@@ -24,11 +25,16 @@ void ImGuiManager::Update(float dt)
   ImGui_ImplGlfwGL3_NewFrame();
   ImGui::ShowTestWindow();
 
+  //Main editor window starts here
   ImGui::Begin("Swole Editor");
+
   if (ImGui::CollapsingHeader("Level Tools"))
-  {
     levelTools->handleLevelTools();
-  }
+  
+  if (ImGui::CollapsingHeader("Tilemap Tools"))
+    tilemapTools->handleTilemapTools();
+
+  //Main editor window ends here
   ImGui::End();
 
   if (focus)

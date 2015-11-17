@@ -5,14 +5,15 @@
 
 #define EDITOR
 
-
 #include <vector>
 #include "imgui_impl_glfw_gl3.h"
 #include "../Engine.h"
 #include "../engineGraphics/Graphics.h"
 #include "editorLevelTools.h"
+#include "editorTilemapTools.h"
 
 class EditorLevelTools;
+class EditorTilemapTools;
 
 class ImGuiManager : public ISystem
 {
@@ -37,6 +38,7 @@ private:
 
   GameObjectComposition* focus = nullptr;
   EditorLevelTools* levelTools = nullptr;
+  EditorTilemapTools* tilemapTools = nullptr;
 
   char desiredTextureName[256];
 
