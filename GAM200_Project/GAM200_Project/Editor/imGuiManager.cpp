@@ -18,7 +18,7 @@ ImGuiManager::~ImGuiManager()
 void ImGuiManager::Initialize()
 {
   ImGui_ImplGlfwGL3_Init(pWindow, false);
-  fetchTextures();
+  levelTools = new EditorLevelTools();
 }
 
 void ImGuiManager::Update(float dt)
@@ -27,85 +27,13 @@ void ImGuiManager::Update(float dt)
   ImGui_ImplGlfwGL3_NewFrame();
   ImGui::ShowTestWindow();
 
-  switch (state)
+  ImGui::Begin("Swole Editor");
+  if (ImGui::CollapsingHeader("Level Tools"))
   {
-    case IDLE:
-    {
-      ImGui::Begin("Level Tools");
-      if (ImGui::Button("Create Level"))
-      {
-        tempMessage = "Creating Level";
-        state = CREATINGLEVEL;
-      }
-      else if (ImGui::Button("Load Level"))
-        state = LOADINGLEVEL;
-      else if (ImGui::Button("Save Level"))
-      {
-
-        createLevelFileFromArray(CORE->LevelName, FACTORY->levelWidth, FACTORY->levelHeight);
-        std::string substring((CORE->LevelName).begin(), (CORE->LevelName).end() - 5);
-        substring.append("-KEY.txt");
-        generateTextureKey(substring);
-      }
-      else if (ImGui::Button("Reload Level"))
-      {
-        CORE->GameState = GS_LOAD;
-      }
-      ImGui::End();
-      break;
-    }
-    case CREATINGLEVEL:
-    {
-      //Waits for input
-      ImGui::Begin("Creating Level");
-      ImGui::Text(tempMessage.c_str());
-      ImGui::InputInt2("Width x Height", activeLevelDimensions);
-      ImGui::InputText("Level Name", activeLevelName, 256);
-
-      if (ImGui::Button("Create"))
-      {
-        //Checks input
-        if (activeLevelDimensions[0] <= 0 || activeLevelDimensions[1] <= 0)
-          tempMessage = "Invalid dimensions, both must be > 0";
-        else if (std::string(activeLevelName).size() <= 2)
-          tempMessage = "Invalid name. too short. ";
-        else
-        { 
-          //creates level file and key
-          createEmptyLevelFile(std::string(activeLevelName), activeLevelDimensions[0], activeLevelDimensions[1]);
-          generateTextureKey(std::string(activeLevelName));
-          tempMessage = std::string(activeLevelName) + " created";
-        }
-      }
-      else if (ImGui::Button("Create and Load"))
-      {
-        if (activeLevelDimensions[0] <= 0 || activeLevelDimensions[1] <= 0)
-          tempMessage = "Invalid dimensions, both must be > 0";
-        else if (std::string(activeLevelName).size() <= 2)
-          tempMessage = "Invalid name. too short. ";
-        else
-        {
-          createEmptyLevelFile(std::string(activeLevelName), activeLevelDimensions[0], activeLevelDimensions[1]);
-          generateTextureKey(std::string(activeLevelName));
-          CORE->GameState = GS_LOAD;
-          CORE->LevelName = std::string(activeLevelName);
-          //FACTORY->destroyAllObjects();
-          //FACTORY->readTextureKey("resources/levels/" + std::string(activeLevelName) + "-KEY.txt");
-          //FACTORY->loadLevelFrom("resources/levels/" + std::string(activeLevelName) + ".txt");
-        }
-      }
-      ImGui::End();
-      break;
-    }
-    case LOADINGLEVEL:
-    {
-      break;
-    }
-    case INLEVEL:
-    {
-      break;
-    }
+    levelTools->handleLevelTools();
   }
+  ImGui::End();
+
   if (focus)
   {
     //Allows changing a tile's texture
@@ -139,22 +67,7 @@ void ImGuiManager::setFocus(GameObjectComposition* newFocus)
   focus = newFocus;
 }
 
-void ImGuiManager::fetchTextures()
-{
-  TextureAtlas* atlas = GRAPHICS->getSpriteAtlas();
 
-  for (std::map<std::string, AtlasTexture>::iterator it = atlas->textures.begin();
-    it != atlas->textures.end(); ++it)
-  {
-    textureNames.push_back((*it).first);
-  }
-
-  /*
-  std::cout << "Hey, check out all these textures I found." << std::endl;
-  for (std::vector<std::string>::iterator it = textureNames.begin(); it != textureNames.end(); ++it)
-    std::cout << (int)(it - textureNames.begin()) << ": " << *it << std::endl;
-    */
-}
 
 void ImGuiManager::createEmptyLevelFile(std::string levelName, int width, int height)
 {
@@ -183,55 +96,6 @@ void ImGuiManager::createEmptyLevelFile(std::string levelName, int width, int he
   }
 
   ofs.close();
-}
-
-void ImGuiManager::createLevelFileFromArray(std::string levelName, int width, int height)
-{
-  std::ofstream ofs;
-  ofs.open(levelName);
-
-  if (!ofs.is_open())
-    std::cout << "Faied to create file " << std::endl;
-
-  ofs << "[LevelName]" << std::endl;
-  ofs << levelName << std::endl;
-
-  ofs << "[ArraySpecs]" << std::endl;
-  ofs << width << std::endl;
-  ofs << height << std::endl;
-
-  ofs << "[TileMap]" << std::endl;
-  //Loop through tile map, fill with 0's
-  for (int j = height - 1; j >= 0; --j)
-  {
-    for (int i = 0; i < width ; ++i)
-    {
-      ofs << FACTORY->tileMap[j][i] << " ";
-    }
-    ofs << std::endl;
-  }
-
-  ofs.close();
-}
-
-
-void ImGuiManager::generateTextureKey(std::string levelName)
-{
-
-  std::ofstream ofs;
-  ofs.open("resources/levels/" + levelName + "-KEY.txt");
-  
-  if (!ofs.is_open())
-    std::cout << "Failed to Create file" << std::endl;
-
-  for (std::vector<std::string>::iterator it = textureNames.begin(); it != textureNames.end(); ++it)
-  {
-    int index = it - textureNames.begin();
-    //+= 1 b/c i want to reserve 0 for empty
-    index += 1;
-    
-    ofs << *it << std::endl;
-  }
 }
 
 void ImGuiManager::changeTile(std::string newTexture)

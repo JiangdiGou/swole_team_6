@@ -285,6 +285,9 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\Serialization\Serialization.h" />
     <ClInclude Include="GAM200_Project\Serialization\TextSerialization.h" />
+    <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h">
+      <Filter>Systems\Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -431,6 +434,9 @@
       <Filter>Systems\Editor</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\Serialization\TextSerialization.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\editorLevelTools.cpp">
+      <Filter>Systems\Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">

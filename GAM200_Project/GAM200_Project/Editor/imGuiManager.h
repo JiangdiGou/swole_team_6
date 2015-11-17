@@ -5,13 +5,14 @@
 
 #define EDITOR
 
-enum EditorState { IDLE, CREATINGLEVEL, LOADINGLEVEL, INLEVEL };
 
 #include <vector>
-#include "imGUI\imgui.h"
 #include "imgui_impl_glfw_gl3.h"
 #include "../Engine.h"
 #include "../engineGraphics/Graphics.h"
+#include "editorLevelTools.h"
+
+class EditorLevelTools;
 
 class ImGuiManager : public ISystem
 {
@@ -31,9 +32,9 @@ private:
   GLFWwindow* pWindow;
   //Useful
   std::string tempMessage = "";
-  EditorState state = IDLE;
 
-  GameObjectComposition* focus = NULL;
+  GameObjectComposition* focus = nullptr;
+  EditorLevelTools* levelTools = nullptr;
 
   int activeLevelDimensions[2];
   char activeLevelName[256];
@@ -43,8 +44,6 @@ private:
   void createLevelFileFromArray(std::string levelName, int width, int height);
   void generateTextureKey(std::string levelName);
 
-  void fetchTextures();
-  std::vector<std::string> textureNames;
 
   void changeTile(std::string newTexture);
 };
