@@ -38,7 +38,7 @@ private:
   //Helpers 
   std::string appendKEY(const std::string input) const;
   void setupMessage(std::string inputMessage, ImVec4 color);
-  bool checkFilename(std::string filename);
+  bool checkFilename(std::string filename, bool checkContentsAndKey = false);
   bool EditorLevelTools::checkLevelDimensions();
   
   std::string currentMessage;

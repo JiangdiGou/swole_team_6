@@ -71,7 +71,7 @@ void EditorLevelTools::handleLevelTools()
   //Button to load an existing level. Checeks form of file, but not its existence. 
   if (ImGui::Button("Load myLvl"))
   {
-    if (checkFilename(levelPathInput))
+    if (checkFilename(levelPathInput, true))
     {
       CORE->LevelName = levelPathInput;
       CORE->textureKeyFile = appendKEY(levelPathInput);
@@ -228,7 +228,7 @@ void EditorLevelTools::setupMessage(std::string inputMessage, ImVec4 color)
   messageStart = ImGui::GetTime();
 }
 
-bool EditorLevelTools::checkFilename(std::string filename)
+bool EditorLevelTools::checkFilename(std::string filename, bool checkContentsAndKey)
 {
   std::string prefixSubstring(filename.begin(), filename.begin() + 17);
   std::string suffixSubstring(filename.end() - 4, filename.end());
@@ -240,7 +240,49 @@ bool EditorLevelTools::checkFilename(std::string filename)
     return false;
   }
   else
+  {
+    if (checkContentsAndKey)
+    {
+      std::string testLine;
+      std::ifstream is;
+
+      //Check that it can open the level file
+      is.open(filename);
+      if (!is.is_open())
+      {
+        setupMessage("Error opening level file: " + filename, ImVec4(1, 0, 0, 1));
+        return false;
+      }
+
+      //Check it's got stuff in it 
+      std::getline(is, testLine);
+      if (testLine.size() < 2)
+      {
+        setupMessage("Level file exists, but appears corrupt: " + filename, ImVec4(1, 0, 0, 1));
+        return false;
+      }
+      //Done checking level file
+      is.close();
+
+
+      //Check that the key exists 
+      is.open(appendKEY(filename));
+      if (!is.is_open())
+      {
+        setupMessage("Error opening KEY file: " + appendKEY(filename), ImVec4(1, 0, 0, 1));
+        return false;
+      }
+
+      //Check that it's got stuff in it 
+      std::getline(is, testLine);
+      if (testLine.size() < 2)
+      {
+        setupMessage("Level file exists, but appears corrupt: " + filename, ImVec4(1, 0, 0, 1));
+        return false;
+      }
+    }
     return true;
+  }
 }
 
 bool EditorLevelTools::checkLevelDimensions()
