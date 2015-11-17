@@ -247,16 +247,16 @@ void PlayerState::SendMessages(Message * message)
 			}
 			//}
 
-			if (CharacterMessage->keyStatus == KEY_PRESSED)// || CharacterMessage->keyStatus == KEY_DOWN)
+			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				
 				//playerSound->StopEvent("player_footsteps");
 				playerSound->SetVolume(1.0f, "swipe_sound");
-				
-				playerSound->PlayEvent("swipe_sound");
 				playerSound->StopEvent("swipe_sound");
+				playerSound->PlayEvent("swipe_sound");
 				
 				
+				JumpTimer = 0.0f;
 
 				printf("reach sound");
 				// change player sprite state here 
@@ -317,11 +317,12 @@ void PlayerState::SendMessages(Message * message)
 			//}
 
 			// change sprite and flip sprite if necessary
-			if (CharacterMessage->keyStatus == KEY_PRESSED )//|| CharacterMessage->keyStatus == KEY_DOWN)
+			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				playerSound->SetVolume(1.0f, "swipe_sound");
-				playerSound->PlayEvent("swipe_sound");
 				playerSound->StopEvent("swipe_sound");
+				playerSound->PlayEvent("swipe_sound");
+				
 				// we can change the player sprite to dashing or sth here?
         if (playerSprite->texture != *runAnimation)
           playerSprite->texture = *runAnimation;

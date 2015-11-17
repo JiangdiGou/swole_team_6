@@ -77,8 +77,8 @@ void CoreEngine::GameLoop()
 	  bgm.Initialize();
 
 	  bgm.SetVolume(1.0f, "Combat_Music");
-	  bgm.StopEvent("Combat_Music");
-	  bgm.PlayEvent("Combat_Music");
+	  bgm.StopEvent("Contra-Level_1");
+	  bgm.PlayEvent("Contra-Level_1");
 	  
 	  
   }
