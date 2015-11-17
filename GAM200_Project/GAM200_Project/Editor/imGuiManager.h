@@ -25,6 +25,8 @@ public:
   void Draw() override;
   void SendMessages(Message* message) override;
 
+  void updateModules();
+
   void setFocus(GameObjectComposition* newFocus);
   GameObjectComposition* getFocus() { return focus; }
 
@@ -36,13 +38,7 @@ private:
   GameObjectComposition* focus = nullptr;
   EditorLevelTools* levelTools = nullptr;
 
-  int activeLevelDimensions[2];
-  char activeLevelName[256];
   char desiredTextureName[256];
-
-  void createEmptyLevelFile(std::string levelName, int width, int height);
-  void createLevelFileFromArray(std::string levelName, int width, int height);
-  void generateTextureKey(std::string levelName);
 
 
   void changeTile(std::string newTexture);
