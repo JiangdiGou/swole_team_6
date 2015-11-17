@@ -14,9 +14,9 @@ namespace ActionSystem
 			bool IsPaused() const { return Paused; };
 			bool IsCompleted() const{ return Completed; };
 
-			virtual void Update(const long double& dt) = 0;
+			virtual void ActionUpdate(const long double& dt) = 0;
 
-			//virtual void Update(float dt) override;//stupid
+			//virtual void Update(float dt) override;//comment this out
 
 			virtual void Restart() { Completed = false; }
 

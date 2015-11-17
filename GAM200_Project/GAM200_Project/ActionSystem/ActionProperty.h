@@ -44,7 +44,7 @@ namespace ActionSystem
 
 		const long double& Duration() const { return EndTime; }
 
-		void Update(const long double& dt) override
+		void ActionUpdate(const long double& dt) override
 		{
 			//See if this action is paused or completed
 			if (IsPause() || IsCompleted())

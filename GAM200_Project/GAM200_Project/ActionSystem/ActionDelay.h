@@ -10,7 +10,7 @@ namespace ActionSystem
 	public:
 		ActionDelay(const long double& duration = 0) : EndTime(duration){};
 
-		void Update(const long double& dt) override;
+		void ActionUpdate(const long double& dt) override;
 
 		void Update(float dt) override;//stupid
 

@@ -5,10 +5,10 @@ namespace ActionSystem
 	void ActionSequence::Update(float dt)
 	{
 		float* doubDt = &dt;
-		Update((const long double&)doubDt);
+		ActionUpdate((const long double&)doubDt);
 	}
 
-	void ActionSequence::Update(const long double& dt)
+	void ActionSequence::ActionUpdate(const long double& dt)
 	{
 		if (IsPaused() || IsCompleted())
 		{
@@ -49,7 +49,7 @@ namespace ActionSystem
 				(*CurrentAction)->Restart();
 			}
 
-			(*CurrentAction)->Update(dt);
+			(*CurrentAction)->ActionUpdate(dt);
 		}
 	}
 

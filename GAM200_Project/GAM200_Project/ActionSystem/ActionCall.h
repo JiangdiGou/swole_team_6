@@ -12,7 +12,7 @@ namespace ActionSystem
 		template <typename ClassType>
 		ActionCall(void (ClassType::*function)(void), ClassType* thisPtr) : Function(std::bind(function, thisPtr)) {};
 
-		void Update(const long double& dt) override;
+		void ActionUpdate(const long double& dt) override;
 
 		void Update(float dt) override;//stupid
 

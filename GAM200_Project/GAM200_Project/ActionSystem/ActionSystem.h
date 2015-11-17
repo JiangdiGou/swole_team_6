@@ -62,12 +62,12 @@ namespace ActionSystem
 			}
 
 			//Sequence Call function <Templated>
-			template<typename <ClassType>
+			template < typename <ClassType>
 
 			inline void Call(ActionmSequence& grp, void (ClassType::*function)(void), ClassType* thisPtr)
 			{
 				grp.AddAction(new ActionCall(function, thisPtr));
-			}
+			};
 
 			//Group Call function <Templated>
 			template <typename ClassType>
@@ -75,35 +75,35 @@ namespace ActionSystem
 			inline void Call(ActionGroup& grp, void (ClassType::*function)(void), ClassType*, thisPtr)
 			{
 				grp.AddAction(new ActionCall(function, thisPtr));
-			}
+			};
 
 			template <typename T>
 
 			inline void Property(ActionSequence& seq, const T* startVal, const T& endVal, const long double& duration, const Ease& ease)
 			{
 				seq.AddAction(new ActionProperty(startVal, endVal, duration, ease));
-			}
+			};
 
 			template <typename T>
 
 			inline void Property(ActionSequence& seq, const T* startVal, const T& endVal, const long double& duration, SampleCurve<T> ease)
 			{
 				seq.AddAction(new ActionProperty<T>(startVal, endVal, duration, ease));
-			}
+			};
 
 			template <typename T>
 
 			inline void Property(ActionGroup& grp, const T* startVal, const T& endVal, const long double& duration, const Ease& ease)
 			{
 				grp.AddAction(new ActionProperty(startVal, endVal, duration, ease));
-			}
+			};
 
 			template <typename T>
 
 			inline void Property(ActionGroup& grp, const T* startVal, const T& endVal, const long double& duration, SampleCurve<T> ease)
 			{
 				grp.AddAction(new ActionProperty<T>(startVal, endVal, duration, ease));
-			};//WTF IS THIS?
+			};
 		}
 	}
 }

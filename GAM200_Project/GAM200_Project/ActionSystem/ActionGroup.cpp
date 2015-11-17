@@ -5,10 +5,10 @@ namespace ActionSystem
 	void ActionGroup::Update(float dt)
 	{
 		float* doubDt = &dt;
-		Update((const long double&)doubDt);
+		ActionUpdate((const long double&)doubDt);
 	}
 
-	void ActionGroup::Update(const long double& dt)
+	void ActionGroup::ActionUpdate(const long double& dt)
 	{
 		if (IsPaused() || IsCompleted())
 		{
@@ -24,7 +24,7 @@ namespace ActionSystem
 
 		while (CurrentAction != ActionQueue.end())
 		{
-			(*CurrentAction)->Update(dt);
+			(*CurrentAction)->ActionUpdate(dt);
 
 			if ((*CurrentAction)->IsCompleted())
 			{
