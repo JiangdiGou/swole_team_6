@@ -31,8 +31,8 @@ void SoundEmitter::Initialize()
 
 SoundEmitter::~SoundEmitter()
 {
-	//if (playSoundOnStart)
-		//PlayEvent(startSound);
+	if (playSoundOnStart)
+		StopEvent(startSound);
 }
 
 

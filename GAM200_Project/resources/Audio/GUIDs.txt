@@ -5,6 +5,7 @@
 {256f5375-75d7-4ade-8d72-23e3212ba5b5} event:/Combat_Music
 {3a35166f-f310-4917-b0de-6836a690bedd} event:/Contra-Level_1
 {a6ab0567-7138-43d4-874d-643d79ba3142} event:/VictoryMusic
+{cf82092f-4046-4ae1-bfb2-76fc318855f2} event:/Blade_blitz_Sound
 {617280ad-cf09-497a-b338-29464d3e6cf5} bus:/
 {05600e41-7ad1-47fa-9fd4-c0f9582b5f38} bus:/Reverb
 {d065b8d3-3b94-4877-b3a7-1e83bed5665d} bank:/Master Bank
