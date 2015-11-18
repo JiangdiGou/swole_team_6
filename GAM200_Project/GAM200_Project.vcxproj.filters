@@ -248,7 +248,6 @@
     <ClInclude Include="GAM200_Project\physicsLib\RayLineBoxCollision.h" />
     <ClInclude Include="GAM200_Project\reactive.h" />
     <ClInclude Include="GAM200_Project\runLua\luaTranslate.h" />
-    <ClInclude Include="GAM200_Project\Swole.h" />
     <ClInclude Include="GAM200_Project\engineAudio\Sound.h">
       <Filter>Systems\audio</Filter>
     </ClInclude>
@@ -292,6 +291,9 @@
       <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\Editor\editorModule.h">
+      <Filter>Systems\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorEntityTools.h">
       <Filter>Systems\Editor</Filter>
     </ClInclude>
   </ItemGroup>
@@ -414,7 +416,6 @@
     <ClCompile Include="GAM200_Project\physicsLib\RayLineBoxCollision.cpp" />
     <ClCompile Include="GAM200_Project\reactive.cpp" />
     <ClCompile Include="GAM200_Project\runLua\luaTranslate.cpp" />
-    <ClCompile Include="GAM200_Project\Swole.cpp" />
     <ClCompile Include="GAM200_Project\engineAudio\Sound.cpp">
       <Filter>Systems\audio</Filter>
     </ClCompile>
@@ -445,6 +446,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Editor\editorTilemapTools.cpp">
       <Filter>Systems\Editor\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editorEntityTools.cpp">
+      <Filter>Systems\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

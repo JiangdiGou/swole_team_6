@@ -9,9 +9,11 @@
 #include "../engineGraphics/Graphics.h"
 #include "editorLevelTools.h"
 #include "editorTilemapTools.h"
+#include "editorEntityTools.h"
 
 class EditorLevelTools;
 class EditorTilemapTools;
+class EditorEntityTools;
 
 class ImGuiManager : public ISystem
 {
@@ -33,6 +35,7 @@ private:
 
   EditorLevelTools* levelTools = nullptr;
   EditorTilemapTools* tilemapTools = nullptr;
+  EditorEntityTools* entityTools = nullptr;
 
 
 };

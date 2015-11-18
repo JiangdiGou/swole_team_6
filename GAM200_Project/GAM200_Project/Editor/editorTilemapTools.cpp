@@ -117,7 +117,7 @@ void EditorTilemapTools::changeTile(GameObjectComposition* tile)
     //but something about how im doing it below is wrong. 
 
     /*
-    if (newTexture != "emptyTile" && wasEmpty)
+    if (currentTexture != "emptyTile" && wasEmpty)
     {
     Body * tileBody = new Body();
     tileBody->Mass = 0;
@@ -126,8 +126,8 @@ void EditorTilemapTools::changeTile(GameObjectComposition* tile)
     ShapeAAB * boxCollider = new ShapeAAB();
     boxCollider->Extents = Vec2D(.5, .5);
     tileBody->BodyShape = boxCollider;
-    focus->AddComponent(CT_Body, tileBody);
-    focus->AddComponent(CT_ShapeAAB, boxCollider);
+    tile->AddComponent(CT_Body, tileBody);
+    tile->AddComponent(CT_ShapeAAB, boxCollider);
 
     tileBody->Initialize();
     boxCollider->Initialize();

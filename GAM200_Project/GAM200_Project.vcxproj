@@ -28,6 +28,7 @@
     <ClInclude Include="GAM200_Project\Composition.h" />
     <ClInclude Include="GAM200_Project\Core.h" />
     <ClInclude Include="GAM200_Project\Editor\editable.h" />
+    <ClInclude Include="GAM200_Project\Editor\editorEntityTools.h" />
     <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h" />
     <ClInclude Include="GAM200_Project\Editor\editorModule.h" />
     <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h" />
@@ -146,7 +147,6 @@
     <ClInclude Include="GAM200_Project\runLua\luaTranslate.h" />
     <ClInclude Include="GAM200_Project\Serialization\Serialization.h" />
     <ClInclude Include="GAM200_Project\Serialization\TextSerialization.h" />
-    <ClInclude Include="GAM200_Project\Swole.h" />
     <ClInclude Include="GAM200_Project\System.h" />
     <ClInclude Include="GAM200_Project\Utilities.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -169,6 +169,7 @@
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\Core.cpp" />
     <ClCompile Include="GAM200_Project\Editor\editable.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\editorEntityTools.cpp" />
     <ClCompile Include="GAM200_Project\Editor\editorLevelTools.cpp" />
     <ClCompile Include="GAM200_Project\Editor\editorTilemapTools.cpp" />
     <ClCompile Include="GAM200_Project\Editor\imGuiManager.cpp" />
@@ -252,7 +253,6 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\runLua\luaTranslate.cpp" />
     <ClCompile Include="GAM200_Project\Serialization\TextSerialization.cpp" />
-    <ClCompile Include="GAM200_Project\Swole.cpp" />
     <ClCompile Include="GAM200_Project\Utilities.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
