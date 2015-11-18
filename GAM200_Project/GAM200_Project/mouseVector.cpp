@@ -23,7 +23,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 void mouseVector::SendMessages(Message * message)
 {
 	parent = GetOwner();
-	mouseSound = reinterpret_cast<SoundEmitter *>(parent->GetComponent(CT_SoundEmitter));
+	//mouseSound = reinterpret_cast<SoundEmitter *>(parent->GetComponent(CT_SoundEmitter));
   switch (message->MessageId)
   {
   case Mid::MouseButton:
@@ -41,11 +41,13 @@ void mouseVector::SendMessages(Message * message)
       }
       else if (mouseDown && !(mouseEvent->ButtonIsPressed))
       {
-		  
+		  mouseSound.Initialize();
+		  mouseSound.PlayEvent("sword-noises");
         mouseDown = false;
         mouseUpPos = mouseEvent->MousePosition;
 		
 		LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
+		
       }
     }
   }
