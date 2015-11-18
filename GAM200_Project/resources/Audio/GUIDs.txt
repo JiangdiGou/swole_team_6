@@ -6,6 +6,21 @@
 {3a35166f-f310-4917-b0de-6836a690bedd} event:/Contra-Level_1
 {a6ab0567-7138-43d4-874d-643d79ba3142} event:/VictoryMusic
 {cf82092f-4046-4ae1-bfb2-76fc318855f2} event:/Blade_blitz_Sound
+{8e18ca69-399c-4ec8-970b-000d52e2d2d6} event:/DragonRoar1
+{569467c6-7301-46cc-9688-b2cfccf81cea} event:/drain_sound
+{a0d3b7fe-e60f-4182-b62c-381f0ec22def} event:/ElectricitySound
+{b0ac89c0-8d49-4b97-8a98-f16740ffdf7f} event:/energy_drain
+{873614a1-0875-4245-8dff-f99b2f9a9cca} event:/ExplosionSound
+{d4b103d4-1be0-4ee9-8872-f434ebecb128} event:/FastSwordSelectSound
+{2b61b151-3f2f-49b5-b994-8f60313cd4a0} event:/gong
+{b3d310d1-20e0-442b-9658-3d4a6ab91769} event:/HighlightSound
+{df88ad7b-05b2-4a8a-a7e8-854c229f03cf} event:/jump_noise
+{8ba41fd5-876a-4218-9250-9c7b8f310e9f} event:/laser_shot
+{0b7b5a02-2cd5-4097-9210-81438c85b54d} event:/level_up
+{2c72fe97-6805-4180-9902-73c6d1cef992} event:/ClickSound
+{fab7cd69-d41f-4c38-bfc6-03e3601bb3fc} event:/damage_sound1
+{d1260219-559e-4d03-962a-8c43a3cd95b8} event:/DeniedSound
+{fa14a04f-1e28-4765-80e2-74807e814114} event:/DestructiveSound
 {617280ad-cf09-497a-b338-29464d3e6cf5} bus:/
 {05600e41-7ad1-47fa-9fd4-c0f9582b5f38} bus:/Reverb
 {d065b8d3-3b94-4877-b3a7-1e83bed5665d} bank:/Master Bank
