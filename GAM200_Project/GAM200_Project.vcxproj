@@ -29,6 +29,7 @@
     <ClInclude Include="GAM200_Project\Core.h" />
     <ClInclude Include="GAM200_Project\Editor\editable.h" />
     <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h" />
+    <ClInclude Include="GAM200_Project\Editor\editorModule.h" />
     <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h" />
     <ClInclude Include="GAM200_Project\Editor\imGuiManager.h" />
     <ClInclude Include="GAM200_Project\Editor\imGUI\imconfig.h" />

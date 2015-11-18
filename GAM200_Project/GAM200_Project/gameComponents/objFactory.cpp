@@ -209,7 +209,9 @@ void objFactory::loadLevelFrom(std::string fileName)
   this->tileMap = tileMap;
   this->printLevel();
 
+#ifdef EDITOR
   GUIMGR->updateModules();
+#endif
 }
 
 void objFactory::createTiles()

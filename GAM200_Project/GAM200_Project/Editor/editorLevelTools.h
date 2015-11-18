@@ -12,21 +12,17 @@ enum EditorLevelState { IDLE, CREATINGLEVEL, LOADINGLEVEL, INLEVEL };
 #include <map>
 #include "../engineGraphics/textureAtlas.h"
 #include "../engineGraphics/graphicsManager.h"
+#include "editorModule.h"
 
-class EditorLevelTools
+//These could probably inherit from an editor module or something. eventually. 
+class EditorLevelTools : public EditorModule
 {
 public:
   EditorLevelTools();
-  void handleLevelTools();
+  void handle() override;
   void levelNameUpdate();
 
 private:
-  std::string message;
-  ImVec4 messageColor;
-  float messageDuration = 5.0f;
-  float messageStart;
-  bool messageActive = false;
-
   //Heavy lifting functions
   void generateTextureKey(std::string levelName);
   void createLevelFileFromArray(std::string levelName, int width, int height);
@@ -34,7 +30,6 @@ private:
 
   //Helpers 
   std::string appendKEY(const std::string input) const;
-  void setupMessage(std::string inputMessage, ImVec4 color);
   bool checkFilename(std::string filename, bool checkContentsAndKey = false);
   bool EditorLevelTools::checkLevelDimensions();
   

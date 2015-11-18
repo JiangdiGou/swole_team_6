@@ -291,6 +291,9 @@
     <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h">
       <Filter>Systems\Editor\imGUI</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorModule.h">
+      <Filter>Systems\Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">

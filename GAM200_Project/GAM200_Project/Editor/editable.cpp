@@ -15,12 +15,11 @@ void Editable::SendMessages(Message* message)
     MouseButton* mouseEvent = (MouseButton*)message;
 
     //If no focus, and left click, and moused over this tile, this is focus
-    if (GUIMGR->getFocus() == NULL
-      && mouseEvent->MouseButtonIndex == 0
+    if (mouseEvent->MouseButtonIndex == 0
       && mouseEvent->ButtonIsPressed
       && pReactive->mouseOver())
     {
-      GUIMGR->setFocus(parent);
+      GUIMGR->tilemapTools->changeTile(parent);
     }
   }
   }
@@ -32,10 +31,8 @@ void Editable::Update(float dt)
   if (ownerSprite)
   {
     //Highlighting for tile selection
-    if (pReactive->mouseOver() && GUIMGR->getFocus() == NULL)
+    if (pReactive->mouseOver())
       ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0f);
-    else if (GUIMGR->getFocus() == parent)
-      ownerSprite->color = glm::vec4(0.0, 1.0, 0.0, 1.0f);
     else
       ownerSprite->color = glm::vec4(1.0, 1.0, 1.0, 1.0);
   }

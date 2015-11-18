@@ -9,21 +9,22 @@
 #include <list>
 #include "../engineGraphics/textureAtlas.h"
 #include "../engineGraphics/graphicsManager.h"
+#include "editorModule.h"
 
-class EditorTilemapTools
+class EditorTilemapTools : public EditorModule
 {
 public:
   EditorTilemapTools();
-  void handleTilemapTools();
+  void handle() override;
+  void changeTile(GameObjectComposition* tile);
 
 private:
   std::string currentTexture;
   ImVec2 currentTopLeft;
   ImVec2 currentBotRight;
 
-
-  void AddToPreviousArray(const std::string textureName, ImVec2 topLeft, ImVec2 topRight);
-
+  //Currently doesn't work. Also this hsould be add to recent list or something 
+  void AddToPreviousArray(const std::string &textureName, ImVec2 topLeft, ImVec2 topRight);
   std::list<std::string> recentTextures;
   std::list<ImVec2> recentTopLefts;
   std::list<ImVec2> recentBotRights;
