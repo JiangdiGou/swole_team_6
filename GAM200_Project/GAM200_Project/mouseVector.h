@@ -43,7 +43,7 @@ public:
   void SerializeWrite(Serializer& str) override;
 
  private:
-  SoundEmitter * mouseSound;
+	 SoundEmitter  mouseSound = *new SoundEmitter();
   GameObjectComposition* parent;
 };
 
