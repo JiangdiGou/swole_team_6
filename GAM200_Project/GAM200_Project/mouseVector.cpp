@@ -34,7 +34,8 @@ void mouseVector::SendMessages(Message * message)
     {
       if (mouseEvent->ButtonIsPressed)
       {
-		  
+		  mouseSound.Initialize();
+		  mouseSound.PlayEvent("SwordSelectSound");
         mouseDown = true;
         mouseDownPos = mouseEvent->MousePosition;
 		//LoopAll(Vector2(mouseDownPos), Vector2(mouseUpPos));
