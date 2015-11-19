@@ -11,15 +11,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\ActionSystem\SampleCurve.h" />
     <ClInclude Include="GAM200_Project\AssertionError\AssertionError.h" />
     <ClInclude Include="GAM200_Project\Component.h" />
@@ -158,11 +176,21 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp" />
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\Client.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
