@@ -132,6 +132,7 @@ bool AtlasTexture::operator==(const AtlasTexture& rhs) const
   //then those might vary. So offset is fine and sufficent anyway.
   if (offsetX == rhs.offsetX && offsetY == rhs.offsetY)
     return true;
+  return false;
 }
 
 bool AtlasTexture::operator!=(const AtlasTexture& rhs) const

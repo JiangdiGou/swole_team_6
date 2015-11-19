@@ -136,7 +136,7 @@ int main()
 
   // compiles zilch
   zilch->Init();
-
+  ZilchTest1(zilch);
   ZilchTest3(zilch);
 
   getchar();

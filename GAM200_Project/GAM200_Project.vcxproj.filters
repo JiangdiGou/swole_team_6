@@ -67,6 +67,9 @@
     <Filter Include="Systems\Editor\imGUI">
       <UniqueIdentifier>{770c3488-775d-4f7f-ac94-db74327d6c70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BaseEngine\Zilch">
+      <UniqueIdentifier>{feaebab1-3786-4bce-a6ee-8816225cd853}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -285,11 +288,14 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\Serialization\Serialization.h" />
     <ClInclude Include="GAM200_Project\Serialization\TextSerialization.h" />
-    <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h">
-      <Filter>Systems\Editor</Filter>
+    <ClInclude Include="GAM200_Project\Zilch\Zilch.hpp">
+      <Filter>BaseEngine\Zilch</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h">
-      <Filter>Systems\Editor\imGUI</Filter>
+    <ClInclude Include="GAM200_Project\Zilch\BindInternal.hpp">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Zilch\ZilchInterface.hpp">
+      <Filter>BaseEngine\Zilch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -437,11 +443,14 @@
       <Filter>Systems\Editor</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\Serialization\TextSerialization.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\editorLevelTools.cpp">
-      <Filter>Systems\Editor</Filter>
+    <ClCompile Include="GAM200_Project\Zilch\Zilch.cpp">
+      <Filter>BaseEngine\Zilch</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\Editor\editorTilemapTools.cpp">
-      <Filter>Systems\Editor\imGUI</Filter>
+    <ClCompile Include="GAM200_Project\Zilch\BindInternal.cpp">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Zilch\ZilchInterface.cpp">
+      <Filter>BaseEngine\Zilch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

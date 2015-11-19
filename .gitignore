@@ -23,3 +23,12 @@ LevelEditor/*.autosave
 GAM200_Project/log.txt
 ZilchTesting/ZilchTesting.sdf
 JSONZilchSerialize/JSONZilchSerialize.sdf
+ZilchTesting/x64/Debug/ZilchTesting.tlog/link.write.1.tlog
+ZilchTesting/x64/Debug/Player.zilch
+ZilchTesting/x64/Debug/ZilchTesting.tlog/CL.read.1.tlog
+ZilchTesting/x64/Debug/ZilchTesting.tlog/CL.command.1.tlog
+ZilchTesting/x64/Debug/ZilchTesting.tlog/CL.write.1.tlog
+ZilchTesting/x64/Debug/ZilchTesting.tlog/ZilchTesting.lastbuildstate
+ZilchTesting/x64/Debug/ZilchTesting.tlog/link.command.1.tlog
+ZilchTesting/x64/Debug/ZilchTesting.tlog/link.read.1.tlog
+ZilchTesting/x64/Debug/vc140.idb

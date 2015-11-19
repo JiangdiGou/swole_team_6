@@ -26,8 +26,11 @@ main loop
 #include "glfwMessages.h"
 #include "initInfo.h"
 #include "Editor\imGuiManager.h"
+#include "Zilch\Zilch.hpp"
 
 initInfo * INITINFO;
+
+using namespace Zilch;
 //HDC deviceContext;
 //HGLRC renderingContext;
 
@@ -103,13 +106,13 @@ int main(void)
 	GRAPHICS->setWindow(window);
 
   //I think this is testing nolan's debug console type thing but
-  Vector3D dumbVector(1.2, 1.2, 1.2);
+  /*Vector3D dumbVector(1.2, 1.2, 1.2);
   CConsoleLoggerEx coloured_console;
   coloured_console.Create("Debug Console");
   coloured_console.printf("LOL C++.\n");
   coloured_console << 213213 << "\n";
   coloured_console << "candy" << "\n";
-  coloured_console << "la di da vector: " << dumbVector << "\n";
+  coloured_console << "la di da vector: " << dumbVector << "\n";*/
   engine->GameLoop();
   
   FACTORY->destroyAllObjects();

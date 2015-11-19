@@ -16,7 +16,6 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 //#include "Precompiled.h"
 #include "PhysicsManager.h"
 #include "Transform.h"
-
 //sample
 
 float DetermineRestitution(Body * a, Body * b)
@@ -89,8 +88,6 @@ void ShapeAAB::Initialize()
       body->BodyShape = this;
     }
   }
-  PrevCollidingObjects.clear();
-  CurCollidingObjects.clear();
   /*body = GetOwner()->has(Body);
   if (body == NULL)
     return;
@@ -99,43 +96,59 @@ void ShapeAAB::Initialize()
 
 void ShapeAAB::Update(float dt)
 {
+  /*
   int i, j;
   bool persist;
-  for (i = 0; i < CurCollidingObjects.size(); i++)
+
+  for (i = 0; i < startNext; i++)
+    startCollisions[i] = 0;
+  startNext = 0;
+  for (i = 0; i < endNext; i++)
+    endCollisions[i] = 0;
+  endNext = 0;
+  for (i = 0; i < persistNext; i++)
+    persistCollisions[i] = 0;
+  persistNext = 0;
+
+  for (i = 0; i <= curSize; i++)
   {
     persist = false;
-    for (j = 0; j < PrevCollidingObjects.size(); j++)
+    for (j = 0; j <= prevSize; j++)
     {
-      if (CurCollidingObjects.at(i) == PrevCollidingObjects.at(j))
+      if (CurCollidingObjects[i] == PrevCollidingObjects[j])
       {
         persist = true;
-        CollisionPersisted collision(CurCollidingObjects.at(i));
-        GetOwner()->SendMessages(&collision);
-        PrevCollidingObjects.erase(PrevCollidingObjects.begin() + j);
+        CollisionPersisted collision(CurCollidingObjects[i]);
+        persistCollisions[persistNext] = collision;
+        GetOwner()->SendMessages((Message *)&persistCollisions[persistNext]);
+        persistNext++;
+        PrevCollidingObjects[j] = 0;
       }
     }
     if (persist == false)
     {
-      std::cout << "start" << std::endl;
-      CollisionStarted collision(CurCollidingObjects.at(i));
-      GetOwner()->SendMessages(&collision);
+      CollisionStarted collision(CurCollidingObjects[i]);
+
+      startCollisions[startNext] = collision;
+      GetOwner()->SendMessages((Message *)&startCollisions[startNext]);
+      startNext++;
     }
   }
-  int prevsize = PrevCollidingObjects.size();
-  for (i = 0; i < prevsize; i++)
+  for (i = 0; i <= prevSize; i++)
   {
-    CollisionEnded collision(PrevCollidingObjects.at(i));
-    GetOwner()->SendMessages(&collision);
-    PrevCollidingObjects.erase(PrevCollidingObjects.begin());
+    if (PrevCollidingObjects[i] != 0) {
+      CollisionEnded collision(PrevCollidingObjects[i]);
+      endCollisions[endNext] = collision;
+      GetOwner()->SendMessages((Message *)&endCollisions[i]);
+      endNext++;
+      PrevCollidingObjects[i] = 0;
+    }
   }
-  PrevCollidingObjects.clear();
-  int cursize = CurCollidingObjects.size();
-  for (i = 0; i < cursize; i++)
+  for (i = 0; i <= curSize; i++)
   {
-    ShapeAAB* otherShape = CurCollidingObjects.at(i);
-    PrevCollidingObjects.push_back(otherShape);
-  }
-  CurCollidingObjects.clear();
+    PrevCollidingObjects[i] = CurCollidingObjects[i];
+  }*/
+ 
   return;
 }
 
@@ -161,7 +174,24 @@ void ShapeAAB::SendMessages(Message* m)
   case Mid::Collision:
   {
     Collision* CollisionEvent = (Collision*)m;
-    //CurCollidingObjects.push_back(CollisionEvent->otherObj);
+    ShapeAAB* otherObj = ((Collision*)m)->otherObj;
+    //CurCollidingObjects.push_back(otherObj);
+    break;
+  }
+  case Mid::CollisionStarted:
+  {
+    printf("start\n");
+    break;
+  }
+  case Mid::CollisionEnded:
+  {
+    printf("end\n");
+    break;
+  }
+  case Mid::CollisionPersisted:
+  {
+    printf("persist\n");
+    break;
   }
   }
 }

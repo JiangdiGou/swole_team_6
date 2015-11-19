@@ -56,7 +56,10 @@ void Physics::DetectContacts(float dt)
 {
 	BodyIterator bodyA = Bodies.begin();
 	BodyIterator lastBody = Bodies.last(); //end - 1
-
+  
+  for (int i = 0; i < nextCollisionIndex; i++)
+    AllCollisions[i] = 0;
+  nextCollisionIndex = 0;
 	//Broad phase should be added this is N^2
 	for (; bodyA != lastBody; ++bodyA)
 	{
@@ -69,14 +72,23 @@ void Physics::DetectContacts(float dt)
 			{
 				if (Collsion.GenerateContacts((bodyA)->BodyShape, (bodyA)->Position, (bodyB)->BodyShape, (bodyB)->Position, &Contacts))
 				{
+          
           ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
           ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
           Collision ACollisionWith(BShape);
           Collision BCollisionWith(AShape);
           if (!bodyA->IsStatic)
-            AShape->SendMessages(&ACollisionWith);
+          {
+            //AllCollisions[nextCollisionIndex] = ACollisionWith;
+            AShape->SendMessages(&AllCollisions[nextCollisionIndex]);
+            nextCollisionIndex++;
+          }
           if (!bodyB->IsStatic)
-            BShape->SendMessages(&BCollisionWith);
+          {
+            //AllCollisions[nextCollisionIndex] = BCollisionWith;
+            BShape->SendMessages((Message*)&BCollisionWith);
+            nextCollisionIndex++;
+          }
 				}
 			}
 		}

@@ -25,6 +25,8 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 
 ///Message sent when there is a Collsion between two
 ///Body Components.
+const static unsigned int MaxContacts = 1024;
+
 class MessageCollide : public Message
 {
 public:
@@ -36,6 +38,7 @@ public:
 class Collision : public Message
 {
 public:
+  Collision() : Message(Mid::Collision), otherObj(NULL) {};
   Collision(ShapeAAB* otherObj) : Message(Mid::Collision), otherObj(otherObj) {};
   ShapeAAB* otherObj;
 };
@@ -58,6 +61,8 @@ private:
 	bool DebugDrawingActive;
 	float TimeAccumulation;
 	CollsionDatabase Collsion;
+  Collision AllCollisions[MaxContacts];
+  int nextCollisionIndex = 0;
 	contactList Contacts;
 
 public:

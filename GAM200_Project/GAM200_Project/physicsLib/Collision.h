@@ -18,10 +18,10 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 //#include "Body.h"
 #include "math_utility.h"
 #include "../Composition.h"
-
+#include <vector>
 //sample
 class Body;
-
+const static int maxContacts = 1024;
 ///Data for a contact between two bodies.
 ///Used to resolve world collisions.
 struct ManifoldSet
@@ -88,6 +88,31 @@ public:
   void SerializeWrite(Serializer& str) override;
 };
 
+class ShapeAAB;
+
+class CollisionStarted : public Message
+{
+public:
+  CollisionStarted() : Message(Mid::CollisionStarted), otherObj(NULL) {};
+  CollisionStarted(ShapeAAB* otherObj) : Message(Mid::CollisionStarted), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
+};
+
+class CollisionPersisted : public Message
+{
+public:
+  CollisionPersisted() : Message(Mid::CollisionPersisted), otherObj(NULL) {};
+  CollisionPersisted(ShapeAAB* otherObj) : Message(Mid::CollisionPersisted), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
+};
+
+class CollisionEnded : public Message
+{
+public:
+  CollisionEnded() : Message(Mid::CollisionEnded), otherObj(NULL) {};
+  CollisionEnded(ShapeAAB* otherObj) : Message(Mid::CollisionEnded), otherObj(otherObj) {};
+  ShapeAAB* otherObj;
+};
 ///Axis Aligned Box Shape
 class ShapeAAB : public Shape
 {
@@ -100,30 +125,10 @@ public:
   void SendMessages(Message* m) override;
 	Vec2D Extents;
 	Vec2D origin = Vec2D(0.0f,0.0f);
+  std::vector<ShapeAAB*> CurCollidingObjects;
 	virtual void Draw();
 	virtual bool TestPoint(Vec2D);
-  std::vector<ShapeAAB*> PrevCollidingObjects;
-  std::vector<ShapeAAB*> CurCollidingObjects;
-};
-class CollisionStarted : public Message
-{
-public:
-  CollisionStarted(ShapeAAB* otherObj) : Message(Mid::CollisionStarted), otherObj(otherObj) {};
-  ShapeAAB* otherObj;
-};
-
-class CollisionPersisted : public Message
-{
-public:
-  CollisionPersisted(ShapeAAB* otherObj) : Message(Mid::CollisionPersisted), otherObj(otherObj) {};
-  ShapeAAB* otherObj;
-};
-
-class CollisionEnded : public Message
-{
-public:
-  CollisionEnded(ShapeAAB* otherObj) : Message(Mid::CollisionEnded), otherObj(otherObj) {};
-  ShapeAAB* otherObj;
+  typedef std::vector<ShapeAAB*>::iterator ObjIt;
 };
 
 class contactList;
