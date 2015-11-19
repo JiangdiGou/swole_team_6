@@ -118,6 +118,13 @@ void CoreEngine::GameLoop()
         transformPlayer->SetScale(Vector2(1.25, 1.25));
         player->AddComponent(CT_Transform, transformPlayer);
 
+#ifdef EDITOR
+        Reactive* playerReactive = new Reactive();
+        player->AddComponent(CT_Reactive, playerReactive);
+        Editable* editable = new Editable(false);
+        player->AddComponent(CT_Editable, editable);
+#endif
+
         Body * bodyPlayer = new Body();
         bodyPlayer->Mass = 3.0f;
         bodyPlayer->Restitution = 0.3f;
