@@ -2,9 +2,11 @@
 #include "ActionBase.h"
 #include <functional>
 
+class ActionBase;
+
 namespace ActionSystem
 {
-	class ActionCall : public Internal::ActionBase
+	class ActionCall : public ActionBase
 	{
 	public:
 		ActionCall(const std::function<void(void)>& function) : Function(function){};
