@@ -1,4 +1,5 @@
 #include "editorEntityTools.h"
+#include <typeinfo>
 
 const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Transform",
@@ -51,6 +52,8 @@ void EditorEntityTools::init()
 
 void EditorEntityTools::handle()
 {
+  //CORE
+  //Displays currently selected entity name
   if (focus)
     ImGui::Text(std::string("Current Entity: " + focus->GetName()).c_str());
   else
@@ -58,18 +61,38 @@ void EditorEntityTools::handle()
 
   handleMessage();
 
-  if (ImGui::Button("Create new Entity"))
-  {
-
-  }
-
+  //MAKE NEW ENTITY, CURRENTLY DOES NOTHING
+  ImGui::Button("Create Entity");
   ImGui::SameLine();
   ImGui::InputText("Name", newEntityName, 256);
-
+  
+  //COMPONENT LIST
   ImGui::Columns(2);
   ImGui::ListBox("", &currentItem, components, TOTALCOMPONENTS); 
+  
+  //TWEAKABLES
+  //Displays currently selected component name
   ImGui::NextColumn();
-  ImGui::Text("Tweakables will go here");
+  const char* curComponent = components[currentItem];
+  std::string curText = "Curr: ";
+  curText.append(curComponent);
+  ImGui::Text(curText.c_str());
+
+  //Checks if the focus has the component
+  if (focus)
+  {
+    GameComponent* component = getFocusComponent((ComponentTypeId)(currentItem + 1));
+
+    if (component != NULL)
+    {
+      ImGui::Text("Entity has component");
+    }
+    else
+    {
+      ImGui::Text("Entity doesn't have component");
+    }
+  }
+
   ImGui::Columns(1);
 
   ImGui::Button("Remove Component");
@@ -128,42 +151,45 @@ std::string EditorEntityTools::getComponentName(ComponentTypeId type)
   }
 }
 
-GameComponent* createComponentPointer(ComponentTypeId type)
+GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 {
   switch (type)
   {
   case CT_Transform:
-    return new Transform();
+    return focus->has(Transform);
 
   case CT_Camera:
-    return new Camera();
+    return focus->has(Camera);
 
   case CT_Sprite:
-    return new Sprite();
+    return focus->has(Sprite);
 
   case CT_SpriteText:
-    return new SpriteText("Default Text");
+    return focus->has(SpriteText);
 
   case CT_Body:
-    return new Body();
+    return focus->has(Body);
 
   case CT_TileMapCollision:
-    return new TileMapCollision();
+    return focus->has(TileMapCollision);
 
   case CT_ShapeAAB:
-    return new ShapeAAB();
+    return focus->has(ShapeAAB);
 
   case CT_ShapeLine:
-    return new ShapeLine();
+    return focus->has(ShapeLine);
 
   case CT_Reactive:
-    return new Reactive();
+    return focus->has(Reactive);
 
   case CT_SoundEmitter:
-    return new SoundEmitter();
+    return focus->has(SoundEmitter);
 
   case CT_Editable:
-    return new Editable();
+    return focus->has(Editable);
+
+  default:
+    return NULL;
 
 
     /*
@@ -176,4 +202,5 @@ GameComponent* createComponentPointer(ComponentTypeId type)
     return new mouseVector();
     */
   }
-}
+}   
+

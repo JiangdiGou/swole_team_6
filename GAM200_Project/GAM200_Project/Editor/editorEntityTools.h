@@ -32,15 +32,18 @@ public:
   GameObjectComposition* getFocus() { return focus; }
   void setFocus(GameObjectComposition* newFocus) { focus = newFocus; }
 
+
+
 private:
   GameObjectComposition* focus;
   char newEntityName[256];
 
   std::string EditorEntityTools::getComponentName(ComponentTypeId type);
+  GameComponent* getFocusComponent(ComponentTypeId type);
 
   static const const char* components[TOTALCOMPONENTS];
 
-  int currentItem = 0;
+  int currentItem = 1;
 
 };
 
