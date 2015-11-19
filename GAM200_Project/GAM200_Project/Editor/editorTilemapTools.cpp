@@ -8,9 +8,17 @@ EditorTilemapTools::EditorTilemapTools()
   recentBotRights.assign(3, ImVec2(0, 0));
 }
 
+void EditorTilemapTools::init()
+{
+  atlas = GRAPHICS->getSpriteAtlas();
+}
+
 void EditorTilemapTools::handle()
 {
-  TextureAtlas* atlas = GRAPHICS->getSpriteAtlas();
+  ImGui::Checkbox("Active", &active);
+
+  if (!active)
+    return;
 
   ImGui::Text("Curr: ");
   

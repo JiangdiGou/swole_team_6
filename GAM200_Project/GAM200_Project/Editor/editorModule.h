@@ -5,6 +5,7 @@ class EditorModule
 {
 public:
   virtual void handle() = 0;
+  virtual void init() = 0;
 
   std::string message = "";
   ImVec4 messageColor = ImVec4(1, 1, 1, 1);

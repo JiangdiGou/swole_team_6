@@ -20,6 +20,7 @@ class EditorLevelTools : public EditorModule
 public:
   EditorLevelTools();
   void handle() override;
+  void init() override;
   void levelNameUpdate();
 
 private:

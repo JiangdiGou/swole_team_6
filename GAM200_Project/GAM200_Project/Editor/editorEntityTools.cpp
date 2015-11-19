@@ -44,6 +44,11 @@ EditorEntityTools::EditorEntityTools()
   }*/
 }
 
+void EditorEntityTools::init()
+{
+
+}
+
 void EditorEntityTools::handle()
 {
   if (focus)

@@ -27,6 +27,7 @@ class EditorEntityTools : public EditorModule
 public:
   EditorEntityTools();
   void handle() override;
+  void init() override;
 
   GameObjectComposition* getFocus() { return focus; }
   void setFocus(GameObjectComposition* newFocus) { focus = newFocus; }

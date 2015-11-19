@@ -4,10 +4,15 @@ EditorLevelTools::EditorLevelTools()
 {
   levelDimensionInput[0] = 0;
   levelDimensionInput[1] = 0;
-  currentMessage = std::string(CORE->LevelName + '\t' +  "currLvl");
 
+  //Puts default text in the box
   std::string initialText = std::string("resources/Levels/");
   initialText.copy(levelPathInput, initialText.size());
+}
+
+void EditorLevelTools::init()
+{
+  currentMessage = std::string(CORE->LevelName + '\t' + "currLvl");
   fetchTextures();
 }
 

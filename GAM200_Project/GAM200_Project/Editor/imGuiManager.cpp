@@ -20,6 +20,12 @@ void ImGuiManager::Initialize()
   levelTools = new EditorLevelTools();
   tilemapTools = new EditorTilemapTools();
   entityTools = new EditorEntityTools();
+
+  //If i eventually have enough modules it might be worth it
+  //to do this in a loop. 
+  levelTools->init();
+  tilemapTools->init();
+  entityTools->init();
 }
 
 void ImGuiManager::Update(float dt)

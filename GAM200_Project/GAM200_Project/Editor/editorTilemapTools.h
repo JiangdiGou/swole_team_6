@@ -16,9 +16,16 @@ class EditorTilemapTools : public EditorModule
 public:
   EditorTilemapTools();
   void handle() override;
+  void init() override;
   void changeTile(GameObjectComposition* tile);
 
+  bool isActive() { return active; };
+
 private:
+  bool active = false;
+
+  TextureAtlas* atlas;
+
   std::string currentTexture;
   ImVec2 currentTopLeft;
   ImVec2 currentBotRight;
