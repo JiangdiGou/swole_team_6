@@ -43,6 +43,7 @@ public:
   void static drawAllSprites();
 
   bool flipSprite = false;
+  bool visible = true; 
 
 private:
   static GLuint vertexArray;

@@ -30,6 +30,8 @@ private:
   ImVec2 currentTopLeft;
   ImVec2 currentBotRight;
 
+  void emptyTilesVisible(bool visibility);
+
   //Currently doesn't work. Also this hsould be add to recent list or something 
   void AddToPreviousArray(const std::string &textureName, ImVec2 topLeft, ImVec2 topRight);
   std::list<std::string> recentTextures;

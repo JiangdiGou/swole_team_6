@@ -15,7 +15,13 @@ void EditorTilemapTools::init()
 
 void EditorTilemapTools::handle()
 {
-  ImGui::Checkbox("Active", &active);
+  if (ImGui::Checkbox("Active", &active))
+  {
+    if (active)
+      emptyTilesVisible(true);
+    else
+      emptyTilesVisible(false);
+  }
 
   if (!active)
     return;
@@ -140,8 +146,20 @@ void EditorTilemapTools::changeTile(GameObjectComposition* tile)
     tileBody->Initialize();
     boxCollider->Initialize();
     }*/
+  }
+}
 
+void EditorTilemapTools::emptyTilesVisible(bool visibility)
+{
+  for (std::map<int, GameObjectComposition*>::iterator it = FACTORY->gameObjs.begin();
+    it != FACTORY->gameObjs.end(); it++)
+  {
+    GameObjectComposition* goc = it->second;
+    Sprite* gocSprite = goc->has(Sprite);
 
-
+    if (!gocSprite)
+      continue;
+    else if (gocSprite->texture == atlas->textures["EmptyTile"])
+      gocSprite->visible = visibility;
   }
 }
