@@ -201,11 +201,12 @@ void PlayerState::SendMessages(Message * message)
 		case 'W':
 			//if (StateList::Grounded)
 			//{
-				if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 				{
 					playerSound->SetVolume(1.0f, "swipe_sound");
-					playerSound->PlayEvent("swipe_sound");
 					playerSound->StopEvent("swipe_sound");
+					playerSound->PlayEvent("swipe_sound");
+					
 			
 					// we can do anything here also sounds
 
@@ -225,11 +226,11 @@ void PlayerState::SendMessages(Message * message)
 					playerSound->SetPause(true, "swipe_sound");
 					
 				}
-				else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
-				{
+				//else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
+				//{
 					// do nothing
 					
-				}
+				//}
 			//}
       break;
 		case 'S':
@@ -247,7 +248,7 @@ void PlayerState::SendMessages(Message * message)
 			}
 			//}
 
-			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
+			if (CharacterMessage->keyStatus == KEY_PRESSED)
 			{
 				
 				//playerSound->StopEvent("player_footsteps");
@@ -317,7 +318,15 @@ void PlayerState::SendMessages(Message * message)
 			//}
 
 			// change sprite and flip sprite if necessary
-			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
+			/*
+				// This will start the sound loop.
+				if (CharacterMessage->KeyStatus == Key_Pressed)
+					playerSound->PlayEvent("swipe_sound");
+				if (CharacterMessage->KeyStatus == KEY_RELEASED)
+					playerSound->StopEvent("swipe_sound");
+			*/
+			//if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
+			if (CharacterMessage->keyStatus == KEY_PRESSED)
 			{
 				playerSound->SetVolume(1.0f, "swipe_sound");
 				playerSound->StopEvent("swipe_sound");
