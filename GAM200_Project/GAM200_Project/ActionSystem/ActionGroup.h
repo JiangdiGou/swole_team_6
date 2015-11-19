@@ -4,7 +4,7 @@
 
 namespace ActionSystem
 {
-	class ActionGroup : public Internal::ActionBase
+	class ActionGroup : public ActionBase
 	{
 	public:
 		ActionGroup(bool looping = false) :

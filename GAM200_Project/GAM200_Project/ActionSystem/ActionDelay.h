@@ -4,7 +4,7 @@
 
 namespace ActionSystem
 {
-	class ActionDelay : public Internal::ActionBase
+	class ActionDelay : public ActionBase
 	{
 
 	public:

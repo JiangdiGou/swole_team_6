@@ -1,12 +1,10 @@
 #pragma once
 
-#include "../Engine.h"
-
+//#include "../Engine.h"
+#include "ActionMath.h"
 namespace ActionSystem
 {
-	namespace Internal
-	{
-		class ActionBase : public ISystem
+		class ActionBase //: public ISystem
 		{
 		public:
 			void Pause() { Paused = true; }
@@ -16,7 +14,7 @@ namespace ActionSystem
 
 			virtual void ActionUpdate(const long double& dt) = 0;
 
-			//virtual void Update(float dt) override;//comment this out
+			virtual void Update(float dt) = 0;//comment this out
 
 			virtual void Restart() { Completed = false; }
 
@@ -27,7 +25,6 @@ namespace ActionSystem
 			bool Paused = false;
 			bool Completed = false;
 
-			ActionBase(){};
+			ActionBase(){}; 
 		};
-	}// namespace Internal
 }// namespace Action System
