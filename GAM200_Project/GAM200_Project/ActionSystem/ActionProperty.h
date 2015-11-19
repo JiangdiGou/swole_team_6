@@ -6,10 +6,10 @@
 namespace ActionSystem
 {
 	template <typename T>
-	class ActionProperty : public Internal::ActionBase
+	class ActionProperty : public ActionBase
 	{
 	public:
-		ActionProperty(T* startVal, const T7 endVal, const long double& duration, const Ease&.ease) :
+		ActionProperty(T* startVal, const T& endVal, const long double& duration, const Ease& ease) :
 			StartVal(*startVal), EndVal(envVal), CurrentVal(startVal), EndTime(duration),
 			EasingCurve(ease)
 		{
