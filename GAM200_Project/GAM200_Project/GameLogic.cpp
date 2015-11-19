@@ -54,6 +54,13 @@ void GameLogic::Initialize()
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
   boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
   bodyPlayer->BodyShape = boxColliderPlayer;
+
+#ifdef EDITOR
+  Reactive* playerReactive = new Reactive();
+  player->AddComponent(CT_Reactive, playerReactive);
+  Editable* editable = new Editable(false);
+  player->AddComponent(CT_Editable, editable);
+#endif
  
 
 

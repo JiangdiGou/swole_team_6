@@ -22,7 +22,7 @@ main loop
 #include "runLua/luaTranslate.h"
 #include "runLua/luaRunner.h"
 #include "Utilities.h"
-#include "ActionSystem\ActionSequence.h"
+//#include "ActionSystem\ActionSequence.h"
 #include "glfwMessages.h"
 #include "initInfo.h"
 #include "Editor\imGuiManager.h"
@@ -42,6 +42,7 @@ int main(void)
   //coloured_console.cprintf(CConsoleLoggerEx::COLOR_RED | CConsoleLoggerEx::COLOR_BACKGROUND_BLACK, "Another console");
   //coloured_console.printf("Rip C++ piping.");
   //Opens a console for debugging and testing 
+  /*
   if (INITINFO->showConsole)
   {
 	  AllocConsole();
@@ -49,7 +50,7 @@ int main(void)
 	  freopen("CONIN$", "r", stdin);
 	  freopen("CONOUT$", "w", stdout);
 	  freopen("CONOUT$", "w", stderr);
-  }
+  }*/
 
   //Init GLFW
 	glfwInit();
@@ -96,7 +97,7 @@ int main(void)
   const Shader &basicShader = *pBasicShader;
   engine->AddSystem(new GraphicsManager(basicShader));
   engine->AddSystem(new GameLogic());
-  engine->AddSystem(new ActionSystem::ActionSequence());
+  //engine->AddSystem(new ActionSystem::ActionSequence());
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
 

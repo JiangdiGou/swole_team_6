@@ -155,11 +155,12 @@ bool SoundManager::StopSound(std::string name)
 		FMOD_STUDIO_PLAYBACK_STATE rock;
 		m_LoopSounds[name]->getPlaybackState(&rock);
 
-		m_LoopSounds[name]->release();
-		m_LoopSounds[name]->setPaused(true);
+		m_LoopSounds[name]->setPaused(true); // Don't neet to pause before stopping.
 		m_LoopSounds[name]->stop(FMOD_STUDIO_STOP_IMMEDIATE);
 
 		m_LoopSounds[name]->getPlaybackState(&rock);
+
+		m_LoopSounds[name]->release();
 	}
 
 

@@ -76,38 +76,38 @@ class PlayerState : public GameComponent//, public CollisionDelegate
     private:
 		SoundManager * Sysptr;
 		SoundEmitter* playerSound;
-        Vector3 PreviousPlatformPosition;
-        GameObjectComposition* Platform;
-        Body *playerBody;
-		    TileMapCollision* playerTileCollision;
+    Vector3 PreviousPlatformPosition;
+    GameObjectComposition* Platform;
+    Body *playerBody;
+		TileMapCollision* playerTileCollision;
         
-        GameObjectComposition* parent;
+    GameObjectComposition* parent;
 
-        StateList MyPlayerState;
+    StateList MyPlayerState;
 
-        Sprite* playerSprite;
-        AtlasTexture* idleAnimation;
-        AtlasTexture* runAnimation;
+    Sprite* playerSprite;
+    AtlasTexture* idleAnimation;
+    AtlasTexture* runAnimation;
 
-        Transform* playerTransform;
+    Transform* playerTransform;
 
 		
 
-        bool variableJumpHeightEnabled = true;
-        unsigned jumpCount;
-        float JumpTimer;
-        float variableJumpTime = 8.0f;
-        float variableJumpPower = 48.0f;
-		    float maxDownwardsVelocity = 40.0f;//40.0f;
-		    float maxUpwardsVelocity = 4.0f;//20.0f;
-        bool jumpButtonReleased; //if the jump button has been released, after jumping, before hitting the ground
+    bool variableJumpHeightEnabled = true;
+    unsigned jumpCount;
+    float JumpTimer;
+    float variableJumpTime = 8.0f;
+    float variableJumpPower = 48.0f;
+		float maxDownwardsVelocity = 40.0f;//40.0f;
+		float maxUpwardsVelocity = 4.0f;//20.0f;
+    bool jumpButtonReleased; //if the jump button has been released, after jumping, before hitting the ground
 
-        float LastframeDT;
-        bool IsAlive;
-        float DeathCount;
-        float timeToJumpAfterLeftGround = 0.2f;
-        void OnCollision(GameObjectComposition*);
-		    //TileMapCollision *playerTileCollision;
+    float LastframeDT;
+    bool IsAlive;
+    float DeathCount;
+    float timeToJumpAfterLeftGround = 0.2f;
+    void OnCollision(GameObjectComposition*);
+		//TileMapCollision *playerTileCollision;
 
 
 

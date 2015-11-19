@@ -13,25 +13,21 @@ enum ComponentTypeId
 	CT_SpriteText,
 	//Physics
 	CT_Body,
-	CT_AABB,
-	CT_Circle,
-	//Max
-	CT_CircleCollider,
-	CT_BoxCollider,
+  //Max
 	CT_TileMapCollision,
-	CT_PlayerState,
-	CT_MOVEPLATFORM,
-	CT_DESTROY,
-	CT_SPAWNBLOCK,
-	CT_PLAYERDEATH,
 	CT_ShapeAAB,
 	CT_ShapeLine,
-	CT_MouseVector,
+
 	CT_Reactive,
-	CT_MaxComponents,
-	CT_Sound,
 	CT_SoundEmitter,
-  CT_Editable
-	
+
+  //INSERT NEW COMPONENTS HERE TILL I FIGURE OUT THE MOUSEVECTOR AND PLAYERSTATE BUG
+
+  CT_Editable,
+  CT_MouseVector,
+  CT_PlayerState
+//Hey I noticed you're adding a component type. Can you please add it to editorEntityTools.cpp's
+//Get componennt name and createComponentPointer, which are just hard coded switches
 };
+
 #endif

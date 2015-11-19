@@ -1,8 +1,6 @@
 #ifndef IMGUIMANAGER_H
 #define IMGUIMANAGER_H
 
-
-
 #define EDITOR
 
 #include <vector>
@@ -11,12 +9,16 @@
 #include "../engineGraphics/Graphics.h"
 #include "editorLevelTools.h"
 #include "editorTilemapTools.h"
+#include "editorEntityTools.h"
 
 class EditorLevelTools;
 class EditorTilemapTools;
+class EditorEntityTools;
 
 class ImGuiManager : public ISystem
 {
+  friend class Editable;
+
 public:
   ImGuiManager(GLFWwindow* window);
   ~ImGuiManager();
@@ -28,22 +30,14 @@ public:
 
   void updateModules();
 
-  void setFocus(GameObjectComposition* newFocus);
-  GameObjectComposition* getFocus() { return focus; }
-
 private:
   GLFWwindow* pWindow;
-  //Useful
-  std::string tempMessage = "";
 
-  GameObjectComposition* focus = nullptr;
   EditorLevelTools* levelTools = nullptr;
   EditorTilemapTools* tilemapTools = nullptr;
+  EditorEntityTools* entityTools = nullptr;
 
-  char desiredTextureName[256];
 
-
-  void changeTile(std::string newTexture);
 };
 
 extern ImGuiManager *GUIMGR;

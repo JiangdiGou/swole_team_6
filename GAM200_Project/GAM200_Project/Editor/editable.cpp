@@ -1,5 +1,10 @@
 #include "editable.h"
 
+Editable::Editable(bool isTile)
+{
+  this->isTile = isTile;
+}
+
 void Editable::Initialize()
 {
   parent = GetOwner();
@@ -14,13 +19,15 @@ void Editable::SendMessages(Message* message)
   {
     MouseButton* mouseEvent = (MouseButton*)message;
 
-    //If no focus, and left click, and moused over this tile, this is focus
-    if (GUIMGR->getFocus() == NULL
-      && mouseEvent->MouseButtonIndex == 0
+    //If you left clicked this object
+    if (mouseEvent->MouseButtonIndex == 0
       && mouseEvent->ButtonIsPressed
       && pReactive->mouseOver())
     {
-      GUIMGR->setFocus(parent);
+      if (isTile && GUIMGR->tilemapTools->isActive())
+        GUIMGR->tilemapTools->changeTile(parent);
+      else if (!isTile)
+        GUIMGR->entityTools->setFocus(parent);
     }
   }
   }
@@ -32,9 +39,14 @@ void Editable::Update(float dt)
   if (ownerSprite)
   {
     //Highlighting for tile selection
-    if (pReactive->mouseOver() && GUIMGR->getFocus() == NULL)
-      ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0f);
-    else if (GUIMGR->getFocus() == parent)
+    if (pReactive->mouseOver())
+    {
+      if (!isTile)
+       ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0f);
+      else if (GUIMGR->tilemapTools->isActive())
+        ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0f);
+    }
+    else if (!isTile && GUIMGR->entityTools->getFocus() == parent)
       ownerSprite->color = glm::vec4(0.0, 1.0, 0.0, 1.0f);
     else
       ownerSprite->color = glm::vec4(1.0, 1.0, 1.0, 1.0);

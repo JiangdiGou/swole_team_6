@@ -1,5 +1,5 @@
-#ifndef MATH_UTILITY_H
-#define MATH_UTILITY_H
+#ifndef ACTION_MATH_UTILITY_H
+#define ACTION_MATH_UTILITY_H
 #include <math.h>
 #include <algorithm>
 

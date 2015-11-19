@@ -79,6 +79,9 @@ void Sprite::SerializeWrite(Serializer& str)
 //**********************
 void Sprite::Update(float dt)
 {
+  if (!visible)
+    return;
+
   glm::vec4 transformedPosition, initialPosition;
   glm::vec3 scale;
 

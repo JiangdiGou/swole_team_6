@@ -4,35 +4,21 @@ EditorLevelTools::EditorLevelTools()
 {
   levelDimensionInput[0] = 0;
   levelDimensionInput[1] = 0;
-  currentMessage = std::string(CORE->LevelName + '\t' +  "currLvl");
 
+  //Puts default text in the box
   std::string initialText = std::string("resources/Levels/");
   initialText.copy(levelPathInput, initialText.size());
+}
+
+void EditorLevelTools::init()
+{
+  currentMessage = std::string(CORE->LevelName + '\t' + "currLvl");
   fetchTextures();
 }
 
-void EditorLevelTools::handleLevelTools()
+void EditorLevelTools::handle()
 {
-  //Displays message if there is one, otherwise blank space 
-  if (messageActive)
-  {
-    if (ImGui::GetTime() - messageStart >= messageDuration)
-    {
-      messageActive = false;
-      ImGui::Text(" ");
-      ImGui::Separator();
-    }
-    else
-    {
-      ImGui::TextColored(messageColor, message.c_str());
-      ImGui::Separator();
-    }
-  }
-  else
-  {
-    ImGui::Text(" ");
-    ImGui::Separator();
-  }
+  handleMessage();
 
   //Button to create a new empty level 
   if (ImGui::Button("Create myLvl"))
@@ -218,14 +204,6 @@ std::string EditorLevelTools::appendKEY(const std::string input) const
   std::string substring(input.begin(), input.end() - 4);
   substring.append("-KEY.txt");
   return substring;
-}
-
-void EditorLevelTools::setupMessage(std::string inputMessage, ImVec4 color)
-{
-  message = inputMessage;
-  messageColor = color;
-  messageActive = true;
-  messageStart = ImGui::GetTime();
 }
 
 bool EditorLevelTools::checkFilename(std::string filename, bool checkContentsAndKey)

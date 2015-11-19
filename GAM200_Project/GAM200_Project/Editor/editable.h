@@ -10,11 +10,13 @@
 class Editable : public GameComponent
 {
 public:
+  Editable(bool isTile = true);
   void Initialize() override;
   void Update(float dt) override;
   void SendMessages(Message* message) override;
 
 private:
+  bool isTile;
   Reactive* pReactive = 0;
   GameObjectComposition* parent = 0;
 };

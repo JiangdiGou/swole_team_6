@@ -3,15 +3,28 @@
 EditorTilemapTools::EditorTilemapTools()
 {
   currentTexture = " ";
-  recentTextures = std::list<std::string>();
-  recentTopLefts = std::list<ImVec2>();
-  recentBotRights = std::list<ImVec2>(); 
-
+  recentTextures.assign(3, "");
+  recentTopLefts.assign(3, ImVec2(0, 0));
+  recentBotRights.assign(3, ImVec2(0, 0));
 }
 
-void EditorTilemapTools::handleTilemapTools()
+void EditorTilemapTools::init()
 {
-  TextureAtlas* atlas = GRAPHICS->getSpriteAtlas();
+  atlas = GRAPHICS->getSpriteAtlas();
+}
+
+void EditorTilemapTools::handle()
+{
+  if (ImGui::Checkbox("Active", &active))
+  {
+    if (active)
+      emptyTilesVisible(true);
+    else
+      emptyTilesVisible(false);
+  }
+
+  if (!active)
+    return;
 
   ImGui::Text("Curr: ");
   
@@ -25,16 +38,16 @@ void EditorTilemapTools::handleTilemapTools()
   ImGui::SameLine();
   ImGui::Text("Recent: ");
 
-  
+  handleMessage();
+
+  /*
   for (std::list<ImVec2>::iterator tIt = recentTopLefts.begin(), bIt = recentBotRights.begin();
     tIt != recentTopLefts.begin() || bIt != recentBotRights.begin(); ++tIt, ++bIt)
   {
     ImGui::SameLine();
     ImGui::ImageButton((ImTextureID)atlas->ID, ImVec2(64, 64), *tIt, *bIt);
   }
- 
-
-  ImGui::Separator();
+  */
 
   for (std::vector<std::string>::iterator it = FACTORY->textureKey.begin();
     it != FACTORY->textureKey.end(); ++it)
@@ -50,122 +63,103 @@ void EditorTilemapTools::handleTilemapTools()
     ImVec2 topLeft = ImVec2(texture.getLeftX(), texture.getTopY());
     ImVec2 botRight = ImVec2(texture.getRightX(), texture.getBottomY());
 
-
     ImGui::PushID(index);
-    //Displays image button
+    //Displays image buttons of textures
     if (ImGui::ImageButton((ImTextureID)atlas->ID, ImVec2(64, 64), topLeft, botRight))
     {
-      if (recentTextures.size() > 0)
-        AddToPreviousArray(currentTexture, currentTopLeft, currentBotRight);
-
       currentTexture = *it;
       currentTopLeft = topLeft;
       currentBotRight = botRight;
 
-      if (recentTextures.size() == 0)
-        AddToPreviousArray(currentTexture, currentTopLeft, currentBotRight);
+      //AddToPreviousArray(currentTexture, currentTopLeft, currentBotRight);
+
     }
     ImGui::PopID();
   }
 }
-/*
-void EditorTilemapTools::AddToPreviousArray(const std::string& textureName, ImVec2 topLeft, ImVec2 botRight)
+
+void EditorTilemapTools::AddToPreviousArray(const std::string &textureName, ImVec2 topLeft, ImVec2 botRight)
 {
-  if (prev3Textures[0].size() < 2)
-  {
-    prev3Textures[0] = textureName;
-    prev3TopLeft[0] = topLeft;
-    prev3BotRight[0] = botRight;
-  }
-  else if (prev3Textures[1].size() < 2)
-  {
-    prev3Textures[1] = textureName;
-    prev3TopLeft[1] = topLeft;
-    prev3BotRight[1] = botRight;
-  }
-  else if (prev3Textures[2].size() < 2)
-  {
-    prev3Textures[2] = textureName;
-    prev3TopLeft[2] = topLeft;
-    prev3BotRight[2] = botRight;
-  }
-  else
-  {
-    //Shift everything over
-    prev3Textures[2] = prev3Textures[1];
-    prev3TopLeft[2] = prev3TopLeft[1];
-    prev3BotRight[2] = prev3BotRight[1];
+  //List is guarunteed to have 3 cause this is only thing that modifies list
+  //This does -1 +1, which net 0, and list init to 3.
+  recentTextures.pop_back();
+  recentTopLefts.pop_back();
+  recentBotRights.pop_back();
 
-    prev3Textures[1] = prev3Textures[0];
-    prev3TopLeft[1] = prev3TopLeft[0];
-    prev3BotRight[1] = prev3BotRight[0];
-
-    prev3Textures[0] = textureName;
-    prev3TopLeft[0] = topLeft;
-    prev3BotRight[0] = botRight;
-  }
-}*/
-
-/*
-void EditorTilemapTools::AddToPreviousArray(const std::string& textureName, ImVec2 topLeft, ImVec2 botRight)
-{
-  if (prev3Textures.size() == 0)
-  {
-    prev3Textures.push_back(textureName);
-    prev3TopLeft.push_back(topLeft);
-    prev3BotRight.push_back(botRight);
-  }
-  else if (prev3Textures.size() == 1)
-  {
-    //Moves stuff from 0 to 1
-    prev3Textures.push_back(prev3Textures[0]);
-    prev3TopLeft.push_back(prev3TopLeft[0]);
-    prev3BotRight.push_back(prev3BotRight[0]);
-
-    //Sets stuff in 0 to recent stuff
-    prev3Textures[0] = textureName;
-    prev3TopLeft[0] = topLeft; 
-    prev3BotRight[0] = botRight;
-  }
-  else if (prev3Textures.size() >= 2)
-  {
-    //moves stuff from 1 to 2 
-    prev3Textures[2] = prev3Textures[1];
-    prev3TopLeft[2] = prev3TopLeft[1];
-    prev3BotRight[2] = prev3BotRight[1];
-
-    //Moves stuff from 0 to 1
-    prev3Textures[1] = prev3Textures[0];
-    prev3TopLeft[1] = prev3TopLeft[0];
-    prev3BotRight[1] = prev3BotRight[0];
-
-    //Sets stuff in 0 to recent stuff 
-    prev3Textures[0] = textureName;
-    prev3TopLeft[0] = topLeft;
-    prev3BotRight[0] = botRight;
-  }
-
+  recentTextures.push_front(textureName);
+  recentTopLefts.push_front(topLeft);
+  recentBotRights.push_front(botRight);
 }
-*/
 
-void EditorTilemapTools::AddToPreviousArray(const std::string textureName, ImVec2 topLeft, ImVec2 botRight)
+
+void EditorTilemapTools::changeTile(GameObjectComposition* tile)
 {
-  if (recentTextures.size() < 3)
+  if (!(currentTexture.size() > 2))
   {
-    recentTextures.push_front(textureName);
-    recentTopLefts.push_front(topLeft);
-    recentBotRights.push_front(botRight);
+    setupMessage("No tile selected or error in selection.", ImVec4(1, 0, 0, 1));
+    return;
   }
-  else
+
+  //You will change the number in the file here, but not till digit thing fixed.
+  Sprite* tSprite = (Sprite*)(tile->GetComponent(CT_Sprite));
+  if (tSprite)
   {
+    bool wasEmpty;
+    if (tSprite->texture == GRAPHICS->getSpriteAtlas()->textures["emptyTile"])
+      wasEmpty = true;
+    else
+      wasEmpty = false;
 
-    recentTextures.pop_back();
-    recentTopLefts.pop_back();
-    recentBotRights.pop_back();
+    TextureAtlas* pAtlas = GRAPHICS->getSpriteAtlas();
+    tSprite->texture = pAtlas->textures[currentTexture];
 
-    recentTextures.push_front(textureName);
-    recentTopLefts.push_front(topLeft);
-    recentBotRights.push_front(botRight);
+    int index = 0;
 
+    //Find the index of texture in texture key. texture key might need to be improved. mess right now.
+    for (std::vector<std::string>::iterator it = FACTORY->textureKey.begin();
+      it != FACTORY->textureKey.end(); ++it)
+    {
+      index = it - FACTORY->textureKey.begin();
+      if (*it == currentTexture)
+        break;
+    }
+
+    Transform* pTransform = tile->has(Transform);
+    FACTORY->tileMap[(int)pTransform->GetPositionY()][(int)pTransform->GetPositionX()] = index;
+
+    //I wanted to have it so that if you make it a tile it has collision
+    //but something about how im doing it below is wrong. 
+
+    /*
+    if (currentTexture != "emptyTile" && wasEmpty)
+    {
+    Body * tileBody = new Body();
+    tileBody->Mass = 0;
+    tileBody->Restitution = 0.3f;
+    tileBody->Friction = 0.0f;
+    ShapeAAB * boxCollider = new ShapeAAB();
+    boxCollider->Extents = Vec2D(.5, .5);
+    tileBody->BodyShape = boxCollider;
+    tile->AddComponent(CT_Body, tileBody);
+    tile->AddComponent(CT_ShapeAAB, boxCollider);
+
+    tileBody->Initialize();
+    boxCollider->Initialize();
+    }*/
+  }
+}
+
+void EditorTilemapTools::emptyTilesVisible(bool visibility)
+{
+  for (std::map<int, GameObjectComposition*>::iterator it = FACTORY->gameObjs.begin();
+    it != FACTORY->gameObjs.end(); it++)
+  {
+    GameObjectComposition* goc = it->second;
+    Sprite* gocSprite = goc->has(Sprite);
+
+    if (!gocSprite)
+      continue;
+    else if (gocSprite->texture == atlas->textures["EmptyTile"])
+      gocSprite->visible = visibility;
   }
 }

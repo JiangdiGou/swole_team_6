@@ -4,7 +4,7 @@
 
 namespace ActionSystem
 {
-	class ActionSequence : public Internal::ActionBase
+	class ActionSequence : public ActionBase
 	{
 	public:
 		ActionSequence(bool looping = false) :

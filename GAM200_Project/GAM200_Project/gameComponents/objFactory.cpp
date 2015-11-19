@@ -209,7 +209,9 @@ void objFactory::loadLevelFrom(std::string fileName)
   this->tileMap = tileMap;
   this->printLevel();
 
+#ifdef EDITOR
   GUIMGR->updateModules();
+#endif
 }
 
 void objFactory::createTiles()
@@ -223,7 +225,11 @@ void objFactory::createTiles()
       int value = (tileMap[i][j]);
 #ifdef EDITOR
       if (value == 0)
-        createTile(j, i, textureKey[value]);
+      {
+        GOC* emptyTile = createTile(j, i, textureKey[value]);
+        Sprite* emptyTileSprite = emptyTile->has(Sprite);
+        emptyTileSprite->visible = false;
+      }
 #endif
 
       if (value > 0)
