@@ -1,3 +1,6 @@
+#ifndef GAMELEVEL_H
+#define GAMELEVEL_H
+
 /******************************************************************************/
 /*!
  \file   gameLevel.h
@@ -36,3 +39,5 @@ public:
   void insertCol(int x, int count);
   void insertRow(int y, int count);
 };
+
+#endif

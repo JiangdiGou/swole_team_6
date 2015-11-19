@@ -1,5 +1,10 @@
 #include "editable.h"
 
+Editable::Editable(bool isTile)
+{
+  this->isTile = isTile;
+}
+
 void Editable::Initialize()
 {
   parent = GetOwner();
