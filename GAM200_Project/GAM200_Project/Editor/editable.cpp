@@ -26,7 +26,7 @@ void Editable::SendMessages(Message* message)
     {
       if (isTile && GUIMGR->tilemapTools->isActive())
         GUIMGR->tilemapTools->changeTile(parent);
-      else
+      else if (!isTile)
         GUIMGR->entityTools->setFocus(parent);
     }
   }
