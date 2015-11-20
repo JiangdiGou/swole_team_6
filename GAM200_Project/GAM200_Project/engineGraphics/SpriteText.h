@@ -25,6 +25,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 class SpriteText : public GameComponent
 {
 public:
+  SpriteText();
   SpriteText(std::string initialMessage);
 
   void Update(float dt) override;

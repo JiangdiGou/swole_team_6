@@ -122,6 +122,11 @@ void SpriteText::drawAllText()
   texCoords.clear();
 }
 
+SpriteText::SpriteText()
+{
+  message = "Default Text";
+}
+
 SpriteText::SpriteText(std::string initialMessage)
 {
   message = initialMessage;
@@ -140,7 +145,8 @@ void SpriteText::Update(float dt)
   glUseProgram(shaderID);
 
   //saves initial translation since its gonna be moved over each time for diffferent letters
-  Transform *transformComponent = GetOwner()->has(Transform)
+  GOC* pOwner = GetOwner();
+  Transform *transformComponent = GetOwner()->has(Transform);
 
   initialTranslation = glm::vec3(
     transformComponent->GetPosition().x,

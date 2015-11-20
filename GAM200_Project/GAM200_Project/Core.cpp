@@ -154,9 +154,6 @@ void CoreEngine::GameLoop()
 
         LOGIC->player = player;
 
-
-        //This move is so that the bottom left corner is 0,0
-
         GRAPHICS->setMainCamera(mainCamera);
         FACTORY->initializeObjects();
         //LOGIC->Initialize();

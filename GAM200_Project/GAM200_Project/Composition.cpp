@@ -41,13 +41,15 @@ void GameObjectComposition::Initialize()
 	//component to initialize itself separate from its constructor.
 	//Which is need for serialization and to allow components to get
 	//pointers to each other during initialization.
+
+  /*
 	if (ObjectName == "player")
 	{
 		ActionSequence& Seq = Action::Sequence(Actions);
 		Vector3& pos = ((Transform*)GetComponent(ComponentTypeId::CT_Transform))->GetPosition();
 		Action::Property(Seq, &pos, Vector3(Vector3(0, 0, 0)), 5, Ease::QuadInOut);
 	}
-	
+	*/
 
 	for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
 	{

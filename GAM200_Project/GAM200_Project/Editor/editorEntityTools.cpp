@@ -74,9 +74,6 @@ void EditorEntityTools::handle()
   //Displays currently selected component name
   ImGui::NextColumn();
   const char* curComponent = components[currentItem];
-  std::string curText = "Curr: ";
-  curText.append(curComponent);
-  ImGui::Text(curText.c_str());
 
   //Checks if the focus has the component
   if (focus)
@@ -85,23 +82,27 @@ void EditorEntityTools::handle()
 
     if (component != NULL)
     {
+      ImGui::TextColored(ImVec4(0, 1, 0, 1), curComponent);
+
       ImGui::SameLine();
-      if (ImGui::Button("Rmv Comp"))
+      if (ImGui::Button("Rmv"))
       {
+        setupMessage("Remove not yet implemented", ImVec4(1, 0, 0, 1));
       }
       showTweakables((ComponentTypeId)(currentItem + 1));
     }
     else
     {
+      ImGui::TextColored(ImVec4(1, 0, 0, 1), curComponent);
+
       ImGui::SameLine();
-      if(ImGui::Button("Add Comp"))
+      if(ImGui::Button("Add"))
       {
         GameComponent* component = getNewComponent((ComponentTypeId(currentItem + 1)));
-        focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
-        component->Initialize();
-      }
 
-      ImGui::TextColored(ImVec4(1, 0, 0, 1), "Do not add component will crash game probs");
+        focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
+        focus->Initialize();
+      }
     }
   }
 
