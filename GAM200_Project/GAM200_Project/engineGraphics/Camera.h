@@ -12,7 +12,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #define CAMERA_H
 
 #include "Shader.h"
-#include "../GameLogic.h"
+#include "../GameLogic/GameLogic.h"
 #include "../Composition.h"
 #include "../physicsLib/Transform.h"
 #include "../initInfo.h" //W and H

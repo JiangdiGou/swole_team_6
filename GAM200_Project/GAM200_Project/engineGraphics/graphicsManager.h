@@ -27,7 +27,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "textureAtlas.h"
 #include "../logger/logger.h"
 #include "Camera.h"
-#include "../GameLogic.h"
+#include "../GameLogic/GameLogic.h"
 #include "../initInfo.h"
 
 class GraphicsManager : public ISystem
