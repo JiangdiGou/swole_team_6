@@ -1,4 +1,4 @@
-//#include "Precompiled.h"
+#include "../physicsLib/Precompiled.h"
 #include "action_math_utility.h"
 
 namespace ActionSystem
@@ -318,4 +318,4 @@ namespace ActionSystem
 		z -= vec.z * scale;
 	}
 
-}
+};

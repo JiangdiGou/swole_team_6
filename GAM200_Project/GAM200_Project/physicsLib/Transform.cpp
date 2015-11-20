@@ -12,10 +12,10 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 #include"Transform.h"
-
+#include "../PleaseWork/ActionSystem.h"
 
 Transform::Transform( Vector3 pos, Vector3 rot, Vector3 scal) :
- position(pos),rotation(rot), scale(scal)
+position(pos), rotation(rot), scale(scal)
 {
   scale = Vector3(1.0f, 1.0f, 1.0f);
   position = Vector3(-1.0f, 1.0f, 1.0f);
@@ -27,10 +27,15 @@ Transform::~Transform()
 
 void Transform::Initialize()
 {
+	//USE THIS FOR ACTIONS:
+	//ActionSequence& seq = Action::Sequence(GetOwner()->Actions);
+	//Action::Property(seq, &position, position + Vector3(3, 3, 0), 5, Ease::SinInOut);
 }
 
 void Transform::Update(float dt)
 {
+	
+	//Grp.Update(dt);
 	pos2d.x = position.x;
 	pos2d.y = position.y;
 }

@@ -70,6 +70,9 @@
     <Filter Include="BaseEngine\Zilch">
       <UniqueIdentifier>{feaebab1-3786-4bce-a6ee-8816225cd853}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ActionSystem">
+      <UniqueIdentifier>{ba1c73db-8c47-414d-a93b-0d0182f76c83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -233,16 +236,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\ParticleSystem.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionBase.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionCall.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionDelay.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionGroup.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionMath.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionProperty.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionSequence.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\ActionSystem.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h" />
-    <ClInclude Include="GAM200_Project\ActionSystem\SampleCurve.h" />
     <ClInclude Include="GAM200_Project\extraLogger\extraLogger.h" />
     <ClInclude Include="GAM200_Project\extraLogger\extraLoggerInline.h" />
     <ClInclude Include="GAM200_Project\initInfo.h" />
@@ -301,6 +294,39 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\Editor\editorEntityTools.h">
       <Filter>Systems\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h" />
+    <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h" />
+    <ClInclude Include="GAM200_Project\ActionSystem\action_math_utility.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionBase.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionCall.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionDelay.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionGroup.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionMath.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionProperty.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionSequence.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\ActionSystem.h">
+      <Filter>ActionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\PleaseWork\action_math_utility.h" />
+    <ClInclude Include="GAM200_Project\PleaseWork\SampleCurve.h">
+      <Filter>ActionSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -411,11 +437,6 @@
     <ClCompile Include="GAM200_Project\gameComponents\objFactory.cpp">
       <Filter>BaseEngine\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionCall.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionDelay.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionGroup.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\ActionSequence.cpp" />
-    <ClCompile Include="GAM200_Project\ActionSystem\action_math_utility.cpp" />
     <ClCompile Include="GAM200_Project\extraLogger\extraLogger.cpp" />
     <ClCompile Include="GAM200_Project\initInfo.cpp" />
     <ClCompile Include="GAM200_Project\mouseVector.cpp" />
@@ -458,6 +479,23 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\Editor\editorEntityTools.cpp">
       <Filter>Systems\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editorLevelTools.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\editorTilemapTools.cpp" />
+    <ClCompile Include="GAM200_Project\PleaseWork\action_math_utility.cpp">
+      <Filter>ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\PleaseWork\ActionSequence.cpp">
+      <Filter>ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\PleaseWork\ActionGroup.cpp">
+      <Filter>ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\PleaseWork\ActionCall.cpp">
+      <Filter>ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\PleaseWork\ActionDelay.cpp">
+      <Filter>ActionSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

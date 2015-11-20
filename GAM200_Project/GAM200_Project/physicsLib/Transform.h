@@ -18,6 +18,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../engineGraphics/Graphics.h"
 #include "math_utility.h"
 
+
 //Transform Component
 class Transform : public GameComponent
 {
@@ -34,6 +35,8 @@ public:
   void SerializeWrite(Serializer& str) override;
 	void Release() override;
 	//Vector2 Position;
+
+	
 
 	//Getters
 	Vector3& GetPosition();

@@ -2,9 +2,11 @@
 #define COMPOSITION_H
 #include "Component.h"
 #include "ComponentTypeIds.h"
+#include "PleaseWork/ActionSystem.h"
 //#include "gameComponents/objFactory.h"
 #include <vector>//TO BE MOVED - container header
 
+using namespace ActionSystem;
 //Game object ID type
 typedef unsigned int GOCId;
 
@@ -36,12 +38,16 @@ void SerializeWrite(Serializer& str);
 void Destroy();
 
 void AddComponent(ComponentTypeId typeId, GameComponent* component);
-
+//ActiongGroup Actions;
 //Game Obj's Id
 GOCId GetId() { return ObjectId; }
 
 //Game Obj's Name
 std::string GetName() { return ObjectName; }
+
+//A group of actions
+ActionGroup Actions;
+
 private:
 
 //Sorted array of components.
