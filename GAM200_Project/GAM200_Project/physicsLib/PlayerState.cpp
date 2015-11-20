@@ -18,10 +18,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #define PER_FRAME 0.03f
 #define DEATH_FRAME 1.5f
 
-PlayerState::PlayerState() : //parent(),
-//controller(new PlayerControllerListener(Parent, this, Controller)),
-//keyboard(new PlayerKeyboardListener(Parent, this)),
-//CollisionDelegate(),
+PlayerState::PlayerState() : 
 MyPlayerState(Grounded), jumpCount(0), JumpTimer(0), IsAlive(true), DeathCount(0),
 LastframeDT(1.0f / 60.0f), jumpButtonReleased(false)
 {

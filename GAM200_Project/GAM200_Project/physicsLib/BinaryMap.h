@@ -1,3 +1,17 @@
+/*****************************************************************************/
+/*!
+\file    BinaryMap.h
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+The header files for binary map implementation
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 #ifndef BINARYMAP_H
 #define BINARYMAP_H
 #include "../Composition.h"
