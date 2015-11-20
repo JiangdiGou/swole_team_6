@@ -32,7 +32,7 @@ public:
   GameObjectComposition* getFocus() { return focus; }
   void setFocus(GameObjectComposition* newFocus) { focus = newFocus; }
 
-
+  GOC* createNewComponent(std::string componentName);
 
 private:
   GameObjectComposition* focus;
