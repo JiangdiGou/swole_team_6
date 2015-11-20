@@ -27,7 +27,6 @@ Camera::Camera()
 //**********************
 Camera::Camera(const Shader& shader)
 {
-  cameraPosition = glm::vec3(0.0f, 0.0f, 2.0);
   cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
   worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -40,6 +39,13 @@ Camera::Camera(const Shader& shader)
 
   width = (2.0f * INITINFO->clientWidth) / (size * zoom);
   height = (2.0f * INITINFO->clientHeight) / (size * zoom);
+}
+
+void Camera::Initialize()
+{
+  GOC* owner = GetOwner();
+  pTransform = owner->has(Transform);
+  pTransform->SetPosition(0.0f, 0.0f, 2.0);
 }
 void Camera::SerializeRead(Serializer& str)
 {
@@ -77,17 +83,18 @@ Camera::~Camera()
 //**********************
 void Camera::Update(float dt)
 {
+  Vector3 currentPos = pTransform->GetPosition();
   glUseProgram(shaderID);
 
   if (followingPlayer)
   {
     Transform* playerTransform = LOGIC->player->has(Transform);
     glm::vec3 newPosition = glm::vec3(playerTransform->GetPosition().x,
-      playerTransform->GetPosition().y, cameraPosition.z);
+      playerTransform->GetPosition().y, currentPos.z);
     glm::vec3 newTarget = glm::vec3(playerTransform->GetPosition().x,
       playerTransform->GetPosition().y, playerTransform->GetPosition().z);
 
-    cameraPosition = newPosition;
+    pTransform->SetPosition(Vector3(newPosition.x, newPosition.y, newPosition.z));
     cameraTarget = newTarget;
   }
 
@@ -106,7 +113,10 @@ void Camera::Update(float dt)
 
   //Gets the view matrix 
   glm::mat4 viewMatrix;
-  viewMatrix = glm::lookAt(cameraPosition, cameraTarget, worldUp);
+
+
+  glm::vec3 glmCurrenPos = glm::vec3(currentPos.x, currentPos.y, currentPos.z);
+  viewMatrix = glm::lookAt(glmCurrenPos, cameraTarget, worldUp);
 
   glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
   glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
@@ -119,12 +129,6 @@ void Camera::Update(float dt)
 //Description : moves the camera and its target so its still looking at the 
 //              2d plane
 //**********************
-void Camera::move(glm::vec3 translation)
-{
-  cameraPosition += translation;
-  cameraTarget += translation;
-}
-
 void Camera::SendMessages(Message* message)
 {
   if (editorMode)
@@ -140,25 +144,25 @@ void Camera::SendMessages(Message* message)
       {
       case 'W' :
       {
-        cameraPosition += glm::vec3(0, editorMoveSpeed, 0);
+        pTransform->SetPosition(pTransform->GetPosition() + Vector3(0, editorMoveSpeed, 0));
         cameraTarget += glm::vec3(0, editorMoveSpeed, 0);
         break;
       }
       case 'A':
       {
-        cameraPosition -= glm::vec3(editorMoveSpeed, 0, 0);
+        pTransform->SetPosition(pTransform->GetPosition() - Vector3(editorMoveSpeed, 0, 0));
         cameraTarget -= glm::vec3(editorMoveSpeed, 0, 0);
         break;
       }
       case 'S':
       {
-        cameraPosition -= glm::vec3(0, editorMoveSpeed, 0);
+        pTransform->SetPosition(pTransform->GetPosition() - Vector3(0, editorMoveSpeed, 0));
         cameraTarget -= glm::vec3(0, editorMoveSpeed, 0);
         break;
       }
       case 'D':
       {
-        cameraPosition += glm::vec3(editorMoveSpeed, 0, 0);
+        pTransform->SetPosition(pTransform->GetPosition() + Vector3(editorMoveSpeed, 0, 0));
         cameraTarget += glm::vec3(editorMoveSpeed, 0, 0);
         break;
       }
