@@ -38,8 +38,11 @@ private:
   GameObjectComposition* focus;
   char newEntityName[256];
 
-  std::string EditorEntityTools::getComponentName(ComponentTypeId type);
+  char tweakableText[256];
+
+  void showTweakables(ComponentTypeId type);
   GameComponent* getFocusComponent(ComponentTypeId type);
+  GameComponent* getNewComponent(ComponentTypeId type);
 
   static const const char* components[TOTALCOMPONENTS];
 

@@ -60,6 +60,8 @@ void TextureAtlas::parseTextureList(const char* filename)
         AtlasTexture newTexture = AtlasTexture(width, height, std::stoi(tokens[1]),
           84, std::stoi(tokens[2]), std::stoi(tokens[3]), std::stoi(tokens[4]),
           std::stoi(tokens[5]));
+
+        newTexture.textureName = tokens[0];
         
         //Adds this AtlasTexture to map 
         textures.insert(std::pair<std::string, AtlasTexture>(

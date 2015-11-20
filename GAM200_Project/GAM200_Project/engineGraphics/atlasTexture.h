@@ -28,6 +28,8 @@ public:
   bool operator!=(const AtlasTexture& rhs) const;
 
   void updateAnimation(void);
+
+  std::string textureName;
 private:
   //Literally every private member here is used for animation 
   int currentFrame;

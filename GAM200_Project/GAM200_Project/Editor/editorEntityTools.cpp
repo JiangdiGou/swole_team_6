@@ -52,6 +52,11 @@ void EditorEntityTools::init()
 
 void EditorEntityTools::handle()
 {
+  //MAKE NEW ENTITY, CURRENTLY DOES NOTHING
+  ImGui::Button("Create Entity");
+  ImGui::SameLine();
+  ImGui::InputText("Name", newEntityName, 256);
+
   //CORE
   //Displays currently selected entity name
   if (focus)
@@ -60,11 +65,6 @@ void EditorEntityTools::handle()
     ImGui::Text("No entity selected. ");
 
   handleMessage();
-
-  //MAKE NEW ENTITY, CURRENTLY DOES NOTHING
-  ImGui::Button("Create Entity");
-  ImGui::SameLine();
-  ImGui::InputText("Name", newEntityName, 256);
   
   //COMPONENT LIST
   ImGui::Columns(2);
@@ -85,69 +85,52 @@ void EditorEntityTools::handle()
 
     if (component != NULL)
     {
-      ImGui::Text("Entity has component");
+      ImGui::SameLine();
+      if (ImGui::Button("Rmv Comp"))
+      {
+      }
+      showTweakables((ComponentTypeId)(currentItem + 1));
     }
     else
     {
-      ImGui::Text("Entity doesn't have component");
+      ImGui::SameLine();
+      if(ImGui::Button("Add Comp"))
+      {
+        GameComponent* component = getNewComponent((ComponentTypeId(currentItem + 1)));
+        focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
+        component->Initialize();
+      }
+
+      ImGui::TextColored(ImVec4(1, 0, 0, 1), "Do not add component will crash game probs");
     }
   }
 
+  //Sets imgui back to a single column
   ImGui::Columns(1);
-
-  ImGui::Button("Remove Component");
-  ImGui::SameLine();
-  ImGui::Button("Add Component");
-
 }
 
-//This isnt in use right now cause it was giving me issues. array is just hard coded now
-std::string EditorEntityTools::getComponentName(ComponentTypeId type)
+void EditorEntityTools::showTweakables(ComponentTypeId type)
 {
   switch (type)
   {
-  case CT_Transform:
+  case CT_Sprite:
   {
-    return std::string("Transform");
-    break;
+    /*
+    //Setup default vals input fields to curr vals
+
+    std::string textureName(fSprite->texture.textureName);
+
+    strcpy(tweakableText, textureName.c_str());
+    */
+
+    Sprite* fSprite = focus->has(Sprite);
+    ImGui::InputText("Texture", tweakableText, 256);
+    
+    if (ImGui::Button("ChangeTexture"))
+    {
+      fSprite->texture = ((GRAPHICS->getSpriteAtlas())->textures[std::string(tweakableText)]);
+    }
   }
-
-  case CT_Camera :
-    return std::string("Camera");
-
-  case CT_Sprite :
-    return std::string("Sprite");
-
-  case CT_SpriteText :
-    return std::string("Sprite Text");
-
-  case CT_Body :
-    return std::string("Body");
-
-  case CT_TileMapCollision:
-    return std::string("Tile Map Collision");
-
-  case CT_PlayerState:
-    return std::string("Player State");
-
-  case CT_ShapeAAB:
-    return std::string("Shape AAB");
-
-  case CT_ShapeLine:
-    return std::string("Shape line");
-
-  case CT_MouseVector:
-    return std::string("Mouse Vector");
-
-  case CT_Reactive:
-    return std::string("Reactive");
-
-  case CT_SoundEmitter:
-    return std::string("Sound Emitter");
-
-  case CT_Editable:
-    return std::string("Editable");
-
   }
 }
 
@@ -203,4 +186,58 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
     */
   }
 }   
+
+GameComponent* EditorEntityTools::getNewComponent(ComponentTypeId type)
+{
+  switch (type)
+  {
+  case CT_Transform:
+    return new Transform();
+
+  case CT_Camera:
+    return new Camera();
+
+  case CT_Sprite:
+    return new Sprite();
+
+  case CT_SpriteText:
+    return new SpriteText(std::string("default text"));
+
+  case CT_Body:
+    return new Body();
+
+  case CT_TileMapCollision:
+    return new TileMapCollision();
+
+  case CT_ShapeAAB:
+    return new ShapeAAB();
+
+  case CT_ShapeLine:
+    return new ShapeLine();
+
+  case CT_Reactive:
+    return new Reactive();
+
+  case CT_SoundEmitter:
+    return new SoundEmitter();
+
+  case CT_Editable:
+    return new Editable();
+
+  default:
+    return NULL;
+
+
+    /*
+    case CT_PlayerState:
+    return new PlayerState();
+    */
+
+    /*
+    case CT_MouseVector:
+    return new mouseVector();
+    */
+  }
+}
+
 

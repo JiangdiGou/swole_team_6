@@ -53,7 +53,7 @@ void Sprite::SerializeRead(Serializer& str)
   StreamRead(str, color.y);
   StreamRead(str, color.z);
   StreamRead(str, color.w);
-  StreamRead(str, textureName);
+  StreamRead(str, texture.textureName);
   StreamRead(str, flipSprite);
 }
 void Sprite::SerializeWrite(Serializer& str)
@@ -65,7 +65,7 @@ void Sprite::SerializeWrite(Serializer& str)
   StreamWrite(str, color.z);
   StreamWrite(str, color.b);
   StreamWrite(str);
-  StreamWrite(str, textureName);
+  StreamWrite(str, texture.textureName);
   StreamWrite(str);
   StreamWrite(str, flipSprite);
   StreamWrite(str);
