@@ -198,6 +198,22 @@ void PlayerState::SendMessages(Message * message)
 		MessageCharacterKey* CharacterMessage = (MessageCharacterKey*)message;
 		switch (CharacterMessage->character)
 		{
+		case 'P':
+			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+			{
+				playerSound->BeQuiet();
+			}
+			else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
+			{
+
+			}
+			else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
+			{
+				playerSound->Rock();
+			}
+			break;
+		
+	     
 		case 'W':
 			//if (StateList::Grounded)
 			//{
@@ -224,6 +240,7 @@ void PlayerState::SendMessages(Message * message)
 					//variableJumpHeightEnabled = false;
 					//ReleaseJump();
 					playerSound->SetPause(true, "swipe_sound");
+	                
 					
 				}
 				//else if (CharacterMessage->keyStatus == keyStatus::KEY_DOWN)
