@@ -156,6 +156,8 @@ void CoreEngine::GameLoop()
 
         GRAPHICS->setMainCamera(mainCamera);
         FACTORY->initializeObjects();
+
+        FACTORY->textureKey = FACTORY->readTextureKey(textureKeyFile);
         //LOGIC->Initialize();
         GameState = GS_RUN;
       }

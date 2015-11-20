@@ -102,10 +102,28 @@ void EditorEntityTools::handle()
       ImGui::SameLine();
       if(ImGui::Button("Add"))
       {
-        GameComponent* component = getNewComponent((ComponentTypeId(currentItem + 1)));
+        //If body or AAB
+        if (currentItem + 1 == 5 || currentItem + 1 == 7)
+        {
+          Body* body = new Body();
+          ShapeAAB* shape = new ShapeAAB();
+          shape->body = body;
+          body->BodyShape = shape;
 
-        focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
-        focus->Initialize();
+          focus->AddComponent(CT_Body, body);
+          focus->AddComponent(CT_ShapeAAB, shape);
+
+          focus->Initialize();
+
+          setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
+        }
+        else
+        {
+          GameComponent* component = getNewComponent((ComponentTypeId(currentItem + 1)));
+
+          focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
+          focus->Initialize();
+        }
       }
     }
   }

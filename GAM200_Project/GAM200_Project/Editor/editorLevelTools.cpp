@@ -94,6 +94,7 @@ void EditorLevelTools::handle()
   if (ImGui::Button("Save currLvl"))
   {
     createLevelFileFromArray(CORE->LevelName, FACTORY->levelWidth, FACTORY->levelHeight);
+    generateTextureKey(CORE->LevelName);
 
     setupMessage(std::string(CORE->LevelName + std::string(" saved")), ImVec4(0, 1, 0, 1));
   }
