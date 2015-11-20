@@ -59,7 +59,7 @@ public:
     owner->AddComponent(CT_Body, body);
     owner->AddComponent(CT_ShapeAAB, shape);
 
-    focus->Initialize();
+    owner->Initialize();
 
     setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
   }

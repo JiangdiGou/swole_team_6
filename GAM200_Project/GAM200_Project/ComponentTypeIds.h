@@ -21,6 +21,8 @@ enum ComponentTypeId
 	CT_Reactive,
 	CT_SoundEmitter,
 
+	CT_TestComponent,
+
   //INSERT NEW COMPONENTS HERE TILL I FIGURE OUT THE MOUSEVECTOR AND PLAYERSTATE BUG
 
   CT_Editable,

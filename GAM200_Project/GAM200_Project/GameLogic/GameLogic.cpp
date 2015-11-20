@@ -10,6 +10,7 @@
 #include "../physicsLib/PlayerState.h"
 #include "../mouseVector.h"
 #include "../reactive.h"
+#include "TestComponent.h"
 
 #include <ctime>
 
@@ -168,6 +169,21 @@ void GameLogic::Initialize()
   sprite6->color = glm::vec4(1, 1, 0, 1);
   blackObj3->AddComponent(CT_Sprite, sprite6);
   blackObj3->AddComponent(CT_ShapeAAB, box1);
+
+
+  // Test Button
+  GOC * button1 = FACTORY->makeObject("");
+  transform1->SetPosition(6, 3, 1);
+  transform1->SetScale(2,1,1);
+  button1->AddComponent(CT_Transform, transform1);
+  Sprite * buttonSprite1 = new Sprite();
+  buttonSprite1->texture = GRAPHICS->getSpriteAtlas()->textures["DuckNoise"];
+  buttonSprite1->color = glm::vec4(1, 1, 1, 1);
+  button1->AddComponent(CT_Sprite, buttonSprite1);
+  Reactive* rc = new Reactive;
+  button1->AddComponent(CT_Reactive, rc);
+  TestComponent* tc = new TestComponent;
+  button1->AddComponent(CT_TestComponent, tc);
 
 
   // 2

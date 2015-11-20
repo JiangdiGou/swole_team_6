@@ -1,13 +1,16 @@
 Character
 CharacterRun
+DuckNoise
 DummySheet1
 DummySheet2
 DummySheet3
 EmptyTile
 ExampleSpriteSheet
+ExitGame
 Smiley1
 Smiley2
 Smiley3
+StartGame
 UlnaLantern
 background
 sliceTest-0
