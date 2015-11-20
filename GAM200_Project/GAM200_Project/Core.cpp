@@ -76,9 +76,9 @@ void CoreEngine::GameLoop()
 	  SoundEmitter bgm = *new SoundEmitter();
 	  bgm.Initialize();
 
-	  bgm.SetVolume(1.0f, "Combat_Music");
-	  bgm.StopEvent("Contra-Level_1");
-	  bgm.PlayEvent("Contra-Level_1");
+	  bgm.SetVolume(1.0f, "PartyCrashv3");
+	  bgm.StopEvent("PartyCrashv3");
+	  bgm.PlayEvent("PartyCrashv3");
 	  
 	  
   }

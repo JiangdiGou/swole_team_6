@@ -216,9 +216,9 @@ void PlayerState::SendMessages(Message * message)
 			//{
 			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 				{
-					playerSound->SetVolume(1.0f, "swipe_sound");
-					playerSound->StopEvent("swipe_sound");
-					playerSound->PlayEvent("swipe_sound");
+					playerSound->SetVolume(1.0f, "TwoFootSteps");
+					playerSound->StopEvent("TwoFootSteps");
+					playerSound->PlayEvent("TwoFootSteps");
 					
 			
 					// we can do anything here also sounds
@@ -236,7 +236,7 @@ void PlayerState::SendMessages(Message * message)
 
 					//variableJumpHeightEnabled = false;
 					//ReleaseJump();
-					playerSound->SetPause(true, "swipe_sound");
+					playerSound->SetPause(true, "TwoFootSteps");
 	                
 					
 				}
@@ -266,9 +266,9 @@ void PlayerState::SendMessages(Message * message)
 			{
 				
 				//playerSound->StopEvent("player_footsteps");
-				playerSound->SetVolume(1.0f, "swipe_sound");
-				playerSound->StopEvent("swipe_sound");
-				playerSound->PlayEvent("swipe_sound");
+				playerSound->SetVolume(1.0f, "TwoFootSteps");
+				playerSound->StopEvent("TwoFootSteps");
+				playerSound->PlayEvent("TwoFootSteps");
 				
 				
 				JumpTimer = 0.0f;
@@ -303,7 +303,7 @@ void PlayerState::SendMessages(Message * message)
 			else if (CharacterMessage->keyStatus == KEY_RELEASED)
 			{
 
-				playerSound->SetPause(true, "swipe_sound");
+				playerSound->SetPause(true, "TwoFootSteps");
 				
 				playerBody->AddForce(Vec2D(0,0));
 				//PlayerSprite->ChangeState("idle");
@@ -342,9 +342,9 @@ void PlayerState::SendMessages(Message * message)
 			//if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			if (CharacterMessage->keyStatus == KEY_PRESSED)
 			{
-				playerSound->SetVolume(1.0f, "swipe_sound");
-				playerSound->StopEvent("swipe_sound");
-				playerSound->PlayEvent("swipe_sound");
+				playerSound->SetVolume(1.0f, "TwoFootSteps");
+				playerSound->StopEvent("TwoFootSteps");
+				playerSound->PlayEvent("TwoFootSteps");
 				
 				// we can change the player sprite to dashing or sth here?
         if (playerSprite->texture != *runAnimation)
@@ -376,7 +376,7 @@ void PlayerState::SendMessages(Message * message)
 			else if (CharacterMessage->keyStatus == KEY_RELEASED)
 			{
 				//player should be idle here?
-				playerSound->SetPause(true, "swipe_sound");
+				playerSound->SetPause(true, "TwoFootSteps");
 				playerBody->AddForce(Vec2D(0, 0));
 				playerBody->Velocity.x = 0.0f;
 				//playerBody->Friction = 0.0f;
