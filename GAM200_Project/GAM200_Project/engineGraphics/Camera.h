@@ -12,7 +12,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #define CAMERA_H
 
 #include "Shader.h"
-#include "../GameLogic.h"
+#include "../GameLogic/GameLogic.h"
 #include "../Composition.h"
 #include "../physicsLib/Transform.h"
 #include "../initInfo.h" //W and H
@@ -28,18 +28,15 @@ public:
   float zoom = 0.25f;
   void move(glm::vec3 translation);
 
+  void Initialize() override;
   void Update(float dt) override;
+  void SendMessages(Message* message) override;
 
   void SerializeRead(Serializer& str) override;
-
   void SerializeWrite(Serializer& str) override;
-
-  void SendMessages(Message* message) override;
 
   bool followingPlayer = true;
   bool editorMode = false;
-
-  glm::vec3 getPosition() { return cameraPosition; }
 
   float getSize() { return size; }
 
@@ -52,7 +49,19 @@ public:
   float getWidth() { return width; }
   float getHeight() { return height; }
 
+  Vector3 getPosition()
+  {
+    return pTransform->GetPosition();
+  }
+
+  void SetPosition(Vector3 in)
+  {
+    pTransform->SetPosition(in);
+  }
+
 private:
+  Transform* pTransform;
+
   float size = 1000.0f;
   float editorMoveSpeed = 0.15;
 
@@ -60,7 +69,6 @@ private:
   float height;
 
   glm::vec3 worldUp;
-  glm::vec3 cameraPosition;
   glm::vec3 cameraTarget;
 
   GLuint shaderID;

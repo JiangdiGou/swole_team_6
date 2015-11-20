@@ -22,7 +22,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "engineGraphics\graphicsManager.h"
 #include "WindowsSystem.h"
 #include "initInfo.h"
-#include "GameLogic.h"
+#include "GameLogic\GameLogic.h"
 #include "physicsLib\Transform.h"
 #include "engineGraphics\debugDraw.h"
 #include "Composition.h"

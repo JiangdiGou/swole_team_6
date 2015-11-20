@@ -15,7 +15,7 @@ main loop
 #include "_EntryPoint.h"
 #include "extraLogger/extraLogger.h"
 #include "engineGraphics/graphicsManager.h"
-#include "GameLogic.h"
+#include "GameLogic\GameLogic.h"
 #include "Core.h"
 #include "engineGraphics/Graphics.h"
 #include "WindowsSystem.h"

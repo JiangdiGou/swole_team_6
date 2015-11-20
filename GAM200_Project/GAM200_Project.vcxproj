@@ -63,7 +63,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\GameLogic.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\GameLogic.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\TestComponent.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
@@ -205,7 +206,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\GameLogic.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\TestComponent.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />
     <ClCompile Include="GAM200_Project\GlobalFactoryClient.cpp">

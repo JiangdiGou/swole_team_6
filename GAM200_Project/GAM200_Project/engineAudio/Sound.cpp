@@ -197,7 +197,7 @@ void SoundManager::ResumeAll()
 {
 	for (Soundit it = m_LoopSounds.begin(); it != m_LoopSounds.end(); ++it)
 	{
-		FMOD_RESULT myfuckingresult = it->second->setPaused(true);
+		FMOD_RESULT myfuckingresult = it->second->setPaused(false);
 		int randonumshit = 9;
 	}
 }

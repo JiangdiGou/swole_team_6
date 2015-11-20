@@ -204,9 +204,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\graphicsManager.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\GameLogic.h">
-      <Filter>GameLogic</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\SpriteText.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
@@ -328,6 +325,12 @@
     <ClInclude Include="GAM200_Project\PleaseWork\SampleCurve.h">
       <Filter>ActionSystem</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\GameLogic.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\TestComponent.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -414,9 +417,6 @@
     <ClCompile Include="GAM200_Project\engineGraphics\graphicsManager.cpp">
       <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\GameLogic.cpp">
-      <Filter>GameLogic</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\engineGraphics\SpriteText.cpp">
       <Filter>Systems\engineGraphics</Filter>
     </ClCompile>
@@ -496,6 +496,12 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\PleaseWork\ActionDelay.cpp">
       <Filter>ActionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\TestComponent.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp">
+      <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

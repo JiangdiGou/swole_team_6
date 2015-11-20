@@ -32,6 +32,8 @@ public:
 
 	void PlayEvent(std::string name);
 	void StopEvent(std::string name);
+	void BeQuiet();
+	void Rock();
 	void SetPause(bool pause, std::string name);
 	void SetVolume(float vol, std::string name);
 

@@ -1,6 +1,20 @@
+/*****************************************************************************/
+/*!
+\file    BinaryMap.cpp
+\author  Jiangdi Gou
+\par     contact: jiangdi.g@digipen.edu
+\brief
+The implementation for the Binary Map, probably not going to be use for now.
+\remarks
+
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/*****************************************************************************/
+
 //#include "Precompiled.h"
 #include "BinaryMap.h"
-
+//#include "../GameComponents/objFactory.h"
 //Collision flags
 #define	COLLISION_LEFT		0x00000001	//0001
 #define	COLLISION_RIGHT		0x00000002	//0010

@@ -1,7 +1,7 @@
 #include <string>
-#include "System.h"
-#include "Composition.h"
-#include "engineGraphics/Texture.h"
+#include "../System.h"
+#include "../Composition.h"
+#include "../engineGraphics/Texture.h"
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 class GameLogic : public ISystem

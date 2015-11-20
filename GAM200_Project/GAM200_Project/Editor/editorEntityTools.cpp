@@ -53,7 +53,11 @@ void EditorEntityTools::init()
 void EditorEntityTools::handle()
 {
   //MAKE NEW ENTITY, CURRENTLY DOES NOTHING
-  ImGui::Button("Create Entity");
+  if (ImGui::Button("Create Entity"))
+  {
+    GOC* newComponent = createNewComponent(newEntityName);
+    newComponent->Initialize();
+  }
   ImGui::SameLine();
   ImGui::InputText("Name", newEntityName, 256);
 
@@ -186,7 +190,39 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
     return new mouseVector();
     */
   }
-}   
+}  
+
+GOC* EditorEntityTools::createNewComponent(std::string componentName)
+{
+  GOC* newEntity = FACTORY->makeObject(componentName);
+  if (!newEntity)
+  {
+    setupMessage("Entity creation failed", ImVec4(1, 0, 0, 1));
+    return NULL;
+  }
+
+  //Core stuff
+  Transform* newTransform = new Transform();
+  Sprite* newSprite = new Sprite();
+  newSprite->texture = (GRAPHICS->getSpriteAtlas())->textures["Smiley1"];
+
+  //Editor Stuff
+  //Since we're in editor mode if this fx got called 
+  Reactive* newReactive = new Reactive();
+  Editable* newEditable = new Editable(false);
+
+  //Add Core stuff
+  newEntity->AddComponent(CT_Transform, newTransform);
+  newEntity->AddComponent(CT_Sprite, newSprite);
+
+  //Add edutir stuff
+  newEntity->AddComponent(CT_Reactive, newReactive);
+  newEntity->AddComponent(CT_Editable, newEditable);
+
+  setupMessage(componentName + " created.", ImVec4(0, 1, 0, 1));
+
+  return newEntity;
+}
 
 GameComponent* EditorEntityTools::getNewComponent(ComponentTypeId type)
 {

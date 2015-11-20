@@ -16,7 +16,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 //#include "Precompiled.h"
 #include "PhysicsManager.h"
 #include "Transform.h"
-//sample
+
 
 float DetermineRestitution(Body * a, Body * b)
 {

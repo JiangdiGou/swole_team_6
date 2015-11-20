@@ -203,10 +203,6 @@ void contactList::CorrectVelocity(float dt)
 
 void contactList::ResolveContacts(float dt)
 {
-	//if (myshape->body->IsGhost == true)
-	//{	
-	//	return;
-	//} 
 
 	this->CorrectPosition(dt);
 	this->CorrectVelocity(dt);

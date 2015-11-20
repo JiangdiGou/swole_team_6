@@ -19,7 +19,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "math_utility.h"
 #include "../Composition.h"
 #include <vector>
-//sample
+
 class Body;
 const static int maxContacts = 1024;
 ///Data for a contact between two bodies.
@@ -54,13 +54,7 @@ public:
 	ShapeId Id;
 	Body * body;
 	Shape(ShapeId pid) : Id(pid) {};
-  //void Initialize() override;
-	//virtual void Draw() = 0;
-	//virtual bool TestPoint(Vec2D) = 0;
-	//virtual BoundingCircle GetBoundingCircle() const = 0;
-	//virtual std::pair<bool, float> Intersect(Ray const& ray) const = 0;
-	//virtual void Print() const = 0;
-	//virtual ~Shape();
+
 };
 
 //Line shape??
@@ -145,32 +139,6 @@ public:
 };
 
 float Clamp(float, float, float);
-//struct Manifold;
-//class RigidBody;
-//
-//typedef void(*CollisionTest)(Primitive *a, Primitive *b, Manifold *data);
-//extern CollisionTest CollisionRegistry[Primitive::pCount][Primitive::pCount];
-//
-//void CircleAndCircle(Primitive *a, Primitive *b, Manifold *data);
-//void AABBAndAABB(Primitive *a, Primitive *b, Manifold *data);
-//void AABBAndCircle(Primitive *a, Primitive *b, Manifold *data);
-//void CircleAndAABB(Primitive *b, Primitive *a, Manifold *data);
-//float Clamp(float, float, float);
-//
-/////Data for a contact between two bodies.
-/////Used to resolve world collisions.
-//struct ManifoldSet
-//{
-//	RigidBody* Bodies[2];
-//	Vec2D Movement[2];
-//	Vec2D ContactNormal;
-//	float Penetration;
-//	float Restitution;
-//	float FrictionCof;
-//
-//	float SeperatingVelocity;
-//	float ContactImpulse;
-//	float GetSeparateVelocity();
-//};
+
 
 #endif
