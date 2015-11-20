@@ -122,7 +122,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [84.8081894, 2.66468334, 50.0000038],
+			Vec3 Translation = [45.1805, -54.7770576, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -134,7 +134,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 24.6597309,
+			float Size = 33.2871437,
 		},
 		EditorCameraController = 
 		{
@@ -142,7 +142,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [84.8081894, 2.66468334, 3.86009333e-006],
+			Vec3 LookTarget = [45.1805, -54.7770576, 8.1661085e-007],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -166,7 +166,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-40.5, 2.5, 40],
+			Vec3 Translation = [4.5, -53.5, 40],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -4811,7 +4811,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-42.5, -1.5, 0],
+			Vec3 Translation = [2.5, -57.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -6698,6 +6698,41 @@ Level =
 		},
 		BobEffectScript = 
 		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 89,
+		},
+		Named = 
+		{
+			string Name = "Level1",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, -60, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		MultiSprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+		},
+		TileMap = 
+		{
+			string SourceName = "567032b33e7cf6b6:Tutorial_TileMap17",
+			string PaletteName = "553ad1ecdc92c95f:CollisionTiles",
+			float UnitsPerTile = 1,
+			float MeshThickness = 1.20000005,
 		},
 	},
 },
