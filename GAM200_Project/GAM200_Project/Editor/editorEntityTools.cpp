@@ -17,37 +17,10 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
 
 EditorEntityTools::EditorEntityTools()
 {
-  
-  /*
-  
-  for (int i = CT_Transform; i != CT_Editable; ++i)
-  {
-    components[i] = new char[256];
-  }
-  
-
-
-  for (int i = CT_Transform; i != CT_Editable; ++i)
-  {
-    ComponentTypeId component = (ComponentTypeId)i;
-    std::string componentName = (getComponentName(component));
-
-
-    strcpy(components[i], componentName.c_str());
-    ++numComponents;
-    
-
-    const char* cStr = new const char[256];
-
-    cStr = componentName.c_str();
-    
-    
-  }*/
 }
 
 void EditorEntityTools::init()
 {
-
 }
 
 void EditorEntityTools::handle()
@@ -129,20 +102,22 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
   {
   case CT_Sprite:
   {
-    /*
-    //Setup default vals input fields to curr vals
-
-    std::string textureName(fSprite->texture.textureName);
-
-    strcpy(tweakableText, textureName.c_str());
-    */
-
-    Sprite* fSprite = focus->has(Sprite);
+    Sprite* fSprite = (Sprite*)getFocusComponent(CT_Sprite);
     ImGui::InputText("Texture", tweakableText, 256);
-    
-    if (ImGui::Button("ChangeTexture"))
+    if (ImGui::Button("ChangeTexture") && fSprite)
     {
       fSprite->texture = ((GRAPHICS->getSpriteAtlas())->textures[std::string(tweakableText)]);
+    }
+    break;
+  }
+  case CT_SpriteText:
+  {
+    SpriteText* fSpriteText = (SpriteText*)getFocusComponent(CT_SpriteText);
+    ImGui::InputText("Texture", tweakableText, 256);
+
+    if (ImGui::Button("Update Text") && fSpriteText)
+    {
+      fSpriteText->message = std::string(tweakableText);
     }
   }
   }
@@ -222,6 +197,13 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
 
   //Add Core stuff
   newEntity->AddComponent(CT_Transform, newTransform);
+
+  //Makes the entity spawn in the middle of the screen
+
+  Vector2 middleOfScreen = Vector2(INITINFO->clientWidth / 2.0, INITINFO->clientHeight / 2.0);
+  middleOfScreen = GRAPHICS->screenToWorld(middleOfScreen);
+  newTransform->SetPosition(Vector3(middleOfScreen, 0)); 
+
   newEntity->AddComponent(CT_Sprite, newSprite);
 
   //Add edutir stuff

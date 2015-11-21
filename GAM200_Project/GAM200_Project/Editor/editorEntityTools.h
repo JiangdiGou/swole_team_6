@@ -38,7 +38,7 @@ private:
   GameObjectComposition* focus;
   char newEntityName[256];
 
-  char tweakableText[256];
+  char tweakableText[256]; 
 
   void showTweakables(ComponentTypeId type);
   GameComponent* getFocusComponent(ComponentTypeId type);
