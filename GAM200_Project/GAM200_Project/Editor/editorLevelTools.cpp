@@ -13,7 +13,6 @@ EditorLevelTools::EditorLevelTools()
 void EditorLevelTools::init()
 {
   currentMessage = std::string(CORE->LevelName + '\t' + "currLvl");
-  fetchTextures();
 }
 
 void EditorLevelTools::handle()
@@ -26,7 +25,6 @@ void EditorLevelTools::handle()
     if (checkFilename(levelPathInput) && checkLevelDimensions())
     {
       createEmptyLevelFile(levelPathInput, levelDimensionInput[0], levelDimensionInput[1]);
-      generateTextureKey(levelPathInput);
 
       setupMessage(std::string(levelPathInput + std::string(" created")), ImVec4(0, 1, 0, 1));
     }
@@ -41,10 +39,8 @@ void EditorLevelTools::handle()
     if (checkFilename(levelPathInput) && checkLevelDimensions())
     {
       createEmptyLevelFile(levelPathInput, levelDimensionInput[0], levelDimensionInput[1]);
-      generateTextureKey(levelPathInput);
 
       CORE->LevelName = levelPathInput;
-      CORE->textureKeyFile = appendKEY(levelPathInput);
       CORE->GameState = GS_LOAD;
 
       setupMessage(std::string(levelPathInput + std::string(" created and loaded")), ImVec4(0, 1, 0, 1));
@@ -60,7 +56,6 @@ void EditorLevelTools::handle()
     if (checkFilename(levelPathInput, true))
     {
       CORE->LevelName = levelPathInput;
-      CORE->textureKeyFile = appendKEY(levelPathInput);
       CORE->GameState = GS_LOAD;
 
       setupMessage(std::string(levelPathInput + std::string(" loaded")), ImVec4(0, 1, 0, 1));
@@ -83,7 +78,6 @@ void EditorLevelTools::handle()
     if (checkFilename(levelPathInput))
     {
       createLevelFileFromArray(levelPathInput, FACTORY->levelWidth, FACTORY->levelHeight);
-      generateTextureKey(levelPathInput);
 
       setupMessage(std::string(levelPathInput + std::string(" created")), ImVec4(0, 1, 0, 1));
     }
@@ -94,48 +88,10 @@ void EditorLevelTools::handle()
   if (ImGui::Button("Save currLvl"))
   {
     createLevelFileFromArray(CORE->LevelName, FACTORY->levelWidth, FACTORY->levelHeight);
-    generateTextureKey(CORE->LevelName);
 
     setupMessage(std::string(CORE->LevelName + std::string(" saved")), ImVec4(0, 1, 0, 1));
   }
 }
-
-void EditorLevelTools::generateTextureKey(std::string levelName)
-{
-
-  std::ofstream ofs;
-  ofs.open(appendKEY(levelName));
-
-  if (!ofs.is_open())
-    std::cout << "Failed to Create file" << std::endl;
-
-  for (std::vector<std::string>::iterator it = textureNames.begin(); it != textureNames.end(); ++it)
-  {
-    int index = it - textureNames.begin();
-    //+= 1 b/c i want to reserve 0 for empty
-    index += 1;
-
-    ofs << *it << std::endl;
-  }
-}
-
-void EditorLevelTools::fetchTextures()
-{
-  TextureAtlas* atlas = GRAPHICS->getSpriteAtlas();
-
-  for (std::map<std::string, AtlasTexture>::iterator it = atlas->textures.begin();
-    it != atlas->textures.end(); ++it)
-  {
-    textureNames.push_back((*it).first);
-  }
-
-  /*
-  std::cout << "Hey, check out all these textures I found." << std::endl;
-  for (std::vector<std::string>::iterator it = textureNames.begin(); it != textureNames.end(); ++it)
-  std::cout << (int)(it - textureNames.begin()) << ": " << *it << std::endl;
-  */
-}
-
 
 void EditorLevelTools::createLevelFileFromArray(std::string levelName, int width, int height)
 {
@@ -158,7 +114,7 @@ void EditorLevelTools::createLevelFileFromArray(std::string levelName, int width
   {
     for (int i = 0; i < width; ++i)
     {
-      ofs << FACTORY->tileMap[j][i] << " ";
+      ofs << FACTORY->tileMap[j][i] << ' ';
     }
     ofs << std::endl;
   }
@@ -187,7 +143,7 @@ void EditorLevelTools::createEmptyLevelFile(std::string levelName, int width, in
   {
     for (int i = 0; i < width; ++i)
     {
-      ofs << "0 ";
+      ofs << std::string("E ");
     }
     ofs << std::endl;
   }
@@ -200,12 +156,6 @@ void EditorLevelTools::levelNameUpdate()
   currentMessage = std::string(CORE->LevelName + '\t' + "currLvl");
 }
 
-std::string EditorLevelTools::appendKEY(const std::string input) const
-{
-  std::string substring(input.begin(), input.end() - 4);
-  substring.append("-KEY.txt");
-  return substring;
-}
 
 bool EditorLevelTools::checkFilename(std::string filename, bool checkContentsAndKey)
 {
@@ -242,25 +192,6 @@ bool EditorLevelTools::checkFilename(std::string filename, bool checkContentsAnd
       }
       //Done checking level file
       is.close();
-
-
-      //Check that the key exists 
-      is.open(appendKEY(filename));
-      if (!is.is_open())
-      {
-        setupMessage("Error opening KEY file: " + appendKEY(filename), ImVec4(1, 0, 0, 1));
-        return false;
-      }
-
-      //Check that it's got stuff in it 
-      std::getline(is, testLine);
-      if (testLine.size() < 2)
-      {
-        setupMessage("KEY file exists, but appears corrupt: " + filename, ImVec4(1, 0, 0, 1));
-        return false;
-      }
-
-      is.close(); 
     }
     return true;
   }

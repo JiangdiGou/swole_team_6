@@ -49,7 +49,7 @@ public:
     }
   }
 
-  bool addTilemapAndBody(GOC* owner)
+  bool addShapeAndBody(GOC* owner)
   {
     Body* body = new Body();
     ShapeAAB* shape = new ShapeAAB();
@@ -61,7 +61,16 @@ public:
 
     owner->Initialize();
 
-    setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
+    if (!shape || !body)
+    {
+      setupMessage("Error in adding Shape/Body.", ImVec4(1, 0, 0, 1));
+      return false;
+    }
+    else
+    {
+      setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
+      return true;
+    }
   }
 };
 

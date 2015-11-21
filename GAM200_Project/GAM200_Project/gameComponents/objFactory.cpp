@@ -129,16 +129,6 @@ void objFactory::SendMessages(Message * message)
     }
 }
 
-bool objFactory::validPoint(int x, int y)
-{
-  if (x > (this->levelWidth - 1) || y > (this->levelHeight - 1) || x < 0 || y < 0)
-  {
-    std::cout << "Invalid tile selection." << std::endl;
-    return false;
-  }
-  return true;
-}
-
 void objFactory::loadLevelFrom(std::string fileName)
 {
   //std::vector<std::string> tokens;
@@ -146,7 +136,7 @@ void objFactory::loadLevelFrom(std::string fileName)
   std::string levelName;//at line 2
   int arrayX;      //        4
   int arrayY;      //        5
-  int**  tileMap;
+  std::string**  tileMap;
 
   //get line count
   int lineCount;
@@ -169,41 +159,21 @@ void objFactory::loadLevelFrom(std::string fileName)
   arrayY = std::stoi(garbage);
 
   //load arrays
-  tileMap = new int*[arrayY];
+  tileMap = new std::string*[arrayY];
   for (int i = 0; i < arrayY; i++)
   {
-    tileMap[i] = new int[arrayX];
+    tileMap[i] = new std::string[arrayX];
 
     garbage = getLineFromFile(5 + arrayY-1-i + 2, fileName);   
     //Gets all ints from level file, fills up tilemap array
-    int j = 0;
-    for (std::string::iterator it1 = garbage.begin(), it2 = it1 + 1;
-      it2 != garbage.end(); ++it1, ++it2)
-    {
-      if (*it2 == ' ')
-      {
-        tileMap[i][j] = *it1 - '0';
-        ++j;
-      }
-      else
-      {
-        while (*it2 != ' ')
-          ++it2;
+    std::vector<std::string> results = tokenize(garbage);
 
-        std::string substring = std::string(it1, it2);
-        tileMap[i][j] = std::stoi(substring);
-
-        it1 = it2 - 1;
-        ++j;
-      }
-    }
+    for (int j = 0; j < results.size(); j++)
+      tileMap[i][j] = results[j];
   }
-  std::string substring(fileName.begin(), fileName.end() - 4);
-  substring.append("-KEY.txt");
 
   this->levelName = levelName;
   CORE->LevelName = fileName;
-  CORE->textureKeyFile = substring;
   this->levelWidth = arrayX;
   this->levelHeight = arrayY;
   this->tileMap = tileMap;
@@ -222,18 +192,17 @@ void objFactory::createTiles()
   {
     for (j = 0; j < levelWidth; j++)
     {
-      int value = (tileMap[i][j]);
-#ifdef EDITOR
-      if (value == 0)
+      std::string texture = (tileMap[i][j]);
+      if (texture == "E")
       {
-        GOC* emptyTile = createTile(j, i, textureKey[value]);
+#ifdef EDITOR
+        GOC* emptyTile = createTile(j, i, "E");
         Sprite* emptyTileSprite = emptyTile->has(Sprite);
         emptyTileSprite->visible = false;
-      }
 #endif
-
-      if (value > 0)
-        createTile(j, i, textureKey[value]);
+      }
+      else
+        createTile(j, i, texture);
 
       /*
     case '1':
@@ -268,7 +237,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   newTile->AddComponent(CT_Sprite, tileSprite);
 
   //Don't want the empty tile to have collision
-  if (!(textureName == "EmptyTile"))
+  if (!(textureName == "E"))
   {
     Body * tileBody = new Body();
     tileBody->Mass = 0;
@@ -314,98 +283,4 @@ void objFactory::printLevel()
     }
     std::cout << std::endl;
   }
-}
-
-//return false if tile couldn't be changed, true + change tile otherwise
-bool objFactory::changeTile(int tile, int x, int y)
-{
-  y = this->levelHeight - y - 1;
-  if (!this->validPoint(x, y))
-  {
-    return false;
-  }
-  this->tileMap[x][y] = tile;
-  return true;
-}
-
-std::vector<std::string> objFactory::readTextureKey(std::string keyPath)
-{
-  std::vector<std::string> textures;
-  std::string line; 
-  std::ifstream is;
-  is.open(keyPath);
-
-  if (!is.is_open())
-  {
-    std::cout << "Failed to open texture key " << keyPath << std::endl;
-    return textures;
-  }
-  
-  //Reads textures from the key file
-  textures.clear();
-  textures.push_back(std::string("EmptyTile"));
-  while (!is.eof())
-  {
-    std::getline(is, line);
-    textures.push_back(line);
-  }
-
-  is.close();
-  return textures;
-}
-
-//This FX is for eventually modifying the current level file's tilemap
-//This isnt how the current system works and should never be called. 
-void objFactory::modifyLevelTilemap(int newTexture, int x, int y)
-{
-  std::vector<std::string> lines; 
-  std::string line;
-  std::ifstream is;
-  std::ofstream os;
-
-  is.open("resources/Levels/" + levelName + ".txt");
-
-  if (!is.is_open())
-  {
-    std::cout << "Failed to open " << "resources/Levels/" + levelName + ".txt" << std::endl;
-    return;
-  }
-
-  //Loops through the junk
-  for (int i = 0; i < 5; ++i)
-  {
-    std::getline(is, line);
-    lines.push_back(line);
-  }
-
-  //Loops through the rows we dont care about
-  for (int j = 0; j < levelHeight - y; ++j)
-  {
-    std::getline(is, line);
-    lines.push_back(line);
-  }
-
-  //Gets the line we care about
-  std::getline(is, line);
-  //modifies the character
-  line[2*x] = (char)(newTexture + '0');
-  lines.push_back(line);
-
-  while (!is.eof())
-  {
-    std::getline(is, line);
-    lines.push_back(line);
-  }
-
-  is.close();
-
-  os.open("resources/Levels/" + levelName + ".txt");
-
-  for (std::vector<std::string>::iterator it = lines.begin();
-    it != lines.end(); ++it)
-  {
-    os << *it << std::endl;
-  }
-
-  os.close();
 }

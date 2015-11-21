@@ -49,25 +49,28 @@ void EditorTilemapTools::handle()
   }
   */
 
-  for (std::vector<std::string>::iterator it = FACTORY->textureKey.begin();
-    it != FACTORY->textureKey.end(); ++it)
+  int counter = 0;
+  for (std::map<std::string, AtlasTexture>::iterator it = atlas->textures.begin();
+      it != atlas->textures.end(); ++it, ++counter)
   {
-    int index = it - FACTORY->textureKey.begin();
+    if (it->second.textureName == "E")
+      continue; 
 
     //Creates a grid by calling SameLine every frame except when time for new row
-    if (!(index % 6 == 0))
+    if (!(counter % 6 == 0))
       ImGui::SameLine();
 
+    AtlasTexture texture = (*it).second; 
+
     //Gets the texture's info for displaying in imgui
-    AtlasTexture texture = atlas->textures[*it];
     ImVec2 topLeft = ImVec2(texture.getLeftX(), texture.getTopY());
     ImVec2 botRight = ImVec2(texture.getRightX(), texture.getBottomY());
 
-    ImGui::PushID(index);
+    ImGui::PushID(counter);
     //Displays image buttons of textures
     if (ImGui::ImageButton((ImTextureID)atlas->ID, ImVec2(64, 64), topLeft, botRight))
     {
-      currentTexture = *it;
+      currentTexture = texture.textureName;
       currentTopLeft = topLeft;
       currentBotRight = botRight;
 
@@ -92,9 +95,9 @@ void EditorTilemapTools::AddToPreviousArray(const std::string &textureName, ImVe
 }
 
 
-void EditorTilemapTools::changeTile(GameObjectComposition* tile)
+void EditorTilemapTools::changeTile(GameObjectComposition* tile, bool setEmpty)
 {
-  if (!(currentTexture.size() > 2))
+  if (currentTexture.size() < 2)
   {
     setupMessage("No tile selected or error in selection.", ImVec4(1, 0, 0, 1));
     return;
@@ -105,47 +108,32 @@ void EditorTilemapTools::changeTile(GameObjectComposition* tile)
   if (tSprite)
   {
     bool wasEmpty;
-    if (tSprite->texture == GRAPHICS->getSpriteAtlas()->textures["emptyTile"])
+    if (tSprite->texture == GRAPHICS->getSpriteAtlas()->textures["E"])
       wasEmpty = true;
     else
       wasEmpty = false;
 
-    TextureAtlas* pAtlas = GRAPHICS->getSpriteAtlas();
-    tSprite->texture = pAtlas->textures[currentTexture];
-
-    int index = 0;
-
-    //Find the index of texture in texture key. texture key might need to be improved. mess right now.
-    for (std::vector<std::string>::iterator it = FACTORY->textureKey.begin();
-      it != FACTORY->textureKey.end(); ++it)
-    {
-      index = it - FACTORY->textureKey.begin();
-      if (*it == currentTexture)
-        break;
-    }
-
     Transform* pTransform = tile->has(Transform);
-    FACTORY->tileMap[(int)pTransform->GetPositionY()][(int)pTransform->GetPositionX()] = index;
+    TextureAtlas* pAtlas = GRAPHICS->getSpriteAtlas();
+    if (setEmpty)
+    {
+      tSprite->texture = pAtlas->textures["E"];
+      FACTORY->tileMap[(int)pTransform->GetPositionY()][(int)pTransform->GetPositionX()] = std::string("E");
+    }
+    else
+    {
+      tSprite->texture = pAtlas->textures[currentTexture];
+      FACTORY->tileMap[(int)pTransform->GetPositionY()][(int)pTransform->GetPositionX()] = currentTexture;
+    }
 
     //I wanted to have it so that if you make it a tile it has collision
     //but something about how im doing it below is wrong. 
 
-    /*
-    if (currentTexture != "emptyTile" && wasEmpty)
-    {
-    Body * tileBody = new Body();
-    tileBody->Mass = 0;
-    tileBody->Restitution = 0.3f;
-    tileBody->Friction = 0.0f;
-    ShapeAAB * boxCollider = new ShapeAAB();
-    boxCollider->Extents = Vec2D(.5, .5);
-    tileBody->BodyShape = boxCollider;
-    tile->AddComponent(CT_Body, tileBody);
-    tile->AddComponent(CT_ShapeAAB, boxCollider);
+    
+    if (currentTexture != "E" && wasEmpty)
+      ;
+      //addShapeAndBody(tile); Still doesnt work
 
-    tileBody->Initialize();
-    boxCollider->Initialize();
-    }*/
   }
 }
 
@@ -159,7 +147,7 @@ void EditorTilemapTools::emptyTilesVisible(bool visibility)
 
     if (!gocSprite)
       continue;
-    else if (gocSprite->texture == atlas->textures["EmptyTile"])
+    else if (gocSprite->texture == atlas->textures["E"])
       gocSprite->visible = visibility;
   }
 }

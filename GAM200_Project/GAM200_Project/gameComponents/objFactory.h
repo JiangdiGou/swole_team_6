@@ -57,16 +57,10 @@ public:
   void createTiles();
   void SendMessages(Message * message);
 
-  bool changeTile(int tile, int x, int y);
-
-  std::vector<std::string> textureKey;
-  std::vector<std::string> readTextureKey(std::string levelName);
-  void modifyLevelTilemap(int newTexture, int x, int y);
-
   std::string levelName;
   int levelWidth;
   int levelHeight;
-  int ** tileMap;
+  std::string ** tileMap;
 
   bool validPoint(int x, int y);
 

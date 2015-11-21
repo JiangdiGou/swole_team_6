@@ -19,6 +19,7 @@
 #include <vector>
 #include "engineGraphics/glm/vec3.hpp"
 #include "physicsLib/math_utility.h"
+#include <sstream>
 
 #ifdef _WIN32
   #include <direct.h>
@@ -58,5 +59,7 @@ void printstr(std::string toPrint);
 void waitForKB();
 
 bool luaTest();
+
+std::vector<std::string> tokenize(const std::string &input);
 
 #endif

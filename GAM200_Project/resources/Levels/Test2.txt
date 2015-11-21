@@ -1,0 +1,21 @@
+[LevelName]
+resources/Levels/Test2.txt
+[ArraySpecs]
+15
+15
+[TileMap]
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E 
+E E redRun E E E DuckNoise E E E E E E E E 
+E greenIdle greenIdle redRun E E DuckNoise E E E E E E E E 
+E redRun redRun redRun redRun E DuckNoise E E E E E E E E 
+DuckNoise DuckNoise DuckNoise DuckNoise DuckNoise DuckNoise DuckNoise E E E E E E E E 

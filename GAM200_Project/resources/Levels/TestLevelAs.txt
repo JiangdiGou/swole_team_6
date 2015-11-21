@@ -1,5 +1,5 @@
 [LevelName]
-resources/Levels/TestLevel.txt
+resources/Levels/TestLevelAs.txt
 [ArraySpecs]
 50
 15
@@ -15,7 +15,7 @@ E E E E E E Character E E E E E background E E E E E DuckNoise E E E E E backgro
 StartGame DuckNoise E E E E E E E E E E background E E E E Character Character Character E E E E background sliceTest-101 sliceTest-101 sliceTest-101 E E sliceTest-18 sliceTest-18 sliceTest-18 E sliceTest-18 E E E E E E E E E E E E sliceTest-18 sliceTest-18 sliceTest-18 
 blackIdle Character DuckNoise E Character E DuckNoise E E E E E background E E E CharacterRun CharacterRun CharacterRun CharacterRun CharacterRun E E E background E E E E E E E E E E E E E E E sliceTest-164 E E E E sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 
 blueIdle blackRun DuckNoise E E E E E E E E E E E E E E E E E E E E background background E E E E E E E E E E E E sliceTest-164 sliceTest-164 sliceTest-164 sliceTest-164 sliceTest-164 sliceTest-164 E E sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 
-greenIdle blueRun DuckNoise E E E E E E E E E E E CharacterRun Character E sliceTest-101 E sliceTest-18 E E E E E E E E E E E E E E E E E E E E E sliceTest-18 E E E sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 
-redIdle greenRun sliceTest-181 E E E sliceTest-14 E E E E DuckNoise E E E E E E E E E E E E E E E E E E E E sliceTest-170 E E E E E E E E E E E E sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 
+greenIdle greenIdle DuckNoise E E E E E E E E E E E CharacterRun Character E sliceTest-101 E sliceTest-18 E E E E E E E E E E E E E E E E E E E E E sliceTest-18 E E E sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 
+greenIdle greenRun sliceTest-181 E E E greenIdle E E E E DuckNoise E E E E E E E E E E E E E E E E E E E E sliceTest-170 E E E E E E E E E E E E sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 
 yellowIdle redRun sliceTest-14 sliceTest-197 sliceTest-14 sliceTest-198 sliceTest-14 sliceTest-141 UlnaLantern UlnaLantern StartGame sliceTest-111 sliceTest-111 sliceTest-135 sliceTest-135 sliceTest-118 sliceTest-118 sliceTest-186 sliceTest-186 sliceTest-231 background sliceTest-233 sliceTest-234 sliceTest-30 sliceTest-31 sliceTest-21 sliceTest-21 sliceTest-21 sliceTest-21 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 E E E E E E E E E sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 sliceTest-18 
 whiteIdle yellowRun whiteRun ExampleSpriteSheet sliceTest-132 sliceTest-181 sliceTest-14 sliceTest-197 sliceTest-132 UlnaLantern StartGame sliceTest-111 sliceTest-111 sliceTest-135 sliceTest-135 sliceTest-118 sliceTest-118 sliceTest-186 sliceTest-186 sliceTest-204 sliceTest-204 sliceTest-205 background sliceTest-238 sliceTest-238 sliceTest-238 sliceTest-238 sliceTest-238 sliceTest-238 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 E sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 sliceTest-184 

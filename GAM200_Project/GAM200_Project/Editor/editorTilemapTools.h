@@ -17,7 +17,7 @@ public:
   EditorTilemapTools();
   void handle() override;
   void init() override;
-  void changeTile(GameObjectComposition* tile);
+  void changeTile(GameObjectComposition* tile, bool setEmpty = false);
 
   bool isActive() { return active; };
 

@@ -105,16 +105,7 @@ void EditorEntityTools::handle()
         //If body or AAB
         if (currentItem + 1 == 5 || currentItem + 1 == 7)
         {
-          Body* body = new Body();
-          ShapeAAB* shape = new ShapeAAB();
-          shape->body = body;
-          body->BodyShape = shape;
-
-          focus->AddComponent(CT_Body, body);
-          focus->AddComponent(CT_ShapeAAB, shape);
-
-          focus->Initialize();
-
+          addShapeAndBody(focus);
           setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
         }
         else

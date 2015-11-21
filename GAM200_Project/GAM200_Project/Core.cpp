@@ -92,7 +92,6 @@ void CoreEngine::GameLoop()
       if (PrevGameState == GS_RUN)
       {
         FACTORY->destroyAllObjects();
-        FACTORY->textureKey = FACTORY->readTextureKey(this->textureKeyFile);
         //FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
         FACTORY->loadLevelFrom(LevelName);
 
@@ -157,7 +156,6 @@ void CoreEngine::GameLoop()
         GRAPHICS->setMainCamera(mainCamera);
         FACTORY->initializeObjects();
 
-        FACTORY->textureKey = FACTORY->readTextureKey(textureKeyFile);
         //LOGIC->Initialize();
         GameState = GS_RUN;
       }

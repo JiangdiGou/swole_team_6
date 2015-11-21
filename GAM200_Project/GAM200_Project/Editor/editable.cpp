@@ -20,14 +20,21 @@ void Editable::SendMessages(Message* message)
     MouseButton* mouseEvent = (MouseButton*)message;
 
     //If you left clicked this object
-    if (mouseEvent->MouseButtonIndex == 0
-      && mouseEvent->ButtonIsPressed
+    if (mouseEvent->ButtonIsPressed
       && pReactive->mouseOver())
     {
-      if (isTile && GUIMGR->tilemapTools->isActive())
-        GUIMGR->tilemapTools->changeTile(parent);
-      else if (!isTile)
-        GUIMGR->entityTools->setFocus(parent);
+      if (mouseEvent->MouseButtonIndex == 0)
+      {
+        if (isTile && GUIMGR->tilemapTools->isActive())
+          GUIMGR->tilemapTools->changeTile(parent);
+        else if (!isTile)
+          GUIMGR->entityTools->setFocus(parent);
+      }
+      else if (mouseEvent->MouseButtonIndex == 1)
+      {
+        if (isTile)
+          GUIMGR->tilemapTools->changeTile(parent, true);
+      }
     }
   }
   }

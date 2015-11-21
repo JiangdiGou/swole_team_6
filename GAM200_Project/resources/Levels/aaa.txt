@@ -1,0 +1,8 @@
+[LevelName]
+resources/Levels/aaa.txt
+[ArraySpecs]
+2
+2
+[TileMap]
+E E 
+E E 

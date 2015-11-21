@@ -23,7 +23,6 @@ public:
   bool GameActive;
   bool Pause;
   std::string LevelName = "";
-  std::string textureKeyFile = "";
   unsigned int PrevGameState = GS_RUN;
   unsigned int GameState = GS_RUN;
 //  SoundManager * m_Sound;

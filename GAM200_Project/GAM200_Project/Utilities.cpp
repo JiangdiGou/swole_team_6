@@ -57,6 +57,18 @@ std::string getLineFromFile(int lineNumber, std::string fileName)
   return garbage;
 }
 
+std::vector<std::string> tokenize(const std::string &input)
+{
+  std::stringstream sStr(input);
+
+  // use stream iterators to copy the stream to the vector as whitespace separated strings
+  std::istream_iterator<std::string> it(sStr);
+  std::istream_iterator<std::string> end;
+  std::vector<std::string> tokens(it, end);
+
+  return tokens;
+}
+
 bool fileExists(const char* fileName)
 {
   std::ifstream infile(fileName);
