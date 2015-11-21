@@ -79,7 +79,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
     Vector3 PreviousPlatformPosition;
     GameObjectComposition* Platform;
     Body *playerBody;
-		TileMapCollision* playerTileCollision;
+		//TileMapCollision* playerTileCollision;
         
     GameObjectComposition* parent;
 

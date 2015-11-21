@@ -28,7 +28,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "Composition.h"
 //#include "physicsLib/RayLineBoxCollision.h"
 
-class mouseVector : public GameComponent
+class MouseVector : public GameComponent
 {
 public:
   Vector2 mouseDownPos;
@@ -43,7 +43,7 @@ public:
   void SerializeWrite(Serializer& str) override;
 
  private:
-	 SoundEmitter  mouseSound = *new SoundEmitter();
+	//SoundEmitter  mouseSound = *new SoundEmitter();
   GameObjectComposition* parent;
 };
 

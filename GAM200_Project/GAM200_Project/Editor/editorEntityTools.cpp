@@ -1,4 +1,5 @@
 #include "editorEntityTools.h"
+
 #include <typeinfo>
 
 const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
@@ -12,7 +13,10 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Shape Line",
   "Reactive",
   "Sound Emitter",
-  "Editbale"
+  "Test Component",
+  "Editbale",
+  "MouseVector",
+  "PlayerState"
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -78,8 +82,10 @@ void EditorEntityTools::handle()
         //If body or AAB
         if (currentItem + 1 == 5 || currentItem + 1 == 7)
         {
-          addShapeAndBody(focus);
-          setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
+          setupMessage("I've removed adding physics b/c they crash editor.", ImVec4(1, 0, 0, 1));
+          //Damn, this still doesnt work.
+          //addShapeAndBody(focus);
+          //setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
         }
         else
         {
@@ -113,7 +119,7 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
   case CT_SpriteText:
   {
     SpriteText* fSpriteText = (SpriteText*)getFocusComponent(CT_SpriteText);
-    ImGui::InputText("Texture", tweakableText, 256);
+    ImGui::InputText("Text", tweakableText, 256);
 
     if (ImGui::Button("Update Text") && fSpriteText)
     {
@@ -157,24 +163,22 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
   case CT_SoundEmitter:
     return focus->has(SoundEmitter);
 
+  case CT_TestComponent:
+    return focus->has(TestComponent);
+
   case CT_Editable:
     return focus->has(Editable);
 
+  case CT_MouseVector:
+    return focus->has(MouseVector);
+ 
+  case CT_PlayerState:
+    return focus->has(PlayerState);
+
   default:
     return NULL;
-
-
-    /*
-    case CT_PlayerState:
-    return new PlayerState();
-    */
-
-    /*
-    case CT_MouseVector:
-    return new mouseVector();
-    */
   }
-}  
+}
 
 GOC* EditorEntityTools::createNewComponent(std::string componentName)
 {
@@ -249,22 +253,20 @@ GameComponent* EditorEntityTools::getNewComponent(ComponentTypeId type)
   case CT_SoundEmitter:
     return new SoundEmitter();
 
+  case CT_TestComponent:
+    return new  TestComponent();
+
   case CT_Editable:
     return new Editable();
 
+  case CT_MouseVector:
+    return new MouseVector();
+
+  case CT_PlayerState:
+    return new PlayerState();
+
   default:
     return NULL;
-
-
-    /*
-    case CT_PlayerState:
-    return new PlayerState();
-    */
-
-    /*
-    case CT_MouseVector:
-    return new mouseVector();
-    */
   }
 }
 

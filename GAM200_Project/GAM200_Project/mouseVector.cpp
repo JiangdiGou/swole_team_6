@@ -20,7 +20,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "physicsLib/RayLineBoxCollision.h"
 #include "engineAudio/SoundEmitter.h"
 
-void mouseVector::SendMessages(Message * message)
+void MouseVector::SendMessages(Message * message)
 {
 	parent = GetOwner();
 	//mouseSound = reinterpret_cast<SoundEmitter *>(parent->GetComponent(CT_SoundEmitter));
@@ -34,20 +34,20 @@ void mouseVector::SendMessages(Message * message)
     {
       if (mouseEvent->ButtonIsPressed)
       {
-		  mouseSound.Initialize();
-		  mouseSound.PlayEvent("SwordSwing");
+		  //mouseSound.Initialize();
+		  //mouseSound.PlayEvent("SwordSwing");
         mouseDown = true;
         mouseDownPos = mouseEvent->MousePosition;
 		//LoopAll(Vector2(mouseDownPos), Vector2(mouseUpPos));
       }
       else if (mouseDown && !(mouseEvent->ButtonIsPressed))
       {
-		  mouseSound.Initialize();
-		  mouseSound.PlayEvent("SwordHitOrganic");
+		  //mouseSound.Initialize();
+		  //mouseSound.PlayEvent("SwordHitOrganic");
         mouseDown = false;
         mouseUpPos = mouseEvent->MousePosition;
 		
-		LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
+		//LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
 		
       }
     }
@@ -55,7 +55,7 @@ void mouseVector::SendMessages(Message * message)
   }
 }
 
-void mouseVector::Update(float dt)
+void MouseVector::Update(float dt)
 {
   if (!mouseDown)
   {
@@ -64,12 +64,12 @@ void mouseVector::Update(float dt)
   }
 }
 
-void mouseVector::SerializeRead(Serializer& str)
+void MouseVector::SerializeRead(Serializer& str)
 {
 
 
 }
-void mouseVector::SerializeWrite(Serializer& str)
+void MouseVector::SerializeWrite(Serializer& str)
 {
   StreamWrite(str, (int&)TypeId);
   StreamWrite(str);

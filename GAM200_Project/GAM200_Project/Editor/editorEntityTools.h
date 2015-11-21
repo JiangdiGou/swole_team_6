@@ -2,7 +2,7 @@
 #define EDITORENTITYTOOLS_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define TOTALCOMPONENTS 11
+#define TOTALCOMPONENTS 14
 
 #include "imGUI\imgui.h"
 #include "../Core.h"
@@ -15,6 +15,9 @@
 #include "../ComponentTypeIds.h"
 #include "../physicsLib/PhysicsManager.h"
 #include "../physicsLib/BinaryMap.h"
+#include "../physicsLib/PlayerState.h"
+#include "../mouseVector.h"
+#include "../GameLogic/TestComponent.h"
 #include <string.h>
 #include <stdio.h>
 

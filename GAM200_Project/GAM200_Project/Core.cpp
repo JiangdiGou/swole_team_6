@@ -100,7 +100,7 @@ void CoreEngine::GameLoop()
         GOC * camera = FACTORY->makeObject("Camera");
         camera->AddComponent(CT_Transform, new Transform());
         Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
-        mouseVector *vectTest = new mouseVector();
+        MouseVector *vectTest = new MouseVector();
         camera->AddComponent(CT_MouseVector, vectTest);
         camera->AddComponent(CT_Camera, mainCamera);
 #ifdef EDITOR
