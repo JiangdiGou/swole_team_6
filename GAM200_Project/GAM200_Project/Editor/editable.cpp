@@ -24,7 +24,7 @@ void Editable::SendMessages(Message* message)
 
     //All left click stuff is figured out by reactive. 
     //If Right click
-    if (mouseEvent->MouseButtonIndex == 1)
+    if (mouseEvent->MouseButtonIndex == 1 && pReactive->mouseOver())
     {
       if (isTile)
         GUIMGR->tilemapTools->changeTile(parent, true);
