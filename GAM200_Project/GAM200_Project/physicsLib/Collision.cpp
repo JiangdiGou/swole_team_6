@@ -18,15 +18,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "Transform.h"
 
 
-float DetermineRestitution(Body * a, Body * b)
-{
-	return 	std::min(a->Restitution, b->Restitution);
-}
 
-float DetermineFriction(Body * a, Body * b)
-{
-	return sqrt(a->Friction*b->Friction);
-}
 
 void ShapeLine::SerializeRead(Serializer& str)
 {
@@ -51,15 +43,15 @@ void ShapeCircle::Draw()
 	/*Drawer::Instance.DrawCircle(body->Position, Radius);*/
 }
 
-bool ShapeCircle::TestPoint(Vec2D testPoint)
-{
+//bool ShapeCircle::TestPoint(Vec2D testPoint)
+//{
 	//Vec2D delta = body->Position - testPoint;
 	//float dis = Normalize(delta);
 	//if (dis < Radius)
 	//	return true;
 	//else
-	return false;
-}
+	//return false;
+//}
 
 void ShapeCircle::SerializeRead(Serializer& str)
 {
@@ -79,15 +71,15 @@ void ShapeCircle::SerializeWrite(Serializer& str)
 
 void ShapeAAB::Initialize()
 {
-  if (body == NULL)
-  {
-    Body* ownerBody = GetOwner()->has(Body);
-    if (ownerBody != NULL)
-    {
-      body = ownerBody;
-      body->BodyShape = this;
-    }
-  }
+  //if (body == NULL)
+  //{
+  //  Body* ownerBody = GetOwner()->has(Body);
+  //  if (ownerBody != NULL)
+  //  {
+  //    body = ownerBody;
+  //    body->BodyShape = this;
+  //  }
+  //}
   /*body = GetOwner()->has(Body);
   if (body == NULL)
     return;
@@ -203,18 +195,18 @@ void ShapeAAB::Draw()
 	//debugDrawSquare(ownerTrans->GetPosition(), Extents.x, Extents.y, Vector3(0, 0, 0));
 }
 
-bool ShapeAAB::TestPoint(Vec2D testPoint)
-{
-	Vec2D delta = body->Position - testPoint;
-	if (fabs(delta.x) < Extents.x)
-	{
-		if (fabs(delta.y) < Extents.y)
-		{
-			return true;
-		}
-	}
-	return false;
-}
+//bool ShapeAAB::TestPoint(Vec2D testPoint)
+//{
+	//Vec2D delta = body->Position - testPoint;
+	//if (fabs(delta.x) < Extents.x)
+	//{
+	//	if (fabs(delta.y) < Extents.y)
+	//	{
+	//		return true;
+	//	}
+	//}
+	//return false;
+//}
 
 
 float Clamp(float min, float max, float x)
@@ -322,13 +314,13 @@ bool DetectCollisionCircleCircle(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactLi
 		}
 
 		//Add a contact
-		ManifoldSet * contact = c->GetNewContact();
-		contact->Bodies[0] = spA->body;
-		contact->Bodies[1] = spB->body;
-		contact->ContactNormal = positionDelta;//A to B
-		contact->Penetration = penetration;
-		contact->Restitution = DetermineRestitution(a->body, b->body);
-		contact->FrictionCof = DetermineFriction(a->body, b->body);
+		//ManifoldSet * contact = c->GetNewContact();
+		//contact->Bodies[0] = spA->body;
+		//contact->Bodies[1] = spB->body;
+		//contact->ContactNormal = positionDelta;//A to B
+		//contact->Penetration = penetration;
+		//contact->Restitution = DetermineRestitution(a->body, b->body);
+		//contact->FrictionCof = DetermineFriction(a->body, b->body);
 		return true;
 	}
 	else
@@ -408,8 +400,11 @@ bool  DetectCollisionCircleAABox(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactLi
 
 bool  DetectCollisionAABoxAABox(Shape *a, Vec2D at, Shape *b, Vec2D bt, contactList*c)
 {
-	ShapeAAB * boxA = (ShapeAAB*)a;
+  ShapeAAB * boxA = (ShapeAAB*)a;
   ShapeAAB * boxB = (ShapeAAB*)b;
+  Body * A = a->GetOwner()->has(Body);
+  Body * B = b->GetOwner()->has(Body);
+  //Body  C;
 
   GOC* bowner = b->GetOwner();
   Transform* aTrans = a->GetOwner()->has(Transform);
@@ -435,12 +430,10 @@ bool  DetectCollisionAABoxAABox(Shape *a, Vec2D at, Shape *b, Vec2D bt, contactL
 				//X is smallest
 				ManifoldSet * contact = c->GetNewContact();
 				Vec2D normal = positionDelta.x < 0 ? Vec2D(-1, 0) : Vec2D(1, 0);
-				contact->Bodies[0] = boxA->body;
-				contact->Bodies[1] = boxB->body;
+				B->fuckCollision(contact, A);
 				contact->ContactNormal = normal;
 				contact->Penetration = xDiff;
-				contact->Restitution = DetermineRestitution(a->body, b->body);
-				contact->FrictionCof = DetermineFriction(a->body, b->body);
+			
 				return true;
 			}
 			else
@@ -448,12 +441,10 @@ bool  DetectCollisionAABoxAABox(Shape *a, Vec2D at, Shape *b, Vec2D bt, contactL
 				//Y is smallest
 				ManifoldSet * contact = c->GetNewContact();
 				Vec2D normal = positionDelta.y < 0 ? Vec2D(0, 1) : Vec2D(0, -1);
-				contact->Bodies[1] = boxA->body;
-				contact->Bodies[0] = boxB->body;
+				A->fuckCollision(contact, B);
 				contact->ContactNormal = normal;
 				contact->Penetration = yDiff;
-				contact->Restitution = DetermineRestitution(a->body, b->body);
-				contact->FrictionCof = DetermineFriction(a->body, b->body);
+			
 				return true;
 			}
 		}

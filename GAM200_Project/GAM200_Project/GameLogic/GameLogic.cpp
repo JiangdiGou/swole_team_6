@@ -53,7 +53,7 @@ void GameLogic::Initialize()
   bodyPlayer->Friction = 0.0f;
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
   boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
-  bodyPlayer->BodyShape = boxColliderPlayer;
+ // bodyPlayer->BodyShape = boxColliderPlayer;
 
 #ifdef EDITOR
   Reactive* playerReactive = new Reactive();

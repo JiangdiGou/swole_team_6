@@ -113,7 +113,8 @@ void Body::Initialize()
     if (ownerAAB != NULL)
     {
       BodyShape = ownerAAB;
-      ownerAAB->body = this;
+      //ownerAAB->body = this;
+	
     }
   }
 	//Get the starting position
@@ -135,7 +136,8 @@ void Body::Initialize()
 		InvMass = 0.0f;
 	}
 
-	BodyShape->body = this;
+	//BodyShape->body = this;
+
 }
 
 void Body::SerializeRead(Serializer& str)
@@ -201,4 +203,27 @@ void Body::SetPosition(Vec2D p)
 void Body::SetVelocity(Vec2D v)
 {
 	Velocity = v;
+}
+
+float Body::DetermineRestitution(Body * a)
+{
+	return 	std::min(a->Restitution, this->Restitution);
+}
+
+float Body::DetermineFriction(Body * a)
+{
+	return sqrt(a->Friction * this->Friction);
+}
+
+void Body::fuckCollision(ManifoldSet * contact, Body * a)
+{
+	
+	//ManifoldSet * contact = c->GetNewContact();
+	//Vec2D normal = positionDelta.x < 0 ? Vec2D(-1, 0) : Vec2D(1, 0);
+	contact->Bodies[0] = a;
+	contact->Bodies[1] = this;
+	//contact->ContactNormal = normal;
+	//contact->Penetration = xDiff;
+	contact->Restitution = DetermineRestitution(this);
+	contact->FrictionCof = DetermineFriction(this);
 }

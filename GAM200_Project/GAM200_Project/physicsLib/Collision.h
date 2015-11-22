@@ -20,14 +20,17 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../Composition.h"
 #include <vector>
 
+
 class Body;
 const static int maxContacts = 1024;
+//Body body;
+
 ///Data for a contact between two bodies.
 ///Used to resolve world collisions.
 struct ManifoldSet
 {
-	
-	
+
+
 	Body* Bodies[2];
 	Vec2D Movement[2];
 	Vec2D ContactNormal;
@@ -52,7 +55,8 @@ public:
 		SidLine
 	};
 	ShapeId Id;
-	Body * body;
+    
+	
 	Shape(ShapeId pid) : Id(pid) {};
 
 };
@@ -77,7 +81,7 @@ public:
 	ShapeCircle() : Shape(SidCircle){};
 	float Radius;
 	virtual void Draw();
-	virtual bool TestPoint(Vec2D);
+	//virtual bool TestPoint(Vec2D);
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
 };
@@ -121,7 +125,7 @@ public:
 	Vec2D origin = Vec2D(0.0f,0.0f);
   std::vector<ShapeAAB*> CurCollidingObjects;
 	virtual void Draw();
-	virtual bool TestPoint(Vec2D);
+	//virtual bool TestPoint(Vec2D);
   typedef std::vector<ShapeAAB*>::iterator ObjIt;
 };
 
