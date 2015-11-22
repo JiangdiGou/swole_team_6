@@ -11,11 +11,16 @@ void Reactive::SendMessages(Message * message)
   //std::cout << "mouse moved!" << std::endl;
   switch (message->MessageId)
   {
+    control = false;
+    alt = false;
+    shift = false;
+
     //std::cout << "ID: " << message->MessageId << std::endl;
   case Mid::MouseMove:
   {
 
     MouseMove* moveEvent = (MouseMove*)message;
+    mousePos = moveEvent->MousePosition;
 
     float leftEdge = ownerTransform->GetPositionX() - 0.5 * ownerTransform->GetScale().x;
     float rightEdge = ownerTransform->GetPositionX() + 0.5 * ownerTransform->GetScale().x;
@@ -24,24 +29,59 @@ void Reactive::SendMessages(Message * message)
 
     if (moveEvent->MousePosition.x < rightEdge && moveEvent->MousePosition.x > leftEdge
       && moveEvent->MousePosition.y > bottomEdge && moveEvent->MousePosition.y < topEdge)
-      mouseIsOver = true;
+      mouseIsOverThis = true;
     else
-      mouseIsOver = false;
+      mouseIsOverThis = false;
+
+    break;
   }
   case Mid::MouseButton:
   {
     MouseButton* mouseEvent = (MouseButton*)message;
 
+    control = mouseEvent->mods & GLFW_MOD_CONTROL;
+    alt = mouseEvent->mods & GLFW_MOD_ALT;
+    shift = mouseEvent->mods & GLFW_MOD_SHIFT;
+
+    //For Left click
     if (mouseEvent->MouseButtonIndex == 0)
     {
-      if (mouseEvent->ButtonIsPressed)
-        mouseDown = true;
-      else
-        mouseDown = false;
+      //if its pressed 
+      if (mouseEvent->ButtonIsPressed && mouseIsOverThis)
+      {
+        mouseDownOnThis = true;
+        break;
+      }
+      //If its not pressed 
+      else if (mouseDownOnThis)
+      {
+        mouseDownOnThis = false;
+        break;
+      }
     }
   }
   }
 }
+
+void Reactive::Update(float dt)
+{
+  if (mouseDownOnThis)
+  {
+    if (mouseHoldCounter > 5)
+      mouseHeldOnThis = true;
+    else
+    {
+      mouseHoldCounter++;
+      mouseHeldOnThis = false;
+    }
+  }
+  else
+  {
+    mouseHoldCounter = 0;
+    mouseHeldOnThis = false;
+  }
+}
+
 void Reactive::SerializeRead(Serializer& str)
 {
 
@@ -50,26 +90,4 @@ void Reactive::SerializeWrite(Serializer& str)
 {
   StreamWrite(str, (int&)TypeId);
   StreamWrite(str);
-}
-
-bool Reactive::mouseOver()
-{
-  return mouseIsOver;
-}
-
-void Reactive::Update(float dt)
-{
-  GameObjectComposition* parent = GetOwner();
-  Sprite* ownerSprite = reinterpret_cast<Sprite *>(parent->GetComponent(CT_Sprite));
-
-  /*
-  if (ownerSprite)
-  {
-    if (mouseIsOver && mouseDown)
-      ownerSprite->color = glm::vec4(0.0, 1.0, 0.0, 1.0);
-    else if (mouseIsOver)
-      ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0);
-    else
-      ownerSprite->color = glm::vec4(1.0, 0.0, 0.0, 1.0);
-  }*/
 }

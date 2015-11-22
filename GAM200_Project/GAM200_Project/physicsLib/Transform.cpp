@@ -191,7 +191,7 @@ void Transform::SetScale(const Vector2 scal)
 glm::mat4 Transform::calculateTransformMatrix()
 {
   glm::mat4 transform;
-  glm::mat4 scaleMat, translateMat;
+  glm::mat4 scaleMat, translateMat, rotMat;
 
   scaleMat = glm::scale(scaleMat, glm::vec3(scale.x, scale.y, scale.z));
 
@@ -199,9 +199,9 @@ glm::mat4 Transform::calculateTransformMatrix()
     position.x, position.y, position.z));
   //Since we're in 2d, rotation occurs about the Z axis
   //Can be changed later if you want different types of rotation
-  //transform = glm::rotate(transform, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+  rotMat = glm::rotate(rotMat, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
 
-  transform = translateMat * scaleMat;
+  transform = translateMat * rotMat * scaleMat;
 
   return transform;
 }

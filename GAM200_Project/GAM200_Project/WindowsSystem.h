@@ -50,12 +50,13 @@ public:
     LeftMouse,
     RightMouse
   };
-  MouseButton(MouseButtonIndexId button, bool state, Vec2D position)
-    : Message(Mid::MouseButton), MouseButtonIndex(button), ButtonIsPressed(state), MousePosition(position) {};
+  MouseButton(MouseButtonIndexId button, bool state, Vec2D position, int mod)
+    : Message(Mid::MouseButton), MouseButtonIndex(button), ButtonIsPressed(state), MousePosition(position), mods(mod) {};
 
   MouseButtonIndexId MouseButtonIndex;
   bool ButtonIsPressed;
   Vec2D MousePosition;
+  int mods;
 };
 
 //Message signaling that the mouse has moved. Has new position of mouse

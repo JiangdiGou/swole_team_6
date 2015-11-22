@@ -14,12 +14,27 @@ public:
   void SendMessages(Message*) override;
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
-  bool mouseOver();
+  bool mouseOver() { return mouseIsOverThis;  }
+  bool mouseDownAndOver() { return mouseDownOnThis; }
+  bool mouseDownHeldAndOver() { return mouseHeldOnThis;  }
+  bool ctrlPressed() { return control;  }
+  bool altPressed() { return alt;  }
+  bool shiftPresed() { return shift;  }
+  Vector2 getMousePos() { return mousePos; }
 
 private:
-  bool mouseDown = false;
-  bool mouseIsOver = false;
-  Transform* ownerTransform;
+  Vector2 mousePos;
+  bool mouseDownOnThis = false;
+  bool mouseIsOverThis = false;
+  bool mouseHeldOnThis = false;
+
+  bool control;
+  bool alt;
+  bool shift;
+
+  int mouseHoldCounter = 0;
+
+  Transform* ownerTransform; 
 };
 
 #endif

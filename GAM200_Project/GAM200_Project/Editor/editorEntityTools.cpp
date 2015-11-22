@@ -106,6 +106,16 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
 {
   switch (type)
   {
+  case CT_Transform:
+  {
+    ImGui::Text("To Translate...");
+    ImGui::Text("Click and Drag");
+    ImGui::Text("To Rotate...");
+    ImGui::Text("Ctrl-Click and Drag");
+    ImGui::Text("To Scale...");
+    ImGui::Text("Shift-Click and Drag");
+    break;
+  }
   case CT_Sprite:
   {
     Sprite* fSprite = (Sprite*)getFocusComponent(CT_Sprite);
@@ -125,6 +135,7 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
     {
       fSpriteText->message = std::string(tweakableText);
     }
+    break;
   }
   }
 }

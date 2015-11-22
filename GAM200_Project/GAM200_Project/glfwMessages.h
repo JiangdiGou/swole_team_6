@@ -202,12 +202,12 @@ void glfwMouseButtonCallback(GLFWwindow *window, int button, int action, int mod
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT)
 	{
-		MouseButton m(MouseButton::LeftMouse, buttonState, worldPos);
+		MouseButton m(MouseButton::LeftMouse, buttonState, worldPos, mods);
 		CORE->BroadcastMessage(&m);
 	}
 	else if (button == GLFW_MOUSE_BUTTON_RIGHT)
 	{
-		MouseButton m(MouseButton::RightMouse, buttonState, worldPos);
+		MouseButton m(MouseButton::RightMouse, buttonState, worldPos, mods);
 		CORE->BroadcastMessage(&m);
 	}
 }

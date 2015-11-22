@@ -49,32 +49,32 @@ LRESULT WINAPI MessageHandler(HWND hWnd,	 //The window the message is for (ours 
 	{
     Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x, 
                                           WINDOWSSYSTEM->MousePosition.y));
-		MouseButton m(MouseButton::LeftMouse, true, worldPos);
-		CORE->BroadcastMessage(&m);
+		//MouseButton m(MouseButton::LeftMouse, true, worldPos, mods);
+		//CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_RBUTTONDOWN:
 	{
     Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x, 
                                           WINDOWSSYSTEM->MousePosition.y));
-    MouseButton m(MouseButton::RightMouse, true, worldPos);
-		CORE->BroadcastMessage(&m);
+    //MouseButton m(MouseButton::RightMouse, true, worldPos);
+		//CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_LBUTTONUP:
 	{
     Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
                                           WINDOWSSYSTEM->MousePosition.y));
-    MouseButton m(MouseButton::LeftMouse, false, worldPos);
-		CORE->BroadcastMessage(&m);
+    //MouseButton m(MouseButton::LeftMouse, false, worldPos);
+		//CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_RBUTTONUP:
 	{
     Vec2D worldPos = GRAPHICS->screenToWorld(Vec2D(WINDOWSSYSTEM->MousePosition.x,
                                           WINDOWSSYSTEM->MousePosition.y));
-    MouseButton m(MouseButton::RightMouse, false, worldPos);
-		CORE->BroadcastMessage(&m);
+    //MouseButton m(MouseButton::RightMouse, false, worldPos);
+		//CORE->BroadcastMessage(&m);
 		break;
 	}
 	case WM_MOUSEMOVE:

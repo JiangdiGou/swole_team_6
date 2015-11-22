@@ -18,6 +18,8 @@ public:
 private:
   bool isTile;
   Reactive* pReactive = 0;
+  Sprite* pSprite = 0;
+  Transform* pTransform = 0;
   GameObjectComposition* parent = 0;
 };
 

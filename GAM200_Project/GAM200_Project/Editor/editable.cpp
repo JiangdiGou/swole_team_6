@@ -9,53 +9,94 @@ void Editable::Initialize()
 {
   parent = GetOwner();
   pReactive = reinterpret_cast<Reactive *>(parent->GetComponent(CT_Reactive));
+  pSprite = reinterpret_cast<Sprite *>(parent->GetComponent(CT_Sprite));
+  pTransform = reinterpret_cast<Transform *>(parent->GetComponent(CT_Transform));
 }
 
 void Editable::SendMessages(Message* message)
 {
+  
   switch (message->MessageId)
   {
   case Mid::MouseButton:
   {
     MouseButton* mouseEvent = (MouseButton*)message;
 
-    //If you left clicked this object
-    if (mouseEvent->ButtonIsPressed
-      && pReactive->mouseOver())
+    //All left click stuff is figured out by reactive. 
+    //If Right click
+    if (mouseEvent->MouseButtonIndex == 1)
     {
-      if (mouseEvent->MouseButtonIndex == 0)
-      {
-        if (isTile && GUIMGR->tilemapTools->isActive())
-          GUIMGR->tilemapTools->changeTile(parent);
-        else if (!isTile)
-          GUIMGR->entityTools->setFocus(parent);
-      }
-      else if (mouseEvent->MouseButtonIndex == 1)
-      {
-        if (isTile)
-          GUIMGR->tilemapTools->changeTile(parent, true);
-      }
+      if (isTile)
+        GUIMGR->tilemapTools->changeTile(parent, true);
     }
   }
   }
 }
 
+
 void Editable::Update(float dt)
 {
-  Sprite* ownerSprite = reinterpret_cast<Sprite *>(parent->GetComponent(CT_Sprite));
-  if (ownerSprite)
+  //Tile chaging / entity selection
+  if (pReactive->mouseDownAndOver())
+  {
+    if (isTile && GUIMGR->tilemapTools->isActive())
+      GUIMGR->tilemapTools->changeTile(parent);
+    else if (!isTile)
+      GUIMGR->entityTools->setFocus(parent);
+  }
+
+  //Transform Stuff
+  //Rotation
+  if (pReactive->mouseDownHeldAndOver() && !isTile && pReactive->ctrlPressed())
+  {
+    debugDrawCircle(pTransform->GetPosition(), 2, Vector3(), 100);
+    Vector2 mousePos = pReactive->getMousePos();
+    Vector2 mouseRadius = mousePos - pTransform->GetPositionXY();
+    mouseRadius = mouseRadius.Normalize();
+
+    //Gets angle of rotation
+    float angle;
+    if (mouseRadius.x > 0)
+      angle = asin(mouseRadius.y);
+    else if (mouseRadius.x < 0 && mouseRadius.y < 0)
+      angle = -acos(mouseRadius.x);
+    else
+      angle = acos(mouseRadius.x);
+
+    pTransform->SetRotation(Vector3(0, 0, angle));
+  }
+  //Scale
+  else if (pReactive->mouseDownHeldAndOver() && !isTile && pReactive->shiftPresed())
+  {
+    debugDrawSquare(pTransform->GetPosition(), 2 * pTransform->GetScale().x, 
+      2 * pTransform->GetScale().y, Vector3());
+
+    Vector2 mousePos = pReactive->getMousePos();
+    Vector2 mouseRadius = mousePos - pTransform->GetPositionXY();
+
+    float scalX = mouseRadius.x;
+    float scalY = mouseRadius.y;
+
+    pTransform->SetScale(Vector2(scalX, scalY));
+  }
+  //Translate
+  else if (pReactive->mouseDownHeldAndOver() && !isTile)
+    pTransform->SetPosition(pReactive->getMousePos());
+
+  //Selection highlighting
+  if (pSprite)
   {
     //Highlighting for tile selection
     if (pReactive->mouseOver())
     {
       if (!isTile)
-       ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0f);
+        pSprite->color = glm::vec4(0.5, 0.5, 0.0, 1.0f);
       else if (GUIMGR->tilemapTools->isActive())
-        ownerSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0f);
+        pSprite->color = glm::vec4(1.0, 1.0, 0.0, 1.0f);
     }
     else if (!isTile && GUIMGR->entityTools->getFocus() == parent)
-      ownerSprite->color = glm::vec4(0.0, 1.0, 0.0, 1.0f);
+      pSprite->color = glm::vec4(0.0, 1.0, 0.0, 1.0f);
     else
-      ownerSprite->color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+      pSprite->color = glm::vec4(1.0, 1.0, 1.0, 1.0);
   }
 }
