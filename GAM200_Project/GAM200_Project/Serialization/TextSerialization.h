@@ -12,6 +12,7 @@ namespace Framework
 		std::fstream stream;
 		virtual bool Open(const std::string& file);
 		virtual bool IsGood();
+
 		virtual void ReadInt(int& i);
 		virtual void ReadFloat(float& f);
 		virtual void ReadString(std::string& str);
@@ -23,6 +24,7 @@ namespace Framework
     virtual void WriteVec3(float& f, float& f2, float& f3);
     virtual void WriteFloat(float& f);
     virtual void WriteString(std::string& str);
+
     virtual void WriteEndl();
 	};
 

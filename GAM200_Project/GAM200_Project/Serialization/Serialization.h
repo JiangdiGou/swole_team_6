@@ -10,11 +10,13 @@
 		///Does the stream still have data?
 		virtual bool IsGood()=0;
 		virtual void ReadInt(int& i)=0;
+    virtual void ReadBool(bool& f) = 0;
 		virtual void ReadFloat(float& f)=0;
 		virtual void ReadString(std::string& str)=0;
     virtual void ReadVec2(float& f, float& f2) = 0;
     virtual void ReadVec3(float& f, float& f2, float& f3) = 0;
     virtual void WriteInt(int& i) = 0;
+    virtual void WriteBool(bool& f) = 0;
     virtual void WriteFloat(float& f) = 0;
     virtual void WriteString(std::string& str) = 0;
     virtual void WriteVec2(float& f, float& f2) = 0;
@@ -49,7 +51,12 @@
 	}
   inline void StreamRead(Serializer& stream, bool& i)
   {
-    stream.ReadInt((int&)i);
+    int boolVal;
+    stream.ReadInt(boolVal);
+    if (boolVal == 1)
+      i = true;
+    else
+      i = false;
   }
 
 	inline void StreamRead(Serializer& stream,std::string& str)
@@ -84,7 +91,12 @@
   }
   inline void StreamWrite(Serializer& stream, bool& i)
   {
-    stream.WriteInt((int&)i);
+    int boolVal;
+    if (i == true)
+      boolVal = 1;
+    else
+      boolVal = 0;
+    stream.WriteInt(boolVal);
   }
   inline void StreamWrite(Serializer& stream, std::string& str)
   {
