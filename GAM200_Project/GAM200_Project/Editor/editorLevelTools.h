@@ -27,9 +27,12 @@ private:
   //Heavy lifting functions
   void createLevelFileFromArray(std::string levelName, int width, int height);
   void createEmptyLevelFile(std::string levelName, int width, int height);
+  void createBlankEntFile(std::string levelName);
+  bool saveEntities(std::string levelName);
 
   //Helpers 
   bool checkFilename(std::string filename, bool checkContentsAndKey = false);
+  std::string appendEnt(const std::string &input) const;
   bool checkLevelDimensions();
   
   std::string currentMessage;

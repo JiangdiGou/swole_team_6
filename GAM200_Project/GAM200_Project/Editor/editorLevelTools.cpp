@@ -1,4 +1,5 @@
 #include "editorLevelTools.h"
+#include "../Serialization/TextSerialization.h"
 
 EditorLevelTools::EditorLevelTools()
 {
@@ -25,6 +26,7 @@ void EditorLevelTools::handle()
     if (checkFilename(levelPathInput) && checkLevelDimensions())
     {
       createEmptyLevelFile(levelPathInput, levelDimensionInput[0], levelDimensionInput[1]);
+      createBlankEntFile(levelPathInput);
 
       setupMessage(std::string(levelPathInput + std::string(" created")), ImVec4(0, 1, 0, 1));
     }
@@ -39,6 +41,7 @@ void EditorLevelTools::handle()
     if (checkFilename(levelPathInput) && checkLevelDimensions())
     {
       createEmptyLevelFile(levelPathInput, levelDimensionInput[0], levelDimensionInput[1]);
+      createBlankEntFile(levelPathInput);
 
       CORE->LevelName = levelPathInput;
       CORE->GameState = GS_LOAD;
@@ -79,7 +82,8 @@ void EditorLevelTools::handle()
     {
       createLevelFileFromArray(levelPathInput, FACTORY->levelWidth, FACTORY->levelHeight);
 
-      setupMessage(std::string(levelPathInput + std::string(" created")), ImVec4(0, 1, 0, 1));
+      if (saveEntities(levelPathInput))
+        setupMessage(std::string(levelPathInput + std::string(" created")), ImVec4(0, 1, 0, 1));
     }
   }
 
@@ -89,7 +93,26 @@ void EditorLevelTools::handle()
   {
     createLevelFileFromArray(CORE->LevelName, FACTORY->levelWidth, FACTORY->levelHeight);
 
-    setupMessage(std::string(CORE->LevelName + std::string(" saved")), ImVec4(0, 1, 0, 1));
+    if (saveEntities(CORE->LevelName))
+      setupMessage(std::string(CORE->LevelName + std::string(" saved")), ImVec4(0, 1, 0, 1));
+  }
+}
+
+bool EditorLevelTools::saveEntities(std::string levelName)
+{
+  Framework::TextSerializer serializer = Framework::TextSerializer();
+
+  if (!(serializer.Open(appendEnt(levelName))))
+  {
+    setupMessage("Failed to open to -ENT file", ImVec4(1, 0, 0, 1));
+    return false;
+  }
+  else
+  {
+    //Factory fx will jusst write on top of old shit if no clear.
+    serializer.stream.clear();
+    FACTORY->SerializeAllObjects(serializer);
+    return true;
   }
 }
 
@@ -128,7 +151,10 @@ void EditorLevelTools::createEmptyLevelFile(std::string levelName, int width, in
   ofs.open(levelName);
 
   if (!ofs.is_open())
-    std::cout << "Faied to create file " << std::endl;
+  {
+    setupMessage("Failed to Create level File", ImVec4(1, 0, 0, 1));
+    return;
+  }
 
   ofs << "[LevelName]" << std::endl;
   ofs << levelName << std::endl;
@@ -149,6 +175,24 @@ void EditorLevelTools::createEmptyLevelFile(std::string levelName, int width, in
   }
 
   ofs.close();
+}
+
+void EditorLevelTools::createBlankEntFile(std::string levelName)
+{
+  std::ofstream ofs;
+  ofs.open(appendEnt(levelName));
+
+  if (!ofs.is_open())
+  {
+    setupMessage("Failed to Create level ENT File", ImVec4(1, 0, 0, 1));
+    return;
+  }
+  else
+  {
+    ofs.clear();
+    ofs.close();
+    return;
+  }
 }
 
 void EditorLevelTools::levelNameUpdate()
@@ -206,4 +250,11 @@ bool EditorLevelTools::checkLevelDimensions()
     setupMessage("Bad Level Dimensions. Both must be > 0", ImVec4(1, 0, 0, 1));
     return false;
   }   
+}
+
+std::string EditorLevelTools::appendEnt(const std::string &input) const
+{
+  std::string substring(input.begin(), input.end() - 4);
+  substring.append("-ENT.txt");
+  return substring;
 }
