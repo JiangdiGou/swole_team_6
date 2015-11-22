@@ -108,19 +108,7 @@
     <ClInclude Include="GAM200_Project\gameLevel.h">
       <Filter>Universal</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\collision_detection_utility.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\math_utility.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\movement_collision_detection.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\range.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\collision_detection.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h">
@@ -165,19 +153,10 @@
     <ClInclude Include="GAM200_Project\physicsLib\Resolution.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\primitive.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\Transform.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\Collision.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\CollisionCheck.h">
-      <Filter>Systems\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\Trigger.h">
       <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\physicsLib\Precompiled.h">
@@ -212,9 +191,6 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\WindowsSystem.h">
       <Filter>Systems\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="GAM200_Project\physicsLib\swag.h">
-      <Filter>Systems\physics</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\textureAtlas.h">
       <Filter>Systems\engineGraphics</Filter>
