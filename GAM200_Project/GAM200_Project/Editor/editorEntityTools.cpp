@@ -89,7 +89,7 @@ void EditorEntityTools::handle()
         }
         else
         {
-          GameComponent* component = getNewComponent((ComponentTypeId(currentItem + 1)));
+          GameComponent* component = FACTORY->getNewComponent((ComponentTypeId(currentItem + 1)));
 
           focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
           focus->Initialize();
@@ -228,57 +228,6 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
   setupMessage(componentName + " created.", ImVec4(0, 1, 0, 1));
 
   return newEntity;
-}
-
-GameComponent* EditorEntityTools::getNewComponent(ComponentTypeId type)
-{
-  switch (type)
-  {
-  case CT_Transform:
-    return new Transform();
-
-  case CT_Camera:
-    return new Camera();
-
-  case CT_Sprite:
-    return new Sprite();
-
-  case CT_SpriteText:
-    return new SpriteText(std::string("default text"));
-
-  case CT_Body:
-    return new Body();
-
-  case CT_TileMapCollision:
-    return new TileMapCollision();
-
-  case CT_ShapeAAB:
-    return new ShapeAAB();
-
-  case CT_ShapeLine:
-    return new ShapeLine();
-
-  case CT_Reactive:
-    return new Reactive();
-
-  case CT_SoundEmitter:
-    return new SoundEmitter();
-
-  case CT_TestComponent:
-    return new  TestComponent();
-
-  case CT_Editable:
-    return new Editable();
-
-  case CT_MouseVector:
-    return new MouseVector();
-
-  case CT_PlayerState:
-    return new PlayerState();
-
-  default:
-    return NULL;
-  }
 }
 
 

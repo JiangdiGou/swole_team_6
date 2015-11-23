@@ -45,7 +45,6 @@ private:
 
   void showTweakables(ComponentTypeId type);
   GameComponent* getFocusComponent(ComponentTypeId type);
-  GameComponent* getNewComponent(ComponentTypeId type);
 
   static const const char* components[TOTALCOMPONENTS];
 

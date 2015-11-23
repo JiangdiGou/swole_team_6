@@ -18,6 +18,7 @@
 #include "../AssertionError/AssertionError.h"
 #include "../WindowsSystem.h"
 #include "../Serialization/Serialization.h"
+#include "../Serialization/TextSerialization.h"
 
 
 bool FACTORY_EXISTS;
@@ -72,7 +73,28 @@ void objFactory::SerializeAllObjects(Serializer& str)
   std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
   for (; it != gameObjs.end(); ++it)
   {
-    it->second->SerializeWrite(str);
+    //We dont want to serialize this at this second, might fix later, but these 
+    //Two will eventually need to be handled specially, leaving hardcoded in gamelogic for now.
+
+    if (it->second->GetName() == std::string("GAMECAMERA")
+      || it->second->GetName() == std::string("GAMEPLAYER"))
+    {
+      continue;
+    }
+    else
+    {
+      //Another check, whether or not tile
+      Editable* pEditable = it->second->has(Editable);
+      Reactive* pReactive = it->second->has(Reactive);
+
+      //Also, we need to not serialize tiles or we'll spawn them twice. 
+      if (pEditable && pEditable->isATile())
+        continue;
+      else if (pReactive && !(pReactive->isActuallyReactive()))
+        continue;
+      else
+        it->second->SerializeWrite(str);
+    }
   }
 }
 /*std::vector<const GameObjectComposition*> objFactory::GetgameObjs()
@@ -91,6 +113,7 @@ void objFactory::SerializeAllObjects(Serializer& str)
 void objFactory::Initialize()
 {
 }
+
 void objFactory::Update(float dt)
 {
   std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
@@ -203,25 +226,6 @@ void objFactory::createTiles()
       }
       else
         createTile(j, i, texture);
-
-      /*
-    case '1':
-    createTile(j, i, std::string("sliceTest-207"));
-    break;
-    case '2':
-    createTile(j, i, std::string("sliceTest-72"));
-    break;
-    case '3':
-    createTile(j, i, std::string("sliceTest-246"));
-    break;
-    case '4':
-    createTile(j, i, std::string("sliceTest-181"));
-    break;
-    case '5':
-    createTile(j, i, std::string("sliceTest-165"));
-    break;
-    }
-    */
     }
   }
 }
@@ -252,7 +256,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
 
 //Adds reactive b/c its a depend of editable.
 #ifdef EDITOR
-  Reactive* reactive = new Reactive();
+  Reactive* reactive = new Reactive(false);
   newTile->AddComponent(CT_Reactive, reactive);
   Editable* editable = new Editable();
   newTile->AddComponent(CT_Editable, editable);
@@ -282,5 +286,166 @@ void objFactory::printLevel()
       std::cout << tileMap[i][j];
     }
     std::cout << std::endl;
+  }
+}
+
+bool objFactory::loadEntities(std::string entityFile)
+{
+  Framework::TextSerializer serializer;
+  char* line = new char[256];
+  int type;
+  std::vector<int> previousTypes;
+  bool newComposition = false;
+
+  if (!(serializer.Open(entityFile)))
+    return false;
+
+  bool firstCreated = false;
+  GOC* currentEntity = NULL;
+  while (!(serializer.stream.eof()))
+  {
+    //Gets type info
+    serializer.stream.getline(line, 256);
+    if (serializer.stream.eof())
+      break;
+
+    //std::cout << "Line: " <<  line << std::endl;
+
+    //It's sometimes getting an empty line? 
+    try
+    {
+      type = std::stoi(line);
+    }
+    catch (std::invalid_argument)
+    {
+      continue;
+    }
+
+    //Makes first component if its needs to
+    if (!firstCreated)
+    {
+      currentEntity = makeObject("We don't save names.");
+      firstCreated = true;
+    }
+
+    //Checks whether this component already exists on object 
+    for (std::vector<int>::iterator it = previousTypes.begin();
+      it != previousTypes.end(); ++it)
+    {
+      //If this type already exists in vect, make a new comp
+      if (*it == type)
+      {
+        newComposition = true;
+        break;
+      }
+      else
+        newComposition = false;
+    }
+
+    //Creates component
+    GameComponent* comp = getNewComponent((ComponentTypeId)type);
+    //If it should make a new composition
+    if (newComposition)
+    {
+      std::cout << "Adding new Composition" << std::endl;
+      //Reset flag
+      newComposition = false;
+      //Clear types vect
+      previousTypes.clear();
+      //Add Editor components if they don't already exist
+      addEditorComponents(currentEntity);
+      //Make obj
+      currentEntity = makeObject("No names");
+      //Add comp
+      std::cout << "Adding new Comp: " << type << std::endl;
+      currentEntity->AddComponent((ComponentTypeId)type, comp);
+      //Add comp to types vect
+      previousTypes.push_back(type);
+      //Set Comp
+      comp->SerializeRead(serializer);
+    }
+    else
+    {
+      //Add comp
+      std::cout << "Adding new Comp: " << type << std::endl;
+      currentEntity->AddComponent((ComponentTypeId)type, comp);
+      //Add comp to types vect
+      previousTypes.push_back(type);
+      //Set Comp
+      comp->SerializeRead(serializer);
+    }
+  }
+
+  if (currentEntity)
+    addEditorComponents(currentEntity);
+
+  //Breaks in this fx
+  initializeObjects();
+  delete [] line;
+  
+}
+
+void objFactory::addEditorComponents(GOC* object)
+{
+  Reactive* pReactive = object->has(Reactive);
+
+  if (!pReactive)
+  {
+    Reactive* editReact = new Reactive(false);
+    object->AddComponent(CT_Reactive, editReact);
+  }
+ 
+  Editable* editable = new Editable(false);
+  object->AddComponent(CT_Editable, editable);
+}
+
+GameComponent* objFactory::getNewComponent(ComponentTypeId type)
+{
+  switch (type)
+  {
+  case CT_Transform:
+    return new Transform();
+
+  case CT_Camera:
+    return new Camera();
+
+  case CT_Sprite:
+    return new Sprite();
+
+  case CT_SpriteText:
+    return new SpriteText(std::string("default text"));
+
+  case CT_Body:
+    return new Body();
+
+  case CT_TileMapCollision:
+    return new TileMapCollision();
+
+  case CT_ShapeAAB:
+    return new ShapeAAB();
+
+  case CT_ShapeLine:
+    return new ShapeLine();
+
+  case CT_Reactive:
+    return new Reactive();
+
+  case CT_SoundEmitter:
+    return new SoundEmitter();
+
+  case CT_TestComponent:
+    return new  TestComponent();
+
+  case CT_Editable:
+    return new Editable();
+
+  case CT_MouseVector:
+    return new MouseVector();
+
+  case CT_PlayerState:
+    return new PlayerState();
+
+  default:
+    return NULL;
   }
 }

@@ -19,10 +19,10 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  FACTORY->loadLevelFrom("resources/Levels/TestLevel.txt");
+  FACTORY->loadLevelFrom("resources/Levels/newLev.txt");
+  FACTORY->loadEntities("resources/levels/newLev-ENT.txt");
 
-
-  GOC * camera = FACTORY->makeObject("Camera");
+  GOC * camera = FACTORY->makeObject("GAMECAMERA");
   camera->AddComponent(CT_Transform, new Transform());
   Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
   MouseVector *vectTest = new MouseVector();
@@ -41,7 +41,7 @@ void GameLogic::Initialize()
 
 
   //PLAYER
-  GOC * player = FACTORY->makeObject("player");
+  GOC * player = FACTORY->makeObject("GAMEPLAYER");
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
   transformPlayer->SetScale(Vector2(1.25, 1.25));
@@ -58,6 +58,7 @@ void GameLogic::Initialize()
 #ifdef EDITOR
   Reactive* playerReactive = new Reactive();
   player->AddComponent(CT_Reactive, playerReactive);
+  
   Editable* editable = new Editable(false);
   player->AddComponent(CT_Editable, editable);
 #endif
@@ -85,6 +86,8 @@ void GameLogic::Initialize()
 
 
   // ground
+
+  /*
   GOC * blackObj2 = FACTORY->makeObject("");
   Transform * transform = new Transform();
   transform->SetPosition(8, 7, 0);
@@ -114,7 +117,7 @@ void GameLogic::Initialize()
   blackObj2->AddComponent(CT_ShapeAAB, box);
   blackObj2->AddComponent(CT_Reactive, reactive);
 
-
+  
   //down 1
   //GOC * bo1 = FACTORY->makeObject("");
   //Transform * transformbo = new Transform();
@@ -231,7 +234,7 @@ void GameLogic::Initialize()
   //blackObj2->AddComponent(CT_AABB, blackCollision2);
 
   //player = Fbox;
-
+  */
   FACTORY->initializeObjects();
 }
 

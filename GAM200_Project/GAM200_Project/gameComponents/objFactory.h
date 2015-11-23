@@ -48,6 +48,10 @@ public:
   void destroyObject(int killID);
   void destroyAllObjects();
   void objFactory::SerializeAllObjects(Serializer& str);
+
+  bool loadEntities(std::string entityFile);
+  GameComponent* getNewComponent(ComponentTypeId type);
+  void addEditorComponents(GOC* object);
   // Overloaded methods
   void Initialize();// override;
   void Update(float dt);//override;

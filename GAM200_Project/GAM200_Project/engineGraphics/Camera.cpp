@@ -49,12 +49,15 @@ void Camera::Initialize()
 }
 void Camera::SerializeRead(Serializer& str)
 {
+  /*
   StreamRead(str, size);
   StreamRead(str, width);
   StreamRead(str, height);
+  */
 }
 void Camera::SerializeWrite(Serializer& str)
-{
+{ 
+  /*
   StreamWrite(str, (int&)TypeId);
   StreamWrite(str);
   StreamWrite(str, size);
@@ -63,6 +66,7 @@ void Camera::SerializeWrite(Serializer& str)
   StreamWrite(str);
   StreamWrite(str, height);
   StreamWrite(str);
+  */
 }
 
 //**********************
