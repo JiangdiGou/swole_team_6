@@ -49,7 +49,7 @@ public:
     }
   }
 
-  bool addShapeAndBody(GOC* owner)
+  /*bool addShapeAndBody(GOC* owner)
   {
     Body* body = new Body();
     ShapeAAB* shape = new ShapeAAB();
@@ -71,7 +71,7 @@ public:
       setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
       return true;
     }
-  }
+  }*/
 };
 
 #endif

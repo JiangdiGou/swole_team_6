@@ -9,6 +9,8 @@
 class Reactive : public GameComponent
 {
 public: 
+  Reactive(bool trueReactive = true);
+
   void Initialize(); 
   void Update(float dt);
   void SendMessages(Message*) override;
@@ -20,9 +22,11 @@ public:
   bool ctrlPressed() { return control;  }
   bool altPressed() { return alt;  }
   bool shiftPresed() { return shift;  }
+  bool isActuallyReactive() { return trueReactive;  }
   Vector2 getMousePos() { return mousePos; }
 
 private:
+  bool trueReactive;
   Vector2 mousePos;
   bool mouseDownOnThis = false;
   bool mouseIsOverThis = false;

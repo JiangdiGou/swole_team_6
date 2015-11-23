@@ -23,6 +23,7 @@ GLuint Sprite::vertexArray = 0;
 GLuint Sprite::vertexBuffer = 0;
 GLuint Sprite::textureBuffer = 0;
 GLuint Sprite::colorBuffer = 0;
+TextureAtlas* Sprite::atlas = 0;
 
 //**********************
 //Function    : Sprite
@@ -45,6 +46,11 @@ Sprite::~Sprite()
 {
 }
 
+void Sprite::Initialize()
+{
+  //std::cout << initialTextureName;
+
+}
 
 void Sprite::SerializeRead(Serializer& str)
 {
@@ -53,7 +59,11 @@ void Sprite::SerializeRead(Serializer& str)
   StreamRead(str, color.y);
   StreamRead(str, color.z);
   StreamRead(str, color.w);
-  StreamRead(str, texture.textureName);
+  
+  std::string initialTexture = std::string();
+  StreamRead(str, initialTexture);
+  texture = (atlas->textures)[initialTexture];
+
   StreamRead(str, flipSprite);
 }
 void Sprite::SerializeWrite(Serializer& str)
@@ -63,7 +73,7 @@ void Sprite::SerializeWrite(Serializer& str)
   StreamWrite(str, color.x);
   StreamWrite(str, color.y);
   StreamWrite(str, color.z);
-  StreamWrite(str, color.b);
+  StreamWrite(str, color.w);
   StreamWrite(str);
   StreamWrite(str, texture.textureName);
   StreamWrite(str);
@@ -97,11 +107,12 @@ void Sprite::Update(float dt)
     transform->GetPosition().z,
     0);
 
-  scale = glm::vec3(
-    transform->GetScale().x,
-    transform->GetScale().y,
-    transform->GetScale().z);
-
+  /*
+  std::cout << "My Texture: " << texture.textureName << std::endl;
+  std::cout << "MY scl " << transform->GetScale() << std::endl;
+  std::cout << "MY rot " << transform->GetRotation() << std::endl;
+  std::cout << "MY pos " << transform->GetPosition() << std::endl;
+*/
   //Vertex 1
   transformedPosition = glm::vec4(transformMatrix * glm::vec4(
      0.5, //* scale.x,
@@ -146,6 +157,7 @@ void Sprite::Update(float dt)
 
   //Pushes tex coords 
   texture.updateAnimation();
+
   for (int i = 0; i < 12; ++i)
     texCoords.push_back(texture.textureCoordinates[i]);
 
@@ -166,7 +178,7 @@ void Sprite::Update(float dt)
   
 }
 
-void Sprite::initSprites(const Shader& shader, TextureAtlas* atlas)
+void Sprite::initSprites(const Shader& shader, TextureAtlas* spriteAtlas)
 {
   //Generates Static Members
   glGenVertexArrays(1, &vertexArray);
@@ -193,7 +205,8 @@ void Sprite::initSprites(const Shader& shader, TextureAtlas* atlas)
   glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 
   shaderID = shader.Program;
-  atlasID = atlas->ID;
+  atlasID = spriteAtlas->ID;
+  atlas = spriteAtlas;
 
   //Unbind stuff
   glBindBuffer(GL_ARRAY_BUFFER, 0);

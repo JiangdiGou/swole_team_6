@@ -14,6 +14,7 @@ public:
   void Initialize() override;
   void Update(float dt) override;
   void SendMessages(Message* message) override;
+  bool isATile() { return isTile; }
 
 private:
   bool isTile;

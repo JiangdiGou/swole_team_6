@@ -96,10 +96,11 @@ int main(void)
   Shader* pBasicShader = new Shader("resources/shaders/VertexShader.txt", "resources/shaders/FragmentShader.txt");
   const Shader &basicShader = *pBasicShader;
   engine->AddSystem(new GraphicsManager(basicShader));
-  engine->AddSystem(new GameLogic());
+
   //engine->AddSystem(new ActionSystem::ActionSequence());
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
+  engine->AddSystem(new GameLogic());
 
   //Initialize all systems in engine
   engine->Initialize();

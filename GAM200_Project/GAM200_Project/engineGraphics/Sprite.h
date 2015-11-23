@@ -34,17 +34,20 @@ public:
 	glm::vec4 color;
 	AtlasTexture texture;
 
+  void Initialize();
   void Update(float dt) override;
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
 
-  static void initSprites(const Shader& shader, TextureAtlas* atlas);
+  static void initSprites(const Shader& shader, TextureAtlas* spriteAtlas);
   void static drawAllSprites();
 
   bool flipSprite = false;
   bool visible = true; 
 
 private:
+  static TextureAtlas* atlas;
+
   static GLuint vertexArray;
   static GLuint vertexBuffer;
   static GLuint textureBuffer;

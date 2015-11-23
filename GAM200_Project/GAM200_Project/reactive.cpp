@@ -1,5 +1,10 @@
 #include "reactive.h"
 
+Reactive::Reactive(bool actuallyReactive)
+{
+  trueReactive = actuallyReactive;
+}
+
 void Reactive::Initialize()
 {
   GameObjectComposition* parent = GetOwner();
@@ -22,10 +27,31 @@ void Reactive::SendMessages(Message * message)
     MouseMove* moveEvent = (MouseMove*)message;
     mousePos = moveEvent->MousePosition;
 
-    float leftEdge = ownerTransform->GetPositionX() - 0.5 * ownerTransform->GetScale().x;
-    float rightEdge = ownerTransform->GetPositionX() + 0.5 * ownerTransform->GetScale().x;
-    float topEdge = ownerTransform->GetPositionY() + 0.5 * ownerTransform->GetScale().y;
-    float bottomEdge = ownerTransform->GetPositionY() - 0.5 * ownerTransform->GetScale().y;
+    float leftEdge, rightEdge, topEdge, bottomEdge;
+
+    //Checks if it needs to flip right and left edges
+    if (ownerTransform->GetScale().x > 0)
+    {
+      leftEdge = ownerTransform->GetPositionX() - 0.5 * ownerTransform->GetScale().x;
+      rightEdge = ownerTransform->GetPositionX() + 0.5 * ownerTransform->GetScale().x;
+    }
+    else
+    {
+      leftEdge = ownerTransform->GetPositionX() + 0.5 * ownerTransform->GetScale().x;
+      rightEdge = ownerTransform->GetPositionX() - 0.5 * ownerTransform->GetScale().x;
+    }
+
+    //Checks if it needs to flip top and bot edges
+    if (ownerTransform->GetScale().y > 0)
+    {
+      topEdge = ownerTransform->GetPositionY() + 0.5 * ownerTransform->GetScale().y;
+      bottomEdge = ownerTransform->GetPositionY() - 0.5 * ownerTransform->GetScale().y;
+    }
+    else
+    {
+      topEdge = ownerTransform->GetPositionY() - 0.5 * ownerTransform->GetScale().y;
+      bottomEdge = ownerTransform->GetPositionY() + 0.5 * ownerTransform->GetScale().y;
+    }
 
     if (moveEvent->MousePosition.x < rightEdge && moveEvent->MousePosition.x > leftEdge
       && moveEvent->MousePosition.y > bottomEdge && moveEvent->MousePosition.y < topEdge)
