@@ -8,7 +8,7 @@ the header file for the transform functions.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 #ifndef TRANSFORM_H

@@ -9,7 +9,7 @@ through the ground and correct the position to have it stay stable.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 #include "Resolution.h"

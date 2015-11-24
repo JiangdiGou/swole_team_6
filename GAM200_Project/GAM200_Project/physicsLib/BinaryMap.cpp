@@ -8,7 +8,7 @@ The implementation for the Binary Map, probably not going to be use for now.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 

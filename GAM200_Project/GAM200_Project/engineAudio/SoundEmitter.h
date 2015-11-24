@@ -8,7 +8,7 @@ the header file for the sound emitter class.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 #ifndef SOUNDEMITTER_H
