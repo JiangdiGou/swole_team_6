@@ -32,13 +32,13 @@ Body::Body()
 	Position = Vec2D(0, 0);
 	PrevPosition = Vec2D(0, 0);
 	Velocity = Vec2D(0, 0);
-	Mass = 0.0f;
+	Mass = 1.0f;
 	InvMass = 0.0f;
 	Damping = 0.9f;
 	Acceleration = Vec2D(0, 0);
 	BodyShape = NULL;
 	Friction = 0.0f;
-	Restitution = 0.0f;
+	Restitution = 0.3f;
 	IsStatic = false;
 	IsGhost = false;
 	AccumulatedForce = Vec2D(0, 0);

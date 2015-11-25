@@ -131,9 +131,17 @@ void EditorTilemapTools::changeTile(GameObjectComposition* tile, bool setEmpty)
 
     
     if (currentTexture != "E" && wasEmpty)
-      ;
-      //addShapeAndBody(tile); Still doesnt work
+    {
+      /*
+      ShapeAAB* col = (ShapeAAB*)FACTORY->getNewComponent(CT_ShapeAAB);
+      Body* body = (Body*)FACTORY->getNewComponent(CT_Body);
 
+      tile->AddComponent(CT_ShapeAAB, col);
+      tile->Initialize();
+      tile->AddComponent(CT_Body, body);
+      tile->Initialize();
+      */
+    }
   }
 }
 

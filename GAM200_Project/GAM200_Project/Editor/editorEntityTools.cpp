@@ -79,21 +79,12 @@ void EditorEntityTools::handle()
       ImGui::SameLine();
       if(ImGui::Button("Add"))
       {
-        //If body or AAB
-        if (currentItem + 1 == 5 || currentItem + 1 == 7)
-        {
-          setupMessage("I've removed adding physics b/c they crash editor.", ImVec4(1, 0, 0, 1));
-          //Damn, this still doesnt work.
-          //addShapeAndBody(focus);
-          //setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
-        }
-        else
-        {
-          GameComponent* component = FACTORY->getNewComponent((ComponentTypeId(currentItem + 1)));
 
-          focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
-          focus->Initialize();
-        }
+        GameComponent* component = FACTORY->getNewComponent((ComponentTypeId(currentItem + 1)));
+
+        focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
+        focus->Initialize();
+        
       }
     }
   }
