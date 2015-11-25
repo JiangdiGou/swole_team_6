@@ -99,12 +99,26 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
   {
   case CT_Transform:
   {
+
+
     ImGui::Text("To Translate...");
     ImGui::Text("Click and Drag");
+    ImGui::InputFloat3("pos", tweakf3_1);
     ImGui::Text("To Rotate...");
     ImGui::Text("Ctrl-Click and Drag");
+    ImGui::InputFloat("rot", &tweakF);
     ImGui::Text("To Scale...");
     ImGui::Text("Shift-Click and Drag");
+    ImGui::InputFloat3("scl", tweakf3_2);
+
+    if (ImGui::Button("Update"))
+    {
+      Transform* fTransform = (Transform*)getFocusComponent(CT_Transform);
+      fTransform->SetPosition(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
+      fTransform->SetRotationZ(tweakF);
+      fTransform->SetScale(Vector3(tweakf3_2[0], tweakf3_2[1], tweakf3_2[2]));
+    }
+
     break;
   }
   case CT_Sprite:
@@ -114,6 +128,11 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
     if (ImGui::Button("ChangeTexture") && fSprite)
     {
       fSprite->texture = ((GRAPHICS->getSpriteAtlas())->textures[std::string(tweakableText)]);
+    }
+    ImGui::InputFloat4("Color", tweakF4);
+    if (ImGui::Button("Update Color") && fSprite)
+    {
+      fSprite->color = glm::vec4(tweakF4[0], tweakF4[1], tweakF4[2], tweakF4[3]);
     }
     break;
   }

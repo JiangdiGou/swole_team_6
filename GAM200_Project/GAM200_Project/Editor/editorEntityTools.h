@@ -38,6 +38,11 @@ public:
   GOC* createNewComponent(std::string componentName);
 
 private:
+  float tweakf3_1[3];
+  float tweakf3_2[3];
+  float tweakF;
+  float tweakF4[4];
+
   GameObjectComposition* focus;
   char newEntityName[256];
 

@@ -36,6 +36,9 @@ void Editable::SendMessages(Message* message)
 
 void Editable::Update(float dt)
 {
+  if (ImGui::GetIO().WantCaptureMouse)
+    return;
+
   //Tile chaging / entity selection
   if (pReactive->mouseDownAndOver())
   {
