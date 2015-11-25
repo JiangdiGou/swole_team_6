@@ -119,3 +119,10 @@ bool luaTest()
   }
   return true;
 }
+
+std::string appendEnt(const std::string &input)
+{
+  std::string substring(input.begin(), input.end() - 4);
+  substring.append("-ENT.txt");
+  return substring;
+}

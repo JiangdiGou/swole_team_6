@@ -251,10 +251,3 @@ bool EditorLevelTools::checkLevelDimensions()
     return false;
   }   
 }
-
-std::string EditorLevelTools::appendEnt(const std::string &input) const
-{
-  std::string substring(input.begin(), input.end() - 4);
-  substring.append("-ENT.txt");
-  return substring;
-}

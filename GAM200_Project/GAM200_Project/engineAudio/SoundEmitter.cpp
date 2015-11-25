@@ -76,3 +76,16 @@ void SoundEmitter::Release()
 {
 
 }
+
+void SoundEmitter::SerializeRead(Serializer& str)
+{
+  StreamRead(str, playSoundOnStart);
+  StreamRead(str, startSound);
+}
+void SoundEmitter::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, playSoundOnStart);
+  StreamWrite(str);
+  StreamWrite(str, startSound);
+  StreamWrite(str);
+}

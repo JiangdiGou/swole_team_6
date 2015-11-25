@@ -92,12 +92,11 @@ void CoreEngine::GameLoop()
       if (PrevGameState == GS_RUN)
       {
         FACTORY->destroyAllObjects();
-        //FACTORY->loadLevelFrom("resources/Levels/InGameEditor.txt");
         FACTORY->loadLevelFrom(LevelName);
-
+        FACTORY->loadEntities(appendEnt(LevelName));
         FACTORY->createTiles();
 
-        GOC * camera = FACTORY->makeObject("Camera");
+        GOC * camera = FACTORY->makeObject("GAMECAMERA");
         camera->AddComponent(CT_Transform, new Transform());
         Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
         MouseVector *vectTest = new MouseVector();
@@ -111,7 +110,7 @@ void CoreEngine::GameLoop()
 
 
         //PLAYER
-        GOC * player = FACTORY->makeObject("player");
+        GOC * player = FACTORY->makeObject("GAMEPLAYER");
         Transform * transformPlayer = new Transform();
         transformPlayer->SetPosition(2, 6, 0);
         transformPlayer->SetScale(Vector2(1.25, 1.25));
@@ -156,7 +155,6 @@ void CoreEngine::GameLoop()
         GRAPHICS->setMainCamera(mainCamera);
         FACTORY->initializeObjects();
 
-        //LOGIC->Initialize();
         GameState = GS_RUN;
       }
     }

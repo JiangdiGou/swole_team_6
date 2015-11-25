@@ -37,6 +37,9 @@ public:
 	void SetPause(bool pause, std::string name);
 	void SetVolume(float vol, std::string name);
 
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
+
 	//Set in editor (optional, see segment in FactoryManager)
 	bool playSoundOnStart;
 	std::string startSound;

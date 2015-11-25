@@ -61,5 +61,7 @@ void waitForKB();
 bool luaTest();
 
 std::vector<std::string> tokenize(const std::string &input);
+/* Adds -ENT to filename. ex. hi.txt -> hi-ENT.txt */
+std::string appendEnt(const std::string &input);
 
 #endif

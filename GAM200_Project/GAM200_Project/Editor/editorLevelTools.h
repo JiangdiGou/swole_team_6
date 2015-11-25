@@ -13,6 +13,7 @@ enum EditorLevelState { IDLE, CREATINGLEVEL, LOADINGLEVEL, INLEVEL };
 #include "../engineGraphics/textureAtlas.h"
 #include "../engineGraphics/graphicsManager.h"
 #include "editorModule.h"
+#include "../Utilities.h"
 
 //These could probably inherit from an editor module or something. eventually. 
 class EditorLevelTools : public EditorModule
@@ -32,7 +33,6 @@ private:
 
   //Helpers 
   bool checkFilename(std::string filename, bool checkContentsAndKey = false);
-  std::string appendEnt(const std::string &input) const;
   bool checkLevelDimensions();
   
   std::string currentMessage;
