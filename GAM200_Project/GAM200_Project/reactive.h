@@ -5,11 +5,15 @@
 #include "WindowsSystem.h"
 #include "physicsLib\Transform.h"
 #include "engineGraphics\Sprite.h"
+#include "Zilch\BindInternal.hpp"
+#include "Zilch\Zilch.hpp"
+
+using namespace Zilch;
 
 class Reactive : public GameComponent
 {
 public: 
-  
+  ZilchDeclareDerivedType(Reactive, GameComponent);
   //Is this mouse over this object (based on transform)
   bool mouseOver() { return mouseIsOverThis;  }
   //Is object clicked basically 
