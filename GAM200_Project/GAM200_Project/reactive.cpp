@@ -1,19 +1,43 @@
 #include "reactive.h"
 
-Reactive::Reactive(bool actuallyReactive)
-{
-  trueReactive = actuallyReactive;
-}
 
-void Reactive::Initialize()
+bool Reactive::fetchTransform()
 {
   GameObjectComposition* parent = GetOwner();
   ownerTransform = reinterpret_cast<Transform *>(parent->GetComponent(CT_Transform));
+
+  if (ownerTransform == NULL)
+    return false;
+  else
+    return true;
 }
 
-void Reactive::SendMessages(Message * message)
+bool Reactive::checkMouseHeld()
 {
-  //std::cout << "mouse moved!" << std::endl;
+  if (mouseDownOnThis)
+  {
+    if (mouseHoldCounter > 5)
+    {
+      mouseHeldOnThis = true;
+      return true;
+    }
+    else
+    {
+      mouseHoldCounter++;
+      mouseHeldOnThis = false;
+      return false;
+    }
+  }
+  else
+  {
+    mouseHoldCounter = 0;
+    mouseHeldOnThis = false;
+    return false;
+  }
+}
+
+void Reactive::updateMouseFlags(Message* message)
+{
   switch (message->MessageId)
   {
     control = false;
@@ -87,33 +111,4 @@ void Reactive::SendMessages(Message * message)
     }
   }
   }
-}
-
-void Reactive::Update(float dt)
-{
-  if (mouseDownOnThis)
-  {
-    if (mouseHoldCounter > 5)
-      mouseHeldOnThis = true;
-    else
-    {
-      mouseHoldCounter++;
-      mouseHeldOnThis = false;
-    }
-  }
-  else
-  {
-    mouseHoldCounter = 0;
-    mouseHeldOnThis = false;
-  }
-}
-
-void Reactive::SerializeRead(Serializer& str)
-{
-
-}
-void Reactive::SerializeWrite(Serializer& str) 
-{
-  StreamWrite(str, (int&)TypeId);
-  StreamWrite(str);
 }
