@@ -89,3 +89,19 @@ void SoundEmitter::SerializeWrite(Serializer& str)
   StreamWrite(str, startSound);
   StreamWrite(str);
 }
+
+ZilchDefineType(SoundEmitter, "SoundEmitter", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, SoundEmitter, ZilchNoNames);
+  ZilchBindDestructor(builder, type, SoundEmitter);
+
+  //ZilchBindMethod(builder, type, &SoundEmitter::PlayEvent, ZilchNoOverload, "PlayEvent", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &SoundEmitter::StopEvent, ZilchNoOverload, "StopEvent", ZilchNoNames);
+  ZilchBindMethod(builder, type, &SoundEmitter::BeQuiet, ZilchNoOverload, "BeQuiet", ZilchNoNames);
+  ZilchBindMethod(builder, type, &SoundEmitter::Rock, ZilchNoOverload, "Rock", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &SoundEmitter::SetPause, ZilchNoOverload, "SetPause", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &SoundEmitter::SetVolume, ZilchNoOverload, "SetVolume", ZilchNoNames);
+
+  ZilchBindField(builder, type, &SoundEmitter::playSoundOnStart, "playSoundOnStart", PropertyBinding::GetSet);
+  //ZilchBindField(builder, type, &SoundEmitter::startSound, "startSound", PropertyBinding::GetSet);
+}

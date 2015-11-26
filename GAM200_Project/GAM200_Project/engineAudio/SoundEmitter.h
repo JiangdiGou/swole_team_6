@@ -16,12 +16,17 @@ All content 2015 DigiPen (USA) Corporation, all rights reserved.
 
 #include "Sound.h"
 #include "../Core.h"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 class SoundEmitter;
 
 class SoundEmitter : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(SoundEmitter, GameComponent);
 	SoundEmitter() {};
 	SoundEmitter(GameObjectComposition *Owner);
 	~SoundEmitter();

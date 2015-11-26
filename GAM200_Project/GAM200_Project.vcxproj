@@ -135,6 +135,7 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\WindowsSystem.h" />
     <ClInclude Include="GAM200_Project\Zilch\BindInternal.hpp" />
+    <ClInclude Include="GAM200_Project\Zilch\Filesystem\Filepaths.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\Zilch.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\ZilchInterface.hpp" />
     <ClInclude Include="GAM200_Project\_EntryPoint.h">
@@ -145,6 +146,8 @@
     <ClCompile Include="GAM200_Project\Client.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\Component.cpp" />
+    <ClCompile Include="GAM200_Project\ComponentTypeIds.cpp" />
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\Core.cpp" />
     <ClCompile Include="GAM200_Project\Editor\editable.cpp" />
@@ -243,6 +246,7 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\WindowsSystem.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\BindInternal.cpp" />
+    <ClCompile Include="GAM200_Project\Zilch\Filesystem\Filepaths_windows.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\Zilch.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\ZilchInterface.cpp" />
     <ClCompile Include="GAM200_Project\PleaseWork\action_math_utility.cpp" />

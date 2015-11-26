@@ -16,6 +16,7 @@ typedef std::vector<GameComponent*> ComponentArray;
 class GameObjectComposition
 {
 public:
+ZilchDeclareBaseType(GameObjectComposition, TypeCopyMode::ReferenceType);
 friend class objFactory;
 
 GameComponent* GetComponent(ComponentTypeId typeId) const;
