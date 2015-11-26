@@ -117,8 +117,6 @@ void CoreEngine::GameLoop()
         player->AddComponent(CT_Transform, transformPlayer);
 
 #ifdef EDITOR
-        Reactive* playerReactive = new Reactive();
-        player->AddComponent(CT_Reactive, playerReactive);
         Editable* editable = new Editable(false);
         player->AddComponent(CT_Editable, editable);
 #endif

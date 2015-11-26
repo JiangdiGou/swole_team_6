@@ -1,7 +1,5 @@
 #include "editorEntityTools.h"
 
-#include <typeinfo>
-
 const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Transform",
   "Camera",
@@ -11,7 +9,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "TileMapCollision",
   "Shape AAB",
   "Shape Line",
-  "Reactive",
+  "GameReactive",
   "Sound Emitter",
   "Test Component",
   "Editbale",
@@ -178,8 +176,8 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
   case CT_ShapeLine:
     return focus->has(ShapeLine);
 
-  case CT_Reactive:
-    return focus->has(Reactive);
+  case CT_GameReactive:
+    return focus->has(GameReactive);
 
   case CT_SoundEmitter:
     return focus->has(SoundEmitter);
@@ -217,7 +215,6 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
 
   //Editor Stuff
   //Since we're in editor mode if this fx got called 
-  Reactive* newReactive = new Reactive();
   Editable* newEditable = new Editable(false);
 
   //Add Core stuff
@@ -232,7 +229,6 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
   newEntity->AddComponent(CT_Sprite, newSprite);
 
   //Add edutir stuff
-  newEntity->AddComponent(CT_Reactive, newReactive);
   newEntity->AddComponent(CT_Editable, newEditable);
 
   setupMessage(componentName + " created.", ImVec4(0, 1, 0, 1));

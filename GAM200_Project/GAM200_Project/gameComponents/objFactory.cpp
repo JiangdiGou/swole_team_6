@@ -85,12 +85,9 @@ void objFactory::SerializeAllObjects(Serializer& str)
     {
       //Another check, whether or not tile
       Editable* pEditable = it->second->has(Editable);
-      Reactive* pReactive = it->second->has(Reactive);
 
       //Also, we need to not serialize tiles or we'll spawn them twice. 
       if (pEditable && pEditable->isATile())
-        continue;
-      else if (pReactive && !(pReactive->isActuallyReactive()))
         continue;
       else
         it->second->SerializeWrite(str);
@@ -256,8 +253,6 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
 
 //Adds reactive b/c its a depend of editable.
 #ifdef EDITOR
-  Reactive* reactive = new Reactive(false);
-  newTile->AddComponent(CT_Reactive, reactive);
   Editable* editable = new Editable();
   newTile->AddComponent(CT_Editable, editable);
 #endif
@@ -387,14 +382,6 @@ bool objFactory::loadEntities(std::string entityFile)
 
 void objFactory::addEditorComponents(GOC* object)
 {
-  Reactive* pReactive = object->has(Reactive);
-
-  if (!pReactive)
-  {
-    Reactive* editReact = new Reactive(false);
-    object->AddComponent(CT_Reactive, editReact);
-  }
- 
   Editable* editable = new Editable(false);
   object->AddComponent(CT_Editable, editable);
 }
@@ -427,8 +414,8 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_ShapeLine:
     return new ShapeLine();
 
-  case CT_Reactive:
-    return new Reactive();
+  case CT_GameReactive:
+    return new GameReactive();
 
   case CT_SoundEmitter:
     return new SoundEmitter();

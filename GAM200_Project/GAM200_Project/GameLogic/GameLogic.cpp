@@ -56,9 +56,6 @@ void GameLogic::Initialize()
  // bodyPlayer->BodyShape = boxColliderPlayer;
 
 #ifdef EDITOR
-  Reactive* playerReactive = new Reactive();
-  player->AddComponent(CT_Reactive, playerReactive);
-  
   Editable* editable = new Editable(false);
   player->AddComponent(CT_Editable, editable);
 #endif
