@@ -1,5 +1,6 @@
 #ifndef COMPONENTTYPEIDS_H
 #define COMPONENTTYPEIDS_H
+#include "Zilch\BindInternal.hpp"
 //enum containing ComponentTypeIds
 enum ComponentTypeId
 {
@@ -30,5 +31,6 @@ enum ComponentTypeId
 
   //Hey I noticed you're adding a component type. Can you please add it editorEntityTools.cpp
 };
+ZilchDeclareExternalBaseType(ComponentTypeId, TypeCopyMode::ReferenceType);
 
 #endif

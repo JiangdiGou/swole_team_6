@@ -21,10 +21,15 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../Composition.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 class SpriteText : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(SpriteText, GameComponent);
   SpriteText();
   SpriteText(std::string initialMessage);
 

@@ -207,7 +207,24 @@ void ShapeAAB::Draw()
 	//}
 	//return false;
 //}
+ZilchDefineExternalType(Shape::ShapeId, "Shape::ShapeId", ZLib_Internal, builder, type)
+{
+  ZilchBindEnum(builder, type, SpecialType::Enumeration);
+  ZilchBindEnumValue(builder, type, Shape::ShapeId::SidCircle, "SidCircle");
+  ZilchBindEnumValue(builder, type, Shape::ShapeId::SidBox, "SidBox");
+  ZilchBindEnumValue(builder, type, Shape::ShapeId::SidNumberOfShapes, "SidNumberOfShapes");
+  ZilchBindEnumValue(builder, type, Shape::ShapeId::SidLine, "SidLine");
+}
 
+ZilchDefineType(Shape, "Shape", ZLib_Internal, builder, type)
+{
+  ZilchBindField(builder, type, &Shape::Id, "Id", PropertyBinding::Get);
+}
+ZilchDefineType(ShapeAAB, "ShapeAAB", ZLib_Internal, builder, type)
+{
+  ZilchBindField(builder, type, &ShapeAAB::Extents, "Extents", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &ShapeAAB::origin, "origin", PropertyBinding::GetSet);
+}
 
 float Clamp(float min, float max, float x)
 {

@@ -5,10 +5,15 @@
 #include "WindowsSystem.h"
 #include "physicsLib\Transform.h"
 #include "engineGraphics\Sprite.h"
+#include "Zilch/BindInternal.hpp"
+#include "Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 class Reactive : public GameComponent
 {
-public: 
+public:
+  ZilchDeclareDerivedType(Reactive, GameComponent);
   Reactive(bool trueReactive = true);
 
   void Initialize(); 

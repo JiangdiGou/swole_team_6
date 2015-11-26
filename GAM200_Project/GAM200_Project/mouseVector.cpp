@@ -75,3 +75,9 @@ void MouseVector::SerializeWrite(Serializer& str)
   StreamWrite(str);
 
 }
+
+ZilchDefineType(MouseVector, "MouseVector", ZLib_Internal, builder, type)
+{
+  ZilchBindField(builder, type, &MouseVector::mouseDownPos, "mouseDownPos", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &MouseVector::mouseUpPos, "mouseUpPos", PropertyBinding::GetSet);
+}

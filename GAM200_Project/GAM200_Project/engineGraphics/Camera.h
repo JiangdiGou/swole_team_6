@@ -17,10 +17,15 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../physicsLib/Transform.h"
 #include "../initInfo.h" //W and H
 #include "../WindowsSystem.h" //Messages 
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
 
-class Camera : public GameComponent 
+using namespace Zilch;
+
+class Camera : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(Camera, GameComponent);
   Camera(); 
   Camera(const Shader& shader);
   ~Camera();

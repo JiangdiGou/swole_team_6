@@ -28,6 +28,7 @@ Header for libraries and engine includes
 #include "./engineAudio/SoundEmitter.h"
 #include "System.h"
 #include "Core.h"
+#include "Zilch\Zilch.hpp"
 #include "./physicsLib/PhysicsManager.h"
 
 #endif

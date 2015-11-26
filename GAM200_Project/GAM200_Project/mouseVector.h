@@ -26,11 +26,16 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "physicsLib\Transform.h"
 #include "engineGraphics\debugDraw.h"
 #include "Composition.h"
+#include "Zilch/BindInternal.hpp"
+#include "Zilch/Zilch.hpp"
+
+using namespace Zilch;
 //#include "physicsLib/RayLineBoxCollision.h"
 
 class MouseVector : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(MouseVector, GameComponent);
   Vector2 mouseDownPos;
   Vector2 mouseUpPos;
   

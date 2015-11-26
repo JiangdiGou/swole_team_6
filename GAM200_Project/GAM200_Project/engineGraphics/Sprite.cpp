@@ -283,3 +283,17 @@ void Sprite::SendMessages(Message * message)
     }
   }
 }
+
+ZilchDefineType(Sprite, "Sprite", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, Sprite, ZilchNoNames);
+  ZilchBindDestructor(builder, type, Sprite);
+
+
+  //ZilchBindField(builder, type, &Sprite::texture.textureName, "textureName", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Sprite::flipSprite, "flipSprite", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Sprite::visible, "visible", PropertyBinding::GetSet);
+
+  //glm::vec4 color;
+  //AtlasTexture texture;
+}

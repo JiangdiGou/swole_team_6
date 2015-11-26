@@ -23,10 +23,15 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../Composition.h"
 #include "../Message.h"
 #include "../WindowsSystem.h"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 class Sprite : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(Sprite, GameComponent);
   //Default constructor, just sets color member
   Sprite();
   ~Sprite();

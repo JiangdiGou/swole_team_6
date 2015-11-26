@@ -17,12 +17,17 @@ All content 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../Composition.h"
 #include "../engineGraphics/Graphics.h"
 #include "math_utility.h"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 
 //Transform Component
 class Transform : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(Transform, GameComponent);
 	friend class Body;
 	Transform( Vector3 pos = Vector3(), Vector3 rot = Vector3(),
 		Vector3 scal = Vector3());

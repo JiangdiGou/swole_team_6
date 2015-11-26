@@ -19,6 +19,10 @@ All content 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "math_utility.h"
 #include "../Composition.h"
 #include <vector>
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 
 class Body;
@@ -47,6 +51,7 @@ struct ManifoldSet
 class Shape : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(Shape, GameComponent);
 	enum ShapeId
 	{
 		SidCircle,
@@ -60,6 +65,7 @@ public:
 	Shape(ShapeId pid) : Id(pid) {};
 
 };
+ZilchDeclareExternalBaseType(Shape::ShapeId, TypeCopyMode::ValueType);
 
 //Line shape??
 class ShapeLine : public Shape
@@ -115,6 +121,7 @@ public:
 class ShapeAAB : public Shape
 {
 public:
+  ZilchDeclareDerivedType(ShapeAAB, Shape);
 	ShapeAAB() : Shape(SidBox){};
   void Initialize() override;
   void Update(float dt) override;

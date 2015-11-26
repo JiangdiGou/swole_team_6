@@ -22,6 +22,10 @@ All content 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../WindowsSystem.h"
 #include "../GameState/GameStateManager.h"
 #include "../engineAudio/SoundEmitter.h"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 enum StateList
 {
@@ -30,6 +34,7 @@ enum StateList
 	OnGround,
 	StartJump
 };
+ZilchDeclareExternalBaseType(StateList, TypeCopyMode::ValueType);
 
 class PlayerState : public GameComponent//, public CollisionDelegate
 {
@@ -37,6 +42,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
   //friend RigidBody;
 
   public:
+     ZilchDeclareDerivedType(PlayerState, GameComponent);
       PlayerState();
       ~PlayerState();
         

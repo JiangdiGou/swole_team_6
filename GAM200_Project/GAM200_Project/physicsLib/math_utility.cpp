@@ -344,4 +344,24 @@ void Vector3D::subScale(const Vector3D& vec, float scale)
 	y -= vec.y * scale;
 	z -= vec.z * scale;
 }
+ZilchDefineType(Vec2D, "Vec2D", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, Vec2D, "x, y", const float, const float);
+  ZilchBindConstructor(builder, type, Vec2D, ZilchNoNames);
+  ZilchBindDestructor(builder, type, Vec2D, ZilchNoNames);
 
+  ZilchBindField(builder, type, &Vec2D::x, "x", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Vec2D::y, "y", PropertyBinding::GetSet);
+}
+ZilchDefineType(Vector3D, "Vector3D", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, Vector3D, "x, y, z", const float, const float, const float);
+  ZilchBindConstructor(builder, type, Vector3D, "vec, z", const Vector2&, const float);
+  ZilchBindConstructor(builder, type, Vector3D, "vec", const Vector2&);
+  ZilchBindConstructor(builder, type, Vector3D, ZilchNoNames);
+  ZilchBindDestructor(builder, type, Vector3D, ZilchNoNames);
+
+  ZilchBindField(builder, type, &Vector3D::x, "x", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Vector3D::y, "y", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Vector3D::z, "z", PropertyBinding::GetSet);
+}

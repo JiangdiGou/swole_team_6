@@ -385,3 +385,17 @@ void SpriteText::renderText(std::string message, Vector3 position, Vector3 scale
   }
 }
 
+ZilchDefineType(SpriteText, "SpriteText", ZLib_Internal, builder, type)
+{
+  //ZilchBindConstructor(builder, type, SpriteText, ZilchNoNames);
+  //ZilchBindConstructor(builder, type, SpriteText, "initMessage", std::string);
+  // ZilchBindDestructor(builder, type, SpriteText);
+
+
+  //ZilchBindField(builder, type, &Sprite::texture.textureName, "textureName", PropertyBinding::GetSet);
+  //ZilchBindField(builder, type, &SpriteText::message, "message", PropertyBinding::GetSet);
+
+  //std::string message;
+  //ZilchBindMethod(builder, type, &SpriteText::drawAllText, ZilchNoOverload,"drawAllText", ZilchNoNames);
+
+}

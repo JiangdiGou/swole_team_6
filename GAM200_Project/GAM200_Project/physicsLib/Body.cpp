@@ -227,3 +227,28 @@ void Body::fuckCollision(ManifoldSet * contact, Body * a)
 	contact->Restitution = DetermineRestitution(this);
 	contact->FrictionCof = DetermineFriction(this);
 }
+
+ZilchDefineType(Body, "Body", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, Body, ZilchNoNames);
+  ZilchBindDestructor(builder, type, Body);
+
+  ZilchBindMethod(builder, type, &Body::AddForce, ZilchNoOverload, "AddForce", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &Body::SetPosition, ZilchNoOverload, "SetPosition", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Body::SetVelocity, ZilchNoOverload, "SetVelocity", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Body::AddForce, ZilchNoOverload, "AddForce", ZilchNoNames);
+
+  ZilchBindField(builder, type, &Body::Position, "Position", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Velocity, "Velocity", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Acceleration, "Acceleration", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Mass, "Mass", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::InvMass, "InvMass", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Restitution, "Restitution", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Friction, "Friction", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Damping, "Damping", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::AccumulatedForce, "AccumulatedForce", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::IsStatic, "IsStatic", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::IsGhost, "IsGhost", PropertyBinding::GetSet);
+
+}
