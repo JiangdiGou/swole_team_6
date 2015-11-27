@@ -66,7 +66,10 @@ void EditorEntityTools::handle()
       ImGui::SameLine();
       if (ImGui::Button("Rmv"))
       {
-        setupMessage("Remove not yet implemented", ImVec4(1, 0, 0, 1));
+        if (focus->RemoveComponent((ComponentTypeId)(currentItem + 1), component))
+          setupMessage("Component Removed", ImVec4(0, 1, 0, 1));
+        else
+          setupMessage("Error in removing component", ImVec4(1, 0, 0, 1));
       }
       showTweakables((ComponentTypeId)(currentItem + 1));
     }

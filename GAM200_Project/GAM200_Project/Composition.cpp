@@ -99,6 +99,33 @@ void GameObjectComposition::AddComponent(ComponentTypeId typeId, GameComponent* 
 	std::sort(Components.begin(), Components.end(), ComponentSorter());
 }
 
+//Returns false if component could not be found. 
+bool GameObjectComposition::RemoveComponent(ComponentTypeId typeId, GameComponent* toBeRemoved)
+{
+  if (toBeRemoved != NULL)
+  {
+    ComponentIt found = std::find(Components.begin(), Components.end() + 1, toBeRemoved);
+    if (found == Components.end() + 1)
+      return false;
+
+    if (typeId == CT_Body)
+    {
+      //PHYSICS->Bodies.erase(std::find(PHYSICS->Bodies.begin(), PHYSICS->Bodies.end(), (Body*)toBeRemoved));
+      std::cout << "Error, Can't Remove physics" << std::endl;
+      return false;
+    }
+
+    Components.erase(found);
+    Components.shrink_to_fit();
+    delete toBeRemoved;   
+    Initialize();
+    return true;
+  }
+  else
+    return false;
+
+}
+
 GameComponent * GameObjectComposition::GetComponent(ComponentTypeId typeId) const
 {
 	return BinaryComponentSearch(Components, typeId);

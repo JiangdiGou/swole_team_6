@@ -110,7 +110,11 @@ bool EditorLevelTools::saveEntities(std::string levelName)
   else
   {
     //Factory fx will jusst write on top of old shit if no clear.
-    serializer.stream.clear();
+    //serializer.stream.clear();
+    std::ofstream ofs;
+    ofs.open(appendEnt(levelName), std::ofstream::out | std::ofstream::trunc);
+    ofs.close(); 
+
     FACTORY->SerializeAllObjects(serializer);
     return true;
   }
