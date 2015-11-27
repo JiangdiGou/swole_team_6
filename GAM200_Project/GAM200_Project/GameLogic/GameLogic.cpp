@@ -19,220 +19,7 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  FACTORY->loadLevelFrom("resources/Levels/newLev.txt");
-  FACTORY->loadEntities("resources/levels/newLev-ENT.txt");
-
-  GOC * camera = FACTORY->makeObject("GAMECAMERA");
-  camera->AddComponent(CT_Transform, new Transform());
-  Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
-  MouseVector *vectTest = new MouseVector();
-  camera->AddComponent(CT_MouseVector, vectTest);
-  camera->AddComponent(CT_Camera, mainCamera);
-#ifdef EDITOR
-  mainCamera->followingPlayer = false;
-  mainCamera->editorMode = true;
-#endif
-  camera->Initialize();
-  //This move is so that the bottom left corner is 0,0
-
-  GRAPHICS->setMainCamera(mainCamera);
-
-  FACTORY->createTiles();
-
-
-  //PLAYER
-  GOC * player = FACTORY->makeObject("GAMEPLAYER");
-  Transform * transformPlayer = new Transform();
-  transformPlayer->SetPosition(2, 6, 0);
-  transformPlayer->SetScale(Vector2(1.25, 1.25));
-  player->AddComponent(CT_Transform, transformPlayer);
-
-  Body * bodyPlayer = new Body();
-  bodyPlayer->Mass = 3.0f;
-  bodyPlayer->Restitution = 0.3f;
-  bodyPlayer->Friction = 0.0f;
-  ShapeAAB * boxColliderPlayer = new ShapeAAB();
-  boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
- // bodyPlayer->BodyShape = boxColliderPlayer;
-
-#ifdef EDITOR
-  Editable* editable = new Editable(false);
-  player->AddComponent(CT_Editable, editable);
-#endif
- 
-
-
-  player->AddComponent(CT_Body, bodyPlayer);
-  player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
-  PlayerState * controller = new PlayerState();
-  player->AddComponent(CT_PlayerState, controller);
-
-  SoundEmitter* playerSound = new SoundEmitter();
-  player->AddComponent(CT_SoundEmitter, playerSound);
-
-  //TileMapCollision * tileplayer = new TileMapCollision();
-  //player->AddComponent(CT_TileMapCollision, tileplayer);
-
-
-  Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
-  spritePlayer->flipSprite = false;
-  player->AddComponent(CT_Sprite, spritePlayer);
-
-  LOGIC->player = player;
-
-
-  // ground
-
-  /*
-  GOC * blackObj2 = FACTORY->makeObject("");
-  Transform * transform = new Transform();
-  transform->SetPosition(8, 7, 0);
-  blackObj2->AddComponent(CT_Transform, transform);
-  Body * body = new Body();
-  body->Mass = 6.0f;
-  body->Restitution = 0.3f;
-  body->Friction = 0.0f;
-  ShapeAAB * box = new ShapeAAB();
-  box->Extents = Vec2D(0.5, 0.5);
-  body->BodyShape = box;
-  blackObj2->AddComponent(CT_Body, body);
-  if (blackObj2 && box && body && body->IsStatic == false)
-  {
-    std::cout << "I exist" << std::endl;
-  }
-  //  blackObj2->InitPosition = (whatever, whatever, whatever);
-  //Transform * transform6 = new Transform();
-  //
-  //transform6->SetPosition(4, 1, 0);
-
-  Sprite * sprite5 = new Sprite();
-  sprite5->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
-  //sprite5->color = glm::vec4(0, 0, 1, 1);
-  Reactive * reactive = new Reactive();
-  blackObj2->AddComponent(CT_Sprite, sprite5);
-  blackObj2->AddComponent(CT_ShapeAAB, box);
-  blackObj2->AddComponent(CT_Reactive, reactive);
-
-  
-  //down 1
-  //GOC * bo1 = FACTORY->makeObject("");
-  //Transform * transformbo = new Transform();
-  //transformbo->SetPosition(12, 1, 0);
-  //bo1->AddComponent(CT_Transform, transformbo);
-  //Body * bodybo = new Body();
-  //bodybo->Mass = 6.0f;
-  //bodybo->Restitution = 0.3f;
-  //bodybo->Friction = 0.3f;
-  //ShapeAAB * boxbo = new ShapeAAB();
-  //boxbo->Extents = Vec2D(0.5, 0.5);
-  //bodybo->BodyShape = boxbo;
-  //bo1->AddComponent(CT_Body, bodybo);
-  //
-  ////  blackObj2->InitPosition = (whatever, whatever, whatever);
-  ////Transform * transform6 = new Transform();
-  ////
-  ////transform6->SetPosition(4, 1, 0);
-  //
-  //Sprite * spritebo = new Sprite();
-  //spritebo->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
-  //spritebo->color = glm::vec4(0, 0, 1, 1);
-  //bo1->AddComponent(CT_Sprite, spritebo);
-  //bo1->AddComponent(CT_ShapeAAB, boxbo);
-
-
-  // 1
-  GOC * blackObj3 = FACTORY->makeObject("");
-  Transform * transform1 = new Transform();
-  transform1->SetPosition(4, 1, 0);
-  blackObj3->AddComponent(CT_Transform, transform1);
-  Body * body1 = new Body();
-  body1->Mass = 0.0f;
-  body1->Restitution = 0.3f;
-  body1->Friction = 0.3f;
-  ShapeAAB * box1 = new ShapeAAB();
-  box1->Extents = Vec2D(0.5, 0.5);
-  body1->BodyShape = box1;
-  blackObj3->AddComponent(CT_Body, body1);
-  if (blackObj3 && box1 && body1 && body1->IsStatic == false)
-  {
-    std::cout << "I exist 1" << std::endl;
-  }
-  //  blackObj3->InitPosition = (whatever, whatever, whatever);
-  //Transform * transform6 = new Transform();
-  //
-  //transform6->SetPosition(4, 1, 0);
-
-  Sprite * sprite6 = new Sprite();
-  sprite6->texture = GRAPHICS->getSpriteAtlas()->textures["ExampleSpriteSheet"];
-  sprite6->color = glm::vec4(1, 1, 0, 1);
-  blackObj3->AddComponent(CT_Sprite, sprite6);
-  blackObj3->AddComponent(CT_ShapeAAB, box1);
-
-
-  // Test Button
-  GOC * button1 = FACTORY->makeObject("");
-  transform1->SetPosition(6, 3, 1);
-  transform1->SetScale(2,1,1);
-  button1->AddComponent(CT_Transform, transform1);
-  Sprite * buttonSprite1 = new Sprite();
-  buttonSprite1->texture = GRAPHICS->getSpriteAtlas()->textures["DuckNoise"];
-  buttonSprite1->color = glm::vec4(1, 1, 1, 1);
-  button1->AddComponent(CT_Sprite, buttonSprite1);
-  Reactive* rc = new Reactive;
-  button1->AddComponent(CT_Reactive, rc);
-  TestComponent* tc = new TestComponent;
-  button1->AddComponent(CT_TestComponent, tc);
-
-
-  // 2
-  //GOC * blackObj4 = FACTORY->makeObject("");
-  //Transform * transform2 = new Transform();
-  //transform2->SetPosition(13, 2, 0);
-  //blackObj4->AddComponent(CT_Transform, transform2);
-  //Body * body2 = new Body();
-  //body2->Mass = 0.0f;
-  //body2->Restitution = 0.3f;
-  //body2->Friction = 0.3f;
-  //ShapeAAB * box2 = new ShapeAAB();
-  //box2->Extents = Vec2D(0.5, 0.5);
-  //body2->BodyShape = box2;
-  //blackObj4->AddComponent(CT_Body, body2);
-  //if (blackObj4 && box2 && body2 && body2->IsStatic == false)
-  //{
-  //	std::cout << "I exist 1" << std::endl;
-  //}
-  ////  blackObj3->InitPosition = (whatever, whatever, whatever);
-  ////Transform * transform6 = new Transform();
-  ////
-  ////transform6->SetPosition(4, 1, 0);
-  //
-  //Sprite * sprite7 = new Sprite();
-  //sprite7->texture = graphics->spriteAtlas.textures[std::string("ExampleSpriteSheet")];
-  //sprite7->color = glm::vec4(0, 0, 1, 1);
-  //blackObj4->AddComponent(CT_Sprite, sprite7);
-  //blackObj4->AddComponent(CT_ShapeAAB, box2);
-
-
-  //blackObj2->AddComponent(CT_Transform, transform6);
-  //blackObj2->AddComponent(CT_Sprite, sprite5);
-  //RigidBody* blackObjBody2 = new RigidBody();
-  //blackObjBody2->isGhost = false;
-  //blackObjBody2->SetStatic();
-  //blackObjBody2->useGravity = false;
-  //if (blackObjBody2->isStatic)
-  //{
-  //	transform6->SetPosition(4, 1, 0);
-  //}
-  //blackObjBody->isKinematic = true;
-  //blackObj2->AddComponent(CT_RigidBody, blackObjBody2);
-  //AABB* blackCollision2 = new AABB();
-  //blackCollision2->SetHalfSize(1.0f, 1.0f);
-  //blackObj2->AddComponent(CT_AABB, blackCollision2);
-
-  //player = Fbox;
-  */
-  FACTORY->initializeObjects();
+  createLevel("resources/Levels/newLev.txt");
 }
 
 void GameLogic::SendMessages(Message * m)
@@ -325,6 +112,68 @@ GameLogic::GameLogic()
 
 GameLogic::~GameLogic()
 {
+}
+
+void GameLogic::createLevel(std::string levelPath)
+{
+  FACTORY->loadLevelFrom(levelPath);
+  FACTORY->loadEntities(appendEnt(levelPath));
+
+  FACTORY->createTiles();
+
+
+  //SET UP CAMERA
+  GOC * camera = FACTORY->makeObject("GAMECAMERA");
+  camera->AddComponent(CT_Transform, new Transform());
+  Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
+  MouseVector *vectTest = new MouseVector();
+  camera->AddComponent(CT_MouseVector, vectTest);
+  camera->AddComponent(CT_Camera, mainCamera);
+#ifdef EDITOR
+  mainCamera->followingPlayer = false;
+  mainCamera->editorMode = true;
+#endif
+  camera->Initialize();
+  GRAPHICS->setMainCamera(mainCamera);
+
+  //SET UP PLAYER
+  GOC * player = FACTORY->makeObject("GAMEPLAYER");
+  //Transform
+  Transform * transformPlayer = new Transform();
+  transformPlayer->SetPosition(2, 6, 0);
+  transformPlayer->SetScale(Vector2(1.25, 1.25));
+  player->AddComponent(CT_Transform, transformPlayer);
+  //Shape
+  ShapeAAB * boxColliderPlayer = new ShapeAAB();
+  boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
+  player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
+  //Body
+  Body * bodyPlayer = new Body();
+  bodyPlayer->Mass = 3.0f;
+  bodyPlayer->Restitution = 0.3f;
+  bodyPlayer->Friction = 0.0f;
+  player->AddComponent(CT_Body, bodyPlayer);
+  //Editable
+#ifdef EDITOR
+  Editable* editable = new Editable(false);
+  player->AddComponent(CT_Editable, editable);
+#endif
+  //Controller
+  PlayerState * controller = new PlayerState();
+  player->AddComponent(CT_PlayerState, controller);
+  //Sound Emitter
+  SoundEmitter* playerSound = new SoundEmitter();
+  player->AddComponent(CT_SoundEmitter, playerSound);
+  //Sprite
+  Sprite * spritePlayer = new Sprite();
+  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+  spritePlayer->flipSprite = false;
+  player->AddComponent(CT_Sprite, spritePlayer);
+  //Saves Player
+  LOGIC->player = player;
+
+  //Init all objects
+  FACTORY->initializeObjects();
 }
 
 void GameLogic::Update(float dt)

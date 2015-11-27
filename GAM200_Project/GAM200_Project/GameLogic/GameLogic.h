@@ -15,6 +15,7 @@ public:
   virtual void SendMessages(Message *);
   void LoadLevelFile(const std::string& file);
   unsigned GrabbedObjectId;
+  void createLevel(std::string levelPath);
 
   GOC* player = NULL;
   GOC* player2 = NULL; 
