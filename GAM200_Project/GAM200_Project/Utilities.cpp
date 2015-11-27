@@ -126,3 +126,16 @@ std::string appendEnt(const std::string &input)
   substring.append("-ENT.txt");
   return substring;
 }
+
+std::string getUnderscoreSuffix(std::string &input)
+{
+  //Find the underscore
+  std::string::iterator it = std::find(input.begin(), input.end(), '_');
+  if (it == input.end())
+    return "";
+
+  //Since i chopped off file ext i can just get underscore to end of string
+  std::string substring(it + 1, input.end());
+  return substring;
+}
+
