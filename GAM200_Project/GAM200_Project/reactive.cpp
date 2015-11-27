@@ -122,6 +122,5 @@ ZilchDefineType(Reactive, "Reactive", ZLib_Internal, builder, type)
   ZilchBindMethod(builder, type, &Reactive::ctrlPressed, ZilchNoOverload, "ctrlPressed", ZilchNoNames);
   ZilchBindMethod(builder, type, &Reactive::altPressed, ZilchNoOverload, "altPressed", ZilchNoNames);
   ZilchBindMethod(builder, type, &Reactive::shiftPresed, ZilchNoOverload, "shiftPresed", ZilchNoNames);
-  ZilchBindMethod(builder, type, &Reactive::isActuallyReactive, ZilchNoOverload, "isActuallyReactive", ZilchNoNames);
   ZilchBindMethod(builder, type, &Reactive::getMousePos, ZilchNoOverload, "getMousePos", ZilchNoNames);
 }
