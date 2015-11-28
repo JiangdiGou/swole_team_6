@@ -100,25 +100,42 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
   {
   case CT_Transform:
   {
+    Transform* fTransform = (Transform*)getFocusComponent(CT_Transform);
+    Vector3 pos = fTransform->GetPosition();
+    Vector3 scl = fTransform->GetScale();
+    float rot = fTransform->GetRotation().z;
 
+    // Get current value of transform stuff
+    char posChar[256];
+    char sclChar[256];
+    char rotChar[256];
+    sprintf(posChar, "Pos: %f %f %f", pos.x, pos.y, pos.z);
+    sprintf(sclChar, "Scl: %f %f %f", scl.x, scl.y, scl.z);
+    sprintf(rotChar, "Rot: %f", rot);
 
-    ImGui::Text("To Translate...");
-    ImGui::Text("Click and Drag");
+    //Pos stuff
+    ImGui::Text("Translation: Click and Drag");
+    ImGui::Text(posChar);
     ImGui::InputFloat3("pos", tweakf3_1);
-    ImGui::Text("To Rotate...");
-    ImGui::Text("Ctrl-Click and Drag");
+
+    if (ImGui::Button("Update Pos"))
+      fTransform->SetPosition(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
+
+    //Rot Stuff
+    ImGui::Text("Rotation: Ctrl-Click and Drag");
+    ImGui::Text(rotChar);
     ImGui::InputFloat("rot", &tweakF);
-    ImGui::Text("To Scale...");
-    ImGui::Text("Shift-Click and Drag");
+
+    if (ImGui::Button("Update Rot"))
+      fTransform->SetRotationZ(tweakF);
+
+    //Scl Stuff
+    ImGui::Text("Scaling: Shift-Click and Drag");
+    ImGui::Text(sclChar);
     ImGui::InputFloat3("scl", tweakf3_2);
 
-    if (ImGui::Button("Update"))
-    {
-      Transform* fTransform = (Transform*)getFocusComponent(CT_Transform);
-      fTransform->SetPosition(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
-      fTransform->SetRotationZ(tweakF);
+    if (ImGui::Button("Update Scl"))
       fTransform->SetScale(Vector3(tweakf3_2[0], tweakf3_2[1], tweakf3_2[2]));
-    }
 
     break;
   }
