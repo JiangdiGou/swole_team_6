@@ -7,7 +7,7 @@ class TestTopPlatform : ZilchComponent
     function Initialize(init : CogInitializer)
     {
         //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
-        //Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
         Zero.Connect(this.Owner, Events.CollisionEnded, this.OnCollisionEnded);
     }
 
@@ -17,7 +17,7 @@ class TestTopPlatform : ZilchComponent
     
     function PositionCheck()
     {
-        if(this.OtherOBJ.Transform.Translation.Y > (this.Owner.Transform.Translation.Y + 1))
+        if(this.OtherOBJ.Transform.Translation.Y > (this.Owner.Transform.Translation.Y + 0.5))
         {
             this.Above = true;
         }
@@ -27,37 +27,21 @@ class TestTopPlatform : ZilchComponent
         }
     }
     
-    //function OnCollisionStarted(event : CollisionEvent)
-    //{
-    //    var otherObject = event.OtherObject;
-    //    this.OtherOBJ = otherObject;
-        
-    //    this.PositionCheck();
-    //    Console.WriteLine("got here");
-        
-    //    if(otherObject.Name == "Player" && this.Above)
-    //    {
-    //        this.Owner.BoxCollider.Ghost = false;
-    //    }
-    //}
-    
-    function OnCollisionEnded(event : CollisionEvent)
+    function OnCollisionStarted(event : CollisionEvent)
     {
         var otherObject = event.OtherObject;
         this.OtherOBJ = otherObject;
         
-        if(this.OtherOBJ != null)
-        {
-            this.PositionCheck();
-        }
+        this.PositionCheck();
         
-        if(otherObject.Name == "Player" && this.Above)
+        if(this.Above)
         {
             this.Owner.BoxCollider.Ghost = false;
         }
-        else
-        {
-            this.Owner.BoxCollider.Ghost = true;
-        }
+    }
+    
+    function OnCollisionEnded(event : CollisionEvent)
+    {
+        this.Owner.BoxCollider.Ghost = true;
     }
 }
