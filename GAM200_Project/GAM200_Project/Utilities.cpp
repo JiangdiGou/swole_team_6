@@ -127,15 +127,15 @@ std::string appendEnt(const std::string &input)
   return substring;
 }
 
-std::string getUnderscoreSuffix(std::string &input)
+std::string getTildePrefix(std::string &input)
 {
   //Find the underscore
-  std::string::iterator it = std::find(input.begin(), input.end(), '_');
+  std::string::iterator it = std::find(input.begin(), input.end(), '~');
   if (it == input.end())
-    return "";
+    return "   ";
 
   //Since i chopped off file ext i can just get underscore to end of string
-  std::string substring(it + 1, input.end());
+  std::string substring(input.begin(), it);
   return substring;
 }
 

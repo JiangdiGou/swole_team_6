@@ -238,7 +238,7 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   newTile->AddComponent(CT_Sprite, tileSprite);
 
   //Don't want the empty tile to have collision, NC thing should allow tiles with no collision
-  if (!(textureName == "E" || getUnderscoreSuffix(textureName) == std::string("NC")))
+  if (!(textureName == "E" ||  getTildePrefix(textureName) == std::string("NC")))
   {
     Body * tileBody = new Body();
     tileBody->Mass = 0;

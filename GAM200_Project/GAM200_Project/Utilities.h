@@ -63,5 +63,5 @@ bool luaTest();
 std::vector<std::string> tokenize(const std::string &input);
 /* Adds -ENT to filename. ex. hi.txt -> hi-ENT.txt */
 std::string appendEnt(const std::string &input);
-std::string getUnderscoreSuffix(std::string &input);
+std::string getTildePrefix(std::string &input);
 #endif
