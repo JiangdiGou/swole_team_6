@@ -64,7 +64,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameLogic\GameLogic.h" />
+<<<<<<< HEAD
+    <ClInclude Include="GAM200_Project\GameLogic\HUDcomponent.h" />
+=======
     <ClInclude Include="GAM200_Project\GameLogic\GameReactive.h" />
+>>>>>>> b05f95edc3d127ba0e4314c9c8d4c0ceb5569ca8
     <ClInclude Include="GAM200_Project\GameLogic\TestComponent.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
@@ -135,10 +139,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="GAM200_Project\WindowsSystem.h" />
+    <ClInclude Include="GAM200_Project\ZilchComponent.h" />
     <ClInclude Include="GAM200_Project\Zilch\BindInternal.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\Filesystem\Filepaths.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\Zilch.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\ZilchInterface.hpp" />
+    <ClInclude Include="GAM200_Project\Zilch\ZilchManager.h" />
     <ClInclude Include="GAM200_Project\_EntryPoint.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -187,7 +193,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="GAM200_Project\GameLogic\HUDcomponent.cpp" />
+=======
     <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp" />
+>>>>>>> b05f95edc3d127ba0e4314c9c8d4c0ceb5569ca8
     <ClCompile Include="GAM200_Project\GameLogic\TestComponent.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />
@@ -247,11 +257,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\WindowsSystem.cpp" />
+    <ClCompile Include="GAM200_Project\ZilchComponent.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\BindInternal.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\Filesystem\Filepaths_windows.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\Zilch.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\ZilchInterface.cpp" />
     <ClCompile Include="GAM200_Project\PleaseWork\action_math_utility.cpp" />
+    <ClCompile Include="GAM200_Project\Zilch\ZilchManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt" />

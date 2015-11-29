@@ -138,12 +138,12 @@ class EnemyHitReaction : ZilchComponent
     }
     
     //Takes the amount of damage this enemy takes, if the attack stuns, and if the attack knocks up.
-    function OnHit(iDamageTaken_:Integer, bIsStunned_:Boolean, bKnockedUp_:Boolean, iAttackID_:Integer)
+    function OnHit(iDamageTaken_:Integer, bIsStunned_:Boolean, bKnockedUp_:Boolean)//Used to include an attack ID
     {
         if(!this.Invulnerable)
         {
             //If the attack was a basic attack
-            if(iAttackID_ >= 20 && iAttackID_ <= 29 && !this.IgnoreBasicAttack)
+            /*if(iAttackID_ >= 20 && iAttackID_ <= 29 && !this.IgnoreBasicAttack)
             {
                 this.TakeDamage(iDamageTaken_, bIsStunned_, bKnockedUp_);
             }
@@ -156,7 +156,7 @@ class EnemyHitReaction : ZilchComponent
             else if(iAttackID_ >= 50 && iAttackID_ <= 54 && !this.IgnoreScrollAttack)
             {
                 this.TakeDamage(iDamageTaken_, bIsStunned_, bKnockedUp_);
-            }
+            }*/
         }
     }
     
