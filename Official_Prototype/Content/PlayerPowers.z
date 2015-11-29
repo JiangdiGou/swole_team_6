@@ -45,7 +45,7 @@ class PlayerPowers : ZilchComponent
         {
             if(castAttackCircle.Front().ObjectHit.Name == "Enemy")
             {
-                castAttackCircle.Front().ObjectHit.EnemyHitReaction.OnHit(1,true,true, 55);//55 is radial power in Combo Manager
+                castAttackCircle.Front().ObjectHit.EnemyHitReaction.OnHit(1,true,true);//55 is radial power in Combo Manager
                 castAttackCircle.Front().ObjectHit.RigidBody.Velocity += Real3(0,0,0);
             }
             castAttackCircle.PopFront();
