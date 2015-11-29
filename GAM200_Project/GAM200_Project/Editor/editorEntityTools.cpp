@@ -170,6 +170,21 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
     }
     break;
   }
+  case CT_HUDcomponent:
+  {
+    HUDcomponent* pHUD = (HUDcomponent*)getFocusComponent(CT_HUDcomponent);
+    char currentOffset[256];
+    Vector3 offset = pHUD->getOffset();
+
+    sprintf(currentOffset, "Cur Offset: %f %f %f", offset.x, offset.y, offset.z);
+    ImGui::Text(currentOffset);
+    ImGui::InputFloat3("offset", tweakf3_1);
+
+    if (ImGui::Button("Update"))
+    {
+      pHUD->setOffset(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
+    }
+  }
   }
 }
 

@@ -11,6 +11,9 @@ public:
 	void SendMessages(Message* msg)override;
 	void SerializeWrite(Serializer& str) override;
 
+  Vector3 getOffset() { return offset; }
+  void setOffset(Vector3 newOffset) { offset = newOffset;  }
+
 	HUDcomponent();
 
 private:
