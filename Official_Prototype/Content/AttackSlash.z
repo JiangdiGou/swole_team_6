@@ -1,5 +1,5 @@
 /********************************************************************************
-file    PlayerSlashAttack.z
+file    AttackSlash.z
 author  Mitchell Regan
 par     Contact: mitchell.regan@digipen.edu
 brief
@@ -8,7 +8,7 @@ brief
 
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 *******************************************************************************/
-class PlayerSlashAttack : ZilchComponent
+class AttackSlash : ZilchComponent
 {
     //Determines if the left mouse is currently held down
     var BLClickDown:Boolean = false;
@@ -76,7 +76,7 @@ class PlayerSlashAttack : ZilchComponent
             
             
             //If the drag of the mouse is long enough and the mouse wasn't held down too long, it registers as a slash
-            if(this.ILClickDuration <= 50 && this.AirSlashCount < this.GameSession.GameData.MaxAirSlash)
+            if(this.ILClickDuration <= 50 && this.AirSlashCount < 2)
             {
                 if(rXDifference >= 1 || rXDifference <= -2 || rYDifference >= 2 || rYDifference <= -2)
                 this.Slash(rXDifference, rYDifference);
@@ -93,8 +93,6 @@ class PlayerSlashAttack : ZilchComponent
         var rDistance:Real = Math.Sqrt((rXDifference_ * rXDifference_) + (rYDifference_ * rYDifference_));
         //The angle that the mouse moved while down, indicating the angle of attack
         var rAngle:Real = Math.ATan2(rYDifference_, rXDifference_) * (180/Math.Pi);
-        //The ID number to send to the Combo Manager to check against
-        var iSlashID:Integer = 0;
         //Speed that the player moves based on the length of the slash############ Possibly not needed with Ray
         var rSpeed:Real = 0;
         
@@ -106,7 +104,6 @@ class PlayerSlashAttack : ZilchComponent
         if(rDistance <= 5)
         {
             //A short slash's ID will be between 10-19
-            iSlashID += 20;
             rSpeed = 70; //60
             rRayDistance = 5.0;
         }
@@ -114,7 +111,6 @@ class PlayerSlashAttack : ZilchComponent
         else if(rDistance <= 8)
         {
             //A medium slash's ID will be between 20-29
-            iSlashID += 30;
             rSpeed = 70; //90
             rRayDistance = 10.0;
         }
@@ -122,7 +118,6 @@ class PlayerSlashAttack : ZilchComponent
         else
         {
             //A long slash's ID will be between 30-39
-            iSlashID += 40;
             rSpeed = 70; //120
             rRayDistance = 15.0;
         }
@@ -136,42 +131,36 @@ class PlayerSlashAttack : ZilchComponent
         //Up-Right slash
         else if(rAngle > 22.5 && rAngle < 67.5)
         {
-            iSlashID += 1;
             this.Owner.Sprite.FlipX = false;
         }
         //Right slash
         else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
         {
-            iSlashID += 2;
             this.Owner.Sprite.FlipX = false;
         }
         //Down-Right slash
         else if(rAngle < -22.5 && rAngle > -67.5)
         {
-            iSlashID += 3;
             this.Owner.Sprite.FlipX = false;
         }
         //Down slash
         else if(rAngle >= -112.5 && rAngle <= -67.5)
         {
-            iSlashID += 4;
+            //iSlashID += 4;
         }
         //Down-Left slash
         else if(rAngle < -112.5 && rAngle > -157.5)
         {
-            iSlashID += 5;
             this.Owner.Sprite.FlipX = true;
         }
         //Left slash
         else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
         {
-            iSlashID += 6;
             this.Owner.Sprite.FlipX = true;
         }
         //Up-Left slash
         else if(rAngle > 112.5 && rAngle < 157.5)
         {
-            iSlashID += 7;
             this.Owner.Sprite.FlipX = true;
         }
         
@@ -190,8 +179,6 @@ class PlayerSlashAttack : ZilchComponent
         var segSlashSegment = this.Space.PhysicsSpace.CastSegmentResults(segSlashStart, segSlashEnd, 10);
         
         
-        this.SlashParticle = this.Space.CreateAtPosition(Archetype.Find("SlashEffect"), this.Owner.Transform.Translation + Real3(0,0,1));
-        this.SlashParticle.RigidBody.Velocity = this.Owner.RigidBody.Velocity / 1.8;
         //play sound
         this.Space.FindObjectByName("BackgroundMusic").BackgroundMusic.SwordSound();
         
@@ -201,7 +188,7 @@ class PlayerSlashAttack : ZilchComponent
             //If the current object checked is an enemy, calls its hit reaction
             if(segSlashSegment.Front().ObjectHit.Name == "Enemy")
             {
-                segSlashSegment.Front().ObjectHit.EnemyHitReaction.OnHit(15,false, true);//used to include attack ID
+                segSlashSegment.Front().ObjectHit.EnemyHitReaction.OnHit(15,false, true);
             }
             //If the current object hit is the tile map, stops the player where they hit the tile
             else if(segSlashSegment.Front().ObjectHit.Name == "DefaultTile")
@@ -222,9 +209,8 @@ class PlayerSlashAttack : ZilchComponent
             --s;
         }
         
-        this.Owner.PlayerMovement.BCanMove = false;
+        //this.Owner.PlayerMovement.BCanMove = false;
         //Sends the slash's attack ID to the combo manager
-        this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,iSlashID);
         
         ++this.AirSlashCount;
     }
@@ -244,15 +230,15 @@ class PlayerSlashAttack : ZilchComponent
             --this.ISlashStop;
             
             //this.Owner.Transform.Translation += Real3(0,0,2);
-            this.Owner.BoxCollider.Ghost = true;
-            this.Owner.PlayerMovement.BCanMove = false;
+            //this.Owner.BoxCollider.Ghost = true;
+            //this.Owner.PlayerMovement.BCanMove = false;
             
             //If the slash ends, stops all of the velocity and lets the player move again
             if(this.ISlashStop == 0)
             {
                 this.Owner.RigidBody.Velocity = Real3(0, 0, 0);
-                this.Owner.BoxCollider.Ghost = false;
-                this.Owner.PlayerMovement.BCanMove = true;
+                //this.Owner.BoxCollider.Ghost = false;
+                //this.Owner.PlayerMovement.BCanMove = true;
             }
         }
     }
