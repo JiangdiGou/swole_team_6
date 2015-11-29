@@ -16,7 +16,8 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Test Component",
   "Editbale",
   "MouseVector",
-  "PlayerState"
+  "PlayerState",
+  "ZilchComponent"
 };
 
 EditorEntityTools::EditorEntityTools()
