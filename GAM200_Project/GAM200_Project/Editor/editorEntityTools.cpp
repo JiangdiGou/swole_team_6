@@ -1,7 +1,5 @@
 #include "editorEntityTools.h"
 
-#include <typeinfo>
-
 const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Transform",
   "Camera",
@@ -11,13 +9,14 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "TileMapCollision",
   "Shape AAB",
   "Shape Line",
-  "Reactive",
+  "GameReactive",
   "Sound Emitter",
   "Test Component",
   "HUD Component",
   "Editbale",
   "MouseVector",
-  "PlayerState"
+  "PlayerState",
+  "ZilchComponent"
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -69,7 +68,10 @@ void EditorEntityTools::handle()
       ImGui::SameLine();
       if (ImGui::Button("Rmv"))
       {
-        setupMessage("Remove not yet implemented", ImVec4(1, 0, 0, 1));
+        if (focus->RemoveComponent((ComponentTypeId)(currentItem + 1), component))
+          setupMessage("Component Removed", ImVec4(0, 1, 0, 1));
+        else
+          setupMessage("Error in removing component", ImVec4(1, 0, 0, 1));
       }
       showTweakables((ComponentTypeId)(currentItem + 1));
     }
@@ -80,21 +82,12 @@ void EditorEntityTools::handle()
       ImGui::SameLine();
       if(ImGui::Button("Add"))
       {
-        //If body or AAB
-        if (currentItem + 1 == 5 || currentItem + 1 == 7)
-        {
-          setupMessage("I've removed adding physics b/c they crash editor.", ImVec4(1, 0, 0, 1));
-          //Damn, this still doesnt work.
-          //addShapeAndBody(focus);
-          //setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
-        }
-        else
-        {
-          GameComponent* component = FACTORY->getNewComponent((ComponentTypeId(currentItem + 1)));
 
-          focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
-          focus->Initialize();
-        }
+        GameComponent* component = FACTORY->getNewComponent((ComponentTypeId(currentItem + 1)));
+
+        focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
+        focus->Initialize();
+        
       }
     }
   }
@@ -109,12 +102,43 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
   {
   case CT_Transform:
   {
-    ImGui::Text("To Translate...");
-    ImGui::Text("Click and Drag");
-    ImGui::Text("To Rotate...");
-    ImGui::Text("Ctrl-Click and Drag");
-    ImGui::Text("To Scale...");
-    ImGui::Text("Shift-Click and Drag");
+    Transform* fTransform = (Transform*)getFocusComponent(CT_Transform);
+    Vector3 pos = fTransform->GetPosition();
+    Vector3 scl = fTransform->GetScale();
+    float rot = fTransform->GetRotation().z;
+
+    // Get current value of transform stuff
+    char posChar[256];
+    char sclChar[256];
+    char rotChar[256];
+    sprintf(posChar, "Pos: %f %f %f", pos.x, pos.y, pos.z);
+    sprintf(sclChar, "Scl: %f %f %f", scl.x, scl.y, scl.z);
+    sprintf(rotChar, "Rot: %f", rot);
+
+    //Pos stuff
+    ImGui::Text("Translation: Click and Drag");
+    ImGui::Text(posChar);
+    ImGui::InputFloat3("pos", tweakf3_1);
+
+    if (ImGui::Button("Update Pos"))
+      fTransform->SetPosition(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
+
+    //Rot Stuff
+    ImGui::Text("Rotation: Ctrl-Click and Drag");
+    ImGui::Text(rotChar);
+    ImGui::InputFloat("rot", &tweakF);
+
+    if (ImGui::Button("Update Rot"))
+      fTransform->SetRotationZ(tweakF);
+
+    //Scl Stuff
+    ImGui::Text("Scaling: Shift-Click and Drag");
+    ImGui::Text(sclChar);
+    ImGui::InputFloat3("scl", tweakf3_2);
+
+    if (ImGui::Button("Update Scl"))
+      fTransform->SetScale(Vector3(tweakf3_2[0], tweakf3_2[1], tweakf3_2[2]));
+
     break;
   }
   case CT_Sprite:
@@ -124,6 +148,11 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
     if (ImGui::Button("ChangeTexture") && fSprite)
     {
       fSprite->texture = ((GRAPHICS->getSpriteAtlas())->textures[std::string(tweakableText)]);
+    }
+    ImGui::InputFloat4("Color", tweakF4);
+    if (ImGui::Button("Update Color") && fSprite)
+    {
+      fSprite->color = glm::vec4(tweakF4[0], tweakF4[1], tweakF4[2], tweakF4[3]);
     }
     break;
   }
@@ -169,8 +198,8 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
   case CT_ShapeLine:
     return focus->has(ShapeLine);
 
-  case CT_Reactive:
-    return focus->has(Reactive);
+  case CT_GameReactive:
+    return focus->has(GameReactive);
 
   case CT_SoundEmitter:
     return focus->has(SoundEmitter);
@@ -211,7 +240,6 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
 
   //Editor Stuff
   //Since we're in editor mode if this fx got called 
-  Reactive* newReactive = new Reactive();
   Editable* newEditable = new Editable(false);
 
   //Add Core stuff
@@ -226,7 +254,6 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
   newEntity->AddComponent(CT_Sprite, newSprite);
 
   //Add edutir stuff
-  newEntity->AddComponent(CT_Reactive, newReactive);
   newEntity->AddComponent(CT_Editable, newEditable);
 
   setupMessage(componentName + " created.", ImVec4(0, 1, 0, 1));

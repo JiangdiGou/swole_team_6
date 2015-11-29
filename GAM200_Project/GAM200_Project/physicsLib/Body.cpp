@@ -8,7 +8,7 @@ the base rigidbody for the physics to do all the effects
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 
@@ -32,13 +32,13 @@ Body::Body()
 	Position = Vec2D(0, 0);
 	PrevPosition = Vec2D(0, 0);
 	Velocity = Vec2D(0, 0);
-	Mass = 0.0f;
+	Mass = 1.0f;
 	InvMass = 0.0f;
 	Damping = 0.9f;
 	Acceleration = Vec2D(0, 0);
 	BodyShape = NULL;
 	Friction = 0.0f;
-	Restitution = 0.0f;
+	Restitution = 0.3f;
 	IsStatic = false;
 	IsGhost = false;
 	AccumulatedForce = Vec2D(0, 0);
@@ -226,4 +226,29 @@ void Body::fuckCollision(ManifoldSet * contact, Body * a)
 	//contact->Penetration = xDiff;
 	contact->Restitution = DetermineRestitution(this);
 	contact->FrictionCof = DetermineFriction(this);
+}
+
+ZilchDefineType(Body, "Body", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, Body, ZilchNoNames);
+  ZilchBindDestructor(builder, type, Body);
+
+  ZilchBindMethod(builder, type, &Body::AddForce, ZilchNoOverload, "AddForce", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &Body::SetPosition, ZilchNoOverload, "SetPosition", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Body::SetVelocity, ZilchNoOverload, "SetVelocity", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Body::AddForce, ZilchNoOverload, "AddForce", ZilchNoNames);
+
+  ZilchBindField(builder, type, &Body::Position, "Position", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Velocity, "Velocity", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Acceleration, "Acceleration", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Mass, "Mass", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::InvMass, "InvMass", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Restitution, "Restitution", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Friction, "Friction", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::Damping, "Damping", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::AccumulatedForce, "AccumulatedForce", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::IsStatic, "IsStatic", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Body::IsGhost, "IsGhost", PropertyBinding::GetSet);
+
 }

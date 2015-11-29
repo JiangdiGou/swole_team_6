@@ -175,3 +175,18 @@ void Camera::SendMessages(Message* message)
     }
   }
 }
+
+ZilchDefineType(Camera, "Camera", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, Camera, ZilchNoNames);
+  ZilchBindDestructor(builder, type, Camera);
+
+  ZilchBindProperty(builder, type, &Camera::getSize, &Camera::setCameraSize, "CamSize");
+  ZilchBindProperty(builder, type, &Camera::getPosition, &Camera::SetPosition, "Position");
+
+  ZilchBindMethod(builder, type, &Camera::getWidth, ZilchNoOverload, "getWidth", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Camera::getHeight, ZilchNoOverload, "getHeight", ZilchNoNames);
+
+  ZilchBindField(builder, type, &Camera::zoom, "zoom", PropertyBinding::GetSet);
+  ZilchBindField(builder, type, &Camera::followingPlayer, "followingPlayer", PropertyBinding::GetSet);
+}

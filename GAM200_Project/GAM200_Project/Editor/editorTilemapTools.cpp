@@ -54,14 +54,17 @@ void EditorTilemapTools::handle()
       it != atlas->textures.end(); ++it, ++counter)
   {
     if (it->second.textureName == "E")
-      continue; 
+    {
+      --counter;
+      continue;
+    }
 
     //Creates a grid by calling SameLine every frame except when time for new row
     if (!(counter % 6 == 0))
       ImGui::SameLine();
 
-    AtlasTexture texture = (*it).second; 
 
+    AtlasTexture texture = (*it).second; 
     //Gets the texture's info for displaying in imgui
     ImVec2 topLeft = ImVec2(texture.getLeftX(), texture.getTopY());
     ImVec2 botRight = ImVec2(texture.getRightX(), texture.getBottomY());
@@ -131,9 +134,17 @@ void EditorTilemapTools::changeTile(GameObjectComposition* tile, bool setEmpty)
 
     
     if (currentTexture != "E" && wasEmpty)
-      ;
-      //addShapeAndBody(tile); Still doesnt work
+    {
+      /*
+      ShapeAAB* col = (ShapeAAB*)FACTORY->getNewComponent(CT_ShapeAAB);
+      Body* body = (Body*)FACTORY->getNewComponent(CT_Body);
 
+      tile->AddComponent(CT_ShapeAAB, col);
+      tile->Initialize();
+      tile->AddComponent(CT_Body, body);
+      tile->Initialize();
+      */
+    }
   }
 }
 

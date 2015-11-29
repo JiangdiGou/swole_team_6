@@ -1,4 +1,11 @@
 #include "BindInternal.hpp"
+#include "../Component.h"
+#include "../engineAudio/SoundEmitter.h"
+#include "../engineGraphics/Camera.h"
+#include "../engineGraphics/Sprite.h"
+#include "../physicsLib/Collision.h"
+#include "../physicsLib/Transform.h"
+#include "../mouseVector.h"
 
 
 
@@ -10,4 +17,20 @@ ZilchDefineStaticLibrary(ZLib_Internal)
   // by globals/pre-main initializations. This method ensures that all classes will be properly bound
   //ZilchInitializeType(Character);
   //ZilchInitializeType(Player);
+  ZilchInitializeType(GameComponent);
+  ZilchInitializeType(GameObjectComposition);
+  ZilchInitializeType(ComponentTypeId);
+  ZilchInitializeType(SoundEmitter);
+  ZilchInitializeType(Camera);
+  ZilchInitializeType(Sprite);
+  ZilchInitializeType(SpriteText);
+  ZilchInitializeType(Body);
+  ZilchInitializeType(Shape);
+  ZilchInitializeType(ShapeAAB);
+  ZilchInitializeType(Transform);
+  ZilchInitializeType(MouseVector);
+  ZilchInitializeType(PlayerState);
+  ZilchInitializeType(Vec2D);
+  ZilchInitializeType(Vector3);
+
 }

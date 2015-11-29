@@ -5,7 +5,7 @@
 void TestComponent::Initialize()
 {
 	GOC* parent = GetOwner();
-	pReactive = parent->has(Reactive);
+	pReactive = parent->has(GameReactive);
 	pTransform = parent->has(Transform);
 }
 void TestComponent::Update(float dt)
@@ -55,7 +55,9 @@ void TestComponent::SendMessages(Message* message)
 	}
 }
 
-TestComponent::TestComponent()
+void TestComponent::SerializeWrite(Serializer& str)
 {
-
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
+  //Other stuff would go here if you wanna store it
 }

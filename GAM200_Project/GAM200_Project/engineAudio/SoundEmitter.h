@@ -8,7 +8,7 @@ the header file for the sound emitter class.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 #ifndef SOUNDEMITTER_H
@@ -16,12 +16,17 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 
 #include "Sound.h"
 #include "../Core.h"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 class SoundEmitter;
 
 class SoundEmitter : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(SoundEmitter, GameComponent);
 	SoundEmitter() {};
 	SoundEmitter(GameObjectComposition *Owner);
 	~SoundEmitter();
@@ -36,6 +41,9 @@ public:
 	void Rock();
 	void SetPause(bool pause, std::string name);
 	void SetVolume(float vol, std::string name);
+
+  void SerializeRead(Serializer& str) override;
+  void SerializeWrite(Serializer& str) override;
 
 	//Set in editor (optional, see segment in FactoryManager)
 	bool playSoundOnStart;

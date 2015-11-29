@@ -8,7 +8,7 @@ the header file for solving the contacts/collision.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 #ifndef RESOLUTION_H

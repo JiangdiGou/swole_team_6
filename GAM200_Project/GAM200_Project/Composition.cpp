@@ -99,6 +99,33 @@ void GameObjectComposition::AddComponent(ComponentTypeId typeId, GameComponent* 
 	std::sort(Components.begin(), Components.end(), ComponentSorter());
 }
 
+//Returns false if component could not be found. 
+bool GameObjectComposition::RemoveComponent(ComponentTypeId typeId, GameComponent* toBeRemoved)
+{
+  if (toBeRemoved != NULL)
+  {
+    ComponentIt found = std::find(Components.begin(), Components.end() + 1, toBeRemoved);
+    if (found == Components.end() + 1)
+      return false;
+
+    if (typeId == CT_Body)
+    {
+      //PHYSICS->Bodies.erase(std::find(PHYSICS->Bodies.begin(), PHYSICS->Bodies.end(), (Body*)toBeRemoved));
+      std::cout << "Error, Can't Remove physics" << std::endl;
+      return false;
+    }
+
+    Components.erase(found);
+    Components.shrink_to_fit();
+    delete toBeRemoved;   
+    Initialize();
+    return true;
+  }
+  else
+    return false;
+
+}
+
 GameComponent * GameObjectComposition::GetComponent(ComponentTypeId typeId) const
 {
 	return BinaryComponentSearch(Components, typeId);
@@ -119,4 +146,32 @@ void GameObjectComposition::SendMessages(Message * message)
   //for( MapIt it = Map.begin();it!=Map.end();++it)
   for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
     (*it)->SendMessages(message);
+}
+ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, builder, type)
+{
+  //Getting and Adding COMPS. Zilch
+  ///ZilchBindMethod(builder, type, &GameObjectComposition::GetComponent, ZilchNoOverload, "GetComponent", ZilchNoNames);
+  ///ZilchBindMethod(builder, type, &GameObjectComposition::AddComponent, ZilchNoOverload, "AddComponent", ZilchNoNames);
+
+  //ZilchBindMethod(builder, type, &GameObjectComposition::SendMessages, ZilchNoOverload, "SendMessages", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &GameObjectComposition::GetComponentType, ZilchNoOverload, "GetComponent", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &GameObjectComposition::Initialize, ZilchNoOverload, "Initialize", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::Update, ZilchNoOverload, "Update", ZilchNoNames);
+
+  //ZilchBindMethod(builder, type, &GameObjectComposition::SerializeRead, ZilchNoOverload, "SerializeRead", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &GameObjectComposition::SerializeWrite, ZilchNoOverload, "SerializeWrite", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &GameObjectComposition::Destroy, ZilchNoOverload, "Destroy", ZilchNoNames);
+  ///ZilchBindMethod(builder, type, &GameObjectComposition::GetId, ZilchNoOverload, "GetId", ZilchNoNames);
+
+  //ZilchBindMethod(builder, type, &GameObjectComposition::GetName, ZilchNoOverload, "GetName", ZilchNoNames);
+
+  ///Type safe way of accessing components.
+  //template<typename type>
+  //type* GetComponentType(ComponentTypeId typeId);
+
+  //A group of actions
+  //ActionGroup Actions;
+
 }

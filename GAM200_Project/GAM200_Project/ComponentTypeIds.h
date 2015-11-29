@@ -1,5 +1,6 @@
 #ifndef COMPONENTTYPEIDS_H
 #define COMPONENTTYPEIDS_H
+#include "Zilch\BindInternal.hpp"
 //enum containing ComponentTypeIds
 enum ComponentTypeId
 {
@@ -18,18 +19,20 @@ enum ComponentTypeId
   CT_ShapeAAB,
   CT_ShapeLine,
 
-  CT_Reactive,
+  CT_GameReactive,
   CT_SoundEmitter,
 
   CT_TestComponent,
   CT_HUDcomponent,
   CT_Editable,
   CT_MouseVector,
-  CT_PlayerState
+  CT_PlayerState,
+  CT_ZilchComponent
 
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 
 
   //Hey I noticed you're adding a component type. Can you please add it editorEntityTools.cpp
 };
+ZilchDeclareExternalBaseType(ComponentTypeId, TypeCopyMode::ReferenceType);
 
 #endif

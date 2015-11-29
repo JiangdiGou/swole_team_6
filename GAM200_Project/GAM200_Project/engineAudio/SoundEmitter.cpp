@@ -8,7 +8,7 @@ Gettors/Settors for the sound
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 
@@ -75,4 +75,33 @@ void SoundEmitter::Update(float dt)
 void SoundEmitter::Release()
 {
 
+}
+
+void SoundEmitter::SerializeRead(Serializer& str)
+{
+  StreamRead(str, playSoundOnStart);
+  StreamRead(str, startSound);
+}
+void SoundEmitter::SerializeWrite(Serializer& str)
+{
+  StreamWrite(str, playSoundOnStart);
+  StreamWrite(str);
+  StreamWrite(str, startSound);
+  StreamWrite(str);
+}
+
+ZilchDefineType(SoundEmitter, "SoundEmitter", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, SoundEmitter, ZilchNoNames);
+  ZilchBindDestructor(builder, type, SoundEmitter);
+
+  //ZilchBindMethod(builder, type, &SoundEmitter::PlayEvent, ZilchNoOverload, "PlayEvent", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &SoundEmitter::StopEvent, ZilchNoOverload, "StopEvent", ZilchNoNames);
+  ZilchBindMethod(builder, type, &SoundEmitter::BeQuiet, ZilchNoOverload, "BeQuiet", ZilchNoNames);
+  ZilchBindMethod(builder, type, &SoundEmitter::Rock, ZilchNoOverload, "Rock", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &SoundEmitter::SetPause, ZilchNoOverload, "SetPause", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &SoundEmitter::SetVolume, ZilchNoOverload, "SetVolume", ZilchNoNames);
+
+  ZilchBindField(builder, type, &SoundEmitter::playSoundOnStart, "playSoundOnStart", PropertyBinding::GetSet);
+  //ZilchBindField(builder, type, &SoundEmitter::startSound, "startSound", PropertyBinding::GetSet);
 }

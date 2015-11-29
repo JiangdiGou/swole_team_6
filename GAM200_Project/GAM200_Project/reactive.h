@@ -5,28 +5,37 @@
 #include "WindowsSystem.h"
 #include "physicsLib\Transform.h"
 #include "engineGraphics\Sprite.h"
+#include "Zilch\BindInternal.hpp"
+#include "Zilch\Zilch.hpp"
+
+using namespace Zilch;
 
 class Reactive : public GameComponent
 {
 public: 
-  Reactive(bool trueReactive = true);
-
-  void Initialize(); 
-  void Update(float dt);
-  void SendMessages(Message*) override;
-  void SerializeRead(Serializer& str) override;
-  void SerializeWrite(Serializer& str) override;
+  ZilchDeclareDerivedType(Reactive, GameComponent);
+  //Is this mouse over this object (based on transform)
   bool mouseOver() { return mouseIsOverThis;  }
+  //Is object clicked basically 
   bool mouseDownAndOver() { return mouseDownOnThis; }
+  //Is object clicked/held
   bool mouseDownHeldAndOver() { return mouseHeldOnThis;  }
+  //Were the following modifier keys pressed?
   bool ctrlPressed() { return control;  }
   bool altPressed() { return alt;  }
   bool shiftPresed() { return shift;  }
-  bool isActuallyReactive() { return trueReactive;  }
+  //Whats the current mouse pos?
   Vector2 getMousePos() { return mousePos; }
 
+  //Call this in init
+  bool fetchTransform();
+  //Call this in update
+  bool checkMouseHeld();
+  //Call this in sendMessages
+  void updateMouseFlags(Message* message);
+
+
 private:
-  bool trueReactive;
   Vector2 mousePos;
   bool mouseDownOnThis = false;
   bool mouseIsOverThis = false;

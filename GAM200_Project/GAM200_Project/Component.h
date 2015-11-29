@@ -3,6 +3,10 @@
 #include "Message.h"
 #include "ComponentTypeIds.h"
 #include "Serialization\Serialization.h"
+#include "Zilch\Zilch.hpp"
+#include "Zilch\BindInternal.hpp"
+
+using namespace Zilch;
 
 class GameObjectComposition;
 typedef GameObjectComposition GOC;
@@ -10,6 +14,7 @@ typedef GameObjectComposition GOC;
 class GameComponent
 {
 public:
+ZilchDeclareBaseType(GameComponent, TypeCopyMode::ReferenceType);
 friend class GameObjectComposition;
 
 virtual void Initialize() {};

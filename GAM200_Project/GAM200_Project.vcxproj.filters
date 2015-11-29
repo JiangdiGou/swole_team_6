@@ -78,9 +78,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
@@ -307,8 +304,22 @@
     <ClInclude Include="GAM200_Project\GameLogic\TestComponent.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="GAM200_Project\GameLogic\HUDcomponent.h">
       <Filter>GameLogic</Filter>
+=======
+    <ClInclude Include="GAM200_Project\Zilch\Filesystem\Filepaths.hpp">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Zilch\ZilchManager.h">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ZilchComponent.h">
+      <Filter>BaseEngine\Composition</Filter>
+>>>>>>> b05f95edc3d127ba0e4314c9c8d4c0ceb5569ca8
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -482,8 +493,25 @@
     <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="GAM200_Project\GameLogic\HUDcomponent.cpp">
       <Filter>GameLogic</Filter>
+=======
+    <ClCompile Include="GAM200_Project\Component.cpp">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Zilch\Filesystem\Filepaths_windows.cpp">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ComponentTypeIds.cpp">
+      <Filter>BaseEngine\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Zilch\ZilchManager.cpp">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ZilchComponent.cpp">
+      <Filter>BaseEngine\Composition</Filter>
+>>>>>>> b05f95edc3d127ba0e4314c9c8d4c0ceb5569ca8
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

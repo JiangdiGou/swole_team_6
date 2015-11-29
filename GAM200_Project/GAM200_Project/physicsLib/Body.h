@@ -8,7 +8,7 @@ the header file for the rigidbody file.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 
@@ -25,12 +25,15 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "Transform.h"
 #include "../WindowsSystem.h"
 #include "Collision.h"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
 
-
+using namespace Zilch;
 
 class Body : public GameComponent
 {
 public:
+  ZilchDeclareDerivedType(Body, GameComponent);
 	Body();
 	~Body();
 

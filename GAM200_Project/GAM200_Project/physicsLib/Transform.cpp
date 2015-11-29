@@ -8,7 +8,7 @@ The functions for general usage of transform in the game.
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 #include"Transform.h"
@@ -204,4 +204,41 @@ glm::mat4 Transform::calculateTransformMatrix()
   transform = translateMat * rotMat * scaleMat;
 
   return transform;
+}
+
+ZilchDefineType(Transform, "Transform", ZLib_Internal, builder, type)
+{
+  ZilchBindConstructor(builder, type, Transform, "pos, rot, scale", Vector3, Vector3, Vector3);
+  ZilchBindDestructor(builder, type, Transform);
+  //Getters
+  ZilchBindMethod(builder, type, &Transform::GetPosition, ZilchNoOverload, "GetPosition", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::GetRotation, ZilchNoOverload, "GetRotation", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::GetScale, ZilchNoOverload, "GetScale", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::GetPositionXY, ZilchNoOverload, "GetPositionXY", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::GetPositionX, ZilchNoOverload, "GetPositionX", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::GetPositionY, ZilchNoOverload, "GetPositionY", ZilchNoNames);
+  //Setters
+  ZilchBindMethod(builder, type, &Transform::SetPosition, (void (Transform::*)(const Vector3)), "SetPosition", "pos");
+  ZilchBindMethod(builder, type, &Transform::SetPosition, (void (Transform::*)(const Vector2)), "SetPosition", "pos");
+  ZilchBindMethod(builder, type, &Transform::SetPosition, (void (Transform::*)(float, float, float)), "SetPosition", "x, y, z");
+
+  ZilchBindMethod(builder, type, &Transform::SetPositionX, ZilchNoOverload, "SetPositionX", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::SetPositionY, ZilchNoOverload, "SetPositionY", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::SetPositionZ, ZilchNoOverload, "SetPositionZ", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &Transform::SetRotation, (void (Transform::*)(Vector3)), "SetRotation", "rot");
+  ZilchBindMethod(builder, type, &Transform::SetRotation, (void (Transform::*)(const Vector2)), "SetRotation", "rot");
+  ZilchBindMethod(builder, type, &Transform::SetRotation, (void (Transform::*)(float, float, float)), "SetRotation", "x, y, z");
+
+  ZilchBindMethod(builder, type, &Transform::SetRotationX, ZilchNoOverload, "SetRotationX", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::SetRotationY, ZilchNoOverload, "SetRotationY", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::SetRotationZ, ZilchNoOverload, "SetRotationZ", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &Transform::SetScale, (void (Transform::*)(Vector3)), "SetRotation", "scal");
+  ZilchBindMethod(builder, type, &Transform::SetScale, (void (Transform::*)(const Vector2)), "SetRotation", "scal");
+  ZilchBindMethod(builder, type, &Transform::SetScale, (void (Transform::*)(float, float, float)), "SetRotation", "x, y, z");
+
+  ZilchBindMethod(builder, type, &Transform::SetScaleX, ZilchNoOverload, "SetScaleX", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::SetScaleY, ZilchNoOverload, "SetScaleY", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Transform::SetScaleZ, ZilchNoOverload, "SetScaleZ", ZilchNoNames);
 }

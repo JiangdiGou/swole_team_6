@@ -48,30 +48,6 @@ public:
       ImGui::Separator();
     }
   }
-
-  /*bool addShapeAndBody(GOC* owner)
-  {
-    Body* body = new Body();
-    ShapeAAB* shape = new ShapeAAB();
-    shape->body = body;
-    body->BodyShape = shape;
-
-    owner->AddComponent(CT_Body, body);
-    owner->AddComponent(CT_ShapeAAB, shape);
-
-    owner->Initialize();
-
-    if (!shape || !body)
-    {
-      setupMessage("Error in adding Shape/Body.", ImVec4(1, 0, 0, 1));
-      return false;
-    }
-    else
-    {
-      setupMessage("Body and Shape added.", ImVec4(0, 1, 0, 1));
-      return true;
-    }
-  }*/
 };
 
 #endif

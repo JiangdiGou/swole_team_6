@@ -119,3 +119,23 @@ bool luaTest()
   }
   return true;
 }
+
+std::string appendEnt(const std::string &input)
+{
+  std::string substring(input.begin(), input.end() - 4);
+  substring.append("-ENT.txt");
+  return substring;
+}
+
+std::string getTildePrefix(std::string &input)
+{
+  //Find the underscore
+  std::string::iterator it = std::find(input.begin(), input.end(), '~');
+  if (it == input.end())
+    return "   ";
+
+  //Since i chopped off file ext i can just get underscore to end of string
+  std::string substring(input.begin(), it);
+  return substring;
+}
+

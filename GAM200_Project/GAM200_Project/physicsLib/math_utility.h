@@ -8,7 +8,7 @@ the header file the vector math implementation
 \remarks
 
 
-All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+All content 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 
@@ -17,6 +17,10 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include <math.h>
 #include <algorithm>
 #include "../engineGraphics/glm/vec3.hpp"
+#include "../Zilch/BindInternal.hpp"
+#include "../Zilch/Zilch.hpp"
+
+using namespace Zilch;
 
 #define FLOAT_PI 3.14159265358979323846f
 
@@ -46,6 +50,7 @@ float radian_to_degrees(float radian);
 class Vec2D
 {
 public:
+  ZilchDeclareBaseType(Vec2D, TypeCopyMode::ValueType);
 	float x;
 	float y;
 private:
@@ -236,6 +241,7 @@ public:
 private:
 
 public:
+  ZilchDeclareBaseType(Vec2D, TypeCopyMode::ValueType);
 	Vector3D() : x(0), y(0), z(0) {} // constructor to zero out
 
   Vector3D(const Vector2& vec) : x(vec.x), y(vec.y), z(0) {}

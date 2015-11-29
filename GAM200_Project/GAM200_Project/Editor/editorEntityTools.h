@@ -18,7 +18,11 @@
 #include "../physicsLib/PlayerState.h"
 #include "../mouseVector.h"
 #include "../GameLogic/TestComponent.h"
+<<<<<<< HEAD
 #include "../GameLogic/HUDcomponent.h"
+=======
+#include "../GameLogic/GameReactive.h"
+>>>>>>> b05f95edc3d127ba0e4314c9c8d4c0ceb5569ca8
 #include <string.h>
 #include <stdio.h>
 
@@ -39,6 +43,11 @@ public:
   GOC* createNewComponent(std::string componentName);
 
 private:
+  float tweakf3_1[3];
+  float tweakf3_2[3];
+  float tweakF;
+  float tweakF4[4];
+
   GameObjectComposition* focus;
   char newEntityName[256];
 
