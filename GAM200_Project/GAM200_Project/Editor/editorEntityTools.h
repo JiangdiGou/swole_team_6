@@ -2,7 +2,7 @@
 #define EDITORENTITYTOOLS_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define TOTALCOMPONENTS 14
+#define TOTALCOMPONENTS 15
 
 #include "imGUI\imgui.h"
 #include "../Core.h"

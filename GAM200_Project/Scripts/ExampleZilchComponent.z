@@ -1,0 +1,47 @@
+class EXAMPLEZILCHCOMPONENT : Component
+{
+    function Initialize()
+    {
+      
+    }
+    function OnUpdate()
+    {
+    
+    }
+    function OnCollideStart()
+    {
+    
+    }
+    function OnCollidePersist()
+    {
+    
+    }
+    function OnCollideEnd()
+    {
+    
+    }
+    function OnCustomEvent()
+    {
+    
+    }
+    function OnMouseLeftDown()
+    {
+    
+    }
+    function OnMouseRightDown()
+    {
+    
+    }
+    function OnMouseLeftUp()
+    {
+    
+    }
+    function OnMouseRightUp()
+    {
+    
+    }
+    function Destroy()
+    {
+    
+    }
+}
