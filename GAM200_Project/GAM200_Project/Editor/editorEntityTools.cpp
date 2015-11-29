@@ -14,6 +14,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Reactive",
   "Sound Emitter",
   "Test Component",
+  "HUD Component",
   "Editbale",
   "MouseVector",
   "PlayerState"
@@ -176,6 +177,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 
   case CT_TestComponent:
     return focus->has(TestComponent);
+
+  case CT_HUDcomponent:
+	  return focus->has(HUDcomponent);
 
   case CT_Editable:
     return focus->has(Editable);

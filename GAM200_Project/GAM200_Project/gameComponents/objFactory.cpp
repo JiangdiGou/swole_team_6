@@ -434,7 +434,10 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
     return new SoundEmitter();
 
   case CT_TestComponent:
-    return new  TestComponent();
+    return new TestComponent();
+
+  case CT_HUDcomponent:
+	  return new HUDcomponent();
 
   case CT_Editable:
     return new Editable();
