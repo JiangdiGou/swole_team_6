@@ -12,6 +12,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "GameReactive",
   "Sound Emitter",
   "Test Component",
+  "HUD Component",
   "Editbale",
   "MouseVector",
   "PlayerState",
@@ -36,6 +37,9 @@ void EditorEntityTools::handle()
   }
   ImGui::SameLine();
   ImGui::InputText("Name", newEntityName, 256);
+
+  if (ImGui::Button("Destroy Entity") && focus != NULL)
+    FACTORY->destroyObject(focus->GetId());
 
   //CORE
   //Displays currently selected entity name
@@ -205,6 +209,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 
   case CT_TestComponent:
     return focus->has(TestComponent);
+
+  case CT_HUDcomponent:
+	  return focus->has(HUDcomponent);
 
   case CT_Editable:
     return focus->has(Editable);

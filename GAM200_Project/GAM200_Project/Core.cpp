@@ -55,14 +55,6 @@ void CoreEngine::GameLoop()
   bgm.SetVolume(1.0f, "Combat_Music");
   bgm.PlayEvent("Combat_Music");
 #else
-
-
-
-
-  
- 
- 
-
   if (INITINFO->playTheme)
   {
     //FMSoundSys sound = *new FMSoundSys();
@@ -105,12 +97,15 @@ void CoreEngine::GameLoop()
       //Update the when the last update started
       LastTime = currenttime;
 
-      //Update every system
-      for (unsigned i = 0; i < Systems.size(); ++i)
-        Systems[i]->Update(dt);
+      if (!Pause)
+      {
+        //Update every system
+        for (unsigned i = 0; i < Systems.size(); ++i)
+          Systems[i]->Update(dt);
 
-      for (unsigned i = 0; i < Systems.size(); ++i)
-        Systems[i]->Draw();
+        for (unsigned i = 0; i < Systems.size(); ++i)
+          Systems[i]->Draw();
+      }
     }
   }
 
