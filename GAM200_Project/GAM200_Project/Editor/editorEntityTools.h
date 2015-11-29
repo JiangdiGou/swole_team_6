@@ -18,6 +18,7 @@
 #include "../physicsLib/PlayerState.h"
 #include "../mouseVector.h"
 #include "../GameLogic/TestComponent.h"
+#include "../GameLogic/GameReactive.h"
 #include <string.h>
 #include <stdio.h>
 

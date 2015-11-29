@@ -38,6 +38,7 @@ void SerializeWrite(Serializer& str);
 
 void Destroy();
 
+bool RemoveComponent(ComponentTypeId typeId, GameComponent* toBeRemoved);
 void AddComponent(ComponentTypeId typeId, GameComponent* component);
 //ActiongGroup Actions;
 //Game Obj's Id
@@ -83,5 +84,4 @@ return static_cast<type*>(GetComponent(typeId));
 }
 
 #define has(type) GetComponentType<type>(CT_##type);
-
 #endif

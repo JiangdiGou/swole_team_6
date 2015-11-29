@@ -1,9 +1,6 @@
 #ifndef EDITORLEVELTOOLS_H
 #define EDITORLEVELTOOLS_H
 
-enum EditorLevelState { IDLE, CREATINGLEVEL, LOADINGLEVEL, INLEVEL };
-
-
 #include "imGUI\imgui.h"
 #include "../Core.h"
 #include <string>

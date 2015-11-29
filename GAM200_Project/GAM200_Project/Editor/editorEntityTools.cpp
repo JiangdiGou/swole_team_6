@@ -1,7 +1,5 @@
 #include "editorEntityTools.h"
 
-#include <typeinfo>
-
 const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Transform",
   "Camera",
@@ -11,7 +9,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "TileMapCollision",
   "Shape AAB",
   "Shape Line",
-  "Reactive",
+  "GameReactive",
   "Sound Emitter",
   "Test Component",
   "Editbale",
@@ -69,7 +67,10 @@ void EditorEntityTools::handle()
       ImGui::SameLine();
       if (ImGui::Button("Rmv"))
       {
-        setupMessage("Remove not yet implemented", ImVec4(1, 0, 0, 1));
+        if (focus->RemoveComponent((ComponentTypeId)(currentItem + 1), component))
+          setupMessage("Component Removed", ImVec4(0, 1, 0, 1));
+        else
+          setupMessage("Error in removing component", ImVec4(1, 0, 0, 1));
       }
       showTweakables((ComponentTypeId)(currentItem + 1));
     }
@@ -100,25 +101,42 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
   {
   case CT_Transform:
   {
+    Transform* fTransform = (Transform*)getFocusComponent(CT_Transform);
+    Vector3 pos = fTransform->GetPosition();
+    Vector3 scl = fTransform->GetScale();
+    float rot = fTransform->GetRotation().z;
 
+    // Get current value of transform stuff
+    char posChar[256];
+    char sclChar[256];
+    char rotChar[256];
+    sprintf(posChar, "Pos: %f %f %f", pos.x, pos.y, pos.z);
+    sprintf(sclChar, "Scl: %f %f %f", scl.x, scl.y, scl.z);
+    sprintf(rotChar, "Rot: %f", rot);
 
-    ImGui::Text("To Translate...");
-    ImGui::Text("Click and Drag");
+    //Pos stuff
+    ImGui::Text("Translation: Click and Drag");
+    ImGui::Text(posChar);
     ImGui::InputFloat3("pos", tweakf3_1);
-    ImGui::Text("To Rotate...");
-    ImGui::Text("Ctrl-Click and Drag");
+
+    if (ImGui::Button("Update Pos"))
+      fTransform->SetPosition(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
+
+    //Rot Stuff
+    ImGui::Text("Rotation: Ctrl-Click and Drag");
+    ImGui::Text(rotChar);
     ImGui::InputFloat("rot", &tweakF);
-    ImGui::Text("To Scale...");
-    ImGui::Text("Shift-Click and Drag");
+
+    if (ImGui::Button("Update Rot"))
+      fTransform->SetRotationZ(tweakF);
+
+    //Scl Stuff
+    ImGui::Text("Scaling: Shift-Click and Drag");
+    ImGui::Text(sclChar);
     ImGui::InputFloat3("scl", tweakf3_2);
 
-    if (ImGui::Button("Update"))
-    {
-      Transform* fTransform = (Transform*)getFocusComponent(CT_Transform);
-      fTransform->SetPosition(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
-      fTransform->SetRotationZ(tweakF);
+    if (ImGui::Button("Update Scl"))
       fTransform->SetScale(Vector3(tweakf3_2[0], tweakf3_2[1], tweakf3_2[2]));
-    }
 
     break;
   }
@@ -179,8 +197,8 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
   case CT_ShapeLine:
     return focus->has(ShapeLine);
 
-  case CT_Reactive:
-    return focus->has(Reactive);
+  case CT_GameReactive:
+    return focus->has(GameReactive);
 
   case CT_SoundEmitter:
     return focus->has(SoundEmitter);
@@ -218,7 +236,6 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
 
   //Editor Stuff
   //Since we're in editor mode if this fx got called 
-  Reactive* newReactive = new Reactive();
   Editable* newEditable = new Editable(false);
 
   //Add Core stuff
@@ -233,7 +250,6 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
   newEntity->AddComponent(CT_Sprite, newSprite);
 
   //Add edutir stuff
-  newEntity->AddComponent(CT_Reactive, newReactive);
   newEntity->AddComponent(CT_Editable, newEditable);
 
   setupMessage(componentName + " created.", ImVec4(0, 1, 0, 1));

@@ -19,7 +19,7 @@ enum ComponentTypeId
   CT_ShapeAAB,
   CT_ShapeLine,
 
-  CT_Reactive,
+  CT_GameReactive,
   CT_SoundEmitter,
 
   CT_TestComponent,
