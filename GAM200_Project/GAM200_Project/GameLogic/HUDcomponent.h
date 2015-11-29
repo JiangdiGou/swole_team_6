@@ -14,9 +14,9 @@ public:
 	HUDcomponent();
 
 private:
-	Reactive* pReactive;
 	Transform* pTransform;
 	Transform* camPos;
+	Vector3D offset;
 	bool CurrMouseState;
 	bool MouseDown;
 };
