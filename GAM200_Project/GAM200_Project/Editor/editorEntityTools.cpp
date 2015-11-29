@@ -36,6 +36,9 @@ void EditorEntityTools::handle()
   ImGui::SameLine();
   ImGui::InputText("Name", newEntityName, 256);
 
+  if (ImGui::Button("Destroy Entity") && focus != NULL)
+    FACTORY->destroyObject(focus->GetId());
+
   //CORE
   //Displays currently selected entity name
   if (focus)
