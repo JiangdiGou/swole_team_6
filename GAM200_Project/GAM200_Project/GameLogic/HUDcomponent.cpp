@@ -6,7 +6,7 @@
 void HUDcomponent::Initialize()
 {
 	GOC* parent = GetOwner();
-	pReactive = parent->has(Reactive);
+	pReactive = parent->has(GameReactive);
 	pTransform = parent->has(Transform);
 	Camera* cPtr = GRAPHICS->getCamera();
 	GOC* camera = cPtr->GetOwner();
