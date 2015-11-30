@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../reactive.h"
+#include "../engineGraphics/Camera.h"
 
 class HUDcomponent : public GameComponent
 {
@@ -9,6 +10,7 @@ public:
 	void Initialize()override;
 	void Update(float dt)override;
 	void SendMessages(Message* msg)override;
+	void SerializeRead(Serializer& str) override;
 	void SerializeWrite(Serializer& str) override;
 
   Vector3 getOffset() { return offset; }
@@ -18,7 +20,7 @@ public:
 
 private:
 	Transform* pTransform;
-	Transform* camPos;
+	Camera* pCam;
 	Vector3D offset;
 	bool CurrMouseState;
 	bool MouseDown;
