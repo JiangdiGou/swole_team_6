@@ -22,10 +22,12 @@ enum ComponentTypeId
   CT_GameReactive,
   CT_SoundEmitter,
 
-  CT_TestComponent,
+  CT_PlayerTag,
+  CT_HUDcomponent,
   CT_Editable,
   CT_MouseVector,
   CT_PlayerState,
+  CT_MenuButton,
   CT_OurZilchComponent
 
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 

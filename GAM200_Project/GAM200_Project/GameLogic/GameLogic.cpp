@@ -11,6 +11,7 @@
 #include "../mouseVector.h"
 #include "../reactive.h"
 #include "PlayerTag.h"
+#include "../ZilchComponent.h"
 
 #include <ctime>
 
@@ -168,7 +169,11 @@ void GameLogic::createLevel(std::string levelPath)
   Sprite * spritePlayer = new Sprite();
   spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
   spritePlayer->flipSprite = false;
-  player->AddComponent(CT_Sprite, spritePlayer);
+  player->AddComponent(CT_Sprite, spritePlayer);  
+  //EXAMPLE ZILCH COMP
+  OurZilchComponent* exampleZilch = new OurZilchComponent("EXAMPLE");
+  player->AddComponent(CT_OurZilchComponent, exampleZilch);
+
   //Saves Player
   LOGIC->player = player;
 
