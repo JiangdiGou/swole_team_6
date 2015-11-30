@@ -39,14 +39,17 @@ private:
   void insertRow(int y, int count);
 
 public:
-  std::map<int, GameObjectComposition*> gameObjs;//id, Game object
+  std::map<int, GameObjectComposition*> gameObjs;
+  std::map<int, GameObjectComposition*> menuObjs;//id, Game object
   //std::vector< const GameObjectComposition*> GetgameObjs();
   void printLevel();
   objFactory();
 
   GameObjectComposition* makeObject(std::string Name);
+  GameObjectComposition* makeMenuObject(std::string Name);
+
   void destroyObject(int killID);
-  void destroyAllObjects();
+  void destroyAllObjects(bool destroyMenus = false);
   void objFactory::SerializeAllObjects(Serializer& str);
 
   bool loadEntities(std::string entityFile);

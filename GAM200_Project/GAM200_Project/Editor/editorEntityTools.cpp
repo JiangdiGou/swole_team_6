@@ -12,9 +12,11 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "GameReactive",
   "Sound Emitter",
   "Test Component",
+  "HUD Component",
   "Editbale",
   "MouseVector",
   "PlayerState",
+  "Menu Button",
   "ZilchComponent"
 };
 
@@ -36,6 +38,9 @@ void EditorEntityTools::handle()
   }
   ImGui::SameLine();
   ImGui::InputText("Name", newEntityName, 256);
+
+  if (ImGui::Button("Destroy Entity") && focus != NULL)
+    FACTORY->destroyObject(focus->GetId());
 
   //CORE
   //Displays currently selected entity name
@@ -166,6 +171,21 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
     }
     break;
   }
+  case CT_HUDcomponent:
+  {
+    HUDcomponent* pHUD = (HUDcomponent*)getFocusComponent(CT_HUDcomponent);
+    char currentOffset[256];
+    Vector3 offset = pHUD->getOffset();
+
+    sprintf(currentOffset, "Cur Offset: %f %f %f", offset.x, offset.y, offset.z);
+    ImGui::Text(currentOffset);
+    ImGui::InputFloat3("offset", tweakf3_1);
+
+    if (ImGui::Button("Update"))
+    {
+      pHUD->setOffset(Vector3(tweakf3_1[0], tweakf3_1[1], tweakf3_1[2]));
+    }
+  }
   }
 }
 
@@ -206,6 +226,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
   case CT_TestComponent:
     return focus->has(TestComponent);
 
+  case CT_HUDcomponent:
+	  return focus->has(HUDcomponent);
+
   case CT_Editable:
     return focus->has(Editable);
 
@@ -213,7 +236,10 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
     return focus->has(MouseVector);
  
   case CT_PlayerState:
-    return focus->has(PlayerState);
+    return focus->has(PlayerState); 
+
+  case CT_MenuButton:
+    return focus->has(MenuButton);
 
   default:
     return NULL;

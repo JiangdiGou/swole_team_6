@@ -23,11 +23,13 @@ enum ComponentTypeId
   CT_SoundEmitter,
 
   CT_TestComponent,
+  CT_HUDcomponent,
   CT_Editable,
   CT_MouseVector,
   CT_PlayerState,
+  CT_MenuButton,
   CT_ZilchComponent
-
+     
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 
 
   //Hey I noticed you're adding a component type. Can you please add it editorEntityTools.cpp

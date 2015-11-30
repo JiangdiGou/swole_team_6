@@ -42,6 +42,17 @@ GameObjectComposition* objFactory::makeObject(std::string Name)
   return toReturn;
 }
 
+GameObjectComposition* objFactory::makeMenuObject(std::string Name)
+{
+  GameObjectComposition *toReturn = new GameObjectComposition();
+
+  toReturn->ObjectName = Name;
+  toReturn->ObjectId = nextID;
+  menuObjs[nextID] = toReturn;
+  nextID++;
+  return toReturn;
+}
+
 void objFactory::destroyObject(int killID)
 {
   if (gameObjs[killID] == NULL)
@@ -58,12 +69,22 @@ void objFactory::destroyObject(int killID)
     gameObjs.erase(killID);
   }
 }
-void objFactory::destroyAllObjects()
+void objFactory::destroyAllObjects(bool DestroyMenus)
 {
   std::map<int, GameObjectComposition*>::iterator it;
   for (it = gameObjs.begin(); gameObjs.size() > 0; it = gameObjs.begin())
   {
     destroyObject(it->first);
+  }
+
+  if (DestroyMenus)
+  {
+    for (it = menuObjs.begin(); menuObjs.size() > 0; it = menuObjs.begin())
+    {
+      destroyObject(it->first);
+    }
+
+    menuObjs.clear();
   }
 
   gameObjs.clear();
@@ -113,10 +134,21 @@ void objFactory::Initialize()
 
 void objFactory::Update(float dt)
 {
-  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
-  for (; it != gameObjs.end(); ++it)
+  if (!(CORE->Pause))
   {
-    it->second->Update(dt);
+    std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+    for (; it != gameObjs.end(); ++it)
+    {
+      it->second->Update(dt);
+    }
+  }
+  else
+  {
+    std::map<int, GameObjectComposition*>::iterator it = menuObjs.begin();
+    for (; it != menuObjs.end(); ++it)
+    {
+      it->second->Update(dt);
+    }
   }
 }
 void objFactory::Shutdown()
@@ -137,16 +169,26 @@ void objFactory::SendMessages(Message * message)
   }
   case Mid::MouseButton:
   {
-    //MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
-    std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
-    for (; it != gameObjs.end(); ++it)
+    if (!(CORE->Pause))
     {
-      it->second->SendMessages(message);
+      //MessageCharacterKey* messageChar = (MessageCharacterKey*)message;
+      std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+      for (; it != gameObjs.end(); ++it)
+      {
+        it->second->SendMessages(message);
+      }
+    }
+    else
+    {
+      std::map<int, GameObjectComposition*>::iterator it = menuObjs.begin();
+      for (; it != menuObjs.end(); ++it)
+      {
+        it->second->SendMessages(message);
+      }
     }
     break;
   }
-
-    }
+  }
 }
 
 void objFactory::loadLevelFrom(std::string fileName)
@@ -382,8 +424,10 @@ bool objFactory::loadEntities(std::string entityFile)
 
 void objFactory::addEditorComponents(GOC* object)
 {
+#ifdef EDITOR
   Editable* editable = new Editable(false);
   object->AddComponent(CT_Editable, editable);
+#endif
 }
 
 GameComponent* objFactory::getNewComponent(ComponentTypeId type)
@@ -421,7 +465,10 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
     return new SoundEmitter();
 
   case CT_TestComponent:
-    return new  TestComponent();
+    return new TestComponent();
+
+  case CT_HUDcomponent:
+	  return new HUDcomponent();
 
   case CT_Editable:
     return new Editable();
@@ -431,6 +478,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
 
   case CT_PlayerState:
     return new PlayerState();
+
+  case CT_MenuButton:
+    return new MenuButton(RESUME);
 
   default:
     return NULL;
