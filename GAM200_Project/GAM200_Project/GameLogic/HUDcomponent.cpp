@@ -23,9 +23,7 @@ void HUDcomponent::SendMessages(Message* message)
 
 void HUDcomponent::SerializeRead(Serializer& str)
 {
-	StreamRead(str, offset.x);
-	StreamRead(str, offset.y);
-	StreamRead(str, offset.z);
+  StreamRead(str, offset);
 }
 
 void HUDcomponent::SerializeWrite(Serializer& str)
