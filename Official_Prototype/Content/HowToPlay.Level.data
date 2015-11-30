@@ -103,7 +103,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [4.40905619, 2.20752048, 50],
+			Vec3 Translation = [0.304495871, 0.5963853, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -115,7 +115,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 40.2750282,
+			float Size = 36.4423561,
 		},
 		EditorCameraController = 
 		{
@@ -123,7 +123,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [4.40905619, 2.20752048, 1.92725935e-007],
+			Vec3 LookTarget = [0.304495871, 0.5963853, 1.330993e-008],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -178,7 +178,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-8.46909904, 4.56028414, 0],
+			Vec3 Translation = [0, 2, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -212,7 +212,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [11.1119919, 8.39696026, 1.30868997e-007],
+			Vec3 Translation = [24.0010815, 17.181488, 1.30868997e-007],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -246,7 +246,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [11.1119919, 7.61456013, 1.30868997e-007],
+			Vec3 Translation = [24.0010815, 16.3990879, 1.30868997e-007],
 			Vec3 Scale = [6.67507982, 2.34746003, 2.34746003],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -294,7 +294,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-8.23643398, 3.51328039, 0],
+			Vec3 Translation = [0, 1, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -328,7 +328,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-8.35276604, 0.488602161, 0],
+			Vec3 Translation = [0, -1.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -362,7 +362,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [5.67708683, -1.74500597, 0],
+			Vec3 Translation = [0, -3.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -396,41 +396,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [5.67708683, -4.18801594, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		SpriteText = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string FontName = "4e7bac697bec55c5:Verdana",
-			uint FontSize = 50,
-			string Text = "R-Click to Special Attack",
-			TextAlign Align = Center,
-			float PixelsPerUnit = 64,
-			bool Smoothing = true,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 11,
-		},
-		Named = 
-		{
-			string Name = "SpriteText",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [5.67708683, -2.88507605, 0],
+			Vec3 Translation = [0, -4.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -456,7 +422,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 12,
+			uint Id = 11,
 		},
 		Named = 
 		{
@@ -464,7 +430,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-8.35276604, 2.04747438, 0],
+			Vec3 Translation = [0, 4.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -480,7 +446,7 @@ Level =
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
 			string FontName = "4e7bac697bec55c5:Verdana",
 			uint FontSize = 50,
-			string Text = """Q"" and ""E"" to Dash",
+			string Text = "ESC to Pause/Unpause",
 			TextAlign Align = Center,
 			float PixelsPerUnit = 64,
 			bool Smoothing = true,
@@ -490,7 +456,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 12,
 		},
 		Named = 
 		{
@@ -498,7 +464,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [5.21175098, 4.18801594, 0],
+			Vec3 Translation = [0, 8.5, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -508,15 +474,15 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
+			Vec4 Color = [1, 0, 0, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
 			string FontName = "4e7bac697bec55c5:Verdana",
 			uint FontSize = 50,
-			string Text = """P"" to Pause/Unpause",
+			string Text = "How To Play",
 			TextAlign Align = Center,
-			float PixelsPerUnit = 64,
+			float PixelsPerUnit = 22.1793785,
 			bool Smoothing = true,
 		},
 	},
