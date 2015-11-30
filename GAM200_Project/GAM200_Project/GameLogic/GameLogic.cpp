@@ -10,8 +10,7 @@
 #include "../physicsLib/PlayerState.h"
 #include "../mouseVector.h"
 #include "../reactive.h"
-#include "TestComponent.h"
-#include "../ZilchComponent.h"
+#include "PlayerTag.h"
 
 #include <ctime>
 
@@ -172,9 +171,6 @@ void GameLogic::createLevel(std::string levelPath)
   player->AddComponent(CT_Sprite, spritePlayer);
   //Saves Player
   LOGIC->player = player;
-  //EXAMPLE ZILCH COMP
-  OurZilchComponent* exampleZilch = new OurZilchComponent("EXAMPLE");
-  player->AddComponent(CT_OurZilchComponent, exampleZilch);
 
   //Init all objects
   FACTORY->initializeObjects();

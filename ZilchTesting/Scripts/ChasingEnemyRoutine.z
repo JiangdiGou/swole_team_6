@@ -1,0 +1,54 @@
+class ChasingEnemyScript : ZilchComponent
+{
+    [Property]
+    var ChaseDistance : Real;
+    
+    [Property]
+    var ChaseSpeed : Real;
+    
+    var GameManager : Cog;
+    
+    var Player : Cog;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        
+        this.GameManager = this.Space.FindObjectByName("GameManager");
+        this.Player = this.Space.FindObjectByName("Player");
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var dist = Math.Distance(this.Owner.Transform.Translation, this.Player.Transform.Translation);
+        
+        if(dist <= this.ChaseDistance)
+        {
+            if(this.Player.Transform.Translation.X < this.Owner.Transform.Translation.X)
+            {
+                this.Owner.Transform.Translation -= Real3(this.ChaseSpeed * event.Dt, 0 ,0);
+            }
+            else if(this.Player.Transform.Translation.X >= this.Owner.Transform.Translation.X)
+            {
+                this.Owner.Transform.Translation += Real3(this.ChaseSpeed * event.Dt, 0 ,0);
+            }
+        }
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        
+        if(otherObject.Name == "Player" && !otherObject.StatusManager.Invincible)
+        {
+            this.GameManager.GameManager.PlayerDied = true;
+            otherObject.RigidBody.Velocity = Real3(0,0,0);
+        }
+        else if(otherObject.Name == "Player" && otherObject.StatusManager.Invincible)
+        {
+                this.Owner.Destroy();
+        }
+    }
+}
