@@ -14,6 +14,7 @@
 #include "initinfo.h"
 #include "physicsLib\PlayerState.h"
 #include "engineAudio/Audio.h"
+#include "GameLogic\PauseMenu.h"
 
 
 CoreEngine* CORE = NULL;
@@ -55,14 +56,6 @@ void CoreEngine::GameLoop()
   bgm.SetVolume(1.0f, "Combat_Music");
   bgm.PlayEvent("Combat_Music");
 #else
-
-
-
-
-  
- 
- 
-
   if (INITINFO->playTheme)
   {
     //FMSoundSys sound = *new FMSoundSys();
@@ -105,12 +98,27 @@ void CoreEngine::GameLoop()
       //Update the when the last update started
       LastTime = currenttime;
 
-      //Update every system
+      //if (!(CORE->Pause))
+      //{
+        //Update every system
       for (unsigned i = 0; i < Systems.size(); ++i)
-        Systems[i]->Update(dt);
+      {
+        if (CORE->Pause && (Systems[i] == PHYSICS || Systems[i] == sound))
+          continue;
+        else
+          Systems[i]->Update(dt);
+      }
 
       for (unsigned i = 0; i < Systems.size(); ++i)
         Systems[i]->Draw();
+      //}
+      //else
+      //{
+       // PAUSEMENU->Update(dt);
+        //FACTORY->Update(dt);
+        //GRAPHICS->Update(dt);
+        //GRAPHICS->Draw();
+      //}
     }
   }
 

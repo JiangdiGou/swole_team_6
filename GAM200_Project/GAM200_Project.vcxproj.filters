@@ -78,9 +78,6 @@
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
-      <Filter>Systems\engineGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\engineGraphics\debugDraw.h">
       <Filter>Systems\engineGraphics</Filter>
     </ClInclude>
@@ -307,10 +304,26 @@
     <ClInclude Include="GAM200_Project\GameLogic\TestComponent.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\HUDcomponent.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\Zilch\Filesystem\Filepaths.hpp">
       <Filter>BaseEngine\Zilch</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\GameLogic\GameReactive.h">
+    <ClInclude Include="GAM200_Project\Zilch\ZilchManager.h">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\engineGraphics\Camera.h">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\ZilchComponent.h">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\GameReactive.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\PauseMenu.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\PauseMenuButton.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
   </ItemGroup>
@@ -485,6 +498,9 @@
     <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\HUDcomponent.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\Component.cpp">
       <Filter>BaseEngine\Composition</Filter>
     </ClCompile>
@@ -494,7 +510,17 @@
     <ClCompile Include="GAM200_Project\ComponentTypeIds.cpp">
       <Filter>BaseEngine\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp">
+    <ClCompile Include="GAM200_Project\Zilch\ZilchManager.cpp">
+      <Filter>BaseEngine\Zilch</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\ZilchComponent.cpp">
+      <Filter>BaseEngine\Composition</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\PauseMenu.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\PauseMenuButton.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>

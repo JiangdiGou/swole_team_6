@@ -27,6 +27,8 @@ main loop
 #include "initInfo.h"
 #include "Editor\imGuiManager.h"
 #include "Zilch\Zilch.hpp"
+#include "Zilch\ZilchInterface.hpp"
+#include "GameLogic\PauseMenu.h"
 
 initInfo * INITINFO;
 
@@ -88,6 +90,17 @@ int main(void)
   //Create Systems and add them to engine
   engine->AddSystem(new Physics());
   engine->AddSystem(new SoundManager());
+  engine->AddSystem(new PauseMenu());
+
+  //Zilch Compilation
+  ZilchInterface *zilch = new ZilchInterface();
+  /*zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerJump.z"));
+  zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerMovement.z"));
+  zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerSlashAttack.z"));
+  zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerStats.z"));
+  zilch->IncludeScriptFile(FilePaths::GetBasePath("Trigger.z"));
+  zilch->IncludeScriptFile(FilePaths::GetBasePath("TutorialTriggerPosition.z"));*/
+  zilch->Init();
 
 #ifdef EDITOR
   engine->AddSystem(new ImGuiManager(window));

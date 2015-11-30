@@ -102,6 +102,6 @@ class EnemySlashTest : ZilchComponent
         }
         
         //Tells this owner to take damage
-        this.Owner.EnemyHitReaction.OnHit(10, false, false, 20);//20 is basic attack in ComboManager
+        this.Owner.EnemyHitReaction.OnHit(10, false, false);//20 is basic attack in ComboManager
     }
 }
