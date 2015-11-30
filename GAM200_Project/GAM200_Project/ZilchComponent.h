@@ -21,7 +21,7 @@ public:
   void SerializeWrite(Serializer& str) override;
 
   BoundType* zilchClass;
-  Handle* classInstance;
+  Handle classInstance;
   std::string classScript;
   Function* initFunc;
   Function* updateFunc;
@@ -29,10 +29,12 @@ public:
   Function* OnCollidePersist;
   Function* OnCollideEnd;
   Function* OnCustomEvent;
+  Function* OnKeyboardDown;
   Function* OnMouseLeftDown;
   Function* OnMouseRightDown;
   Function* OnMouseLeftUp;
   Function* OnMouseRightUp;
+  Function* OnMouseMove;
   Function* Destroy;
 };
 

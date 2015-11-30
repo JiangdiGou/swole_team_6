@@ -26,7 +26,7 @@ enum ComponentTypeId
   CT_Editable,
   CT_MouseVector,
   CT_PlayerState,
-  CT_ZilchComponent
+  CT_OurZilchComponent
 
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 
 

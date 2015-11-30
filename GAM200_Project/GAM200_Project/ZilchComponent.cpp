@@ -2,44 +2,164 @@
 
 OurZilchComponent::OurZilchComponent(std::string scriptName)
 {
-  ZilchInterface* Inter = ZILCHMANAGER->Interface;
+  LibraryRef library = ZILCHMANAGER->library;
   classScript = scriptName;
-  zilchClass = Inter->GetBoundType(classScript);
-  initFunc = Inter->GetFunction(zilchClass, "Initialize", ZilchTypeId(void));
-  updateFunc = Inter->GetFunction(zilchClass, "OnUpdate", ZilchTypeId(void));
-  OnCollideStart = Inter->GetFunction(zilchClass, "OnCollideStart", ZilchTypeId(void));
-  OnCollidePersist = Inter->GetFunction(zilchClass, "OnCollidePersist", ZilchTypeId(void));
-  OnCollideEnd = Inter->GetFunction(zilchClass, "OnCollideEnd", ZilchTypeId(void));
-  OnCustomEvent = Inter->GetFunction(zilchClass, "OnCustomEvent", ZilchTypeId(void));
-  OnMouseLeftDown = Inter->GetFunction(zilchClass, "OnMouseLeftDown", ZilchTypeId(void));
-  OnMouseRightDown = Inter->GetFunction(zilchClass, "OnMouseRightDown", ZilchTypeId(void));
-  OnMouseLeftUp = Inter->GetFunction(zilchClass, "OnMouseLeftUp", ZilchTypeId(void));
-  OnMouseRightUp = Inter->GetFunction(zilchClass, "OnMouseRightUp", ZilchTypeId(void));
-  Destroy = Inter->GetFunction(zilchClass, "Destroy", ZilchTypeId(void));
+  if (library->BoundTypes.findValue("EXAMPLE", nullptr) == NULL)
+  {
+    return;
+  }
+  else
+  {
+    zilchClass = library->BoundTypes.findValue("EXAMPLE", nullptr);
+    initFunc = zilchClass->FindFunction("Initialize", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+    updateFunc = zilchClass->FindFunction("OnUpdate", Array<Type*>(ZeroInit, ZilchTypeId(Real)), ZilchTypeId(void), FindMemberOptions::None);
+
+    OnCollideStart = zilchClass->FindFunction("OnCollideStart", Array<Type*>(ZeroInit, ZilchTypeId(GameObjectComposition)), ZilchTypeId(void), FindMemberOptions::None);
+    OnCollidePersist = zilchClass->FindFunction("OnCollidePersist", Array<Type*>(ZeroInit, ZilchTypeId(GameObjectComposition)), ZilchTypeId(void), FindMemberOptions::None);
+    OnCollideEnd = zilchClass->FindFunction("OnCollideEnd", Array<Type*>(ZeroInit, ZilchTypeId(GameObjectComposition)), ZilchTypeId(void), FindMemberOptions::None);
+
+    OnCustomEvent = zilchClass->FindFunction("OnCustomEvent", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+
+    OnKeyboardDown = zilchClass->FindFunction("OnKeyboardDown", Array<Type*>(ZeroInit, ZilchTypeId(Integer)), ZilchTypeId(void), FindMemberOptions::None);
+
+    OnMouseLeftDown = zilchClass->FindFunction("OnMouseLeftDown", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+    OnMouseRightDown = zilchClass->FindFunction("OnMouseRightDown", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+    OnMouseLeftUp = zilchClass->FindFunction("OnMouseLeftUp", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+    OnMouseRightUp = zilchClass->FindFunction("OnMouseRightUp", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+    OnMouseMove = zilchClass->FindFunction("OnMouseMove", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+
+    Destroy = zilchClass->FindFunction("Destroy", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+  }
 }
 OurZilchComponent::~OurZilchComponent()
 {
-
+  ExceptionReport report;
+  if (Destroy != NULL)
+  {
+    Call call(Destroy, ZILCHMANAGER->state);
+    call.Set<Handle>(Call::This, classInstance);
+    call.Invoke(report);
+  }
+  //delete classInstance;
 }
 void OurZilchComponent::Initialize()
 {
-  ZilchInterface* Inter = ZILCHMANAGER->Interface;
-  Handle* classInstance = new Handle();
-  *classInstance = Inter->AllocateType(zilchClass);
+  ExceptionReport report;
+  classInstance = ZILCHMANAGER->state->AllocateDefaultConstructedHeapObject(zilchClass, report, HeapFlags::ReferenceCounted);
   if (initFunc != NULL)
   {
-    Call call(initFunc, Inter->state_);
-    call.Set<Handle>(Call::This, *classInstance);
-    call.Invoke(Inter->report_);
+    Call call(initFunc, ZILCHMANAGER->state);
+    call.Set<Handle>(Call::This, classInstance);
+    call.Invoke(report);
   }
 }
 void OurZilchComponent::Update(float dt)
 {
-
+  ExceptionReport report;
+  classInstance = ZILCHMANAGER->state->AllocateDefaultConstructedHeapObject(zilchClass, report, HeapFlags::ReferenceCounted);
+  if (updateFunc != NULL)
+  {
+    Call call(updateFunc, ZILCHMANAGER->state);
+    call.Set<Handle>(Call::This, classInstance);
+    call.Set<Real>(0, dt);
+    call.Invoke(report);
+  }
 }
 void OurZilchComponent::SendMessages(Message* message)
 {
-
+  ExceptionReport report;
+  classInstance = ZILCHMANAGER->state->AllocateDefaultConstructedHeapObject(zilchClass, report, HeapFlags::ReferenceCounted);
+  switch (message->MessageId)
+  {
+  case Mid::CharacterKey:
+    if (OnKeyboardDown != NULL)
+    {
+      Call call(OnKeyboardDown, ZILCHMANAGER->state);
+      call.Set<Handle>(Call::This, classInstance);
+      call.Set<Integer>(Call::This, ((MessageCharacterKey*)message)->character);
+      call.Invoke(report);
+    }
+    break;
+  case Mid::MouseButton:
+    if (((MouseButton*)message)->ButtonIsPressed)
+    {
+      if (((MouseButton*)message)->MouseButtonIndex == MouseButton::MouseButtonIndexId::LeftMouse)
+      {
+        if (OnMouseLeftDown != NULL)
+        {
+          Call call(OnMouseLeftDown, ZILCHMANAGER->state);
+          call.Set<Handle>(Call::This, classInstance);
+          call.Invoke(report);
+        }
+      }
+      else
+      {
+        if (OnMouseRightDown != NULL)
+        {
+          Call call(OnMouseRightDown, ZILCHMANAGER->state);
+          call.Set<Handle>(Call::This, classInstance);
+          call.Invoke(report);
+        }
+      }
+    }
+    else
+    {
+      if (((MouseButton*)message)->MouseButtonIndex == MouseButton::MouseButtonIndexId::LeftMouse)
+      {
+        if (OnMouseLeftUp != NULL)
+        {
+          Call call(OnMouseLeftUp, ZILCHMANAGER->state);
+          call.Set<Handle>(Call::This, classInstance);
+          call.Invoke(report);
+        }
+      }
+      else
+      {
+        if (OnMouseRightUp != NULL)
+        {
+          Call call(OnMouseRightUp, ZILCHMANAGER->state);
+          call.Set<Handle>(Call::This, classInstance);
+          call.Invoke(report);
+        }
+      }
+    }
+    break;
+  case Mid::MouseMove:
+    if (OnMouseMove != NULL)
+    {
+      Call call(OnMouseMove, ZILCHMANAGER->state);
+      call.Set<Handle>(Call::This, classInstance);
+      call.Invoke(report);
+    }
+    break;
+  case Mid::CollisionStarted:
+    if (OnCollideStart != NULL)
+    {
+      Call call(OnCollideStart, ZILCHMANAGER->state);
+      call.Set<Handle>(Call::This, classInstance);
+      call.Set<>(0, ((CollisionStarted*)message)->otherObj->GetOwner());
+      call.Invoke(report);
+    }
+    break;
+  case Mid::CollisionPersisted:
+    if (OnCollidePersist != NULL)
+    {
+      Call call(OnCollidePersist, ZILCHMANAGER->state);
+      call.Set<Handle>(Call::This, classInstance);
+      call.Set<>(0, ((CollisionStarted*)message)->otherObj->GetOwner());
+      call.Invoke(report);
+    }
+    break;
+  case Mid::CollisionEnded:
+    if (OnCollideEnd != NULL)
+    {
+      Call call(OnCollideEnd, ZILCHMANAGER->state);
+      call.Set<Handle>(Call::This, classInstance);
+      call.Set<>(0, ((CollisionStarted*)message)->otherObj->GetOwner());
+      call.Invoke(report);
+    }
+    break;
+  }
 }
 void OurZilchComponent::SerializeRead(Serializer& str)
 {

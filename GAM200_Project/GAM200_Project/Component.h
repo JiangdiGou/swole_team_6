@@ -9,7 +9,6 @@
 using namespace Zilch;
 
 class GameObjectComposition;
-typedef GameObjectComposition GOC;
 
 class GameComponent
 {
@@ -24,15 +23,15 @@ virtual void SendMessages(Message *) {};
 virtual void SerializeRead(Serializer& str) {};
 virtual void SerializeWrite(Serializer& str) {};
 
-GOC* GetOwner() { return Base; }
+GameObjectComposition* GetOwner() { return Base; }
 
 ComponentTypeId TypeId;
+virtual ~GameComponent() {};
 
 protected:
-virtual ~GameComponent() {};
 private:
 //pointer to the owner composition
-GOC* Base;
+GameObjectComposition* Base;
 };
 
 #endif

@@ -28,6 +28,7 @@ main loop
 #include "Editor\imGuiManager.h"
 #include "Zilch\Zilch.hpp"
 #include "Zilch\ZilchInterface.hpp"
+#include "Zilch\ZilchManager.h"
 
 initInfo * INITINFO;
 
@@ -91,14 +92,23 @@ int main(void)
   engine->AddSystem(new SoundManager());
 
   //Zilch Compilation
-  ZilchInterface *zilch = new ZilchInterface();
-  /*zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerJump.z"));
-  zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerMovement.z"));
-  zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerSlashAttack.z"));
-  zilch->IncludeScriptFile(FilePaths::GetBasePath("PlayerStats.z"));
-  zilch->IncludeScriptFile(FilePaths::GetBasePath("Trigger.z"));
-  zilch->IncludeScriptFile(FilePaths::GetBasePath("TutorialTriggerPosition.z"));*/
-  zilch->Init();
+  //ZilchInterface *zilch = new ZilchInterface();
+  //zilch->IncludeScriptFile(FilePaths::GetBasePath("Example.zilch"));
+  //zilch->Init();
+
+  ZilchSetup setup(StartupFlags::None);
+  Project project;
+  project.AddCodeFromFile("Player.zilch");
+  project.AddCodeFromFile("Scripts/Example.zilch");
+  Module dependencies;
+  LibraryRef library = project.Compile("Test", dependencies, EvaluationMode::Project);
+  ErrorIf(library == nullptr, "Failed to compile library");
+
+  dependencies.push_back(ZLib_Internal::GetLibrary());
+  dependencies.push_back(library);
+
+  ExecutableState* state = dependencies.Link();
+  ErrorIf(state == nullptr, "Failed to link libraries together");
 
 #ifdef EDITOR
   engine->AddSystem(new ImGuiManager(window));
@@ -111,6 +121,7 @@ int main(void)
   //engine->AddSystem(new ActionSystem::ActionSequence());
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
+  engine->AddSystem(new ZilchManager(&dependencies, library, &project, state));
   engine->AddSystem(new GameLogic());
 
   //Initialize all systems in engine

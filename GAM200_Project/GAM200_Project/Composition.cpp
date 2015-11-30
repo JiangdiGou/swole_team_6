@@ -147,10 +147,11 @@ void GameObjectComposition::SendMessages(Message * message)
   for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
     (*it)->SendMessages(message);
 }
+
 ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, builder, type)
 {
   //Getting and Adding COMPS. Zilch
-  ///ZilchBindMethod(builder, type, &GameObjectComposition::GetComponent, ZilchNoOverload, "GetComponent", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::GetComponent, ZilchNoOverload, "GetComponent", ZilchNoNames);
   ///ZilchBindMethod(builder, type, &GameObjectComposition::AddComponent, ZilchNoOverload, "AddComponent", ZilchNoNames);
 
   //ZilchBindMethod(builder, type, &GameObjectComposition::SendMessages, ZilchNoOverload, "SendMessages", ZilchNoNames);

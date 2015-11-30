@@ -1,0 +1,57 @@
+class EXAMPLE
+{
+    //var thing : Any;
+    //var ObjectOwner : GameObjectComposition;
+    function Initialize(dt : Real)//: Vec2D)
+    {
+      //ObjectOwner = GameObjectComposition;
+    }
+    function OnUpdate(dt : Real)
+    {
+    
+    }
+    function OnCollideStart()//otherObj : ref GameObjectComposition)
+    {
+    
+    }
+    function OnCollidePersist()//otherObj : ref GameObjectComposition)
+    {
+    
+    }
+    function OnCollideEnd()//otherObj : ref GameObjectComposition)
+    {
+    
+    }
+    function OnCustomEvent()
+    {
+    
+    }
+    function OnKeyboardDown()//charKey : Integer)
+    {
+    
+    }
+    function OnMouseLeftDown()
+    {
+    
+    }
+    function OnMouseRightDown()
+    {
+    
+    }
+    function OnMouseLeftUp()
+    {
+    
+    }
+    function OnMouseRightUp()
+    {
+    
+    }
+    function OnMouseMove()
+    {
+    
+    }
+    function Destroy()
+    {
+    
+    }
+}

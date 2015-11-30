@@ -2,14 +2,17 @@
 
 ZilchManager *ZILCHMANAGER;
 
-ZilchManager::ZilchManager(ZilchInterface* ZilchInter)
+ZilchManager::ZilchManager(Module* dependencies_, LibraryRef library_,
+  Project* project_, ExecutableState* state_)
 {
+  dependencies = dependencies_;
+  library = library_;
+  project = project_;
+  state = state_;
   ZILCHMANAGER = this;
-  Interface = ZilchInter;
 }
 ZilchManager::~ZilchManager()
 {
-  delete Interface;
 }
 void ZilchManager::Initialize()
 {

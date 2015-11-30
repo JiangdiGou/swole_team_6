@@ -1,0 +1,47 @@
+class TestTopPlatform : ZilchComponent
+{
+    var Above : Boolean = false;
+    
+    var OtherOBJ : Cog;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        Zero.Connect(this.Owner, Events.CollisionEnded, this.OnCollisionEnded);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function PositionCheck()
+    {
+        if(this.OtherOBJ.Transform.Translation.Y > (this.Owner.Transform.Translation.Y + 0.5))
+        {
+            this.Above = true;
+        }
+        else
+        {
+            this.Above = false;
+        }
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        this.OtherOBJ = otherObject;
+        
+        this.PositionCheck();
+        
+        if(this.Above)
+        {
+            this.Owner.BoxCollider.Ghost = false;
+        }
+    }
+    
+    function OnCollisionEnded(event : CollisionEvent)
+    {
+        this.Owner.BoxCollider.Ghost = true;
+    }
+}

@@ -50,6 +50,10 @@ std::string GetName() { return ObjectName; }
 //A group of actions
 ActionGroup Actions;
 
+//FACTORY ONLY: Use CreateEmptyComposition on factory instead
+GameObjectComposition();
+//FACTORY ONLY: Use Destroy instead, factory will call the destructor correctly
+~GameObjectComposition();
 private:
 
 //Sorted array of components.
@@ -66,10 +70,6 @@ std::string ObjectName;
 //The constructor and destructor are private to prevent a user
 //from creating or deleting an object directly they must use the Destroy function
 
-//FACTORY ONLY: Use CreateEmptyComposition on factory instead
-GameObjectComposition();
-//FACTORY ONLY: Use Destroy instead, factory will call the destructor correctly
-~GameObjectComposition();
 
 };
 

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Zilch.hpp"
+#include "zilch.hpp"
 
 #include <string>
 #include <unordered_map>
 
-#include "./Filesystem/Filepaths.hpp"
+#include "Filesystem/Filepaths.hpp"
 
 using namespace Zilch;
 
@@ -14,8 +14,8 @@ class ZilchInterface
 public:
   // setting up some typedefs
   using zilchOrigin = std::string;
-  using zilchCode   = std::string;
-  using zilchFile   = std::string;
+  using zilchCode = std::string;
+  using zilchFile = std::string;
 
   ZilchInterface();
   ~ZilchInterface();
@@ -35,15 +35,15 @@ public:
   BoundType* GetBoundType(std::string name);
   // Given the name of a field on a given bound type, return pointer to the field.
   Field* GetTypeField(BoundType* boundType, std::string fieldName);
-  
+
   Function* GetFunction(
     BoundType* boundType, std::string funcName,
     Type* returnType = ZilchTypeId(void), const Array<Type*>& parameters = Array<Type*>(),
-    FindMemberOptions::Flags options = FindMemberOptions::None );
-  
+    FindMemberOptions::Flags options = FindMemberOptions::None);
+
   Function* GetStaticFunction(
     BoundType* boundType, std::string funcName,
-    Type* returnType = ZilchTypeId(void), const Array<Type*>& parameters = Array<Type*>() );
+    Type* returnType = ZilchTypeId(void), const Array<Type*>& parameters = Array<Type*>());
 
   Handle AllocateType(BoundType *boundType, HeapFlags::Enum flags = HeapFlags::NonReferenceCounted);
 
@@ -66,7 +66,7 @@ private:
 
   // Compile the zilch library and state. Will compile files currently in scripts_.
   void CompileZilchState();
-  
+
   // Clean up the zilch library and state. NOTE: scripts_ persists through clean.
   void CleanZilchState();
 

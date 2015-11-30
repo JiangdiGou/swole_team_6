@@ -263,6 +263,9 @@
     <Text Include="resources\Shaders\imGuiVertex.txt" />
     <Text Include="resources\VertexShader.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Example.zilch" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{73E2DFFE-92FF-4977-B8FE-68E8ED2EA2F6}</ProjectGuid>
     <RootNamespace>GraphicPrototype2</RootNamespace>

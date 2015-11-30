@@ -73,6 +73,9 @@
     <Filter Include="ActionSystem">
       <UniqueIdentifier>{ba1c73db-8c47-414d-a93b-0d0182f76c83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{89b296d8-ab3a-4c86-8db3-7543c2c90172}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GAM200_Project\engineGraphics\Sprite.h">
@@ -316,6 +319,7 @@
     <ClInclude Include="GAM200_Project\ZilchComponent.h">
       <Filter>BaseEngine\Composition</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\GameReactive.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -503,6 +507,7 @@
     <ClCompile Include="GAM200_Project\ZilchComponent.cpp">
       <Filter>BaseEngine\Composition</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">
@@ -517,5 +522,10 @@
     <Text Include="resources\Shaders\imGuiVertex.txt">
       <Filter>resources</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Example.zilch">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -7,13 +7,16 @@
 class ZilchManager : public ISystem
 {
 public:
-  ZilchManager(ZilchInterface* ZilchInter);
+  ZilchManager(Module* dependencies, LibraryRef library, Project* project, ExecutableState* state);
   ~ZilchManager();
 
   void Initialize()  override;
   void Update(float dt) override;
   void Draw() override;
-  ZilchInterface* Interface;
+  Module* dependencies;
+  LibraryRef library;
+  Project* project;
+  ExecutableState* state;
 
 private:
 };

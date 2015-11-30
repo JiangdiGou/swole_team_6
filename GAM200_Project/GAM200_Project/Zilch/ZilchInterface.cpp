@@ -58,7 +58,7 @@ void ZilchInterface::CompileZilchState()
   for (auto pair : scriptFiles_)
   {
     bool success = script_project.AddCodeFromFile(pair.first.c_str());
-    ErrorIf(!success, std::string("Failed to compiler library '" + pair.first + "'").c_str() );
+    ErrorIf(!success, std::string("Failed to compiler library '" + pair.first + "'").c_str());
   }
 
   // Compile all the code we added together into a single library named "GG_Scripts"
