@@ -22,7 +22,7 @@ enum ComponentTypeId
   CT_GameReactive,
   CT_SoundEmitter,
 
-  CT_TestComponent,
+  CT_PlayerTag,
   CT_HUDcomponent,
   CT_Editable,
   CT_MouseVector,

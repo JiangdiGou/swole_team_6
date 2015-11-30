@@ -14,7 +14,7 @@ ZilchDefineExternalType(ComponentTypeId, "ComponentTypeId", ZLib_Internal, build
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_ShapeLine, "CT_ShapeLine");
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_GameReactive, "CT_GameReactive");
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_SoundEmitter, "CT_SoundEmitter");
-  ZilchBindEnumValue(builder, type, ComponentTypeId::CT_TestComponent, "CT_TestComponent");
+  ZilchBindEnumValue(builder, type, ComponentTypeId::CT_PlayerTag, "CT_PlayerTag");
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_Editable, "CT_Editable");
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_MouseVector, "CT_MouseVector");
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_PlayerState, "CT_PlayerState");

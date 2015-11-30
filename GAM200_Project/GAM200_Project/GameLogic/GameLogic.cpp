@@ -10,7 +10,7 @@
 #include "../physicsLib/PlayerState.h"
 #include "../mouseVector.h"
 #include "../reactive.h"
-#include "TestComponent.h"
+#include "PlayerTag.h"
 
 #include <ctime>
 

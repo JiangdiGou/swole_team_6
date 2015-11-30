@@ -464,8 +464,8 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_SoundEmitter:
     return new SoundEmitter();
 
-  case CT_TestComponent:
-    return new TestComponent();
+  case CT_PlayerTag:
+	  return new PlayerTag();
 
   case CT_HUDcomponent:
 	  return new HUDcomponent();

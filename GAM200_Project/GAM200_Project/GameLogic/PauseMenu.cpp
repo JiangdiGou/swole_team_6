@@ -13,12 +13,12 @@ void PauseMenu::Initialize()
   Transform* pTrasnform = new Transform();
   Sprite* pSprite = new Sprite();
   GameReactive* pReactive = new GameReactive();
-  TestComponent* pTestComp = new TestComponent();
+  PlayerTag* pPlayerTag = new PlayerTag();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["StartGame"];
   resumeButton->AddComponent(CT_Transform, pTrasnform);
   resumeButton->AddComponent(CT_Sprite, pSprite);
   resumeButton->AddComponent(CT_GameReactive, pReactive);
-  resumeButton->AddComponent(CT_TestComponent, pTestComp);
+  resumeButton->AddComponent(CT_PlayerTag, pPlayerTag);
 
   MenuButton* pButton = new MenuButton(RESUME);
   resumeButton->AddComponent(CT_MenuButton, pButton);

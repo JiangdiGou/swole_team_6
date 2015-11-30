@@ -301,9 +301,6 @@
     <ClInclude Include="GAM200_Project\GameLogic\GameLogic.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
-    <ClInclude Include="GAM200_Project\GameLogic\TestComponent.h">
-      <Filter>GameLogic</Filter>
-    </ClInclude>
     <ClInclude Include="GAM200_Project\GameLogic\HUDcomponent.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
@@ -324,6 +321,9 @@
       <Filter>GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameLogic\PauseMenuButton.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\PlayerTag.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
   </ItemGroup>
@@ -492,9 +492,6 @@
     <ClCompile Include="GAM200_Project\PleaseWork\ActionDelay.cpp">
       <Filter>ActionSystem</Filter>
     </ClCompile>
-    <ClCompile Include="GAM200_Project\GameLogic\TestComponent.cpp">
-      <Filter>GameLogic</Filter>
-    </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
@@ -521,6 +518,9 @@
       <Filter>GameLogic</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\PauseMenuButton.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\PlayerTag.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>

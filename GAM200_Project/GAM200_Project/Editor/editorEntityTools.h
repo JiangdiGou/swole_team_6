@@ -17,7 +17,7 @@
 #include "../physicsLib/BinaryMap.h"
 #include "../physicsLib/PlayerState.h"
 #include "../mouseVector.h"
-#include "../GameLogic/TestComponent.h"
+#include "../GameLogic/PlayerTag.h"
 #include "../GameLogic/HUDcomponent.h"
 #include "../GameLogic/GameReactive.h"
 #include "../GameLogic/PauseMenuButton.h"
