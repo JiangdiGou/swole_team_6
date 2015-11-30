@@ -14,6 +14,7 @@
 #include "initinfo.h"
 #include "physicsLib\PlayerState.h"
 #include "engineAudio/Audio.h"
+#include "GameLogic\PauseMenu.h"
 
 
 CoreEngine* CORE = NULL;
@@ -105,6 +106,13 @@ void CoreEngine::GameLoop()
 
         for (unsigned i = 0; i < Systems.size(); ++i)
           Systems[i]->Draw();
+      }
+      else
+      {
+        FACTORY->Update(0.016);
+        GRAPHICS->Update(0.016);
+        PAUSEMENU->Update(0.016);
+        GRAPHICS->Draw();
       }
     }
   }

@@ -34,6 +34,16 @@ public:
   //Call this in sendMessages
   void updateMouseFlags(Message* message);
 
+  void setDefaultOverride()
+  {
+    mouseDownOnThis = false;
+    mouseIsOverThis = false;
+    mouseHeldOnThis = false;
+    control = false;
+    alt = false;
+    shift = false;
+  }
+
 
 private:
   Vector2 mousePos;

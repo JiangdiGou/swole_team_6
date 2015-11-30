@@ -28,6 +28,7 @@ main loop
 #include "Editor\imGuiManager.h"
 #include "Zilch\Zilch.hpp"
 #include "Zilch\ZilchInterface.hpp"
+#include "GameLogic\PauseMenu.h"
 
 initInfo * INITINFO;
 
@@ -89,6 +90,7 @@ int main(void)
   //Create Systems and add them to engine
   engine->AddSystem(new Physics());
   engine->AddSystem(new SoundManager());
+  engine->AddSystem(new PauseMenu());
 
   //Zilch Compilation
   ZilchInterface *zilch = new ZilchInterface();

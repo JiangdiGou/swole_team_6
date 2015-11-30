@@ -67,6 +67,7 @@
     <ClInclude Include="GAM200_Project\GameLogic\HUDcomponent.h" />
     <ClInclude Include="GAM200_Project\GameLogic\GameReactive.h" />
     <ClInclude Include="GAM200_Project\GameLogic\PauseMenu.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\PauseMenuButton.h" />
     <ClInclude Include="GAM200_Project\GameLogic\TestComponent.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="GAM200_Project\GameLogic\HUDcomponent.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\PauseMenu.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\PauseMenuButton.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\TestComponent.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />

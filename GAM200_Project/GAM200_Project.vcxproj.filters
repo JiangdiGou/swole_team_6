@@ -323,6 +323,9 @@
     <ClInclude Include="GAM200_Project\GameLogic\PauseMenu.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\PauseMenuButton.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -515,6 +518,9 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\PauseMenu.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\PauseMenuButton.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>
