@@ -14,8 +14,6 @@ public:
 
   void Initialize();
   void Update(float dt);
-  void SendMessages(Message* message);
-
 
 private:
   GameReactive* pReactive;

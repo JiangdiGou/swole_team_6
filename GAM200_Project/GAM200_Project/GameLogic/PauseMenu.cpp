@@ -90,9 +90,9 @@ void PauseMenu::SendMessages(Message* message)
   case Mid::CharacterKey:
   {
     MessageCharacterKey* charMsg = (MessageCharacterKey*)message;
-    if (charMsg->character == 'P')
+    if (charMsg->character == 'P' && charMsg->keyStatus == KEY_PRESSED)
     {
-      CORE->Pause = true;
+      CORE->Pause = !CORE->Pause;
     }
   }
   }

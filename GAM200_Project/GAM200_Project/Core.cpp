@@ -98,22 +98,27 @@ void CoreEngine::GameLoop()
       //Update the when the last update started
       LastTime = currenttime;
 
-      if (!Pause)
-      {
+      //if (!(CORE->Pause))
+      //{
         //Update every system
-        for (unsigned i = 0; i < Systems.size(); ++i)
-          Systems[i]->Update(dt);
-
-        for (unsigned i = 0; i < Systems.size(); ++i)
-          Systems[i]->Draw();
-      }
-      else
+      for (unsigned i = 0; i < Systems.size(); ++i)
       {
-        FACTORY->Update(0.016);
-        GRAPHICS->Update(0.016);
-        PAUSEMENU->Update(0.016);
-        GRAPHICS->Draw();
+        if (CORE->Pause && (Systems[i] == PHYSICS || Systems[i] == sound))
+          continue;
+        else
+          Systems[i]->Update(dt);
       }
+
+      for (unsigned i = 0; i < Systems.size(); ++i)
+        Systems[i]->Draw();
+      //}
+      //else
+      //{
+       // PAUSEMENU->Update(dt);
+        //FACTORY->Update(dt);
+        //GRAPHICS->Update(dt);
+        //GRAPHICS->Draw();
+      //}
     }
   }
 

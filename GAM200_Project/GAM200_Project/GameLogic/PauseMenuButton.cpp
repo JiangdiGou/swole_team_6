@@ -19,15 +19,12 @@ void MenuButton::Update(float dt)
     {
       pReactive->setDefaultOverride();
       CORE->Pause = false;
+      break;
+    }
+    default:
+    {
+      return;
     }
     }
-  }
-}
-
-void MenuButton::SendMessages(Message* message)
-{
-  switch (message->MessageId)
-  {
-
   }
 }
