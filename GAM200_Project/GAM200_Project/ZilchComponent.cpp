@@ -1,9 +1,10 @@
 #include "ZilchComponent.h"
 
-OurZilchComponent::OurZilchComponent(std::string scriptName)
+OurZilchComponent::OurZilchComponent(std::string scriptName, ZilchComponentTypeId scriptId)
 {
   LibraryRef library = ZILCHMANAGER->library;
   classScript = scriptName;
+  zilchId = scriptId;
   if (library->BoundTypes.findValue("EXAMPLE", nullptr) == NULL)
   {
     return;
@@ -166,10 +167,15 @@ void OurZilchComponent::SendMessages(Message* message)
 void OurZilchComponent::SerializeRead(Serializer& str)
 {
   StreamRead(str, classScript);
+  ZilchComponentTypeId* idPoint = &zilchId;
+  StreamRead(str, (int&)idPoint);
 }
 void OurZilchComponent::SerializeWrite(Serializer& str)
 {
   StreamWrite(str, classScript);
+  StreamWrite(str);
+  ZilchComponentTypeId* idPoint = &zilchId;
+  StreamWrite(str, (int&)idPoint);
   StreamWrite(str);
 }
 ZilchDefineType(OurZilchComponent, "OurZilchComponent", ZLib_Internal, builder, type)

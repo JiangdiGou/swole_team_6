@@ -132,6 +132,7 @@ void objFactory::SerializeAllObjects(Serializer& str)
         continue;
       else
         it->second->SerializeWrite(str);
+
     }
   }
 }
@@ -368,69 +369,90 @@ bool objFactory::loadEntities(std::string entityFile)
 
     //std::cout << "Line: " <<  line << std::endl;
 
-    //It's sometimes getting an empty line? 
-    try
+    if (line[0] == '#')
     {
-      type = std::stoi(line);
+      serializer.stream.getline(line, 256);
+      currentEntity = makeObject(line);
+      addEditorComponents(currentEntity);
     }
-    catch (std::invalid_argument)
+    //It's sometimes getting an empty line?
+    else
     {
-      continue;
+      try
+      {
+        type = std::stoi(line);
+      }
+      catch (std::invalid_argument)
+      {
+        continue;
+      }
+      std::cout << "Line: " <<  line << std::endl;
+      //printf("||%c||", line);
+    
+      //Creates component
+      GameComponent* comp = getNewComponent((ComponentTypeId)type);
+      //Add comp
+      std::cout << "Adding new Comp: " << type << std::endl;
+      currentEntity->AddComponent((ComponentTypeId)type, comp);
+      //Add comp to types vect
+      //previousTypes.push_back(type);
+      //Set Comp
+      comp->SerializeRead(serializer);
     }
 
     //Makes first component if its needs to
-    if (!firstCreated)
-    {
-      currentEntity = makeObject("We don't save names.");
-      firstCreated = true;
-    }
+    //if (!firstCreated)
+    //{
+    //  currentEntity = makeObject("We don't save names.");
+    //  firstCreated = true;
+    //}
 
-    //Checks whether this component already exists on object 
-    for (std::vector<int>::iterator it = previousTypes.begin();
-      it != previousTypes.end(); ++it)
-    {
-      //If this type already exists in vect, make a new comp
-      if (*it == type)
-      {
-        newComposition = true;
-        break;
-      }
-      else
-        newComposition = false;
-    }
+    ////Checks whether this component already exists on object 
+    //for (std::vector<int>::iterator it = previousTypes.begin();
+    //  it != previousTypes.end(); ++it)
+    //{
+    //  //If this type already exists in vect, make a new comp
+    //  if (*it == type)
+    //  {
+    //    newComposition = true;
+    //    break;
+    //  }
+    //  else
+    //    newComposition = false;
+    //}
 
-    //Creates component
-    GameComponent* comp = getNewComponent((ComponentTypeId)type);
-    //If it should make a new composition
-    if (newComposition)
-    {
-      std::cout << "Adding new Composition" << std::endl;
-      //Reset flag
-      newComposition = false;
-      //Clear types vect
-      previousTypes.clear();
-      //Add Editor components if they don't already exist
-      addEditorComponents(currentEntity);
-      //Make obj
-      currentEntity = makeObject("No names");
-      //Add comp
-      std::cout << "Adding new Comp: " << type << std::endl;
-      currentEntity->AddComponent((ComponentTypeId)type, comp);
-      //Add comp to types vect
-      previousTypes.push_back(type);
-      //Set Comp
-      comp->SerializeRead(serializer);
-    }
-    else
-    {
-      //Add comp
-      std::cout << "Adding new Comp: " << type << std::endl;
-      currentEntity->AddComponent((ComponentTypeId)type, comp);
-      //Add comp to types vect
-      previousTypes.push_back(type);
-      //Set Comp
-      comp->SerializeRead(serializer);
-    }
+    ////Creates component
+    //GameComponent* comp = getNewComponent((ComponentTypeId)type);
+    ////If it should make a new composition
+    //if (newComposition)
+    //{
+    //  std::cout << "Adding new Composition" << std::endl;
+    //  //Reset flag
+    //  newComposition = false;
+    //  //Clear types vect
+    //  previousTypes.clear();
+    //  //Add Editor components if they don't already exist
+    //  addEditorComponents(currentEntity);
+    //  //Make obj
+    //  currentEntity = makeObject("No names");
+    //  //Add comp
+    //  std::cout << "Adding new Comp: " << type << std::endl;
+    //  currentEntity->AddComponent((ComponentTypeId)type, comp);
+    //  //Add comp to types vect
+    //  previousTypes.push_back(type);
+    //  //Set Comp
+    //  comp->SerializeRead(serializer);
+    //}
+    //else
+    //{
+    //  //Add comp
+    //  std::cout << "Adding new Comp: " << type << std::endl;
+    //  currentEntity->AddComponent((ComponentTypeId)type, comp);
+    //  //Add comp to types vect
+    //  previousTypes.push_back(type);
+    //  //Set Comp
+    //  comp->SerializeRead(serializer);
+    //}
   }
 
   if (currentEntity)

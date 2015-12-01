@@ -33,7 +33,13 @@ if (userData.Type->Name == #TypeName)           \
   retComp = owner->GetComponent(CT_##TypeName); \
   return retComp;                               \
 }                                               
-                                            
+#define DeclareZilchType(TypeName)                   \
+if (userData.Type->Name == #TypeName)                \
+{                                                    \
+  retComp = owner->GetZilchComponent(CTZ_##TypeName); \
+  return retComp;                                    \
+}                                           
+
 
 GameComponent* ZilchGetComponent(Zilch::Call& call, Zilch::ExceptionReport& report)
 {
@@ -59,6 +65,8 @@ GameComponent* ZilchGetComponent(Zilch::Call& call, Zilch::ExceptionReport& repo
   DeclareType(PlayerState);
   DeclareType(MenuButton);
   DeclareType(OurZilchComponent); 
+
+  DeclareZilchType(Example);
 }
 #undef DeclareType()
 

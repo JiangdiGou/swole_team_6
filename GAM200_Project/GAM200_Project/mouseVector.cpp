@@ -47,12 +47,17 @@ void MouseVector::SendMessages(Message * message)
         mouseDown = false;
         mouseUpPos = mouseEvent->MousePosition;
 		
-		//LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
+		    objsInRay = LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
 		
       }
     }
   }
   }
+}
+
+GameObjectComposition* MouseVector::GetRayResult(int index)
+{
+  return objsInRay.at(index);
 }
 
 void MouseVector::Update(float dt)
@@ -81,4 +86,5 @@ ZilchDefineType(MouseVector, "MouseVector", ZLib_Internal, builder, type)
   type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindField(builder, type, &MouseVector::mouseDownPos, "mouseDownPos", PropertyBinding::GetSet);
   ZilchBindField(builder, type, &MouseVector::mouseUpPos, "mouseUpPos", PropertyBinding::GetSet);
+  ZilchBindMethod(builder, type, &MouseVector::GetRayResult, ZilchNoOverload, "GetRayResult", ZilchNoNames);
 }

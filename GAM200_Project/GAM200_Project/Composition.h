@@ -3,15 +3,20 @@
 #include "Component.h"
 #include "ComponentTypeIds.h"
 #include "PleaseWork/ActionSystem.h"
+
 //#include "gameComponents/objFactory.h"
 #include <vector>//TO BE MOVED - container header
 
 using namespace ActionSystem;
 //Game object ID type
 typedef unsigned int GOCId;
+class OurZilchComponent;
 
 //Vector of components, used for storage of components
 typedef std::vector<GameComponent*> ComponentArray;
+typedef std::vector<OurZilchComponent*> ZilchComponentArray;
+
+
 
 class GameObjectComposition : public IZilchObject
 {
@@ -19,6 +24,7 @@ public:
 ZilchDeclareBaseType(GameObjectComposition, TypeCopyMode::ReferenceType);
 friend class objFactory;
 
+GameComponent* GetZilchComponent(ZilchComponentTypeId typeId) const;
 GameComponent* GetComponent(ComponentTypeId typeId) const;
 //Transform * GetTransform() const;
 
@@ -60,6 +66,7 @@ private:
 //Sorted array of components.
 ComponentArray Components;
 typedef ComponentArray::iterator ComponentIt;
+ZilchComponentArray ZilchComponents;
 
 //A unique id for each object used to safely reference 
 //GOCs.

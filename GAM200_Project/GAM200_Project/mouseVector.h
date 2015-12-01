@@ -46,10 +46,12 @@ public:
   void Update(float dt) override;
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
+  GameObjectComposition* GetRayResult(int index);
 
  private:
 	//SoundEmitter  mouseSound = *new SoundEmitter();
   GameObjectComposition* parent;
+  std::vector <GameObjectComposition*> objsInRay;
 };
 
 
