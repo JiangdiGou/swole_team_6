@@ -542,5 +542,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Example.zilch" />
+    <None Include="GAM200_Project\GameLogic\BasicAIComponent.zilch">
+      <Filter>GameLogic</Filter>
+    </None>
+    <None Include="GAM200_Project\GameLogic\PlayerHealthManager.zilch">
+      <Filter>GameLogic</Filter>
+    </None>
+    <None Include="GAM200_Project\GameLogic\PlayerHealthBar.zilch">
+      <Filter>GameLogic</Filter>
+    </None>
   </ItemGroup>
 </Project>

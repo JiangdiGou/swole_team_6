@@ -272,6 +272,9 @@
     <Text Include="resources\VertexShader.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GAM200_Project\GameLogic\BasicAIComponent.zilch" />
+    <None Include="GAM200_Project\GameLogic\PlayerHealthBar.zilch" />
+    <None Include="GAM200_Project\GameLogic\PlayerHealthManager.zilch" />
     <None Include="Scripts\Example.zilch" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

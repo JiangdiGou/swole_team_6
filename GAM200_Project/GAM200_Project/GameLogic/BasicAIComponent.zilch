@@ -1,0 +1,117 @@
+class BasicAIComponent
+{
+    var Owner : GameObjectComposition;
+	var PaceWait : Real;
+	var MoveSpeed : Real;
+	var PaceDistance : Real;
+	var DistanceTraveled : Real;
+	var MoveRight : Boolean;
+	var Player : Cog; //can i even use cogs?
+
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+		this.PaceWait = 2.0;
+		this.MoveSpeed = 1.0
+		this.PaceDistance = 3.0;
+		this.MoveRight = true;
+		//how do I even get the player object?
+
+        this.Owner = ourOwner;
+    }
+    function OnUpdate(dt : Real)
+    {
+      //Console.WriteLine(this.Owner.Transform);
+      //var transform = //this.Owner.GetComponent(CT_Transform);// as Transfrom;
+     // this.Owner.Transform.SetPositionX(this.Owner.Transform.GetPositionX() + 0.01);
+
+		//wait the desired amount of time before pacing
+		if(this.PaceWait <= 0)
+		{
+			//choose a direction to move
+			if(this.MoveRight)
+			{
+				this.Owner.Transform.Translation += this.MoveSpeed * dt;
+			}
+			else
+			{
+				this.Owner.Transform.Translation -= this.MoveSpeed * dt;
+			}
+
+			//adjust the total distance traveled
+			this.DistanceTraveled += this.MoveSpeed * dt;
+
+			//if were done pacing
+			if(this.DistanceTraveled >= this.PaceDistance)
+			{
+				//reset the pace wait timer
+				this.PaceWait = 2.0;
+
+				//toggle move right
+				if(this.MoveRight)
+				{
+					this.MoveRight = false;
+				}
+				else
+				{
+					this.MoveRight = true;
+				}
+			}
+		}
+		else
+		{
+			this.PaceWait -= dt;
+		}
+    }
+    function OnCollideStart(otherObj : GameObjectComposition)
+    {
+		
+		//we dont actually want our enemies to deal damage on collision but it has to happen for now...
+		//if we collide with the player
+		if(otherObj.PlayerTag != null)
+		{
+			//making this up as I go...
+			this.Player.PlayerHealthManager.TakeDamage(20);
+			//Sprite changing?
+			//this.Owner.Sprite.SpriteSource = this.SpriteSource.AttackAnimation;
+		}
+    }
+    function OnCollidePersist(otherObj : GameObjectComposition)
+    {
+    
+    }
+    function OnCollideEnd(otherObj : GameObjectComposition)
+    {
+    
+    }
+    function OnCustomEvent()
+    {
+    
+    }
+    function OnKeyboardDown(char : Integer)
+    {
+    }
+    function OnMouseLeftDown(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseRightDown(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseLeftUp(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseRightUp(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseMove(mousePos : Vec2D)
+    {
+    
+    }
+    function Destroy()
+    {
+    
+    }
+}
