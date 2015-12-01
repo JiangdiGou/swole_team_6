@@ -400,7 +400,15 @@ bool objFactory::loadEntities(std::string entityFile)
       comp->SerializeRead(serializer);
     }
 
-    //Makes first component if its needs to
+    //  try
+    //  {
+    //    type = std::stoi(line);
+    //  }
+    //  catch (std::invalid_argument)
+    //  {
+    //    continue;
+    //  }
+    ////Makes first component if its needs to
     //if (!firstCreated)
     //{
     //  currentEntity = makeObject("We don't save names.");
