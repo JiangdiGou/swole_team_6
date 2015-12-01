@@ -5,10 +5,14 @@
 #include "GameReactive.h"
 #include "../Core.h"
 
-enum buttonType { HOWTOPLAY = 0, RESUME, QUIT};
+enum buttonType { HOWTOPLAY = 0, RESUME, QUIT, IAMSURE, IAMNOTSURE, 
+  GOBACK, AREYOUSURESPRITE, HOWTOPLAYSPRITE};
 
 class MenuButton : public GameComponent
 {
+  friend class PauseMenu;
+
+
 public:
   MenuButton(buttonType newButtonType);
 

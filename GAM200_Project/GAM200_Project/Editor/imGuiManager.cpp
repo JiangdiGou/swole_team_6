@@ -32,7 +32,7 @@ void ImGuiManager::Update(float dt)
 {
   glfwPollEvents();
   ImGui_ImplGlfwGL3_NewFrame();
-  ImGui::ShowTestWindow();
+  //ImGui::ShowTestWindow();
 
   //Main editor window starts here
   ImGui::Begin("Swole Editor");

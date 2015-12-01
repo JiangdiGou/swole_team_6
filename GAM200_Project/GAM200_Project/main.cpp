@@ -154,7 +154,9 @@ int main(void)
   coloured_console << "la di da vector: " << dumbVector << "\n";*/
   engine->GameLoop();
   
-  FACTORY->destroyAllObjects();
+  glfwTerminate();
+
+  FACTORY->destroyAllObjects(true);
   engine->DestroySystems();
 
   delete engine;

@@ -56,6 +56,11 @@ public:
 	void setWindow(GLFWwindow* inputWindow) { pWindow = inputWindow; }
 
   Vector2 screenToWorld(Vector2 screenCoords);
+  void toggleBackground(bool gameBackground)
+  {
+    usingGameBackground = gameBackground;
+  }
+
 
 private:
   HDC deviceContext;
@@ -64,6 +69,11 @@ private:
   Camera* mainCamera;
   TextureAtlas* spriteAtlas;
   Shader coreShader;
+
+  bool usingGameBackground = true;
+
+  glm::vec4 menuColor = glm::vec4(0.15f, 0.15f, 0.15f, 1.0f);
+  glm::vec4 backgroundColor = glm::vec4(0.3f, 0.1f, 0.3f, 1.0f);
 
 };
 

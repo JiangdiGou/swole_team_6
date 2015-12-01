@@ -53,22 +53,42 @@ GameObjectComposition* objFactory::makeMenuObject(std::string Name)
   return toReturn;
 }
 
-void objFactory::destroyObject(int killID)
+void objFactory::destroyObject(int killID, bool menuObject)
 {
-  if (gameObjs[killID] == NULL)
+  if (menuObject)
   {
-    /* assert that we should never try to destroy an object
-       that doesn't exist */
-    throw AssertionError(std::string("Object ID " + std::to_string(killID)
-                                     +" is not destroyable."
-                                     ));
+    if (menuObjs[killID] == NULL)
+    {
+      /* assert that we should never try to destroy an object
+      that doesn't exist */
+      throw AssertionError(std::string("Object ID " + std::to_string(killID)
+        + " is not destroyable."
+        ));
+    }
+    else
+    {
+      menuObjs.at(killID)->~GameObjectComposition();
+      menuObjs.erase(killID);
+    }
   }
   else
   {
-    gameObjs.at(killID)->~GameObjectComposition();
-    gameObjs.erase(killID);
+    if (gameObjs[killID] == NULL)
+    {
+      /* assert that we should never try to destroy an object
+         that doesn't exist */
+      throw AssertionError(std::string("Object ID " + std::to_string(killID)
+        + " is not destroyable."
+        ));
+    }
+    else
+    {
+      gameObjs.at(killID)->~GameObjectComposition();
+      gameObjs.erase(killID);
+    }
   }
 }
+
 void objFactory::destroyAllObjects(bool DestroyMenus)
 {
   std::map<int, GameObjectComposition*>::iterator it;
@@ -81,7 +101,7 @@ void objFactory::destroyAllObjects(bool DestroyMenus)
   {
     for (it = menuObjs.begin(); menuObjs.size() > 0; it = menuObjs.begin())
     {
-      destroyObject(it->first);
+      destroyObject(it->first, true);
     }
 
     menuObjs.clear();

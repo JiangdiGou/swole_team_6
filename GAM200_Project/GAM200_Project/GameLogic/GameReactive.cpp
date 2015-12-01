@@ -8,12 +8,24 @@ void GameReactive::Initialize()
 
 void GameReactive::Update(float dt)
 {
+  if (!active)
+  {
+    setDefaultOverride();
+    return;
+  }
+
   checkMouseHeld();
   //Put stuff here..
 }
 
 void GameReactive::SendMessages(Message* message)
 {
+  if (!active)
+  {
+    setDefaultOverride();
+    return;
+  }
+
   updateMouseFlags(message);
   //...
 }

@@ -44,6 +44,7 @@ public:
     shift = false;
   }
 
+  bool active = true;
 
 private:
   Vector2 mousePos;
@@ -54,6 +55,7 @@ private:
   bool control;
   bool alt;
   bool shift;
+
 
   int mouseHoldCounter = 0;
 

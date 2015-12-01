@@ -68,18 +68,23 @@ void GraphicsManager::Update(float dt)
 
   coreShader.Use();
 
-  glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
+
+  if (usingGameBackground)
+    glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w);
+  else
+    glClearColor(menuColor.x, menuColor.y, menuColor.z, menuColor.w);
+
   glClear(GL_COLOR_BUFFER_BIT);
 
   //wglMakeCurrent(deviceContext, renderingContext);
 	glfwMakeContextCurrent(pWindow);
 
-  std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
-  SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
+  //std::string fTime = std::to_string((int)(1000.0f / (float)FramerateController::getPreviousDt()));
+  //SpriteText::renderText(fTime, Vector3(0, 0, 0), Vector3(0.15, 0.25, 1));
 
-  Transform* playerTransform = LOGIC->player->has(Transform)
-  if (playerTransform)
-	  debugDrawCircle(playerTransform->GetPosition(), 1, Vector3(), 100);
+  //Transform* playerTransform = LOGIC->player->has(Transform)
+  //if (playerTransform)
+	//  debugDrawCircle(playerTransform->GetPosition(), 1, Vector3(), 100);
 
   debugDrawFrame();
 #ifdef GFXLOG

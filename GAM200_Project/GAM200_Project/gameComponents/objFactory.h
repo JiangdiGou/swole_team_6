@@ -48,7 +48,7 @@ public:
   GameObjectComposition* makeObject(std::string Name);
   GameObjectComposition* makeMenuObject(std::string Name);
 
-  void destroyObject(int killID);
+  void destroyObject(int killID, bool menuObject = false);
   void destroyAllObjects(bool destroyMenus = false);
   void objFactory::SerializeAllObjects(Serializer& str);
 
