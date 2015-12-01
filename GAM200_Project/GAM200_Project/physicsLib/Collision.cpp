@@ -218,10 +218,12 @@ ZilchDefineExternalType(Shape::ShapeId, "Shape::ShapeId", ZLib_Internal, builder
 
 ZilchDefineType(Shape, "Shape", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindField(builder, type, &Shape::Id, "Id", PropertyBinding::Get);
 }
 ZilchDefineType(ShapeAAB, "ShapeAAB", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindField(builder, type, &ShapeAAB::Extents, "Extents", PropertyBinding::GetSet);
   ZilchBindField(builder, type, &ShapeAAB::origin, "origin", PropertyBinding::GetSet);
 }

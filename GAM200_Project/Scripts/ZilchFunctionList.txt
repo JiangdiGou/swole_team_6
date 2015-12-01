@@ -1,0 +1,100 @@
+Component
+  GetOwner() //returns owner composition
+GameObjectComposition
+  //When you have a composition, 
+  //add .[ANYCOMPONENT].[COMPONENTFUNCT]() to access members
+Transform
+  GetPosition()
+  GetRotation()
+  GetScale()
+  GetPositionXY()
+  GetPositionX()
+  GetPositionY()
+  SetPosition(Vector3)
+  SetPosition(Vector2)
+  SetPosition(Real, Real, Real)
+  SetPositionX(Real)
+  SetPositionY(Real)
+  SetPositionZ(Real)
+  SetRotation(Vector3)
+  SetRotation(Vector2)
+  SetRotation(Real, Real, Real)
+  SetRotationX(Real)
+  SetRotationY(Real)
+  SetRotationZ(Real)
+  SetScale(Vector3)
+  SetScale(Vector2)
+  SetScale(Real, Real, Real)
+  SetScaleX(Real)
+  SetScaleY(Real)
+  SetScaleZ(Real)
+Camera
+  CamSize //Real property
+  Position //Vector3 property
+  getWidth()
+  getHeight()
+  zoom //property
+  followingPlayer //Bool property
+Sprite
+  flipSprite //Bool property
+  visible //Bool property
+SpriteText//NOT WORKING
+Body
+  AddForce(Vec2D)
+  SetPosition(Vec2D)
+  SetVelocity(Vec2D)
+  Position//Real property
+  Velocity//Real property
+  Acceleration//Real property
+  Mass//Real property
+  InvMass//Real property
+  Restitution//Real property
+  Friction//Real property
+  Damping//Real property
+  AccumulatedForce//Real property
+  IsStatic//bool property
+  IsGhost//bool property
+TileMapCollision//NOT WORKING
+ShapeAAB
+  Extents //Vec2D property
+  origin //Vec2D property
+GameReactive
+  mouseOver() //isMouseOver
+  mouseDownAndOver() //isMouseOver
+  mouseDownHeldAndOver() //isMouseOver
+  ctrlPressed()//is ctrl pressed
+  altPressed()//is alt pressed
+  shiftPressed()//is shift pressed
+  getMousePos()//get mouse pos
+SoundEmitter
+  BeQuiet()
+  Rock()
+  playSoundOnStart//Bool property
+PlayerTag//NO BOUND MEMBERS
+HUDcomponent//NO BOUND MEMBERS
+MouseVector
+  mouseDownPos//Vector2 property
+  mouseUpPos//Vector2 property
+PlayerState
+  PressJump()
+  ripPlayer()
+  getJumpState()
+  getJumpTimer()
+  playerRunSpeed //Real property
+  playerJumpVelocity //Real property
+  WalkTimer //Real property
+MenuButton//NOT BOUND
+OurZilchComponent//NEED TO WRAP
+Vec2D
+  Vec2D(Real, Real)
+  Vec2D()
+  x //Real property
+  y //Real property
+Vector3D
+  Vector3D(Real, Real, Real)
+  Vector3D(Vec2D, Real)
+  Vector3D(Vec2D)
+  Vector3D()
+  x //Real property
+  y //Real property
+  z //Real property

@@ -1,6 +1,7 @@
 #include "Composition.h"
 #include "gameComponents/objFactory.h"
 #include <algorithm>
+#include "physicsLib\Transform.h"
 
 objFactory *FACTORY;//extern I believe still requires the declaration
 
@@ -146,10 +147,17 @@ void GameObjectComposition::SendMessages(Message * message)
   //for( MapIt it = Map.begin();it!=Map.end();++it)
   for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
     (*it)->SendMessages(message);
+
 }
+
+/*Transform * GameObjectComposition::GetTransform() const
+{
+  return (Transform*) GetComponent(CT_Transform);
+}*/
 
 ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   //Getting and Adding COMPS. Zilch
   ZilchBindMethod(builder, type, &GameObjectComposition::GetComponent, ZilchNoOverload, "GetComponent", ZilchNoNames);
   ///ZilchBindMethod(builder, type, &GameObjectComposition::AddComponent, ZilchNoOverload, "AddComponent", ZilchNoNames);

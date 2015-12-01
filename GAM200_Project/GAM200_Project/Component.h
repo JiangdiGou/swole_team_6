@@ -10,7 +10,7 @@ using namespace Zilch;
 
 class GameObjectComposition;
 
-class GameComponent
+class GameComponent : public IZilchObject
 {
 public:
 ZilchDeclareBaseType(GameComponent, TypeCopyMode::ReferenceType);
@@ -24,7 +24,6 @@ virtual void SerializeRead(Serializer& str) {};
 virtual void SerializeWrite(Serializer& str) {};
 
 GameObjectComposition* GetOwner() { return Base; }
-
 ComponentTypeId TypeId;
 virtual ~GameComponent() {};
 

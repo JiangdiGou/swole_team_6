@@ -1,24 +1,25 @@
 class EXAMPLE
 {
-    //var thing : Any;
-    //var ObjectOwner : GameObjectComposition;
-    function Initialize(dt : Real)//: Vec2D)
+    var Owner : GameObjectComposition;
+    function Initialize(ourOwner : GameObjectComposition)
     {
-      //ObjectOwner = GameObjectComposition;
+      this.Owner = ourOwner;
     }
     function OnUpdate(dt : Real)
     {
-    
+      //Console.WriteLine(this.Owner.Transform);
+      //var transform = //this.Owner.GetComponent(CT_Transform);// as Transfrom;
+     // this.Owner.Transform.SetPositionX(this.Owner.Transform.GetPositionX() + 0.01);
     }
-    function OnCollideStart()//otherObj : ref GameObjectComposition)
+    function OnCollideStart(otherObj : GameObjectComposition)
+    {
+      
+    }
+    function OnCollidePersist(otherObj : GameObjectComposition)
     {
     
     }
-    function OnCollidePersist()//otherObj : ref GameObjectComposition)
-    {
-    
-    }
-    function OnCollideEnd()//otherObj : ref GameObjectComposition)
+    function OnCollideEnd(otherObj : GameObjectComposition)
     {
     
     }
@@ -26,27 +27,27 @@ class EXAMPLE
     {
     
     }
-    function OnKeyboardDown()//charKey : Integer)
+    function OnKeyboardDown(char : Integer)
+    {
+      Console.WriteLine(char);
+    }
+    function OnMouseLeftDown(mousePos : Vec2D)
     {
     
     }
-    function OnMouseLeftDown()
+    function OnMouseRightDown(mousePos : Vec2D)
     {
     
     }
-    function OnMouseRightDown()
+    function OnMouseLeftUp(mousePos : Vec2D)
     {
     
     }
-    function OnMouseLeftUp()
+    function OnMouseRightUp(mousePos : Vec2D)
     {
     
     }
-    function OnMouseRightUp()
-    {
-    
-    }
-    function OnMouseMove()
+    function OnMouseMove(mousePos : Vec2D)
     {
     
     }

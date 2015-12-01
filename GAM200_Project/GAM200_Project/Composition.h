@@ -13,13 +13,14 @@ typedef unsigned int GOCId;
 //Vector of components, used for storage of components
 typedef std::vector<GameComponent*> ComponentArray;
 
-class GameObjectComposition
+class GameObjectComposition : public IZilchObject
 {
 public:
 ZilchDeclareBaseType(GameObjectComposition, TypeCopyMode::ReferenceType);
 friend class objFactory;
 
 GameComponent* GetComponent(ComponentTypeId typeId) const;
+//Transform * GetTransform() const;
 
 ///Message interface See Message.h
 ///Message will be sent to each component on this composition.

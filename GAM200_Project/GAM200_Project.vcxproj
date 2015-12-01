@@ -142,6 +142,7 @@
     <ClInclude Include="GAM200_Project\Zilch\BindInternal.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\Filesystem\Filepaths.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\Zilch.hpp" />
+    <ClInclude Include="GAM200_Project\Zilch\ZilchBind.h" />
     <ClInclude Include="GAM200_Project\Zilch\ZilchInterface.hpp" />
     <ClInclude Include="GAM200_Project\Zilch\ZilchManager.h" />
     <ClInclude Include="GAM200_Project\_EntryPoint.h">
@@ -259,6 +260,7 @@
     <ClCompile Include="GAM200_Project\Zilch\BindInternal.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\Filesystem\Filepaths_windows.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\Zilch.cpp" />
+    <ClCompile Include="GAM200_Project\Zilch\ZilchBind.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\ZilchInterface.cpp" />
     <ClCompile Include="GAM200_Project\PleaseWork\action_math_utility.cpp" />
     <ClCompile Include="GAM200_Project\Zilch\ZilchManager.cpp" />

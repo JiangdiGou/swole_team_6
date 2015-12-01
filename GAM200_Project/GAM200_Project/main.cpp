@@ -29,6 +29,7 @@ main loop
 #include "Zilch\Zilch.hpp"
 #include "Zilch\ZilchInterface.hpp"
 #include "Zilch\ZilchManager.h"
+#include "Zilch\ZilchBind.h"
 #include "GameLogic\PauseMenu.h"
 
 initInfo * INITINFO;
@@ -105,20 +106,23 @@ int main(void)
   //ZilchInterface *zilch = new ZilchInterface();
   //zilch->IncludeScriptFile(FilePaths::GetBasePath("Example.zilch"));
   //zilch->Init();
-
+  
   ZilchSetup setup(StartupFlags::None);
-  Project project;
+  /*Project project;
   project.AddCodeFromFile("Player.zilch");
   project.AddCodeFromFile("Scripts/Example.zilch");
   Module dependencies;
+  dependencies.push_back(ZLib_Internal::GetLibrary());
+
   LibraryRef library = project.Compile("Test", dependencies, EvaluationMode::Project);
   ErrorIf(library == nullptr, "Failed to compile library");
 
-  dependencies.push_back(ZLib_Internal::GetLibrary());
   dependencies.push_back(library);
 
   ExecutableState* state = dependencies.Link();
-  ErrorIf(state == nullptr, "Failed to link libraries together");
+  ErrorIf(state == nullptr, "Failed to link libraries together");*/
+  ZilchBinder binders(true);
+
 
 
 #ifdef EDITOR
@@ -128,11 +132,11 @@ int main(void)
   Shader* pBasicShader = new Shader("resources/shaders/VertexShader.txt", "resources/shaders/FragmentShader.txt");
   const Shader &basicShader = *pBasicShader;
   engine->AddSystem(new GraphicsManager(basicShader));
-
+  
   //engine->AddSystem(new ActionSystem::ActionSequence());
   objFactory* factory = new objFactory();
   engine->AddSystem(factory);
-  engine->AddSystem(new ZilchManager(&dependencies,library, &project, state));
+  engine->AddSystem(new ZilchManager(&binders.mDependencies, binders.mLibrary, &binders.mProject, binders.mState));
   engine->AddSystem(new GameLogic());
 
   //Initialize all systems in engine

@@ -178,6 +178,7 @@ void Camera::SendMessages(Message* message)
 
 ZilchDefineType(Camera, "Camera", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindConstructor(builder, type, Camera, ZilchNoNames);
   ZilchBindDestructor(builder, type, Camera);
 

@@ -286,6 +286,7 @@ void Sprite::SendMessages(Message * message)
 
 ZilchDefineType(Sprite, "Sprite", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindConstructor(builder, type, Sprite, ZilchNoNames);
   ZilchBindDestructor(builder, type, Sprite);
 

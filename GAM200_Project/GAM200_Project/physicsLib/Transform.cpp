@@ -208,6 +208,7 @@ glm::mat4 Transform::calculateTransformMatrix()
 
 ZilchDefineType(Transform, "Transform", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindConstructor(builder, type, Transform, "pos, rot, scale", Vector3, Vector3, Vector3);
   ZilchBindDestructor(builder, type, Transform);
   //Getters

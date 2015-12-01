@@ -230,6 +230,7 @@ void Body::fuckCollision(ManifoldSet * contact, Body * a)
 
 ZilchDefineType(Body, "Body", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindConstructor(builder, type, Body, ZilchNoNames);
   ZilchBindDestructor(builder, type, Body);
 
@@ -237,7 +238,7 @@ ZilchDefineType(Body, "Body", ZLib_Internal, builder, type)
 
   ZilchBindMethod(builder, type, &Body::SetPosition, ZilchNoOverload, "SetPosition", ZilchNoNames);
   ZilchBindMethod(builder, type, &Body::SetVelocity, ZilchNoOverload, "SetVelocity", ZilchNoNames);
-  ZilchBindMethod(builder, type, &Body::AddForce, ZilchNoOverload, "AddForce", ZilchNoNames);
+  //ZilchBindMethod(builder, type, &Body::AddForce, ZilchNoOverload, "AddForce", ZilchNoNames);
 
   ZilchBindField(builder, type, &Body::Position, "Position", PropertyBinding::GetSet);
   ZilchBindField(builder, type, &Body::Velocity, "Velocity", PropertyBinding::GetSet);

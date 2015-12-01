@@ -92,6 +92,7 @@ void SoundEmitter::SerializeWrite(Serializer& str)
 
 ZilchDefineType(SoundEmitter, "SoundEmitter", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindConstructor(builder, type, SoundEmitter, ZilchNoNames);
   ZilchBindDestructor(builder, type, SoundEmitter);
 

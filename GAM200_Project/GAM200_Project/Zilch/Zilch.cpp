@@ -4555,6 +4555,7 @@ namespace Zilch
   //***************************************************************************
   ZilchDefineType(Console, "Console", Core, builder, type)
   {
+    type->HandleManager = ZilchManagerId(PointerManager);
     ZilchBindMethod(builder, type, &Console::Write, (void (*)(AnyParam)),                                         "Write", nullptr);
     ZilchBindMethod(builder, type, &Console::Write, (void (*)(AnyParam, AnyParam)),                               "Write", nullptr);
     ZilchBindMethod(builder, type, &Console::Write, (void (*)(AnyParam, AnyParam, AnyParam)),                     "Write", nullptr);

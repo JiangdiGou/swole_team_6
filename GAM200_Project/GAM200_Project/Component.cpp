@@ -3,6 +3,7 @@
 
 ZilchDefineType(GameComponent, "GameComponent", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   //ZilchBindConstructor(builder, type, GameComponent, ZilchNoNames);
   //ZilchBindDestructor(builder, type, GameComponent);
 

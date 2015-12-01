@@ -540,12 +540,12 @@ ZilchDefineExternalType(StateList, "StateList", ZLib_Internal, builder, type)
 }
 ZilchDefineType(PlayerState, "PlayerState", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindMethod(builder, type, &PlayerState::PressJump, ZilchNoOverload, "PressJump", ZilchNoNames);
   //ZilchBindMethod(builder, type, &PlayerState::HoldJump, ZilchNoOverload, "HoldJump", ZilchNoNames);
   ZilchBindMethod(builder, type, &PlayerState::ripPlayer, ZilchNoOverload, "ripPlayer", ZilchNoNames);
   ZilchBindMethod(builder, type, &PlayerState::getJumpState, ZilchNoOverload, "getJumpState", ZilchNoNames);
   ZilchBindMethod(builder, type, &PlayerState::getJumpTimer, ZilchNoOverload, "getJumpTimer", ZilchNoNames);
-  ZilchBindMethod(builder, type, &PlayerState::PressJump, ZilchNoOverload, "PressJump", ZilchNoNames);
 
   ZilchBindField(builder, type, &PlayerState::playerRunSpeed, "playerRunSpeed", PropertyBinding::GetSet);
   ZilchBindField(builder, type, &PlayerState::playerJumpVelocity, "playerJumpVelocity", PropertyBinding::GetSet);

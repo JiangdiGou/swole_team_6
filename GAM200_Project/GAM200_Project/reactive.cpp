@@ -115,7 +115,7 @@ void Reactive::updateMouseFlags(Message* message)
 
 ZilchDefineType(Reactive, "Reactive", ZLib_Internal, builder, type)
 {
-
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindMethod(builder, type, &Reactive::mouseOver, ZilchNoOverload, "mouseOver", ZilchNoNames);
   ZilchBindMethod(builder, type, &Reactive::mouseDownAndOver, ZilchNoOverload, "mouseDownAndOver", ZilchNoNames);
   ZilchBindMethod(builder, type, &Reactive::mouseDownHeldAndOver, ZilchNoOverload, "mouseDownHeldAndOver", ZilchNoNames);

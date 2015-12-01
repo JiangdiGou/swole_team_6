@@ -23,3 +23,9 @@ void GameReactive::SerializeWrite(Serializer& str)
   StreamWrite(str, (int&)TypeId);
   StreamWrite(str);
 }
+
+
+ZilchDefineType(GameReactive, "GameReactive", ZLib_Internal, builder, type)
+{
+
+}

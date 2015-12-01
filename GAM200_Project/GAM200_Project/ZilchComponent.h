@@ -11,6 +11,7 @@ using namespace Zilch;
 class OurZilchComponent : public GameComponent 
 {
 public:
+  ZilchDeclareDerivedType(OurZilchComponent, GameComponent);
   OurZilchComponent(std::string scriptName);
   ~OurZilchComponent();
   void Initialize() override;
@@ -20,6 +21,7 @@ public:
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
 
+  ExceptionReport report;
   BoundType* zilchClass;
   Handle classInstance;
   std::string classScript;
