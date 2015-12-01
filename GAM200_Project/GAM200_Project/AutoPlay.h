@@ -1,0 +1,16 @@
+#include "Composition.h"
+#include "Zilch/BindInternal.hpp"
+#include "Zilch/Zilch.hpp"
+#include "Core.h"
+
+
+class AutoPlay : public GameComponent
+{
+    public: 
+		
+		AutoPlay();
+		void Initialize()override;
+		bool AutoPlayOn;
+        //void SendMessages(Message*)override;
+		void Update(float dt)override;
+};
