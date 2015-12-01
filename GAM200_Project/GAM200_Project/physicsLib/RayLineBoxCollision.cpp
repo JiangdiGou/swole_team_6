@@ -238,12 +238,12 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endPoint, ShapeAAB* object)
   Vec2D c4 = { c1.x, c2.y };
   if (startBase.x < c2.x && startBase.x > c1.x && startBase.y < c2.y && startBase.y > c1.y)
   {
-    printf("slash");
+    //printf("slash");
     return true;
   }
   if (endPoint.x < c2.x && endPoint.x > c1.x && endPoint.y < c2.y && endPoint.y > c1.y)
   {
-    printf("slash");
+    //printf("slash");
     return true;
   }
   c1 = Vec2D::subtract_vector(&c1, &LineA.base);
@@ -271,7 +271,7 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endPoint, ShapeAAB* object)
         && !((startBase.x < endPoint.x) ^ (startBase.x < boxTrans->GetPositionXY().x))
         && !((startBase.y < endPoint.y) ^ (startBase.y < boxTrans->GetPositionXY().y)))
     {
-      printf("Slash Slash Slash !!!!\n");
+      //printf("Slash Slash Slash !!!!\n");
       return true;
     }
   }
@@ -280,12 +280,12 @@ bool line_rectangle_collide(Vec2D startBase, Vec2D endPoint, ShapeAAB* object)
 
 }
 
-std::vector <const GameObjectComposition*> LoopAll(Vec2D start, Vec2D end)
+std::vector <GameObjectComposition*> LoopAll(Vec2D start, Vec2D end)
 {
 	//if (start == Vec2D(0.0f, 0.0f) && end == Vec2D(0.0f, 0.0f))
 		
 
-	std::vector<const GameObjectComposition*> collidedObj;
+	std::vector<GameObjectComposition*> collidedObj;
 
 	std::map<int, GameObjectComposition*>::iterator it = FACTORY->gameObjs.begin();
 	int size = FACTORY->gameObjs.size();
@@ -298,7 +298,7 @@ std::vector <const GameObjectComposition*> LoopAll(Vec2D start, Vec2D end)
 			if (line_rectangle_collide(start, end, shape))
 			{
 				std::cout << it->second->GetName() << std::endl;
-				std::cout << "Im in loop" << std::endl;
+				//std::cout << "Im in loop" << std::endl;
 				//collidedObj.push_back(it->second);
 			}
 	}

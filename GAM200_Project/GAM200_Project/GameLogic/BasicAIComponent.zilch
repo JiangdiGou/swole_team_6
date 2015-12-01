@@ -7,6 +7,8 @@ class BasicAIComponent
 	var DistanceTraveled : Real;
 	var MoveRight : Boolean;
 	var Player : Cog; //can i even use cogs?
+	var StunTimer : Real;
+	var Stunned : Boolean;
 
     function Initialize(ourOwner : GameObjectComposition)
     {
@@ -14,54 +16,67 @@ class BasicAIComponent
 		this.MoveSpeed = 1.0
 		this.PaceDistance = 3.0;
 		this.MoveRight = true;
+		this.StunTimer = 1.0;
 		//how do I even get the player object?
 
         this.Owner = ourOwner;
     }
+
     function OnUpdate(dt : Real)
     {
       //Console.WriteLine(this.Owner.Transform);
       //var transform = //this.Owner.GetComponent(CT_Transform);// as Transfrom;
      // this.Owner.Transform.SetPositionX(this.Owner.Transform.GetPositionX() + 0.01);
 
-		//wait the desired amount of time before pacing
-		if(this.PaceWait <= 0)
+	 if(this.Stunned)
+	 {
+		this.StunTimer -= dt;
+
+		if(this.StunTimer <= 0)
 		{
-			//choose a direction to move
-			if(this.MoveRight)
-			{
-				this.Owner.Transform.Translation += this.MoveSpeed * dt;
-			}
-			else
-			{
-				this.Owner.Transform.Translation -= this.MoveSpeed * dt;
-			}
+			this.Stunned = false;
+			this.StunTimer = 1.0;
+		}
+	 }
 
-			//adjust the total distance traveled
-			this.DistanceTraveled += this.MoveSpeed * dt;
-
-			//if were done pacing
-			if(this.DistanceTraveled >= this.PaceDistance)
-			{
-				//reset the pace wait timer
-				this.PaceWait = 2.0;
-
-				//toggle move right
-				if(this.MoveRight)
-				{
-					this.MoveRight = false;
-				}
-				else
-				{
-					this.MoveRight = true;
-				}
-			}
+	//wait the desired amount of time before pacing
+	if((this.PaceWait <= 0) && (!this.Stunned))
+	{
+		//choose a direction to move
+		if(this.MoveRight)
+		{
+			this.Owner.Transform.Translation += this.MoveSpeed * dt;
 		}
 		else
 		{
-			this.PaceWait -= dt;
+			this.Owner.Transform.Translation -= this.MoveSpeed * dt;
 		}
-    }
+
+		//adjust the total distance traveled
+		this.DistanceTraveled += this.MoveSpeed * dt;
+
+		//if were done pacing
+		if(this.DistanceTraveled >= this.PaceDistance)
+		{
+			//reset the pace wait timer
+			this.PaceWait = 2.0;
+
+			//toggle move right
+			if(this.MoveRight)
+			{
+				this.MoveRight = false;
+			}
+			else
+			{
+				this.MoveRight = true;
+			}
+		}
+	}
+	else
+	{
+		this.PaceWait -= dt;
+	}
+}
     function OnCollideStart(otherObj : GameObjectComposition)
     {
 		

@@ -2,6 +2,7 @@
 #include "gameComponents/objFactory.h"
 #include <algorithm>
 #include "physicsLib\Transform.h"
+#include "ZilchComponent.h"
 
 objFactory *FACTORY;//extern I believe still requires the declaration
 
@@ -34,6 +35,25 @@ GameComponent* BinaryComponentSearch(const ComponentArray& components, Component
 	else
 		return NULL;
 }
+GameComponent* BinaryZilchComponentSearch(const ZilchComponentArray& components, ZilchComponentTypeId name)
+{
+  size_t begin = 0;
+  size_t end = components.size();
+
+  while (begin < end)
+  {
+    size_t mid = (begin + end) / 2;
+    if (components[mid]->TypeId < name)
+      begin = mid + 1;
+    else
+      end = mid; 
+  }
+
+  if ((begin < components.size()) && (components[begin]->TypeId == name))
+    return (GameComponent*)components[begin];
+  else
+    return NULL;
+}
 
 void GameObjectComposition::Initialize()
 {
@@ -51,6 +71,7 @@ void GameObjectComposition::Initialize()
 }
 void GameObjectComposition::SerializeRead(Serializer& str)
 {
+  str.ReadString(ObjectName);
   for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
   {
     (*it)->SerializeRead(str);
@@ -58,6 +79,11 @@ void GameObjectComposition::SerializeRead(Serializer& str)
 }
 void GameObjectComposition::SerializeWrite(Serializer& str)
 {
+  std::string NewObj = "#";
+  str.WriteString(NewObj);
+  str.WriteEndl();
+  str.WriteString(ObjectName);
+  str.WriteEndl();
   for (ComponentIt it = Components.begin(); it != Components.end(); ++it)
   {
     (*it)->SerializeWrite(str);
@@ -95,6 +121,8 @@ void GameObjectComposition::AddComponent(ComponentTypeId typeId, GameComponent* 
 	//Store the components type Id
 	component->TypeId = typeId;
 	Components.push_back(component);
+  if (typeId == CT_OurZilchComponent)
+    ZilchComponents.push_back((OurZilchComponent*)component);
 
 	//Sort the component array so binary search can be used to find components quickly.
 	std::sort(Components.begin(), Components.end(), ComponentSorter());
@@ -132,6 +160,10 @@ GameComponent * GameObjectComposition::GetComponent(ComponentTypeId typeId) cons
 	return BinaryComponentSearch(Components, typeId);
 }
 
+GameComponent * GameObjectComposition::GetZilchComponent(ZilchComponentTypeId typeId) const
+{
+  return BinaryZilchComponentSearch(ZilchComponents, typeId);
+}
 void GameObjectComposition::Destroy()
 {
 	//Signal the factory that is object needs to be destroyed

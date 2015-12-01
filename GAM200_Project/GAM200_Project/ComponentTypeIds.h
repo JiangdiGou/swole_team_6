@@ -34,6 +34,11 @@ enum ComponentTypeId
 
   //Hey I noticed you're adding a component type. Can you please add it editorEntityTools.cpp
 };
+enum ZilchComponentTypeId
+{
+  CTZ_Example
+};
 ZilchDeclareExternalBaseType(ComponentTypeId, TypeCopyMode::ReferenceType);
+ZilchDeclareExternalBaseType(ZilchComponentTypeId, TypeCopyMode::ReferenceType);
 
 #endif

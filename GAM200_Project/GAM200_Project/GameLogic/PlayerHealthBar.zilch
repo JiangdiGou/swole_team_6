@@ -1,4 +1,4 @@
-class BasicAIComponent
+class PlayerHealthBar
 {
     var Owner : GameObjectComposition;
 	
@@ -20,14 +20,13 @@ class BasicAIComponent
       //var transform = //this.Owner.GetComponent(CT_Transform);// as Transfrom;
      // this.Owner.Transform.SetPositionX(this.Owner.Transform.GetPositionX() + 0.01);
 
-
     }
 
 	function UpdateHealth(currentHealth : Real) : Real
 	{
 		this.CurrentHealth = currentHealth;
 
-		//should do interpolate with actions
+		//should interpolate with actions
 		this.Owner.Transform.Scale *= Real3((this.CurrentHealth / this.TotalHealth), 1, 1);
 
 		this.PreviousHealth = this.CurrentHealth;
