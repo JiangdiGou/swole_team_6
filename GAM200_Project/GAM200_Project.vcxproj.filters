@@ -551,5 +551,11 @@
     <None Include="GAM200_Project\GameLogic\PlayerHealthBar.zilch">
       <Filter>GameLogic</Filter>
     </None>
+    <None Include="GAM200_Project\GameLogic\EnemyHealthManager.zilch">
+      <Filter>GameLogic</Filter>
+    </None>
+    <None Include="GAM200_Project\GameLogic\EndOfGame.zilch">
+      <Filter>GameLogic</Filter>
+    </None>
   </ItemGroup>
 </Project>
