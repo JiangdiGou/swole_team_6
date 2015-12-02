@@ -45,6 +45,7 @@ private:
   float tweakf3_2[3];
   float tweakF;
   float tweakF4[4];
+  int tweakI = 0;
 
   GameObjectComposition* focus;
   char newEntityName[256];
