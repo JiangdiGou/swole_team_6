@@ -1,0 +1,129 @@
+/********************************************************************************
+file    PlayerMovement.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Controls how the player does basic movements with WASD.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
+class PlayerMovement : ZilchComponent
+{
+	var Owner: GameObjectComposition;
+	
+    //How fast the player can move
+    var RSpeed:Real = 13;
+    
+    var LeftCollision:Boolean = false;
+    var RightCollision:Boolean = false;
+    
+    //Boolean that prevents the player from moving at certain times (like when dashing)
+    var BCanMove:Boolean = true;
+    
+    //Collider for the CheckCollisions collider to reference
+    var Collider:Collider = null;
+    
+	
+    //*******************************************************************************************************************************************
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+        this.Owner = ourOwner;
+    }
+    
+	//*******************************************************************************************************************************************
+	function OnKeyboardDown(char : Integer)
+	{
+		if(this.BCanMove)
+		{
+			//Move left when A is pressed
+			if(char == 65 || char == 97)//don't know the ascii for arrow keys
+			{
+				if(!this.LeftCollision)
+				{
+					this.Owner.RigidBody.Velocity = Real3(-this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+					
+					this.Owner.Sprite.SpriteSource = SpriteSource.CharacterRun_8;
+					this.Owner.Sprite.AnimationActive = true;
+                    this.Owner.Sprite.FlipX = true;
+				}
+			}
+			
+			//Move right when D is pressed
+			if(char == 68 || 100)
+			{
+				if(!this.RightCollision)
+                {
+                    this.Owner.RigidBody.Velocity = Real3(this.RSpeed, this.Owner.RigidBody.Velocity.Y, 0);
+					
+					this.Owner.Sprite.SpriteSource = SpriteSource.CharacterRun_8;
+					this.Owner.Sprite.AnimationActive = true;
+                    this.Owner.Sprite.FlipX = false;
+                }
+			}
+		}
+	}
+	
+    //*******************************************************************************************************************************************
+    function OnUpdate(dt : Real)
+    {
+        if(this.BCanMove)
+        {
+            this.LeftCollision = this.CheckCollision(-Real3.XAxis);
+            this.RightCollision = this.CheckCollision(Real3.XAxis);
+            
+            //safety checks to stop the player from continuously moving only if they arent in the middle of slashing or dashing
+            else if(this.Owner.AttackSlash != null && this.Owner.AttackSlash.ISlashStop == 0)
+            {
+                this.Owner.RigidBody.Velocity = Real3(0, this.Owner.RigidBody.Velocity.Y, 0);
+            }
+            
+            
+            if(this.Owner.RigidBody.Velocity.X < 0.1 && this.Owner.RigidBody.Velocity.X > -0.1)
+            {
+                this.Owner.Sprite.SpriteSource = SpriteSource.Character_4;
+                this.Owner.Sprite.AnimationActive = false;
+            }
+        }
+    }
+    
+    //Casts a ray and checks if the object hit is close enough to the player
+    function CheckCollision(direction_:Real3):Boolean
+    {
+        var ray = Ray();
+        ray.Start = this.Owner.Transform.Translation;
+        ray.Direction = direction_;
+        var filter = CastFilter();
+        filter.IgnoreDynamic = true;
+        var results = this.Space.PhysicsSpace.CastRayFirstFiltered(ray, filter);
+        var difference:Real = 0.0;
+        
+        if(results.ObjectHit == null)
+        {
+            return false;
+        }
+        
+        //If checking right
+        if(direction_.X > 0)
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        //If checking left
+        else
+        {
+            difference = Math.Abs(results.WorldPosition.X - this.Owner.Transform.Translation.X);
+        }
+        
+        if(difference <= 0.8)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+
+
+

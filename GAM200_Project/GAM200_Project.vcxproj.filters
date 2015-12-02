@@ -547,5 +547,8 @@
     <None Include="Scripts\EnemyHealthManager.zilch" />
     <None Include="Scripts\PlayerHealthBar.zilch" />
     <None Include="Scripts\PlayerHealthManager.zilch" />
+    <None Include="Scripts\PlayerMovement.zilch">
+      <Filter>Universal</Filter>
+    </None>
   </ItemGroup>
 </Project>
