@@ -68,16 +68,41 @@ class PlayerMovement : ZilchComponent
             }
             
             
+            
             if(Zero.Keyboard.KeyIsPressed(Keys.A) || Zero.Keyboard.KeyIsPressed(Keys.D))
             {
-                this.Owner.Sprite.SpriteSource = SpriteSource.CharacterRun_8;
-                this.Owner.Sprite.AnimationActive = true;
+                //if slashing
+                if(this.Owner.Sprite.SpriteSource == SpriteSource.CharacterSlash_4)
+                {
+                    //stops on last frame of slash
+                    if(this.Owner.Sprite.CurrentFrame == 3)
+                    {
+                        this.Owner.Sprite.SpriteSource = SpriteSource.CharacterRun_8;
+                        this.Owner.Sprite.AnimationActive = true;
+                    }
+                }
+                
+                //if not slashing
+                
+                this.Owner.Sprite.SpriteSource = SpriteSource.Character_4;
+                this.Owner.Sprite.AnimationActive = false;
             }
             
             if(Zero.Keyboard.KeyIsUp(Keys.A) && Zero.Keyboard.KeyIsUp(Keys.D))
             {
+                //if slashing
+                if(this.Owner.Sprite.SpriteSource == SpriteSource.CharacterSlash_4)
+                {
+                    //stops on last frame of slash
+                    if(this.Owner.Sprite.CurrentFrame == 3)
+                    {
+                        this.Owner.Sprite.SpriteSource = SpriteSource.Character_4;
+                        this.Owner.Sprite.AnimationActive = true;
+                    }
+                }
+                //if not slashing
                 this.Owner.Sprite.SpriteSource = SpriteSource.Character_4;
-                this.Owner.Sprite.AnimationActive = false;
+                this.Owner.Sprite.AnimationActive = true;
             }
             
             if(this.LeftCollision || this.RightCollision && this.Owner.RigidBody.Velocity.Y < 0)

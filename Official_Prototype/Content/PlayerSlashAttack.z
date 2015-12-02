@@ -227,6 +227,9 @@ class PlayerSlashAttack : ZilchComponent
         this.GameSession.FindSpaceByName("HUDSpace").LevelSettings.ComboManager.NewAttack(20,iSlashID);
         
         ++this.AirSlashCount;
+        
+        this.Owner.Sprite.SpriteSource = SpriteSource.CharacterSlash_4;
+        this.Owner.Sprite.AnimationActive = true;
     }
     
     //*******************************************************************************************************************************************
