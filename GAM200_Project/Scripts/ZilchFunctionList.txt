@@ -36,6 +36,7 @@ Camera
   zoom //property
   followingPlayer //Bool property
 Sprite
+  textureName //String name
   flipSprite //Bool property
   visible //Bool property
 SpriteText//NOT WORKING

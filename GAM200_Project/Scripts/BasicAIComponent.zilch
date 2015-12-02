@@ -6,7 +6,7 @@ class BasicAIComponent
 	var PaceDistance : Real;
 	var DistanceTraveled : Real;
 	var MoveRight : Boolean;
-	var Player : Cog; //can i even use cogs?
+	var Player : GameObjectComposition; //can i even use cogs?
 	var StunTimer : Real;
 	var Stunned : Boolean;
 
@@ -18,8 +18,8 @@ class BasicAIComponent
 		this.MoveRight = true;
 		this.StunTimer = 1.0;
 		//how do I even get the player object?
-
         this.Owner = ourOwner;
+    this.Player = this.Owner.FindObject("Player");
     }
 
     function OnUpdate(dt : Real)
@@ -82,12 +82,12 @@ class BasicAIComponent
 		
 		//we dont actually want our enemies to deal damage on collision but it has to happen for now...
 		//if we collide with the player
-		if(otherObj.PlayerTag != null)
+		if(otherObj.GetName() == "Player")
 		{
 			//making this up as I go...
-			this.Player.PlayerHealthManager.TakeDamage(20);
+			//this.Player.ZilchComponent.PlayerHealthManager.TakeDamage(20);
 			//Sprite changing?
-			//this.Owner.Sprite.SpriteSource = this.SpriteSource.AttackAnimation;
+			//this.Owner.Sprite.textureName.
 		}
     }
     function OnCollidePersist(otherObj : GameObjectComposition)
