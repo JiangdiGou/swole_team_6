@@ -56,11 +56,13 @@ void SoundEmitter::SetPause(bool pause, std::string name)
 void SoundEmitter::BeQuiet()
 {
 	m_manager->PauseAll();
+	m_manager->Update(0.0f);
 }
 
 void SoundEmitter::Rock()
 {
 	m_manager->ResumeAll();
+	m_manager->Update(0.0f);
 }
 
 void SoundEmitter::SetVolume(float vol, std::string name)
