@@ -9,7 +9,7 @@ brief
 
 All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 *******************************************************************************/
-class AttackBasic : ZilchComponent
+class AttackBasic
 {
 	var Owner: GameObjectComposition;
 	
@@ -26,6 +26,7 @@ class AttackBasic : ZilchComponent
     //Screen position of the mouse when the left mouse is released
     var RMouseReleasePos:Real2 = Real2(0,0);
 	
+    var Pi:Real = 3.1415926535;
     
     //*******************************************************************************************************************************************
     function Initialize(ourOwner : GameObjectComposition)
@@ -51,7 +52,7 @@ class AttackBasic : ZilchComponent
         //Resets the duration timer for left click to 0 frames
         this.ILClickDuration = 0;
         //Captures the screen position of the mouse when left click is clicked down
-        //this.RMouseClickPos = Real2(event.ToWorldZPlane(0).X - this.Owner.Transform.Translation.X, event.ToWorldZPlane(0).Y - this.Owner.Transform.Translation.Y);
+        //this.RMouseClickPos = Real2(event.ToWorldZPlane(0).x - this.Owner.Transform.Translation.x, event.ToWorldZPlane(0).y - this.Owner.Transform.Translation.y);
         this.RMouseClickPos = mousePos as Real2;
 		
         this.BLClickDown = true;
@@ -63,16 +64,16 @@ class AttackBasic : ZilchComponent
         if(this.IAttackCD == 0)
         {
             //Captures the screen position of the mouse when left click is released
-            //this.RMouseReleasePos = Real2(event.ToWorldZPlane(0).X - this.Owner.Transform.Translation.X, event.ToWorldZPlane(0).Y - this.Owner.Transform.Translation.Y);
+            //this.RMouseReleasePos = Real2(event.ToWorldZPlane(0).x - this.Owner.Transform.Translation.x, event.ToWorldZPlane(0).y - this.Owner.Transform.Translation.y);
             this.RMouseReleasePos = mousePos as Real2;
 			
-            var rXDifference:Real = this.RMouseReleasePos.X - this.RMouseClickPos.X;
-            var rYDifference:Real = this.RMouseReleasePos.Y - this.RMouseClickPos.Y;
+            var rXDifference:Real = this.RMouseReleasePos.x - this.RMouseClickPos.x;
+            var rYDifference:Real = this.RMouseReleasePos.y - this.RMouseClickPos.y;
             
             //If the drag of the mouse isn't long enough, it won't register as a slash, just a standard attack
             if(rXDifference <= 1 && rXDifference >= -2 && rYDifference <= 2 && rYDifference >= -2)
             {
-                this.StandardAttack(this.RMouseReleasePos.X, this.RMouseReleasePos.Y);
+                this.StandardAttack(this.RMouseReleasePos.x, this.RMouseReleasePos.y);
             }
         }
         this.BLClickDown = false;
@@ -86,7 +87,7 @@ class AttackBasic : ZilchComponent
         var rXDiff:Real = rXPos_;//
         var rYDiff:Real = rYPos_;//
         
-        var rAngle:Real = Math.ATan2(rYDiff, rXDiff) * (180/Math.Pi);
+        var rAngle:Real = this.Owner.zATan2(rYDiff, rXDiff) * (180/this.Pi);//Needs
         var rAtkPos:Real3 = Real3(0.0, 0.0, 0.0);
         
         
@@ -99,17 +100,17 @@ class AttackBasic : ZilchComponent
         //Up-Right attack
         else if(rAngle > 22.5 && rAngle < 67.5)
         {
-            this.Owner.Sprite.FlipX = false;
+            this.Owner.Sprite.flipSprite = false;
         }
         //Right attack
         else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
         {
-            this.Owner.Sprite.FlipX = false;
+            this.Owner.Sprite.flipSprite = false;
         }
         //Down-Right attack
         else if(rAngle < -22.5 && rAngle > -67.5)
         {
-            this.Owner.Sprite.FlipX = false;
+            this.Owner.Sprite.flipSprite = false;
         }
         //Down attack
         else if(rAngle >= -112.5 && rAngle <= -67.5)
@@ -119,21 +120,21 @@ class AttackBasic : ZilchComponent
         //Down-Left attack
         else if(rAngle < -112.5 && rAngle > -157.5)
         {
-            this.Owner.Sprite.FlipX = true;
+            this.Owner.Sprite.flipSprite = true;
         }
         //Left attack
         else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
         {
-            this.Owner.Sprite.FlipX = true;
+            this.Owner.Sprite.flipSprite = true;
         }
         //Down-Left attack
         else if(rAngle > 112.5 && rAngle < 157.5)
         {
-            this.Owner.Sprite.FlipX = true;
+            this.Owner.Sprite.flipSprite = true;
         }
         
         var segAttackStart:Real3 = this.Owner.Transform.Translation;
-        var segAttackEnd:Real3 = Real3(Math.Cos(rAngle * (Math.Pi/180)) * 10 + this.Owner.Transform.Translation.X, Math.Sin(rAngle * (Math.Pi/180)) * 10 + this.Owner.Transform.Translation.Y, 0);
+        var segAttackEnd:Real3 = Real3(this.Owner.zCos(rAngle * (this.Pi/180)) * 10 + this.Owner.Transform.Translation.x, this.Owner.zSin(rAngle * (this.Pi/180)) * 10 + this.Owner.Transform.Translation.y, 0);
         var segAttackSegment = this.Space.PhysicsSpace.CastSegmentResults(segAttackStart, segAttackEnd, 10);
         
         var iDamage:Integer = 10;
@@ -145,9 +146,9 @@ class AttackBasic : ZilchComponent
         {
             if(segAttackSegment.Front().ObjectHit.Name == "Enemy")
             {
-                //var rXDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.X - this.Owner.Transform.Translation.X;
-                //var rYDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.Y - this.Owner.Transform.Translation.Y;
-                var rHypot:Real = Math.DistanceSq(this.Owner.Transform.Translation, segAttackSegment.Front().ObjectHit.Transform.Translation);
+                //var rXDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.x - this.Owner.Transform.Translation.x;
+                //var rYDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.y - this.Owner.Transform.Translation.y;
+                var rHypot:Real = this.Owner.zDistanceSq(this.Owner.Transform.GetPosition(), segAttackSegment.Front().ObjectHit.Transform.GetPosition());
                 if(rHypot <= 20)
                 {
                     segAttackSegment.Front().ObjectHit.EnemyHitReaction.OnHit(iDamage,false, bStun); // used to include attack ID
@@ -156,14 +157,6 @@ class AttackBasic : ZilchComponent
             segAttackSegment.PopFront();
             --s;
         }
-        
-        this.SlashParticle = this.Space.CreateAtPosition(Archetype.Find("SlashEffect"), this.Owner.Transform.Translation + Real3(0,0,1));
-        this.SlashParticle.RigidBody.Velocity = Real3(Math.Cos(rAngle * (Math.Pi/180)) * 40, Math.Sin(rAngle * (Math.Pi/180)) * 40, 0);
-        //Play sound
-        this.Space.FindObjectByName("BackgroundMusic").BackgroundMusic.SwordSound();
-        //var seq1 = Action.Sequence(this.SlashParticle.Actions);
-        
-        //Action.Property(seq1, @this.SlashParticle.RigidBody.Velocity, Real3(Math.Cos(rAngle * (Math.Pi/180)) * 20, Math.Sin(rAngle * (Math.Pi/180)) * 20, 0), 0.2, Ease.Linear);
     }
     
     

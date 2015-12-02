@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "AttackSlash",
-		uint64 ResourceId = 566422826ce46980,
-	},
-},
