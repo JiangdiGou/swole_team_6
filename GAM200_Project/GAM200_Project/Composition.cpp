@@ -182,10 +182,10 @@ void GameObjectComposition::SendMessages(Message * message)
 
 }
 
-/*Transform * GameObjectComposition::GetTransform() const
+GameObjectComposition* GameObjectComposition::FindObject(std::string name)
 {
-  return (Transform*) GetComponent(CT_Transform);
-}*/
+  return FACTORY->FindObjectByName(name);
+}
 
 ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, builder, type)
 {
@@ -206,7 +206,8 @@ ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, b
   ZilchBindMethod(builder, type, &GameObjectComposition::Destroy, ZilchNoOverload, "Destroy", ZilchNoNames);
   ///ZilchBindMethod(builder, type, &GameObjectComposition::GetId, ZilchNoOverload, "GetId", ZilchNoNames);
 
-  //ZilchBindMethod(builder, type, &GameObjectComposition::GetName, ZilchNoOverload, "GetName", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::GetName, ZilchNoOverload, "GetName", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::FindObject, ZilchNoOverload, "GetName", ZilchNoNames);
 
   ///Type safe way of accessing components.
   //template<typename type>

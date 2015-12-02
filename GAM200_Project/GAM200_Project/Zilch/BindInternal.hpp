@@ -1,14 +1,16 @@
 #pragma once
 
 
-#include "zilch.hpp"
-#include <string.h>
+#include "Zilch.hpp"
+#include <string>
 
-using namespace Zilch;
 
-//ZilchDeclareRedirectType(std::string, Zilch::String);
+//using namespace Zilch;
 
 // Declare Internal Library Singleton
-ZilchDeclareStaticLibrary(ZLib_Internal);
 
+
+ZilchDeclareRedirectType(std::string, Zilch::String);
+
+ZilchDeclareStaticLibrary(ZLib_Internal);
 

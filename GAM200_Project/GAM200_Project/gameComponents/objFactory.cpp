@@ -212,6 +212,24 @@ void objFactory::SendMessages(Message * message)
   }
 }
 
+GameObjectComposition* objFactory::FindObjectByName(std::string name)
+{
+  for (unsigned int i = 0; i < gameObjs.size(); i++)
+  {
+    if (gameObjs.at(i)->ObjectName == name)
+    {
+      return gameObjs.at(i);
+    }
+  }
+  for (unsigned int i = 0; i < menuObjs.size(); i++)
+  {
+    if (menuObjs.at(i)->ObjectName == name)
+    {
+      return menuObjs.at(i);
+    }
+  }
+  return 0;
+}
 void objFactory::loadLevelFrom(std::string fileName)
 {
   //std::vector<std::string> tokens;

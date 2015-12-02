@@ -51,7 +51,7 @@ public:
   void destroyObject(int killID, bool menuObject = false);
   void destroyAllObjects(bool destroyMenus = false);
   void objFactory::SerializeAllObjects(Serializer& str);
-
+  GameObjectComposition* FindObjectByName(std::string name);
   bool loadEntities(std::string entityFile);
   GameComponent* getNewComponent(ComponentTypeId type);
   void addEditorComponents(GOC* object);

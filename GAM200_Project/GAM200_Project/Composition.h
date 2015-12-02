@@ -27,7 +27,7 @@ friend class objFactory;
 GameComponent* GetZilchComponent(ZilchComponentTypeId typeId) const;
 GameComponent* GetComponent(ComponentTypeId typeId) const;
 //Transform * GetTransform() const;
-
+GameObjectComposition* FindObject(std::string name);
 ///Message interface See Message.h
 ///Message will be sent to each component on this composition.
 void SendMessages(Message* message);

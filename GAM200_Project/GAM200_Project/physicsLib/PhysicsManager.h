@@ -39,7 +39,8 @@ class Collision : public Message
 {
 public:
   Collision() : Message(Mid::Collision), otherObj(NULL) {};
-  Collision(ShapeAAB* otherObj) : Message(Mid::Collision), otherObj(otherObj) {};
+  Collision(ShapeAAB* firstObj, ShapeAAB* otherObj) : Message(Mid::Collision), firstObj(firstObj), otherObj(otherObj) {};
+  ShapeAAB* firstObj;
   ShapeAAB* otherObj;
 };
 
@@ -61,8 +62,8 @@ private:
 	bool DebugDrawingActive;
 	float TimeAccumulation;
 	CollsionDatabase Collsion;
-  Collision AllCollisions[MaxContacts];
-  int nextCollisionIndex = 0;
+  std::vector<Collision> prevCollisions;
+  std::vector<Collision> curCollisions;
 	contactList Contacts;
 
 public:

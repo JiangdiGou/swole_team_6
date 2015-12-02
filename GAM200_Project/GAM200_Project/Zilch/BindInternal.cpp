@@ -7,16 +7,17 @@
 #include "../physicsLib/Transform.h"
 #include "../mouseVector.h"
 
-
-//inline const Zilch::String StdStringToZeroString(const std::string& aString)
-//{
-//  return Zilch::String(aString.c_str(), aString.size());
-//}
-//inline const std::string ZeroStringToStdString(const Zilch::String& aString)
-//{
-//  return std::string(aString.c_str(), aString.size());
-//}
-//ZilchDefineRedirectType(std::string, StdStringToZeroString, ZeroStringToStdString);
+/*******************************************************************************
+Converts std::string to Zilch::String and back
+*******************************************************************************/
+inline const Zilch::String StdStringToZeroString(const std::string& aString)
+{
+  return Zilch::String(aString.c_str(), aString.size());
+}
+inline const std::string ZeroStringToStdString(const Zilch::String& aString)
+{
+  return std::string(aString.c_str(), aString.size());
+}
 
 ZilchDefineStaticLibrary(ZLib_Internal)
 {
@@ -43,3 +44,4 @@ ZilchDefineStaticLibrary(ZLib_Internal)
   ZilchInitializeType(Vector3);
 
 }
+ZilchDefineRedirectType(std::string, StdStringToZeroString, ZeroStringToStdString);
