@@ -388,6 +388,21 @@ void PlayerState::SendMessages(Message * message)
 			break;
 		}
 	}
+  case Mid::CollisionStarted:
+  {
+    printf("start");
+    break;
+  }
+  case Mid::CollisionPersisted:
+  {
+    printf("persist");
+    break;
+  }
+  case Mid::CollisionEnded:
+  {
+    printf("end");
+    break;
+  }
 	}
 }
 void PlayerState::SerializeRead(Serializer& str)

@@ -72,7 +72,7 @@ void Physics::DetectContacts(float dt)
           
           ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
           ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
-          Collision collideEvent(AShape, BShape);
+          //Collision* collideEvent = new Collision(AShape, BShape);
 
           //curCollisions.push_back(collideEvent);
           /*Collision ACollisionWith(BShape);
@@ -167,11 +167,15 @@ void Physics::solveMessage()
     }
   }*/
 
- /* prevCollisions.clear();
-  for (unsigned i = 0; i < curCollisions.size(); i++)
-  {
-    prevCollisions.at(i) = curCollisions.at(i);
-  }*/
+  //for (unsigned i = 0; i < prevCollisions.size(); i++)
+  //{
+    //prevCollisions.at(i) = NULL;
+  //}
+  //prevCollisions = curCollisions;
+  //for (unsigned i = 0; i < curCollisions.size(); i++)
+  //{
+    //curCollisions.at(i) = NULL;
+  //}
 }
 
 void Physics::Step(float dt)

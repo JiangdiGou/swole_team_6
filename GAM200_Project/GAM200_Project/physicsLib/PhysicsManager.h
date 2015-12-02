@@ -62,8 +62,8 @@ private:
 	bool DebugDrawingActive;
 	float TimeAccumulation;
 	CollsionDatabase Collsion;
-  std::vector<Collision> prevCollisions;
-  std::vector<Collision> curCollisions;
+  std::vector<Collision*> prevCollisions;
+  std::vector<Collision*> curCollisions;
 	contactList Contacts;
 
 public:
