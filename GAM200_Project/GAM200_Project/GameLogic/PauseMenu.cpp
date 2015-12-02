@@ -1,4 +1,5 @@
 #include "PauseMenu.h"
+#include "../engineAudio/SoundEmitter.h"
 
 PauseMenu* PAUSEMENU;
 
@@ -161,6 +162,10 @@ void PauseMenu::Update(float dt)
 {
   if (!(CORE->Pause))
   {
+    //SoundEmitter* emitter = (SoundEmitter*)LOGIC->player->GetComponent(CT_SoundEmitter);
+    //emitter->Rock();
+
+
     for (std::vector<GOC*>::iterator it = pauseMenuObjects.begin();
       it != pauseMenuObjects.end(); ++it)
     {
@@ -172,10 +177,14 @@ void PauseMenu::Update(float dt)
 
       if (pReactive && pReactive->active)
         pReactive->active = false;
+
     }
   }
   else
   {
+    //SoundEmitter* emitter = (SoundEmitter*)LOGIC->player->GetComponent(CT_SoundEmitter);
+    //emitter->BeQuiet();
+
     for (std::vector<GOC*>::iterator it = pauseMenuObjects.begin();
       it != pauseMenuObjects.end(); ++it)
     {
