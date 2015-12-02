@@ -12,6 +12,7 @@ class OurZilchComponent : public GameComponent
 {
 public:
   ZilchDeclareDerivedType(OurZilchComponent, GameComponent);
+  OurZilchComponent() : classScript("Example"), zilchId(CTZ_Example) {};
   OurZilchComponent(std::string scriptName, ZilchComponentTypeId zilchId);
   ~OurZilchComponent();
   void Initialize() override;

@@ -91,11 +91,14 @@ void EditorEntityTools::handle()
         ImGui::InputInt("ID", &tweakI);
         if (ImGui::Button("Add"))
         {
-          OurZilchComponent* zComp = new OurZilchComponent(std::string(tweakableText), (ZilchComponentTypeId)tweakI);
-          if (zComp->zilchClass == NULL)
+          LibraryRef library = ZILCHMANAGER->library;
+          if (library->BoundTypes.findValue(tweakableText, nullptr) == NULL)
+          {
             setupMessage("Incorrect Zilch Class", ImVec4(1, 0, 0, 1));
+          }
           else
           {
+            OurZilchComponent* zComp = new OurZilchComponent(std::string(tweakableText), (ZilchComponentTypeId)tweakI);
             focus->AddComponent(CT_OurZilchComponent, zComp);
             setupMessage("Zilch comp Added", ImVec4(0, 1, 0, 1));
           }

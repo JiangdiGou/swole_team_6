@@ -19,6 +19,7 @@
 #include "../WindowsSystem.h"
 #include "../Serialization/Serialization.h"
 #include "../Serialization/TextSerialization.h"
+#include "../ZilchComponent.h"
 
 
 bool FACTORY_EXISTS;
@@ -549,6 +550,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
 
   case CT_MenuButton:
     return new MenuButton(RESUME);
+    
+  case CT_OurZilchComponent:
+    return new OurZilchComponent();
 
   default:
     return NULL;

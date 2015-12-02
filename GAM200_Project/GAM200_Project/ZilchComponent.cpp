@@ -2,9 +2,23 @@
 
 OurZilchComponent::OurZilchComponent(std::string scriptName, ZilchComponentTypeId scriptId)
 {
-  LibraryRef library = ZILCHMANAGER->library;
   classScript = scriptName;
   zilchId = scriptId;
+  
+}
+OurZilchComponent::~OurZilchComponent()
+{
+  if (Destroy != NULL)
+  {
+    Call call(Destroy, ZILCHMANAGER->state);
+    call.Set<Handle>(Call::This, classInstance);
+    call.Invoke(report);
+  }
+  //delete classInstance;
+}
+void OurZilchComponent::Initialize()
+{
+  LibraryRef library = ZILCHMANAGER->library;
   if (library->BoundTypes.findValue("EXAMPLE", nullptr) == NULL)
   {
     return;
@@ -32,20 +46,6 @@ OurZilchComponent::OurZilchComponent(std::string scriptName, ZilchComponentTypeI
 
     Destroy = zilchClass->FindFunction("Destroy", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
   }
-}
-OurZilchComponent::~OurZilchComponent()
-{
-  
-  if (Destroy != NULL)
-  {
-    Call call(Destroy, ZILCHMANAGER->state);
-    call.Set<Handle>(Call::This, classInstance);
-    call.Invoke(report);
-  }
-  //delete classInstance;
-}
-void OurZilchComponent::Initialize()
-{
   classInstance = ZILCHMANAGER->state->AllocateDefaultConstructedHeapObject(zilchClass, report, HeapFlags::ReferenceCounted);
   if (initFunc != NULL)
   {
@@ -167,15 +167,15 @@ void OurZilchComponent::SendMessages(Message* message)
 void OurZilchComponent::SerializeRead(Serializer& str)
 {
   StreamRead(str, classScript);
-  ZilchComponentTypeId* idPoint = &zilchId;
-  StreamRead(str, (int&)idPoint);
+  StreamRead(str, (int&)zilchId);
 }
 void OurZilchComponent::SerializeWrite(Serializer& str)
 {
+  StreamWrite(str, (int&)TypeId);
+  StreamWrite(str);
   StreamWrite(str, classScript);
   StreamWrite(str);
-  ZilchComponentTypeId* idPoint = &zilchId;
-  StreamWrite(str, (int&)idPoint);
+  StreamWrite(str, (int&)zilchId);
   StreamWrite(str);
 }
 ZilchDefineType(OurZilchComponent, "OurZilchComponent", ZLib_Internal, builder, type)
