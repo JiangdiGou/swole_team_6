@@ -15,16 +15,18 @@ class BasicAIComponent
 		this.PaceWait = 2.0;
 		this.MoveSpeed = 1.0;
 		this.PaceDistance = 3.0;
-	  this.MoveRight = true;
+	    this.MoveRight = true;
 		this.StunTimer = 1.0;
 		//how do I even get the player object?
         this.Owner = ourOwner;
-    this.Player = this.Owner.FindObject("Player");
+		this.Player = this.Owner.FindObject("Player");
+
     }
 
     function OnUpdate(dt : Real)
     {
-
+		Console.WriteLine("Hello");
+	   
 	   if(this.Stunned)
 	   {
 	     this.StunTimer -= dt;

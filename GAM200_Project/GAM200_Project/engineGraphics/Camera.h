@@ -30,7 +30,7 @@ public:
   Camera(const Shader& shader);
   ~Camera();
 
-  float zoom = 0.25f;
+  float zoom = 0.1f;
   void move(glm::vec3 translation);
 
   void Initialize() override;

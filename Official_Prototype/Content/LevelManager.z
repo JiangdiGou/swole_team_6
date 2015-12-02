@@ -17,9 +17,15 @@ class LevelManager : ZilchComponent
     [Property]
     var Tutorial : Boolean;
     
+    [Property]
+    var EoG : Boolean;
+    
+    var Player : Cog;
+    
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.Player = this.Space.FindObjectByName("Player");
     }
 
     function OnLogicUpdate(event : UpdateEvent)
@@ -34,6 +40,11 @@ class LevelManager : ZilchComponent
                 
                 Action.Property(seq, @square.Sprite.Color, Real4(0,0,0,1), 2, Ease.Linear);
                 Action.Call(seq, this.LoadNextLv);
+            }
+            
+            if(this.EoG)
+            {
+                this.Player.PlayerMovement.BCanMove = false;
             }
             
             if(this.GameOver)

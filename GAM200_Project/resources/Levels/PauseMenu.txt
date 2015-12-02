@@ -1,7 +1,0 @@
-[LevelName]
-resources/Levels/PauseMenu.txt
-[ArraySpecs]
-1
-1
-[TileMap]
-E 

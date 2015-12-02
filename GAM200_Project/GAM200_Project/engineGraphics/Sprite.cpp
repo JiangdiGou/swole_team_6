@@ -65,6 +65,7 @@ void Sprite::SerializeRead(Serializer& str)
   texture = (atlas->textures)[initialTexture];
 
   StreamRead(str, flipSprite);
+  StreamRead(str, layer);
 }
 void Sprite::SerializeWrite(Serializer& str)
 {
@@ -78,6 +79,8 @@ void Sprite::SerializeWrite(Serializer& str)
   StreamWrite(str, texture.textureName);
   StreamWrite(str);
   StreamWrite(str, flipSprite);
+  StreamWrite(str);
+  StreamWrite(str, layer);
   StreamWrite(str);
 }
 

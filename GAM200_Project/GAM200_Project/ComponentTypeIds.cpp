@@ -25,8 +25,8 @@ ZilchDefineExternalType(ZilchComponentTypeId, "ZilchCompoentTypeId", ZLib_Intern
   ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_Example, "CTZ_Example");
   ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_BasicAIComponent, "CTZ_BasicAIComponent");
   ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_BasicAIComponent, "CTZ_BasicAIComponent");
-  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::EndOfGame, "EndOfGame");
-  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::EnemyHealthManager, "EnemyHealthManager");
-  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::PlayerHealthBar, "PlayerHealthBar");
-  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::PlayerHealthManager, "PlayerHealthManager");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_EndOfGame, "EndOfGame");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_EnemyHealthManager, "EnemyHealthManager");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_PlayerHealthBar, "PlayerHealthBar");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_PlayerHealthManager, "PlayerHealthManager");
 }

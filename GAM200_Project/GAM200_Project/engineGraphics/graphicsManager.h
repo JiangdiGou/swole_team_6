@@ -55,7 +55,7 @@ public:
   TextureAtlas* getSpriteAtlas() { return spriteAtlas; }
 	void setWindow(GLFWwindow* inputWindow) { pWindow = inputWindow; }
 
-  Vector2 screenToWorld(Vector2 screenCoords);
+  Vector2 screenToWorld(const Vector2& screenCoords);
   void toggleBackground(bool gameBackground)
   {
     usingGameBackground = gameBackground;

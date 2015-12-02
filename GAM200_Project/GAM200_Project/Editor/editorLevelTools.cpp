@@ -78,6 +78,8 @@ void EditorLevelTools::handle()
   //Button to save current level with a new name 
   if (ImGui::Button("Save as myLvl"))
   {
+    createBlankEntFile(levelPathInput);
+
     if (checkFilename(levelPathInput))
     {
       createLevelFileFromArray(levelPathInput, FACTORY->levelWidth, FACTORY->levelHeight);

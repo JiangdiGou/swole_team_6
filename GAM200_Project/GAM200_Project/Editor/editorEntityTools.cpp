@@ -184,6 +184,11 @@ void EditorEntityTools::showTweakables(ComponentTypeId type)
     {
       fSprite->color = glm::vec4(tweakF4[0], tweakF4[1], tweakF4[2], tweakF4[3]);
     }
+    ImGui::InputInt("Layer", &tweakI);
+    if (ImGui::Button("Update Layer"))
+    {
+      fSprite->setLayer(tweakI);
+    }
     break;
   }
   case CT_SpriteText:
