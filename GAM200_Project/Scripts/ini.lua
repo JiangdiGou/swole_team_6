@@ -12,8 +12,8 @@ init = {
 
   --[renderConfig]
     --1920x1080 when?
-  clientWidth = 1200,
-  clientHeight = 900,
+  clientWidth = 1920,
+  clientHeight = 1080,
   FPSlimit = 120,
 
   --[debugMode]

@@ -84,7 +84,8 @@ void EditorEntityTools::handle()
     }
     else
     {
-      if (currentItem == 17)
+      //17 is our zilch component
+      if (currentItem + 1 == 17)
       {
         ImGui::InputText("Comp", tweakableText, 256);
         ImGui::InputInt("ID", &tweakI);

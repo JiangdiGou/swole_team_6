@@ -124,7 +124,7 @@ void GameLogic::createLevel(std::string levelPath)
 
 
   //SET UP CAMERA
-  GOC * camera = FACTORY->makeObject("Camera");
+  GOC * camera = FACTORY->makeObject("GAMECAMERA");
   camera->AddComponent(CT_Transform, new Transform());
   Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
   camera->AddComponent(CT_Camera, mainCamera);
@@ -136,7 +136,7 @@ void GameLogic::createLevel(std::string levelPath)
   GRAPHICS->setMainCamera(mainCamera);
 
   //SET UP PLAYER
-  GOC * player = FACTORY->makeObject("Player");
+  GOC * player = FACTORY->makeObject("GAMEPLAYER");
   //Transform
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
