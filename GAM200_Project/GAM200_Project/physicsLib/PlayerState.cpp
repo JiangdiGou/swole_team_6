@@ -211,7 +211,7 @@ void PlayerState::SendMessages(Message * message)
 			break;
 		
 	     
-		case 'W':
+		case VK_SPACE:
 			//if (StateList::Grounded)
 			//{
 			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
