@@ -1,7 +1,7 @@
 #include "AutoPlay.h"
 #include "Core.h"
 #include <string>
-#include <cstdlib>
+//#include <cstdlib>
 #include "WindowsSystem.h"
 
 

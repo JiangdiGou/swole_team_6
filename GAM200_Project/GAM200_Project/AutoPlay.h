@@ -1,3 +1,6 @@
+#ifndef AUTOPLAY_H
+#define AUTOPLAY_H
+
 #include "Composition.h"
 #include "Zilch/BindInternal.hpp"
 #include "Zilch/Zilch.hpp"
@@ -14,3 +17,5 @@ class AutoPlay : public GameComponent
         //void SendMessages(Message*)override;
 		void Update(float dt)override;
 };
+
+#endif
