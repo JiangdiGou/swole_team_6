@@ -1,5 +1,6 @@
 #include "ZilchComponent.h"
 
+
 OurZilchComponent::OurZilchComponent(std::string scriptName, ZilchComponentTypeId scriptId)
 {
   classScript = scriptName;
@@ -19,13 +20,13 @@ OurZilchComponent::~OurZilchComponent()
 void OurZilchComponent::Initialize()
 {
   LibraryRef library = ZILCHMANAGER->library;
-  if (library->BoundTypes.findValue("EXAMPLE", nullptr) == NULL)
+  if (library->BoundTypes.findValue(StdStringToZeroString(classScript), nullptr) == NULL)
   {
     return;
   }
   else
   {
-    zilchClass = library->BoundTypes.findValue("EXAMPLE", nullptr);
+	zilchClass = library->BoundTypes.findValue(StdStringToZeroString(classScript), nullptr);
     initFunc = zilchClass->FindFunction("Initialize", Array<Type*>(ZeroInit, ZilchTypeId(GameObjectComposition)), ZilchTypeId(void), FindMemberOptions::None);
     updateFunc = zilchClass->FindFunction("OnUpdate", Array<Type*>(ZeroInit, ZilchTypeId(Real)), ZilchTypeId(void), FindMemberOptions::None);
 

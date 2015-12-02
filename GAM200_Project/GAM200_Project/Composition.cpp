@@ -246,7 +246,7 @@ ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, b
   ///ZilchBindMethod(builder, type, &GameObjectComposition::GetId, ZilchNoOverload, "GetId", ZilchNoNames);
 
   ZilchBindMethod(builder, type, &GameObjectComposition::GetName, ZilchNoOverload, "GetName", ZilchNoNames);
-  ZilchBindMethod(builder, type, &GameObjectComposition::FindObject, ZilchNoOverload, "GetName", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::FindObject, ZilchNoOverload, "FindObject", ZilchNoNames);
 
   ZilchBindMethod(builder, type, &GameObjectComposition::ourSin, ZilchNoOverload, "zSin", ZilchNoNames);
   ZilchBindMethod(builder, type, &GameObjectComposition::ourCos, ZilchNoOverload, "zCos", ZilchNoNames);

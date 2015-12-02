@@ -217,16 +217,16 @@ GameObjectComposition* objFactory::FindObjectByName(std::string name)
 {
   for (unsigned int i = 0; i < gameObjs.size(); i++)
   {
-    if (gameObjs.at(i)->ObjectName == name)
+	  if (gameObjs[i] && gameObjs[i]->ObjectName == name)
     {
-      return gameObjs.at(i);
+		  return gameObjs[i];
     }
   }
   for (unsigned int i = 0; i < menuObjs.size(); i++)
   {
-    if (menuObjs.at(i)->ObjectName == name)
+	  if (menuObjs[i] && menuObjs[i]->ObjectName == name)
     {
-      return menuObjs.at(i);
+		  return menuObjs[i];
     }
   }
   return 0;
@@ -343,10 +343,11 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
 
 void objFactory::initializeObjects()
 {
-  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
-  for (; it != gameObjs.end(); ++it)
+  for (auto &object : gameObjs)
   {
-    it->second->Initialize();
+    //std::cout << object.second->GetName() << std::endl;
+
+    object.second->Initialize();
   }
 }
 

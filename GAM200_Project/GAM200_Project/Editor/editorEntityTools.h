@@ -55,7 +55,7 @@ private:
   void showTweakables(ComponentTypeId type);
   GameComponent* getFocusComponent(ComponentTypeId type);
 
-  static const const char* components[TOTALCOMPONENTS];
+  static const char* components[TOTALCOMPONENTS];
 
   int currentItem = 1;
 
