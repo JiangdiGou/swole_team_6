@@ -142,6 +142,7 @@ class EnemyHitReaction : ZilchComponent
     {
         if(!this.Invulnerable)
         {
+             this.TakeDamage(iDamageTaken_, bIsStunned_, bKnockedUp_);
             //If the attack was a basic attack
             /*if(iAttackID_ >= 20 && iAttackID_ <= 29 && !this.IgnoreBasicAttack)
             {
