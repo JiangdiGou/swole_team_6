@@ -1,0 +1,35 @@
+class DigiPenLogoEffect : ZilchComponent
+{
+    var Owner: GameObjectComposition;
+	
+    var FadeInTime:Real = 0.5;
+	var ShowTime:Real = 2.0;
+	
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+		this.Owner = ourOwner;
+    }
+    
+    function OnUpdate(dt : Real)
+    {
+		if(this.FadeInTime > 0)
+		{
+			this.FadeInTime -= dt;
+			this.Owner.Sprite.Color += Real4(0,0,0,0.2);
+			
+			if(this.FadeInTime <= 0)
+			{
+				this.Owner.Sprite.Color
+			}
+		}
+		else if(this.ShowTime > 0)
+		{
+			this.ShowTime -= dt;
+			this.Owner.Transform.Scale += Real3(0.05, 0.05, 0);
+		}
+		else
+		{
+			//Load new level
+		}
+    }
+}

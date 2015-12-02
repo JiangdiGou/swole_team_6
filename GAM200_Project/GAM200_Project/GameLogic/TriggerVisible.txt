@@ -1,0 +1,18 @@
+class TriggerVisible : ZilchComponent
+{
+    var Owner: GameObjectComposition;
+	
+    
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+		this.Owner = ourOwner;
+    }
+    
+    function OnCollideStart(otherObj : GameObjectComposition)
+	{
+		if(otherObj.Name == "Player")
+		{
+			this.Owner.Sprite.Visible = true;
+		}
+	}
+}
