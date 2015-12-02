@@ -23,18 +23,24 @@ class EnemyHealthManager
 
 	  function UpdateHealth(currentHealth : Real) : Real
 	  {
-		 // this.CurrentHealth = currentHealth;
+		 this.CurrentHealth = currentHealth;
 
-		  //if(this.CurrentHealth < this.PreviousHealth)
-		  //{
+		  if(this.CurrentHealth < this.PreviousHealth)
+		  {
 			  //this should use actions to flicker between red and not red or alpha'd and not alpha'd
-			  //this.Owner.Sprite.Color -= Vector4(0 , 0 , 0 , 0.25);
-		  //}
+			  //this.Owner.Sprite.Color Vector4(0 , 0 , 0 , 0.25);
+		  }
 
 		  //should interpolate with actions
-		  //this.Owner.Transform.Scale *= Real3((this.CurrentHealth / this.TotalHealth), 1, 1);
+		  this.Owner.Transform.SetScaleX() = (this.Owner.Transform.GetScale().x) * (this.CurrentHealth / this.TotalHealth);
 
-		 // this.PreviousHealth = this.CurrentHealth;
+		  if(this.CurrentHealth <= 0)
+		  {
+			this.Alive = false;
+			this.Owner.Destroy();
+		  }
+
+		 this.PreviousHealth = this.CurrentHealth;
 	  }
 
     function OnCollideStart(otherObj : GameObjectComposition)
