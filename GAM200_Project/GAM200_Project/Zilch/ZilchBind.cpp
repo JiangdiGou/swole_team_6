@@ -232,8 +232,13 @@ void ZilchBinder::Compile(bool isZcc)
   //}
 
   //ZILCH SCRIPTS
-  mProject.AddCodeFromFile("Player.zilch");
+  //mProject.AddCodeFromFile("Player.zilch");
   mProject.AddCodeFromFile("Scripts/Example.zilch");
+  //mProject.AddCodeFromFile("Scripts/BasicAIComponent.zilch");
+  //mProject.AddCodeFromFile("Scripts/EndOfGame.zilch");
+  //mProject.AddCodeFromFile("Scripts/EnemyHealthManager.zilch");
+  //mProject.AddCodeFromFile("Scripts/PlayerHealthBar.zilch");
+ // mProject.AddCodeFromFile("Scripts/PlayerHeathManager.zilch");
 
 
   mDependencies.push_back(ZLib_Internal::GetInstance().GetLibrary());
