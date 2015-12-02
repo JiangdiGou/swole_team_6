@@ -161,7 +161,7 @@ GraphicsManager::~GraphicsManager()
   //wgldeletecontext of context
 }
 
-Vector2 GraphicsManager::screenToWorld(Vector2 screenCoords)
+Vector2 GraphicsManager::screenToWorld(const Vector2& screenCoords)
 {
   Vector2 worldCoords = screenCoords;
 

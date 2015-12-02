@@ -154,6 +154,48 @@ int main(void)
   coloured_console << 213213 << "\n";
   coloured_console << "candy" << "\n";
   coloured_console << "la di da vector: " << dumbVector << "\n";*/
+
+
+  unsigned timePassed = 0;
+  unsigned deltaTime;
+  unsigned previousTime = timeGetTime();
+
+  GOC* splash = FACTORY->makeObject("Splash");
+  Transform* pTransform = new Transform();
+
+  Vector2 worldScale = GRAPHICS->screenToWorld(Vector2(1.5 * INITINFO->clientWidth, -1.5 * INITINFO->clientHeight));
+  pTransform->SetScale(worldScale);
+
+  Vector2 worldCenter = Vector2(GRAPHICS->getCamera()->getPosition().x, GRAPHICS->getCamera()->getPosition().y);
+  pTransform->SetPosition(worldCenter);
+
+  Sprite * pSprite = new Sprite;
+  pSprite->setTexture("DigiPenLogo");
+  splash->AddComponent(CT_Transform, pTransform);
+  splash->AddComponent(CT_Sprite, pSprite);
+  splash->Initialize();
+
+  while (timePassed < 5000)
+  {
+    deltaTime = timeGetTime() - previousTime;
+    previousTime = timeGetTime();
+    timePassed += deltaTime;
+    splash->Update(deltaTime);
+    GRAPHICS->getCamera()->Update(deltaTime);
+
+    for (unsigned i = 0; i < CORE->getSystems().size(); ++i)
+    {
+      if (CORE->Pause && (CORE->getSystems()[i] == PHYSICS || CORE->getSystems()[i] == sound))
+        continue;
+      else
+        CORE->getSystems()[i]->Update(deltaTime);
+    }
+    GRAPHICS->Draw();
+  }
+
+  FACTORY->destroyObject(splash->GetId());  
+
+
   engine->GameLoop();
   
   glfwTerminate();

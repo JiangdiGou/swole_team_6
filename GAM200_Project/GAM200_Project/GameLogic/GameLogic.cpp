@@ -140,11 +140,11 @@ void GameLogic::createLevel(std::string levelPath)
   //Transform
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
-  transformPlayer->SetScale(Vector2(1.25, 1.25));
+  transformPlayer->SetScale(Vector2(3, 3));
   player->AddComponent(CT_Transform, transformPlayer);
   //Shape
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
-  boxColliderPlayer->Extents = Vec2D(0.5 * transformPlayer->GetScale().x, 0.5 * transformPlayer->GetScale().y);
+  boxColliderPlayer->Extents = Vec2D(0.2 * transformPlayer->GetScale().x, 0.45 * transformPlayer->GetScale().y);
   player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
   //Body
   Body * bodyPlayer = new Body();

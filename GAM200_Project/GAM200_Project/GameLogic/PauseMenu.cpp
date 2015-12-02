@@ -16,7 +16,7 @@ void PauseMenu::Initialize()
   GOC* resumeButton = FACTORY->makeMenuObject("Resume");
   //Components
   Transform* pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(2, 1));
+  pTrasnform->SetScale(Vector2(4, 2));
   Sprite* pSprite = new Sprite();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["ResumeGame"];
   GameReactive* pReactive = new GameReactive();
@@ -33,7 +33,7 @@ void PauseMenu::Initialize()
   GOC* h2playButton = FACTORY->makeMenuObject("HowToPlay");
   //Components
   pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(2, 1));
+  pTrasnform->SetScale(Vector2(4, 2));
   pSprite = new Sprite();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["HowToPlay"];
   pReactive = new GameReactive();
@@ -50,7 +50,7 @@ void PauseMenu::Initialize()
   GOC* quitButton = FACTORY->makeMenuObject("Quit");
   //Components
   pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(2, 1));
+  pTrasnform->SetScale(Vector2(4, 2));
   pSprite = new Sprite();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["QuitGame"];
   pReactive = new GameReactive();
@@ -68,7 +68,7 @@ void PauseMenu::Initialize()
   GOC* areYouSure = FACTORY->makeMenuObject("AreYouSure");
   //Components
   pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(2, 1));
+  pTrasnform->SetScale(Vector2(4, 2));
   pSprite = new Sprite();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["AreYouSure"];
   pReactive = new GameReactive();
@@ -86,7 +86,7 @@ void PauseMenu::Initialize()
   GOC* iAmSure = FACTORY->makeMenuObject("IAmSure");
   //Components
   pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(2, 1));
+  pTrasnform->SetScale(Vector2(4, 2));
   pSprite = new Sprite();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["Yes"];
   pReactive = new GameReactive();
@@ -104,7 +104,7 @@ void PauseMenu::Initialize()
   GOC* iAmNotSure = FACTORY->makeMenuObject("IAmNotSure");
   //Components
   pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(2, 1));
+  pTrasnform->SetScale(Vector2(4, 2));
   pSprite = new Sprite();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["No"];
   pReactive = new GameReactive();
@@ -121,7 +121,7 @@ void PauseMenu::Initialize()
   GOC* howToPlaySprite = FACTORY->makeMenuObject("HowToPlaySprite");
   //Components
   pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(6, 4.5));
+  pTrasnform->SetScale(Vector2(12, 9));
   pSprite = new Sprite();
   pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["Instructions"];
   pReactive = new GameReactive();
@@ -137,9 +137,9 @@ void PauseMenu::Initialize()
   GOC* goBack = FACTORY->makeMenuObject("GoBack");
   //Components
   pTrasnform = new Transform();
-  pTrasnform->SetScale(Vector2(2, 1));
+  pTrasnform->SetScale(Vector2(4, 2));
   pSprite = new Sprite();
-  pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["DuckNoise"];
+  pSprite->texture = GRAPHICS->getSpriteAtlas()->textures["Back"];
   pReactive = new GameReactive();
   pButton = new MenuButton(GOBACK);
   //Add
@@ -220,12 +220,12 @@ void PauseMenu::Update(float dt)
           }
           case RESUME:
           {
-            followCameraWithOffset(*it, Vector2(0, 1.5));
+            followCameraWithOffset(*it, Vector2(0, 3));
             break;
           }
           case QUIT:
           {
-            followCameraWithOffset(*it, Vector2(0, -1.5));
+            followCameraWithOffset(*it, Vector2(0, -3));
             break;
           }
           }
@@ -258,17 +258,17 @@ void PauseMenu::Update(float dt)
           {
           case IAMSURE:
           {
-            followCameraWithOffset(*it, Vector2(2, -0.5));
+            followCameraWithOffset(*it, Vector2(4, -1));
             break;
           }
           case IAMNOTSURE:
           {
-            followCameraWithOffset(*it, Vector2(-2, -0.5));
+            followCameraWithOffset(*it, Vector2(-4, -1));
             break;
           }
           case AREYOUSURESPRITE:
           {
-            followCameraWithOffset(*it, Vector2(0, 1));
+            followCameraWithOffset(*it, Vector2(0, 2));
             break;
           }
           }
@@ -300,12 +300,12 @@ void PauseMenu::Update(float dt)
           {
           case HOWTOPLAYSPRITE:
           {
-            followCameraWithOffset(*it, Vector2(0, 1));
+            followCameraWithOffset(*it, Vector2(0, 2));
             break;
           }
           case GOBACK:
           {
-            followCameraWithOffset(*it, Vector2(0, -2.25));
+            followCameraWithOffset(*it, Vector2(0, -5));
             break;
           }
 
