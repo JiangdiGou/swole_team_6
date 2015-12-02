@@ -165,7 +165,7 @@ void GameLogic::createLevel(std::string levelPath)
   player->AddComponent(CT_SoundEmitter, playerSound);
   //Sprite
   Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+  spritePlayer->setTexture("Character");
   spritePlayer->flipSprite = false;
   player->AddComponent(CT_Sprite, spritePlayer);  
   //EXAMPLE ZILCH COMP
