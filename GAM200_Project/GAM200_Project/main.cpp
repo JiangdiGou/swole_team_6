@@ -65,7 +65,8 @@ int main(void)
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   //Create a Window 
-	GLFWwindow* window = glfwCreateWindow(INITINFO->clientWidth, INITINFO->clientHeight, "NinjaCade", glfwGetPrimaryMonitor(), nullptr);
+	//GLFWwindow* window = glfwCreateWindow(INITINFO->clientWidth, INITINFO->clientHeight, "NinjaCade", glfwGetPrimaryMonitor(), nullptr);
+  GLFWwindow* window = glfwCreateWindow(INITINFO->clientWidth, INITINFO->clientHeight, "NinjaCade", nullptr, nullptr);
 	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;

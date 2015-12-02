@@ -27,7 +27,19 @@ friend class objFactory;
 GameComponent* GetZilchComponent(ZilchComponentTypeId typeId) const;
 GameComponent* GetComponent(ComponentTypeId typeId) const;
 //Transform * GetTransform() const;
+//Stupid AF functions
 GameObjectComposition* FindObject(std::string name);
+float ourCos(float angle);
+float ourSin(float angle);
+float ourTan(float angle);
+float ourACos(float angle);
+float ourASin(float angle);
+float ourATan(float angle);
+float zDistanceSq(Vector3 pos1, Vector3 pos2);
+float zSqrt(float val);
+void CastRay(Vec2D pos1, Vec2D pos2);
+GameObjectComposition* GetRayResult(int index);
+
 ///Message interface See Message.h
 ///Message will be sent to each component on this composition.
 void SendMessages(Message* message);
@@ -63,6 +75,7 @@ GameObjectComposition();
 ~GameObjectComposition();
 private:
 
+std::vector <GameObjectComposition*> objsInRay;
 //Sorted array of components.
 ComponentArray Components;
 typedef ComponentArray::iterator ComponentIt;

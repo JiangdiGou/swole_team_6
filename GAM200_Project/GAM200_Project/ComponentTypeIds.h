@@ -36,12 +36,12 @@ enum ComponentTypeId
 };
 enum ZilchComponentTypeId
 {
-  CTZ_Example,
-  CTZ_BasicAIComponent,
-  EndOfGame,
-  EnemyHealthManager,
-  PlayerHealthBar,
-  PlayerHealthManager,
+  CTZ_Example,//0
+  CTZ_BasicAIComponent,//1
+  EndOfGame,//2
+  EnemyHealthManager,//3
+  PlayerHealthBar,//4
+  PlayerHealthManager,//5
 };
 ZilchDeclareExternalBaseType(ComponentTypeId, TypeCopyMode::ReferenceType);
 ZilchDeclareExternalBaseType(ZilchComponentTypeId, TypeCopyMode::ReferenceType);

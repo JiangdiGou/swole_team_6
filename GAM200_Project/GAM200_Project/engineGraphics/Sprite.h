@@ -54,7 +54,14 @@ public:
 
   bool flipSprite = false;
   bool visible = true; 
-
+  float GetColorX();
+  float GetColorY();
+  float GetColorZ();
+  float GetColorW();
+  void SetColorX(float val);
+  void SetColorY(float val);
+  void SetColorZ(float val);
+  void SetColorW(float val);
 private:
   static TextureAtlas* atlas;
 

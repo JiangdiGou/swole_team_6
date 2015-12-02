@@ -19,7 +19,7 @@ class BasicAIComponent
 		this.StunTimer = 1.0;
 		//how do I even get the player object?
         this.Owner = ourOwner;
-   // this.Player = this.Owner.FindObject("Player");
+    this.Player = this.Owner.FindObject("Player");
     }
 
     function OnUpdate(dt : Real)

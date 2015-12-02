@@ -284,6 +284,38 @@ void Sprite::SendMessages(Message * message)
   }
 }
 
+float Sprite::GetColorX()
+{
+  return color.x;
+}
+float Sprite::GetColorY()
+{
+  return color.y;
+}
+float Sprite::GetColorZ()
+{
+  return color.z;
+}
+float Sprite::GetColorW()
+{
+  return color.w;
+}
+void Sprite::SetColorX(float val)
+{
+  color.x = val;
+}
+void Sprite::SetColorY(float val)
+{
+  color.y = val;
+}
+void Sprite::SetColorZ(float val)
+{
+  color.z = val;
+}
+void Sprite::SetColorW(float val)
+{
+  color.w = val;
+}
 ZilchDefineType(Sprite, "Sprite", ZLib_Internal, builder, type)
 {
   type->HandleManager = ZilchManagerId(PointerManager);
@@ -294,6 +326,16 @@ ZilchDefineType(Sprite, "Sprite", ZLib_Internal, builder, type)
   //ZilchBindField(builder, type, &Sprite::texture.textureName, "textureName", PropertyBinding::GetSet);
   ZilchBindField(builder, type, &Sprite::flipSprite, "flipSprite", PropertyBinding::GetSet);
   ZilchBindField(builder, type, &Sprite::visible, "visible", PropertyBinding::GetSet);
+
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorX", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorY", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorZ", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorW", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorX", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorY", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorZ", ZilchNoNames);
+  ZilchBindMethod(builder, type, &Sprite::GetColorX, ZilchNoOverload, "GetColorW", ZilchNoNames);
 
   //glm::vec4 color;
   //AtlasTexture texture;

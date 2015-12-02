@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "physicsLib\Transform.h"
 #include "ZilchComponent.h"
+#include "physicsLib/RayLineBoxCollision.h"
 
 objFactory *FACTORY;//extern I believe still requires the declaration
 
@@ -186,7 +187,45 @@ GameObjectComposition* GameObjectComposition::FindObject(std::string name)
 {
   return FACTORY->FindObjectByName(name);
 }
-
+void GameObjectComposition::CastRay(Vec2D pos1, Vec2D pos2) {
+  objsInRay = LoopAll(pos1, pos2);
+}
+GameObjectComposition* GameObjectComposition::GetRayResult(int index)
+{
+  return objsInRay.at(index);
+}
+float GameObjectComposition::ourCos(float angle)
+{
+  return cos(angle);
+}
+float GameObjectComposition::ourSin(float angle)
+{
+  return sin(angle);
+}
+float GameObjectComposition::ourTan(float angle)
+{
+  return tan(angle);
+}
+float GameObjectComposition::ourACos(float angle)
+{
+  return acos(angle);
+}
+float GameObjectComposition::ourASin(float angle)
+{
+  return asin(angle);
+}
+float GameObjectComposition::ourATan(float angle)
+{
+  return atan(angle);
+}
+float GameObjectComposition::zDistanceSq(Vector3 pos1, Vector3 pos2)
+{
+  return((pos2.x - pos1.x)*(pos2.x - pos1.x) + (pos2.y - pos1.y)*(pos2.y - pos1.y) + (pos2.z - pos1.z)*(pos2.z - pos1.z));
+}
+float GameObjectComposition::zSqrt(float val)
+{
+  return sqrt(val);
+}
 ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, builder, type)
 {
   type->HandleManager = ZilchManagerId(PointerManager);
@@ -208,6 +247,16 @@ ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, b
 
   ZilchBindMethod(builder, type, &GameObjectComposition::GetName, ZilchNoOverload, "GetName", ZilchNoNames);
   ZilchBindMethod(builder, type, &GameObjectComposition::FindObject, ZilchNoOverload, "GetName", ZilchNoNames);
+
+  ZilchBindMethod(builder, type, &GameObjectComposition::ourSin, ZilchNoOverload, "zSin", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::ourCos, ZilchNoOverload, "zCos", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::ourTan, ZilchNoOverload, "zTan", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::ourACos, ZilchNoOverload, "zACos", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::ourASin, ZilchNoOverload, "zASin", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::ourATan, ZilchNoOverload, "zATan", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::zDistanceSq, ZilchNoOverload, "zDistanceSq", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::CastRay, ZilchNoOverload, "CastRay", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::GetRayResult, ZilchNoOverload, "GetRayResult", ZilchNoNames);
 
   ///Type safe way of accessing components.
   //template<typename type>

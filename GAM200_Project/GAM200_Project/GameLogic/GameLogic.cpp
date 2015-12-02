@@ -169,8 +169,8 @@ void GameLogic::createLevel(std::string levelPath)
   spritePlayer->flipSprite = false;
   player->AddComponent(CT_Sprite, spritePlayer);  
   //EXAMPLE ZILCH COMP
- // OurZilchComponent* exampleZilch = new OurZilchComponent("EXAMPLE", CTZ_Example);
-  OurZilchComponent* exampleZilch = new createZilch(Example);
+  OurZilchComponent* exampleZilch = new OurZilchComponent("EXAMPLE", CTZ_Example);
+  //OurZilchComponent* exampleZilch = new ou;
   player->AddComponent(CT_OurZilchComponent, exampleZilch);
   MouseVector *vectTest = new MouseVector();
   camera->AddComponent(CT_MouseVector, vectTest);

@@ -70,9 +70,9 @@ void Physics::DetectContacts(float dt)
 				if (Collsion.GenerateContacts((bodyA)->BodyShape, (bodyA)->Position, (bodyB)->BodyShape, (bodyB)->Position, &Contacts))
 				{
           
-          //ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
-          //ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
-          //Collision collideEvent(AShape, BShape);
+          ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
+          ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
+          Collision collideEvent(AShape, BShape);
 
           //curCollisions.push_back(collideEvent);
           /*Collision ACollisionWith(BShape);
@@ -167,6 +167,11 @@ void Physics::solveMessage()
     }
   }*/
 
+ /* prevCollisions.clear();
+  for (unsigned i = 0; i < curCollisions.size(); i++)
+  {
+    prevCollisions.at(i) = curCollisions.at(i);
+  }*/
 }
 
 void Physics::Step(float dt)
