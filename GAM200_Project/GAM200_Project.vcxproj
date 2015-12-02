@@ -282,6 +282,7 @@
     <None Include="Scripts\Example.zilch" />
     <None Include="Scripts\PlayerHealthBar.zilch" />
     <None Include="Scripts\PlayerHealthManager.zilch" />
+    <None Include="Scripts\PlayerMovement.zilch" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{73E2DFFE-92FF-4977-B8FE-68E8ED2EA2F6}</ProjectGuid>
