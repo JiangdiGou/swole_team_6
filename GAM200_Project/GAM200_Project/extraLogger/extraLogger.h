@@ -1,3 +1,6 @@
+// DO NOT CLOC: Public Domain code derived from
+// http://www.codeproject.com/Articles/13368/Multiple-consoles-for-a-single-application
+//
 // ConsoleLogger.h: interface for the CConsoleLogger class.
 //
 //////////////////////////////////////////////////////////////////////

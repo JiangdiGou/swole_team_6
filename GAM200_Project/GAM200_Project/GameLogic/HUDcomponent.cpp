@@ -7,6 +7,11 @@ void HUDcomponent::Initialize()
 {
 	GOC* parent = GetOwner();
 	pTransform = parent->has(Transform);
+
+  Sprite *pSprite = parent->has(Sprite);
+  if (pSprite)
+    pSprite->setLayer(1);
+
 	pCam = GRAPHICS->getCamera();
 }
 

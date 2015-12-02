@@ -16,9 +16,9 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 
 GLuint Sprite::shaderID = 0;
 GLuint Sprite::atlasID = 0;
-std::vector<GLfloat> Sprite::vertices = {};
-std::vector<GLfloat> Sprite::texCoords = {};
-std::vector<GLfloat> Sprite::colors = {};
+std::vector<GLfloat> Sprite::vertices[NUMLAYERS] = {};
+std::vector<GLfloat> Sprite::texCoords[NUMLAYERS] = {};
+std::vector<GLfloat> Sprite::colors[NUMLAYERS] = {};
 GLuint Sprite::vertexArray = 0;
 GLuint Sprite::vertexBuffer = 0;
 GLuint Sprite::textureBuffer = 0;
@@ -159,16 +159,16 @@ void Sprite::Update(float dt)
   texture.updateAnimation();
 
   for (int i = 0; i < 12; ++i)
-    texCoords.push_back(texture.textureCoordinates[i]);
+    texCoords[layer].push_back(texture.textureCoordinates[i]);
 
   //Pushes Color
   //For each of the 6 verts
   for (int i = 0; i < 6; ++i)
   {
-    colors.push_back(color.x);
-    colors.push_back(color.y);
-    colors.push_back(color.z);
-    colors.push_back(color.w);
+    colors[layer].push_back(color.x);
+    colors[layer].push_back(color.y);
+    colors[layer].push_back(color.z);
+    colors[layer].push_back(color.w);
   }
 
   //Unbind Stuff
@@ -216,37 +216,43 @@ void Sprite::initSprites(const Shader& shader, TextureAtlas* spriteAtlas)
 void Sprite::pushVertices(const glm::vec4 &verts)
 {
   //W is not used. It's only a vec4 b/c of matrix mult
-  vertices.push_back(verts.x);
-  vertices.push_back(verts.y);
-  vertices.push_back(verts.z);
+  vertices[layer].push_back(verts.x);
+  vertices[layer].push_back(verts.y);
+  vertices[layer].push_back(verts.z);
 }
 
 void Sprite::drawAllSprites()
 {
-  glUseProgram(shaderID);
+  std::vector<GLfloat> allverts = combineLayers(vertices);
+  std::vector<GLfloat> allTextCoords = combineLayers(texCoords);
+  std::vector<GLfloat> allColors = combineLayers(colors);
 
+  glUseProgram(shaderID);
   glBindTexture(GL_TEXTURE_2D, atlasID);
 
   glBindVertexArray(vertexArray);
   //Sends Verts to gfx card
   glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), vertices.data(), GL_STREAM_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, allverts.size() * sizeof(GLfloat), allverts.data(), GL_STREAM_DRAW);
 
   //Sends tex coords to gfx card
   glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
-  glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(GLfloat), texCoords.data(), GL_STREAM_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, allTextCoords.size() * sizeof(GLfloat), allTextCoords.data(), GL_STREAM_DRAW);
 
   //Sends color to gfx card
   glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-  glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(GLfloat), colors.data(), GL_STREAM_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, allColors.size() * sizeof(GLfloat), allColors.data(), GL_STREAM_DRAW);
 
   //draws
-  glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3.0f);
+  glDrawArrays(GL_TRIANGLES, 0, allverts.size() / 3.0f);
   glBindVertexArray(0);
 
-  vertices.clear();
-  texCoords.clear();
-  colors.clear();
+  for (int i = 0; i < NUMLAYERS; ++i)
+  {
+    vertices[i].clear();
+    texCoords[i].clear();
+    colors[i].clear();
+  }
 }
 
 void Sprite::SendMessages(Message * message)
@@ -316,6 +322,19 @@ void Sprite::SetColorW(float val)
 {
   color.w = val;
 }
+
+std::vector<GLfloat> Sprite::combineLayers(std::vector<GLfloat> layers[NUMLAYERS])
+{
+  std::vector<GLfloat> output;
+
+  for (int i = NUMLAYERS - 1; i >= 0; --i)
+  {
+    output.insert(output.end(), layers[i].begin(), layers[i].end());
+  }
+
+  return output;
+}
+
 ZilchDefineType(Sprite, "Sprite", ZLib_Internal, builder, type)
 {
   type->HandleManager = ZilchManagerId(PointerManager);

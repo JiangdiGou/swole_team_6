@@ -15,6 +15,8 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #ifndef  SPRITE_H
 #define SPRITE_H
 
+#define NUMLAYERS 5
+
 #include "Shader.h"
 #include <vector>
 #include "AtlasTexture.h"
@@ -49,6 +51,24 @@ public:
     texture = atlas->textures[newTexture];
   }
 
+  void setLayer(int newLayer)
+  {
+    //Input checking. This is going to
+    //Put the layer you set within the bounds of layers
+    //we actually support.
+    if (newLayer > NUMLAYERS - 1)
+      layer = NUMLAYERS;
+    else if (newLayer < 0)
+      layer = 0;
+    else
+      layer = newLayer;
+  }
+
+  int getLayer()
+  {
+    return layer; 
+  }
+
   static void initSprites(const Shader& shader, TextureAtlas* spriteAtlas);
   void static drawAllSprites();
 
@@ -63,6 +83,9 @@ public:
   void SetColorZ(float val);
   void SetColorW(float val);
 private:
+  //The backmost layer by default
+  int layer = NUMLAYERS - 1;
+
   static TextureAtlas* atlas;
 
   static GLuint vertexArray;
@@ -72,11 +95,13 @@ private:
   static GLuint shaderID;
   static GLuint atlasID;
 
-  static std::vector<GLfloat> vertices;
-  static std::vector<GLfloat> texCoords;
-  static std::vector<GLfloat> colors;
+  static std::vector<GLfloat> vertices[NUMLAYERS];
+  static std::vector<GLfloat> texCoords[NUMLAYERS];
+  static std::vector<GLfloat> colors[NUMLAYERS];
 
   void SendMessages(Message * message) override;
+  static std::vector<GLfloat> combineLayers(std::vector<GLfloat> layers[NUMLAYERS]);
+
 
   //Helper Function, pushes xyz to vertices
   void pushVertices(const glm::vec4 &verts);
