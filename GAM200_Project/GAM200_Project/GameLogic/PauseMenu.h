@@ -3,6 +3,7 @@
 
 #include "../Engine.h"
 #include "PauseMenuButton.h"
+#include "../engineAudio/SoundEmitter.h"
 
 enum menuSate {MAINMENU = 0, AREYOUSURE, INSTRUCTIONS};
 
@@ -16,8 +17,10 @@ public:
   void Initialize();
   void Update(float dt);
   void SendMessages(Message* message);
+  
 
 private:
+	SoundEmitter * emitter;
   void PauseMenu::followCameraWithOffset(GOC* follower, Vector2 offset);
   std::vector<GOC*> pauseMenuObjects;
   menuSate state = MAINMENU;
