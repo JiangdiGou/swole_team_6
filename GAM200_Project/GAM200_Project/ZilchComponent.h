@@ -41,5 +41,6 @@ public:
   Function* Destroy;
 };
 
+#define createZilch(arg) OurZilchComponent(#arg, CTZ_##arg);
 
 #endif

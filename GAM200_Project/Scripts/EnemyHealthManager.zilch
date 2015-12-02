@@ -8,10 +8,10 @@ class EnemyHealthManager
 
     function Initialize(ourOwner : GameObjectComposition)
     {
-		this.TotalHealth = 100;
-		this.CurrentHealth = this.TotalHealth;
+		  this.TotalHealth = 100;
+		  this.CurrentHealth = this.TotalHealth;
 
-        this.Owner = ourOwner;
+      this.Owner = ourOwner;
     }
     function OnUpdate(dt : Real)
     {
@@ -21,21 +21,21 @@ class EnemyHealthManager
 		
     }
 
-	function UpdateHealth(currentHealth : Real) : Real
-	{
-		this.CurrentHealth = currentHealth;
+	  function UpdateHealth(currentHealth : Real) : Real
+	  {
+		 // this.CurrentHealth = currentHealth;
 
-		if(this.CurrentHealth < this.PreviousHealth)
-		{
-			//this should use actions to flicker between red and not red or alpha'd and not alpha'd
-			this.Owner.Sprite.Color -= Vector4(0 , 0 , 0 , 0.25);
-		}
+		  //if(this.CurrentHealth < this.PreviousHealth)
+		  //{
+			  //this should use actions to flicker between red and not red or alpha'd and not alpha'd
+			  //this.Owner.Sprite.Color -= Vector4(0 , 0 , 0 , 0.25);
+		  //}
 
-		//should interpolate with actions
-		this.Owner.Transform.Scale *= Real3((this.CurrentHealth / this.TotalHealth), 1, 1);
+		  //should interpolate with actions
+		  //this.Owner.Transform.Scale *= Real3((this.CurrentHealth / this.TotalHealth), 1, 1);
 
-		this.PreviousHealth = this.CurrentHealth;
-	}
+		 // this.PreviousHealth = this.CurrentHealth;
+	  }
 
     function OnCollideStart(otherObj : GameObjectComposition)
     {
