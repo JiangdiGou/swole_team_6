@@ -19,3 +19,14 @@ ZilchDefineExternalType(ComponentTypeId, "ComponentTypeId", ZLib_Internal, build
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_MouseVector, "CT_MouseVector");
   ZilchBindEnumValue(builder, type, ComponentTypeId::CT_PlayerState, "CT_PlayerState");
 }
+ZilchDefineExternalType(ZilchComponentTypeId, "ZilchCompoentTypeId", ZLib_Internal, builder, type)
+{
+  ZilchBindEnum(builder, type, SpecialType::Enumeration);
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_Example, "CTZ_Example");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_BasicAIComponent, "CTZ_BasicAIComponent");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_BasicAIComponent, "CTZ_BasicAIComponent");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::EndOfGame, "EndOfGame");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::EnemyHealthManager, "EnemyHealthManager");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::PlayerHealthBar, "PlayerHealthBar");
+  ZilchBindEnumValue(builder, type, ZilchComponentTypeId::PlayerHealthManager, "PlayerHealthManager");
+}

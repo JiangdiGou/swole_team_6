@@ -1,36 +1,45 @@
-class BasicAIComponent
+class PlayerHealthManager
 {
     var Owner : GameObjectComposition;
 	
 	var CurrentHealth : Real;
 	var PreviousHealth : Real;
 	var TotalHealth : Real;
+	var PlayerDied : Boolean = false;
 
     function Initialize(ourOwner : GameObjectComposition)
     {
-		this.TotalHealth = this.Player.PlayerHealthManager.TotalHealth;
+		this.TotalHealth = 100;
 		this.CurrentHealth = this.TotalHealth;
 
         this.Owner = ourOwner;
     }
-
     function OnUpdate(dt : Real)
     {
       //Console.WriteLine(this.Owner.Transform);
       //var transform = //this.Owner.GetComponent(CT_Transform);// as Transfrom;
      // this.Owner.Transform.SetPositionX(this.Owner.Transform.GetPositionX() + 0.01);
 
-
+		if(this.PlayerDied)
+		{
+			//player loses the game
+		}
+		
     }
 
-	function UpdateHealth(currentHealth : Real) : Real
+	function TakeDamage(damage : Real) : Real
 	{
-		this.CurrentHealth = currentHealth;
+		this.CurrentHealth -= damage;
 
-		//should do interpolate with actions
-		this.Owner.Transform.Scale *= Real3((this.CurrentHealth / this.TotalHealth), 1, 1);
+		if(this.CurrentHealth <= 0)
+		{
+			this.PlayerDied = true;
+		}
 
-		this.PreviousHealth = this.CurrentHealth;
+		//should probably update the health bar here but I dont know how I would access it...
+		//this.PlayerHealthBar.UpdateHealth(this.CurrentHealth);
+
+		return this.CurrentHealth;
 	}
 
     function OnCollideStart(otherObj : GameObjectComposition)

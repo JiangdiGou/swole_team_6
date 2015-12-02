@@ -1,0 +1,31 @@
+[LevelName]
+resources/Levels/newLev.txt
+[ArraySpecs]
+25
+25
+[TileMap]
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E E E E E E E E E E E E E E E E E E E E E E E 
+E E E NC~building-30 NC~building-31 NC~building-31 NC~building-32 E E E E E E E E E E E E E E E E E E 
+E NC~building-35 NC~building-36 NC~building-37 NC~building-39 NC~building-39 NC~building-38 NC~building-40 NC~building-41 E E E E E E E E E E E E E E E E 
+E NC~building-35 E NC~building-7 NC~building-14 NC~building-14 NC~building-17 E E E E E E E E E E E E E E E E E E 
+E E E NC~building-14 NC~building-14 NC~building-14 NC~building-17 E E E E E E E E E E E E E E E E E E 
+sliceTest-0 sliceTest-118 sliceTest-0 NC~building-0 NC~building-0 NC~building-0 NC~building-0 NC~building-0 E E E E E E E E E E E E E E E E E 
+sliceTest-118 sliceTest-0 sliceTest-118 sliceTest-0 sliceTest-118 sliceTest-0 sliceTest-118 sliceTest-0 E E E E E E E E E E E E E E E E E 

@@ -40,6 +40,7 @@ using namespace Zilch;
 
 int main(void)
 {
+  FreeConsole();
   luaInitFile();
   //Do init stuff from ini file here. currently, we do nothing.
 
@@ -64,7 +65,7 @@ int main(void)
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   //Create a Window 
-	GLFWwindow* window = glfwCreateWindow(INITINFO->clientWidth, INITINFO->clientHeight, "NinjaCade", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(INITINFO->clientWidth, INITINFO->clientHeight, "NinjaCade", glfwGetPrimaryMonitor(), nullptr);
 	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -87,7 +88,8 @@ int main(void)
 	glfwSetKeyCallback(window, glfwKeyCallback);
 	glfwSetMouseButtonCallback(window, glfwMouseButtonCallback);
 	glfwSetCursorPosCallback(window, glfwMousePosCallback);
-
+  glfwSetWindowIconifyCallback(window, glfwWindowMinimizeCallback);
+  
   CoreEngine* engine = new CoreEngine();
   //Create Systems and add them to engine
   engine->AddSystem(new Physics());

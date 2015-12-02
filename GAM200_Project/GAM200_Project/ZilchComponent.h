@@ -12,7 +12,7 @@ class OurZilchComponent : public GameComponent
 {
 public:
   ZilchDeclareDerivedType(OurZilchComponent, GameComponent);
-  OurZilchComponent(std::string scriptName);
+  OurZilchComponent(std::string scriptName, ZilchComponentTypeId zilchId);
   ~OurZilchComponent();
   void Initialize() override;
   void Update(float dt) override;
@@ -25,6 +25,7 @@ public:
   BoundType* zilchClass;
   Handle classInstance;
   std::string classScript;
+  ZilchComponentTypeId zilchId;
   Function* initFunc;
   Function* updateFunc;
   Function* OnCollideStart;
@@ -40,5 +41,6 @@ public:
   Function* Destroy;
 };
 
+#define createZilch(arg) OurZilchComponent(#arg, CTZ_##arg);
 
 #endif

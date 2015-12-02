@@ -77,7 +77,7 @@ public:
 };
 
 
-std::vector <const GameObjectComposition*> LoopAll(Vec2D start, Vec2D end);
+std::vector <GameObjectComposition*> LoopAll(Vec2D start, Vec2D end);
 
 bool line_rectangle_collide(Vec2D startBase, Vec2D endDirection);
 

@@ -1,0 +1,77 @@
+class PlayerHealthBar
+{
+    var Owner : GameObjectComposition;
+	
+	var CurrentHealth : Real;
+	var PreviousHealth : Real;
+	var TotalHealth : Real;
+
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+		this.TotalHealth = this.Player.PlayerHealthManager.TotalHealth;
+		this.CurrentHealth = this.TotalHealth;
+
+        this.Owner = ourOwner;
+    }
+
+    function OnUpdate(dt : Real)
+    {
+      //Console.WriteLine(this.Owner.Transform);
+      //var transform = //this.Owner.GetComponent(CT_Transform);// as Transfrom;
+     // this.Owner.Transform.SetPositionX(this.Owner.Transform.GetPositionX() + 0.01);
+
+    }
+
+	function UpdateHealth(currentHealth : Real) : Real
+	{
+		this.CurrentHealth = currentHealth;
+
+		//should interpolate with actions
+		this.Owner.Transform.Scale *= Real3((this.CurrentHealth / this.TotalHealth), 1, 1);
+
+		this.PreviousHealth = this.CurrentHealth;
+	}
+
+    function OnCollideStart(otherObj : GameObjectComposition)
+    {
+    }
+    function OnCollidePersist(otherObj : GameObjectComposition)
+    {
+    
+    }
+    function OnCollideEnd(otherObj : GameObjectComposition)
+    {
+    
+    }
+    function OnCustomEvent()
+    {
+    
+    }
+    function OnKeyboardDown(char : Integer)
+    {
+    }
+    function OnMouseLeftDown(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseRightDown(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseLeftUp(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseRightUp(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseMove(mousePos : Vec2D)
+    {
+    
+    }
+    function Destroy()
+    {
+    
+    }
+}

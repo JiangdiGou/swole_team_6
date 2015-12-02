@@ -124,11 +124,9 @@ void GameLogic::createLevel(std::string levelPath)
 
 
   //SET UP CAMERA
-  GOC * camera = FACTORY->makeObject("GAMECAMERA");
+  GOC * camera = FACTORY->makeObject("Camera");
   camera->AddComponent(CT_Transform, new Transform());
   Camera *mainCamera = new Camera(*(GRAPHICS->getCoreShader()));
-  MouseVector *vectTest = new MouseVector();
-  camera->AddComponent(CT_MouseVector, vectTest);
   camera->AddComponent(CT_Camera, mainCamera);
 #ifdef EDITOR
   mainCamera->followingPlayer = false;
@@ -138,7 +136,7 @@ void GameLogic::createLevel(std::string levelPath)
   GRAPHICS->setMainCamera(mainCamera);
 
   //SET UP PLAYER
-  GOC * player = FACTORY->makeObject("GAMEPLAYER");
+  GOC * player = FACTORY->makeObject("Player");
   //Transform
   Transform * transformPlayer = new Transform();
   transformPlayer->SetPosition(2, 6, 0);
@@ -167,12 +165,15 @@ void GameLogic::createLevel(std::string levelPath)
   player->AddComponent(CT_SoundEmitter, playerSound);
   //Sprite
   Sprite * spritePlayer = new Sprite();
-  spritePlayer->texture = GRAPHICS->getSpriteAtlas()->textures["Character"];
+  spritePlayer->setTexture("Character");
   spritePlayer->flipSprite = false;
   player->AddComponent(CT_Sprite, spritePlayer);  
   //EXAMPLE ZILCH COMP
-  OurZilchComponent* exampleZilch = new OurZilchComponent("EXAMPLE");
+ // OurZilchComponent* exampleZilch = new OurZilchComponent("EXAMPLE", CTZ_Example);
+  OurZilchComponent* exampleZilch = new createZilch(Example);
   player->AddComponent(CT_OurZilchComponent, exampleZilch);
+  MouseVector *vectTest = new MouseVector();
+  camera->AddComponent(CT_MouseVector, vectTest);
 
   //Saves Player
   LOGIC->player = player;

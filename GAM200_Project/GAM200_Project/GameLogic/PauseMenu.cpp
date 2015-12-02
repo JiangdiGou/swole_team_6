@@ -1,4 +1,5 @@
 #include "PauseMenu.h"
+#include "../engineAudio/SoundEmitter.h"
 
 PauseMenu* PAUSEMENU;
 
@@ -11,6 +12,7 @@ void PauseMenu::Initialize()
 {
   //MAIN MENU
   //RESUME
+	
   GOC* resumeButton = FACTORY->makeMenuObject("Resume");
   //Components
   Transform* pTrasnform = new Transform();
@@ -161,6 +163,10 @@ void PauseMenu::Update(float dt)
 {
   if (!(CORE->Pause))
   {
+    //SoundEmitter* emitter = (SoundEmitter*)LOGIC->player->GetComponent(CT_SoundEmitter);
+    //emitter->Rock();
+
+
     for (std::vector<GOC*>::iterator it = pauseMenuObjects.begin();
       it != pauseMenuObjects.end(); ++it)
     {
@@ -172,17 +178,20 @@ void PauseMenu::Update(float dt)
 
       if (pReactive && pReactive->active)
         pReactive->active = false;
+
     }
   }
   else
   {
+    
+	 // pSound->BeQuiet();
     for (std::vector<GOC*>::iterator it = pauseMenuObjects.begin();
       it != pauseMenuObjects.end(); ++it)
     {
       Sprite* pSprite = (*it)->has(Sprite);
       GameReactive* pReactive = (*it)->has(GameReactive);
       MenuButton* pMenuButton = (*it)->has(MenuButton);
-
+      
       if (!pMenuButton)
         return;
 
@@ -338,14 +347,23 @@ void PauseMenu::SendMessages(Message* message)
     //'\0' is escape apparently.
     if (charMsg->character == '\0' && charMsg->keyStatus == KEY_PRESSED)
     {
+		 
+		
+	
+		//pSound->BeQuiet();
       if (CORE->Pause)
-      {
+      {	 
+		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+		  emitter->Rock();
         GRAPHICS->toggleBackground(true);
         state = MAINMENU;
       }
-      else
-        GRAPHICS->toggleBackground(false);
-
+	  else
+	  {
+		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+		  emitter->BeQuiet();
+		  GRAPHICS->toggleBackground(false);
+	  }
       CORE->Pause = !CORE->Pause;
     }
   }

@@ -132,6 +132,7 @@ void objFactory::SerializeAllObjects(Serializer& str)
         continue;
       else
         it->second->SerializeWrite(str);
+
     }
   }
 }
@@ -211,6 +212,24 @@ void objFactory::SendMessages(Message * message)
   }
 }
 
+GameObjectComposition* objFactory::FindObjectByName(std::string name)
+{
+  for (unsigned int i = 0; i < gameObjs.size(); i++)
+  {
+    if (gameObjs.at(i)->ObjectName == name)
+    {
+      return gameObjs.at(i);
+    }
+  }
+  for (unsigned int i = 0; i < menuObjs.size(); i++)
+  {
+    if (menuObjs.at(i)->ObjectName == name)
+    {
+      return menuObjs.at(i);
+    }
+  }
+  return 0;
+}
 void objFactory::loadLevelFrom(std::string fileName)
 {
   //std::vector<std::string> tokens;
@@ -368,69 +387,98 @@ bool objFactory::loadEntities(std::string entityFile)
 
     //std::cout << "Line: " <<  line << std::endl;
 
-    //It's sometimes getting an empty line? 
-    try
+    if (line[0] == '#')
     {
-      type = std::stoi(line);
-    }
-    catch (std::invalid_argument)
-    {
-      continue;
-    }
-
-    //Makes first component if its needs to
-    if (!firstCreated)
-    {
-      currentEntity = makeObject("We don't save names.");
-      firstCreated = true;
-    }
-
-    //Checks whether this component already exists on object 
-    for (std::vector<int>::iterator it = previousTypes.begin();
-      it != previousTypes.end(); ++it)
-    {
-      //If this type already exists in vect, make a new comp
-      if (*it == type)
-      {
-        newComposition = true;
-        break;
-      }
-      else
-        newComposition = false;
-    }
-
-    //Creates component
-    GameComponent* comp = getNewComponent((ComponentTypeId)type);
-    //If it should make a new composition
-    if (newComposition)
-    {
-      std::cout << "Adding new Composition" << std::endl;
-      //Reset flag
-      newComposition = false;
-      //Clear types vect
-      previousTypes.clear();
-      //Add Editor components if they don't already exist
+      serializer.stream.getline(line, 256);
+      currentEntity = makeObject(line);
       addEditorComponents(currentEntity);
-      //Make obj
-      currentEntity = makeObject("No names");
-      //Add comp
-      std::cout << "Adding new Comp: " << type << std::endl;
-      currentEntity->AddComponent((ComponentTypeId)type, comp);
-      //Add comp to types vect
-      previousTypes.push_back(type);
-      //Set Comp
-      comp->SerializeRead(serializer);
     }
+    //It's sometimes getting an empty line?
     else
     {
+      try
+      {
+        type = std::stoi(line);
+      }
+      catch (std::invalid_argument)
+      {
+        continue;
+      }
+      std::cout << "Line: " <<  line << std::endl;
+      //printf("||%c||", line);
+    
+      //Creates component
+      GameComponent* comp = getNewComponent((ComponentTypeId)type);
       //Add comp
       std::cout << "Adding new Comp: " << type << std::endl;
       currentEntity->AddComponent((ComponentTypeId)type, comp);
       //Add comp to types vect
-      previousTypes.push_back(type);
+      //previousTypes.push_back(type);
       //Set Comp
       comp->SerializeRead(serializer);
     }
+
+    //  try
+    //  {
+    //    type = std::stoi(line);
+    //  }
+    //  catch (std::invalid_argument)
+    //  {
+    //    continue;
+    //  }
+    ////Makes first component if its needs to
+    //if (!firstCreated)
+    //{
+    //  currentEntity = makeObject("We don't save names.");
+    //  firstCreated = true;
+    //}
+
+    ////Checks whether this component already exists on object 
+    //for (std::vector<int>::iterator it = previousTypes.begin();
+    //  it != previousTypes.end(); ++it)
+    //{
+    //  //If this type already exists in vect, make a new comp
+    //  if (*it == type)
+    //  {
+    //    newComposition = true;
+    //    break;
+    //  }
+    //  else
+    //    newComposition = false;
+    //}
+
+    ////Creates component
+    //GameComponent* comp = getNewComponent((ComponentTypeId)type);
+    ////If it should make a new composition
+    //if (newComposition)
+    //{
+    //  std::cout << "Adding new Composition" << std::endl;
+    //  //Reset flag
+    //  newComposition = false;
+    //  //Clear types vect
+    //  previousTypes.clear();
+    //  //Add Editor components if they don't already exist
+    //  addEditorComponents(currentEntity);
+    //  //Make obj
+    //  currentEntity = makeObject("No names");
+    //  //Add comp
+    //  std::cout << "Adding new Comp: " << type << std::endl;
+    //  currentEntity->AddComponent((ComponentTypeId)type, comp);
+    //  //Add comp to types vect
+    //  previousTypes.push_back(type);
+    //  //Set Comp
+    //  comp->SerializeRead(serializer);
+    //}
+    //else
+    //{
+    //  //Add comp
+    //  std::cout << "Adding new Comp: " << type << std::endl;
+    //  currentEntity->AddComponent((ComponentTypeId)type, comp);
+    //  //Add comp to types vect
+    //  previousTypes.push_back(type);
+    //  //Set Comp
+    //  comp->SerializeRead(serializer);
+    //}
   }
 
   if (currentEntity)

@@ -57,9 +57,6 @@ void Physics::DetectContacts(float dt)
 	BodyIterator bodyA = Bodies.begin();
 	BodyIterator lastBody = Bodies.last(); //end - 1
   
-  for (int i = 0; i < nextCollisionIndex; i++)
-    AllCollisions[i] = 0;
-  nextCollisionIndex = 0;
 	//Broad phase should be added this is N^2
 	for (; bodyA != lastBody; ++bodyA)
 	{
@@ -73,9 +70,12 @@ void Physics::DetectContacts(float dt)
 				if (Collsion.GenerateContacts((bodyA)->BodyShape, (bodyA)->Position, (bodyB)->BodyShape, (bodyB)->Position, &Contacts))
 				{
           
-          ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
-          ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
-          Collision ACollisionWith(BShape);
+          //ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
+          //ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
+          //Collision collideEvent(AShape, BShape);
+
+          //curCollisions.push_back(collideEvent);
+          /*Collision ACollisionWith(BShape);
           Collision BCollisionWith(AShape);
           if (!bodyA->IsStatic)
           {
@@ -88,7 +88,7 @@ void Physics::DetectContacts(float dt)
             //AllCollisions[nextCollisionIndex] = BCollisionWith;
             BShape->SendMessages((Message*)&BCollisionWith);
             nextCollisionIndex++;
-          }
+          }*/
 				}
 			}
 		}
@@ -99,6 +99,8 @@ void Physics::DetectContacts(float dt)
 
 void Physics::solveMessage()
 {
+
+
 	//Commit all physics updates
 	for (BodyIterator it = Bodies.begin(); it != Bodies.end(); ++it)
 	{
@@ -107,22 +109,64 @@ void Physics::solveMessage()
 
 	//Broadcast physics collision messages AFTER physics
 	//has update the bodies
-	for (unsigned i = 0; i<Contacts.TotalContacts; ++i)
+	/*for (unsigned i = 0; i < curCollisions.size(); ++i)
 	{
-		ManifoldSet* contact = &Contacts.contactSet[i];
-		MessageCollide messageCollide;
-		messageCollide.ContactNormal = contact->ContactNormal;
-		messageCollide.Impulse = contact->ContactImpulse;
-		messageCollide.CollidedWith = contact->Bodies[1]->GetOwner();
-		contact->Bodies[0]->GetOwner()->SendMessages(&messageCollide);
-		if (contact->Bodies[1] != NULL)
-		{
-			messageCollide.ContactNormal = -contact->ContactNormal;
-			messageCollide.Impulse = contact->ContactImpulse;
-			messageCollide.CollidedWith = contact->Bodies[0]->GetOwner();
-			contact->Bodies[1]->GetOwner()->SendMessages(&messageCollide);
-		}
+    bool persist = false;
+    for (unsigned j = 0; j < prevCollisions.size(); ++i)
+    {
+      if (curCollisions.at(i).firstObj == prevCollisions.at(j).firstObj &&
+        curCollisions.at(i).otherObj == prevCollisions.at(j).otherObj)
+      {
+        persist = true;
+        if (((Body*)curCollisions.at(i).firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+        {
+          CollisionPersisted persist(curCollisions.at(i).otherObj);
+          curCollisions.at(i).firstObj->GetOwner()->SendMessages(&persist);
+        }
+        if (((Body*)curCollisions.at(i).otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+        {
+          CollisionPersisted persist(curCollisions.at(i).firstObj);
+          curCollisions.at(i).otherObj->GetOwner()->SendMessages(&persist);
+        }
+      }
+    }
+    if (persist == false)
+    {
+      if (((Body*)curCollisions.at(i).firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      {
+        CollisionStarted start(curCollisions.at(i).otherObj);
+        curCollisions.at(i).firstObj->GetOwner()->SendMessages(&start);
+      }
+      if (((Body*)curCollisions.at(i).otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      {
+        CollisionStarted start(curCollisions.at(i).firstObj);
+        curCollisions.at(i).otherObj->GetOwner()->SendMessages(&start);
+      }
+    }
 	}
+
+  for (unsigned i = 0; prevCollisions.size(); ++i)
+  {
+    bool ended = true;
+    for (unsigned j = 0; j < curCollisions.size(); ++i)
+    {
+      ended = false;
+    }
+    if (ended)
+    {
+      if (((Body*)curCollisions.at(i).firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      {
+        CollisionEnded end(curCollisions.at(i).otherObj);
+        curCollisions.at(i).firstObj->GetOwner()->SendMessages(&end);
+      }
+      if (((Body*)curCollisions.at(i).otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      {
+        CollisionEnded end(curCollisions.at(i).firstObj);
+        curCollisions.at(i).otherObj->GetOwner()->SendMessages(&end);
+      }
+    }
+  }*/
+
 }
 
 void Physics::Step(float dt)

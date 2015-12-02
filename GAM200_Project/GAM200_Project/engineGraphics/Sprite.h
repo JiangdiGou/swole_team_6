@@ -44,6 +44,11 @@ public:
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
 
+  void setTexture(std::string newTexture)
+  {
+    texture = atlas->textures[newTexture];
+  }
+
   static void initSprites(const Shader& shader, TextureAtlas* spriteAtlas);
   void static drawAllSprites();
 

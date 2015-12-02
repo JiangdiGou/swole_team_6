@@ -1,4 +1,5 @@
 #include "editorEntityTools.h"
+#include "../ZilchComponent.h"
 
 const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Transform",
@@ -17,7 +18,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "MouseVector",
   "PlayerState",
   "Menu Button",
-  "ZilchComponent"
+  "OurZilchComponent"
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -65,6 +66,8 @@ void EditorEntityTools::handle()
   {
     GameComponent* component = getFocusComponent((ComponentTypeId)(currentItem + 1));
 
+   
+
     if (component != NULL)
     {
       ImGui::TextColored(ImVec4(0, 1, 0, 1), curComponent);
@@ -81,17 +84,36 @@ void EditorEntityTools::handle()
     }
     else
     {
-      ImGui::TextColored(ImVec4(1, 0, 0, 1), curComponent);
-
-      ImGui::SameLine();
-      if(ImGui::Button("Add"))
+      if (currentItem == 17)
       {
+        ImGui::InputText("Comp", tweakableText, 256);
+        ImGui::InputInt("ID", &tweakI);
+        if (ImGui::Button("Add"))
+        {
+          OurZilchComponent* zComp = new OurZilchComponent(std::string(tweakableText), (ZilchComponentTypeId)tweakI);
+          if (zComp->zilchClass == NULL)
+            setupMessage("Incorrect Zilch Class", ImVec4(1, 0, 0, 1));
+          else
+          {
+            focus->AddComponent(CT_OurZilchComponent, zComp);
+            setupMessage("Zilch comp Added", ImVec4(0, 1, 0, 1));
+          }
+        }
 
-        GameComponent* component = FACTORY->getNewComponent((ComponentTypeId(currentItem + 1)));
+      }
+      else
+      {
+        ImGui::TextColored(ImVec4(1, 0, 0, 1), curComponent);
 
-        focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
-        focus->Initialize();
-        
+        ImGui::SameLine();
+        if (ImGui::Button("Add"))
+        {
+
+          GameComponent* component = FACTORY->getNewComponent((ComponentTypeId(currentItem + 1)));
+
+          focus->AddComponent((ComponentTypeId)(currentItem + 1), component);
+          focus->Initialize();
+        }
       }
     }
   }
