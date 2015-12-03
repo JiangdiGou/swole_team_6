@@ -122,7 +122,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [132.2742, 1.17696631, 50],
+			Vec3 Translation = [104.375702, 7.5407505, 50.0000076],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-008, 0, 1],
 		},
@@ -134,7 +134,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 27.2532082,
+			float Size = 60.6530991,
 		},
 		EditorCameraController = 
 		{
@@ -142,7 +142,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [132.2742, 1.17696631, 7.3394682e-007],
+			Vec3 LookTarget = [104.375702, 7.5407505, 6.42199529e-006],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -203,7 +203,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [75.5, 40.5, 0],
+			Vec3 Translation = [75.5, 57.8684235, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -6614,16 +6614,36 @@ Level =
 					Vec3 Velocity = [0, 0, 0],
 					Vec3 AngularVelocity = [0, 0, 0],
 				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+				EnemySlashTest = 
+				{
+				},
+				CapsuleCollider = 
+				{
+					bool Ghost = false,
+					bool SendsMessages = true,
+					bool Seamless = true,
+					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+					Vec3 Offset = [0, -0.629999995, 0],
+					float Radius = 0.61656338,
+					float Height = 9.99999975e-005,
+					uint Direction = 1,
+				},
 				EnemyHitReaction = 
 				{
-					int IHealth = 100,
-					int IOverkillHealth = 100,
-					int IDespawnTime = 1,
-					int IStunCD = 0,
+					int IHealth = 20,
+					int IOverkillHealth = 50,
+					int IDespawnTime = 200,
+					int IStunCD = 60,
 					bool Box = false,
-					bool IgnoreBasicAttack = true,
+					bool IgnoreBasicAttack = false,
 					bool IgnoreSlashAttack = false,
-					bool IgnoreScrollAttack = true,
+					bool IgnoreScrollAttack = false,
 					CogPath ObjectToTrigger1 = 
 					{
 						string Path = "../Door2",
@@ -6655,28 +6675,8 @@ Level =
 						CogPathPreference PathPreference2 = Absolute,
 					},
 					string NameOfTriggerObjects = "",
-					bool TurnOnTrigger1 = false,
+					bool TurnOnTrigger1 = true,
 					bool TurnOnTrigger2 = true,
-				},
-				Reactive = 
-				{
-					bool Active = true,
-					bool CaptureMouse = false,
-				},
-				EnemySlashTest = 
-				{
-				},
-				CapsuleCollider = 
-				{
-					bool Ghost = false,
-					bool SendsMessages = true,
-					bool Seamless = true,
-					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
-					Vec3 Offset = [0, -0.629999995, 0],
-					float Radius = 0.61656338,
-					float Height = 9.99999975e-005,
-					uint Direction = 1,
 				},
 			},
 			Cog = 
@@ -6695,7 +6695,7 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [118.5, -2, 0],
+					Vec3 Translation = [115.247444, -4.01145363, 0],
 					Vec3 Scale = [1.60000002, 1.60000002, 1],
 					Quat Rotation = [0, 0, 0, 1],
 				},
@@ -6729,16 +6729,36 @@ Level =
 					Vec3 Velocity = [0, 0, 0],
 					Vec3 AngularVelocity = [0, 0, 0],
 				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+				EnemySlashTest = 
+				{
+				},
+				CapsuleCollider = 
+				{
+					bool Ghost = false,
+					bool SendsMessages = true,
+					bool Seamless = true,
+					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+					Vec3 Offset = [0, -0.629999995, 0],
+					float Radius = 0.61656338,
+					float Height = 9.99999975e-005,
+					uint Direction = 1,
+				},
 				EnemyHitReaction = 
 				{
-					int IHealth = 100,
-					int IOverkillHealth = 100,
-					int IDespawnTime = 1,
-					int IStunCD = 0,
+					int IHealth = 20,
+					int IOverkillHealth = 50,
+					int IDespawnTime = 200,
+					int IStunCD = 60,
 					bool Box = false,
-					bool IgnoreBasicAttack = true,
+					bool IgnoreBasicAttack = false,
 					bool IgnoreSlashAttack = false,
-					bool IgnoreScrollAttack = true,
+					bool IgnoreScrollAttack = false,
 					CogPath ObjectToTrigger1 = 
 					{
 						string Path = "../Door2",
@@ -6770,28 +6790,8 @@ Level =
 						CogPathPreference PathPreference2 = Absolute,
 					},
 					string NameOfTriggerObjects = "",
-					bool TurnOnTrigger1 = false,
+					bool TurnOnTrigger1 = true,
 					bool TurnOnTrigger2 = true,
-				},
-				Reactive = 
-				{
-					bool Active = true,
-					bool CaptureMouse = false,
-				},
-				EnemySlashTest = 
-				{
-				},
-				CapsuleCollider = 
-				{
-					bool Ghost = false,
-					bool SendsMessages = true,
-					bool Seamless = true,
-					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
-					Vec3 Offset = [0, -0.629999995, 0],
-					float Radius = 0.61656338,
-					float Height = 9.99999975e-005,
-					uint Direction = 1,
 				},
 			},
 			Cog = 
@@ -6810,7 +6810,7 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [131, 0, 0],
+					Vec3 Translation = [132.241119, -11.8547306, 0],
 					Vec3 Scale = [1.60000002, 1.60000002, 1],
 					Quat Rotation = [0, 0, 0, 1],
 				},
@@ -6844,16 +6844,36 @@ Level =
 					Vec3 Velocity = [0, 0, 0],
 					Vec3 AngularVelocity = [0, 0, 0],
 				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+				EnemySlashTest = 
+				{
+				},
+				CapsuleCollider = 
+				{
+					bool Ghost = false,
+					bool SendsMessages = true,
+					bool Seamless = true,
+					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+					Vec3 Offset = [0, -0.629999995, 0],
+					float Radius = 0.61656338,
+					float Height = 9.99999975e-005,
+					uint Direction = 1,
+				},
 				EnemyHitReaction = 
 				{
-					int IHealth = 100,
-					int IOverkillHealth = 100,
-					int IDespawnTime = 1,
-					int IStunCD = 0,
+					int IHealth = 20,
+					int IOverkillHealth = 150,
+					int IDespawnTime = 200,
+					int IStunCD = 60,
 					bool Box = false,
-					bool IgnoreBasicAttack = true,
+					bool IgnoreBasicAttack = false,
 					bool IgnoreSlashAttack = false,
-					bool IgnoreScrollAttack = true,
+					bool IgnoreScrollAttack = false,
 					CogPath ObjectToTrigger1 = 
 					{
 						string Path = "../Door2",
@@ -6885,28 +6905,8 @@ Level =
 						CogPathPreference PathPreference2 = Absolute,
 					},
 					string NameOfTriggerObjects = "",
-					bool TurnOnTrigger1 = false,
+					bool TurnOnTrigger1 = true,
 					bool TurnOnTrigger2 = true,
-				},
-				Reactive = 
-				{
-					bool Active = true,
-					bool CaptureMouse = false,
-				},
-				EnemySlashTest = 
-				{
-				},
-				CapsuleCollider = 
-				{
-					bool Ghost = false,
-					bool SendsMessages = true,
-					bool Seamless = true,
-					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
-					Vec3 Offset = [0, -0.629999995, 0],
-					float Radius = 0.61656338,
-					float Height = 9.99999975e-005,
-					uint Direction = 1,
 				},
 			},
 			Cog = 
@@ -6959,16 +6959,36 @@ Level =
 					Vec3 Velocity = [0, 0, 0],
 					Vec3 AngularVelocity = [0, 0, 0],
 				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+				EnemySlashTest = 
+				{
+				},
+				CapsuleCollider = 
+				{
+					bool Ghost = false,
+					bool SendsMessages = true,
+					bool Seamless = true,
+					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+					Vec3 Offset = [0, -0.629999995, 0],
+					float Radius = 0.61656338,
+					float Height = 9.99999975e-005,
+					uint Direction = 1,
+				},
 				EnemyHitReaction = 
 				{
-					int IHealth = 100,
-					int IOverkillHealth = 100,
-					int IDespawnTime = 1,
-					int IStunCD = 0,
+					int IHealth = 20,
+					int IOverkillHealth = 50,
+					int IDespawnTime = 200,
+					int IStunCD = 60,
 					bool Box = false,
-					bool IgnoreBasicAttack = true,
+					bool IgnoreBasicAttack = false,
 					bool IgnoreSlashAttack = false,
-					bool IgnoreScrollAttack = true,
+					bool IgnoreScrollAttack = false,
 					CogPath ObjectToTrigger1 = 
 					{
 						string Path = "../Door2",
@@ -7000,28 +7020,8 @@ Level =
 						CogPathPreference PathPreference2 = Absolute,
 					},
 					string NameOfTriggerObjects = "",
-					bool TurnOnTrigger1 = false,
+					bool TurnOnTrigger1 = true,
 					bool TurnOnTrigger2 = true,
-				},
-				Reactive = 
-				{
-					bool Active = true,
-					bool CaptureMouse = false,
-				},
-				EnemySlashTest = 
-				{
-				},
-				CapsuleCollider = 
-				{
-					bool Ghost = false,
-					bool SendsMessages = true,
-					bool Seamless = true,
-					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
-					Vec3 Offset = [0, -0.629999995, 0],
-					float Radius = 0.61656338,
-					float Height = 9.99999975e-005,
-					uint Direction = 1,
 				},
 			},
 			Cog = 
@@ -7074,16 +7074,36 @@ Level =
 					Vec3 Velocity = [0, 0, 0],
 					Vec3 AngularVelocity = [0, 0, 0],
 				},
+				Reactive = 
+				{
+					bool Active = true,
+					bool CaptureMouse = false,
+				},
+				EnemySlashTest = 
+				{
+				},
+				CapsuleCollider = 
+				{
+					bool Ghost = false,
+					bool SendsMessages = true,
+					bool Seamless = true,
+					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
+					Vec3 Offset = [0, -0.629999995, 0],
+					float Radius = 0.61656338,
+					float Height = 9.99999975e-005,
+					uint Direction = 1,
+				},
 				EnemyHitReaction = 
 				{
-					int IHealth = 100,
-					int IOverkillHealth = 100,
-					int IDespawnTime = 1,
-					int IStunCD = 0,
+					int IHealth = 20,
+					int IOverkillHealth = 50,
+					int IDespawnTime = 200,
+					int IStunCD = 60,
 					bool Box = false,
-					bool IgnoreBasicAttack = true,
+					bool IgnoreBasicAttack = false,
 					bool IgnoreSlashAttack = false,
-					bool IgnoreScrollAttack = true,
+					bool IgnoreScrollAttack = false,
 					CogPath ObjectToTrigger1 = 
 					{
 						string Path = "../Door2",
@@ -7115,28 +7135,8 @@ Level =
 						CogPathPreference PathPreference2 = Absolute,
 					},
 					string NameOfTriggerObjects = "",
-					bool TurnOnTrigger1 = false,
+					bool TurnOnTrigger1 = true,
 					bool TurnOnTrigger2 = true,
-				},
-				Reactive = 
-				{
-					bool Active = true,
-					bool CaptureMouse = false,
-				},
-				EnemySlashTest = 
-				{
-				},
-				CapsuleCollider = 
-				{
-					bool Ghost = false,
-					bool SendsMessages = true,
-					bool Seamless = true,
-					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-					string SerializedGroupName = "55344c1d69797cae:CollisionGroup_Enemy",
-					Vec3 Offset = [0, -0.629999995, 0],
-					float Radius = 0.61656338,
-					float Height = 9.99999975e-005,
-					uint Direction = 1,
 				},
 			},
 			Cog = 
@@ -7578,6 +7578,56 @@ Level =
 			bool AnimationActive = true,
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 102,
+		},
+		Named = 
+		{
+			string Name = "EndBox",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [133.319641, 6.87463236, 7.3394682e-007],
+			Vec3 Scale = [2.2092669, 19.9892178, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = false,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		BoxCollider = 
+		{
+			bool Ghost = true,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+		EndGameScript = 
+		{
+			string Level2Load = "5660321fda9263f0:VillageLevel",
+			int EnemyTotal = 0,
 		},
 	},
 },

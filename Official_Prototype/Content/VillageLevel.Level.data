@@ -276,7 +276,7 @@ Level =
 		EndGameScript = 
 		{
 			string Level2Load = "551f871f885a5f4b:EndOfGame",
-			int EnemyTotal = 1,
+			int EnemyTotal = 12,
 		},
 	},
 	Cog = 

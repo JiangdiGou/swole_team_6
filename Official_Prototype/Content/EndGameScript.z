@@ -18,7 +18,6 @@ class EndGameScript : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        Console.WriteLine(this.KillCounter);
         if(this.KillCounter >= this.EnemyTotal)
         {
             this.AllEnemiesDead = true;
@@ -31,7 +30,17 @@ class EndGameScript : ZilchComponent
         
         if((sOtherObject.Name == "Player") && (this.AllEnemiesDead))
         {
-            this.Space.LoadLevel(this.Level2Load);
+            sOtherObject.PlayerMovement.BCanMove = false;
+            var seq = Action.Sequence(this.Owner.Actions);
+            
+            Action.Delay(seq, 1.5);
+            Action.Call(seq, this.LoadNextLevel);
+            
         }
+    }
+    
+    function LoadNextLevel()
+    {
+        this.Space.LoadLevel(this.Level2Load);
     }
 }

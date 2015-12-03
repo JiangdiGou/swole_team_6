@@ -18,7 +18,8 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "MouseVector",
   "PlayerState",
   "Menu Button",
-  "OurZilchComponent"
+  "OurZilchComponent",
+  "BadEnemyAI"
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -271,6 +272,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 
   case CT_MenuButton:
     return focus->has(MenuButton);
+
+  case CT_BadEnemyAI:
+    return focus->has(BadEnemyAI);
 
   default:
     return NULL;

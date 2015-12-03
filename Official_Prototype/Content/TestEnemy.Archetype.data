@@ -6,7 +6,7 @@ Cog =
 	},
 	Named = 
 	{
-		string Name = "Enemy",
+		string Name = "SlashDummy",
 	},
 	Archetyped = 
 	{
@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [40.0258102, 4.55409718, 0],
+		Vec3 Translation = [115.247444, -4.01145363, 0],
 		Vec3 Scale = [1.60000002, 1.60000002, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -36,28 +36,11 @@ Cog =
 		float AnimationSpeed = 1,
 		uint StartFrame = 0,
 	},
-	SpriteText = 
-	{
-		bool Visible = true,
-		bool VisibilityCulling = true,
-		bool VisibilityEvents = false,
-		bool CastShadows = false,
-		Vec4 Color = [0, 0, 0, 1],
-		BlendMode BlendMode = Alpha,
-		SpriteGeometryMode GeometryMode = ZPlane,
-		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-		string FontName = "4e7bac697bec55c5:Verdana",
-		uint FontSize = 15,
-		string Text = "",
-		TextAlign Align = Left,
-		float PixelsPerUnit = 64,
-		bool Smoothing = true,
-	},
 	RigidBody = 
 	{
 		bool Static = false,
 		bool Asleep = false,
-		bool Kinematic = false,
+		bool Kinematic = true,
 		bool RotationLocked = true,
 		bool Mode2D = true,
 		bool AllowSleep = true,
@@ -67,17 +50,17 @@ Cog =
 	},
 	EnemyHitReaction = 
 	{
-		int IHealth = 100,
-		int IOverkillHealth = 150,
-		int IDespawnTime = 200,
-		int IStunCD = 60,
+		int IHealth = 40,
+		int IOverkillHealth = 100,
+		int IDespawnTime = 1,
+		int IStunCD = 0,
 		bool Box = false,
-		bool IgnoreBasicAttack = false,
+		bool IgnoreBasicAttack = true,
 		bool IgnoreSlashAttack = false,
-		bool IgnoreScrollAttack = false,
+		bool IgnoreScrollAttack = true,
 		CogPath ObjectToTrigger1 = 
 		{
-			string Path = "",
+			string Path = "../Door2",
 			bool ErrorOnResolveToNull = false,
 			bool ErrorOnPathCantCompute = false,
 			bool ErrorOnDirectLinkFail = false,
@@ -106,7 +89,7 @@ Cog =
 			CogPathPreference PathPreference2 = Absolute,
 		},
 		string NameOfTriggerObjects = "",
-		bool TurnOnTrigger1 = true,
+		bool TurnOnTrigger1 = false,
 		bool TurnOnTrigger2 = true,
 	},
 	Reactive = 
@@ -115,9 +98,6 @@ Cog =
 		bool CaptureMouse = false,
 	},
 	EnemySlashTest = 
-	{
-	},
-	EnemyPatrol = 
 	{
 	},
 	CapsuleCollider = 

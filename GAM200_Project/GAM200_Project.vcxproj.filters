@@ -328,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\Zilch\ZilchBind.h" />
     <ClInclude Include="GAM200_Project\AutoPlay.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\BadEnemyAI.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -525,6 +528,9 @@
     <ClCompile Include="GAM200_Project\Zilch\ZilchBind.cpp" />
     <ClCompile Include="GAM200_Project\main.cpp" />
     <ClCompile Include="GAM200_Project\AutoPlay.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\BadEnemyAI.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">

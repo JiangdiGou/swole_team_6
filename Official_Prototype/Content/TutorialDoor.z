@@ -13,7 +13,8 @@ class TutorialDoor : ZilchComponent
         if(event.CogToTrigger1 == this.Owner || event.NameToTrigger == this.Owner.Name)
         {
             --this.NumEnemies;
-            
+            Console.WriteLine("num enemies: `this.NumEnemies`");
+        
             if(this.NumEnemies <= 0)
             {
                 this.Owner.Destroy();

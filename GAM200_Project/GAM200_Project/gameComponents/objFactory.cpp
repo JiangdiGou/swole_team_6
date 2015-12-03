@@ -540,6 +540,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_HUDcomponent:
 	  return new HUDcomponent();
 
+  case CT_BadEnemyAI:
+    return new BadEnemyAI();
+
   case CT_Editable:
     return new Editable();
 
