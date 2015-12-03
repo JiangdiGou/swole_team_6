@@ -177,6 +177,7 @@ int main(void)
 
   while (timePassed < 5000)
   {
+    std::cout << "passed: " << timePassed << std::endl;
     deltaTime = timeGetTime() - previousTime;
     previousTime = timeGetTime();
     timePassed += deltaTime;
@@ -185,7 +186,8 @@ int main(void)
 
     for (unsigned i = 0; i < CORE->getSystems().size(); ++i)
     {
-      if (CORE->Pause && (CORE->getSystems()[i] == PHYSICS || CORE->getSystems()[i] == sound))
+      if (CORE->Pause && (CORE->getSystems()[i] == PHYSICS || CORE->getSystems()[i] == sound
+          || CORE->getSystems()[i] == LOGIC) || CORE->getSystems()[i] == FACTORY)
         continue;
       else
         CORE->getSystems()[i]->Update(deltaTime);
