@@ -10,6 +10,7 @@ void BadEnemyAI::Initialize()
 	pTransform = parent->has(Transform);
 
 	player = LOGIC->player;
+  playerHM = player->has(HealthManager);
 
 	pSprite = parent->has(Sprite);
   if (pSprite)
@@ -33,13 +34,7 @@ void BadEnemyAI::Update(float dt)
 {
 	GOC* owner = GetOwner();
 	Transform* playerTransform = player->has(Transform);
-
-	if (playerHM == NULL)
-	{
-		playerHM = player->has(HealthManager);
-	}
 	
-
   ////////////////////////////////////////////////////////        Movement          ////////////////////////////////////////////////////////////////
 	if (CanMove)
 	{
