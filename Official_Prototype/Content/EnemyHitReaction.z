@@ -91,8 +91,12 @@ class EnemyHitReaction : ZilchComponent
         if(this.IOverkillHealth <= 0)
         {
             //subtract 1 from amount of enemies alive
-            this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
-            Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
+            //this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive -= 1;
+            //Console.WriteLine(this.Space.FindObjectByName("LevelManager").EnemyCounter.EnemiesAlive);
+            if(this.Space.FindObjectByName("EndBox") != null)
+            {
+                this.Space.FindObjectByName("EndBox").EndGameScript.KillCounter += 1;
+            }
             
             //If we need to send a trigger to any objects that needs it
             if(this.ObjectToTrigger1 != null || this.ObjectToTrigger2 != null || this.NameOfTriggerObjects != null)

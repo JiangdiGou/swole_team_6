@@ -1,0 +1,37 @@
+class EndGameScript : ZilchComponent
+{
+    var AllEnemiesDead : Boolean;
+    
+    [Property]
+    var Level2Load : Level;
+    
+    [Property]
+    var EnemyTotal : Integer;
+    
+    var KillCounter : Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollision);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        Console.WriteLine(this.KillCounter);
+        if(this.KillCounter >= this.EnemyTotal)
+        {
+            this.AllEnemiesDead = true;
+        }
+    }
+    
+    function OnCollision(event : CollisionEvent)
+    {
+        var sOtherObject = event.OtherObject;
+        
+        if((sOtherObject.Name == "Player") && (this.AllEnemiesDead))
+        {
+            this.Space.LoadLevel(this.Level2Load);
+        }
+    }
+}
