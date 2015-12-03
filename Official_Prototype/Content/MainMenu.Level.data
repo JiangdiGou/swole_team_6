@@ -559,7 +559,7 @@ Level =
 		GenericButton = 
 		{
 			Enum ButtonType = LoadLevel,
-			string LoadThisLevel = "56162dbd80a3aaac:Tutorial",
+			string LoadThisLevel = "553573c03722f285:LevelSelect",
 		},
 	},
 	Cog = 
