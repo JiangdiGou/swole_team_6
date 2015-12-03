@@ -17,10 +17,15 @@ class EndOfGame
 
     function OnCollideStart(otherObj : GameObjectComposition)
     {
-		if(otherObj.Name == "Player")
-		{
-			this.Space.LoadLevel("VictoryScreen");
-		}
+		//if(otherObj.Name == "Player")
+		//{
+			//this.Space.LoadLevel("VictoryScreen");
+		//}
+
+		//if(otherObject.GetName() == "GAMEPLAYER")
+		//{
+			
+		//}
     }
     function OnCollidePersist(otherObj : GameObjectComposition)
     {
