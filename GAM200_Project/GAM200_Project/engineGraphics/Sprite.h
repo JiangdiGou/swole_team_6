@@ -30,7 +30,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 
 using namespace Zilch;
 
-class Sprite : public GameComponent
+__declspec(align(16)) class Sprite : public GameComponent
 {
 public:
   ZilchDeclareDerivedType(Sprite, GameComponent);
@@ -62,6 +62,16 @@ public:
       layer = 0;
     else
       layer = newLayer;
+  }
+
+  void* operator new(size_t size)
+  {
+    return _mm_malloc(size, 16);
+  }
+
+  void operator delete(void* toBeDeleted)
+  {
+    _mm_free(toBeDeleted);
   }
 
   int getLayer()

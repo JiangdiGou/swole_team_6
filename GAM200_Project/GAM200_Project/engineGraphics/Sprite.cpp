@@ -341,8 +341,8 @@ std::vector<GLfloat> Sprite::combineLayers(std::vector<GLfloat> layers[NUMLAYERS
 ZilchDefineType(Sprite, "Sprite", ZLib_Internal, builder, type)
 {
   type->HandleManager = ZilchManagerId(PointerManager);
-  ZilchBindConstructor(builder, type, Sprite, ZilchNoNames);
-  ZilchBindDestructor(builder, type, Sprite);
+  //ZilchBindConstructor(builder, type, Sprite, ZilchNoNames);
+  //ZilchBindDestructor(builder, type, Sprite);
 
 
   //ZilchBindField(builder, type, &Sprite::texture.textureName, "textureName", PropertyBinding::GetSet);
