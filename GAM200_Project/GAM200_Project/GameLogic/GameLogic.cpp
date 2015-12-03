@@ -11,6 +11,7 @@
 #include "../mouseVector.h"
 #include "../reactive.h"
 #include "PlayerTag.h"
+#include "HealthManager.h"
 #include "../ZilchComponent.h"
 
 #include <ctime>
@@ -20,7 +21,7 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  createLevel("resources/Levels/newLev.txt");
+  createLevel("resources/Levels/Level1.txt");
 }
 
 void GameLogic::SendMessages(Message * m)
@@ -174,6 +175,9 @@ void GameLogic::createLevel(std::string levelPath)
   player->AddComponent(CT_OurZilchComponent, exampleZilch);
   MouseVector *vectTest = new MouseVector();
   camera->AddComponent(CT_MouseVector, vectTest);
+  //HealthManager
+  HealthManager* healthManager = new HealthManager();
+  player->AddComponent(CT_HealthManager, healthManager);
 
   //Saves Player
   LOGIC->player = player;

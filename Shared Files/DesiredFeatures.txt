@@ -1,0 +1,4 @@
+Desired Features List:
+- Right Click and drag in editor to move camera
+- Opacity changes
+- Sprite Text functionality

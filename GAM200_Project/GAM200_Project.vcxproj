@@ -68,6 +68,7 @@
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameLogic\BadEnemyAI.h" />
     <ClInclude Include="GAM200_Project\GameLogic\GameLogic.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\HealthManager.h" />
     <ClInclude Include="GAM200_Project\GameLogic\HUDcomponent.h" />
     <ClInclude Include="GAM200_Project\GameLogic\GameReactive.h" />
     <ClInclude Include="GAM200_Project\GameLogic\PauseMenu.h" />
@@ -201,6 +202,7 @@
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\BadEnemyAI.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\HealthManager.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\HUDcomponent.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\PauseMenu.cpp" />

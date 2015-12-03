@@ -2,29 +2,29 @@
 
 #include "../Component.h"
 #include "../reactive.h"
-#include "HealthManager.h"
 
-class BadEnemyAI : public GameComponent
+class HealthManager : public GameComponent
 {
 public:
   void Initialize()override;
   void Update(float dt)override;
   void SendMessages(Message* msg)override;
   void SerializeWrite(Serializer& str) override;
+  void UpdateHealth(int val);
 
-  BadEnemyAI();
+  HealthManager();
 
 private:
-	enum  EnemyState { CHASING, PACING, ATTACKING };
+	//enum  EnemyState { CHASING, PACING, ATTACKING };
 
   Transform* pTransform;
   Sprite *pSprite;
-  Vector3D paceDistance;
-  float waitTime;
-  EnemyState CurrentState;
   GOC* player;
-  HealthManager* playerHM;
+  
+  int TotalHealth;
+  int CurrentHealth;
 
   bool CanMove = true;
   bool MovingRight;
+  bool Alive = true;
 };

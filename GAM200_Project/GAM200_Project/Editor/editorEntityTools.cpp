@@ -19,7 +19,8 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "PlayerState",
   "Menu Button",
   "OurZilchComponent",
-  "BadEnemyAI"
+  "Bad Enemy AI",
+  "Health Manager"
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -275,6 +276,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 
   case CT_BadEnemyAI:
     return focus->has(BadEnemyAI);
+
+  case CT_HealthManager:
+	  return focus->has(HealthManager);
 
   default:
     return NULL;

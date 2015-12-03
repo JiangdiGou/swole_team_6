@@ -331,6 +331,9 @@
     <ClInclude Include="GAM200_Project\GameLogic\BadEnemyAI.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\HealthManager.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -529,6 +532,9 @@
     <ClCompile Include="GAM200_Project\main.cpp" />
     <ClCompile Include="GAM200_Project\AutoPlay.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\BadEnemyAI.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\HealthManager.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>

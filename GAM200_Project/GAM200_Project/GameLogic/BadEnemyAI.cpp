@@ -1,6 +1,7 @@
 #include "BadEnemyAI.h"
 #include "../physicsLib/math_utility.h"
 #include "../engineGraphics/graphicsManager.h"
+#include <cmath> 
 
 //playerstate component for reference
 void BadEnemyAI::Initialize()
@@ -8,52 +9,112 @@ void BadEnemyAI::Initialize()
 	GOC* parent = GetOwner();
 	pTransform = parent->has(Transform);
 
-  Sprite *pSprite = parent->has(Sprite);
+	player = LOGIC->player;
+
+	pSprite = parent->has(Sprite);
   if (pSprite)
     pSprite->setLayer(1);
 
-  paceDistance = Vector3D(5,0,0);
+  paceDistance = Vector3D(2,0,0);
   waitTime = 2;
+
+  CanMove = true;
+  CurrentState = PACING;
+
+
+#ifdef EDITOR
+  //CanMove = false;
+#else
+  CanMove = true;
+#endif
 }
 
 void BadEnemyAI::Update(float dt)
 {
 	GOC* owner = GetOwner();
+	Transform* playerTransform = player->has(Transform);
+
+	if (playerHM == NULL)
+	{
+		playerHM = player->has(HealthManager);
+	}
+	
 
   ////////////////////////////////////////////////////////        Movement          ////////////////////////////////////////////////////////////////
-  Vector3D temp = Vector3D(paceDistance.x * dt, 0, 0);
+	if (CanMove)
+	{
+		if (CurrentState == PACING)
+		{
+			Vector3D temp = Vector3D(paceDistance.x * dt, 0, 0);
 
-  if (MovingRight)
-  {
-    pTransform->SetPosition((pTransform->GetPosition() + temp));
-  }
-  else if(!MovingRight)
-  {
-    pTransform->SetPosition((pTransform->GetPosition() - temp));
-  }
+			if (MovingRight)
+			{
+				pTransform->SetPosition((pTransform->GetPosition() + temp));
+			}
+			else if (!MovingRight)
+			{
+				pTransform->SetPosition((pTransform->GetPosition() - temp));
+			}
 
-  if (waitTime > 0)
-  {
-    waitTime -= dt;
-  }
-  else
-  {
-    if (MovingRight)
-    {
-      MovingRight = false;
-    }
-    else
-    {
-      MovingRight = true;
-    }
-    waitTime = 2;
-  }
+			if (waitTime > 0)
+			{
+				waitTime -= dt;
+			}
+			else
+			{
+				if (MovingRight)
+				{
+					MovingRight = false;
+					//pTransform->SetScale(pTransform->GetScale() * (-1, 1, 1));
+				}
+				else
+				{
+					MovingRight = true;
+					//pTransform->SetScale(pTransform->GetScale() * (-1,1,1));
+				}
 
-  ////////////////////////////////////////////////////////        Health          ////////////////////////////////////////////////////////////////
-}
+				waitTime = 2;
+			}
+		}
+		else if (CurrentState == CHASING)
+		{
+			if ((pTransform->GetPositionX() - 1) > playerTransform->GetPositionX())
+			{
+				pTransform->SetPosition(Vector3(pTransform->GetPositionX() - (2 * dt), pTransform->GetPositionY(), 0));
+			}
+			else if((pTransform->GetPositionX() + 1) < playerTransform->GetPositionX())
+			{
+				pTransform->SetPosition(Vector3(pTransform->GetPositionX() + (2 * dt), pTransform->GetPositionY(), 0));
+			}
 
-void BadEnemyAI::UpdateHealth(int val)
-{
+		}
+		else if (CurrentState == ATTACKING)
+		{
+			//change the sprite to attacking here
+
+			playerHM->UpdateHealth(-5);
+
+			CurrentState = CHASING;
+		}
+		else
+		{
+			CurrentState = PACING;
+		}
+////////////////////////////////////////////////////////        Chasing         ////////////////////////////////////////////////////////////////
+
+		if (abs((pTransform->GetPositionX() - playerTransform->GetPositionX())) < 3)
+		{
+			CurrentState = CHASING;
+		}
+
+////////////////////////////////////////////////////////        Attacking        ////////////////////////////////////////////////////////////////
+		//if were in range to attack
+		if (abs((pTransform->GetPositionX() - playerTransform->GetPositionX())) < 0.5)
+		{
+			CurrentState = ATTACKING;
+		}
+	}
+
 
 }
 
