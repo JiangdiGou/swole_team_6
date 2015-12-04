@@ -10,7 +10,7 @@ public:
   void Update(float dt)override;
   void SendMessages(Message* msg)override;
   void SerializeWrite(Serializer& str) override;
-  void Attack();
+  void Attack(std::vector <GameObjectComposition*> objectsHit);
 
   PlayerAttack();
 

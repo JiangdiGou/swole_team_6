@@ -46,8 +46,13 @@ void MouseVector::SendMessages(Message * message)
 		  //mouseSound.PlayEvent("SwordHitOrganic");
         mouseDown = false;
         mouseUpPos = mouseEvent->MousePosition;
-		
+		    
+        //call the player attack
+        PlayerAttack* playerAttack = parent->has(PlayerAttack);
+
 		    objsInRay = LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
+
+        playerAttack->Attack(objsInRay);
 		
       }
     }
@@ -64,7 +69,6 @@ void MouseVector::Update(float dt)
 {
   if (!mouseDown)
   {
-	parent->has(PlayerAttack);
     debugDrawLine(Vector3(mouseDownPos, 0), Vector3(mouseUpPos, 0), Vector3());
   }
 }
