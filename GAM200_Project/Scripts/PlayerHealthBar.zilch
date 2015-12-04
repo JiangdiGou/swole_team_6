@@ -8,8 +8,8 @@ class PlayerHealthBar
 
     function Initialize(ourOwner : GameObjectComposition)
     {
-		this.TotalHealth = this.Player.PlayerHealthManager.TotalHealth;
-		this.CurrentHealth = this.TotalHealth;
+		this.TotalHealth = this.FindObject("Player").PlayerHealthManager.TotalHealth;
+		this.CurrentHealth = this.FindObject("Player").PlayerHealthManager.CurrentHealth;
 
         this.Owner = ourOwner;
     }
