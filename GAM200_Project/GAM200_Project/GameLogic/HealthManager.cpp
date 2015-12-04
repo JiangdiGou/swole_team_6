@@ -10,11 +10,13 @@ void HealthManager::Initialize()
 
 	player = LOGIC->player;
 
+  //healthBar = "TempHealthBar");
+  //healthBarComponent = healthBar->has(PlayerHealthBar);
+
 	pSprite = parent->has(Sprite);
   if (pSprite)
     pSprite->setLayer(1);
 
-  //Alive = false;
 #ifdef EDITOR
   //CanMove = false;
 #else
@@ -38,9 +40,7 @@ void HealthManager::UpdateHealth(int val)
 {
 	CurrentHealth += val;
 
-	std::cout << CurrentHealth;
-
-	std::cout << "You got knocked the fuck out!";
+  //healthBarComponent->UpdateScale(CurrentHealth / TotalHealth);
 
 	if (CurrentHealth <= 0)
 	{

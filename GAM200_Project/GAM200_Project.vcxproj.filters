@@ -334,6 +334,9 @@
     <ClInclude Include="GAM200_Project\GameLogic\HealthManager.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\PlayerHealthBar.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -535,6 +538,9 @@
       <Filter>GameLogic</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\HealthManager.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\PlayerHealthBar.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>
