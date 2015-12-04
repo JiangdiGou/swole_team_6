@@ -370,12 +370,12 @@ void objFactory::initializeObjects()
   std::map<int, GameObjectComposition*>::const_iterator it = gameObjs.begin();
   for (; it != gameObjs.end(); ++it)
   {
-    PrintPointer(this);
+    //PrintPointer(this);
     //auto stuff = it->first;
     //printf("da fuck %d \n", stuff);
 
-    if(it->second)
-      PrintPointer(it->second);
+    //if(it->second)
+      //PrintPointer(it->second);
     
     it->second->Initialize();
   }
