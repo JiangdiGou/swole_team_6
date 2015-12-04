@@ -71,7 +71,7 @@ void SoundManager::Initialize()
 		printf("shit happenes2\n");
 	}
 
-	result_ = m_Sys->loadBankFile("resources/Audio/BGM.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MusicBank);
+	result_ = m_Sys->loadBankFile("resources/Audio/RealBGM.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &m_MusicBank);
 	if (result_ != FMOD_OK)
 	{
 		std::cout << result_ << std::endl;
@@ -84,6 +84,7 @@ void SoundManager::Initialize()
 		std::cout << result_ << std::endl;
 		printf("shit happenes4\n");
 	}
+
 	return;
 }
 
