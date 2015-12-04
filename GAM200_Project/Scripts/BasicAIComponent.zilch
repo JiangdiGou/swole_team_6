@@ -18,13 +18,17 @@ class BasicAIComponent
 	    this.MoveRight = true;
 		this.StunTimer = 1.0;
 		//how do I even get the player object?
-        this.Owner = ourOwner;
+    this.Owner = ourOwner;
 		this.Player = this.Owner.FindObject("GAMEPLAYER");
     Console.WriteLine(this.Player.GetName());
+    //Console.WriteLine(this.Owner.GetZilchComponent("BasicAIComponent"));//.CallFunction("OnCustomEvent");
     }
 
     function OnUpdate(dt : Real)
     {
+    //Console.WriteLine(this.Player.GetName());
+    //Console.WriteLine(this.Owner.Transform);//.CallFunction("OnCustomEvent");
+    //Console.WriteLine(this.Owner.GetZilchComponent("BasicAIComponent"));
 		//Console.WriteLine("Hello");
 	   
 	   if(this.Stunned)

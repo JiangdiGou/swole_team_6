@@ -21,7 +21,9 @@ public:
 
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
-
+  void CallFunction(std::string);
+  Function* GetFieldOrProperty(std::string functName);
+  Function* SetFieldOrProperty(std::string functName);
   ExceptionReport report;
   BoundType* zilchClass;
   Handle classInstance;

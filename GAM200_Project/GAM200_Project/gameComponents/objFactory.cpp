@@ -379,6 +379,11 @@ void objFactory::initializeObjects()
     
     it->second->Initialize();
   }
+  it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    it->second->Initialize();
+  }
   /*for (auto &object : gameObjs)
   {
     //std::cout << object.second->GetName() << std::endl;

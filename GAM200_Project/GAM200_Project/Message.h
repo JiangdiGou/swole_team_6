@@ -1,7 +1,7 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-//#pragma optimize("", off)
+#pragma optimize("", off)
 
 namespace Mid // Message id
 {

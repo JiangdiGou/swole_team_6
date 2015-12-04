@@ -38,22 +38,12 @@ GameComponent* BinaryComponentSearch(const ComponentArray& components, Component
 }
 GameComponent* BinaryZilchComponentSearch(const ZilchComponentArray& components, ZilchComponentTypeId name)
 {
-  size_t begin = 0;
-  size_t end = components.size();
-
-  while (begin < end)
+  for (int i = 0; i < components.size(); i++)
   {
-    size_t mid = (begin + end) / 2;
-    if (components[mid]->TypeId < name)
-      begin = mid + 1;
-    else
-      end = mid; 
+    if (((OurZilchComponent*)components[i])->zilchId == name)
+      return components[i];
   }
-
-  if ((begin < components.size()) && (components[begin]->TypeId == name))
-    return (GameComponent*)components[begin];
-  else
-    return NULL;
+   return nullptr;
 }
 
 void GameObjectComposition::Initialize()
@@ -123,7 +113,7 @@ void GameObjectComposition::AddComponent(ComponentTypeId typeId, GameComponent* 
 	component->TypeId = typeId;
 	Components.push_back(component);
   if (typeId == CT_OurZilchComponent)
-    ZilchComponents.push_back((OurZilchComponent*)component);
+    ZilchComponents.push_back(component);
 
 	//Sort the component array so binary search can be used to find components quickly.
 	std::sort(Components.begin(), Components.end(), ComponentSorter());
@@ -169,6 +159,21 @@ GameComponent * GameObjectComposition::GetComponent(ComponentTypeId typeId) cons
 GameComponent * GameObjectComposition::GetZilchComponent(ZilchComponentTypeId typeId) const
 {
   return BinaryZilchComponentSearch(ZilchComponents, typeId);
+}
+
+#define DeclareZilchType(TypeName)                   \
+if (name == #TypeName)                \
+{                                                    \
+  retComp = GetZilchComponent(CTZ_##TypeName);\
+  return retComp;                                    \
+}  
+GameComponent * GameObjectComposition::ZilchGetComponent(std::string name) const
+{
+  GameComponent* retComp;
+  DeclareZilchType(Example);
+  DeclareZilchType(BasicAIComponent);
+
+  return nullptr;
 }
 void GameObjectComposition::Destroy()
 {
@@ -262,6 +267,7 @@ ZilchDefineType(GameObjectComposition, "GameObjectComposition", ZLib_Internal, b
   ZilchBindMethod(builder, type, &GameObjectComposition::zDistanceSq, ZilchNoOverload, "zDistanceSq", ZilchNoNames);
   ZilchBindMethod(builder, type, &GameObjectComposition::CastRay, ZilchNoOverload, "CastRay", ZilchNoNames);
   ZilchBindMethod(builder, type, &GameObjectComposition::GetRayResult, ZilchNoOverload, "GetRayResult", ZilchNoNames);
+  ZilchBindMethod(builder, type, &GameObjectComposition::ZilchGetComponent, ZilchNoOverload, "GetZilchComponent", ZilchNoNames);
 
   ///Type safe way of accessing components.
   //template<typename type>
