@@ -243,7 +243,11 @@ void PauseMenu::Update(float dt)
       }
       case AREYOUSURE:
       {
-		
+		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+		  emitter->SetVolume(1.0f, "Enter");
+		  
+		  emitter->PlayEvent("Enter");
+		  emitter->StopEvent("Enter");
         //And youre one of the menu buttons in the main menu
         if (pMenuButton->type == IAMSURE || pMenuButton->type == IAMNOTSURE
           || pMenuButton->type == AREYOUSURESPRITE)

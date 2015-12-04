@@ -14,10 +14,7 @@ void MenuButton::Update(float dt)
 {
   if (pReactive->mouseDownAndOver())
   {
-	SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-	emitter->SetVolume(1.0f, "Enter");
-	emitter->StopEvent("Enter");
-	emitter->PlayEvent("Enter");
+
     switch (type)
     {
     case RESUME:
@@ -30,43 +27,32 @@ void MenuButton::Update(float dt)
     }
     case QUIT:
     {
-	  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-	  emitter->SetVolume(1.0f, "Enter");
-      emitter->StopEvent("Enter");
-	  emitter->PlayEvent("Enter");
+
 		
       PAUSEMENU->state = AREYOUSURE;
       break;
     }
     case IAMSURE:
     {
-	  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-	  emitter->StopEvent("Enter");
-	  emitter->PlayEvent("Enter");
+
       CORE->GameActive = false;
       break;
     }
     case IAMNOTSURE:
     {
-	  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-	  emitter->StopEvent("Enter");
-	  emitter->PlayEvent("Enter");
+
       PAUSEMENU->state = MAINMENU;
       break;
     }
     case HOWTOPLAY:
     {
-	  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-      emitter->StopEvent("Enter");
-	  emitter->PlayEvent("Enter");
+
       PAUSEMENU->state = INSTRUCTIONS;
       break;
     }
     case GOBACK:
     {
-	  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-	  emitter->StopEvent("Enter");
-	  emitter->PlayEvent("Enter");
+
       PAUSEMENU->state = MAINMENU;
       break;
     }

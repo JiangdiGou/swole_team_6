@@ -309,7 +309,7 @@ void PlayerState::SendMessages(Message * message)
 			}
 			//}
 
-			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
+			if (CharacterMessage->keyStatus == KEY_PRESSED )//|| CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				
 				//playerSound->StopEvent("player_footsteps");
@@ -387,7 +387,7 @@ void PlayerState::SendMessages(Message * message)
 					playerSound->StopEvent("swipe_sound");
 			*/
 			//if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
-			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
+			if (CharacterMessage->keyStatus == KEY_PRESSED )//|| CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				playerSound->SetVolume(1.0f, "TwoFootSteps");
 				playerSound->StopEvent("TwoFootSteps");
