@@ -267,6 +267,10 @@ Level =
 		PlayerSlashAttack = 
 		{
 		},
+		HealthManager = 
+		{
+			float TotalHealth = 100,
+		},
 		Hierarchy = 
 		{
 			ArchetypeInstance = 

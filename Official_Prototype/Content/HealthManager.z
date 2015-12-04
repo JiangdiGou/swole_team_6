@@ -6,19 +6,27 @@ class HealthManager : ZilchComponent
     
     function Initialize(init : CogInitializer)
     {
-        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
         
         this.CurrentHealth = this.TotalHealth;
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
+        if(Zero.Keyboard.KeyIsPressed(Keys.Equal))
+        {
+            this.UpdateHealth(10);
+        }
+        else if(Zero.Keyboard.KeyIsPressed(Keys.Minus))
+        {
+            this.UpdateHealth(-10);
+        }
     }
     
     function UpdateHealth(val : Integer)
     {
         //if were taking damage
-        if(val < 0)
+        if(val < 0 && this.Owner.PlayerSlashAttack.ISlashStop <= 0)
         {
             var seq = Actions.Sequence(this.Owner.Actions);
             
@@ -31,7 +39,15 @@ class HealthManager : ZilchComponent
             
             this.CurrentHealth += val;
         }
-        
+        else if(val > 0)
+        {
+            this.CurrentHealth += val;
+            
+            if(this.CurrentHealth > this.TotalHealth)
+            {
+                this.CurrentHealth = this.TotalHealth;
+            }
+        }
         
         if(this.CurrentHealth <= 0)
         {

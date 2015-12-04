@@ -20,9 +20,9 @@ class UIBarScaling : ZilchComponent
     {
         this.OriginalX = this.Owner.Transform.Scale.X;
         
-        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
-        
         this.Player = this.GameSession.FindSpaceByName("Main").FindObjectByName("Player");
+        
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
     
