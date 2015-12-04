@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-3.5, 23.5, 0],
+		Vec3 Translation = [-0.650690079, -2.29452133, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -77,6 +77,10 @@ Cog =
 	},
 	PlayerSlashAttack = 
 	{
+	},
+	HealthManager = 
+	{
+		float TotalHealth = 100,
 	},
 	Hierarchy = 
 	{

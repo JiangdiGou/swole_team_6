@@ -1,0 +1,62 @@
+class HealthManager : ZilchComponent
+{
+    [Property]
+    var TotalHealth : Real = 100;
+    var CurrentHealth : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        this.CurrentHealth = this.TotalHealth;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function UpdateHealth(val : Integer)
+    {
+        //if were taking damage
+        if(val < 0)
+        {
+            var seq = Actions.Sequence(this.Owner.Actions);
+            
+            Action.Property(seq, @this.Owner.Sprite.Color, this.Owner.Sprite.Color - Real4(0,0,0, 0.5), 0.2, Ease.Linear);
+            Action.Property(seq, @this.Owner.Sprite.Color, this.Owner.Sprite.Color + Real4(0,0,0, 0.5), 0.2, Ease.Linear);
+            Action.Property(seq, @this.Owner.Sprite.Color, this.Owner.Sprite.Color - Real4(0,0,0, 0.5), 0.2, Ease.Linear);
+            Action.Property(seq, @this.Owner.Sprite.Color, this.Owner.Sprite.Color + Real4(0,0,0, 0.5), 0.2, Ease.Linear);
+            Action.Property(seq, @this.Owner.Sprite.Color, this.Owner.Sprite.Color - Real4(0,0,0, 0.5), 0.2, Ease.Linear);
+            Action.Property(seq, @this.Owner.Sprite.Color, this.Owner.Sprite.Color, 0.2, Ease.Linear);
+            
+            this.CurrentHealth += val;
+        }
+        
+        
+        if(this.CurrentHealth <= 0)
+        {
+            this.DeathCalls(this.Owner.Name);
+        }
+    }
+    
+    function DeathCalls(name : String)
+    {
+        if(name == "Player")
+        {
+            var clearSq = this.Space.CreateAtPosition(Archetype.Find("ClearSquare"), Real3(0,0,0));
+            var seq = Actions.Sequence(this.Owner.Actions);
+            
+            Action.Property(seq, @clearSq.Sprite.Color, Real4(0,0,0, 1), 1.5, Ease.Linear);
+            Action.Call(seq, this.LoadPlayerDeath);
+        }
+        else
+        {
+            this.Owner.Destroy();
+        }
+    }
+    
+    function LoadPlayerDeath()
+    {
+        this.Space.LoadLevel(Level.PlayerDeath);
+    }
+}
