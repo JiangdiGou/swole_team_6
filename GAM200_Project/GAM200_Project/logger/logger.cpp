@@ -16,15 +16,19 @@
 
 txtlog::txtlog(std::string fileName)
 {
+#ifdef EDTIOR
 	logStream.open(fileName.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
 	this->fileName = fileName;
+#endif
 }
 
 void txtlog::write(std::string message)
 {
+#ifdef EDTIOR
 	logStream << '[' << this->dateTime() << "] " << message.c_str() << '\n';
 	logStream.close();
 	logStream.open(fileName.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
+#endif
 }
 
 const std::string txtlog::dateTime()
