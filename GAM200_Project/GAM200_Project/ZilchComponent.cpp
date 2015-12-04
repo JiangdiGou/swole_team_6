@@ -46,6 +46,7 @@ void OurZilchComponent::Initialize()
     OnMouseMove = zilchClass->FindFunction("OnMouseMove", Array<Type*>(ZeroInit, ZilchTypeId(Vec2D)), ZilchTypeId(void), FindMemberOptions::None);
 
     Destroy = zilchClass->FindFunction("Destroy", Array<Type*>(), ZilchTypeId(void), FindMemberOptions::None);
+
   }
   classInstance = ZILCHMANAGER->state->AllocateDefaultConstructedHeapObject(zilchClass, report, HeapFlags::ReferenceCounted);
   if (initFunc != NULL)
@@ -179,6 +180,36 @@ void OurZilchComponent::SerializeWrite(Serializer& str)
   StreamWrite(str, (int&)zilchId);
   StreamWrite(str);
 }
+void OurZilchComponent::CallFunction(std::string functName)
+{
+  Function* funct = zilchClass->FindFunction(functName.data(), Array<Type*>(), ZilchTypeId(String), FindMemberOptions::None);
+  if (funct != NULL)
+  {
+    Call call(initFunc, ZILCHMANAGER->state);
+    call.Set<Handle>(Call::This, classInstance);
+    call.Set<>(0, GetOwner());
+    call.Invoke(report);
+  }
+}
+Function* OurZilchComponent::GetFieldOrProperty(std::string functName)
+{
+  Property* field = zilchClass->FindPropertyOrField(functName.data(), FindMemberOptions::None);
+  if (field != NULL)
+  {
+      return field->Get;
+  }
+}
+Function* OurZilchComponent::SetFieldOrProperty(std::string functName)
+{
+  Property* field = zilchClass->FindPropertyOrField(functName.data(), FindMemberOptions::None);
+  if (field != NULL)
+  {
+    return field->Set;
+  }
+}
+
 ZilchDefineType(OurZilchComponent, "OurZilchComponent", ZLib_Internal, builder, type)
 {
+  ZilchBindMethod(builder, type, &OurZilchComponent::CallFunction, ZilchNoOverload, "CallFunction", ZilchNoNames);
+  //ZilchBindField(builder, type, &OurZilchComponent::classInstance, "Get", PropertyBinding::GetSet);
 }

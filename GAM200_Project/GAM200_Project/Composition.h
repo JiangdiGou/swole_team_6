@@ -14,7 +14,7 @@ class OurZilchComponent;
 
 //Vector of components, used for storage of components
 typedef std::vector<GameComponent*> ComponentArray;
-typedef std::vector<OurZilchComponent*> ZilchComponentArray;
+typedef std::vector<GameComponent*> ZilchComponentArray;
 
 
 
@@ -39,7 +39,7 @@ float zDistanceSq(Vector3 pos1, Vector3 pos2);
 float zSqrt(float val);
 void CastRay(Vec2D pos1, Vec2D pos2);
 GameObjectComposition* GetRayResult(int index);
-
+GameComponent * GameObjectComposition::ZilchGetComponent(std::string name) const;
 ///Message interface See Message.h
 ///Message will be sent to each component on this composition.
 void SendMessages(Message* message);
