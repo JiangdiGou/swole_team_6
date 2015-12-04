@@ -562,5 +562,8 @@
     <None Include="Scripts\PlayerMovement.zilch">
       <Filter>Universal</Filter>
     </None>
+    <None Include="Scripts\AttackSlash.zilch">
+      <Filter>Universal</Filter>
+    </None>
   </ItemGroup>
 </Project>

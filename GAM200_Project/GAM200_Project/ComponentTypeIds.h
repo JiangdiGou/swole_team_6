@@ -44,6 +44,7 @@ enum ZilchComponentTypeId
   CTZ_EnemyHealthManager,//3
   CTZ_PlayerHealthBar,//4
   CTZ_PlayerHealthManager,//5
+  //CTZ_AttackSlash,//6
 
 };
 ZilchDeclareExternalBaseType(ComponentTypeId, TypeCopyMode::ReferenceType);
