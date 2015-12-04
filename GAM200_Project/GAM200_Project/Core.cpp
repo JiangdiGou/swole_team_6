@@ -69,9 +69,9 @@ void CoreEngine::GameLoop()
 	  SoundEmitter bgm = *new SoundEmitter();
 	  bgm.Initialize();
 
-	  bgm.SetVolume(1.0f, "PartyCrashv3");
-	  bgm.StopEvent("PartyCrashv3");
-	  bgm.PlayEvent("PartyCrashv3");
+	  bgm.SetVolume(1.0f, "demotitle2");
+	  bgm.StopEvent("demotitle2");
+	  bgm.PlayEvent("demotitle2");
 	  
 	  
   }

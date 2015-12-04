@@ -211,6 +211,18 @@ void PlayerState::SendMessages(Message * message)
 			break;
 		
 	     
+		case 'Z':
+			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED)
+			{
+				playerSound->SetVolume(1.0f,"SwordHitOrganic");
+				playerSound->StopEvent("SwordHitOrganic");
+				playerSound->PlayEvent("SwordHitOrganic");
+
+			}
+			else if (CharacterMessage->keyStatus == keyStatus::KEY_RELEASED)
+			{
+				
+			}
 		case VK_SPACE:
 			//if (StateList::Grounded)
 			//{

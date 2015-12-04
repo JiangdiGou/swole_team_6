@@ -243,6 +243,7 @@ void PauseMenu::Update(float dt)
       }
       case AREYOUSURE:
       {
+		
         //And youre one of the menu buttons in the main menu
         if (pMenuButton->type == IAMSURE || pMenuButton->type == IAMNOTSURE
           || pMenuButton->type == AREYOUSURESPRITE)
@@ -348,13 +349,16 @@ void PauseMenu::SendMessages(Message* message)
     if (charMsg->character == '\0' && charMsg->keyStatus == KEY_PRESSED)
     {
 		 
-		
+		SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+		emitter->StopEvent("Enter");
+		emitter->PlayEvent("Enter");
 	
 		//pSound->BeQuiet();
       if (CORE->Pause)
       {	 
 		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
 		  emitter->Rock();
+		 
         GRAPHICS->toggleBackground(true);
         state = MAINMENU;
       }
