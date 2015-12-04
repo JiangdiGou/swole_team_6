@@ -69,7 +69,10 @@ class PlayerState : public GameComponent//, public CollisionDelegate
       int getJumpState(void);
       float WalkTimer;
       float getJumpTimer(void);
-	  
+      bool AutoPlayOn = false;
+      char curAuto = ' ';
+      float AutoPlayTimer = 0;
+      float AutoPlayTimerMax = 100;
 		  //"Player Run Speed": 9.250000
 		  //	"Player Jump Velocity" : 8.510000
 		  //	"Variable Jump Height Enabled" : true
@@ -89,6 +92,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
         
     GameObjectComposition* parent;
 
+    bool NoCollisions;
     StateList MyPlayerState;
 
     Sprite* playerSprite;
@@ -97,7 +101,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
 
     Transform* playerTransform;
 
-		
+    bool IWannaFly = false;
 
     bool variableJumpHeightEnabled = true;
     unsigned jumpCount;
