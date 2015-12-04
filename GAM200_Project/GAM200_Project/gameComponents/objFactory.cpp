@@ -27,6 +27,14 @@ int nextID = 0;
 int tileNumber = 0;
 objFactory::objFactory()
 {
+  gameObjs.clear();
+  menuObjs.clear();
+
+  levelName.clear();
+  levelWidth = 0;
+  levelHeight = 0;
+  tileMap = nullptr;
+
   FACTORY = this;
   FACTORY_EXISTS = true;
 }
@@ -58,7 +66,7 @@ void objFactory::destroyObject(int killID, bool menuObject)
 {
   if (menuObject)
   {
-    if (menuObjs[killID] == NULL)
+    if (menuObjs[killID] == nullptr)
     {
       /* assert that we should never try to destroy an object
       that doesn't exist */
@@ -74,7 +82,7 @@ void objFactory::destroyObject(int killID, bool menuObject)
   }
   else
   {
-    if (gameObjs[killID] == NULL)
+    if (gameObjs[killID] == nullptr)
     {
       /* assert that we should never try to destroy an object
          that doesn't exist */
@@ -215,8 +223,17 @@ void objFactory::SendMessages(Message * message)
 
 GameObjectComposition* objFactory::FindObjectByName(std::string name)
 {
+  std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    if (it->second->GetName() == name)
+      return it->second;
+  }
+  return nullptr;
+  /*
   for (unsigned int i = 0; i < gameObjs.size(); i++)
   {
+    std::cout << gameObjs[i]->ObjectName << std::endl;
 	  if (gameObjs[i] && gameObjs[i]->ObjectName == name)
     {
 		  return gameObjs[i];
@@ -229,7 +246,7 @@ GameObjectComposition* objFactory::FindObjectByName(std::string name)
 		  return menuObjs[i];
     }
   }
-  return 0;
+  return 0;*/
 }
 void objFactory::loadLevelFrom(std::string fileName)
 {
@@ -311,7 +328,9 @@ void objFactory::createTiles()
 
 GOC * objFactory::createTile(int positionX, int positionY, std::string textureName)
 {
-  GOC * newTile = FACTORY->makeObject("newTile" + tileNumber++);
+  char numStr[21];
+  sprintf(numStr, "newTile %d", tileNumber++);
+  GOC * newTile = makeObject(numStr);
   Transform * tileTransform = new Transform();
   tileTransform->SetPosition(positionX, positionY, 0);
   Sprite * tileSprite = new Sprite();
@@ -341,14 +360,31 @@ GOC * objFactory::createTile(int positionX, int positionY, std::string textureNa
   return newTile;
 }
 
+void PrintPointer(void* p)
+{
+  std::cout << "da fuq " << p << std::endl;
+}
+
 void objFactory::initializeObjects()
 {
-  for (auto &object : gameObjs)
+  std::map<int, GameObjectComposition*>::const_iterator it = gameObjs.begin();
+  for (; it != gameObjs.end(); ++it)
+  {
+    PrintPointer(this);
+    //auto stuff = it->first;
+    //printf("da fuck %d \n", stuff);
+
+    if(it->second)
+      PrintPointer(it->second);
+    
+    it->second->Initialize();
+  }
+  /*for (auto &object : gameObjs)
   {
     //std::cout << object.second->GetName() << std::endl;
 
     object.second->Initialize();
-  }
+  }*/
 }
 
 void objFactory::printLevel()
@@ -379,7 +415,7 @@ bool objFactory::loadEntities(std::string entityFile)
     return false;
 
   bool firstCreated = false;
-  GOC* currentEntity = NULL;
+  GOC* currentEntity = nullptr;
   while (!(serializer.stream.eof()))
   {
     //Gets type info
@@ -406,14 +442,17 @@ bool objFactory::loadEntities(std::string entityFile)
       {
         continue;
       }
+      line[255] = '\0';
       std::cout << "Line: " <<  line << std::endl;
       //printf("||%c||", line);
     
       //Creates component
-      GameComponent* comp = getNewComponent((ComponentTypeId)type);
+      //GameComponent* comp = getNewComponent((ComponentTypeId)type);
+      GameComponent* comp = getNewComponent(static_cast<ComponentTypeId>(type));
       //Add comp
       std::cout << "Adding new Comp: " << type << std::endl;
-      currentEntity->AddComponent((ComponentTypeId)type, comp);
+      //currentEntity->AddComponent((ComponentTypeId)type, comp);
+      currentEntity->AddComponent(static_cast<ComponentTypeId>(type), comp);
       //Add comp to types vect
       //previousTypes.push_back(type);
       //Set Comp
@@ -490,6 +529,7 @@ bool objFactory::loadEntities(std::string entityFile)
   initializeObjects();
   delete [] line;
   
+  return true;
 }
 
 void objFactory::addEditorComponents(GOC* object)
@@ -556,6 +596,6 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
     return new OurZilchComponent();
 
   default:
-    return NULL;
+    return nullptr;
   }
 }

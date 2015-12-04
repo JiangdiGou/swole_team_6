@@ -144,7 +144,7 @@ void GameLogic::createLevel(std::string levelPath)
   player->AddComponent(CT_Transform, transformPlayer);
   //Shape
   ShapeAAB * boxColliderPlayer = new ShapeAAB();
-  boxColliderPlayer->Extents = Vec2D(0.2 * transformPlayer->GetScale().x, 0.45 * transformPlayer->GetScale().y);
+  boxColliderPlayer->Extents = Vec2D(0.2f * transformPlayer->GetScale().x, 0.45f * transformPlayer->GetScale().y);
   player->AddComponent(CT_ShapeAAB, boxColliderPlayer);
   //Body
   Body * bodyPlayer = new Body();

@@ -67,6 +67,8 @@ GameComponent* ZilchGetComponent(Zilch::Call& call, Zilch::ExceptionReport& repo
   DeclareType(OurZilchComponent); 
 
   DeclareZilchType(Example);
+
+  return nullptr;
 }
 #undef DeclareType()
 

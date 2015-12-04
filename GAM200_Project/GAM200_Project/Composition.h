@@ -64,7 +64,7 @@ void AddComponent(ComponentTypeId typeId, GameComponent* component);
 GOCId GetId() { return ObjectId; }
 
 //Game Obj's Name
-std::string GetName() { return ObjectName; }
+std::string GetName();
 
 //A group of actions
 ActionGroup Actions;

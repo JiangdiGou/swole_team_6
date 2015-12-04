@@ -387,20 +387,24 @@ void PlayerState::SendMessages(Message * message)
 
 			break;
 		}
+    break;
 	}
   case Mid::CollisionStarted:
   {
-    printf("start");
+    //GameObjectComposition* otherObj = ((CollisionStarted*)message)->otherObj->GetOwner();
+    //std::cout << "start " << otherObj->GetName() << std::endl;
     break;
   }
   case Mid::CollisionPersisted:
   {
-    printf("persist");
+    //GameObjectComposition* otherObj = ((CollisionPersisted*)message)->otherObj->GetOwner();
+    //std::cout << "??? " << otherObj->GetName() << std::endl;
     break;
   }
   case Mid::CollisionEnded:
   {
-    printf("end");
+    //GameObjectComposition* otherObj = ((CollisionEnded*)message)->otherObj->GetOwner();
+    //std::cout << "end " << otherObj->GetName() << std::endl;
     break;
   }
 	}
