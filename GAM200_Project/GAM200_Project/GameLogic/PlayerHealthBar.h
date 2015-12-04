@@ -19,7 +19,7 @@ private:
   Transform* pTransform;
   Sprite *pSprite;
   GOC* player;
-  
+  Vector3 originScale;
   int TotalHealth;
   int CurrentHealth;
 };

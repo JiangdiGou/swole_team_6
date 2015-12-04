@@ -38,6 +38,20 @@ Physics::Physics()
 	AdvanceStep = false;
 }
 
+void Physics::Reload()
+{
+  while (prevCollisions.size())
+  {
+    delete prevCollisions.back();
+    prevCollisions.pop_back();
+  }
+  while (curCollisions.size())
+  {
+    delete curCollisions.back();
+    curCollisions.pop_back();
+  }
+}
+
 void Physics::Initialize()
 {
 	

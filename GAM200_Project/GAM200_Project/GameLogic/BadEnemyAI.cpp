@@ -10,11 +10,14 @@ void BadEnemyAI::Initialize()
 	pTransform = parent->has(Transform);
 
 	player = parent->FindObject("GAMEPLAYER");
+  if (player != NULL)
+  {
     playerHM = player->has(HealthManager);
 
-	pSprite = parent->has(Sprite);
-  if (pSprite)
-    pSprite->setLayer(1);
+    pSprite = parent->has(Sprite);
+    if (pSprite)
+      pSprite->setLayer(1);
+  }
 
   paceDistance = Vector3D(2,0,0);
   waitTime = 2;
@@ -88,7 +91,7 @@ void BadEnemyAI::Update(float dt)
 			//change the sprite to attacking here
 			std::cout << "ATTACK";
 			//FUCK THIS
-			//playerHM->UpdateHealth(-5);
+			playerHM->UpdateHealth(-5.0f);
 
 			CurrentState = CHASING;
 		}

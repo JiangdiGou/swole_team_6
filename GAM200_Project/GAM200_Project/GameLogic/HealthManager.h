@@ -12,7 +12,6 @@ public:
   void SendMessages(Message* msg)override;
   void SerializeWrite(Serializer& str) override;
   void UpdateHealth(int val);
-  void UpdateScale(float scale);
 
   HealthManager();
 
@@ -20,9 +19,10 @@ private:
   Transform* pTransform;
   Sprite *pSprite;
   GOC* parent;
+  GOC* pHealthBar;
   
 
-  int TotalHealth;
+  int TotalHealth = 100;
   int CurrentHealth;
 
   bool CanMove = true;

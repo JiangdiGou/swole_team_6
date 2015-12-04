@@ -13,7 +13,7 @@ void PlayerHealthBar::Initialize()
 	pSprite = parent->has(Sprite);
   if (pSprite)
     pSprite->setLayer(1);
-
+  originScale = pTransform->GetScale();
   //Alive = false;
 #ifdef EDITOR
   //CanMove = false;
@@ -29,7 +29,7 @@ void PlayerHealthBar::Update(float dt)
 
 void PlayerHealthBar::UpdateScale(float scale)
 {
-  pTransform->SetScale(pTransform->GetScale() * scale);
+  pTransform->SetScale(originScale * scale);
 }
 
 void PlayerHealthBar::SendMessages(Message* message)
