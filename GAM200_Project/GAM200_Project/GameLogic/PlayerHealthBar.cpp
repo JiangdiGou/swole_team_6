@@ -14,7 +14,6 @@ void PlayerHealthBar::Initialize()
   if (pSprite)
     pSprite->setLayer(1);
 
-  //Alive = false;
 #ifdef EDITOR
   //CanMove = false;
 #else

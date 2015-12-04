@@ -21,14 +21,11 @@ void HealthManager::Initialize()
 
 void HealthManager::Update(float dt)
 {
-	//UpdateScale((float)(CurrentHealth / TotalHealth));
-
 	//GOC* enemy = parent->FindObject("Enemy1");
 	//Transform* eTransform = enemy->has(Transform);
 
 	//if ((pTransform->GetPositionX() - eTransform->GetPositionX()) < 1)
 	//{
-	//	std::cout << "im a genius?";
 	//}
 
 	if (!Alive)
@@ -39,14 +36,16 @@ void HealthManager::Update(float dt)
 	}
 }
 
-void UpdateScale(float scale)
+void HealthManager::UpdateScale(float scale)
 {
-	std::cout << "im a genius?";
+  //eTransform->SetScale(Vector3D((int)(CurrentHealth/TotalHealth), 1 , 1));
 }
 
 void HealthManager::UpdateHealth(int val)
 {
 	CurrentHealth += val;
+
+  UpdateScale((float)(CurrentHealth / TotalHealth));
 
 	if (CurrentHealth <= 0)
 	{
