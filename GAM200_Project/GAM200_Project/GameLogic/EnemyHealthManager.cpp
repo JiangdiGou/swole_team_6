@@ -3,7 +3,7 @@
 #include "../engineGraphics/graphicsManager.h"
 
 //playerstate component for reference
-void HealthManager::Initialize()
+void EnemyHealthManager::Initialize()
 {
 	parent = GetOwner();
 	pTransform = parent->has(Transform);
