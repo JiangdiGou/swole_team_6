@@ -129,6 +129,11 @@ void GameObjectComposition::AddComponent(ComponentTypeId typeId, GameComponent* 
 	std::sort(Components.begin(), Components.end(), ComponentSorter());
 }
 
+std::string GameObjectComposition::GetName()
+{ 
+  return ObjectName;
+}
+
 //Returns false if component could not be found. 
 bool GameObjectComposition::RemoveComponent(ComponentTypeId typeId, GameComponent* toBeRemoved)
 {

@@ -241,7 +241,7 @@ public:
 private:
 
 public:
-  ZilchDeclareBaseType(Vec2D, TypeCopyMode::ValueType);
+  ZilchDeclareBaseType(Vector3D, TypeCopyMode::ValueType);
 	Vector3D() : x(0), y(0), z(0) {} // constructor to zero out
 
   Vector3D(const Vector2& vec) : x(vec.x), y(vec.y), z(0) {}

@@ -172,17 +172,14 @@ void ShapeAAB::SendMessages(Message* m)
   }
   case Mid::CollisionStarted:
   {
-    printf("start\n");
     break;
   }
   case Mid::CollisionEnded:
   {
-    printf("end\n");
     break;
   }
   case Mid::CollisionPersisted:
   {
-    printf("persist\n");
     break;
   }
   }

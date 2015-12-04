@@ -19,13 +19,13 @@ class BasicAIComponent
 		this.StunTimer = 1.0;
 		//how do I even get the player object?
         this.Owner = ourOwner;
-		this.Player = this.Owner.FindObject("Player");
-
+		this.Player = this.Owner.FindObject("GAMEPLAYER");
+    Console.WriteLine(this.Player.GetName());
     }
 
     function OnUpdate(dt : Real)
     {
-		Console.WriteLine("Hello");
+		//Console.WriteLine("Hello");
 	   
 	   if(this.Stunned)
 	   {

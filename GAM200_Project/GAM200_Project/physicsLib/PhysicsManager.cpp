@@ -72,9 +72,18 @@ void Physics::DetectContacts(float dt)
           
           ShapeAAB* AShape = bodyA->GetOwner()->has(ShapeAAB);
           ShapeAAB* BShape = bodyB->GetOwner()->has(ShapeAAB);
-          //Collision* collideEvent = new Collision(AShape, BShape);
+          Collision* collideEvent = new Collision(AShape, BShape);
 
-          //curCollisions.push_back(collideEvent);
+          bool push = true;
+          for (unsigned i = 0; push == true && i < curCollisions.size(); i++)
+          {
+            if ((curCollisions[i]->firstObj == collideEvent->firstObj && curCollisions[i]->otherObj == collideEvent->otherObj))
+            {
+              push = false;
+            }
+          }
+          if(push == true)
+            curCollisions.push_back(collideEvent);
           /*Collision ACollisionWith(BShape);
           Collision BCollisionWith(AShape);
           if (!bodyA->IsStatic)
@@ -101,81 +110,82 @@ void Physics::solveMessage()
 {
 
 
-	//Commit all physics updates
-	for (BodyIterator it = Bodies.begin(); it != Bodies.end(); ++it)
-	{
-		(it)->solveMessage();
-	}
+  //Commit all physics updates
+  for (BodyIterator it = Bodies.begin(); it != Bodies.end(); ++it)
+  {
+    (it)->solveMessage();
+  }
 
-	//Broadcast physics collision messages AFTER physics
-	//has update the bodies
-	/*for (unsigned i = 0; i < curCollisions.size(); ++i)
-	{
-    bool persist = false;
-    for (unsigned j = 0; j < prevCollisions.size(); ++i)
+  //Broadcast physics collision messages AFTER physics
+  //has update the bodies
+  for (unsigned i = 0; i < curCollisions.size(); i++)
+  {
+    bool started = true;
+    for (unsigned j = 0; started == true && j < prevCollisions.size(); j++)
     {
-      if (curCollisions.at(i).firstObj == prevCollisions.at(j).firstObj &&
-        curCollisions.at(i).otherObj == prevCollisions.at(j).otherObj)
+      if (curCollisions[i]->firstObj == prevCollisions[j]->firstObj && curCollisions[i]->otherObj == prevCollisions[j]->otherObj)
       {
-        persist = true;
-        if (((Body*)curCollisions.at(i).firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+        started = false;
+        if (((Body*)curCollisions[i]->firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
         {
-          CollisionPersisted persist(curCollisions.at(i).otherObj);
-          curCollisions.at(i).firstObj->GetOwner()->SendMessages(&persist);
+          CollisionPersisted start(curCollisions[i]->otherObj);
+          curCollisions[i]->firstObj->GetOwner()->SendMessages(&start);
         }
-        if (((Body*)curCollisions.at(i).otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+        if (((Body*)curCollisions[i]->otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
         {
-          CollisionPersisted persist(curCollisions.at(i).firstObj);
-          curCollisions.at(i).otherObj->GetOwner()->SendMessages(&persist);
+          CollisionPersisted start(curCollisions[i]->firstObj);
+          curCollisions[i]->otherObj->GetOwner()->SendMessages(&start);
         }
       }
     }
-    if (persist == false)
+    if (started == true)
     {
-      if (((Body*)curCollisions.at(i).firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      if (((Body*)curCollisions[i]->firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
       {
-        CollisionStarted start(curCollisions.at(i).otherObj);
-        curCollisions.at(i).firstObj->GetOwner()->SendMessages(&start);
+        CollisionStarted persist(curCollisions[i]->otherObj);
+        curCollisions[i]->firstObj->GetOwner()->SendMessages(&persist);
       }
-      if (((Body*)curCollisions.at(i).otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      if (((Body*)curCollisions[i]->otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
       {
-        CollisionStarted start(curCollisions.at(i).firstObj);
-        curCollisions.at(i).otherObj->GetOwner()->SendMessages(&start);
+        CollisionStarted persist(curCollisions[i]->firstObj);
+        curCollisions[i]->otherObj->GetOwner()->SendMessages(&persist);
       }
     }
-	}
-
-  for (unsigned i = 0; prevCollisions.size(); ++i)
+  }
+  for (unsigned i = 0; i < prevCollisions.size(); i++)
   {
     bool ended = true;
-    for (unsigned j = 0; j < curCollisions.size(); ++i)
+    for (unsigned j = 0; ended == true && j < curCollisions.size(); j++)
     {
-      ended = false;
-    }
-    if (ended)
-    {
-      if (((Body*)curCollisions.at(i).firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      if (curCollisions[j]->firstObj == prevCollisions[i]->firstObj && curCollisions[j]->otherObj == prevCollisions[i]->otherObj)
       {
-        CollisionEnded end(curCollisions.at(i).otherObj);
-        curCollisions.at(i).firstObj->GetOwner()->SendMessages(&end);
-      }
-      if (((Body*)curCollisions.at(i).otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
-      {
-        CollisionEnded end(curCollisions.at(i).firstObj);
-        curCollisions.at(i).otherObj->GetOwner()->SendMessages(&end);
+        ended = false;
       }
     }
-  }*/
-
-  //for (unsigned i = 0; i < prevCollisions.size(); i++)
-  //{
-    //prevCollisions.at(i) = NULL;
-  //}
-  //prevCollisions = curCollisions;
-  //for (unsigned i = 0; i < curCollisions.size(); i++)
-  //{
-    //curCollisions.at(i) = NULL;
-  //}
+    if (ended == true)
+    {
+      if (((Body*)curCollisions[i]->firstObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      {
+        CollisionEnded end(curCollisions[i]->otherObj);
+        curCollisions[i]->firstObj->GetOwner()->SendMessages(&end);
+      }
+      if (((Body*)curCollisions[i]->otherObj->GetOwner()->GetComponent(CT_Body))->IsStatic == false)
+      {
+        CollisionEnded end(curCollisions[i]->firstObj);
+        curCollisions[i]->otherObj->GetOwner()->SendMessages(&end);
+      }
+    }
+  }
+  while (prevCollisions.size())
+  {
+    delete prevCollisions.back();
+    prevCollisions.pop_back();
+  }
+  while (curCollisions.size())
+  {
+    prevCollisions.push_back(curCollisions.back());
+    curCollisions.pop_back();
+  }
 }
 
 void Physics::Step(float dt)

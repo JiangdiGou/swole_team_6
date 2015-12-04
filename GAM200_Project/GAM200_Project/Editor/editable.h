@@ -20,8 +20,8 @@ public:
 
 private:
   Vector3 actualColor;
-  Vector3 highlightColor = Vector3(0.5241, 0.5241, 0);
-  Vector3 selectionColor = Vector3(0, .9562, 0);
+  Vector3 highlightColor = Vector3(0.5241f, 0.5241f, 0);
+  Vector3 selectionColor = Vector3(0, .9562f, 0);
 
   bool isTile;
   Sprite* pSprite = 0;
