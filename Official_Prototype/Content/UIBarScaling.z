@@ -14,9 +14,13 @@ class UIBarScaling : ZilchComponent
     
     var OriginalX : Real;
     
+    var Player : Cog;
+    
     function Initialize(init : CogInitializer)
     {
         this.OriginalX = this.Owner.Transform.Scale.X;
+        
+        this.Player = this.GameSession.FindSpaceByName("Main").FindObjectByName("Player");
         
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
@@ -24,9 +28,9 @@ class UIBarScaling : ZilchComponent
     
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(this.BIsHealth)
+        if(this.BIsHealth && (this.Player != null))
         {
-            var rXScale:Real = (this.LevelSettings.LevelData.RPlayerHealth / 100) * this.OriginalX;
+            var rXScale:Real = (this.Player.HealthManager.CurrentHealth / this.Player.HealthManager.TotalHealth) * this.OriginalX;
             this.Owner.Transform.Scale = Real3(rXScale, this.Owner.Transform.Scale.Y, 0);
         }
         else

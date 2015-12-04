@@ -5,16 +5,13 @@
 //playerstate component for reference
 void HealthManager::Initialize()
 {
-	GOC* parent = GetOwner();
+	parent = GetOwner();
 	pTransform = parent->has(Transform);
-
-	player = LOGIC->player;
 
 	pSprite = parent->has(Sprite);
   if (pSprite)
     pSprite->setLayer(1);
 
-  //Alive = false;
 #ifdef EDITOR
   //CanMove = false;
 #else
@@ -24,7 +21,15 @@ void HealthManager::Initialize()
 
 void HealthManager::Update(float dt)
 {
-	GOC* owner = GetOwner();
+	//UpdateScale((float)(CurrentHealth / TotalHealth));
+
+	//GOC* enemy = parent->FindObject("Enemy1");
+	//Transform* eTransform = enemy->has(Transform);
+
+	//if ((pTransform->GetPositionX() - eTransform->GetPositionX()) < 1)
+	//{
+	//	std::cout << "im a genius?";
+	//}
 
 	if (!Alive)
 	{
@@ -34,13 +39,14 @@ void HealthManager::Update(float dt)
 	}
 }
 
+void UpdateScale(float scale)
+{
+	std::cout << "im a genius?";
+}
+
 void HealthManager::UpdateHealth(int val)
 {
 	CurrentHealth += val;
-
-	std::cout << CurrentHealth;
-
-	std::cout << "You got knocked the fuck out!";
 
 	if (CurrentHealth <= 0)
 	{

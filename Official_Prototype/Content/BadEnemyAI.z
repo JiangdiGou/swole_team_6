@@ -1,0 +1,111 @@
+enum EnemyState {CHASING, ATTACKING, PACING}
+
+class BadEnemyAI : ZilchComponent
+{
+    var Player : Cog;
+    [Property]
+    var ChaseRange : Real = 5.0;
+    [Property]
+    var MoveSpeed : Real = 1.0;
+    [Property]
+    var PaceDirection : Real3 = Real3(1,0,0);
+    
+    var CurrentState : EnemyState;
+    var PreviousState : EnemyState;
+    
+    var PacingRight : Boolean;
+    [Property]
+    var PaceTime : Real = 1.0;
+    var OrigPaceTime : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        
+        this.Player = this.Space.FindObjectByName("Player");
+        this.CurrentState = EnemyState.PACING;
+        this.PreviousState = this.CurrentState;
+        this.OrigPaceTime = this.PaceTime;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        
+        if(Math.Distance(this.Player.Transform.Translation, this.Owner.Transform.Translation) < 5)
+        {
+            this.CurrentState = EnemyState.CHASING;
+            this.MoveSpeed = 2.5;
+            
+            if(this.Player.Transform.Translation.X > this.Owner.Transform.Translation.X)
+            {
+                this.Owner.Sprite.FlipX = true;
+            }
+            else
+            {
+                this.Owner.Sprite.FlipX = false;
+            }
+        }
+        else
+        {
+            this.CurrentState = EnemyState.PACING;
+            this.MoveSpeed = 2.5;
+            
+        }
+        ////////////////////////////////////// Pacing Logic ////////////////////////////////////////
+            if(this.CurrentState == EnemyState.PACING)
+            {
+                if(this.PaceTime > 0)
+                {
+                    this.PaceTime -= event.Dt;
+                }
+                else
+                {  
+                    if(this.PacingRight)
+                    {
+                        this.PacingRight = false;
+                        this.Owner.Sprite.FlipX = false;
+                    }
+                    else
+                    {
+                        this.PacingRight = true;
+                        this.Owner.Sprite.FlipX = true;
+                    }
+                
+                this.PaceTime = this.OrigPaceTime;
+            }
+            
+            if(this.PacingRight)
+            {
+                this.Owner.Transform.Translation += this.PaceDirection * event.Dt * this.MoveSpeed;
+            }
+            else
+            {
+                this.Owner.Transform.Translation -= this.PaceDirection * event.Dt * this.MoveSpeed;
+            }
+        }
+        ////////////////////////////////////// Chasing Logic ////////////////////////////////////////
+        else if(this.CurrentState == EnemyState.CHASING)
+        {
+            var playerPos = this.Player.Transform.Translation;
+            var myPos = this.Owner.Transform.Translation;
+            var moveVec = playerPos - myPos;
+            moveVec = Math.Normalize(moveVec);
+            
+            this.Owner.Transform.Translation += moveVec * event.Dt * this.MoveSpeed;
+            
+            
+        }
+    }
+    
+        
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        
+        if(otherObject.Name == "Player")
+        {
+            otherObject.HealthManager.UpdateHealth(-15);
+        }
+    }
+}

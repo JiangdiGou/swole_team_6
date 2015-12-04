@@ -606,6 +606,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_HealthManager:
 	  return new HealthManager();
 
+  case CT_PlayerHealthBar:
+    return new PlayerHealthBar();
+
   default:
     return nullptr;
   }

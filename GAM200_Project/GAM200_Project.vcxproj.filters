@@ -334,6 +334,9 @@
     <ClInclude Include="GAM200_Project\GameLogic\HealthManager.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\PlayerHealthBar.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -537,6 +540,9 @@
     <ClCompile Include="GAM200_Project\GameLogic\HealthManager.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\PlayerHealthBar.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\FragmentShader.txt">
@@ -560,6 +566,9 @@
     <None Include="Scripts\PlayerHealthBar.zilch" />
     <None Include="Scripts\PlayerHealthManager.zilch" />
     <None Include="Scripts\PlayerMovement.zilch">
+      <Filter>Universal</Filter>
+    </None>
+    <None Include="Scripts\AttackSlash.zilch">
       <Filter>Universal</Filter>
     </None>
   </ItemGroup>

@@ -269,7 +269,7 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 0,
-			string LevelToLoad = "551f871f885a5f4b:Level",
+			string LevelToLoad = "56162dbd80a3aaac:Tutorial",
 		},
 		Reactive = 
 		{
@@ -342,7 +342,7 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 1,
-			string LevelToLoad = "551f871f885a5f4b:Level",
+			string LevelToLoad = "5660321fda9263f0:VillageLevel",
 		},
 		Reactive = 
 		{
@@ -415,7 +415,7 @@ Level =
 		{
 			bool BIsFirst = false,
 			int ISelected = 2,
-			string LevelToLoad = "551f871f885a5f4b:Level",
+			string LevelToLoad = "551f871f885a5f4b:EndOfGame",
 		},
 		Reactive = 
 		{

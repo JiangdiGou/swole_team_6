@@ -12,16 +12,20 @@ class HealthEnergyBar : ZilchComponent
     [Property]
     var BIsHealth:Boolean = true;
     
+    var Player : Cog;
+    
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        this.Player = this.GameSession.FindSpaceByName("Main").FindObjectByName("Player");
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(this.BIsHealth)
+        if(this.BIsHealth && (this.Player != null))
         {
-            this.Owner.SpriteText.Text = "Health: `this.LevelSettings.LevelData.RPlayerHealth`";
+            this.Owner.SpriteText.Text = "Health: `this.Player.HealthManager.CurrentHealth`";
         }
         else
         {

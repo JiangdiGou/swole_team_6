@@ -30,7 +30,8 @@ enum ComponentTypeId
   CT_MenuButton,
   CT_OurZilchComponent,
   CT_BadEnemyAI,
-  CT_HealthManager
+  CT_HealthManager,
+  CT_PlayerHealthBar
 
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 
 
@@ -44,6 +45,7 @@ enum ZilchComponentTypeId
   CTZ_EnemyHealthManager,//3
   CTZ_PlayerHealthBar,//4
   CTZ_PlayerHealthManager,//5
+  //CTZ_AttackSlash,//6
 
 };
 ZilchDeclareExternalBaseType(ComponentTypeId, TypeCopyMode::ReferenceType);

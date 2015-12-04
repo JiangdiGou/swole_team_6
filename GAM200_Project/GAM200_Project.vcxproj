@@ -89,6 +89,7 @@
     <ClInclude Include="GAM200_Project\GameLogic\GameReactive.h" />
     <ClInclude Include="GAM200_Project\GameLogic\PauseMenu.h" />
     <ClInclude Include="GAM200_Project\GameLogic\PauseMenuButton.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\PlayerHealthBar.h" />
     <ClInclude Include="GAM200_Project\GameLogic\PlayerTag.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateList.h" />
     <ClInclude Include="GAM200_Project\GameState\GameStateManager.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="GAM200_Project\GameLogic\GameReactive.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\PauseMenu.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\PauseMenuButton.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\PlayerHealthBar.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\PlayerTag.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameStateManager.cpp" />
     <ClCompile Include="GAM200_Project\GameState\GameState_Default.cpp" />
@@ -334,6 +336,7 @@
     <Text Include="resources\VertexShader.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scripts\AttackSlash.zilch" />
     <None Include="Scripts\BasicAIComponent.zilch" />
     <None Include="Scripts\EndOfGame.zilch" />
     <None Include="Scripts\EnemyHealthManager.zilch" />

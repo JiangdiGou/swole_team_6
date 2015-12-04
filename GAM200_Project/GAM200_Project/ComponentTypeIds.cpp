@@ -29,4 +29,5 @@ ZilchDefineExternalType(ZilchComponentTypeId, "ZilchCompoentTypeId", ZLib_Intern
   ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_EnemyHealthManager, "EnemyHealthManager");
   ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_PlayerHealthBar, "PlayerHealthBar");
   ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_PlayerHealthManager, "PlayerHealthManager");
+  //ZilchBindEnumValue(builder, type, ZilchComponentTypeId::CTZ_AttackSlash, "CTZ_AttackSlash");
 }

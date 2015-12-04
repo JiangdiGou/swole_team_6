@@ -9,8 +9,8 @@ void BadEnemyAI::Initialize()
 	GOC* parent = GetOwner();
 	pTransform = parent->has(Transform);
 
-	player = LOGIC->player;
-  playerHM = player->has(HealthManager);
+	player = parent->FindObject("GAMEPLAYER");
+    playerHM = player->has(HealthManager);
 
 	pSprite = parent->has(Sprite);
   if (pSprite)
@@ -86,8 +86,9 @@ void BadEnemyAI::Update(float dt)
 		else if (CurrentState == ATTACKING)
 		{
 			//change the sprite to attacking here
-
-			playerHM->UpdateHealth(-5);
+			std::cout << "ATTACK";
+			//FUCK THIS
+			//playerHM->UpdateHealth(-5);
 
 			CurrentState = CHASING;
 		}

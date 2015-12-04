@@ -98,7 +98,7 @@ class EnemyHitReaction : ZilchComponent
                 this.Space.FindObjectByName("EndBox").EndGameScript.KillCounter += 1;
             }
             
-            Console.WriteLine("Trigger object: `this.ObjectToTrigger1.Cog.Name`");
+            //Console.WriteLine("Trigger object: `this.ObjectToTrigger1.Cog.Name`");
             //If we need to send a trigger to any objects that needs it
             if(this.ObjectToTrigger1 != null || this.ObjectToTrigger2 != null || this.NameOfTriggerObjects != null)
             {

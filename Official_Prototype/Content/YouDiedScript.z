@@ -1,0 +1,26 @@
+class YouDiedScript : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        var grp = Actions.Group(this.Owner.Actions);
+        var seq = Actions.Sequence(this.Owner.Actions);
+            
+        Action.Property(grp, @this.Owner.SpriteText.Color, Real4(1,0, 0, 1), 1, Ease.Linear);
+        Action.Property(grp, @this.Owner.Transform.Scale, Real3(1,1,1), 1, Ease.Linear);
+        
+        Action.Delay(seq, 2);
+        Action.Call(seq, this.LoadLevel1);
+        
+    }
+    
+    function LoadLevel1()
+    {
+        this.Space.LoadLevel(Level.VillageLevel);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+}

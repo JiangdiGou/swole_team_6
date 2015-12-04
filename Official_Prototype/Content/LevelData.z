@@ -10,7 +10,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 class LevelData : ZilchComponent
 {
     //Player HP 0-100 but will change the max in GameData
-    var RPlayerHealth:Real;
+   // var RPlayerHealth:Real;
     //Player energy 0-100
     var RPlayerEnergy:Real;
     //Number of frames until energy is decreased by 1
@@ -28,7 +28,7 @@ class LevelData : ZilchComponent
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
-        this.RPlayerHealth = 100;
+        //this.RPlayerHealth = 100;
         this.RPlayerEnergy = 0;
         this.IEnergyCountDown = 0;
         this.IBestCombo = 0;
@@ -50,7 +50,7 @@ class LevelData : ZilchComponent
         else if(!this.GameOver && this.ILevelTimer <= 0)
         {
             this.GameOver = true;
-            this.GameSession.FindSpaceByName("Main").FindObjectByName("LevelManager").LevelManager.GameOver = true;
+            //this.GameSession.FindSpaceByName("Main").FindObjectByName("LevelManager").LevelManager.GameOver = true;
         }
         
         //Decreases the player's energy by 1 every 40 frames
@@ -66,22 +66,6 @@ class LevelData : ZilchComponent
         }
         
         //DEVELOPER TOOLS TO TEST HEALTH AND ENERGY MECHANICSVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        if(Zero.Keyboard.KeyIsPressed(Keys.Minus))
-        {
-            this.RPlayerHealth -= 10;
-        }
-        else if(Zero.Keyboard.KeyIsPressed(Keys.Equal))
-        {
-            this.RPlayerHealth = 100;
-        }
-        else if(Zero.Keyboard.KeyIsPressed(Keys.LeftBracket))
-        {
-            this.RPlayerEnergy += 20;
-        }
-        else if(Zero.Keyboard.KeyIsPressed(Keys.RightBracket))
-        {
-            this.RPlayerEnergy = 100;
-        }
     }
     
     //Called when a combo ends. Checks the new combo streak against the best and finds the highest

@@ -8,8 +8,8 @@ class PlayerHealthBar
 
     function Initialize(ourOwner : GameObjectComposition)
     {
-		this.TotalHealth = this.Player.PlayerHealthManager.TotalHealth;
-		this.CurrentHealth = this.TotalHealth;
+		this.TotalHealth = this.FindObject("Player").PlayerHealthManager.TotalHealth;
+		this.CurrentHealth = this.FindObject("Player").PlayerHealthManager.CurrentHealth;
 
         this.Owner = ourOwner;
     }
@@ -27,7 +27,7 @@ class PlayerHealthBar
 		this.CurrentHealth = currentHealth;
 
 		//should interpolate with actions
-		this.Owner.Transform.Scale *= Real3((this.CurrentHealth / this.TotalHealth), 1, 1);
+		this.Owner.Transform.Scale = this.Owner.Transfomr.GetScale() * Vector3D((this.CurrentHealth / this.TotalHealth), 1, 1);
 
 		this.PreviousHealth = this.CurrentHealth;
 	}
