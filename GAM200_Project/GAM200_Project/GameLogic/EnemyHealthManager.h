@@ -2,9 +2,8 @@
 
 #include "../Component.h"
 #include "../reactive.h"
-#include "PlayerHealthBar.h"
 
-class HealthManager : public GameComponent
+class EnemyHealthManager : public GameComponent
 {
 public:
   void Initialize()override;
@@ -13,7 +12,7 @@ public:
   void SerializeWrite(Serializer& str) override;
   void UpdateHealth(int val);
 
-  HealthManager();
+  EnemyHealthManager();
 
 private:
   Transform* pTransform;

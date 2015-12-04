@@ -2,31 +2,25 @@
 
 #include "../Component.h"
 #include "../reactive.h"
-#include "PlayerHealthBar.h"
+#include "LoadLevel.h"
+#include "GameReactive.h"
 
-class HealthManager : public GameComponent
+class LoadLevel : public GameComponent
 {
 public:
   void Initialize()override;
   void Update(float dt)override;
   void SendMessages(Message* msg)override;
   void SerializeWrite(Serializer& str) override;
-  void UpdateHealth(int val);
 
-  HealthManager();
+  LoadLevel();
 
 private:
   Transform* pTransform;
   Sprite *pSprite;
   GOC* parent;
-  GOC* pHealthBar;
+  GameReactive* pReactive;
   
 
-  int TotalHealth = 100;
-  int CurrentHealth;
-  bool GodMode;
-
-  bool CanMove = true;
-  bool MovingRight;
-  bool Alive = true;
+ 
 };

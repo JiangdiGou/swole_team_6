@@ -73,7 +73,35 @@ void PlayerState::Update(float dt)
 		}
 		return;
 	}
+  
+  if (AutoPlayOn == true)
+  {
+    int rand_index = 0;
+    static char randominput[] = { 'W', 'S', 'D', 'A', ' ' };
+    if (AutoPlayTimer <= 0)
+    {
+      srand(time(0));
 
+      rand_index = rand() % 5;
+      AutoPlayTimer = AutoPlayTimerMax;
+      curAuto = randominput[rand_index];
+    }
+    MessageCharacterKey keyMsg;
+
+    keyMsg.character = curAuto;
+    if (AutoPlayTimer < 50)
+    {
+      keyMsg.keyStatus = keyStatus::KEY_RELEASED;
+    }
+    else
+    {
+      keyMsg.keyStatus = keyStatus::KEY_PRESSED;
+    }
+    std::cout << randominput[rand_index] << std::endl;
+
+    SendMessages(&keyMsg);
+    --AutoPlayTimer;
+  }
 	//if (playerBody->Velocity.y < -(maxDownwardsVelocity))
 	//	playerBody->SetVelocity(Vec2D(playerBody->Velocity.x, /*playerBody->Velocity.y +  */-(maxDownwardsVelocity)));
 	//if (playerBody->Velocity.y > maxUpwardsVelocity)
@@ -226,7 +254,7 @@ void PlayerState::SendMessages(Message * message)
 		case VK_SPACE:
 			//if (StateList::Grounded)
 			//{
-			if (CharacterMessage->keyStatus == keyStatus::KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
+			if ((CharacterMessage->keyStatus == keyStatus::KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN) && (MyPlayerState == StateList::Grounded || IWannaFly == true))
 				{
 					playerSound->SetVolume(1.0f, "TwoFootSteps");
 					playerSound->StopEvent("TwoFootSteps");
@@ -236,6 +264,7 @@ void PlayerState::SendMessages(Message * message)
 					// we can do anything here also sounds
 
 					//variableJumpHeightEnabled = true;
+          MyPlayerState = StateList::Jumping;
 					PressJump();
 					//playerBody->AddForce(Vec2D(0, 1000));
 					printf("my jumping v: %f", playerBody->Velocity.y);
@@ -261,6 +290,12 @@ void PlayerState::SendMessages(Message * message)
       break;
 		case 'S':
 			break;
+    case '0':
+      AutoPlayOn = true;
+      break;
+    case '9':
+      AutoPlayOn = false;
+      break;
 
 		case 'A':
 			//if (this->playerController->getJumpState() == JumpStates::JS_Grounded || this->playerController->getJumpState() == JumpStates::JS_PLATFORM)
@@ -274,7 +309,7 @@ void PlayerState::SendMessages(Message * message)
 			}
 			//}
 
-			if (CharacterMessage->keyStatus == KEY_PRESSED)
+			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				
 				//playerSound->StopEvent("player_footsteps");
@@ -352,7 +387,7 @@ void PlayerState::SendMessages(Message * message)
 					playerSound->StopEvent("swipe_sound");
 			*/
 			//if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
-			if (CharacterMessage->keyStatus == KEY_PRESSED)
+			if (CharacterMessage->keyStatus == KEY_PRESSED || CharacterMessage->keyStatus == KEY_DOWN)
 			{
 				playerSound->SetVolume(1.0f, "TwoFootSteps");
 				playerSound->StopEvent("TwoFootSteps");
@@ -398,6 +433,18 @@ void PlayerState::SendMessages(Message * message)
 			}
 
 			break;
+    case '1':
+      if (IsAltHeld() && IsCtrlHeld())
+      {
+        IWannaFly = true;
+      }
+      break;
+    case '.':
+      if (IsAltHeld() && IsCtrlHeld())
+      {
+        IWannaFly = false;
+      }
+      break;
 		}
     break;
 	}
@@ -405,12 +452,14 @@ void PlayerState::SendMessages(Message * message)
   {
     //GameObjectComposition* otherObj = ((CollisionStarted*)message)->otherObj->GetOwner();
     //std::cout << "start " << otherObj->GetName() << std::endl;
+    MyPlayerState = StateList::Grounded;
     break;
   }
   case Mid::CollisionPersisted:
   {
     //GameObjectComposition* otherObj = ((CollisionPersisted*)message)->otherObj->GetOwner();
     //std::cout << "??? " << otherObj->GetName() << std::endl;
+    MyPlayerState = StateList::Grounded;
     break;
   }
   case Mid::CollisionEnded:

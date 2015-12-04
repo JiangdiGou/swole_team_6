@@ -5,34 +5,36 @@
 enum ComponentTypeId
 {
   //Invalid component id
-  CT_None = 0,
-  //Basic Components
-  CT_Transform,
-  //Graphics
-  CT_Camera,
-  CT_Sprite,
-  CT_SpriteText,
-  //Physics
-  CT_Body,
-  //Max
-  CT_TileMapCollision,
-  CT_ShapeAAB,
-  CT_ShapeLine,
+	CT_None = 0,
+	//Basic Components
+	CT_Transform,
+	//Graphics
+	CT_Camera,
+	CT_Sprite,
+	CT_SpriteText,
+	//Physics
+	CT_Body,
+	//Max
+	CT_TileMapCollision,
+	CT_ShapeAAB,
+	CT_ShapeLine,
 
-  CT_GameReactive,
-  CT_SoundEmitter,
+	CT_GameReactive,
+	CT_SoundEmitter,
 
-  CT_PlayerTag,
-  CT_HUDcomponent,
-  CT_Editable,
-  CT_MouseVector,
-  CT_PlayerState,
-  CT_MenuButton,
-  CT_OurZilchComponent,
-  CT_BadEnemyAI,
+	CT_PlayerTag,
+	CT_HUDcomponent,
+	CT_Editable,
+	CT_MouseVector,
+	CT_PlayerState,
+	CT_MenuButton,
+	CT_OurZilchComponent,
+	CT_BadEnemyAI,
   CT_HealthManager,
-  CT_PlayerHealthBar,
-  CT_PlayerAttack
+	CT_PlayerHealthBar,
+	CT_PlayerAttack,
+	CT_LoadLevel,
+  CT_EnemyHealthManager
 
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 
 

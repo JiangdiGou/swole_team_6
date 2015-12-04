@@ -21,6 +21,7 @@ private:
   Sprite *pSprite;
   Vector3D paceDistance;
   float waitTime;
+  float attackCooldown;
   EnemyState CurrentState;
   GOC* player;
   HealthManager* playerHM;

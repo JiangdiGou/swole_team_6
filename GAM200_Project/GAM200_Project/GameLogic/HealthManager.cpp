@@ -23,6 +23,10 @@ void HealthManager::Initialize()
 
 void HealthManager::Update(float dt)
 {
+  if (GodMode == true)
+  {
+    CurrentHealth = TotalHealth;
+  }
 	if (!Alive)
 	{
 		CORE->LevelName = "resources/Levels/PlayerDeath.txt";
@@ -33,9 +37,14 @@ void HealthManager::Update(float dt)
 
 void HealthManager::UpdateHealth(int val)
 {
+  if (GodMode == true)
+  {
+    return;
+  }
 	CurrentHealth += val;
   PlayerHealthBar* healthBar = pHealthBar->has(PlayerHealthBar);
-  healthBar->UpdateScale(CurrentHealth/TotalHealth);
+  healthBar->UpdateScale( (float)(CurrentHealth) / (float)(TotalHealth) );
+  std::cout << "Player Health:" << CurrentHealth << ", Total Health: " << TotalHealth << "\n";
 	if (CurrentHealth <= 0)
 	{
 		Alive = false;
@@ -44,6 +53,30 @@ void HealthManager::UpdateHealth(int val)
 
 void HealthManager::SendMessages(Message* message)
 {
+  switch (message->MessageId)
+  {
+  case Mid::CharacterKey:
+      MessageCharacterKey* charMessage = (MessageCharacterKey*)message;
+
+	  switch (charMessage->character)
+	  {
+	  case '2':
+		  if (IsAltHeld() && IsCtrlHeld())
+		  {
+			  GodMode = true;
+		  }
+		  break;
+	  case '.':
+		  if (IsAltHeld() && IsCtrlHeld())
+		  {
+			  GodMode = false;
+		  }
+		  break;
+	  default:
+		  break;
+	  }
+      break;
+  }
 }
 
 void HealthManager::SerializeWrite(Serializer& str)

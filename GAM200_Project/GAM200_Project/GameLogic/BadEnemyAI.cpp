@@ -21,6 +21,7 @@ void BadEnemyAI::Initialize()
 
   paceDistance = Vector3D(2,0,0);
   waitTime = 2;
+  attackCooldown = 2;
 
   CanMove = true;
   CurrentState = PACING;
@@ -38,6 +39,11 @@ void BadEnemyAI::Update(float dt)
 	GOC* owner = GetOwner();
 	Transform* playerTransform = player->has(Transform);
 	
+	if (attackCooldown > 0)
+	{
+		attackCooldown = attackCooldown - dt;
+	}
+
   ////////////////////////////////////////////////////////        Movement          ////////////////////////////////////////////////////////////////
 	if (CanMove)
 	{
@@ -88,12 +94,15 @@ void BadEnemyAI::Update(float dt)
 		}
 		else if (CurrentState == ATTACKING)
 		{
-			//change the sprite to attacking here
-			std::cout << "ATTACK";
-			//FUCK THIS
-			playerHM->UpdateHealth(-5.0f);
+			if (attackCooldown <= 0)
+			{
+				//change the sprite to attacking here
+				std::cout << "ATTACK";
+				playerHM->UpdateHealth(-5.0f);
 
-			CurrentState = CHASING;
+				CurrentState = CHASING;
+				attackCooldown = 2;
+			}
 		}
 		else
 		{
