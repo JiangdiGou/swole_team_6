@@ -57,19 +57,24 @@ void HealthManager::SendMessages(Message* message)
   {
   case Mid::CharacterKey:
       MessageCharacterKey* charMessage = (MessageCharacterKey*)message;
-      switch(charMessage->character)
-        case '2':
-          if (IsAltHeld() && IsCtrlHeld())
-          {
-            GodMode = true;
-          }
-          break;
-        case '.':
-          if (IsAltHeld() && IsCtrlHeld())
-          {
-            GodMode = false;
-          }
-          break;
+
+	  switch (charMessage->character)
+	  {
+	  case '2':
+		  if (IsAltHeld() && IsCtrlHeld())
+		  {
+			  GodMode = true;
+		  }
+		  break;
+	  case '.':
+		  if (IsAltHeld() && IsCtrlHeld())
+		  {
+			  GodMode = false;
+		  }
+		  break;
+	  default:
+		  break;
+	  }
       break;
   }
 }
