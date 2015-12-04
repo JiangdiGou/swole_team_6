@@ -83,6 +83,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="GAM200_Project\GameLogic\BadEnemyAI.h" />
+    <ClInclude Include="GAM200_Project\GameLogic\EnemyHealthManager.h" />
     <ClInclude Include="GAM200_Project\GameLogic\GameLogic.h" />
     <ClInclude Include="GAM200_Project\GameLogic\HealthManager.h" />
     <ClInclude Include="GAM200_Project\GameLogic\HUDcomponent.h" />
@@ -243,6 +244,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\BadEnemyAI.cpp" />
+    <ClCompile Include="GAM200_Project\GameLogic\EnemyHealthManager.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\GameLogic.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\HealthManager.cpp" />
     <ClCompile Include="GAM200_Project\GameLogic\HUDcomponent.cpp" />

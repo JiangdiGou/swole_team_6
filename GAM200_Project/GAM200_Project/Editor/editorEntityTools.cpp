@@ -24,6 +24,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "PlayerHealthBar",
   "PlayerAttack",
   "Load Level",
+  "Enemy Health Manager",
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -291,6 +292,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 
   case CT_LoadLevel:
 	  return focus->has(LoadLevel);
+
+  case CT_EnemyHealthManager:
+    return focus->has(EnemyHealthManager);
 
   default:
     return NULL;

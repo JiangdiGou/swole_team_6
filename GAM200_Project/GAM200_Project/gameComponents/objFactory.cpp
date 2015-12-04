@@ -612,6 +612,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_LoadLevel:
 	  return new LoadLevel();
 
+  case CT_EnemyHealthManager:
+    return new EnemyHealthManager();
+
   default:
     return nullptr;
   }

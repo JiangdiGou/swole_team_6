@@ -30,10 +30,11 @@ enum ComponentTypeId
 	CT_MenuButton,
 	CT_OurZilchComponent,
 	CT_BadEnemyAI,
-	CT_HealthManager,
+  CT_HealthManager,
 	CT_PlayerHealthBar,
 	CT_PlayerAttack,
-	CT_LoadLevel
+	CT_LoadLevel,
+  CT_EnemyHealthManager
 
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 
 
