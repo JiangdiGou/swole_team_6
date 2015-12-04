@@ -97,27 +97,37 @@ class ScrollSelect : ZilchComponent
         //Crane scroll, silver
         else if(this.IGameDataScroll == 1)
         {
-            this.Owner.Sprite.Color = Real4(0.78, 0.78, 0.78, 1);
+            this.Owner.Sprite.Color = Real4(1,1,1,1);
+            this.Owner.Sprite.SpriteSource = SpriteSource.HUDScrollSilver;
+            //this.Owner.Sprite.Color = Real4(0.78, 0.78, 0.78, 1);
         }
         //Boar scroll, red
         else if(this.IGameDataScroll == 2)
         {
-            this.Owner.Sprite.Color = Real4(1, 0.12, 0.12, 1);
+            this.Owner.Sprite.Color = Real4(1,1,1,1);
+            this.Owner.Sprite.SpriteSource = SpriteSource.HUDScrollRed;
+            //this.Owner.Sprite.Color = Real4(1, 0.12, 0.12, 1);
         }
         //Serpent scroll, blue
         else if(this.IGameDataScroll == 3)
         {
-            this.Owner.Sprite.Color = Real4(0, 0.2907, 0.855, 1);
+            this.Owner.Sprite.Color = Real4(1,1,1,1);
+            this.Owner.Sprite.SpriteSource = SpriteSource.HUDScrollBlue;
+            //this.Owner.Sprite.Color = Real4(0, 0.2907, 0.855, 1);
         }
         //Tiger scroll, yellow
         else if(this.IGameDataScroll == 4)
         {
-            this.Owner.Sprite.Color = Real4(0.980392, 0.498039, 0, 1);
+            this.Owner.Sprite.Color = Real4(1,1,1,1);
+            this.Owner.Sprite.SpriteSource = SpriteSource.HUDScrollYellow;
+            //this.Owner.Sprite.Color = Real4(0.980392, 0.498039, 0, 1);
         }
         //Dragon scroll, green
         else if(this.IGameDataScroll == 5)
         {
-            this.Owner.Sprite.Color = Real4(0.269342, 0.69, 0.21735, 1);
+            this.Owner.Sprite.Color = Real4(1,1,1,1);
+            this.Owner.Sprite.SpriteSource = SpriteSource.HUDScrollGreen;
+            //this.Owner.Sprite.Color = Real4(0.269342, 0.69, 0.21735, 1);
         }
     }
     

@@ -2,7 +2,7 @@
 #define EDITORENTITYTOOLS_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define TOTALCOMPONENTS 17
+#define TOTALCOMPONENTS 19
 
 #include "imGUI\imgui.h"
 #include "../Core.h"
@@ -19,6 +19,8 @@
 #include "../mouseVector.h"
 #include "../GameLogic/PlayerTag.h"
 #include "../GameLogic/HUDcomponent.h"
+#include "../GameLogic/BadEnemyAI.h"
+#include "../GameLogic/HealthManager.h"
 #include "../GameLogic/GameReactive.h"
 #include "../GameLogic/PauseMenuButton.h"
 #include <string.h>

@@ -45,6 +45,7 @@ class LevelManager : ZilchComponent
             if(this.EoG)
             {
                 this.Player.PlayerMovement.BCanMove = false;
+                this.Player.RigidBody.Velocity = Real3.Zero;
             }
             
             if(this.GameOver)

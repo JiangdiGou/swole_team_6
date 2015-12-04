@@ -68,7 +68,7 @@ private:
   Transform* pTransform;
 
   float size = 1000.0f;
-  float editorMoveSpeed = 0.15f;
+  float editorMoveSpeed = 0.75;
 
   float width;
   float height;

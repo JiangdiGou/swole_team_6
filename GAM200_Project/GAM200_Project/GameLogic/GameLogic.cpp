@@ -11,6 +11,7 @@
 #include "../mouseVector.h"
 #include "../reactive.h"
 #include "PlayerTag.h"
+#include "HealthManager.h"
 #include "../ZilchComponent.h"
 
 #include <ctime>
@@ -20,7 +21,7 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  createLevel("resources/Levels/newLev.txt");
+  createLevel("resources/Levels/Level1.txt");
 }
 
 void GameLogic::SendMessages(Message * m)
@@ -118,10 +119,6 @@ GameLogic::~GameLogic()
 void GameLogic::createLevel(std::string levelPath)
 {
   FACTORY->loadLevelFrom(levelPath);
-  FACTORY->loadEntities(appendEnt(levelPath));
-
-  FACTORY->createTiles();
-
 
   //SET UP CAMERA
   GOC * camera = FACTORY->makeObject("GAMECAMERA");
@@ -132,6 +129,7 @@ void GameLogic::createLevel(std::string levelPath)
   mainCamera->followingPlayer = false;
   mainCamera->editorMode = true;
 #endif
+  //Saves camera
   camera->Initialize();
   GRAPHICS->setMainCamera(mainCamera);
 
@@ -174,11 +172,15 @@ void GameLogic::createLevel(std::string levelPath)
   player->AddComponent(CT_OurZilchComponent, exampleZilch);
   MouseVector *vectTest = new MouseVector();
   camera->AddComponent(CT_MouseVector, vectTest);
+  //HealthManager
+  HealthManager* healthManager = new HealthManager();
+  player->AddComponent(CT_HealthManager, healthManager);
 
   //Saves Player
   LOGIC->player = player;
 
-  //Init all objects
+  FACTORY->loadEntities(appendEnt(levelPath));
+  FACTORY->createTiles();
   FACTORY->initializeObjects();
 }
 

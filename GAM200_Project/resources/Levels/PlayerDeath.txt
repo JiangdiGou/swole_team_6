@@ -1,0 +1,7 @@
+[LevelName]
+resources/Levels/PlayerDeath.txt
+[ArraySpecs]
+1
+1
+[TileMap]
+E 

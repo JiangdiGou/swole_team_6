@@ -580,6 +580,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_HUDcomponent:
 	  return new HUDcomponent();
 
+  case CT_BadEnemyAI:
+    return new BadEnemyAI();
+
   case CT_Editable:
     return new Editable();
 
@@ -594,6 +597,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
     
   case CT_OurZilchComponent:
     return new OurZilchComponent();
+
+  case CT_HealthManager:
+	  return new HealthManager();
 
   default:
     return nullptr;

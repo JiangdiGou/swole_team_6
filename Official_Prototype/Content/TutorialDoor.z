@@ -1,0 +1,24 @@
+class TutorialDoor : ZilchComponent
+{
+    var NumEnemies:Integer = 5;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space, Events.TriggerEvent, this.OnTrigger);
+    }
+    
+    function OnTrigger(event : TriggerEvent)
+    {
+        if(event.CogToTrigger1 == this.Owner || event.NameToTrigger == this.Owner.Name)
+        {
+            --this.NumEnemies;
+            Console.WriteLine("num enemies: `this.NumEnemies`");
+        
+            if(this.NumEnemies <= 0)
+            {
+                this.Owner.Destroy();
+            }
+        }
+    }
+}
