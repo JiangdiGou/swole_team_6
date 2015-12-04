@@ -12,6 +12,7 @@
 #include "../reactive.h"
 #include "PlayerTag.h"
 #include "HealthManager.h"
+#include "LoadLevel.h"
 #include "../ZilchComponent.h"
 
 #include <ctime>

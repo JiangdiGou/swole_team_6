@@ -30,6 +30,7 @@ void PlayerHealthBar::Update(float dt)
 void PlayerHealthBar::UpdateScale(float scale)
 {
   pTransform->SetScale(originScale * scale);
+  std::cout << "HP bar Scale: " << scale << "\n";
 }
 
 void PlayerHealthBar::SendMessages(Message* message)

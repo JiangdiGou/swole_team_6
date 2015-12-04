@@ -35,7 +35,8 @@ void HealthManager::UpdateHealth(int val)
 {
 	CurrentHealth += val;
   PlayerHealthBar* healthBar = pHealthBar->has(PlayerHealthBar);
-  healthBar->UpdateScale(CurrentHealth/TotalHealth);
+  healthBar->UpdateScale( (float)(CurrentHealth) / (float)(TotalHealth) );
+  std::cout << "Player Health:" << CurrentHealth << ", Total Health: " << TotalHealth << "\n";
 	if (CurrentHealth <= 0)
 	{
 		Alive = false;

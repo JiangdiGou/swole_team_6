@@ -64,7 +64,7 @@ void MouseVector::Update(float dt)
 {
   if (!mouseDown)
   {
-	parent->has(PlayerAttack);
+	GetOwner()->has(PlayerAttack);
     debugDrawLine(Vector3(mouseDownPos, 0), Vector3(mouseUpPos, 0), Vector3());
   }
 }
