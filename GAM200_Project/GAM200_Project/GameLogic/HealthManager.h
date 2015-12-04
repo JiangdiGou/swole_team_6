@@ -12,17 +12,14 @@ public:
   void SendMessages(Message* msg)override;
   void SerializeWrite(Serializer& str) override;
   void UpdateHealth(int val);
+  void UpdateScale(float scale);
 
   HealthManager();
 
 private:
-	//enum  EnemyState { CHASING, PACING, ATTACKING };
-
   Transform* pTransform;
   Sprite *pSprite;
   GOC* parent;
-  GOC* healthBar;
-  PlayerHealthBar* healthBarComponent;
   
 
   int TotalHealth;

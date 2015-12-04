@@ -21,22 +21,15 @@ void HealthManager::Initialize()
 
 void HealthManager::Update(float dt)
 {
-	if (healthBar == NULL)
-	{
-		healthBar = parent->FindObject("HUDHealthBar");
+	//UpdateScale((float)(CurrentHealth / TotalHealth));
 
-		if (healthBar != NULL)
-		{
-			std::cout << "got here";
-			healthBarComponent = healthBar->has(PlayerHealthBar);
-		}
-	}
+	//GOC* enemy = parent->FindObject("Enemy1");
+	//Transform* eTransform = enemy->has(Transform);
 
-	if (healthBarComponent != NULL)
-	{
-		
-		healthBarComponent->UpdateScale(CurrentHealth / TotalHealth);
-	}
+	//if ((pTransform->GetPositionX() - eTransform->GetPositionX()) < 1)
+	//{
+	//	std::cout << "im a genius?";
+	//}
 
 	if (!Alive)
 	{
@@ -44,6 +37,11 @@ void HealthManager::Update(float dt)
 
 		CORE->GameState = GS_LOAD;
 	}
+}
+
+void UpdateScale(float scale)
+{
+	std::cout << "im a genius?";
 }
 
 void HealthManager::UpdateHealth(int val)
