@@ -11,7 +11,9 @@ void HealthManager::Initialize()
 	pSprite = parent->has(Sprite);
   if (pSprite)
     pSprite->setLayer(1);
+  pHealthBar = FACTORY->FindObjectByName("HUDHealthBar ");
 
+  CurrentHealth = TotalHealth;
 #ifdef EDITOR
   //CanMove = false;
 #else
@@ -21,13 +23,6 @@ void HealthManager::Initialize()
 
 void HealthManager::Update(float dt)
 {
-	//GOC* enemy = parent->FindObject("Enemy1");
-	//Transform* eTransform = enemy->has(Transform);
-
-	//if ((pTransform->GetPositionX() - eTransform->GetPositionX()) < 1)
-	//{
-	//}
-
 	if (!Alive)
 	{
 		CORE->LevelName = "resources/Levels/PlayerDeath.txt";
@@ -36,17 +31,11 @@ void HealthManager::Update(float dt)
 	}
 }
 
-void HealthManager::UpdateScale(float scale)
-{
-  //eTransform->SetScale(Vector3D((int)(CurrentHealth/TotalHealth), 1 , 1));
-}
-
 void HealthManager::UpdateHealth(int val)
 {
 	CurrentHealth += val;
-
-  UpdateScale((float)(CurrentHealth / TotalHealth));
-
+  PlayerHealthBar* healthBar = pHealthBar->has(PlayerHealthBar);
+  healthBar->UpdateScale(CurrentHealth/TotalHealth);
 	if (CurrentHealth <= 0)
 	{
 		Alive = false;

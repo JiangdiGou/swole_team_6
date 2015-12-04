@@ -119,6 +119,8 @@ GameLogic::~GameLogic()
 void GameLogic::createLevel(std::string levelPath)
 {
   FACTORY->loadLevelFrom(levelPath);
+  FACTORY->loadEntities(appendEnt(levelPath));
+  FACTORY->createTiles();
 
   //SET UP CAMERA
   GOC * camera = FACTORY->makeObject("GAMECAMERA");
@@ -179,8 +181,6 @@ void GameLogic::createLevel(std::string levelPath)
   //Saves Player
   LOGIC->player = player;
 
-  FACTORY->loadEntities(appendEnt(levelPath));
-  FACTORY->createTiles();
   FACTORY->initializeObjects();
 }
 

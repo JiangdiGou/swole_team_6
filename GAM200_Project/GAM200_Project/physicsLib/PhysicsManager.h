@@ -49,6 +49,7 @@ class Physics : public ISystem
 {
 public:
 	Physics();
+  void Reload();
 	virtual void Update(float dt);
 	virtual std::string GetName(){ return "Physics"; }
 	void SendMessage(Message * m);

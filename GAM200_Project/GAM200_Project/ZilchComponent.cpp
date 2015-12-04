@@ -210,6 +210,7 @@ Function* OurZilchComponent::SetFieldOrProperty(std::string functName)
 
 ZilchDefineType(OurZilchComponent, "OurZilchComponent", ZLib_Internal, builder, type)
 {
+  type->HandleManager = ZilchManagerId(PointerManager);
   ZilchBindMethod(builder, type, &OurZilchComponent::CallFunction, ZilchNoOverload, "CallFunction", ZilchNoNames);
   //ZilchBindField(builder, type, &OurZilchComponent::classInstance, "Get", PropertyBinding::GetSet);
 }

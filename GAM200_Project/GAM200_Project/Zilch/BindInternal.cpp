@@ -6,6 +6,7 @@
 #include "../physicsLib/Collision.h"
 #include "../physicsLib/Transform.h"
 #include "../mouseVector.h"
+#include "../ZilchComponent.h"
 
 /*******************************************************************************
 Converts std::string to Zilch::String and back
@@ -40,6 +41,7 @@ ZilchDefineStaticLibrary(ZLib_Internal)
   ZilchInitializeType(Transform);
   ZilchInitializeType(MouseVector);
   ZilchInitializeType(PlayerState);
+  ZilchInitializeType(OurZilchComponent);
   ZilchInitializeType(Vec2D);
   ZilchInitializeType(Vector3);
 

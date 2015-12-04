@@ -34,7 +34,7 @@ GameComponent* BinaryComponentSearch(const ComponentArray& components, Component
 	if ((begin < components.size()) && (components[begin]->TypeId == name))
 		return components[begin];
 	else
-		return NULL;
+		return nullptr;
 }
 GameComponent* BinaryZilchComponentSearch(const ZilchComponentArray& components, ZilchComponentTypeId name)
 {
@@ -158,6 +158,7 @@ GameComponent * GameObjectComposition::GetComponent(ComponentTypeId typeId) cons
 
 GameComponent * GameObjectComposition::GetZilchComponent(ZilchComponentTypeId typeId) const
 {
+  return BinaryComponentSearch(Components, CT_OurZilchComponent);
   return BinaryZilchComponentSearch(ZilchComponents, typeId);
 }
 

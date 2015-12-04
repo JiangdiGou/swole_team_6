@@ -2,28 +2,27 @@
 
 #include "../Component.h"
 #include "../reactive.h"
-#include "PlayerHealthBar.h"
 
-class HealthManager : public GameComponent
+class PlayerAttack : public GameComponent
 {
 public:
   void Initialize()override;
   void Update(float dt)override;
   void SendMessages(Message* msg)override;
   void SerializeWrite(Serializer& str) override;
-  void UpdateHealth(int val);
+  void Attack();
 
-  HealthManager();
+  PlayerAttack();
 
 private:
   Transform* pTransform;
   Sprite *pSprite;
   GOC* parent;
-  GOC* pHealthBar;
+  //pMouse;
   
 
-  int TotalHealth = 100;
-  int CurrentHealth;
+  float startPos;
+  float endPos;
 
   bool CanMove = true;
   bool MovingRight;

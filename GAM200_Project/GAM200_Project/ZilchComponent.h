@@ -4,6 +4,7 @@
 #include "Zilch\ZilchInterface.hpp"
 #include "Zilch\ZilchManager.h"
 #include "Zilch\Zilch.hpp"
+#include "Zilch\BindInternal.hpp"
 #include <string.h>
 
 using namespace Zilch;
