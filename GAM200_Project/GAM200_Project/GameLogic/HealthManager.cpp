@@ -5,13 +5,8 @@
 //playerstate component for reference
 void HealthManager::Initialize()
 {
-	GOC* parent = GetOwner();
+	parent = GetOwner();
 	pTransform = parent->has(Transform);
-
-	player = LOGIC->player;
-
-  //healthBar = "TempHealthBar");
-  //healthBarComponent = healthBar->has(PlayerHealthBar);
 
 	pSprite = parent->has(Sprite);
   if (pSprite)
@@ -26,7 +21,22 @@ void HealthManager::Initialize()
 
 void HealthManager::Update(float dt)
 {
-	GOC* owner = GetOwner();
+	if (healthBar == NULL)
+	{
+		healthBar = parent->FindObject("HUDHealthBar");
+
+		if (healthBar != NULL)
+		{
+			std::cout << "got here";
+			healthBarComponent = healthBar->has(PlayerHealthBar);
+		}
+	}
+
+	if (healthBarComponent != NULL)
+	{
+		
+		healthBarComponent->UpdateScale(CurrentHealth / TotalHealth);
+	}
 
 	if (!Alive)
 	{
@@ -39,8 +49,6 @@ void HealthManager::Update(float dt)
 void HealthManager::UpdateHealth(int val)
 {
 	CurrentHealth += val;
-
-  //healthBarComponent->UpdateScale(CurrentHealth / TotalHealth);
 
 	if (CurrentHealth <= 0)
 	{

@@ -20,9 +20,9 @@ private:
 
   Transform* pTransform;
   Sprite *pSprite;
-  GOC* player;
-  //GOC* healthBar;
-  //PlayerHealthBar* healthBarComponent;
+  GOC* parent;
+  GOC* healthBar;
+  PlayerHealthBar* healthBarComponent;
   
 
   int TotalHealth;

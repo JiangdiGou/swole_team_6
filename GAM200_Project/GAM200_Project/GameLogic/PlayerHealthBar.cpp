@@ -25,8 +25,6 @@ void PlayerHealthBar::Initialize()
 void PlayerHealthBar::Update(float dt)
 {
 	GOC* owner = GetOwner();
-
-  std::cout << "fuck me sideways";
 }
 
 void PlayerHealthBar::UpdateScale(float scale)
