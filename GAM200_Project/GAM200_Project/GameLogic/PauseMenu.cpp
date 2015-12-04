@@ -191,7 +191,6 @@ void PauseMenu::Update(float dt)
       Sprite* pSprite = (*it)->has(Sprite);
       GameReactive* pReactive = (*it)->has(GameReactive);
       MenuButton* pMenuButton = (*it)->has(MenuButton);
-      
       if (!pMenuButton)
         return;
 
@@ -204,6 +203,7 @@ void PauseMenu::Update(float dt)
         if (pMenuButton->type == HOWTOPLAY || pMenuButton->type == RESUME
           || pMenuButton->type == QUIT)
         {
+		
           //Activate
           if (pSprite)
             pSprite->visible = true;
@@ -215,6 +215,8 @@ void PauseMenu::Update(float dt)
           {
           case HOWTOPLAY:
           {
+			 
+			
             followCameraWithOffset(*it, Vector2(0, 0));
             break;
           }
@@ -243,11 +245,7 @@ void PauseMenu::Update(float dt)
       }
       case AREYOUSURE:
       {
-		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-		  emitter->SetVolume(1.0f, "Enter");
-		  
-		  emitter->PlayEvent("Enter");
-		  emitter->StopEvent("Enter");
+		 
         //And youre one of the menu buttons in the main menu
         if (pMenuButton->type == IAMSURE || pMenuButton->type == IAMNOTSURE
           || pMenuButton->type == AREYOUSURESPRITE)
@@ -305,6 +303,7 @@ void PauseMenu::Update(float dt)
           {
           case HOWTOPLAYSPRITE:
           {
+			
             followCameraWithOffset(*it, Vector2(0, 2));
             break;
           }
