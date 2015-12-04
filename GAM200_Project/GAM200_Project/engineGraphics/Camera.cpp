@@ -113,7 +113,7 @@ void Camera::Update(float dt)
                                 (float)INITINFO->clientWidth / (size * zoom),
                                 (float)-INITINFO->clientHeight / (size * zoom),
                                 (float)INITINFO->clientHeight / (size * zoom),
-                                0.1f, 5.0f);
+                                -1.0f, 5.0f);
 
   //Gets the view matrix 
   glm::mat4 viewMatrix;

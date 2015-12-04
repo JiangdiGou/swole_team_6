@@ -24,6 +24,7 @@ private:
 
   int TotalHealth = 100;
   int CurrentHealth;
+  bool GodMode;
 
   bool CanMove = true;
   bool MovingRight;

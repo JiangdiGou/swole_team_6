@@ -5,7 +5,11 @@ namespace Framework
 {
 	bool TextSerializer::Open(const std::string& file)
 	{
+#ifdef EDITOR
 		stream.open(file.c_str());
+#else
+    stream.open(file.c_str(), std::ifstream::in);
+#endif
 		return stream.is_open();
 	}
 
@@ -40,6 +44,7 @@ namespace Framework
     ReadFloat(f3);
   }
 
+#ifdef EDITOR
   void TextSerializer::WriteVec2(float& f, float& f2)
   {
     WriteFloat(f);
@@ -54,21 +59,30 @@ namespace Framework
 
   void TextSerializer::WriteInt(int& i)
   {
+
     stream << i << ' ';
+
   }
 
   void TextSerializer::WriteFloat(float& f)
   {
+
     stream << f << ' ';
+
   }
 
   void TextSerializer::WriteString(std::string& str)
   {
+
     stream << str << ' ';
+
   }
 
   void TextSerializer::WriteEndl()
   {
+
     stream << '\n';
+
   }
+#endif
 }

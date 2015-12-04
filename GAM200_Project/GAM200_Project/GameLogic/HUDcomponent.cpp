@@ -19,7 +19,7 @@ void HUDcomponent::Update(float dt)
 {
 	GOC* owner = GetOwner();
 
-	pTransform->SetPosition(pCam->getPosition() + offset);
+	pTransform->SetPosition(pCam->getPosition() + Vector3(offset.x, offset.y, -(pCam->getPosition().z)));
 }
 
 void HUDcomponent::SendMessages(Message* message)

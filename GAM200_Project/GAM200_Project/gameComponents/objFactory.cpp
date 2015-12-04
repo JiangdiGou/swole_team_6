@@ -69,10 +69,10 @@ void objFactory::destroyObject(int killID, bool menuObject)
     if (menuObjs[killID] == nullptr)
     {
       /* assert that we should never try to destroy an object
-      that doesn't exist */
+      that doesn't exist 
       throw AssertionError(std::string("Object ID " + std::to_string(killID)
         + " is not destroyable."
-        ));
+        )); */
     }
     else
     {
@@ -85,10 +85,10 @@ void objFactory::destroyObject(int killID, bool menuObject)
     if (gameObjs[killID] == nullptr)
     {
       /* assert that we should never try to destroy an object
-         that doesn't exist */
+         that doesn't exist 
       throw AssertionError(std::string("Object ID " + std::to_string(killID)
         + " is not destroyable."
-        ));
+        )); */
     }
     else
     {

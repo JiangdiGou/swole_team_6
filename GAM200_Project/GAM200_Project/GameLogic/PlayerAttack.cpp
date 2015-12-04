@@ -23,9 +23,15 @@ void PlayerAttack::Update(float dt)
 {
 }
 
-void PlayerAttack::Attack()
+void PlayerAttack::Attack(std::vector <GameObjectComposition*> objectsHit)
 {
-
+  for (std::vector<GameObjectComposition*>::iterator it = objectsHit.begin(); it != objectsHit.end(); ++it)
+  {
+    //if (it->GetOwner()->GetName() == "Enemy")
+    //{
+    //  it->GetOwner()->EnemyHealthManager();
+    //}
+  }
 }
 
 void PlayerAttack::SendMessages(Message* message)

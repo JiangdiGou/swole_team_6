@@ -153,6 +153,9 @@ void GameLogic::createLevel(std::string levelPath)
   bodyPlayer->Restitution = 0.3f;
   bodyPlayer->Friction = 0.0f;
   player->AddComponent(CT_Body, bodyPlayer);
+  //mouseVec
+  MouseVector *vectTest1 = new MouseVector();
+  player->AddComponent(CT_MouseVector, vectTest1);
   //Editable
 #ifdef EDITOR
   Editable* editable = new Editable(false);

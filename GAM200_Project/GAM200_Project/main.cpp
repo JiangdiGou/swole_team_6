@@ -175,6 +175,12 @@ int main(void)
   splash->AddComponent(CT_Sprite, pSprite);
   splash->Initialize();
 
+
+  Camera* cam = GRAPHICS->getCamera();
+#ifndef EDITOR
+  cam->editorMode = true;
+  cam->followingPlayer = false;
+#endif
   while (timePassed < 5000)
   {
     std::cout << "passed: " << timePassed << std::endl;
@@ -194,6 +200,10 @@ int main(void)
     }
     GRAPHICS->Draw();
   }
+#ifndef EDITOR
+  cam->editorMode = false;
+  cam->followingPlayer = true;
+#endif
 
   FACTORY->destroyObject(splash->GetId());  
 
