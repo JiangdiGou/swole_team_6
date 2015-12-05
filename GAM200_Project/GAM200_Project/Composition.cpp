@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   Composition.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Defintion for GameObjects for Component Based Engine
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "Composition.h"
 #include "gameComponents/objFactory.h"
 #include <algorithm>

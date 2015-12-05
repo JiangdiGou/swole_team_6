@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   GameLogic.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  GameLogic System for our engine, used to create levels, calls objFactory
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "GameLogic.h"
 #include ".././physicsLib//Transform.h"
 #include ".././physicsLib/Body.h"

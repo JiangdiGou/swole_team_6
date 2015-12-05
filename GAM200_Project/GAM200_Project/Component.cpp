@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+\file   Component.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Zilch Binding for Game Component
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
 #include "Component.h"
 #include "Composition.h"
 

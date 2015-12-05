@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   ZilchComponent.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  Declarations of ZilchComponent Function Pointers
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef ZILCHCOMPONENT_H
 #define ZILCHCOMPONENT_H
 #include "Component.h"

@@ -1,10 +1,13 @@
-///////////////////////////////////////////////////////////////////////////////////////
-//
-//	Core.cpp
-//	Authors: Chris Peters
-//	Copyright 2010, Digipen Institute of Technology
-//
-///////////////////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
+/*!
+\file   Core.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+CoreEngine Functions and GameLoop behavior
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include <Windows.h>
 #include "Core.h"
 #include "engineGraphics/Graphics.h"

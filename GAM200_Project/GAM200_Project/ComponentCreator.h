@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   ComponentCreator.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Declarations for ComponentCreator
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef COMPONENTCREATOR_H
 #define COMPONENTCREATOR_H
 #include "ComponentTypeIds.h"

@@ -1,12 +1,17 @@
-﻿//All content © 2014 DigiPen (USA) Corporation, all rights reserved.
+﻿//All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 //*****************************************************************************/
 /*!
 \file   ZilchBind.h
 \author Joshua T. Fisher
 \par    email: j.fisher\@digipen.edu
 \par    DigiPen login: j.fisher
-\par    Course: GAM 200
 \date   10/25/2014
+\author Gabriel Neuman
+\par    email: g.neumann\@digipen.edu
+\par    DigiPen login: g.neumann
+\par    Course: GAM 200
+\date   12/4/2015
+\par    Course: GAM 200
 \brief
 This file contains the functions needed to bind Zilch scripts to our engine.
 

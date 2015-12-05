@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+\file   BindInternal.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  Our Zilch Bound C++ Library, allows Zilch to call C++ functions, Intializes
+  Bound Types
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "BindInternal.hpp"
 #include "../Component.h"
 #include "../engineAudio/SoundEmitter.h"

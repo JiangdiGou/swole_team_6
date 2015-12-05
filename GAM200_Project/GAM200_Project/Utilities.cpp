@@ -6,6 +6,7 @@
  \par    Component: LevelDataManager
  \brief
  This is the implementation for Utilities, which does some random crap.
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
  */
 /******************************************************************************/
 

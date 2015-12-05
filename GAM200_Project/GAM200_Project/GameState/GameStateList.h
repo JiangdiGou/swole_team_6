@@ -5,6 +5,7 @@
 \par    email: g.neumann\@digipen.edu
 \brief
 Enum of possible game states
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

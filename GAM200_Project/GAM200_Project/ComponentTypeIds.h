@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   ComponentTypeIds.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+TypeIds to Identify different Game Components and Zilch Components
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef COMPONENTTYPEIDS_H
 #define COMPONENTTYPEIDS_H
 #include "Zilch\BindInternal.hpp"

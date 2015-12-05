@@ -1,3 +1,11 @@
+/******************************************************************************/
+/*!
+\file   ZilchInterface.hpp
+\author Nolan Yoo
+\par    email: n.yoo\@digipen.edu
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #pragma once
 
 #include "zilch.hpp"

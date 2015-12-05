@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   Serialization.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Virtual Base Serializer
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef SERIALIZATION_H
 #define SERIALIZATION_H
 #include "../physicsLib/math_utility.h"

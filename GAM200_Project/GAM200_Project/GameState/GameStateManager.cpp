@@ -6,6 +6,7 @@
 \brief
 Game State Manager, sets up initial game state and updates game state based
 upon current state
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

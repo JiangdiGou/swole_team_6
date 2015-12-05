@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   Core.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Defintion of CoreEngine, contains all Systems
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef CORE_H
 #define CORE_H
 #include <vector>

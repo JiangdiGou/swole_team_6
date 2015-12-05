@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+\file   ComponentTypeIds.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  Zilch binding of TypeIds to Identify different Game Components 
+  and Zilch Components
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "ComponentTypeIds.h"
 
 ZilchDefineExternalType(ComponentTypeId, "ComponentTypeId", ZLib_Internal, builder, type)

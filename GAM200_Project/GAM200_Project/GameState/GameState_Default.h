@@ -5,6 +5,7 @@
 \par    email: g.neumann\@digipen.edu
 \brief
 Declarations of the Defualt Game State functions
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

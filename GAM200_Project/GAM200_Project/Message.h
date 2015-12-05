@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   Message.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Engine Depends
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
