@@ -77,6 +77,9 @@ void glfwWindowMinimizeCallback(GLFWwindow* pWindow, int minimized)
 {
   if (minimized)
   {
+	SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+	emitter->BeQuiet();
+
     CORE->Pause = true;
     GRAPHICS->toggleBackground(false);
   }
