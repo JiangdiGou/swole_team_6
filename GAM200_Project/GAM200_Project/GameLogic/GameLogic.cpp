@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   GameLogic.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  GameLogic System for our engine, used to create levels, calls objFactory
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "GameLogic.h"
 #include ".././physicsLib//Transform.h"
 #include ".././physicsLib/Body.h"
@@ -23,7 +33,7 @@ GameLogic* LOGIC = NULL;
 
 void GameLogic::Initialize()
 {
-  createLevel("resources/Levels/Level1.txt");
+  createLevel("resources/Levels/Tutorial.txt");
 }
 
 void GameLogic::SendMessages(Message * m)
@@ -136,6 +146,22 @@ void GameLogic::createLevel(std::string levelPath)
   //Saves camera
   camera->Initialize();
   GRAPHICS->setMainCamera(mainCamera);
+
+
+  if (levelPath == "resources/Levels/WinScreen.txt")
+  {
+	  //SET UP PLAYER
+	  GOC * player = FACTORY->makeObject("GAMEPLAYER");
+	  //Transform
+	  Transform * transformPlayer = new Transform();
+	  transformPlayer->SetPosition(0, 0, 0);
+	  transformPlayer->SetScale(Vector2(3, 3));
+	  player->AddComponent(CT_Transform, transformPlayer);
+
+	  LOGIC->player = player;
+	  FACTORY->initializeObjects();
+	  return;
+  }
 
   //SET UP PLAYER
   GOC * player = FACTORY->makeObject("GAMEPLAYER");

@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file   glfwMessages.h
+\author Conor Lavelle
+\brief
+Input Callback recieved through GLFW
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "Core.h"
 #include "engineGraphics\Graphics.h"
 #include "WindowsSystem.h"

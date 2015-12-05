@@ -6,6 +6,7 @@
  \par    Component: LevelDataManager
  \brief
  This is the interface (and some implementations) for Utilities.
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
  */
 /******************************************************************************/
 

@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   TextSerialization.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Text Serializer to save and load our files
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "TextSerialization.h"
 #include <string>
 

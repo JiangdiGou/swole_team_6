@@ -4,7 +4,8 @@
 \author Gabriel Neumann
 \par    email: g.neumann\@digipen.edu
 \brief
-  Main header containing header includes
+  Engine Depends
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 
