@@ -627,6 +627,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_WinLogic:
 	  return new WinLogic();
 
+  case CT_TutorialLogic:
+    return new TutorialLogic();
+
   default:
     return nullptr;
   }
