@@ -43,9 +43,15 @@ void TutorialLogic::SendMessages(Message* message)
     case Mid::CollisionStarted:
     {
       CollisionStarted* CollisionMsg = (CollisionStarted*)message;
+      GOC* other = CollisionMsg->otherObj->GetOwner();
 
-      loadLevel = true;
-      delayTimer = 0.5f;
+      if (other->GetName() == "GAMEPLAYER")
+      {
+        std::cout << "Collided: Loading Level...";
+
+        loadLevel = true;
+        delayTimer = 1.0f;
+      }
     }
   }
 }
