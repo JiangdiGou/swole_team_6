@@ -136,7 +136,7 @@
 
 		iterator begin()
 		{ 
-			First;
+			return First;
 		}
 		iterator end()
 		{ 
