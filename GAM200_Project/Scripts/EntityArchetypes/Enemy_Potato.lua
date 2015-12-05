@@ -1,3 +1,0 @@
-aType = {
-	name = "PotatoEnemy"	
-}

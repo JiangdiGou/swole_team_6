@@ -13,6 +13,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 /*****************************************************************************/
 //~EndHeader~
 #include "Camera.h"
+#include "../Editor/Defines.h"
 
 //DO NOT USE. It was bitching at me for no default
 Camera::Camera()
@@ -37,8 +38,8 @@ Camera::Camera(const Shader& shader)
   //Gets the location of the view matrix uniform and sends it to the shader. 
   viewLocation = glGetUniformLocation(shaderID, "uniformView");
 
-  width = (2.0f * INITINFO->clientWidth) / (size * zoom);
-  height = (2.0f * INITINFO->clientHeight) / (size * zoom);
+  width = (2.0f * windowWidth) / (size * zoom);
+  height = (2.0f * windowHeight) / (size * zoom);
 }
 
 void Camera::Initialize()
@@ -103,16 +104,16 @@ void Camera::Update(float dt)
   }
 
   //Gets the Aspect Ratio of the Window to set up the camera's coordinates 
-  float ratio = (float)INITINFO->clientWidth / (float)INITINFO->clientWidth;
+  float ratio = windowWidth / windowHeight;
 
   //Gets the Orthographic Projection Matrix 
   glm::mat4 projectionMatrix;
   //Left, Right, Bottom, Top, Near, Far
   //This random magic 1000.0f is just to make everything have a reasonable value
-  projectionMatrix = glm::ortho((float)-INITINFO->clientWidth / (size * zoom),
-                                (float)INITINFO->clientWidth / (size * zoom),
-                                (float)-INITINFO->clientHeight / (size * zoom),
-                                (float)INITINFO->clientHeight / (size * zoom),
+  projectionMatrix = glm::ortho((float)-windowWidth / (size * zoom),
+                                (float)windowWidth / (size * zoom),
+                                (float)-windowHeight / (size * zoom),
+                                (float)windowHeight / (size * zoom),
                                 -1.0f, 5.0f);
 
   //Gets the view matrix 

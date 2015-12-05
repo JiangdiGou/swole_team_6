@@ -2,6 +2,7 @@
 
 void luaInitFile()
 {
+  /*
   initInfo *constructGlobal = new initInfo();
   luaRunner iniFile;
   iniFile.runFile("Scripts/ini.lua");
@@ -14,6 +15,7 @@ void luaInitFile()
   INITINFO->atlasPNG = iniFile.get<std::string>("init.atlasPNG");
   INITINFO->atlasINFO = iniFile.get<std::string>("init.atlasINFO");
   iniFile.stop();
+  */
 }
 
 initInfo::initInfo()

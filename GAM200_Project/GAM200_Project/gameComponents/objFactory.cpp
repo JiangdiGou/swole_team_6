@@ -14,7 +14,7 @@
  *******************************************************************************/
 
 #include "objFactory.h"
-
+#include "../Editor/Defines.h"
 #include "../AssertionError/AssertionError.h"
 #include "../WindowsSystem.h"
 #include "../Serialization/Serialization.h"
@@ -134,13 +134,16 @@ void objFactory::SerializeAllObjects(Serializer& str)
     else
     {
       //Another check, whether or not tile
+#ifdef EDITOR
       Editable* pEditable = it->second->has(Editable);
 
       //Also, we need to not serialize tiles or we'll spawn them twice. 
       if (pEditable && pEditable->isATile())
         continue;
       else
+#endif
         it->second->SerializeWrite(str);
+
 
     }
   }
@@ -587,10 +590,10 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
 
   case CT_BadEnemyAI:
     return new BadEnemyAI();
-
+#ifdef EDITOR
   case CT_Editable:
     return new Editable();
-
+#endif
   case CT_MouseVector:
     return new MouseVector();
 

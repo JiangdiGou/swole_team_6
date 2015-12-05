@@ -15,7 +15,6 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "../GameLogic/GameLogic.h"
 #include "../Composition.h"
 #include "../physicsLib/Transform.h"
-#include "../initInfo.h" //W and H
 #include "../WindowsSystem.h" //Messages 
 #include "../Zilch/BindInternal.hpp"
 #include "../Zilch/Zilch.hpp"

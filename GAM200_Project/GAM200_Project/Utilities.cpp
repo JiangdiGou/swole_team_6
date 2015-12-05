@@ -44,7 +44,7 @@ std::string whereExec()
 std::string getLineFromFile(int lineNumber, std::string fileName)
 {
   std::string garbage;
-  std::fstream fileStream(fileName.c_str());
+  std::ifstream fileStream(fileName.c_str());
 
   fileStream.seekg(0);//don't trust the client. especially since I wrote the damn thing
 

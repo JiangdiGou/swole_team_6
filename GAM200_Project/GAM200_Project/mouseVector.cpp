@@ -19,6 +19,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "mouseVector.h"
 #include "physicsLib/RayLineBoxCollision.h"
 #include "engineAudio/SoundEmitter.h"
+#include "GameLogic\PlayerAttack.h"
 
 void MouseVector::SendMessages(Message * message)
 {

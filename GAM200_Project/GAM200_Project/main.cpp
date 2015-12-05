@@ -25,12 +25,13 @@ main loop
 //#include "ActionSystem\ActionSequence.h"
 #include "glfwMessages.h"
 #include "initInfo.h"
-#include "Editor\imGuiManager.h"
+//#include "Editor\imGuiManager.h"
 #include "Zilch\Zilch.hpp"
 #include "Zilch\ZilchInterface.hpp"
 #include "Zilch\ZilchManager.h"
 #include "Zilch\ZilchBind.h"
 #include "GameLogic\PauseMenu.h"
+#include "Editor\Defines.h"
 
 initInfo * INITINFO;
 
@@ -40,8 +41,8 @@ using namespace Zilch;
 
 int main(void)
 {
-  //FreeConsole();
-  luaInitFile();
+  FreeConsole();
+  //luaInitFile();
   //Do init stuff from ini file here. currently, we do nothing.
 
   //coloured_console.cprintf(CConsoleLoggerEx::COLOR_RED | CConsoleLoggerEx::COLOR_BACKGROUND_BLACK, "Another console");
@@ -65,7 +66,7 @@ int main(void)
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   //Create a Window 
-	GLFWwindow* window = glfwCreateWindow(INITINFO->clientWidth, INITINFO->clientHeight, "NinjaCade", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "NinjaCade", glfwGetPrimaryMonitor(), nullptr);
 	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -163,7 +164,7 @@ int main(void)
   GOC* splash = FACTORY->makeObject("Splash");
   Transform* pTransform = new Transform();
 
-  Vector2 worldScale = GRAPHICS->screenToWorld(Vector2(1.5 * INITINFO->clientWidth, -1.5 * INITINFO->clientHeight));
+  Vector2 worldScale = GRAPHICS->screenToWorld(Vector2(1.5 * windowWidth, -1.5 * windowHeight));
   pTransform->SetScale(worldScale);
 
   Vector2 worldCenter = Vector2(GRAPHICS->getCamera()->getPosition().x, GRAPHICS->getCamera()->getPosition().y);

@@ -7,6 +7,7 @@
 #include "../physicsLib/Transform.h"
 #include "../mouseVector.h"
 #include "../ZilchComponent.h"
+#include "../physicsLib/PlayerState.h"
 
 /*******************************************************************************
 Converts std::string to Zilch::String and back

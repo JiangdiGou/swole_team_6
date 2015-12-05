@@ -15,6 +15,7 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 //~EndHeader~
 #include "Graphics.h"
 
+
 #ifdef GFXLOG
 
 txtlog *gfxErrorLog;

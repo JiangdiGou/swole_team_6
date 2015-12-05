@@ -35,19 +35,46 @@
     <ClInclude Include="GAM200_Project\ComponentTypeIds.h" />
     <ClInclude Include="GAM200_Project\Composition.h" />
     <ClInclude Include="GAM200_Project\Core.h" />
-    <ClInclude Include="GAM200_Project\Editor\editable.h" />
-    <ClInclude Include="GAM200_Project\Editor\editorEntityTools.h" />
-    <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h" />
-    <ClInclude Include="GAM200_Project\Editor\editorModule.h" />
-    <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h" />
-    <ClInclude Include="GAM200_Project\Editor\imGuiManager.h" />
-    <ClInclude Include="GAM200_Project\Editor\imGUI\imconfig.h" />
-    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui.h" />
-    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui_internal.h" />
-    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_rect_pack.h" />
-    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_textedit.h" />
-    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_truetype.h" />
-    <ClInclude Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="GAM200_Project\Editor\Defines.h" />
+    <ClInclude Include="GAM200_Project\Editor\editable.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorEntityTools.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorLevelTools.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorModule.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\editorTilemapTools.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imGuiManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imconfig.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\imgui_internal.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_rect_pack.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_textedit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imGUI\stb_truetype.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\Engine.h" />
     <ClInclude Include="GAM200_Project\engineAudio\Audio.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -99,7 +126,9 @@
     <ClInclude Include="GAM200_Project\GameState\GameState_Default.h" />
     <ClInclude Include="GAM200_Project\glfwMessages.h" />
     <ClInclude Include="GAM200_Project\initInfo.h" />
-    <ClInclude Include="GAM200_Project\logger\logger.h" />
+    <ClInclude Include="GAM200_Project\logger\logger.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GAM200_Project\lvlTools\levelEditor.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -203,15 +232,33 @@
     <ClCompile Include="GAM200_Project\ComponentTypeIds.cpp" />
     <ClCompile Include="GAM200_Project\Composition.cpp" />
     <ClCompile Include="GAM200_Project\Core.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\editable.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\editorEntityTools.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\editorLevelTools.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\editorTilemapTools.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\imGuiManager.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_demo.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_draw.cpp" />
-    <ClCompile Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="GAM200_Project\Editor\editable.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editorEntityTools.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editorLevelTools.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\editorTilemapTools.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\imGuiManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_demo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\imGUI\imgui_draw.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\Editor\imgui_impl_glfw_gl3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\engineAudio\Audio.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -264,7 +311,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GAM200_Project\initInfo.cpp" />
-    <ClCompile Include="GAM200_Project\logger\logger.cpp" />
+    <ClCompile Include="GAM200_Project\logger\logger.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GAM200_Project\lvlTools\levelEditor.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

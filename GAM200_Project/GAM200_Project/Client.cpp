@@ -37,6 +37,7 @@ using std::string;
 
 void luaRoutine(std::string arg)
 {
+  /*
   luaRunner testLua;
   #ifndef _WIN32
   arg.erase(arg.begin() + arg.find_last_of("/"), arg.end());
@@ -73,20 +74,24 @@ void luaRoutine(std::string arg)
       std::cout<<i<<std::endl;
     }
   }
+  */
   //std::cout<<'\n';
 }
 
 void logRoutine()
 {
+  /*
   printstr("(Log Test 1)");
   txtlog *thisLog = new txtlog("log.txt");
   thisLog->write("log test");
   printstr("Wrote \"log test\" to thisLog.");
   //thisLog->write("ERROR");
+  */
 }
 
 void factoryRoutine()
 {
+  /*
   printstr("(Factory Test 1)");
   objFactory *makeThings = new objFactory();
   GameObjectComposition* unicorn = makeThings->makeObject("SampleThing");
@@ -96,4 +101,5 @@ void factoryRoutine()
 	  std::cout << "Attempting destruction of illegal object #23.";
 	makeThings->destroyObject(23);
   }
+  */
 }

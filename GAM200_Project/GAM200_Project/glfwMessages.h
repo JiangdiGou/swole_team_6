@@ -5,7 +5,7 @@
 
 void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-
+#ifdef EDITOR
   ImGuiIO& io = ImGui::GetIO();
   if (action == GLFW_PRESS)
     io.KeysDown[key] = true;
@@ -16,7 +16,7 @@ void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int 
   io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
   io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
   io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
-
+#endif
 	//Create a key message
 	MessageCharacterKey keyMsg;
 	//Lazy conversion to char

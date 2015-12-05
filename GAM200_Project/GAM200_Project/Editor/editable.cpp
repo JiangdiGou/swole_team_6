@@ -1,4 +1,7 @@
+#include "Defines.h"
 #include "editable.h"
+
+#ifdef EDITOR
 
 Editable::Editable(bool isTile)
 {
@@ -109,3 +112,5 @@ void Editable::Update(float dt)
 
   }
 }
+
+#endif

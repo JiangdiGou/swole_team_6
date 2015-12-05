@@ -346,6 +346,7 @@
     <ClInclude Include="GAM200_Project\GameLogic\EnemyHealthManager.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\Editor\Defines.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">

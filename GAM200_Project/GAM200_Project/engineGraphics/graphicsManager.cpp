@@ -13,8 +13,8 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /*****************************************************************************/
 //~EndHeader~
-#include "graphicsManager.h"
-#include "../initInfo.h"
+#include "graphicsManager.h"'
+#include "../Editor/Defines.h"
 
 GraphicsManager *GRAPHICS;
 
@@ -27,8 +27,8 @@ GraphicsManager::GraphicsManager(const Shader& shader)
 
   //Flush out the error
   glGetError();
-  spriteAtlas = new TextureAtlas((INITINFO->atlasPNG).c_str(),
-                                  (INITINFO->atlasINFO).c_str());
+  spriteAtlas = new TextureAtlas("resources/Textures/Atlas/testAtlas.png",
+    ("resources/Textures/tList_testAtlas.txt"));
 #ifdef GFXLOG
   logGfxError("TEXTUREATLAS:: Error in texture Atlas construction. ");
 #endif
@@ -165,12 +165,12 @@ Vector2 GraphicsManager::screenToWorld(const Vector2& screenCoords)
 {
   Vector2 worldCoords = screenCoords;
 
-  worldCoords.x = worldCoords.x - 0.5*INITINFO->clientWidth;
-  worldCoords.y = 0.5*INITINFO->clientHeight - worldCoords.y;
+  worldCoords.x = worldCoords.x - 0.5*windowWidth;
+  worldCoords.y = 0.5*windowHeight - worldCoords.y;
 
   //x2 here because the camera is -initInfo to initInfo, so its really like 2 initInfo
-  worldCoords.x = worldCoords.x * (mainCamera->getWidth() / INITINFO->clientWidth);
-  worldCoords.y = worldCoords.y * (mainCamera->getHeight() / INITINFO->clientHeight);
+  worldCoords.x = worldCoords.x * (mainCamera->getWidth() / windowWidth);
+  worldCoords.y = worldCoords.y * (mainCamera->getHeight() / windowHeight);
 
   //Player transform cause thats where the camera is centered
   Vector2 cameraXY = Vector2(mainCamera->getPosition().x, mainCamera->getPosition().y);

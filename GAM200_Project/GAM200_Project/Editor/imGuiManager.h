@@ -1,8 +1,8 @@
 #ifndef IMGUIMANAGER_H
 #define IMGUIMANAGER_H
 
-#define EDITOR
-
+//#define EDITOR
+#include "Defines.h"
 #include <vector>
 #include "imgui_impl_glfw_gl3.h"
 #include "../Engine.h"

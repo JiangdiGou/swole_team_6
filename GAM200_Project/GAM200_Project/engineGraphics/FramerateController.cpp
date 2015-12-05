@@ -15,7 +15,6 @@ All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 //~EndHeader~
 #include "FramerateController.h"
 #include "Graphics.h"
-#include "../initInfo.h"
 #include <mmsystem.h>
 
 //initInfo * INITINFO;
@@ -30,7 +29,7 @@ unsigned FramerateController::getPreviousDt()
 void FramerateController::frameEnd()
 {
   unsigned deltaTime = timeGetTime() - frameStartTime;
-  unsigned frameTime = (unsigned)(1000.0f / INITINFO->FPSlimit);
+  unsigned frameTime = (unsigned)(1000.0f / 60.0f);
 
   timeBeginPeriod(1);
 

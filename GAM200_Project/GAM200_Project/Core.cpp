@@ -11,7 +11,6 @@
 #include "Message.h"
 #include "mouseVector.h"
 #include "_EntryPoint.h"
-#include "initinfo.h"
 #include "physicsLib\PlayerState.h"
 #include "engineAudio/Audio.h"
 #include "GameLogic\PauseMenu.h"
@@ -56,8 +55,7 @@ void CoreEngine::GameLoop()
   bgm.SetVolume(1.0f, "Combat_Music");
   bgm.PlayEvent("Combat_Music");
 #else
-  if (INITINFO->playTheme)
-  {
+
     //FMSoundSys sound = *new FMSoundSys();
     ////sound.Initialize(); <-- deprecated
 
@@ -74,7 +72,7 @@ void CoreEngine::GameLoop()
 	  bgm.PlayEvent("demotitle2");
 	  
 	  
-  }
+  
 #endif
 
   while (GameActive)
