@@ -1,3 +1,11 @@
+/******************************************************************************/
+/*!
+\file   ZilchInterface.cpp
+\author Nolan Yoo
+\par    email: n.yoo\@digipen.edu
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "ZilchInterface.hpp"
 #include "BindInternal.hpp"
 #include <iostream>

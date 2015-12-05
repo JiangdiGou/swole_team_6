@@ -1,10 +1,13 @@
-///////////////////////////////////////////////////////////////////////////////////////
-//
-//	Core.cpp
-//	Authors: Chris Peters
-//	Copyright 2010, Digipen Institute of Technology
-//
-///////////////////////////////////////////////////////////////////////////////////////
+/******************************************************************************/
+/*!
+\file   Core.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+CoreEngine Functions and GameLoop behavior
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include <Windows.h>
 #include "Core.h"
 #include "engineGraphics/Graphics.h"
@@ -79,13 +82,43 @@ void CoreEngine::GameLoop()
   {
     //updateMousePos();
     if (GameState == GS_LOAD)
-    {
-      if (PrevGameState == GS_RUN)
-      {
-        FACTORY->destroyAllObjects();
-        PHYSICS->Reload();
-        LOGIC->createLevel(LevelName);
-        GameState = GS_RUN;
+	{
+		if (PrevGameState == GS_RUN)
+		{
+			if (LevelName == "resources/Levels/WinScreen.txt" || LevelName == "resources/Levels/PlayerDeath.txt")
+			{
+				SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+				emitter->SetPause(true, "demotitle2");
+			}
+			FACTORY->destroyAllObjects();
+			PHYSICS->Reload();
+			LOGIC->createLevel(LevelName);
+			if (LevelName == "resources/Levels/WinScreen.txt")
+			{
+				SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+				emitter->SetVolume(1.0f, "Win");
+				emitter->StopEvent("Win");
+				emitter->PlayEvent("Win");
+			}
+			else if (LevelName == "resources/Levels/PlayerDeath.txt")
+			{
+				SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+				emitter->SetVolume(1.0f, "Death");
+				emitter->StopEvent("Death");
+				emitter->PlayEvent("Death");
+			}
+			else
+			{
+				SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+				emitter->SetVolume(1.0f, "demotitle2");
+				emitter->StopEvent("demotitle2");
+				emitter->PlayEvent("demotitle2");
+			}
+			GameState = GS_RUN;
         //PHYSICS->Initialize();
         //for (unsigned i = 0; i < Systems.size(); ++i)
         //{

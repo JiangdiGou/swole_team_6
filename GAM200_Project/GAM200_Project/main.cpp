@@ -1,10 +1,11 @@
 /******************************************************************************/
 /*!
-\file   Main.c
+\file   Main.cpp
 \author Gabriel Neumann
 \par    email: g.neumann\@digipen.edu
 \brief
-main loop
+  Entry Point, Sets up engine and Constructs Systems
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
@@ -190,9 +191,8 @@ int main(void)
   cam->editorMode = true;
   cam->followingPlayer = false;
 #endif
-  while (timePassed < 5000)
+  while (timePassed < 4000)
   {
-    std::cout << "passed: " << timePassed << std::endl;
     deltaTime = timeGetTime() - previousTime;
     previousTime = timeGetTime();
     timePassed += deltaTime;

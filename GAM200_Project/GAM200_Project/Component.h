@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+\file   Component.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+Declartions for GameComponent
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
 #ifndef COMPONENT_H
 #define COMPONENT_H
 #include "Message.h"

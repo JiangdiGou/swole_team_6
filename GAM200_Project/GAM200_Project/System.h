@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   Message.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  ISystem Derived Class declarations
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef SYSTEM_H
 #define SYSTEM_H
 #include "Message.h"

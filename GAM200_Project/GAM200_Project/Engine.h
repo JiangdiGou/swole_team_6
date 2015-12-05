@@ -4,6 +4,7 @@
 \author Gabriel Neumann
 \par    email: g.neumann\@digipen.edu
 Header for libraries and engine includes
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 #ifndef ENGINE_H

@@ -5,6 +5,8 @@
 {7bdbfb57-3281-4406-bbc9-ea0bc3fc393f} event:/EnemySword
 {f7dd3d75-7dbd-4da8-8d9c-37825d904f75} event:/GetsHit
 {bc0713b6-6c2b-440a-b07c-303386693a88} event:/Enter
+{f5b32e20-ac20-4b6d-b6eb-937fd5dedc66} event:/Win
+{963c3ac3-e00d-4dbd-9c2e-e4d87e2cc4e7} event:/Death
 {0be6245d-b22e-4811-8de2-fbd704baa3e2} bus:/
 {c2e29bc2-b4d1-4530-a8a0-1285faaf7ee2} bus:/Reverb
 {e663a13e-08bc-47fa-a945-42cd6496f97c} bank:/Master Bank

@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   Composition.h
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  Declaration for GameObjects for Component Based Engine
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #ifndef COMPOSITION_H
 #define COMPOSITION_H
 #include "Component.h"

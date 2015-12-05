@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   WindowsSystem.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  WindowsSystem used for Handling Callback Messages and Creating Window
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "WindowsSystem.h"
 #include "initInfo.h"
 #include "engineGraphics\GraphicsManager.h"

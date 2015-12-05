@@ -5,6 +5,7 @@
 \par    email: g.neumann\@digipen.edu
 \brief
 Game State Manager declarations
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

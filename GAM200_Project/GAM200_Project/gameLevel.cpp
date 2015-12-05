@@ -6,6 +6,7 @@
  \par    Component: LevelDataManager
  \brief
  This is the implementation of the gameLevel class. (Quick printing, tileMap, etc).
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
  */
 /******************************************************************************/
 

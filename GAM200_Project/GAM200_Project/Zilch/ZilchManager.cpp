@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file   ZilchManager.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+ZilchManager To keep Track of Zilch Stuff
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "ZilchManager.h"
 
 ZilchManager *ZILCHMANAGER;

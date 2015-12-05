@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*!
+\file   ZilchComponent.cpp
+\author Gabriel Neumann
+\par    email: g.neumann\@digipen.edu
+\brief
+  Implementation of finding functions from our Zilch Scripts and calling them
+  when they need to be in order for ZilchComponents to work with our engine.
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "ZilchComponent.h"
 
 

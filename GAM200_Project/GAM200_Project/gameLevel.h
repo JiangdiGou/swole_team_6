@@ -9,6 +9,7 @@
  \par    Component: LevelDataManager
  \brief
  This is the interface for the gameLevel class.
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
  */
 /******************************************************************************/
 
