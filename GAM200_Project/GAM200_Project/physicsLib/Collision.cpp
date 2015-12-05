@@ -69,6 +69,12 @@ void ShapeCircle::SerializeWrite(Serializer& str)
   StreamWrite(str);
 }
 
+ShapeAAB::ShapeAAB() : Shape(SidBox)
+{
+  Extents.x = 0.5;
+  Extents.y = 0.5;
+}
+
 void ShapeAAB::Initialize()
 {
   //if (body == NULL)

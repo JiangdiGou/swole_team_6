@@ -22,7 +22,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Bad Enemy AI",
   "Health Manager",
   "PlayerHealthBar",
-  "PlayerAttack",
+  "Player Attack",
   "Load Level",
   "Enemy Health Manager",
 };

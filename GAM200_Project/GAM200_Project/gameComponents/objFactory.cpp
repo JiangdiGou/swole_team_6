@@ -169,6 +169,15 @@ void objFactory::Update(float dt)
     std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
     for (; it != gameObjs.end(); ++it)
     {
+      if (it->second->MarkedForDeath)
+      {
+        destroyObject(it->second->ObjectId);
+        it = gameObjs.begin();
+      }
+    }
+    it = gameObjs.begin();
+    for (; it != gameObjs.end(); ++it)
+    {
       it->second->Update(dt);
     }
   }

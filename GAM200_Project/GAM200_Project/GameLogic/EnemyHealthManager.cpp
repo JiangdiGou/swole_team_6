@@ -13,18 +13,14 @@ void EnemyHealthManager::Initialize()
     pSprite->setLayer(1);
 
   CurrentHealth = TotalHealth;
-
-#ifdef EDITOR
-  //CanMove = false;
-#else
-  //CanMove = true;
-#endif
 }
 
 void EnemyHealthManager::Update(float dt)
 {
 	if (!Alive)
 	{
+    std::cout << "enemy died \n";
+
     parent->Destroy();
 	}
 }
@@ -32,6 +28,8 @@ void EnemyHealthManager::Update(float dt)
 void EnemyHealthManager::UpdateHealth(int val)
 {
 	CurrentHealth += val;
+
+  std::cout << CurrentHealth << "\n";
 
 	if (CurrentHealth <= 0)
 	{
