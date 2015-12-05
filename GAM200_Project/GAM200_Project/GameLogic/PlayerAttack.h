@@ -10,7 +10,7 @@ public:
   void Update(float dt)override;
   void SendMessages(Message* msg)override;
   void SerializeWrite(Serializer& str) override;
-  void Attack(std::vector <GameObjectComposition*> objectsHit);
+  void Attack(std::vector <GameObjectComposition*> objectsHit, Vec2D start, Vec2D end);
 
   PlayerAttack();
 
@@ -18,12 +18,16 @@ private:
   Transform* pTransform;
   Sprite *pSprite;
   GOC* parent;
+  Body* playerBody;
   //pMouse;
   
 
   float startPos;
   float endPos;
 
+  float slashTimer;
+
+  bool CanSlash = true;
   bool CanMove = true;
   bool MovingRight;
   bool Alive = true;
