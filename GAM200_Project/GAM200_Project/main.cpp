@@ -25,7 +25,7 @@ main loop
 //#include "ActionSystem\ActionSequence.h"
 #include "glfwMessages.h"
 #include "initInfo.h"
-//#include "Editor\imGuiManager.h"
+#include "Editor\imGuiManager.h"
 #include "Zilch\Zilch.hpp"
 #include "Zilch\ZilchInterface.hpp"
 #include "Zilch\ZilchManager.h"
