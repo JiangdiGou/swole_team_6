@@ -1,45 +1,34 @@
 #pragma once
 
-
-	///	Intrusively linked list for objects. This enables the ability to store 
-	/// objects in an efficient linked list structure without duplicating code. 
-	/// Object to be used in this container must have Prev and Next pointers as
-	/// members.
 	template< typename type >
 	class ObjectLinkList
 	{
 	public:
-		typedef type * pointer;
-		typedef type& reference;
+		typedef type * ObjPtr;
+		typedef type& ObjRef;
 
 		ObjectLinkList()
 			:First(NULL),Last(NULL),ObjectCount(0)
 		{
 		}
 
-		//Pop the front element. If the list is empty return NULL.
-		pointer pop_front()
+		ObjPtr pop_front()
 		{
 			if(First==NULL)
 			{
-				//List is empty
 				return NULL;
 			}
 			else
 			{
-				//get the first object
 				type * first = First;
 				First = first->Next;
 			
-				//Update linked list pointers
 				if(First)
 				{
-					//more elements in list
 					First->Prev = NULL;
 				}
 				else
 				{
-					//popped last object in list
 					Last = NULL;
 				}
 
@@ -51,13 +40,12 @@
 
 		}
 
-		void push_back(pointer object)
+		void push_back(ObjPtr object)
 		{
 			++ObjectCount;
 
 			if( Last == NULL )
 			{
-				//list was empty
 				First = object;
 				Last = object;
 				object->Next = NULL;
@@ -72,64 +60,95 @@
 			}
 		}
 
-		void erase(pointer object)
+		void erase(ObjPtr object)
 		{
 			--ObjectCount;
 
 			if( object->Next == NULL && object->Prev == NULL)
 			{
-				//Only object in list make list empty
 				Last = NULL;
 				First = NULL;
 			}
 			else if( object->Next == NULL )
 			{
-				//Object is last update Last
 				Last = object->Prev;
 				if( Last ) Last->Next = NULL;
 
 			}
 			else if( object->Prev == NULL )
 			{
-				//Object is first update first
 				First = object->Next;
 				if( First ) First->Prev = NULL;
 			}
 			else
 			{
-				//Object is in middle just update pointers
 				object->Prev->Next = object->Next;
 				object->Next->Prev = object->Prev;
 			}
 
 		}
 
-		///Intrusive linked list iterator
 		class iterator
 		{
 		public:
 			friend class ObjectLinkList;
 			iterator(){};
-			iterator(pointer p) : item(p) {}
-			void operator--(){item=item->Prev;}
-			void operator++(){item=item->Next;}
-			reference operator*(){return *item;}
-			pointer operator->(){return item;}
-			bool operator==(const iterator& i){return item==i.item;}
-			bool operator!=(const iterator& i){return item!=i.item;}
-			operator bool(){return item!=NULL;}
-			operator pointer(){return item;}
-			pointer GetPtr(){return item;}
+			iterator(ObjPtr p) : item(p) {}
+			void operator--()
+			{
+				item=item->Prev;
+			}
+			void operator++()
+			{
+				item=item->Next;
+			}
+			ObjRef operator*()
+			{
+				return *item;
+			}
+			ObjPtr operator->()
+			{
+				return item;
+			}
+			bool operator==(const iterator& i)
+			{ 
+				return item==i.item;
+			}
+			bool operator!=(const iterator& i)
+			{ 
+				return item!=i.item;
+			}
+			operator bool()
+			{
+				return item!=NULL;
+			}
+			operator ObjPtr()
+			{ 
+				return item;
+			}
+			ObjPtr GetPtr()
+			{ 
+				return item;
+			}
 		private:
-			pointer item;
+			ObjPtr item;
 		};
 
-		iterator begin(){ return First; }
-		iterator end(){ return NULL;}
-		pointer last(){ return Last; }
+		iterator begin()
+		{ 
+			return First;
+		}
+		iterator end()
+		{ 
+			return NULL;
+		}
+		ObjPtr last()
+		{ 
+			return Last;
+		}
 	private:
-		pointer First;
-		pointer Last;
+		ObjPtr First;
+		ObjPtr Last;
 		unsigned ObjectCount;
 	};
 

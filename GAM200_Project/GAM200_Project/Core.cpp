@@ -83,8 +83,8 @@ void CoreEngine::GameLoop()
       if (PrevGameState == GS_RUN)
       {
         FACTORY->destroyAllObjects();
-        LOGIC->createLevel(LevelName);
         PHYSICS->Reload();
+        LOGIC->createLevel(LevelName);
         GameState = GS_RUN;
         //PHYSICS->Initialize();
         //for (unsigned i = 0; i < Systems.size(); ++i)

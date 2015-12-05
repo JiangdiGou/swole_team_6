@@ -149,46 +149,7 @@ int TileMapCollision::CheckBinaryMapCollision(float PosX, float PosY)
 {
   //Creating the flag_ to be bit-shifted
   flag_ = 0;
-  //Preventing repeat calculations
-  //float HALF_TILE_WIDTH = scaleX / 2.0f, HALF_TILE_WIDTH = scaleY / 2.0f,
-    //QUARTER_TILE_WIDTH = scaleX / 4.0f, QUARTER_TILE_WIDTH = scaleY / 4.0f;
 
-  /*********************************************
-     t1    t2
-  l1           r1
-  l2           r2    CREATING THE HOT SPOTS
-     b1    b2
-  **********************************************/
-  /*
-  left1X = PosX - HALF_TILE_WIDTH;
-  left1Y = PosY + QUARTER_TILE_WIDTH;
-  left2X = left1X;
-  left2Y = PosY - QUARTER_TILE_WIDTH;
-
-  top1X = PosX - QUARTER_TILE_WIDTH;
-  top1Y = PosY + HALF_TILE_WIDTH;
-  top2X = PosX + QUARTER_TILE_WIDTH;
-  top2Y = top1Y;
-
-  right1X = PosX + HALF_TILE_WIDTH;
-  right1Y = left1Y;
-  right2X = right1X;
-  right2Y = left2Y;
-
-  bot1X = top1X;
-  bot1Y = PosY - HALF_TILE_WIDTH;
-  bot2X = top2X;
-  bot2Y = bot1Y;
-  */
-
-  //@ Maybe check top/bottom first, then left/right?
-  //This would keep long falls from "snapping" left/right at the bottom
-  //And you're pretty much never gonna go super-fast to the left or right
-  //Try it later.
-
-
-  //Here we compare the values from GetCellValue, which are the IDs of the tiles
-  //So, 0 == empty, 1 == wall, 2 == ceiling, etc...
   int checkID1, checkID2;
 
   /* Left*/
@@ -230,9 +191,6 @@ int TileMapCollision::CheckBinaryMapCollision(float PosX, float PosY)
     //(If we're entirely on a platform, and not currently jumping above it.)
     if (checkID1 == HOPPABLE_PLATFORM && checkID2 == HOPPABLE_PLATFORM)
     {
-      //Case 1: Upward velocity? Do nothing
-      //Case 2: Downward velocity, player is in middle of platform, do nothing
-      //Case 3: Downward velocity, player is comfortably above middle of platform, do something!
 		if (rigid_->Velocity.y < 0)
       {
         //If our "feet" are touching the top half of the tile, and if they're touching it JUST BARELY
@@ -249,8 +207,6 @@ int TileMapCollision::CheckBinaryMapCollision(float PosX, float PosY)
     }
   }
 
-  //At the end of this function, "flag_" will be used to determine which sides
-  //of the object instance are colliding. 2 hot spots will be placed on each side.
   return flag_;
 
 }

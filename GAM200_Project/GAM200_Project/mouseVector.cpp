@@ -35,6 +35,15 @@ void MouseVector::SendMessages(Message * message)
     {
       if (mouseEvent->ButtonIsPressed)
       {
+		  //I don't know if gameplay programmer is going to add attack sound or not, but before
+		  //submission, if the gameplay programmer find sth breaks becuz of the sound code below,
+		  //comment it out and make your own attack sound code sheet. I'm not responsible for when
+		  // someone who said"I can work on that too.""I need you to tell me how to access it".. but
+		  // never do anythings, if you cant do it, say you cant, if you can, do it asap. jg
+		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+		  emitter->SetVolume(1.0f,"SwordSwing");
+		  emitter->StopEvent("SwordSwing");
+		  emitter->PlayEvent("SwordSwing");
 		  //mouseSound.Initialize();
 		  //mouseSound.PlayEvent("SwordSwing");
         mouseDown = true;
@@ -43,6 +52,10 @@ void MouseVector::SendMessages(Message * message)
       }
       else if (mouseDown && !(mouseEvent->ButtonIsPressed))
       {
+		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+		  emitter->SetVolume(1.0f, "SwordHitOrganic");
+		  emitter->StopEvent("SwordHitOrganic");
+		  emitter->PlayEvent("SwordHitOrganic");
 		  //mouseSound.Initialize();
 		  //mouseSound.PlayEvent("SwordHitOrganic");
         mouseDown = false;
@@ -53,7 +66,8 @@ void MouseVector::SendMessages(Message * message)
 
 		    objsInRay = LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
 
-        playerAttack->Attack(objsInRay);
+        if (playerAttack != nullptr)
+         playerAttack->Attack(objsInRay);
 		
       }
     }

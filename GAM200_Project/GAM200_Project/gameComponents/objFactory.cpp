@@ -172,6 +172,15 @@ void objFactory::Update(float dt)
     std::map<int, GameObjectComposition*>::iterator it = gameObjs.begin();
     for (; it != gameObjs.end(); ++it)
     {
+      if (it->second->MarkedForDeath)
+      {
+        destroyObject(it->second->ObjectId);
+        it = gameObjs.begin();
+      }
+    }
+    it = gameObjs.begin();
+    for (; it != gameObjs.end(); ++it)
+    {
       it->second->Update(dt);
     }
   }
@@ -617,6 +626,15 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
 
   case CT_EnemyHealthManager:
     return new EnemyHealthManager();
+
+  case CT_WinLogic:
+	  return new WinLogic();
+
+  case CT_TutorialLogic:
+    return new TutorialLogic();
+	
+  case CT_QuitGame:
+	  return new QuitGame();
 
   default:
     return nullptr;

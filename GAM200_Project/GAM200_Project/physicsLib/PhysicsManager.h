@@ -58,9 +58,7 @@ private:
 	void IntegrateBodies(float dt);
 	void DetectContacts(float dt);
 	void solveMessage();
-	void DebugDraw();
 	void Step(float dt);
-	bool DebugDrawingActive;
 	float TimeAccumulation;
 	CollsionDatabase Collsion;
   std::vector<Collision*> prevCollisions;

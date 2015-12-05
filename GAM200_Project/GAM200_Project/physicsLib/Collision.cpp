@@ -40,18 +40,10 @@ void ShapeLine::SerializeWrite(Serializer& str)
 }
 void ShapeCircle::Draw()
 {
-	/*Drawer::Instance.DrawCircle(body->Position, Radius);*/
+
 }
 
-//bool ShapeCircle::TestPoint(Vec2D testPoint)
-//{
-	//Vec2D delta = body->Position - testPoint;
-	//float dis = Normalize(delta);
-	//if (dis < Radius)
-	//	return true;
-	//else
-	//return false;
-//}
+
 
 void ShapeCircle::SerializeRead(Serializer& str)
 {
@@ -67,6 +59,12 @@ void ShapeCircle::SerializeWrite(Serializer& str)
   StreamWrite(str);
   StreamWrite(str, Radius);
   StreamWrite(str);
+}
+
+ShapeAAB::ShapeAAB() : Shape(SidBox)
+{
+  Extents.x = 0.5;
+  Extents.y = 0.5;
 }
 
 void ShapeAAB::Initialize()
@@ -188,22 +186,9 @@ void ShapeAAB::SendMessages(Message* m)
 void ShapeAAB::Draw()
 {
 
-
-	//debugDrawSquare(ownerTrans->GetPosition(), Extents.x, Extents.y, Vector3(0, 0, 0));
 }
 
-//bool ShapeAAB::TestPoint(Vec2D testPoint)
-//{
-	//Vec2D delta = body->Position - testPoint;
-	//if (fabs(delta.x) < Extents.x)
-	//{
-	//	if (fabs(delta.y) < Extents.y)
-	//	{
-	//		return true;
-	//	}
-	//}
-	//return false;
-//}
+
 ZilchDefineExternalType(Shape::ShapeId, "Shape::ShapeId", ZLib_Internal, builder, type)
 {
   ZilchBindEnum(builder, type, SpecialType::Enumeration);
@@ -233,7 +218,7 @@ float Clamp(float min, float max, float x)
 		return max;
 	return x;
 }
-/////////////////////Collsion Detection Functions////////////////////
+
 
 //bool line_rectangle_collide( Vec2D startBase, Vec2D endDirection)
 //{
@@ -329,14 +314,6 @@ bool DetectCollisionCircleCircle(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactLi
 			normal = positionDelta;
 		}
 
-		//Add a contact
-		//ManifoldSet * contact = c->GetNewContact();
-		//contact->Bodies[0] = spA->body;
-		//contact->Bodies[1] = spB->body;
-		//contact->ContactNormal = positionDelta;//A to B
-		//contact->Penetration = penetration;
-		//contact->Restitution = DetermineRestitution(a->body, b->body);
-		//contact->FrictionCof = DetermineFriction(a->body, b->body);
 		return true;
 	}
 	else
@@ -446,7 +423,7 @@ bool  DetectCollisionAABoxAABox(Shape *a, Vec2D at, Shape *b, Vec2D bt, contactL
 				//X is smallest
 				ManifoldSet * contact = c->GetNewContact();
 				Vec2D normal = positionDelta.x < 0 ? Vec2D(-1, 0) : Vec2D(1, 0);
-				B->fuckCollision(contact, A);
+				B->ResolveCollision(contact, A);
 				contact->ContactNormal = normal;
 				contact->Penetration = xDiff;
 			
@@ -457,7 +434,7 @@ bool  DetectCollisionAABoxAABox(Shape *a, Vec2D at, Shape *b, Vec2D bt, contactL
 				//Y is smallest
 				ManifoldSet * contact = c->GetNewContact();
 				Vec2D normal = positionDelta.y < 0 ? Vec2D(0, 1) : Vec2D(0, -1);
-				A->fuckCollision(contact, B);
+				A->ResolveCollision(contact, B);
 				contact->ContactNormal = normal;
 				contact->Penetration = yDiff;
 			
@@ -468,8 +445,6 @@ bool  DetectCollisionAABoxAABox(Shape *a, Vec2D at, Shape *b, Vec2D bt, contactL
 	return false;
 }
 
-
-//Auxiliary
 bool  DetectCollisionBoxCircle(Shape*a, Vec2D at, Shape*b, Vec2D bt, contactList*c)
 {
 	return DetectCollisionCircleAABox(b, bt, a, at, c);

@@ -25,9 +25,7 @@ Physics * PHYSICS = NULL;
 
 Physics::Physics()
 {
-	//ErrorIf(PHYSICS != NULL, "Physics already initialized");
 	PHYSICS = this;
-	DebugDrawingActive = false;
 	TimeAccumulation = 0.0f;
 	Gravity = Vec2D(0, -5);
 	MaxVelocity = 1000;
@@ -50,12 +48,14 @@ void Physics::Reload()
     delete curCollisions.back();
     curCollisions.pop_back();
   }
+  Contacts.Reset();
+  while (Bodies.begin())
+    Bodies.pop_front();
 }
 
 void Physics::Initialize()
 {
-	
-	//RegisterComponent(Body);
+
 }
 
 void Physics::IntegrateBodies(float dt)
@@ -69,9 +69,8 @@ void Physics::IntegrateBodies(float dt)
 void Physics::DetectContacts(float dt)
 {
 	BodyIterator bodyA = Bodies.begin();
-	BodyIterator lastBody = Bodies.last(); //end - 1
+	BodyIterator lastBody = Bodies.last(); 
   
-	//Broad phase should be added this is N^2
 	for (; bodyA != lastBody; ++bodyA)
 	{
 		BodyIterator bodyB = bodyA;
@@ -98,20 +97,7 @@ void Physics::DetectContacts(float dt)
           }
           if(push == true)
             curCollisions.push_back(collideEvent);
-          /*Collision ACollisionWith(BShape);
-          Collision BCollisionWith(AShape);
-          if (!bodyA->IsStatic)
-          {
-            //AllCollisions[nextCollisionIndex] = ACollisionWith;
-            AShape->SendMessages(&AllCollisions[nextCollisionIndex]);
-            nextCollisionIndex++;
-          }
-          if (!bodyB->IsStatic)
-          {
-            //AllCollisions[nextCollisionIndex] = BCollisionWith;
-            BShape->SendMessages((Message*)&BCollisionWith);
-            nextCollisionIndex++;
-          }*/
+
 				}
 			}
 		}
@@ -131,7 +117,7 @@ void Physics::solveMessage()
   }
 
   //Broadcast physics collision messages AFTER physics
-  //has update the bodies
+  //update the bodies
   for (unsigned i = 0; i < curCollisions.size(); i++)
   {
     bool started = true;
@@ -242,19 +228,10 @@ void Physics::Update(float dt)
 		}
 	}
 
-	if (DebugDrawingActive)
-		DebugDraw();
 
 }
 
 
-void Physics::DebugDraw()
-{
-	for (BodyIterator it = Bodies.begin(); it != Bodies.end(); ++it)
-	{
-		it->DebugDraw();
-	}
-}
 
 void Physics::SendMessage(Message * m)
 {

@@ -215,9 +215,8 @@ void PauseMenu::Update(float dt)
           {
           case HOWTOPLAY:
           {
-			 
 			
-            followCameraWithOffset(*it, Vector2(0, 0));
+			  followCameraWithOffset(*it, Vector2(0, 0));
             break;
           }
           case RESUME:
@@ -245,11 +244,13 @@ void PauseMenu::Update(float dt)
       }
       case AREYOUSURE:
       {
+
 		 
         //And youre one of the menu buttons in the main menu
         if (pMenuButton->type == IAMSURE || pMenuButton->type == IAMNOTSURE
           || pMenuButton->type == AREYOUSURESPRITE)
         {
+			
           //Activate
           if (pSprite)
             pSprite->visible = true;
@@ -355,6 +356,7 @@ void PauseMenu::SendMessages(Message* message)
 		SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
 		emitter->StopEvent("Enter");
 		emitter->PlayEvent("Enter");
+	
 	
 		//pSound->BeQuiet();
       if (CORE->Pause)

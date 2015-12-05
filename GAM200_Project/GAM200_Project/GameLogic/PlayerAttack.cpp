@@ -28,7 +28,7 @@ void PlayerAttack::Attack(std::vector <GameObjectComposition*> objectsHit)
 {
   for (std::vector<GameObjectComposition*>::iterator it = objectsHit.begin(); it != objectsHit.end(); ++it)
   {
-    if ((*it)->GetName() == "Enemy")
+    if ((*it)->GetName() == "Enemy ")
     {
       GOC *refedEnemy = (*it);
       EnemyHealthManager *refedEHM = refedEnemy->has(EnemyHealthManager);

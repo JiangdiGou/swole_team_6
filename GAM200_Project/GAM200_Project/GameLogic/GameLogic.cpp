@@ -11,6 +11,7 @@
 #include "../mouseVector.h"
 #include "../reactive.h"
 #include "PlayerTag.h"
+#include "PlayerAttack.h"
 #include "HealthManager.h"
 #include "LoadLevel.h"
 #include "../ZilchComponent.h"
@@ -156,6 +157,9 @@ void GameLogic::createLevel(std::string levelPath)
   //mouseVec
   MouseVector *vectTest1 = new MouseVector();
   player->AddComponent(CT_MouseVector, vectTest1);
+  //Player Attack
+  PlayerAttack *attackComponent = new PlayerAttack();
+  player->AddComponent(CT_PlayerAttack, attackComponent);
   //Editable
 #ifdef EDITOR
   Editable* editable = new Editable(false);
