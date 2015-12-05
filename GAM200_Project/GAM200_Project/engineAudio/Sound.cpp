@@ -51,7 +51,7 @@ void SoundManager::Initialize()
   //For later... check for errors
 
 
-	if (m_Sys->initialize(1024, FMOD_STUDIO_INIT_LIVEUPDATE, FMOD_INIT_NORMAL, 0))
+	if (m_Sys->initialize(1024, FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, 0))
 	{
 		printf("Bank creation initialized\n");
 		//return;

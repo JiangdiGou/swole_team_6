@@ -121,7 +121,11 @@ void Body::Initialize()
 	Position = bodyTrans->GetPositionXY();
 
 	//Add this body to the body list
-	PHYSICS->Bodies.push_back(this);
+  if (notInitial == false)
+  {
+    PHYSICS->Bodies.push_back(this);
+    notInitial = true;
+  }
 
 	//If mass is zero object is interpreted
 	//to be static

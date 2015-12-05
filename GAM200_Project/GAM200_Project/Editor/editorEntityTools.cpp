@@ -1,5 +1,6 @@
 #include "editorEntityTools.h"
 #include "../ZilchComponent.h"
+#include "editable.h"
 
 const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Transform",
@@ -336,7 +337,7 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
 
   //Makes the entity spawn in the middle of the screen
 
-  Vector2 middleOfScreen = Vector2(INITINFO->clientWidth / 2.0, INITINFO->clientHeight / 2.0);
+  Vector2 middleOfScreen = Vector2(windowWidth / 2.0, windowHeight / 2.0);
   middleOfScreen = GRAPHICS->screenToWorld(middleOfScreen);
   newTransform->SetPosition(Vector3(middleOfScreen, 0)); 
 

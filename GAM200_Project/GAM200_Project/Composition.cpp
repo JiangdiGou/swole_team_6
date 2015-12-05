@@ -102,7 +102,8 @@ GameObjectComposition::~GameObjectComposition()
 	//takes care of all resources and memory.
   for (ComponentIt it = Components.begin(); Components.size() > 0; it = Components.begin())
   {
-    (*it)->~GameComponent();
+    //(*it)->~GameComponent();
+    delete (*it);
     Components.erase(it);
   }
 }

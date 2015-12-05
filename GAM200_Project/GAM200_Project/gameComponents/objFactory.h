@@ -23,8 +23,10 @@
 #include "../WindowsSystem.h"
 
 #include "../reactive.h"
+#ifdef EDITOR
 #include "../Editor/editable.h"
 #include "../Editor/imGuiManager.h"
+#endif
 
 #ifndef OBJFACTORY_H
 #define OBJFACTORY_H

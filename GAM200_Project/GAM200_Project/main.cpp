@@ -11,6 +11,7 @@ main loop
 
 
 
+#include "Editor\Defines.h"
 #include "main.h"
 #include "_EntryPoint.h"
 #include "extraLogger/extraLogger.h"
@@ -25,13 +26,14 @@ main loop
 //#include "ActionSystem\ActionSequence.h"
 #include "glfwMessages.h"
 #include "initInfo.h"
+#ifdef EDITOR
 #include "Editor\imGuiManager.h"
+#endif
 #include "Zilch\Zilch.hpp"
 #include "Zilch\ZilchInterface.hpp"
 #include "Zilch\ZilchManager.h"
 #include "Zilch\ZilchBind.h"
 #include "GameLogic\PauseMenu.h"
-#include "Editor\Defines.h"
 
 initInfo * INITINFO;
 
@@ -41,7 +43,9 @@ using namespace Zilch;
 
 int main(void)
 {
+  #ifndef EDITOR
   FreeConsole();
+  #endif
   //luaInitFile();
   //Do init stuff from ini file here. currently, we do nothing.
 
@@ -66,7 +70,11 @@ int main(void)
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   //Create a Window 
-	GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "NinjaCade", glfwGetPrimaryMonitor(), nullptr);
+#ifdef EDITOR
+	  GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "NinjaCade", nullptr, nullptr);
+#else
+  GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "NinjaCade", glfwGetPrimaryMonitor(), nullptr);
+#endif
 	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;

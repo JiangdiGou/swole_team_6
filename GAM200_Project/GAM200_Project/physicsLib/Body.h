@@ -76,6 +76,7 @@ public:
 	//Static object are immovable fixed objects
 	bool IsStatic;
 	bool IsGhost;
+  bool notInitial;
 	bool CheckDetectsCollision();
 };
 
