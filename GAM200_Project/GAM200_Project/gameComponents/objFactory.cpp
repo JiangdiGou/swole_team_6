@@ -624,6 +624,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
   case CT_EnemyHealthManager:
     return new EnemyHealthManager();
 
+  case CT_WinLogic:
+	  return new WinLogic();
+
   default:
     return nullptr;
   }
