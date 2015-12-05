@@ -79,12 +79,42 @@ void CoreEngine::GameLoop()
   {
     //updateMousePos();
     if (GameState == GS_LOAD)
-    {
-      if (PrevGameState == GS_RUN)
-      {
-        FACTORY->destroyAllObjects();
-        PHYSICS->Reload();
+	{
+		if (PrevGameState == GS_RUN)
+		{
+		if (LevelName == "resources/Levels/WinScreen.txt")
+		{
+			SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+			emitter->SetPause(true, "demotitle2");
+		}
+		FACTORY->destroyAllObjects();
+		PHYSICS->Reload();
         LOGIC->createLevel(LevelName);
+		if (LevelName == "resources/Levels/WinScreen.txt")
+		{
+			SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+			emitter->SetVolume(1.0f, "Win");
+			emitter->StopEvent("Win");
+			emitter->PlayEvent("Win");
+		}
+		else if (LevelName == "resources/Levels/LoseScreen.txt")
+		{
+			SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+			emitter->SetVolume(1.0f, "Death");
+			emitter->StopEvent("Death");
+			emitter->PlayEvent("Death");
+		}
+		else
+		{
+			SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+
+			emitter->SetVolume(1.0f, "demotitle2");
+			emitter->StopEvent("demotitle2");
+			emitter->PlayEvent("demotitle2");
+		}
         GameState = GS_RUN;
         //PHYSICS->Initialize();
         //for (unsigned i = 0; i < Systems.size(); ++i)
