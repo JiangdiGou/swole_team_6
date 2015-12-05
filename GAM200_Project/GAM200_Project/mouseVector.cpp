@@ -52,10 +52,10 @@ void MouseVector::SendMessages(Message * message)
       }
       else if (mouseDown && !(mouseEvent->ButtonIsPressed))
       {
-		  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
-		  emitter->SetVolume(1.0f, "SwordHitOrganic");
-		  emitter->StopEvent("SwordHitOrganic");
-		  emitter->PlayEvent("SwordHitOrganic");
+		  //SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+		  //emitter->SetVolume(1.0f, "SwordHitOrganic");
+		  //emitter->StopEvent("SwordHitOrganic");
+		  //emitter->PlayEvent("SwordHitOrganic");
 		  //mouseSound.Initialize();
 		  //mouseSound.PlayEvent("SwordHitOrganic");
         mouseDown = false;
@@ -67,7 +67,7 @@ void MouseVector::SendMessages(Message * message)
 		    objsInRay = LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
 
         if (playerAttack != nullptr)
-         playerAttack->Attack(objsInRay);
+         playerAttack->Attack(objsInRay, mouseDownPos, mouseUpPos);
 		
       }
     }

@@ -134,6 +134,8 @@ public:
 	friend Vec2D operator/(const Vec2D& vec, const float scale);
 	friend Vec2D operator/(const float scale, const Vec2D& vec);
 
+  Vec2D operator=(const Vec2D& rhs);
+
 	// Returns true if the vectors are equal.
 	bool operator==(const Vec2D& rhs);
 

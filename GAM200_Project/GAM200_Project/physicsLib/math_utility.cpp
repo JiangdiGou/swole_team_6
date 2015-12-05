@@ -171,6 +171,18 @@ Vec2D operator/(const float scale, const Vec2D& vec)
 //	return (float) *this)[i]);
 //}
 
+Vec2D Vec2D::operator=(const Vec2D& rhs)
+{
+  if (&rhs == this)
+  {
+    return *this;
+  }
+  this->x = rhs.x;
+  this->y = rhs.y;
+
+  return *this;
+}
+
 // Returns true if the vectors are equal.
 bool  Vec2D::operator==(const Vec2D& rhs)
 {
