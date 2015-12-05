@@ -346,6 +346,9 @@
     <ClInclude Include="GAM200_Project\GameLogic\EnemyHealthManager.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="GAM200_Project\GameLogic\WinLogic.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GAM200_Project\engineGraphics\Texture.cpp">
@@ -559,6 +562,9 @@
       <Filter>GameLogic</Filter>
     </ClCompile>
     <ClCompile Include="GAM200_Project\GameLogic\EnemyHealthManager.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GAM200_Project\GameLogic\WinLogic.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>

@@ -68,7 +68,7 @@ std::string GetName();
 
 //A group of actions
 ActionGroup Actions;
-
+bool MarkedForDeath = false;
 //FACTORY ONLY: Use CreateEmptyComposition on factory instead
 GameObjectComposition();
 //FACTORY ONLY: Use Destroy instead, factory will call the destructor correctly

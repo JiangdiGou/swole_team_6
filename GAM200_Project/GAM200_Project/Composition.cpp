@@ -181,7 +181,8 @@ void GameObjectComposition::Destroy()
 	//Signal the factory that is object needs to be destroyed
 	//this will happen at the end of the frame.
 	//FACTORY = new objFactory();
-	FACTORY->destroyObject(this->ObjectId);
+	//FACTORY->destroyObject(this->ObjectId);
+  MarkedForDeath = true;
 }
 
 void GameObjectComposition::SendMessages(Message * message)

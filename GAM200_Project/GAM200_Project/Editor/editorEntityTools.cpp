@@ -22,9 +22,10 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Bad Enemy AI",
   "Health Manager",
   "PlayerHealthBar",
-  "PlayerAttack",
+  "Player Attack",
   "Load Level",
   "Enemy Health Manager",
+  "WinLogic",
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -295,6 +296,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 
   case CT_EnemyHealthManager:
     return focus->has(EnemyHealthManager);
+
+  case CT_WinLogic:
+	  return focus->has(WinLogic);
 
   default:
     return NULL;

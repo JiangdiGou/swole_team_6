@@ -106,7 +106,7 @@ std::vector <GameObjectComposition*> LoopAll(Vec2D start, Vec2D end)
 			{
 				std::cout << it->second->GetName() << std::endl;
 				//std::cout << "Im in loop" << std::endl;
-				//collidedObj.push_back(it->second);
+				collidedObj.push_back(it->second);
 			}
 	}
 	/*for (int i = 0; i < FACTORY->gameObjs.size(); i++)

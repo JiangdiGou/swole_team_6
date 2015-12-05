@@ -122,7 +122,7 @@ class ShapeAAB : public Shape
 {
 public:
   ZilchDeclareDerivedType(ShapeAAB, Shape);
-	ShapeAAB() : Shape(SidBox){};
+  ShapeAAB();
   void Initialize() override;
   void Update(float dt) override;
   void SerializeRead(Serializer& str) override;

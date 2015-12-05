@@ -52,7 +52,8 @@ void MouseVector::SendMessages(Message * message)
 
 		    objsInRay = LoopAll(Vec2D(mouseDownPos), Vec2D(mouseUpPos));
 
-        playerAttack->Attack(objsInRay);
+        if (playerAttack != nullptr)
+         playerAttack->Attack(objsInRay);
 		
       }
     }

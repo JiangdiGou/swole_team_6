@@ -34,7 +34,8 @@ enum ComponentTypeId
 	CT_PlayerHealthBar,
 	CT_PlayerAttack,
 	CT_LoadLevel,
-  CT_EnemyHealthManager
+  CT_EnemyHealthManager,
+  CT_WinLogic
 
   //OK NOW I NEED YOU TO ALWAYS ADD AT END 
 
