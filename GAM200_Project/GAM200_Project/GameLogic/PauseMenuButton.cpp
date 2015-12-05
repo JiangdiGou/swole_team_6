@@ -19,7 +19,7 @@ void MenuButton::Update(float dt)
     {
     case RESUME:
     {
-
+    
       pReactive->setDefaultOverride();
       CORE->Pause = false;
       GRAPHICS->toggleBackground(true);
@@ -28,7 +28,10 @@ void MenuButton::Update(float dt)
     case QUIT:
     {
 
-		
+    /*  SoundEmitter* emitter = reinterpret_cast<SoundEmitter*>(LOGIC->player->GetComponent(CT_SoundEmitter));
+	  emitter->SetVolume(1.0f, "Enter");
+	  emitter->StopEvent("Enter");
+	  emitter->PlayEvent("Enter");*/
       PAUSEMENU->state = AREYOUSURE;
       break;
     }

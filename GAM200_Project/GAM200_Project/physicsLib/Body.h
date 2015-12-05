@@ -42,7 +42,7 @@ public:
 	void SetPosition(Vec2D);
 	void SetVelocity(Vec2D);
 	void solveMessage();
-	void fuckCollision(ManifoldSet * Contact, Body * a);
+	void ResolveCollision(ManifoldSet * Contact, Body * a);
 	float DetermineRestitution(Body * a); 
 	float DetermineFriction(Body * a);
 	//Draw the object using the debug drawer

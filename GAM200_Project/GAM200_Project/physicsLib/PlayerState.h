@@ -36,10 +36,10 @@ enum StateList
 };
 ZilchDeclareExternalBaseType(StateList, TypeCopyMode::ValueType);
 
-class PlayerState : public GameComponent//, public CollisionDelegate
+class PlayerState : public GameComponent
 {
   friend Body;
-  //friend RigidBody;
+
 
   public:
      ZilchDeclareDerivedType(PlayerState, GameComponent);
@@ -117,7 +117,7 @@ class PlayerState : public GameComponent//, public CollisionDelegate
     float DeathCount;
     float timeToJumpAfterLeftGround = 0.2f;
     void OnCollision(GameObjectComposition*);
-		//TileMapCollision *playerTileCollision;
+		
 
 
 

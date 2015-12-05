@@ -18,6 +18,7 @@ All content 2015 DigiPen (USA) Corporation, all rights reserved.
 #include "Body.h"
 #include "PhysicsManager.h"
 //#include "../Composition.h"
+
 float Random(float low, float high)
 {
   float a = (float)rand();
@@ -32,31 +33,32 @@ Body::Body()
 	Position = Vec2D(0, 0);
 	PrevPosition = Vec2D(0, 0);
 	Velocity = Vec2D(0, 0);
+	AccumulatedForce = Vec2D(0, 0);
+	Acceleration = Vec2D(0, 0);
 	Mass = 1.0f;
 	InvMass = 0.0f;
 	Damping = 0.9f;
-	Acceleration = Vec2D(0, 0);
 	BodyShape = NULL;
 	Friction = 0.0f;
 	Restitution = 0.3f;
 	IsStatic = false;
 	IsGhost = false;
-	AccumulatedForce = Vec2D(0, 0);
+	
 }
 
 Body::~Body()
 {
-	//delete BodyShape;
 	PHYSICS->Bodies.erase(this);
 }
 
 void Body::Integrate(float dt)
 {
-	//Do not integrate static bodies
-	if (IsStatic) return;
+	//no need to check static objects
+	if (IsStatic)
+		return;
 	
 
-	//Store prev position
+	//Save the previous position
 	PrevPosition = Position;
 	ShapeAAB * debugbody = GetOwner()->has(ShapeAAB);
 	Transform* ownerTrans = GetOwner()->has(Transform);
@@ -64,24 +66,21 @@ void Body::Integrate(float dt)
 	Position = Position + Velocity * dt; //acceleration term is small
   ownerTrans->SetPosition(ownerTrans->GetPositionXY() + Velocity*dt);
 
-	//Determine the acceleration
+	//Generate  acceleration
 	Acceleration = PHYSICS->Gravity;
 	Vec2D newAcceleration = AccumulatedForce * InvMass + Acceleration;
 
 	//Integrate the velocity
 	Velocity = Velocity + newAcceleration * dt;
-
-	//Dampen the velocity for numerical stability and soft drag
 	Velocity *= std::pow(Damping, dt);
 
-	//Clamp to velocity max for numerical stability
 	if (Vec2D::DotProduct(Velocity, Velocity) > PHYSICS->MaxVelocitySq)
 	{
 		Vec2D Normalize(Velocity);
 		Velocity = Velocity * PHYSICS->MaxVelocity;
 	}
 
-	//Clear the force
+	//Remove the force
 	AccumulatedForce = Vec2D(0, 0);
 
 	debugDrawSquare(ownerTrans->GetPosition(), 2*debugbody->Extents.x, 2*debugbody->Extents.y, Vector3(0, 0, 0));
@@ -215,15 +214,11 @@ float Body::DetermineFriction(Body * a)
 	return sqrt(a->Friction * this->Friction);
 }
 
-void Body::fuckCollision(ManifoldSet * contact, Body * a)
+void Body::ResolveCollision(ManifoldSet * contact, Body * a)
 {
 	
-	//ManifoldSet * contact = c->GetNewContact();
-	//Vec2D normal = positionDelta.x < 0 ? Vec2D(-1, 0) : Vec2D(1, 0);
 	contact->Bodies[0] = a;
 	contact->Bodies[1] = this;
-	//contact->ContactNormal = normal;
-	//contact->Penetration = xDiff;
 	contact->Restitution = DetermineRestitution(this);
 	contact->FrictionCof = DetermineFriction(this);
 }

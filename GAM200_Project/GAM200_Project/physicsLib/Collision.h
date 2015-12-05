@@ -87,7 +87,6 @@ public:
 	ShapeCircle() : Shape(SidCircle){};
 	float Radius;
 	virtual void Draw();
-	//virtual bool TestPoint(Vec2D);
   void SerializeRead(Serializer& str) override;
   void SerializeWrite(Serializer& str) override;
 };
@@ -117,6 +116,7 @@ public:
   CollisionEnded(ShapeAAB* otherObj) : Message(Mid::CollisionEnded), otherObj(otherObj) {};
   ShapeAAB* otherObj;
 };
+
 ///Axis Aligned Box Shape
 class ShapeAAB : public Shape
 {
@@ -132,7 +132,6 @@ public:
 	Vec2D origin = Vec2D(0.0f,0.0f);
   std::vector<ShapeAAB*> CurCollidingObjects;
 	virtual void Draw();
-	//virtual bool TestPoint(Vec2D);
   typedef std::vector<ShapeAAB*>::iterator ObjIt;
 };
 

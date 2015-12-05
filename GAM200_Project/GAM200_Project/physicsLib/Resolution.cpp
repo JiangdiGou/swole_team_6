@@ -23,8 +23,7 @@ All content 2015 DigiPen (USA) Corporation, all rights reserved.
 
 
 ManifoldSet * contactList::GetNewContact()
-{
-	
+{	
 	return &contactSet[TotalContacts++];
 }
 
@@ -38,7 +37,6 @@ float ManifoldSet::GetSeparateVelocity()
 	
 	Vec2D relativeVelocity = Bodies[0]->Velocity - Bodies[1]->Velocity;
 
-	//Get the separating velocity by projecting along the contact normal
 	SeperatingVelocity = Vec2D::DotProduct(relativeVelocity, ContactNormal);
 
 	return SeperatingVelocity;
@@ -52,8 +50,7 @@ void SolveVelocity(ManifoldSet& c, float dt)
 
 	if (separatingVelocity > 0)
 	{
-		//The objects are no longer moving towards each other
-		//or the contact they are stationary
+		//The objects are static
 		c.ContactImpulse = 0;
 		return;
 	}
@@ -77,9 +74,8 @@ void SolveVelocity(ManifoldSet& c, float dt)
 		{
 			newSepVelocity += c.Restitution * NewVelocity;
 
-			// Make sure we haven't removed more than was
-			// there to remove.
-			if (newSepVelocity < 0) newSepVelocity = 0;
+			if (newSepVelocity < 0) 
+				newSepVelocity = 0;
 		}
 	}
 
@@ -90,31 +86,26 @@ void SolveVelocity(ManifoldSet& c, float dt)
 	//mass. 
 	float totalInverseMass = c.Bodies[0]->InvMass + c.Bodies[1]->InvMass;
 
-	// Calculate the impulse to apply
+	// apply impluse
 	float impulse = deltaVelocity / totalInverseMass;
 
 	c.ContactImpulse = impulse;
 
-	// Find the amount of impulse per unit of inverse mass
 	Vec2D impulsePerIMass = c.ContactNormal * impulse;
 
+	// x direction
 	c.Bodies[0]->Velocity = c.Bodies[0]->Velocity + impulsePerIMass * c.Bodies[0]->InvMass;
-	// The other body goes in the opposite direction
+	
+	// y direction
 	c.Bodies[1]->Velocity = c.Bodies[1]->Velocity + impulsePerIMass * -c.Bodies[1]->InvMass;
 }
 
 void SolvePenetration(ManifoldSet& c, float dt)
 {
-	
-	// The movement of each object is based on their inverse mass, so
-	// total that.
 	float totalInverseMass = c.Bodies[0]->InvMass + c.Bodies[1]->InvMass;
 
-	// Find the amount of penetration resolution per unit of inverse mass
 	Vec2D movePerIMass = c.ContactNormal * (c.Penetration / totalInverseMass);
 
-	//If stack stability can be increased by not resolving all the penetrations
-	//in one step
 	movePerIMass *= PHYSICS->PenetrationResolvePercentage;
 
 	// Calculate the the movement amounts
@@ -191,10 +182,11 @@ void contactList::CorrectVelocity(float dt)
 			}
 		}
 
-		// Do we have anything worth resolving?
-		if (contactIndex == TotalContacts) break;
+		// check contact list
+		if (contactIndex == TotalContacts) 
+			break;
 
-		// Resolve this contact velocity
+		// Resolve contact velocity
 		SolveVelocity(contactSet[contactIndex], dt);
 
 		++k;
