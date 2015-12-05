@@ -1,5 +1,5 @@
 [LevelName]
-resources/Levels/PlayerDeath.txt
+resources/Levels/WinScreen.txt
 [ArraySpecs]
 1
 1

@@ -1,5 +1,5 @@
 [LevelName]
-resources/Levels/Tutorial.txt
+resources/Levels/tutorial.txt
 [ArraySpecs]
 190
 21

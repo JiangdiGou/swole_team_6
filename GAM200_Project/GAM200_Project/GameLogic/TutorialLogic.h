@@ -2,6 +2,7 @@
 
 #include "../Component.h"
 #include "../reactive.h"
+#include <string>
 
 class TutorialLogic : public GameComponent
 {
@@ -15,9 +16,12 @@ public:
   TutorialLogic();
 
 private:
+  int dist;
   Transform* pTransform;
   Sprite *pSprite;
   GOC* parent;
+
+  std::string levelName;
 
   float delayTimer;
   bool loadLevel = false;

@@ -327,10 +327,9 @@ void PlayerState::SendMessages(Message * message)
 
         if (playerTransform->GetScale().x > 0)
         {
-          playerTransform->SetScale(Vector2(-1 * playerTransform->GetScale().x,
-            playerTransform->GetScale().y));
+          Sprite* pSprite = parent->has(Sprite);
+          pSprite->flipSprite = true;
         }
-
 
 				if (playerBody->Velocity.x >= 0.2f)
 					break;
@@ -399,8 +398,8 @@ void PlayerState::SendMessages(Message * message)
 
         if (playerTransform->GetScale().x < 0)
         {
-          playerTransform->SetScale(Vector2(-1 * playerTransform->GetScale().x,
-            playerTransform->GetScale().y));
+          Sprite* pSprite = parent->has(Sprite);
+          pSprite->flipSprite = false;
         }
 
 				if (playerBody->Velocity.x <= -0.2f)

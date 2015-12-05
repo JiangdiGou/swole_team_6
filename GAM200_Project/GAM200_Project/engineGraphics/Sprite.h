@@ -92,6 +92,17 @@ public:
   void SetColorY(float val);
   void SetColorZ(float val);
   void SetColorW(float val);
+
+  void toggleFlip()
+  {
+    flipSprite = !flipSprite;
+  }
+
+  bool getDirection()
+  {
+    return flipSprite;
+  }
+
 private:
   //The backmost layer by default
   int layer = NUMLAYERS - 1;
@@ -116,7 +127,6 @@ private:
   //Helper Function, pushes xyz to vertices
   void pushVertices(const glm::vec4 &verts);
 
-  bool facingRight = true;
 };
 
 #endif 

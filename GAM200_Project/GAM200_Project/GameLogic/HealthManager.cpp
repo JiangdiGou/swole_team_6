@@ -29,7 +29,7 @@ void HealthManager::Update(float dt)
   }
 	if (!Alive)
 	{
-		CORE->LevelName = "resources/Levels/PlayerDeath.txt";
+		CORE->LevelName = "resources/Levels/DeathScreen.txt";
 
 		CORE->GameState = GS_LOAD;
 	}
@@ -42,8 +42,11 @@ void HealthManager::UpdateHealth(int val)
     return;
   }
 	CurrentHealth += val;
-  PlayerHealthBar* healthBar = pHealthBar->has(PlayerHealthBar);
-  healthBar->UpdateScale( (float)(CurrentHealth) / (float)(TotalHealth) );
+  if (pHealthBar != nullptr)
+  {
+    PlayerHealthBar* healthBar = pHealthBar->has(PlayerHealthBar);
+    healthBar->UpdateScale((float)(CurrentHealth) / (float)(TotalHealth));
+  }
   std::cout << "Player Health:" << CurrentHealth << ", Total Health: " << TotalHealth << "\n";
 	if (CurrentHealth <= 0)
 	{

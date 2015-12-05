@@ -446,6 +446,10 @@ bool objFactory::loadEntities(std::string entityFile)
     {
       serializer.stream.getline(line, 256);
       currentEntity = makeObject(line);
+      if (line == "Enemy")
+      {
+        std::cout << "Hapened" << std::endl;
+      }
       addEditorComponents(currentEntity);
     }
     //It's sometimes getting an empty line?

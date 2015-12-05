@@ -95,6 +95,19 @@ void Sprite::Update(float dt)
   if (!visible)
     return;
 
+
+  Transform * transform = GetOwner()->has(Transform);
+
+
+  if (flipSprite && transform->GetScale().x > 0)
+  {
+    transform->SetScaleX(transform->GetScale().x * -1.0f);
+  }
+  else if (!flipSprite && transform->GetScale().x < 0)
+  {
+    transform->SetScaleX(transform->GetScale().x * -1.0f);
+  }
+
   glm::vec4 transformedPosition, initialPosition;
   glm::vec3 scale;
 
@@ -102,7 +115,6 @@ void Sprite::Update(float dt)
   glUseProgram(shaderID);
 
   //Initialize vars I'm gonna need
-  Transform *transform = GetOwner()->has(Transform);
   glm::mat4 transformMatrix = transform->calculateTransformMatrix();
   initialPosition = glm::vec4(
     transform->GetPosition().x,
@@ -260,37 +272,6 @@ void Sprite::drawAllSprites()
 
 void Sprite::SendMessages(Message * message)
 {
-  if (flipSprite)
-  {
-    switch (message->MessageId)
-    {
-    case Mid::CharacterKey:
-    {
-      MessageCharacterKey* keyMsg = (MessageCharacterKey*)message;
-      Transform* tform = GetOwner()->has(Transform);
-      switch (keyMsg->character)
-      {
-      case 'a':
-      {
-        if (!facingRight)
-        {
-          facingRight = true;
-          tform->SetScaleX(tform->GetScale().x * -1.0f);
-        }
-      }
-      case 'd':
-      {
-        if (facingRight)
-        {
-          facingRight = false;
-          tform->SetScaleX(tform->GetScale().x * -1.0f);
-        }
-      }
-
-      }
-    }
-    }
-  }
 }
 
 float Sprite::GetColorX()

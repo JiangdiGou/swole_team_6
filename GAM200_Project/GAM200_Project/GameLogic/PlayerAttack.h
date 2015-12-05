@@ -20,7 +20,6 @@ private:
   GOC* parent;
   Body* playerBody;
   //pMouse;
-  
 
   float startPos;
   float endPos;

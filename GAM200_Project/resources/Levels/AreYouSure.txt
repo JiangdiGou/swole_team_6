@@ -1,7 +1,0 @@
-[LevelName]
-resources/Levels/AreYouSure.txt
-[ArraySpecs]
-1
-1
-[TileMap]
-E 

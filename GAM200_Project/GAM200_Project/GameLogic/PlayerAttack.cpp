@@ -3,6 +3,7 @@
 #include "../engineGraphics/graphicsManager.h"
 #include "EnemyHealthManager.h"
 #include "../engineAudio/SoundEmitter.h"
+#include "../Editor/Defines.h"
 
 //playerstate component for reference
 void PlayerAttack::Initialize()
@@ -35,6 +36,8 @@ void PlayerAttack::Update(float dt)
   {
     playerBody->SetVelocity(Vec2D(0,0));
 
+    pSprite->setTexture("Character");
+
     slashTimer = 0.4;
     CanSlash = true;
   }
@@ -42,27 +45,30 @@ void PlayerAttack::Update(float dt)
 
 void PlayerAttack::Attack(std::vector <GameObjectComposition*> objectsHit, Vec2D start, Vec2D end)
 {
+#ifndef EDITOR
   if (CanSlash)
   {
     CanSlash = false;
 
     Vec2D temp = start;
 
-    if ((temp.x < 7) && (temp.y < 7))
+    pSprite->setTexture("CharacterSlash");
+
+    if ((temp.x < 5) && (temp.y < 5))
     {
       temp.x = end.x - start.x;
       temp.y = end.y - start.y;
     }
     else
     {
-      temp.x = (end.x - start.x) / 1.7;
-      temp.y = (end.y - start.y) / 1.7;
+      temp.x = (end.x - start.x) / 1.5;
+      temp.y = (end.y - start.y) / 1.5;
     }
 
     //std::cout << "Slice Vec" << temp << "\n";
     Vec2D temp2 = temp.Normalize();
 
-    playerBody->SetVelocity(playerBody->Velocity + (temp * 4));
+    playerBody->SetVelocity(playerBody->Velocity + (temp2 * 20));
 
     for (std::vector<GameObjectComposition*>::iterator it = objectsHit.begin(); it != objectsHit.end(); ++it)
     {
@@ -80,6 +86,7 @@ void PlayerAttack::Attack(std::vector <GameObjectComposition*> objectsHit, Vec2D
       }
     }
   }
+#endif
 }
 
 void PlayerAttack::SendMessages(Message* message)

@@ -270,8 +270,10 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
   case CT_HUDcomponent:
 	  return focus->has(HUDcomponent);
 
+#ifdef EDITOR
   case CT_Editable:
     return focus->has(Editable);
+#endif
 
   case CT_MouseVector:
     return focus->has(MouseVector);
@@ -330,7 +332,9 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
 
   //Editor Stuff
   //Since we're in editor mode if this fx got called 
+#ifdef EDITOR
   Editable* newEditable = new Editable(false);
+#endif
 
   //Add Core stuff
   newEntity->AddComponent(CT_Transform, newTransform);
@@ -344,7 +348,9 @@ GOC* EditorEntityTools::createNewComponent(std::string componentName)
   newEntity->AddComponent(CT_Sprite, newSprite);
 
   //Add edutir stuff
+#ifdef EDITOR
   newEntity->AddComponent(CT_Editable, newEditable);
+#endif
 
   setupMessage(componentName + " created.", ImVec4(0, 1, 0, 1));
 

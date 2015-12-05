@@ -5,6 +5,7 @@
 //playerstate component for reference
 void TutorialLogic::Initialize()
 {
+  dist = 0;
 	parent = GetOwner();
 	pTransform = parent->has(Transform);
 
@@ -12,12 +13,31 @@ void TutorialLogic::Initialize()
   if (pSprite)
     pSprite->setLayer(1);
 
+  ShapeAAB* pShape = parent->has(ShapeAAB);
+
+  if (pShape != nullptr)
+  {
+    pShape->Extents.y = 10000;
+  }
+
   delayTimer = 0.0f;
 
 }
 
 void TutorialLogic::Update(float dt)
 {
+  GOC* player = LOGIC->player;
+  Transform* playerTransform = player->has(Transform);
+
+  dist = pTransform->GetPositionX() - playerTransform->GetPositionX();
+  
+  if (dist < 0)
+    dist *= -1;
+
+
+  if (dist < 5)
+    LoadNextLevel();
+  /*
   if (delayTimer > 0)
   {
     delayTimer -= dt;
@@ -26,14 +46,21 @@ void TutorialLogic::Update(float dt)
   {
     LoadNextLevel();
   }
-
+  */
 }
 
 void TutorialLogic::LoadNextLevel()
 {
-  CORE->LevelName = "resources/Levels/Level1.txt";
-  std::cout << "Loading Level 1...";
-  CORE->GameState = GS_LOAD;
+  if (parent->GetName() == "Sensei")
+  {
+    CORE->LevelName = "resources/Levels/Level1.txt";
+    CORE->GameState = GS_LOAD;
+  }
+  else if (parent->GetName() == "NextLev")
+  {
+    CORE->LevelName = "resources/Levels/WinScreen.txt";
+    CORE->GameState = GS_LOAD;
+  }
 }
 
 void TutorialLogic::SendMessages(Message* message)
@@ -47,8 +74,6 @@ void TutorialLogic::SendMessages(Message* message)
 
       if (other->GetName() == "GAMEPLAYER")
       {
-        std::cout << "Collided: Loading Level...";
-
         loadLevel = true;
         delayTimer = 1.0f;
       }
