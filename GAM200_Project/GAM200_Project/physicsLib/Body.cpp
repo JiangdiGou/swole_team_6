@@ -64,7 +64,8 @@ void Body::Integrate(float dt)
 	Transform* ownerTrans = GetOwner()->has(Transform);
 	//Integrate the position using Euler 
 	Position = Position + Velocity * dt; //acceleration term is small
-  ownerTrans->SetPosition(ownerTrans->GetPositionXY() + Velocity*dt);
+  if (ownerTrans)
+    ownerTrans->SetPosition(ownerTrans->GetPositionXY() + Velocity*dt);
 
 	//Generate  acceleration
 	Acceleration = PHYSICS->Gravity;
@@ -83,7 +84,7 @@ void Body::Integrate(float dt)
 	//Remove the force
 	AccumulatedForce = Vec2D(0, 0);
 
-	debugDrawSquare(ownerTrans->GetPosition(), 2*debugbody->Extents.x, 2*debugbody->Extents.y, Vector3(0, 0, 0));
+	//debugDrawSquare(ownerTrans->GetPosition(), 2*debugbody->Extents.x, 2*debugbody->Extents.y, Vector3(0, 0, 0));
 	
 }
 

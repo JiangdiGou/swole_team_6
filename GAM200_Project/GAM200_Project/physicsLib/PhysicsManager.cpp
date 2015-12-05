@@ -48,6 +48,9 @@ void Physics::Reload()
     delete curCollisions.back();
     curCollisions.pop_back();
   }
+  Contacts.Reset();
+  while (Bodies.begin())
+    Bodies.pop_front();
 }
 
 void Physics::Initialize()
