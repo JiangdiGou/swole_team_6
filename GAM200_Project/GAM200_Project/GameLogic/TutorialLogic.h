@@ -20,5 +20,5 @@ private:
   GOC* parent;
 
   float delayTimer;
-  boolean loadLevel = false;
+  bool loadLevel = false;
 };
