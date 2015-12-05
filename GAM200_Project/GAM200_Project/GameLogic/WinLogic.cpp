@@ -14,6 +14,8 @@ void WinLogic::Initialize()
 
   numEnemies = 0;
   totalEnemies = 0;
+
+  KillCounterPlus();
 }
 
 void WinLogic::Update(float dt)
@@ -37,10 +39,11 @@ void WinLogic::KillCounterPlus()
 
 	if (numEnemies >= totalEnemies)
 	{
-		//CORE->LevelName = "resources/Levels/WinLevel.txt";
+		CORE->LevelName = "resources/Levels/WinScreen.txt";
 		std::cout << "All dem peepelz be dead";
-		//CORE->GameState = GS_LOAD;
+		CORE->GameState = GS_LOAD;
 	}
+
 }
 
 WinLogic::WinLogic()

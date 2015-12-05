@@ -27,6 +27,10 @@ public:
   bool operator==(const AtlasTexture& rhs) const;
   bool operator!=(const AtlasTexture& rhs) const;
 
+  int getCurrentFrame(){ return currentFrame;  }
+  void setCurrentFrame(int newFrame) { currentFrame = newFrame;}
+  int getTotalFrames(){ return numFrames; }
+
   void updateAnimation(void);
 
   std::string textureName;
