@@ -190,9 +190,8 @@ int main(void)
   cam->editorMode = true;
   cam->followingPlayer = false;
 #endif
-  while (timePassed < 5000)
+  while (timePassed < 4000)
   {
-    std::cout << "passed: " << timePassed << std::endl;
     deltaTime = timeGetTime() - previousTime;
     previousTime = timeGetTime();
     timePassed += deltaTime;

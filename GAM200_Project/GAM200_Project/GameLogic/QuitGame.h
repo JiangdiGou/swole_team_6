@@ -6,6 +6,8 @@
 #include "GameReactive.h"
 #include "PauseMenu.h"
 
+enum QuitButtonTypes {QB_Quit, QB_Yes, QB_No};
+
 class QuitGame : public GameComponent
 {
 public:
@@ -21,6 +23,8 @@ private:
   Sprite *pSprite;
   GOC* parent;
   GameReactive* pReactive;
+  void SwitchQuitState();
+  QuitButtonTypes Type;
   
 
  
