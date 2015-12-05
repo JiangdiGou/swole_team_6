@@ -27,6 +27,7 @@ const const char* EditorEntityTools::components[TOTALCOMPONENTS] = {
   "Enemy Health Manager",
   "WinLogic",
   "Tutorial Logic",
+  "Quit Game",
 };
 
 EditorEntityTools::EditorEntityTools()
@@ -303,6 +304,9 @@ GameComponent* EditorEntityTools::getFocusComponent(ComponentTypeId type)
 
   case CT_TutorialLogic:
     return focus->has(TutorialLogic);
+
+  case CT_QuitGame:
+	  return focus->has(QuitGame);
 
   default:
     return NULL;

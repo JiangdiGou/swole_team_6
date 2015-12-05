@@ -17,13 +17,15 @@ public:
   void Initialize();
   void Update(float dt);
   void SendMessages(Message* message);
+
+  menuSate state = MAINMENU;
+
   
 
 private:
 	SoundEmitter * emitter;
   void PauseMenu::followCameraWithOffset(GOC* follower, Vector2 offset);
   std::vector<GOC*> pauseMenuObjects;
-  menuSate state = MAINMENU;
 };
 
 extern PauseMenu* PAUSEMENU;

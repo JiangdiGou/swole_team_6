@@ -2,7 +2,7 @@
 #define EDITORENTITYTOOLS_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define TOTALCOMPONENTS 25
+#define TOTALCOMPONENTS 26
 
 #include "imGUI\imgui.h"
 #include "../Core.h"
@@ -29,6 +29,7 @@
 #include "../GameLogic/EnemyHealthManager.h"
 #include "../GameLogic/WinLogic.h"
 #include "../GameLogic/TutorialLogic.h"
+#include "../GameLogic/QuitGame.h"
 #include <string.h>
 #include <stdio.h>
 

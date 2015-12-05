@@ -629,6 +629,9 @@ GameComponent* objFactory::getNewComponent(ComponentTypeId type)
 
   case CT_TutorialLogic:
     return new TutorialLogic();
+	
+  case CT_QuitGame:
+	  return new QuitGame();
 
   default:
     return nullptr;
