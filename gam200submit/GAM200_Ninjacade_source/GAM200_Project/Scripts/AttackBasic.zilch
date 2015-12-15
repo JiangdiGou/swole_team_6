@@ -1,0 +1,185 @@
+/********************************************************************************
+file    AttackBasic.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Basic player attack that shoots out in a straight line toward the mouse.
+    This is probably not going to be used in the final game, but keep it anyways 
+    just in case.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
+class AttackBasic
+{
+	var Owner: GameObjectComposition;
+	
+    //Determines if the left mouse is currently held down
+    var BLClickDown:Boolean = false;
+    //Duration that the left mouse is held down
+    var ILClickDuration:Integer = 0;
+    
+    //Internal cooldown to prevent the player from attacking too fast
+    var IAttackCD:Integer = 0;
+    
+    //Screen position of the mouse when the left mouse is clicked down
+    var RMouseClickPos:Real2 = Real2(0,0);
+    //Screen position of the mouse when the left mouse is released
+    var RMouseReleasePos:Real2 = Real2(0,0);
+	
+    var Pi:Real = 3.1415926535;
+    
+    //*******************************************************************************************************************************************
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+		this.Owner = ourOwner;
+    }
+    
+    //*******************************************************************************************************************************************
+    function OnUpdate(dt : Real)
+    {
+        this.DecreaseCounters();
+        
+        //Increases the duration of how long the left mouse has been down
+        if(this.BLClickDown)
+        {
+            this.ILClickDuration += 1;
+        }
+    }
+    
+    //*******************************************************************************************************************************************
+    function OnMouseLeftDown(mousePos : Vec2D)
+    {
+        //Resets the duration timer for left click to 0 frames
+        this.ILClickDuration = 0;
+        //Captures the screen position of the mouse when left click is clicked down
+        //this.RMouseClickPos = Real2(event.ToWorldZPlane(0).x - this.Owner.Transform.Translation.x, event.ToWorldZPlane(0).y - this.Owner.Transform.Translation.y);
+        this.RMouseClickPos = mousePos as Real2;
+		
+        this.BLClickDown = true;
+    }
+    
+    //*******************************************************************************************************************************************
+    function OnMouseLeftUp(mousePos : Vec2D)
+    {
+        if(this.IAttackCD == 0)
+        {
+            //Captures the screen position of the mouse when left click is released
+            //this.RMouseReleasePos = Real2(event.ToWorldZPlane(0).x - this.Owner.Transform.Translation.x, event.ToWorldZPlane(0).y - this.Owner.Transform.Translation.y);
+            this.RMouseReleasePos = mousePos as Real2;
+			
+            var rXDifference:Real = this.RMouseReleasePos.x - this.RMouseClickPos.x;
+            var rYDifference:Real = this.RMouseReleasePos.y - this.RMouseClickPos.y;
+            
+            //If the drag of the mouse isn't long enough, it won't register as a slash, just a standard attack
+            if(rXDifference <= 1 && rXDifference >= -2 && rYDifference <= 2 && rYDifference >= -2)
+            {
+                this.StandardAttack(this.RMouseReleasePos.x, this.RMouseReleasePos.y);
+            }
+        }
+        this.BLClickDown = false;
+    }
+    
+    
+    //*******************************************************************************************************************************************
+    function StandardAttack(rXPos_:Real, rYPos_:Real)
+    {
+        //Finding the section of the screen that the player is attacking in (Cardinals and diagonals from the player)
+        var rXDiff:Real = rXPos_;//
+        var rYDiff:Real = rYPos_;//
+        
+        var rAngle:Real = this.Owner.zATan2(rYDiff, rXDiff) * (180/this.Pi);//Needs
+        var rAtkPos:Real3 = Real3(0.0, 0.0, 0.0);
+        
+        
+        
+        //Up attack
+        if(rAngle >= 67.5 && rAngle <= 112.5)
+        {
+            //iAttackID += 0;
+        }
+        //Up-Right attack
+        else if(rAngle > 22.5 && rAngle < 67.5)
+        {
+            this.Owner.Sprite.flipSprite = false;
+        }
+        //Right attack
+        else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
+        {
+            this.Owner.Sprite.flipSprite = false;
+        }
+        //Down-Right attack
+        else if(rAngle < -22.5 && rAngle > -67.5)
+        {
+            this.Owner.Sprite.flipSprite = false;
+        }
+        //Down attack
+        else if(rAngle >= -112.5 && rAngle <= -67.5)
+        {
+            //iAttackID = 14;
+        }
+        //Down-Left attack
+        else if(rAngle < -112.5 && rAngle > -157.5)
+        {
+            this.Owner.Sprite.flipSprite = true;
+        }
+        //Left attack
+        else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
+        {
+            this.Owner.Sprite.flipSprite = true;
+        }
+        //Down-Left attack
+        else if(rAngle > 112.5 && rAngle < 157.5)
+        {
+            this.Owner.Sprite.flipSprite = true;
+        }
+        
+        var segAttackStart:Real3 = this.Owner.Transform.Translation;
+        var segAttackEnd:Real3 = Real3(this.Owner.zCos(rAngle * (this.Pi/180)) * 10 + this.Owner.Transform.Translation.x, this.Owner.zSin(rAngle * (this.Pi/180)) * 10 + this.Owner.Transform.Translation.y, 0);
+        var segAttackSegment = this.Space.PhysicsSpace.CastSegmentResults(segAttackStart, segAttackEnd, 10);
+        
+        var iDamage:Integer = 10;
+        
+        
+        
+        
+        for(var s:Integer = 0; s < segAttackSegment.Size(); ++s)
+        {
+            if(segAttackSegment.Front().ObjectHit.Name == "Enemy")
+            {
+                //var rXDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.x - this.Owner.Transform.Translation.x;
+                //var rYDist:Real = segAttackSegment.Front().ObjectHit.Transform.Translation.y - this.Owner.Transform.Translation.y;
+                var rHypot:Real = this.Owner.zDistanceSq(this.Owner.Transform.GetPosition(), segAttackSegment.Front().ObjectHit.Transform.GetPosition());
+                if(rHypot <= 20)
+                {
+                    segAttackSegment.Front().ObjectHit.EnemyHitReaction.OnHit(iDamage,false, bStun); // used to include attack ID
+                }
+            }
+            segAttackSegment.PopFront();
+            --s;
+        }
+    }
+    
+    
+    //*******************************************************************************************************************************************
+    function DecreaseCounters()
+    {
+        //Decrements the light attack cooldown
+        if(this.IAttackCD > 0)
+        {
+            this.IAttackCD -= 1;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

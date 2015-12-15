@@ -1,0 +1,69 @@
+class EndOfGame
+{
+    var Owner : GameObjectComposition;
+
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+        this.Owner = ourOwner;
+    }
+
+    function OnUpdate(dt : Real)
+    {
+      //Console.WriteLine(this.Owner.Transform);
+      //var transform = //this.Owner.GetComponent(CT_Transform);// as Transfrom;
+     // this.Owner.Transform.SetPositionX(this.Owner.Transform.GetPositionX() + 0.01);
+		
+    }
+
+    function OnCollideStart(otherObj : GameObjectComposition)
+    {
+		//if(otherObj.Name == "Player")
+		//{
+			//this.Space.LoadLevel("VictoryScreen");
+		//}
+
+		//if(otherObject.GetName() == "GAMEPLAYER")
+		//{
+			
+		//}
+    }
+    function OnCollidePersist(otherObj : GameObjectComposition)
+    {
+    
+    }
+    function OnCollideEnd(otherObj : GameObjectComposition)
+    {
+    
+    }
+    function OnCustomEvent()
+    {
+    
+    }
+    function OnKeyboardDown(char : Integer)
+    {
+    }
+    function OnMouseLeftDown(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseRightDown(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseLeftUp(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseRightUp(mousePos : Vec2D)
+    {
+    
+    }
+    function OnMouseMove(mousePos : Vec2D)
+    {
+    
+    }
+    function Destroy()
+    {
+    
+    }
+}

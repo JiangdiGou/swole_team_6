@@ -1,0 +1,251 @@
+/********************************************************************************
+file    AttackSlash.z
+author  Mitchell Regan
+par     Contact: mitchell.regan@digipen.edu
+brief
+    Lets the player do a dash attack in the direction of their mouse when clicked 
+    and dragged.
+
+All content © 2015 DigiPen (USA) Corporation, all rights reserved.
+*******************************************************************************/
+class AttackSlash : ZilchComponent
+{
+	var Owner : GameObjectComposition;
+	
+    //Determines if the left mouse is currently held down
+    var BLClickDown:Boolean = false;
+    //Duration that the left mouse is held down
+    var ILClickDuration:Integer = 0;
+    
+    //Internal cooldown to prevent the player from attacking too fast
+    var IAttackCD:Integer = 0;
+    
+    //Screen position of the mouse when the left mouse is clicked down
+    var RMouseClickPos:Real2 = Real2(0,0);
+    //Screen position of the mouse when the left mouse is released
+    var RMouseReleasePos:Real2 = Real2(0,0);
+    
+    //Stops player's velocity when it hits 0 or they keep sliding after a slash
+    var ISlashStop:Integer = 0;
+    
+    //Particle Emitter for slashing things n stuff
+    var SlashParticle:Cog;
+    
+    //Tracks the number of times the player can slash in mid air
+    var AirSlashCount:Integer = 0;
+    
+    var Pi:Real = 3.1415926535;
+    
+    //*******************************************************************************************************************************************
+    function Initialize(ourOwner : GameObjectComposition)
+    {
+		this.Owner = ourOwner;
+    }
+    
+    //*******************************************************************************************************************************************
+    function OnUpdate(dt : Real)
+    {
+        this.DecreaseCounters();
+        
+        //Increases the duration of how long the left mouse has been down
+        if(this.BLClickDown)
+        {
+            this.ILClickDuration += 1;
+        }
+    }
+    
+    //*******************************************************************************************************************************************
+    function OnMouseLeftDown(mousePos : Vec2D)
+    {
+        //Resets the duration timer for left click to 0 frames
+        this.ILClickDuration = 0;
+        //Captures the screen position of the mouse when left click is clicked down
+        //this.RMouseClickPos = Real2(event.ToWorldZPlane(0).x - this.Owner.Transform.Translation.x, event.ToWorldZPlane(0).y - this.Owner.Transform.Translation.y);
+        this.RMouseClickPos = mousePos as Real2;
+		
+        this.BLClickDown = true;
+    }
+    
+    //*******************************************************************************************************************************************
+    function OnMouseLeftUp(mousePos : Vec2D)
+    {
+        if(this.IAttackCD == 0)
+        {
+            //Captures the screen position of the mouse when left click is released
+            //this.RMouseReleasePos = Real2(event.ToWorldZPlane(0).x - this.Owner.Transform.Translation.x, event.ToWorldZPlane(0).y - this.Owner.Transform.Translation.y);
+            this.RMouseReleasePos = mousePos as Real2;
+			
+            var rXDifference:Real = this.RMouseReleasePos.x - this.RMouseClickPos.x;
+            var rYDifference:Real = this.RMouseReleasePos.y - this.RMouseClickPos.y;
+            
+            
+            //If the drag of the mouse is long enough and the mouse wasn't held down too long, it registers as a slash
+            if(this.ILClickDuration <= 50 && this.AirSlashCount < 2)
+            {
+                if(rXDifference >= 1 || rXDifference <= -2 || rYDifference >= 2 || rYDifference <= -2)
+                this.Slash(rXDifference, rYDifference);
+            }
+        }
+        this.BLClickDown = false;
+    }
+    
+    
+    //*******************************************************************************************************************************************
+    function Slash(rXDifference_:Real, rYDifference_:Real)
+    {
+        //Overall distance between the mouse down and mouse up positions
+        var rDistance:Real = this.Owner.zSqrt((rXDifference_ * rXDifference_) + (rYDifference_ * rYDifference_));
+        //The angle that the mouse moved while down, indicating the angle of attack
+        var rAngle:Real = this.Owner.zATan2(rYDifference_, rXDifference_) * (180/this.Pi);
+        //Speed that the player moves based on the length of the slash############ Possibly not needed with Ray
+        var rSpeed:Real = 0;
+        
+        //Distance for the ray to use
+        var rRayDistance:Real = 0;
+        
+        
+        //Short slash
+        if(rDistance <= 5)
+        {
+            //A short slash's ID will be between 10-19
+            rSpeed = 70; //60
+            rRayDistance = 5.0;
+        }
+        //Medium slash
+        else if(rDistance <= 8)
+        {
+            //A medium slash's ID will be between 20-29
+            rSpeed = 70; //90
+            rRayDistance = 10.0;
+        }
+        //Long slash
+        else
+        {
+            //A long slash's ID will be between 30-39
+            rSpeed = 70; //120
+            rRayDistance = 15.0;
+        }
+        
+        //Note for this IF check: zilch doesn't do angles from 0-360. Instead it does 0 to 180 and 0 to -180
+        //Up slash
+        if(rAngle >= 67.5 && rAngle <= 112.5)
+        {
+            //iSlashID += 0;
+        }
+        //Up-Right slash
+        else if(rAngle > 22.5 && rAngle < 67.5)
+        {
+            this.Owner.Sprite.flipSprite = false;
+        }
+        //Right slash
+        else if(rAngle <= 22.5 && rAngle >= 0.0 || rAngle >= -22.5 && rAngle <= 0.0)
+        {
+            this.Owner.Sprite.flipSprite = false;
+        }
+        //Down-Right slash
+        else if(rAngle < -22.5 && rAngle > -67.5)
+        {
+            this.Owner.Sprite.flipSprite = false;
+        }
+        //Down slash
+        else if(rAngle >= -112.5 && rAngle <= -67.5)
+        {
+            //iSlashID += 4;
+        }
+        //Down-Left slash
+        else if(rAngle < -112.5 && rAngle > -157.5)
+        {
+            this.Owner.Sprite.flipSprite = true;
+        }
+        //Left slash
+        else if(rAngle >= 157.5 && rAngle <= 180.0 || rAngle <= -157.5 && rAngle >= -180.0)
+        {
+            this.Owner.Sprite.flipSprite = true;
+        }
+        //Up-Left slash
+        else if(rAngle > 112.5 && rAngle < 157.5)
+        {
+            this.Owner.Sprite.flipSprite = true;
+        }
+        
+        //Gives the player momentum in the direction they slashed
+        this.Owner.RigidBody.Velocity.x = this.Owner.RigidBody.Velocity.x + rAngle * (this.Pi/180)) * rSpeed;
+        this.Owner.RigidBody.Velocity.y = this.Owner.zSin(rAngle * (this.Pi/180)) * rSpeed;
+        //stops the slash momentum in 6 frames
+        this.ISlashStop = 6;
+        //Sets the cooldown before the player can attack again
+        this.IAttackCD = 20;
+        
+        //Creates a segment cast (like ray cast) to determine what the player hits in the attack
+        var segSlashStart:Real3 = this.Owner.Transform.Translation;
+        //Sets the end location of the segment cast based on the angle and ray distance
+        var segSlashEnd:Real3 = Real3(this.Owner.zCos(rAngle * (this.Pi/180)) * rRayDistance + this.Owner.Transform.Translation.x, this.Owner.zSin(rAngle * (this.Pi/180)) * rRayDistance + this.Owner.Transform.Translation.y, 0);
+        //Casts the ray in physics space to find the objects hit
+        
+		//var segSlashSegment = this.Space.PhysicsSpace.CastSegmentResults(segSlashStart, segSlashEnd, 10);
+        this.Owner.MouseVector(segSlash)
+        
+        //this.Owner.FindObjectByName("BackgroundMusic").BackgroundMusic.SwordSound();
+        
+        //Loops through all of the objects the segment hit in the order that they were hit
+        for(var s:Integer = 0; s < segSlashSegment.Size(); ++s)
+        {
+            //If the current object checked is an enemy, calls its hit reaction
+            if(segSlashSegment.Front().ObjectHit.Name == "Enemy")
+            {
+                //segSlashSegment.Front().ObjectHit.EnemyHitReaction.OnHit(15,false, true);
+				segSlashSegment.Front().ObjectHit.EnemyHealthManager.TakeDamage(15.0);
+            }
+            //If the current object hit is the tile map, stops the player where they hit the tile
+            else if(segSlashSegment.Front().ObjectHit.Name == "DefaultTile")
+            {
+                //this.Owner.RigidBody.Velocity = Real3(0,0,0);
+                var newX:Real = segSlashSegment.Current.WorldPosition.x + 1 - this.Owner.zCos(rAngle * this.Pi/180);
+                var newY:Real = segSlashSegment.Current.WorldPosition.y + 1 - this.Owner.zSin(rAngle * this.Pi/180);
+                
+                this.Owner.Transform.Translation = Real3(newX, newY, 0);
+                //this.Owner.Transform.Translation = Real3(segSlashSegment.Current.WorldPosition.x, segSlashSegment.Current.WorldPosition.y, 0);
+                this.Owner.RigidBody.Velocity = Real3(0,0,0);
+                //lineDraw.End(Real3(newX,newY,0));
+                break;//stops the slash as soon as it hits a wall so it doesn't pass though
+            }
+            
+            //removes the objects hit info from the segment cast and checks the new front
+            segSlashSegment.PopFront();
+            --s;
+        }
+        
+        //this.Owner.PlayerMovement.BCanMove = false;
+        //Sends the slash's attack ID to the combo manager
+        
+        ++this.AirSlashCount;
+    }
+    
+    //*******************************************************************************************************************************************
+    function DecreaseCounters()
+    {
+        //Decrements the light attack cooldown
+        if(this.IAttackCD > 0)
+        {
+            this.IAttackCD -= 1;
+        }
+        
+        //Decrements the amount of time the player is moving from a slash
+        if(this.ISlashStop > 0)
+        {
+            --this.ISlashStop;
+            
+            //this.Owner.Transform.Translation += Real3(0,0,2);
+            //this.Owner.BoxCollider.Ghost = true;
+            //this.Owner.PlayerMovement.BCanMove = false;
+            
+            //If the slash ends, stops all of the velocity and lets the player move again
+            if(this.ISlashStop == 0)
+            {
+                this.Owner.RigidBody.Velocity = Real3(0, 0, 0);
+                //this.Owner.BoxCollider.Ghost = false;
+                //this.Owner.PlayerMovement.BCanMove = true;
+            }
+        }
+    }
+}
